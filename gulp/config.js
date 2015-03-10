@@ -19,13 +19,13 @@ module.exports = {
     outputName: 'democracyio.min.js'
   },
 
-  browserSync: {
-    proxy: sprintf.format('http://localhost:%d', process.env.PORT || 3000),
-    files: [
-      path.join(DIST_DIR, '/**/*'),
-      '!' + path.join(DIST_DIR, '/**.map')
-    ]
-  },
+//  browserSync: {
+//    proxy: sprintf.format('http://localhost:%d', process.env.PORT || 3000),
+//    files: [
+//      path.join(DIST_DIR, '/**/*'),
+//      '!' + path.join(DIST_DIR, '/**.map')
+//    ]
+//  },
 
   css: {
     dest: path.join(BUILD_DIR, 'js'),
@@ -33,6 +33,8 @@ module.exports = {
       path.join(WWW_DIR, 'css/app.scss')
     ]
   },
+
+  // TODO(leah): Autogen a settings service.
 
   test: {
 

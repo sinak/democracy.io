@@ -22,6 +22,10 @@ var configureRoutes = function($routeProvider) {
       controller: '',
       templateUrl: ''
     })
+    .when('/about', {
+      controller: 'AboutController',
+      templateUrl: ''
+    })
     .otherwise({
       redirectTo: '/'
     });

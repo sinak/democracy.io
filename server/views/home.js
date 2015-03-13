@@ -3,7 +3,7 @@
  */
 
 var homeController = function(req, res) {
-  res.send('OK!');
+  res.render('index');
 };
 
 

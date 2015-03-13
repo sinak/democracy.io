@@ -16,7 +16,7 @@ module.exports = {
     debug: !gutil.env.production,
     entries: ['./www/js/app.js'],
     dest: path.join(BUILD_DIR, 'js'),
-    outputName: 'democracyio.min.js'
+    outputName: 'dio.min.js'
   },
 
 //  browserSync: {

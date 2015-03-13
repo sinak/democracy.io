@@ -10,6 +10,9 @@ var meddleware = require('meddleware');
 var path = require('path');
 var sprintf = require('sprintf-js').sprintf;
 
+var config = require('config');
+console.log(config);
+
 
 /**
  * Fetch the meddleware config and switch module paths to be absolute.
@@ -33,13 +36,15 @@ var getMeddlewareConfig = function() {
 };
 
 
+var app = express();
+
 var options = {
   onconfig: function (config, next) {
+    app.locals['SITE_CONFIG'] = config.get('SITE_CONFIG');
     next(null, config);
   }
 };
 
-var app = express();
 app.use(kraken(options));
 
 app.on('start', function () {

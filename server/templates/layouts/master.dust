@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>{+title /}</title>
+  <link rel="stylesheet" href="{SITE_CONFIG.STATIC_URL}/css/dio.min.css" />
+</head>
+
+<body>
+  <div id="wrapper" class="content">
+    {+body /}
+  </div>
+  <script src="{SITE_CONFIG.STATIC_URL}/js/dio.min.js"></script>
+</body>
+
+</html>

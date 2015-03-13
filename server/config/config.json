@@ -1,5 +1,37 @@
 {
 
+  "express": {
+    "view cache": false,
+    "view engine": "dust",
+    "views": "path:./templates"
+  },
 
+  "i18n": {
+    "contentPath": "path:../locales",
+    "fallback": "en-US"
+  },
+
+  "view engines": {
+    "dust": {
+      "module": "engine-munger",
+      "renderer": {
+        "method": "dust",
+        "arguments": [
+          {
+            "cache": false
+          },
+          {
+            "views": "config:express.views",
+            "view engine": "config:express.view engine",
+            "i18n": "config:i18n"
+          }
+        ]
+      }
+    }
+  },
+
+  "SITE_CONFIG": {
+    "STATIC_URL": "/static"
+  }
 
 }

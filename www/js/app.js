@@ -4,7 +4,7 @@
 
 var angular = require('angular');
 
-var democracyApp = angular.module('DemocracyIoApp', []);
+var democracyApp = angular.module('democracyIoApp', []);
 democracyApp.config(require('./routes'));
 
 democracyApp.controller('dioHome', require('./controllers/home'));
@@ -16,3 +16,5 @@ democracyApp.controller('dioAbout', require('./controllers/about'));
 
 democracyApp.factory('dioApp', require('./services/api'));
 democracyApp.factory('dioRepData', require('./services/rep_data'));
+
+require('../../.build/partials/partials');

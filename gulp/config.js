@@ -38,6 +38,17 @@ module.exports = {
 
   test: {
 
+  },
+
+  partials: {
+    dest: path.join(BUILD_DIR, '../partials'),
+    paths: [
+      path.join(WWW_DIR, 'partials/**/*.html')
+    ],
+    options: {
+      filename: 'partials.js',
+      module: 'democracyIoApp'
+    }
   }
 
 };

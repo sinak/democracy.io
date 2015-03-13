@@ -22,7 +22,7 @@
     "browser-sync": "^2.2.2",
     "browserify": "^9.0.3",
     "gulp": "^3.8.10",
-    "gulp-angular-templatecache": "^1.4.2",
+    "gulp-angular-templatecache": "^1.5.0",
     "gulp-changed": "^0.4.1",
     "gulp-concat": "^2.4.1",
     "gulp-exit": "0.0.2",

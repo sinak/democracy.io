@@ -27,13 +27,6 @@ module.exports = {
 //    ]
 //  },
 
-  css: {
-    dest: path.join(BUILD_DIR, 'css'),
-    paths: [
-      path.join(WWW_DIR, 'css/app.scss')
-    ]
-  },
-
   img: {
     dest: path.join(BUILD_DIR, 'img'),
     paths: [
@@ -56,6 +49,13 @@ module.exports = {
       filename: 'partials.js',
       module: 'democracyIoApp'
     }
+  },
+
+  sass: {
+    dest: path.join(BUILD_DIR, 'css'),
+    paths: [
+      path.join(WWW_DIR, 'sass/app.scss')
+    ]
   }
 
 };

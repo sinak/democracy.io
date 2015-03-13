@@ -15,4 +15,4 @@ democracyApp.controller('dioAbout', require('./controllers/about'));
 
 
 democracyApp.factory('dioApp', require('./services/api'));
-democracyApp.factory('dioRepData', require('./services/repData'));
+democracyApp.factory('dioRepData', require('./services/rep_data'));

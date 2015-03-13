@@ -23,8 +23,9 @@ var getMeddlewareConfig = function() {
     meddlewareConfig,
     {
       serverDir: __dirname,
-      krakenDir: '../node_modules/kraken-js' // Kind of a hack, but ensure that the kraken
-                                             // middleware deps get used
+      // Kind of a hack, but ensures the kraken middleware deps get used
+      krakenDir: path.join(__dirname, '../node_modules/kraken-js'),
+      buildDir: path.join(__dirname, '../.build')
     }
   );
 
@@ -39,12 +40,12 @@ var options = {
 };
 
 var app = express();
-app.use(meddleware(getMeddlewareConfig()));
 app.use(kraken(options));
 
 app.on('start', function () {
   console.log('Application ready to serve requests.');
   console.log('Environment: %s', app.kraken.get('env:env'));
+  app.use(meddleware(getMeddlewareConfig()));
 });
 
 

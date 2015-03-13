@@ -28,6 +28,7 @@
     "gulp-exit": "0.0.2",
     "gulp-file": "^0.1.0",
     "gulp-htmlmin": "^0.2.0",
+    "gulp-imagemin": "^2.2.1",
     "gulp-minify-html": "^0.1.6",
     "gulp-mocha": "^1.1.1",
     "gulp-notify": "^1.4.2",

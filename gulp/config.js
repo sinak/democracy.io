@@ -34,6 +34,13 @@ module.exports = {
     ]
   },
 
+  img: {
+    dest: path.join(BUILD_DIR, 'img'),
+    paths: [
+      path.join(WWW_DIR, 'img/**/*')
+    ]
+  },
+
   // TODO(leah): Autogen a settings service.
 
   test: {

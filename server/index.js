@@ -10,9 +10,6 @@ var meddleware = require('meddleware');
 var path = require('path');
 var sprintf = require('sprintf-js').sprintf;
 
-var config = require('config');
-console.log(config);
-
 
 /**
  * Fetch the meddleware config and switch module paths to be absolute.
@@ -50,6 +47,9 @@ app.use(kraken(options));
 app.on('start', function () {
   console.log('Application ready to serve requests.');
   console.log('Environment: %s', app.kraken.get('env:env'));
+  // TODO(leah): For some reason the middleware gets called twice, once with meddled config
+  //             values and once with standard. Setting this here means the last call, the
+  //             one that takes effect, is done with meddled configs.
   app.use(meddleware(getMeddlewareConfig()));
 });
 

@@ -11,7 +11,7 @@
     "module": {
       "name": "%(krakenDir)s/node_modules/express-enrouten",
       "arguments": [{
-        "directory": "%(serverDir)s/routes"
+        "index": "%(serverDir)s/routes"
       }]
     }
   }

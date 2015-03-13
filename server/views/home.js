@@ -1,10 +1,10 @@
 /**
- *
+ * Root controller to render the top level Democracy.io page.
  */
 
-var homeController = function(req, res) {
+var home = function(req, res) {
   res.render('index');
 };
 
 
-module.exports = homeController;
+module.exports = home;

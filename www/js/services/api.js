@@ -2,8 +2,7 @@
  * API service for the Democracy.io app.
  */
 
-var api = function ($http) {
-
+var api = function ($http, dioConstants) {
 
   return {
 

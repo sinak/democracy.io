@@ -60,6 +60,7 @@ module.exports = {
 
   sass: {
     dest: path.join(STATIC_DIR, 'css'),
+    fileName: 'dio.min.css',
     paths: [
       path.join(WWW_DIR, 'sass/app.scss')
     ]

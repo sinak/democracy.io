@@ -6,7 +6,7 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var ngConstant = require('gulp-ng-constant');
 var path = require('path');
-var rename = require("gulp-rename");
+var rename = require('gulp-rename');
 
 var config = require('../config').appSettings;
 // Explicitly set the config dir, so that it gets pulled from www/config

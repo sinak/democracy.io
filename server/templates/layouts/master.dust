@@ -11,7 +11,9 @@
   <div id="wrapper" class="content">
     {+body /}
   </div>
-  <script src="{SITE_CONFIG.STATIC_URL}/js/dio.min.js"></script>
 </body>
+
+<script src="{SITE_CONFIG.STATIC_URL}/js/dio.min.js"></script>
+{+afterBody /}
 
 </html>

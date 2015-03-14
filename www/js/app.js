@@ -4,7 +4,7 @@
 
 var angular = require('angular');
 
-var democracyApp = angular.module('democracyIoApp', ['democracyIoApp.constants']);
+var democracyApp = angular.module('democracyIoApp', ['ngRoute', 'dioConstants']);
 democracyApp.config(require('./routes'));
 
 democracyApp.controller('dioHome', require('./controllers/home'));
@@ -20,5 +20,7 @@ democracyApp.factory(
 );
 democracyApp.factory('dioRepData', require('./services/rep_data'));
 
+// Require in all the modules that are used, but not referenced directly
+require('angular-route');
 require('../../.build/partials/partials');
 require('../../.build/dioAppSettings');

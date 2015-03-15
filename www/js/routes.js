@@ -8,23 +8,23 @@ var configureRoutes = function($routeProvider) {
   $routeProvider
     .when('/', {
       controller: 'HomeController',
-      templateUrl: ''
+      templateUrl: '/partials/home.html'
     })
     .when('/location', {
       controller: 'RepPickerController',
-      templateUrl: ''
+      templateUrl: '/partials/rep_picker.html'
     })
     .when('/representatives', {
       controller: 'MessageFormController',
-      templateUrl: ''
+      templateUrl: '/partials/message_form.html'
     })
     .when('/thanks', {
       controller: '',
-      templateUrl: ''
+      templateUrl: '/partials/thanks.html'
     })
     .when('/about', {
       controller: 'AboutController',
-      templateUrl: ''
+      templateUrl: '/partials/about.html'
     })
     .otherwise({
       redirectTo: '/'

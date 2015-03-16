@@ -10,7 +10,7 @@ var config = require('../config').sass;
 
 gulp.task('css', function() {
   gulp.src(config.paths)
-    .pipe(sass())
+    .pipe(sass({includePaths: config.includePaths}))
     .pipe(rename(config.fileName))
     .pipe(gulp.dest(config.dest));
 });

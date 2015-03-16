@@ -9,6 +9,7 @@ var sprintf = require('sprintf-js').sprintf;
 var WWW_DIR = path.join(__dirname, '../www');
 var BUILD_DIR = path.join(__dirname, '../.build');
 var STATIC_DIR = path.join(__dirname, '../.build/static');
+var NPM_DIR = path.join(__dirname, '../node_modules');
 
 
 module.exports = {
@@ -63,6 +64,9 @@ module.exports = {
     fileName: 'dio.min.css',
     paths: [
       path.join(WWW_DIR, 'sass/app.scss')
+    ],
+    includePaths: [
+      NPM_DIR
     ]
   }
 

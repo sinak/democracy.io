@@ -7,11 +7,11 @@ var angular = require('angular');
 var democracyApp = angular.module('democracyIoApp', ['ngRoute', 'dioConstants']);
 democracyApp.config(require('./routes'));
 
-democracyApp.controller('dioHome', require('./controllers/home'));
-democracyApp.controller('dioRepPicker', require('./controllers/rep_picker'));
-democracyApp.controller('dioMessageForm', require('./controllers/message_form'));
-democracyApp.controller('dioThanks', require('./controllers/thanks'));
-democracyApp.controller('dioAbout', require('./controllers/about'));
+democracyApp.controller('HomeController', require('./controllers/home'));
+democracyApp.controller('RepPickerController', require('./controllers/rep_picker'));
+democracyApp.controller('MessageFormController', require('./controllers/message_form'));
+democracyApp.controller('ThanksController', require('./controllers/thanks'));
+democracyApp.controller('AboutController', require('./controllers/about'));
 
 
 democracyApp.factory(

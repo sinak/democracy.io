@@ -55,7 +55,8 @@ module.exports = {
     ],
     options: {
       filename: 'partials.js',
-      module: 'democracyIoApp'
+      module: 'democracyIoApp',
+      root: '/partials'
     }
   },
 

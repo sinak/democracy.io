@@ -9,31 +9,35 @@ var sprintf = require('sprintf-js').sprintf;
 var WWW_DIR = path.join(__dirname, '../www');
 var BUILD_DIR = path.join(__dirname, '../.build');
 var STATIC_DIR = path.join(__dirname, '../.build/static');
+var SERVER_DIR = path.join(__dirname, '../server');
 var NPM_DIR = path.join(__dirname, '../node_modules');
-
 
 module.exports = {
 
   appSettings: {
     dest: BUILD_DIR,
     fileName: 'dioAppSettings.js',
-    moduleName: 'dioConstants'
+    moduleName: 'democracyIoApp',
+    configVarName: 'dioConfig'
   },
 
   browserify: {
     debug: !gutil.env.production,
-    entries: ['./www/js/app.js'],
+    entries: [
+      './www/js/app.js'
+    ],
     dest: path.join(STATIC_DIR, 'js'),
     outputName: 'dio.min.js'
   },
 
-//  browserSync: {
-//    proxy: sprintf.format('http://localhost:%d', process.env.PORT || 3000),
-//    files: [
-//      path.join(DIST_DIR, '/**/*'),
-//      '!' + path.join(DIST_DIR, '/**.map')
-//    ]
-//  },
+  browserSync: {
+    proxy: 'http://localhost:' + (process.env.PORT || 3000),
+    files: [
+      path.join(STATIC_DIR, '/**/*'),
+      path.join(SERVER_DIR, 'templates/**/*.dust'),
+      '!' + path.join(STATIC_DIR, '/**.map')
+    ]
+  },
 
   img: {
     dest: path.join(STATIC_DIR, 'img'),
@@ -42,7 +46,11 @@ module.exports = {
     ]
   },
 
-  // TODO(leah): Autogen a settings service.
+  templates: {
+    paths: [
+      path.join(SERVER_DIR, 'templates/**/*.dust')
+    ]
+  },
 
   test: {
 
@@ -69,6 +77,10 @@ module.exports = {
     includePaths: [
       NPM_DIR
     ]
+  },
+
+  watch: {
+
   }
 
 };

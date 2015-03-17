@@ -4,6 +4,7 @@
 
 var gulp = require('gulp');
 
-gulp.task('runServer', ['build'], function() {
+gulp.task('serve', ['setWatch', 'build', 'watch'], function() {
+  // This is a bit weird, but not a huge deal.
   var server = require('../../server');
 });

@@ -4,7 +4,7 @@
 
 var HomeController = function($scope, $location, dioApi, dioRepData) { 
 
-	$scope.address = "";
+	$scope.address = '';
 
 	$scope.submit = function(address){
 		console.log(address);

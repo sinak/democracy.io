@@ -13,11 +13,13 @@ var config = require('../config').appSettings;
 process.env['NODE_CONFIG_DIR'] = path.join(__dirname, '../../www/config');
 
 gulp.task('appSettings', function() {
-  var appConfig = require('config');
+  var appConfig = {};
+  appConfig[config.configVarName] = require('config');
 
   gulp.src('')
     .pipe(ngConstant({
       name: config.moduleName,
+      deps: false,
       constants: appConfig,
       wrap: 'commonjs'
     }))

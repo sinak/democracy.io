@@ -5,9 +5,9 @@
     <div class="email-form-container">
       <label for="inputAddress">Enter your address:</label>
       <div class="input-group">
-        <input type="text" class="form-control input-lg" placeholder="1600 Pennsylvania Ave, Washington DC, 20500">
+        <input type="text" class="form-control input-lg" placeholder="1600 Pennsylvania Ave, Washington DC, 20500" ng-model="address">
         <span class="input-group-btn">
-          <button type="submit" class="btn btn-lg btn-orange">Submit</button>
+          <button type="submit" class="btn btn-lg btn-orange" ng-click="submit(address)">Submit</button>
         </span>
       </div>
     </div>

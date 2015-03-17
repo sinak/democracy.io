@@ -2,7 +2,19 @@
  *
  */
 
-var MessageFormController = function($scope) {
+var MessageFormController = function($scope, $location, dioRepData) {
+	$scope.goBack = function(){
+		$location.path('/location');
+	};
+
+	$scope.submit = function(repData){
+		if (repData.hasCaptcha){
+			//TODO
+
+		} else {
+			//TODO
+		};
+	}
 
 };
 

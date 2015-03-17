@@ -5,7 +5,8 @@
 var repData = function () {
 
   return {
-
+  	repList: [],
+  	selectedReps: []
   };
 
 };

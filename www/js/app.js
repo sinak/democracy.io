@@ -4,6 +4,10 @@
 
 var angular = require('angular');
 
+// Require modules that are used, not referenced directly and need to be in place before creating the app module
+require('angular-route');
+require('../../.build/dioAppSettings');
+
 var democracyApp = angular.module('democracyIoApp', ['ngRoute', 'dioConstants']);
 democracyApp.config(require('./routes'));
 
@@ -20,7 +24,5 @@ democracyApp.factory(
 );
 democracyApp.factory('dioRepData', require('./services/rep_data'));
 
-// Require in all the modules that are used, but not referenced directly
-require('angular-route');
+// Require modules that are used, not referenced directly and should be invoked after creating the app module
 require('../../.build/partials/partials');
-require('../../.build/dioAppSettings');

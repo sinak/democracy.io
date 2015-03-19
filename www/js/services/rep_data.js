@@ -6,7 +6,8 @@ var repData = function () {
 
   return {
   	repList: [],
-  	selectedReps: []
+  	selectedReps: [],
+  	repDataReceived: false
   };
 
 };

@@ -12,6 +12,7 @@ var api = function ($http, dioConfig) {
      * @param lng
      */
     getRepsByLocation: function(lat, lng) {
+
         return [
           {
             "bioguide_id": "P000197",

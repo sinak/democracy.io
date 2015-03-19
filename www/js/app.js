@@ -22,5 +22,6 @@ democracyApp.factory('dioRepData', require('./services/rep_data'));
 
 // Require modules that are used and not referenced directly
 require('angular-route');
+//require('ngAutocomplete')
 require('../../.build/dioAppSettings');
 require('../../.build/partials/partials');

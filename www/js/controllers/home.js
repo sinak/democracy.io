@@ -2,6 +2,8 @@
  * Top level controller for the democracy.io app.
  */
 
+
+
 var HomeController = function($scope, $location, dioApi, dioRepData) { 
 	
 	dioRepData.repList = []

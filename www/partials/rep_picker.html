@@ -3,15 +3,12 @@
   <div class="email-form col-md-8 col-md-offset-2">
     <button class="btn-sm btn-warning back-button" ng-click="goBack()">Go Back</button>
 
-    <div><label>
-      <input type="checkbox"> Rep. Nancy Pelosi (D-CA)
-    </label></div>
-    <div><label>
-      <input type="checkbox"> Sen. Diane Feinstein (D-CA)
-    </label></div>
-    <div><label>
-      <input type="checkbox"> Sen. Barbara Boxer (D-CA)
-    </label></div>
-    <button type="submit" class="btn btn-warning btn-lg">Write to them!</button>
+    <ul>
+      <li class="repOption" ng-repeat="rep in repData.repList">
+        <input type="checkbox" ng-model="rep.selected"> {{rep.title}} {{rep.first_name}} {{rep.last_name}}
+      </li>
+    </ul>
+
+    <button type="submit" class="btn btn-warning btn-lg" ng-click="submit()">Write to them!</button>
   </div>
 </div>

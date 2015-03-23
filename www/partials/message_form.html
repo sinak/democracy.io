@@ -61,8 +61,7 @@
       <div class="form-group col-md-6">
         <label for="inputTopic">Topic</label>
         <select class="form-control" id="inputTopic">
-          <option value="Agriculture">Agriculture</option>
-          <option value="Technology">Technology</option>
+          <option ng-repeat="topic in topics" value="{{topic}}">{{topic}}</option>
         </select>
       </div>
     </div>

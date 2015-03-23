@@ -18,21 +18,33 @@ html {
 }
 
 body {
-  padding-top: 50px;
-  background-image: url('/images/bg.jpg');
+  padding-top: 20px;
+  background-image: url('/static/img/bg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-color: #F0F0F0;
   min-height: 100%;
   margin-bottom: 170px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+a.ondark {
+  color: #fff;
+  &:visited, &:active {
+    color: #fff;
+  }
+  &:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
 }
 .navbar-header, .navbar-brand {
   width: 100%;
   text-align: center;
 }
 .navbar-brand #logo {
-  width: 300px;
+  width: 200px;
   margin: 0 auto;
   // @extend .ro-gradient;
 }
@@ -51,21 +63,73 @@ h1 {
 }
 .email-form {
   background-color: #fff;
-  border-radius: 10px;
-  border-top: 4px solid orange;
-  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
-  padding:30px 30px 30px 30px;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  border-radius: 5px;
+
+  &::before {
+    content: '';
+    display: block;
+    height:5px;
+    background-color: #000;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background-image: linear-gradient(to right, #FF8900, #FF4127);
+  }
+}
+.email-form-container {
+  padding: 23px 30px 30px 30px;
+}
+.back-button {
+  display: inline-block;
+  border-bottom-right-radius: 5px;
+  background-color: #FF8900;
+  color: #fff;
+  padding: 0px 10px 2px 10px;
+  font-size: 12px;
+  line-height: 21px;
+  @extend a.ondark;
+}
+label {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 12px;
+  color: $gray;
+  font-weight: 400;
+}
+.form-control {
+  box-shadow: none;
+}
+.input-lg {
+  height: 54px;
+}
+.input-group {
+  .input-lg {
+    border-right:0;
+  }
+  .btn-lg {
+    height: 54px;
+  }
+}
+.btn-orange {
+  @extend a.ondark;
+  color: #FF8900;
+  background-color: #fff;
+  border: 1px solid #FF8900;
+  border-left:1px;
+  &:hover {
+  }
 }
 
-.back-button {
-  position: relative;
-  top:-30px;
-  left:-30px;
-  border: none;
-  border-radius: 0px;
-  border-top-left-radius:3px;
-  border-bottom-right-radius:3px;
-}
+// .back-button {
+//   position: relative;
+//   top:-30px;
+//   left:-30px;
+//   border: none;
+//   border-radius: 0px;
+//   border-t: op-left-radius:3px;
+//   border-bottom-right-radius:3px;
+// }
 
 .email-form button {
 /*  
@@ -88,6 +152,8 @@ h1 {
   background-color: white;
 }
 
-#footer a:link, a:visited, a:hover, a:active {
-  color: orange;
+#footer {
+  a:link, a:visited, a:hover, a:active {
+    color: orange;
+  }
 }

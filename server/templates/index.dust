@@ -28,10 +28,7 @@
           <feGaussianBlur in="SourceAlpha" result="blur-out" stdDeviation="2" />
           <feOffset in="blur-out" result="the-shadow" dx="0" dy="2"/> 
           <feColorMatrix in="the-shadow" result="color-out" type="matrix"
-            values="0 0 0 0   0
-                    0 0 0 0   0 
-                    0 0 0 0   0 
-                    0 0 0 .17 0"/>
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .17 0"/>
           <feBlend in="SourceGraphic" in2="color-out" mode="normal"/>
         </filter>
 

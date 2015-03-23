@@ -77,10 +77,6 @@ module.exports = {
     includePaths: [
       NPM_DIR
     ]
-  },
-
-  watch: {
-
   }
 
 };

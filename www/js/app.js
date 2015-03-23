@@ -4,7 +4,7 @@
 
 var angular = require('angular');
 
-var democracyApp = angular.module('democracyIoApp', ['ngRoute']);
+var democracyApp = angular.module('democracyIoApp', ['ngRoute', 'ngAutocomplete']);
 democracyApp.config(require('./routes'));
 
 democracyApp.controller('HomeController', require('./controllers/home'));

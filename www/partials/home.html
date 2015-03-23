@@ -13,9 +13,16 @@
                details="data.geocode"
                ng-model="data.address">
         <span class="input-group-btn">
-          <button type="submit" class="btn btn-lg btn-orange" ng-click="submit(address)">Submit</button>
+          <button type="submit"
+                  ng-disabled="data.invalidGeocode"
+                  class="btn btn-lg btn-orange"
+                  ng-click="submit(data.geocode.geometry.location)">
+            Submit
+          </button>
         </span>
+
       </div>
+      <div>TODO: DISPLAY AN ERROR MESSAGE IF NO LAT / LNG FOUND</div>
     </div>
   </div>
 </div>

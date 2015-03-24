@@ -1,5 +1,14 @@
 @import "bootstrap-sass/assets/stylesheets/bootstrap.scss";
 
+$primaryColor: #fff;
+$secondaryColor: #fff;
+$highlightColor: #fff;
+$activeColor: #f85628;
+$slowDuration: 0.4s;
+@import "hover.css/scss/options";
+@import "hover.css/scss/mixins";
+@import "hover.css/scss/hacks";
+@import "hover.css/scss/effects/background-transitions/bounce-to-right.scss";
 // Import IE10 fix
 //@import "ie_10_fix";
 
@@ -96,7 +105,7 @@ h1 {
 }
 .email-form {
   background-color: #fff;
-  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 7px 0px rgba(100, 100, 100, 0.18);
   padding: 0;
   border-radius: 5px;
 
@@ -146,11 +155,18 @@ label {
 }
 .btn-orange {
   @extend a.ondark;
-  color: #FF8900;
+  color: #f85628;
   background-color: #fff;
-  border: 1px solid #FF8900;
-  border-left:1px;
+  border: 1px solid #f85628;
+  margin-left: 0 !important;
+  font-weight: 300;
+  padding: 0 30px;
+  @include bounce-to-right;
   &:hover {
+    //background-color: #f85628;
+    //color: #fff;
+    text-decoration: none;
+    font-weight: 300;
   }
 }
 

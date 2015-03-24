@@ -1,9 +1,9 @@
 <svg id="progress-bar-svg" viewBox="0 0 433 69" >
   <filter id="dropshadow" x="-20%" y="-20%" width="140%" height="140%">
     <feGaussianBlur in="SourceAlpha" result="blur-out" stdDeviation="2" />
-    <feOffset in="blur-out" result="the-shadow" dx="0" dy="2"/>
+    <feOffset in="blur-out" result="the-shadow" dx="0" dy="1"/>
     <feColorMatrix in="the-shadow" result="color-out" type="matrix"
-      values="0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 0 .17 0"/>
+      values="0.05 0 0 0   0.05 0 0 0 0   0.05 0 0 0 0   0 0 0 0 .14 0"/>
     <feBlend in="SourceGraphic" in2="color-out" mode="normal"/>
   </filter>
 

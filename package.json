@@ -52,6 +52,7 @@
     "dustjs-helpers": "^1.6.1",
     "dustjs-linkedin": "^2.6.1",
     "engine-munger": "^0.2.5",
+    "hover.css": "^2.0.2",
     "kraken-js": "^1.0.3",
     "lodash": "^3.3.1",
     "meddleware": "^3.0.0",

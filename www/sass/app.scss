@@ -71,7 +71,7 @@ div#progress-bar {
   margin-top: -8px;
   font-size: 11px;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 300;
   span {
     display: inline-block;
   }
@@ -80,6 +80,7 @@ div#progress-bar {
     margin-left: -6%;
     position: absolute;
     left: 0;
+    font-weight: 400;
   }
   .second {
     width: 46%;
@@ -118,9 +119,12 @@ h1 {
     border-top-left-radius: 5px;
     background-image: linear-gradient(to right, #FF8900, #FF4127);
   }
+  label {
+    margin-bottom: 11px;
+  }
 }
 .email-form-container {
-  padding: 23px 30px 30px 30px;
+  padding: 27px 30px 34px 30px;
 }
 .back-button {
   display: inline-block;

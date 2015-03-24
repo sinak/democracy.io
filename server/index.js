@@ -37,7 +37,7 @@ var app = express();
 
 var options = {
   onconfig: function (config, next) {
-    app.locals['SITE_CONFIG'] = config.get('SITE_CONFIG');
+    app.locals['CONFIG'] = config.get('CONFIG');
     next(null, config);
   }
 };

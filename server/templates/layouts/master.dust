@@ -22,7 +22,7 @@
 	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
-  <link rel="stylesheet" href="{SITE_CONFIG.STATIC_URL}/css/dio.min.css" />
+  <link rel="stylesheet" href="{CONFIG.SITE.STATIC_URL}/css/dio.min.css" />
 </head>
 
 <body>
@@ -32,7 +32,7 @@
 </body>
 
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-<script src="{SITE_CONFIG.STATIC_URL}/js/dio.min.js"></script>
+<script src="{CONFIG.SITE.STATIC_URL}/js/dio.min.js"></script>
 {+afterBody /}
 
 </html>

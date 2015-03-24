@@ -1,5 +1,10 @@
 {
 
-  "MODE": "development"
+  "MODE": "development",
+
+  "SITE": {
+    "API_VERSION": 1,
+    "API_BASE_URL": "/api"
+  }
 
 }

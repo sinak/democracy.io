@@ -22,17 +22,21 @@ var HomeController = function($scope, $location, dioApi, dioRepData) {
   };
 
 	$scope.submit = function(location) {
-    var geocode = {lat: location.lat(), lng: location.lng()};
-		dioRepData.repList = dioApi.getRepsByLocation(geocode);
-		dioRepData.repDataReceived = true;
+    var lat = location.lat();
+    var lng = location.lng();
 
-    for (var i = 0; i < dioRepData.repList.length; ++i) {
-			dioRepData.repList[i].selected = true;
-		};
+		dioRepData.repList = dioApi.getRepsByLocation(lat, lng, function(reps) {
 
-		$location
-      .path('/location')
-      .search(geocode);
+      //      dioRepData.repDataReceived = true;
+      //
+      //      for (var i = 0; i < dioRepData.repList.length; ++i) {
+      //        dioRepData.repList[i].selected = true;
+      //      };
+
+      $location
+        .path('/location')
+        .search({lat: lat, lng: lng});
+    });
 	};
 
   var watchHasFired = false;

@@ -5,7 +5,7 @@
 
 var http = require('http');
 
-var app = require('./server/index');
+var app = require('./server/app');
 
 var server;
 

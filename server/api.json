@@ -1,0 +1,264 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Democracy.io API",
+        "description": "Internal API used by the democracy.io site",
+        "version": "1.0.0"
+    },
+    "host": "api.democracy.io",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/api/v1",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/legislators/findByLatLng": {
+            "get": {
+                "summary": "Legislators' biographical information by location.",
+                "description": "Fetches biographical information for the US congressional representatives associated with a given latitude and longitude. The information is retrived via the [Sunlight Foundation API](https://sunlightlabs.github.io/congress/legislators.html).",
+                "parameters": [
+                    {
+                        "name": "latitude",
+                        "in": "query",
+                        "description": "Latitude component of location.",
+                        "required": true,
+                        "type": "number",
+                        "format": "double"
+                    },
+                    {
+                        "name": "longitude",
+                        "in": "query",
+                        "description": "Longitude component of location.",
+                        "required": true,
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "tags": [
+                    "Legislators"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of legislators' biographical info.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Legislator"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/legislator/{bioguideId}": {
+            "get": {
+                "summary": "Biographical information for a specific legislator.",
+                "description": "Fetches biographical information for the legislator matching the supplied bioguideId.",
+                "parameters": [
+                    {
+                        "name": "bioguideId",
+                        "in": "path",
+                        "description": "The biographical id of the legislator to retrieve.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Legislator"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An object containing the legislator's biographical info",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/Legislator"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/legislator/{bioguideId}/formElements": {
+            "get": {
+                "summary": "Fetches the form elements to contact a legislator.",
+                "description": "Fetches a JSON object describing the form elements the user needs to fill out to be able to contact their legislator via their online form.",
+                "parameters": [
+                    {
+                        "name": "bioguideId",
+                        "in": "path",
+                        "description": "Identifier for this member in various Congressional sources. Originally taken from the Congressional Biographical Directory, but used in many places.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Legislator",
+                    "FormElements"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A LegislatorFormElements object describing the form elements the user needs to complete to contact the legislator matching the supplied bioguideId.",
+                        "schema": {
+                            "type": "object",
+                            "items": {
+                                "$ref": "#/definitions/LegislatorFormElements"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/formElements/findByLegislatorBioguideIds": {
+            "get": {
+                "summary": "Fetches the form elements to contact one or more legislators.",
+                "description": "Fetches a JSON object describing the form elements the user needs to fill out to be able to contact their legislator(s) via their online form(s).",
+                "parameters": [
+                    {
+                        "name": "bioguideIds",
+                        "in": "query",
+                        "description": "An array of bioguideIds identifying the legislators to fetch form elements for.",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "tags": [
+                    "FormElements"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of LegislatorFormElements objects describing the form elements the user needs to complete to contact the legislator(s) matching the supplied bioguideId(s).",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/LegislatorFormElements"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Legislator": {
+            "description": "A simplified description of a US Congressional legislator.",
+            "properties": {
+                "bioguideId": {
+                    "type": "string",
+                    "description": "Identifier for this member in various Congressional sources. Originally taken from the Congressional Biographical Directory, but used in many places."
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The legislator's title",
+                    "enum": [
+                        "Sen",
+                        "Rep",
+                        "Del",
+                        "Com"
+                    ]
+                },
+                "firstName": {
+                    "type": "string",
+                    "description": "The member’s first name. This may or may not be the name they are usually called."
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "The member’s last name."
+                },
+                "nickname": {
+                    "type": "string",
+                    "description": "The member’s nickname. If present, usually safe to assume this is the name they go by."
+                },
+                "middleName": {
+                    "type": "string",
+                    "description": "The member’s middle name, if they have one."
+                },
+                "nameSuffix": {
+                    "type": "string",
+                    "description": "A name suffix, if the member uses one. For example, “Jr.” or “III”."
+                },
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "An array of common names combinations for a Congressperson if a combination does not exist, the result will be null and the index will be consistent."
+                }
+            }
+        },
+        "LegislatorFormElements": {
+            "properties": {
+                "bioguideId": {
+                    "type": "string",
+                    "description": "Identifier for this member in various Congressional sources. Originally taken from the Congressional Biographical Directory, but used in many places."
+                },
+                "formElements": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FormElement"
+                    }
+                }
+            }
+        },
+        "FormElement": {
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "description": "The name of the field."
+                },
+                "maxLength": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The max length for this field."
+                },
+                "optionsHash": {
+                    "type": "object",
+                    "description": "An object describing the options this field can take and the corresponding value for each option."
+                }
+            }
+        },
+        "Error": {
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -8,7 +8,7 @@ var homeView = require('../views/home');
 module.exports = [
 
   [
-    {path: '/', name: 'home'}, {get: homeView}
+
   ]
 
 ];

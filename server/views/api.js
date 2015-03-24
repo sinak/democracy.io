@@ -8,7 +8,6 @@ var thirdPartyAPIs = require('../services/third_party_apis');
 
 
 var getRepresentatives = function(req, res) {
-
   // TODO(leah): Update this to:
   //   * validate the query params
 

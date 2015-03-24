@@ -30,8 +30,16 @@
     }
   },
 
-  "SITE_CONFIG": {
-    "STATIC_URL": "/static"
+  "CONFIG": {
+    "SITE": {
+      "STATIC_URL": "/static"
+    },
+
+    "API": {
+      "SUNLIGHT_BASE_URL": "https://congress.api.sunlightfoundation.com"
+    },
+
+    "CREDENTIALS": "import:./credentials"
   }
 
 }

@@ -35,15 +35,16 @@ var HomeController = function($scope, $location, dioApi, dioRepData) {
       .search(geocode);
 	};
 
-  $scope.$watch('data.geocode', function(newVal, oldVal) {
+  var watchHasFired = false;
+  $scope.$watch('data.geocode', function(newVal) {
+    $scope.data.addressPristine = watchHasFired ? false : true;
+    watchHasFired = true;
+
     // Use a try / catch here as there's a variety of null vs undefined conditions that could cause issues.
     try {
       $scope.data.invalidGeocode = angular.isUndefined(newVal.geometry.location.lat());
     } catch(err) {
       $scope.data.invalidGeocode = true;
-      if((!angular.isUndefined(newVal) || newVal === null) && oldVal !== newVal){
-        $scope.data.addressPristine = false;
-      }
     };
   }, true);
 

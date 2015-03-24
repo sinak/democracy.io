@@ -6,6 +6,7 @@ var path = require('path');
 var gutil = require('gulp-util');
 var sprintf = require('sprintf-js').sprintf;
 
+var TEST_DIR = path.join(__dirname, '../test');
 var WWW_DIR = path.join(__dirname, '../www');
 var BUILD_DIR = path.join(__dirname, '../.build');
 var STATIC_DIR = path.join(__dirname, '../.build/static');
@@ -54,6 +55,10 @@ module.exports = {
 
   test: {
 
+    mochaOptions: {
+      reporter: 'spec'
+    },
+    paths: path.join(TEST_DIR, '**/*.js')
   },
 
   partials: {

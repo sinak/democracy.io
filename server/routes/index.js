@@ -5,23 +5,20 @@
 
 var lodash = require('lodash');
 
-var apiRoutes = require('./api');
-var appRoutes = require('./app');
-
-var allRoutes = lodash.flatten([
-  apiRoutes,
-  appRoutes
-]);
+var routes = [
+  [{path: '/', name: 'home'}, {get: require('./app/home')}]
+];
 
 
 module.exports = function(router) {
 
-  var route;
-  lodash.forEach(allRoutes, function(routeConfig) {
+  var route, httpHandlers;
+  lodash.forEach(routes, function(routeConfig) {
     route = routeConfig[0];
+    httpHandlers = routeConfig[1];
 
-    lodash.forEach(routeConfig[1], function(val, key) {
-      router(route)[key](val);
+    lodash.forEach(httpHandlers, function(handler, httpVerb) {
+      router(route)[httpVerb](handler);
     });
   });
 

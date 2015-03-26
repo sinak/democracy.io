@@ -203,6 +203,12 @@ label {
   /* Set the fixed height of the footer here */
   height: 150px;
   background-color: white;
+  padding-top: 30px;
+}
+
+#footer svg.logo {
+  width: 200px;
+  // fill: #333;
 }
 
 #footer {

@@ -27,12 +27,14 @@
     <div class="logo">
       <div class="row">
         <div class="col-md-6 col-md-offset-2">
-          <!-- TODO Add SVG HERE -->
-          <h2>Democracy.io</h2>
-          <div>Send message to members of the US Senate and House of Representitives</div>
+          <svg class="logo" preserveAspectRatio="none" viewBox="0 0 335 25">
+              <use xlink:href="#logo"></use>
+          </svg>
+
+          <p>Send message to members of the US Senate and House of Representitives</p>
         </div>
         <div class="col-md-2">
-          <div class="pull-right" style="margin-top: 20px">
+          <div class="pull-right"å>
             <div>
               <a href="/privacy">Privacy Policy</a>
             </div>

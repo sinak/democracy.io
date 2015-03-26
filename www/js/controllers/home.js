@@ -25,7 +25,7 @@ var HomeController = function($scope, $location, dioApi, dioRepData) {
     var lat = location.lat();
     var lng = location.lng();
 
-		dioRepData.repList = dioApi.getRepsByLocation(lat, lng, function(reps) {
+		dioRepData.repList = dioApi.findLegislatorsByLatLng(lat, lng, function(reps) {
 
       //      dioRepData.repDataReceived = true;
       //

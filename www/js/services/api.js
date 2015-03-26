@@ -13,8 +13,9 @@ var api = function ($http, dioConfig) {
      * @param lat
      * @param lng
      */
-    getRepsByLocation: function(lat, lng, cb) {
-      $http.get(this.makeAPIUrl('representatives'), {params: {lat: lat, lng: lng}})
+    findLegislatorsByLatLng: function(lat, lng, cb) {
+      var params = {params: {latitude: lat, longitude: lng}};
+      $http.get(this.makeAPIUrl('/legislators/findByLatLng'), params)
         .success(function(data) {
           cb(data);
         })
@@ -23,7 +24,7 @@ var api = function ($http, dioConfig) {
         });
     },
 
-    getRepsById: function(repIds) {
+    legislatorFormElementsByBioguideIds: function(bioguideIds) {
 
     },
 

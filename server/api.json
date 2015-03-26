@@ -9,7 +9,7 @@
     "schemes": [
         "https"
     ],
-    "basePath": "/api/v1",
+    "basePath": "/api/1",
     "produces": [
         "application/json"
     ],

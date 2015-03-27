@@ -4,7 +4,7 @@
 
 var changeCaseKeys = require('change-case-keys');
 
-var Legislator = require('../../../models/legislator');
+var Legislator = require('../../../../models').Legislator;
 var thirdPartyAPIs = require('../../../services/third_party_apis');
 
 

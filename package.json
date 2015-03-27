@@ -57,6 +57,7 @@
     "hover.css": "^2.0.2",
     "kraken-js": "^1.0.3",
     "lodash": "^3.3.1",
+    "lodash.isempty": "^3.0.1",
     "meddleware": "^3.0.0",
     "morgan": "^1.5.1",
     "ng-autocomplete": "^1.0.0",

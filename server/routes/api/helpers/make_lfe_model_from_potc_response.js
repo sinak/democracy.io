@@ -1,24 +1,23 @@
 /**
- *
+ * Helper to construct a LegislatorFormElements model from a POTC response.
  */
 
 var lodash = require('lodash');
 
-var FormElement = require('../../../models/form_element');
-var LegislatorFormElements = require('../../../models/legislator_form_elements');
+var models = require('../../../../models');
 
 
 var makeLegislatorFormElementsFromPOTCResponse = function(potcResponse, bioguideId) {
 
   var formElems = lodash.map(potcResponse['required_actions'], function(action) {
-    return new FormElement({
+    return {
       value: action.value,
       maxLength: action['maxlength'],
       optionsHash: action['options_hash']
-    });
+    };
   });
 
-  return new LegislatorFormElements({
+  return new models.LegislatorFormElements({
     bioguideId: bioguideId,
     formElements: formElems
   });

@@ -4,11 +4,11 @@
  * @constructor
  */
 
-var lodash = require('lodash');
+var isEmpty = require('lodash.isempty');
 
 
 function Error(options) {
-  options = lodash.isEmpty(options) ? {} : options;
+  options = isEmpty(options) ? {} : options;
     
   this.code = options.code;
   this.message = options.message;

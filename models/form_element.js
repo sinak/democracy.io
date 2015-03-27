@@ -4,15 +4,15 @@
  * @constructor
  */
 
-var lodash = require('lodash');
+var isEmpty = require('lodash.isempty');
 
 
 var FormElement = function(options) {
-  options = lodash.isEmpty(options) ? {} : options;
+  options = isEmpty(options) ? {} : options;
 
   this.value = options.value;
   this.maxLength = options.maxLength;
-  this.optionsHash = lodash.isEmpty(options.optionsHash) ? {} : options.optionsHash;
+  this.optionsHash = isEmpty(options.optionsHash) ? {} : options.optionsHash;
 };
 
 

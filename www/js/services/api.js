@@ -2,6 +2,9 @@
  * API service for the Democracy.io app.
  */
 
+var helpers = require('../helpers/api_helpers');
+var models = require('../../../models');
+
 var api = function ($http, dioConfig) {
 
   var siteConfig = dioConfig.SITE;
@@ -14,8 +17,15 @@ var api = function ($http, dioConfig) {
      * @param lng
      */
     findLegislatorsByLatLng: function(lat, lng, cb) {
-      var params = {params: {latitude: lat, longitude: lng}};
-      $http.get(this.makeAPIUrl('/legislators/findByLatLng'), params)
+      var opts = {
+        url: helpers.makeAPIUrl(
+          siteConfig.API_BASE_URL, siteConfig.API_VERSION, '/legislators/findByLatLng'),
+        method: 'GET',
+        params: {latitude: lat, longitude: lng},
+        modelClass: models.Legislator
+      };
+
+      $http(opts)
         .success(function(data) {
           cb(data);
         })
@@ -40,16 +50,6 @@ var api = function ($http, dioConfig) {
      */
     submitCaptchaResponse: function() {
 
-    },
-
-    /**
-     * Construct a relative, versioned API URL from an URL path.
-     * @param urlSuffix
-     * @returns {string}
-     */
-    makeAPIUrl: function(urlSuffix) {
-      var url = [siteConfig.API_BASE_URL, siteConfig.API_VERSION, urlSuffix].join('/');
-      return url.replace('//', '/');
     }
 
   };

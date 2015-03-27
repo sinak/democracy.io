@@ -4,11 +4,11 @@
  * @constructor
  */
 
-var lodash = require('lodash');
+var isEmpty = require('lodash.isempty');
 
 
 var Legislator = function(options) {
-  options = lodash.isEmpty(options) ? {} : options;
+  options = isEmpty(options) ? {} : options;
 
   this.bioguideId = options.bioguideId;
   this.title = options.title;
@@ -17,7 +17,7 @@ var Legislator = function(options) {
   this.nickname = options.nickname;
   this.middleName = options.middleName;
   this.nameSuffix = options.nameSuffix;
-  this.aliases = lodash.isEmpty(options.aliases) ? [] : options.aliases;
+  this.aliases = isEmpty(options.aliases) ? [] : options.aliases;
 };
 
 module.exports = Legislator;

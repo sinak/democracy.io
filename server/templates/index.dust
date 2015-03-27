@@ -2,19 +2,23 @@
 
 {<body}
 
+
 <div id="wrapper" class="content">
   <nav class="navbar navbar-static">
     <div class="container">
       <div class="navbar-header">
         <div class="navbar-brand">
-          {>header_logo/}
+          {>logo_svg_defs/}
+          <svg class="logo" preserveAspectRatio="none" viewBox="0 0 335 25">
+            <use xlink:href="#logo" fill="url(#grad1)" />
+          </svg>
         </div>
       </div>
     </div>
   </nav>
 
 	<div class="header">
-    <h1>Write to your representatives</h1> <!--TODO - update based on page -->
+    <h1><span class="hidden">Write to your representatives</span></h1> <!--TODO - update based on page -->
   </div>
   <div id="progress-bar">
     {>progress_bar/}
@@ -30,15 +34,15 @@
   <div class="container">
     <div class="logo">
       <div class="row">
-        <div class="col-md-6 col-md-offset-2">
+        <div class="col-md-9">
           <svg class="logo" preserveAspectRatio="none" viewBox="0 0 335 25">
               <use xlink:href="#logo"></use>
           </svg>
 
           <p>Send message to members of the US Senate and House of Representitives</p>
         </div>
-        <div class="col-md-2">
-          <div class="pull-right"å>
+        <div class="col-md-3">
+          <div class="pull-right">
             <div>
               <a href="/privacy">Privacy Policy</a>
             </div>
@@ -52,9 +56,42 @@
   </div>
 </div>
 
+
 {/body}
 
 {<afterBody}
+<script>
+  var h1 = document.querySelectorAll('.header h1')[0];
+  var text = h1.textContent;
+  var counter = 0;
+  var speed = 70;
+  var typeText;
+  h1.innerHTML = '';
+
+  function type(){
+      lastText = h1.innerHTML;
+      lastText+=text.charAt(counter);
+      counter++;
+      h1.innerHTML = lastText;
+
+      if (h1.classList) h1.classList.remove('hidden');
+      else {
+        h1.className = h1.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+      }
+
+      if (counter == text.length){ 
+        clearInterval(typeText);
+
+        if (h1.classList) h1.classList.add('hasFinishedTyping');
+        else h1.className += ' ' + className;
+      }
+  }
+
+  function startTyping() {
+    var typeText = setInterval(function(){type()},speed);
+  }
+  setTimeout( function() {startTyping();}, 300);
+</script>
 <script>
   angular.element(document).ready(function() {
     angular.bootstrap(document, ['democracyIoApp']);

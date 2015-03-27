@@ -53,7 +53,7 @@ a.ondark {
   width: 100%;
   text-align: center;
 }
-.navbar-brand #logo {
+.navbar-brand svg.logo {
   width: 200px;
   margin: 0 auto;
   // @extend .ro-gradient;
@@ -67,6 +67,10 @@ div#progress-bar {
   max-width: 433px;
   margin: 0 auto 40px auto;
   position: relative;
+
+  @extend .animated;
+  @extend .fadeInUp;
+  animation-delay: 0.3s; // Reduces jittering
 }
 #progress-bar .labels {
   margin-top: -8px;
@@ -102,6 +106,7 @@ h1 {
   text-align: center;
   color: #444444;
 }
+
 .header h1 {
   margin-top: 100px;
 }
@@ -208,7 +213,77 @@ label {
   padding-top: 30px;
 }
 
-#footer svg.logo {
+#footer svg {
   width: 200px;
-  // fill: #333;
+  fill: #999;
+}
+#footer .pull-right {
+  text-align: right;
+}
+
+
+// Custom animations 
+
+.header h1 {
+  // @extend .animated;
+  // @extend .fadeZoomIn;
+  // animation-delay: 0.5s; // Reduces jittering
+  &::after {
+    content: '|';
+    display: inline;
+    animation: blink 0.7s infinite;
+    position:relative;
+    bottom: 5px;
+  }
+}
+h1.hasFinishedTyping::after {
+  display: none;
+  animation: none;
+}
+div#progress-bar {
+  @extend .animated;
+  @extend .fadeInUp;
+  animation-delay: 4s; // Reduces jittering
+}
+.email-form {
+  @extend .animated;
+  @extend .fadeInUp;
+  animation-delay: 4s; // Reduces jittering
+}
+
+.animated {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+@keyframes blink{
+  to{opacity: .0;}
+}
+
+.fadeInUp {
+  animation-name: fadeInUp;
+}
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+.fadeZoomIn {
+  animation-name: fadeZoomIn;
+}
+@keyframes fadeZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

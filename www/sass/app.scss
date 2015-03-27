@@ -1,3 +1,4 @@
+$brand-primary: #f85628;
 @import "bootstrap-sass/assets/stylesheets/bootstrap.scss";
 
 $primaryColor: #fff;
@@ -109,6 +110,7 @@ h1 {
   box-shadow: 0px 2px 7px 0px rgba(100, 100, 100, 0.18);
   padding: 0;
   border-radius: 5px;
+  margin-bottom: 90px;
 
   &::before {
     content: '';
@@ -209,10 +211,4 @@ label {
 #footer svg.logo {
   width: 200px;
   // fill: #333;
-}
-
-#footer {
-  a:link, a:visited, a:hover, a:active {
-    color: orange;
-  }
 }

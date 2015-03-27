@@ -1,6 +1,8 @@
 {>"layouts/master" /}
 
 {<body}
+
+<div id="wrapper" class="content">
   <nav class="navbar navbar-static">
     <div class="container">
       <div class="navbar-header">
@@ -18,9 +20,11 @@
     {>progress_bar/}
   </div>
 
-<div class="container">
-  <div ng-view></div>
-</div><!-- /.container -->
+  <div class="container">
+    <div ng-view></div>
+  </div><!-- /.container -->
+
+</div>
 
 <div id="footer">
   <div class="container">

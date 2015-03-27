@@ -15,7 +15,7 @@ democracyApp.config(function($provide, $httpProvider) {
 democracyApp.config(require('./routes'));
 
 democracyApp.controller('HomeController', controllers.home);
-democracyApp.controller('RepPickerController', controllers.repPicker);
+democracyApp.controller('LegislatorPickerController', controllers.LegislatorPickerController);
 democracyApp.controller('MessageFormController', controllers.messageForm);
 democracyApp.controller('ThanksController', controllers.thanks);
 democracyApp.controller('AboutController', controllers.about);
@@ -25,7 +25,7 @@ democracyApp.factory(
   'dioApi',
   ['$http', 'dioConfig', services.api]
 );
-democracyApp.factory('dioRepData', services.repData);
+democracyApp.factory('dioLegislatorData', services.legislatorData);
 
 // Require modules that are used but not referenced directly
 require('angular-route');

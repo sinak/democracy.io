@@ -9,12 +9,12 @@ var configureRoutes = function($routeProvider) {
     .when('/', {
       controller: 'HomeController',
       templateUrl: '/partials/home.html',
-      title: 'Write to your representitives'
+      title: 'Write to your representatives'
     })
     .when('/location', {
-      controller: 'RepPickerController',
-      templateUrl: '/partials/rep_picker.html',
-      title: 'Select your receipients'
+      controller: 'LegislatorPickerController',
+      templateUrl: '/partials/legislator_picker.html',
+      title: 'Select your recipients'
     })
     .when('/representatives', {
       controller: 'MessageFormController',

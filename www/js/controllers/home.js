@@ -3,10 +3,7 @@
  */
 
 
-var HomeController = function($scope, $location, dioApi, dioRepData) { 
-	
-	dioRepData.repList = [];
-	dioRepData.repDataRecieved = false;
+var HomeController = function($scope, $location, dioApi, dioLegislatorData) {
 
 	$scope.data = {
     address: '',
@@ -25,14 +22,10 @@ var HomeController = function($scope, $location, dioApi, dioRepData) {
     var lat = location.lat();
     var lng = location.lng();
 
-		dioRepData.repList = dioApi.findLegislatorsByLatLng(lat, lng, function(reps) {
-
-      //      dioRepData.repDataReceived = true;
-      //
-      //      for (var i = 0; i < dioRepData.repList.length; ++i) {
-      //        dioRepData.repList[i].selected = true;
-      //      };
-
+    dioLegislatorData.clearData();
+    // TODO: There should probably be a lag-delayed (~350ms) loading modal before firing the API call
+		dioApi.findLegislatorsByLatLng(lat, lng, function(legislators) {
+      dioLegislatorData.setLegislators(legislators);
       $location
         .path('/location')
         .search({lat: lat, lng: lng});

@@ -2,8 +2,8 @@
  *
  */
 
-var MessageFormController = function($scope, $location, dioRepData) {
-	//check if rep data is loaded
+var MessageFormController = function($scope, $location, dioLegislatorData) {
+
 	if (dioRepData.repDataReceived) {
 		$scope.repData = dioRepData;
 	} else {

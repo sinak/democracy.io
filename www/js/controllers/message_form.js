@@ -2,20 +2,22 @@
  *
  */
 
-var MessageFormController = function($scope, $location, dioLegislatorData) {
+var MessageFormController = function($scope, $location, dioLegislatorData, dioPageNav) {
 
-	if (dioRepData.repDataReceived) {
-		$scope.repData = dioRepData;
-	} else {
+  $scope.dioPageNav = dioPageNav;
 
-		// see if the address is in the url param
-		params = $location.search()
-		if (params.address) {
-			dioRepData.repList = dioApi.getRepsByLocation(params.address);
-		} else {
-			$location.path('/');
-		}	
-	}
+  //	if (dioRepData.repDataReceived) {
+  //		$scope.repData = dioRepData;
+  //	} else {
+  //
+  //		// see if the address is in the url param
+  //		params = $location.search()
+  //		if (params.address) {
+  //			dioRepData.repList = dioApi.getRepsByLocation(params.address);
+  //		} else {
+  //			$location.path('/');
+  //		}
+  //	}
 
 	//TODO check if captchas are needed
 
@@ -23,22 +25,18 @@ var MessageFormController = function($scope, $location, dioLegislatorData) {
 	$scope.topics = [
 		'Agriculture',
 		'Technology'
-	]
-
-	$scope.goBack = function(){
-		$location.path('/location');
-	};
+	];
 
 	$scope.submit = function(repData){
-		if (repData.hasCaptcha){
-			//TODO
-
-		} else {
-			//TODO
-			$location.path('/thanks');
-
-		};
-	}
+    //		if (repData.hasCaptcha){
+    //			//TODO
+    //
+    //		} else {
+    //			//TODO
+    //			$location.path('/thanks');
+    //
+    //		};
+	};
 
 };
 

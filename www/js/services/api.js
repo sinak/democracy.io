@@ -11,6 +11,16 @@ var api = function ($http, dioConfig) {
 
   return {
 
+    makeAPICall: function(opts, cb) {
+      $http(opts)
+        .success(function(data) {
+          cb(data);
+        })
+        .error(function(data, status, headers, config) {
+          // TODO(leah): Get a reasonable err msg out of this.
+        });
+    },
+
     /**
      *
      * @param lat
@@ -25,17 +35,19 @@ var api = function ($http, dioConfig) {
         modelClass: models.Legislator
       };
 
-      $http(opts)
-        .success(function(data) {
-          cb(data);
-        })
-        .error(function(data, status, headers, config) {
-          // TODO(leah): Get a reasonable err msg out of this.
-        });
+      this.makeAPICall(opts, cb);
     },
 
-    legislatorFormElementsByBioguideIds: function(bioguideIds) {
+    legislatorFormElementsByBioguideIds: function(bioguideIds, cb) {
+      var opts = {
+        url: helpers.makeAPIUrl(
+          siteConfig.API_BASE_URL, siteConfig.API_VERSION, '/formElements/findByLegislatorBioguideIds'),
+        method: 'GET',
+        params: {bioguideIds: bioguideIds},
+        modelClass: models.LegislatorFormElements
+      };
 
+      this.makeAPICall(opts, cb);
     },
 
     /**

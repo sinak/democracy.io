@@ -15,7 +15,7 @@ var get = function (req, res) {
       var results = [];
       lodash.reduce(response, function(result, val, bioguideId) {
         var lfeModel = makeLFEModelFromPOTCResponse(val, bioguideId);
-        result.push(lfeModel);
+        results.push(lfeModel);
       }, results);
 
       res.json(results);

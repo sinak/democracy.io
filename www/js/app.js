@@ -21,11 +21,9 @@ democracyApp.controller('ThanksController', controllers.thanks);
 democracyApp.controller('AboutController', controllers.about);
 
 
-democracyApp.factory(
-  'dioApi',
-  ['$http', 'dioConfig', services.api]
-);
+democracyApp.factory('dioApi', ['$http', 'dioConfig', services.api]);
 democracyApp.factory('dioLegislatorData', services.legislatorData);
+democracyApp.factory('dioPageNav', services.pageNav);
 
 // Require modules that are used but not referenced directly
 require('angular-route');

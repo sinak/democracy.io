@@ -1,5 +1,5 @@
 /**
- *
+ * Fetches form elements from POTC for a supplied array of bioguideIds.
  */
 
 var lodash = require('lodash');

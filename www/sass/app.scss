@@ -179,6 +179,24 @@ label {
     font-weight: 300;
   }
 }
+.btn[disabled] {
+  border-color: #ccc;
+  color: #aaa;
+  opacity: 1;
+}
+
+// Styles for progress-bar
+#pb-check-2 {
+  fill: none;
+}
+#pb-check-3 {
+  fill: none;
+}
+#pb-check-1 {
+  fill: none;
+}
+#pb-circle-1 {
+}
 
 // .back-button {
 //   position: relative;
@@ -214,15 +232,14 @@ label {
 
 #footer svg {
   width: 200px;
-  fill: #999;
+  fill: #333;
 }
 #footer .pull-right {
   text-align: right;
 }
 
 
-// Custom animations 
-
+// Homepage animations 
 .header h1 {
   // @extend .animated;
   // @extend .fadeZoomIn;
@@ -230,11 +247,14 @@ label {
   &::after {
     content: '|';
     display: inline;
-    animation: blink 0.7s linear 4s infinite;
+    opacity: 1;
+    animation: blink 0.7s linear 0s infinite;
     position:relative;
     bottom: 5px;
-    opacity: 0;
   }
+}
+@keyframes blink{
+  to{opacity: 0;}
 }
 h1.hasFinishedTyping::after {
   display: none;
@@ -243,22 +263,17 @@ h1.hasFinishedTyping::after {
 div#progress-bar {
   @extend .animated;
   @extend .fadeInUp;
-  animation-delay: 5s; // Reduces jittering
+  animation-delay: 3s; // Reduces jittering
 }
 .email-form {
   @extend .animated;
   @extend .fadeInUp;
-  animation-delay: 5s; // Reduces jittering
+  animation-delay: 3s; // Reduces jittering
 }
-
 .animated {
   animation-duration: 0.5s;
   animation-fill-mode: both;
 }
-@keyframes blink{
-  to{opacity: 1;}
-}
-
 .fadeInUp {
   animation-name: fadeInUp;
 }
@@ -267,7 +282,6 @@ div#progress-bar {
     opacity: 0;
     transform: translate3d(0, 30%, 0);
   }
-
   100% {
     opacity: 1;
     transform: none;
@@ -281,7 +295,6 @@ div#progress-bar {
     opacity: 0;
     transform: scale(0.9);
   }
-
   100% {
     opacity: 1;
     transform: scale(1);
@@ -290,45 +303,50 @@ div#progress-bar {
 
 
 // Animated Logo
-
-/* Main styles */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:800);
-
-.navbar-brand {
-  .text {
-    fill: none;
-    stroke-width: 9;
-    stroke-linejoin: butt;
-    stroke-dasharray: 500;
-    stroke-dashoffset: 500;
-    animation: draw 5s ease 2s 1 forwards;
-    animation-repeat: 1;
-    position: absolute;
-  }
-
-
-  svg {
-    font: 12em/1 Open Sans, Impact;
-    text-transform: uppercase;
-    margin: 0;
-    letter-spacing:40px;
-    font-weight: 800;
-    max-width: 550px;
-    margin-top: 50px;
-    animation: resizeLogo 1s ease 4s 1 forwards;
-  }
+.navbar-brand .text {
+  fill: none;
+  stroke-width: 9;
+  // stroke-linejoin: butt;
+  // stroke-dasharray: 500;
+  // stroke-dashoffset: 500;
+  // animation: draw 5s ease 2s 1 forwards;
+  // animation-repeat: 1;
+  position: absolute;
 }
-
+.navbar-brand svg, #footer svg {
+  font: 12em/1 Open Sans, Impact;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing:40px;
+  font-weight: 800;
+}
+#footer svg {
+  width: 200px;
+  fill: #aaa;
+}
+.navbar-brand svg {
+  // animation: resizeLogo 1s ease 4s 1 forwards;
+  // max-width: 550px;
+  // margin-top: 50px;
+  max-width: 250px;
+  margin-top: 0;
+}
 @keyframes draw {
   to {
       stroke-dashoffset: 0;
-      }
   }
+}
+// @keyframes resizeLogo {
+//   100% {
+//     max-width: 250px;
+//     margin-top: 0;
+//   }
+// }
 
-
-@keyframes resizeLogo {
-  100% {
-    max-width: 250px;
-    margin-top: 0;
-  }
+// Animated progress-bar
+#progress-bar-svg {
+  stroke-linejoin: butt;
+  stroke-dasharray: 500;
+  stroke-dashoffset: -500;
+  animation: draw 2s ease 2.5s 1 forwards;
 }

@@ -55,8 +55,8 @@
     <div class="logo">
       <div class="row">
         <div class="col-md-9">
-          <svg class="logo" preserveAspectRatio="none" viewBox="0 0 335 25">
-              <use xlink:href="#logo"></use>
+          <svg class="logo" preserveAspectRatio="none" viewBox="0 0 1760 200">
+              <use xlink:href="#s-text"></use>
           </svg>
 
           <p>Send message to members of the US Senate and House of Representitives</p>
@@ -110,7 +110,7 @@
   function startTyping() {
     var typeText = setInterval(function(){type()},speed);
   }
-  setTimeout( function() {startTyping();}, 4000);
+  setTimeout( function() {startTyping();}, 1000);
 </script>
 <script>
   angular.element(document).ready(function() {

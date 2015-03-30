@@ -28,7 +28,6 @@ html {
 }
 
 body {
-  padding-top: 20px;
   background-image: url('/static/img/bg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -54,8 +53,8 @@ a.ondark {
   text-align: center;
 }
 .navbar-brand svg.logo {
-  width: 200px;
-  margin: 0 auto;
+  //width: 200px;
+  //margin: 0 auto;
   // @extend .ro-gradient;
 }
 #progress-bar-svg {
@@ -231,9 +230,10 @@ label {
   &::after {
     content: '|';
     display: inline;
-    animation: blink 0.7s infinite;
+    animation: blink 0.7s linear 4s infinite;
     position:relative;
     bottom: 5px;
+    opacity: 0;
   }
 }
 h1.hasFinishedTyping::after {
@@ -243,12 +243,12 @@ h1.hasFinishedTyping::after {
 div#progress-bar {
   @extend .animated;
   @extend .fadeInUp;
-  animation-delay: 4s; // Reduces jittering
+  animation-delay: 5s; // Reduces jittering
 }
 .email-form {
   @extend .animated;
   @extend .fadeInUp;
-  animation-delay: 4s; // Reduces jittering
+  animation-delay: 5s; // Reduces jittering
 }
 
 .animated {
@@ -256,7 +256,7 @@ div#progress-bar {
   animation-fill-mode: both;
 }
 @keyframes blink{
-  to{opacity: .0;}
+  to{opacity: 1;}
 }
 
 .fadeInUp {
@@ -285,5 +285,50 @@ div#progress-bar {
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+
+// Animated Logo
+
+/* Main styles */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:800);
+
+.navbar-brand {
+  .text {
+    fill: none;
+    stroke-width: 9;
+    stroke-linejoin: butt;
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: draw 5s ease 2s 1 forwards;
+    animation-repeat: 1;
+    position: absolute;
+  }
+
+
+  svg {
+    font: 12em/1 Open Sans, Impact;
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing:40px;
+    font-weight: 800;
+    max-width: 550px;
+    margin-top: 50px;
+    animation: resizeLogo 1s ease 4s 1 forwards;
+  }
+}
+
+@keyframes draw {
+  to {
+      stroke-dashoffset: 0;
+      }
+  }
+
+
+@keyframes resizeLogo {
+  100% {
+    max-width: 250px;
+    margin-top: 0;
   }
 }

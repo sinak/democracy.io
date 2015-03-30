@@ -109,7 +109,7 @@ h1 {
 .header h1 {
   margin-top: 100px;
 }
-.email-form {
+.whitebox {
   background-color: #fff;
   box-shadow: 0px 2px 7px 0px rgba(100, 100, 100, 0.18);
   padding: 0;
@@ -129,13 +129,54 @@ h1 {
     margin-bottom: 11px;
   }
 }
-.email-form-container {
+
+.whitebox.pick-legislators {
+  label {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 20px;
+    color: $gray;
+    font-weight: 200;
+  }
+  .checkbox {
+    margin-bottom: 15px;
+  }
+}
+
+.checkbox input[type="checkbox"] {
+    display:none;
+}
+.checkbox input[type="checkbox"] + label {
+    display:inline-block;
+    cursor:pointer;
+}
+.checkbox input[type="checkbox"]  + label:before {
+  background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" enable-background="new 0 0 50 50"><path d="M25 50c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.215 25-25 25zm0-48.482c-12.951 0-23.487 10.534-23.487 23.482s10.536 23.482 23.487 23.482c12.95 0 23.486-10.534 23.486-23.482s-10.535-23.482-23.486-23.482zM38.5 30h-27c-1.375 0-2.5-1.125-2.5-2.5v-5c0-1.375 1.125-2.5 2.5-2.5h27c1.375 0 2.5 1.125 2.5 2.5v5c0 1.375-1.125 2.5-2.5 2.5z" fill="#E6E7E8"/></svg>');
+  background-size: cover;
+}
+.checkbox input[type="checkbox"]:checked  + label:before {
+  background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" enable-background="new 0 0 50 50"><path d="M25 50c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.215 25-25 25zm0-48.482c-12.951 0-23.487 10.534-23.487 23.482s10.536 23.482 23.487 23.482c12.95 0 23.486-10.534 23.486-23.482s-10.535-23.482-23.486-23.482zM39 18.294c0 .494-.169.914-.505 1.259l-13.08 13.411-2.457 2.519c-.338.346-.746.517-1.228.517s-.892-.173-1.228-.518l-2.457-2.519-6.54-6.705c-.338-.347-.505-.765-.505-1.259 0-.494.169-.914.505-1.259l2.457-2.519c.338-.347.746-.518 1.228-.518s.892.173 1.228.518l5.311 5.465 11.851-12.168c.337-.347.745-.518 1.226-.518.482 0 .892.173 1.228.518l2.457 2.519c.34.343.509.763.509 1.257z" fill="#EE355B"/></svg>');
+  background-size: cover;
+}
+.checkbox input[type="checkbox"] + label:before {
+    content:" ";
+    display:inline-block;
+    height: 30px;
+    width: 30px;
+    margin-bottom: -8px;
+    margin-right: 10px;
+}
+
+.whitebox-container {
   padding: 27px 30px 34px 30px;
 }
 .back-button {
+  @extend .pull-right;
   display: inline-block;
-  border-bottom-right-radius: 5px;
-  background-color: #FF8900;
+  border-radius: 0;
+  border-width: 0;
+  border-bottom-left-radius: 5px;
+  background-color: #FF4425;
   color: #fff;
   padding: 0px 10px 2px 10px;
   font-size: 12px;
@@ -170,7 +211,6 @@ label {
   border: 1px solid #f85628;
   margin-left: 0 !important;
   font-weight: 300;
-  padding: 0 30px;
   @include bounce-to-right;
   &:hover {
     //background-color: #f85628;
@@ -178,6 +218,12 @@ label {
     text-decoration: none;
     font-weight: 300;
   }
+}
+.btn-lg.btn-orange {
+  padding: 15px 30px;
+}
+.input-group .btn-orange {
+  padding: 0 30px;
 }
 .btn[disabled] {
   border-color: #ccc;

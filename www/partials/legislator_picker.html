@@ -1,17 +1,17 @@
 <!-- Page 2 -->
 <div class="row">
-  <div class="email-form col-md-8 col-md-offset-2">
-    <button class="btn-sm btn-warning back-button" ng-click="dioPageNav.back()">Go Back</button>
-
-    <ul>
-      <li class="repOption" ng-repeat="legislator in legislators">
-        <input type="checkbox" ng-model="selectedLegislators[legislator.bioguideId]">
-        {{legislator.title}}. {{legislator.firstName}} {{legislator.lastName}}
-      </li>
-    </ul>
-
-    <button type="submit" class="btn btn-warning btn-lg" ng-click="submit()">
-      Write to them!
-    </button>
+  <div class="pick-legislators whitebox col-md-6 col-md-offset-3">
+      <button class="btn-sm btn-warning back-button" ng-click="dioPageNav.back()">Go back</button>
+      
+    <div class="whitebox-container">
+      <div class="repOption checkbox" ng-repeat="legislator in legislators">
+          <input type="checkbox" ng-model="selectedLegislators[legislator.bioguideId]" id="{{legislator.bioguideId}}" unchecked> 
+          <label for="{{legislator.bioguideId}}">{{legislator.title}}. {{legislator.firstName}} {{legislator.lastName}}
+        </label>
+      </div>
+      <button type="submit" class="btn btn-lg btn-orange" ng-click="submit()">
+        Write to them!
+      </button>
+    </div>
   </div>
 </div>

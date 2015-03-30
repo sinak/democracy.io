@@ -3,5 +3,6 @@ module.exports = {
   home: require('./home'),
   messageForm: require('./message_form'),
   LegislatorPickerController: require('./legislator_picker'),
-  thanks: require('./thanks')
+  thanks: require('./thanks'),
+  HeadingController: require('./main_heading')
 };

@@ -2,7 +2,9 @@
  *
  */
 
-var MessageFormController = function($scope, $location, dioLegislatorData, dioPageNav) {
+var isEmpty = require('lodash.isEmpty');
+
+var MessageFormController = function($scope, $location, dioLegislatorData, dioApi, dioPageNav) {
 
   $scope.dioPageNav = dioPageNav;
 
@@ -27,6 +29,25 @@ var MessageFormController = function($scope, $location, dioLegislatorData, dioPa
 		'Technology'
 	];
 
+  var attemptToFetchLegislatorData = function(params) {
+    if (!angular.isUndefined(params.lat) && !angular.isUndefined(params.lng)) {
+      var cb = function(legislators) {
+        dioLegislatorData.setLegislators(legislators);
+        $scope.setLegislators();
+      };
+      // TODO: There should probably be a lag-delayed (~350ms) loading modal before firing the API call
+      dioApi.findLegislatorsByLatLng(params.lat, params.lng, cb);
+    } else {
+      $scope.dioPageNav.goBack();
+    }
+  };
+
+  $scope.setLegislators = function() {
+    $scope.legislators = dioLegislatorData.getSelectedLegislators();
+    console.log('legistlators:', $scope.legislators)
+    $scope.selectedLegislators = dioLegislatorData.selectedLegislators;
+  };
+
 	$scope.submit = function(repData){
     //		if (repData.hasCaptcha){
     //			//TODO
@@ -37,6 +58,13 @@ var MessageFormController = function($scope, $location, dioLegislatorData, dioPa
     //
     //		};
 	};
+
+  if (isEmpty(dioLegislatorData.legislators)) {
+    attemptToFetchLegislatorData($location.search());
+  } else {
+    $scope.setLegislators();
+  }
+
 
 };
 

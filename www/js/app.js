@@ -19,6 +19,7 @@ democracyApp.controller('LegislatorPickerController', controllers.LegislatorPick
 democracyApp.controller('MessageFormController', controllers.messageForm);
 democracyApp.controller('ThanksController', controllers.thanks);
 democracyApp.controller('AboutController', controllers.about);
+democracyApp.controller('HeadingController', controllers.HeadingController);
 
 
 democracyApp.factory('dioApi', ['$http', 'dioConfig', services.api]);

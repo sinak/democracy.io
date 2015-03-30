@@ -5,8 +5,8 @@
 
     <div class="row">
       <div class="col-md-12">
-        To: <span ng-repeat="rep in repData.repList">
-          <span ng-show="rep.selected">{{rep.title}}. {{rep.first_name}} {{rep.last_name}}<span ng-hide="$last">,</span></span>
+        To: <span ng-repeat="legislator in legislators">
+          <span>{{legislator.title}}. {{legislator.firstName}} {{legislator.lastName}}<span ng-hide="$last">,</span></span>
         </span>
       </div>
     </div>

@@ -20,7 +20,7 @@ var LegislatorPickerController = function($scope, $location, dioLegislatorData, 
       // TODO: There should probably be a lag-delayed (~350ms) loading modal before firing the API call
       dioApi.findLegislatorsByLatLng(params.lat, params.lng, cb);
 		} else {
-			$scope.goBack();
+			$scope.dioPageNav.goBack();
 		}
   };
 

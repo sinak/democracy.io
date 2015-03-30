@@ -37,7 +37,7 @@
     </div>
   </nav>
 
-	<div class="header">
+	<div class="header" id="main-header" ng-controller="HeadingController" data-pagename="{{pageName}}">
     <h1><span class="hidden">Write to your representatives</span></h1> <!--TODO - update based on page -->
   </div>
   <div id="progress-bar">

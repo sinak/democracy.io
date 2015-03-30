@@ -93,16 +93,18 @@
       lastText+=text.charAt(counter);
       counter++;
       h1.innerHTML = lastText;
-
-      if (h1.classList) h1.classList.remove('hidden');
+      
+      className = 'hidden';
+      if (h1.classList) h1.classList.remove(className);
       else {
-        h1.className = h1.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+        h1.hidden = h1.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
       }
-
+      
       if (counter == text.length){ 
         clearInterval(typeText);
-
-        if (h1.classList) h1.classList.add('hasFinishedTyping');
+        
+        className = 'hasFinishedTyping';
+        if (h1.classList) h1.classList.add(className);
         else h1.className += ' ' + className;
       }
   }

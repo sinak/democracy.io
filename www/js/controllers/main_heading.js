@@ -12,9 +12,9 @@ var HeadingController = function($scope, $location) {
     		$scope.pageName = $scope.pageName.slice( 1 );
     	}
 
-		var header = document.querySelector('#main-header');
+		var wrapper = document.querySelector('#wrapper');
 
-		header.dataset.pagename = $scope.pageName;
+		wrapper.dataset.pagename = $scope.pageName;
 
 	});
 

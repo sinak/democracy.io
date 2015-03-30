@@ -3,7 +3,7 @@
 {<body}
 
 
-<div id="wrapper" class="content">
+<div id="wrapper" class="content" ng-controller="HeadingController" data-pagename="{{pageName}}">
   <nav class="navbar navbar-static">
     <div class="container">
       <div class="navbar-header">
@@ -37,7 +37,7 @@
     </div>
   </nav>
 
-	<div class="header" id="main-header" ng-controller="HeadingController" data-pagename="{{pageName}}">
+	<div class="header">
     <h1><span class="hidden">Write to your representatives</span></h1> <!--TODO - update based on page -->
   </div>
   <div id="progress-bar">

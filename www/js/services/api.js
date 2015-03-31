@@ -28,7 +28,7 @@ var api = function ($http, dioConfig) {
      */
     findLegislatorsByLatLng: function(lat, lng, cb) {
       var opts = {
-        url: helpers.makeAPIUrl(
+        url: helpers.makeRelativeAPIUrl(
           siteConfig.API_BASE_URL, siteConfig.API_VERSION, '/legislators/findByLatLng'),
         method: 'GET',
         params: {latitude: lat, longitude: lng},
@@ -40,7 +40,7 @@ var api = function ($http, dioConfig) {
 
     legislatorFormElementsByBioguideIds: function(bioguideIds, cb) {
       var opts = {
-        url: helpers.makeAPIUrl(
+        url: helpers.makeRelativeAPIUrl(
           siteConfig.API_BASE_URL, siteConfig.API_VERSION, '/formElements/findByLegislatorBioguideIds'),
         method: 'GET',
         params: {bioguideIds: bioguideIds},

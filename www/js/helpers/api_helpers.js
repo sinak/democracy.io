@@ -3,6 +3,7 @@
  */
 
 var map = require('lodash.map');
+var isArray = require('lodash.isArray');
 
 
 /**
@@ -10,9 +11,10 @@ var map = require('lodash.map');
  * @param urlSuffix
  * @returns {string}
  */
-var makeAPIUrl = function(apiBaseUrl, apiVersion, urlSuffix) {
+var makeRelativeAPIUrl = function(apiBaseUrl, apiVersion, urlSuffix) {
   var url = [apiBaseUrl, apiVersion, urlSuffix].join('/');
-  return url.replace('//', '/');
+  url = url.replace(/\/\//g, '/');
+  return url.indexOf('/') === 0 ? url : '/' + url;
 };
 
 
@@ -23,7 +25,7 @@ var makeAPIUrl = function(apiBaseUrl, apiVersion, urlSuffix) {
  * @returns {*}
  */
 var coerceJSONResponseToModelResponse = function(jsonData, modelClass) {
- if (angular.isArray(jsonData)) {
+ if (isArray(jsonData)) {
     return map(jsonData, function(modelData) {
       return new modelClass(modelData);
     });
@@ -33,5 +35,5 @@ var coerceJSONResponseToModelResponse = function(jsonData, modelClass) {
 };
 
 
-module.exports.makeAPIUrl = makeAPIUrl;
+module.exports.makeRelativeAPIUrl = makeRelativeAPIUrl;
 module.exports.coerceJSONResponseToModelResponse = coerceJSONResponseToModelResponse;

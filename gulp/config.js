@@ -54,7 +54,6 @@ module.exports = {
   },
 
   test: {
-
     mochaOptions: {
       reporter: 'spec'
     },

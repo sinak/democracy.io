@@ -39,6 +39,19 @@
   }
 }
 
+#progress-bar-svg {
+  stroke-linejoin: butt;
+  stroke-dasharray: 500;
+  stroke-dashoffset: -500;
+  animation: draw 2s ease 2.5s 1 forwards;
+}
+
+div#progress-bar {
+  @extend .animated;
+  @extend .fadeInUp;
+  animation-delay: 0.3s; // Reduces jittering
+}
+
 @keyframes fadeInUp {
   0% {
     opacity: 0;

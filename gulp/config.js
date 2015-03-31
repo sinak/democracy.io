@@ -79,6 +79,9 @@ module.exports = {
     paths: [
       path.join(WWW_DIR, 'sass/app.scss')
     ],
+    watch: [
+      path.join(WWW_DIR, 'sass/**.scss')
+    ],
     includePaths: [
       NPM_DIR
     ]

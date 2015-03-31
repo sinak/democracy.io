@@ -10,6 +10,6 @@ var gulp  = require('gulp');
 var config = require('../config');
 
 gulp.task('watch', ['setWatch', 'browserify', 'browserSync'], function() {
-  gulp.watch(config.sass.paths, ['css']);
+  gulp.watch(config.sass.watch, ['css']);
   gulp.watch(config.partials.paths, ['partials', 'browserify']);
 });

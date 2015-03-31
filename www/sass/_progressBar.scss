@@ -1,0 +1,51 @@
+
+// Styles for progress-bar
+#pb-check-2 {
+  fill: none;
+}
+#pb-check-3 {
+  fill: none;
+}
+#pb-check-1 {
+  fill: none;
+}
+#pb-circle-1 {
+}
+#progress-bar-svg {
+  width: 100%;
+  margin: 0 auto;
+}
+div#progress-bar {
+  text-align: center;
+  max-width: 433px;
+  margin: 0 auto 40px auto;
+  position: relative;
+}
+#progress-bar .labels {
+  margin-top: -8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 300;
+  span {
+    display: inline-block;
+  }
+  .first {
+    width: 27%;
+    margin-left: -6%;
+    position: absolute;
+    left: 0;
+    font-weight: 400;
+  }
+  .second {
+    width: 46%;
+    position: absolute;
+    left: 50%;
+    margin-left: -22%;
+  }
+  .third {
+    width: 27%;
+    position: absolute;
+    right: 0;
+    margin-right: -8%;
+  }
+}

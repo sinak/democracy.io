@@ -1,0 +1,27 @@
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #C0C0C0;
+  height: 150px;
+  background-color: white;
+  padding-top: 30px;
+}
+#footer svg {
+  width: 200px;
+  fill: #333;
+}
+#footer .pull-right {
+  text-align: right;
+}
+.navbar-brand svg, #footer svg {
+  font: 12em/1 Open Sans, Impact;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing:40px;
+  font-weight: 800;
+}
+#footer svg {
+  width: 200px;
+  fill: #aaa;
+}

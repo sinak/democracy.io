@@ -1,16 +1,7 @@
-
 // Styles for progress-bar
-#pb-check-2 {
-  fill: none;
-}
-#pb-check-3 {
-  fill: none;
-}
-#pb-check-1 {
-  fill: none;
-}
-#pb-dot-1, #pb-dot-2, #pb-dot-3 {
-  fill: none;
+.label.active {
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
 }
 #progress-bar-svg {
   width: 100%;
@@ -31,14 +22,13 @@ div#progress-bar {
     display: inline-block;
   }
   .first {
-    width: 27%;
+    width: 28%;
     margin-left: -6%;
     position: absolute;
     left: 0;
-    font-weight: 400;
   }
   .second {
-    width: 46%;
+    width: 45%;
     position: absolute;
     left: 50%;
     margin-left: -22%;
@@ -49,4 +39,26 @@ div#progress-bar {
     right: 0;
     margin-right: -8%;
   }
+}
+
+#pb-check-1, #pb-check-2, #pb-check-3 {
+  fill: none;
+}
+#pb-dot-1, #pb-dot-2, #pb-dot-3 {
+  fill: none;
+}
+#wrapper[data-pagename="home"] {
+  #pb-dot-1 { fill: $pink; }
+  #progress-bar .labels .first { @extend .label.active;}
+}
+#wrapper[data-pagename="location"] {
+  #pb-dot-2, #pb-check-1 { fill: $pink; }
+  #progress-bar .labels .second { @extend .label.active; }
+}
+#wrapper[data-pagename="write-message"] {
+  #pb-dot-3, #pb-check-1, #pb-check-2 { fill: $pink; }
+  #progress-bar .labels .third { @extend .label.active; }
+}
+#wrapper[data-pagename="share"] {
+  #pb-check-3, #pb-check-1, #pb-check-2 { fill: $pink; }
 }

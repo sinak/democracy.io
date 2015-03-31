@@ -1,11 +1,16 @@
 $brand-primary: #f85628;
 @import "bootstrap-sass/assets/stylesheets/bootstrap.scss";
 
+// Animation colors
 $primaryColor: #fff;
 $secondaryColor: #fff;
 $highlightColor: #fff;
 $activeColor: #f85628;
 $slowDuration: 0.4s;
+
+// Variables
+$pink: #EE325A;
+
 @import "hover.css/scss/options";
 @import "hover.css/scss/mixins";
 @import "hover.css/scss/hacks";
@@ -21,9 +26,7 @@ $slowDuration: 0.4s;
 //@import "bootstrap-variables";
 
 @import 'base';
-@import 'home';
 @import 'footer';
 @import 'progressBar';
 @import 'steps';
 @import 'animations';
-

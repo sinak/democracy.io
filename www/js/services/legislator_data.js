@@ -42,6 +42,10 @@ var legislatorData = function () {
         }
       }
       return selectedLegislators;
+    },
+
+    getLegislatorsFormElements: function(){
+      return this.legislatorsFormElements;
     }
   };
 

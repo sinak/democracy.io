@@ -23,13 +23,10 @@ var HomeController = function($scope, $location, dioApi, dioLegislatorData) {
     var lng = location.lng();
 
     dioLegislatorData.clearData();
-    // TODO: There should probably be a lag-delayed (~350ms) loading modal before firing the API call
-		dioApi.findLegislatorsByLatLng(lat, lng, function(legislators) {
-      dioLegislatorData.setLegislators(legislators);
-      $location
+    $location
         .path('/location')
         .search({lat: lat, lng: lng});
-    });
+        
 	};
 
   var watchHasFired = false;

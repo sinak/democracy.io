@@ -6,10 +6,18 @@ var isEmpty = require('lodash.isEmpty');
 var map = require('lodash.map');
 
 
-var LegislatorPickerController = function($scope, $location, dioLegislatorData, dioApi, dioPageNav) {
+var LegislatorPickerController = function($scope, $location, $timeout, dioLegislatorData, dioApi, dioPageNav) {
 
   // TODO(leah): Wire this on to the rootscope?
   $scope.dioPageNav = dioPageNav;
+
+  $scope.loadingDelay = true;
+  
+  $timeout(function(){
+      $scope.loadingDelay = false;
+    },
+    350);
+
 
   var attemptToFetchLegislatorData = function(params) {
     if (!angular.isUndefined(params.lat) && !angular.isUndefined(params.lng)) {
@@ -17,10 +25,10 @@ var LegislatorPickerController = function($scope, $location, dioLegislatorData, 
         dioLegislatorData.setLegislators(legislators);
         $scope.setLegislators();
       };
-      // TODO: There should probably be a lag-delayed (~350ms) loading modal before firing the API call
+      
       dioApi.findLegislatorsByLatLng(params.lat, params.lng, cb);
 		} else {
-			$scope.dioPageNav.goBack();
+			$scope.dioPageNav.back();
 		}
   };
 

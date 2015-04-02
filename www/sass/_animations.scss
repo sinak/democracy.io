@@ -17,66 +17,43 @@
     animation: none;
   }
   div#progress-bar {
+    opacity: 0;
     @extend .animated;
     animation-name: fadeInUp;
     animation-delay: 3s; // Reduces jittering
   }
-  .email-form {
+  .email.whitebox {
     @extend .animated;
     animation-name: fadeInUp;
     animation-delay: 3s; // Reduces jittering
   }
-  #progress-bar-svg {
-    stroke-linejoin: butt;
-    stroke-dasharray: 500;
-    stroke-dashoffset: -500;
-    animation: draw 2s ease 2.5s 1 forwards;
-  }
-  div#progress-bar {
-    @extend .animated;
-    @extend .fadeInUp;
-    animation-delay: 0.3s; // Reduces jittering
+  #progress-bar-svg { 
+    #pb-circle-1, #pb-circle-2, #pb-circle-3 {
+      stroke-linejoin: butt;
+      stroke-dasharray: 500;
+      stroke-dashoffset: -500;
+      animation: draw 2s ease 2.5s 1 forwards;
+    }
   }
 }
 
-// Homepage animations 
-.animated {
-  animation-duration: 0.5s;
-  animation-fill-mode: both;
-}
-#wrapper[data-pagename="home"] {
-  .header h1::after {
-      content: '|';
-      display: inline;
-      opacity: 1;
-      animation: blink 0.7s linear 0s infinite;
-      position:relative;
-      bottom: 5px;
-  }
-  h1.hasFinishedTyping::after {
-    display: none;
-    animation: none;
-  }
+#wrapper[data-pagename="location"] {
   div#progress-bar {
-    @extend .animated;
-    animation-name: fadeInUp;
-    animation-delay: 3s; // Reduces jittering
+    opacity: 1;
   }
-  .email-form {
-    @extend .animated;
-    animation-name: fadeInUp;
-    animation-delay: 3s; // Reduces jittering
-  }
-  #progress-bar-svg {
+  #pb-line-1 {
+    stroke-width: 1;
     stroke-linejoin: butt;
-    stroke-dasharray: 500;
-    stroke-dashoffset: -500;
-    animation: draw 2s ease 2.5s 1 forwards;
+    stroke-dasharray: 170;
+    stroke-dashoffset: 170;
+    animation: draw 2s ease 0.5s 1 forwards;
   }
-  div#progress-bar {
-    @extend .animated;
-    @extend .fadeInUp;
-    animation-delay: 0.3s; // Reduces jittering
+  #pb-dot-2 {
+    animation: moveRight 2s ease 0.5s 1 forwards;
+  }
+  #pb-check-1 {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease 1s 1 forwards;
   }
 }
 
@@ -87,6 +64,24 @@
   }
   100% {
     opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeDownOut {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 30%, 0);
+  }
+}
+@keyframes moveRight {
+  0% {
+    transform: translate(-186px, 0);
+  }
+  100% {
     transform: none;
   }
 }

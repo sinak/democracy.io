@@ -12,6 +12,7 @@ div#progress-bar {
   max-width: 433px;
   margin: 0 auto 40px auto;
   position: relative;
+  opacity: 0;
 }
 #progress-bar .labels {
   margin-top: -8px;
@@ -46,6 +47,9 @@ div#progress-bar {
 }
 #pb-dot-1, #pb-dot-2, #pb-dot-3 {
   fill: none;
+}
+#pb-line-1, #pb-line-2 {
+  stroke-width: 0;
 }
 #wrapper[data-pagename="home"] {
   #pb-dot-1 { fill: $pink; }

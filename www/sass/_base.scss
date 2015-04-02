@@ -48,7 +48,8 @@ h1 {
   box-shadow: 0px 2px 7px 0px rgba(100, 100, 100, 0.18);
   padding: 0;
   border-radius: 5px;
-  margin-bottom: 90px;
+  margin: 0 auto 90px auto;
+  float: none;
 
   &::before {
     content: '';

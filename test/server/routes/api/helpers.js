@@ -30,11 +30,10 @@ nestedDescribe('server.routes.api.helpers', function () {
     };
 
     var makeLFEModelFromPOTCResponse = require('../../../../server/routes/api/helpers/make_lfe_model_from_potc_response.js');
-    var results = [];
-    lodash.reduce(simplifiedPOTCResponse, function (result, val, bioguideId) {
-      var lfeModel = makeLFEModelFromPOTCResponse(val, bioguideId);
-      result.push(lfeModel);
-    }, results);
+    var results = lodash.reduce(simplifiedPOTCResponse, function (results, val, bioguideId) {
+      results.push(makeLFEModelFromPOTCResponse(val, bioguideId));
+      return results;
+    }, []);
 
     expect(results).to.be.a('array');
     expect(results).to.have.length(1);

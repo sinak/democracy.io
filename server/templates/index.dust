@@ -3,7 +3,7 @@
 {<body}
 
 
-<div id="wrapper" class="content" ng-controller="HeadingController" data-pagename="{{pageName}}" data-from="new-visit">
+<div id="wrapper" class="content" ng-controller="HeadingController" data-pagename="{{pageName}}" data-pagefrom="{{pageFrom}}">
   <nav class="navbar navbar-static">
     <div class="container">
       <div class="navbar-header">

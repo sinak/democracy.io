@@ -1,79 +1,86 @@
 <!-- Page 3 -->
 <div class="row">
-  <div class="email-form col-md-8 col-md-offset-2">
-    <button class="btn-sm btn-warning back-button" ng-click="dioPageNav.back()">Go Back</button>
-
-    <div class="row">
-      <div class="col-md-12">
-        To: <span ng-repeat="legislator in legislators">
-          <span>{{legislator.title}}. {{legislator.firstName}} {{legislator.lastName}}<span ng-hide="$last">,</span></span>
-        </span>
-      </div>
+  <div class="write-message whitebox col-md-10">
+      <button class="btn-sm btn-warning back-button" ng-click="dioPageNav.back()">Go back</button>
+      
+    <div ng-show="!loadingDelay && !legislators">
+      <h1>LOADING</h1>
     </div>
+    <div class="whitebox-container" ng-show="legislators">
 
-    <div class="row">
-      <div class="form-group col-md-6">
-        <label for="inputSubject">Subject</label>
-        <input type="text" class="form-control" id="inputSubject">
+      <div class="row">
+        <div class="col-md-12">
+          <label id="to-field">This message will be sent to:</label>
+            <span ng-repeat="legislator in legislators">
+              <span>{{legislator.title}}. {{legislator.firstName}} {{legislator.lastName}}<span ng-hide="$last">,</span></span>
+          </span>
+        </div>
       </div>
-    </div>
 
-    <label for="inputMessage">Message</label>
-    <div class="row">
-      <div class="form-group col-md-9">
-        <textarea id="inputMessage" class="form-control" cols="30" rows="10">Dear Representative,</textarea>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="inputSubject">Subject</label>
+          <input type="text" class="form-control" id="inputSubject">
+        </div>
       </div>
-      <div class="col-md-3">
-        <div class="panel panel-warning">
-          <div class="panel-heading">
-            <small>GUIDELINES:</small>
-          </div>
-          <div class="panel-body">
-              <p>Be <strong>polite</strong> and concise.</p>
-              <p>Explain why this issue is important to you.</p>
+
+      <label for="inputMessage">Message</label>
+      <div class="row">
+        <div class="form-group col-md-9">
+          <textarea id="inputMessage" class="form-control" cols="30" rows="10">Dear Representative,</textarea>
+        </div>
+        <div class="col-md-3">
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <small>GUIDELINES:</small>
+            </div>
+            <div class="panel-body">
+                <p>Be <strong>polite</strong> and concise.</p>
+                <p>Explain why this issue is important to you.</p>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-md-3 form-group">
+          <label for="inputFirstName">First name</label>
+          <input type="text" class="form-control" id="inputFirstName">
+        </div>
+
+        <div class="col-md-3 form-group">
+          <label for="inputLastName">Last name</label>
+          <input type="text" class="form-control" id="inputLastName">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3 form-group">
+          <label for="inputPrefix">Prefix</label>
+          <select class="form-control" id="inputPrefix">
+            <option value="Mr">Mr</option>
+            <option value="Ms">Ms</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Dr">Dr</option>
+          </select>
+        </div>
+
+        <div class="col-md-3 form-group">
+          <label for="inputPhoneNumber">Phone number <small>(optional)</small></label>
+          <input type="text" class="form-control" id="inputPhoneNumber">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="inputTopic">Topic</label>
+          <select class="form-control" id="inputTopic">
+            <option ng-repeat="topic in topics" value="{{topic}}">{{topic}}</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-warning btn-lg">Send!</button>
     </div>
-
-    <div class="row">
-      <div class="col-md-3 form-group">
-        <label for="inputFirstName">First name</label>
-        <input type="text" class="form-control" id="inputFirstName">
-      </div>
-
-      <div class="col-md-3 form-group">
-        <label for="inputLastName">Last name</label>
-        <input type="text" class="form-control" id="inputLastName">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3 form-group">
-        <label for="inputPrefix">Prefix</label>
-        <select class="form-control" id="inputPrefix">
-          <option value="Mr">Mr</option>
-          <option value="Ms">Ms</option>
-          <option value="Mrs">Mrs</option>
-          <option value="Dr">Dr</option>
-        </select>
-      </div>
-
-      <div class="col-md-3 form-group">
-        <label for="inputPhoneNumber">Phone number <small>(optional)</small></label>
-        <input type="text" class="form-control" id="inputPhoneNumber">
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="form-group col-md-6">
-        <label for="inputTopic">Topic</label>
-        <select class="form-control" id="inputTopic">
-          <option ng-repeat="topic in topics" value="{{topic}}">{{topic}}</option>
-        </select>
-      </div>
-    </div>
-
-    <button type="submit" class="btn btn-warning btn-lg">Send!</button>
   </div>
 </div>

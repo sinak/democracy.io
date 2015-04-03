@@ -16,7 +16,7 @@ var configureRoutes = function($routeProvider) {
       templateUrl: '/partials/legislator_picker.html',
       title: 'Select your recipients'
     })
-    .when('/representatives', {
+    .when('/compose', {
       controller: 'MessageFormController',
       templateUrl: '/partials/message_form.html',
       title: 'Write your letter'

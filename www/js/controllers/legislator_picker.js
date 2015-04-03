@@ -47,7 +47,7 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioLegisl
     // TODO: There should probably be a lag-delayed (~350ms) loading modal before firing the API call
     dioApi.legislatorFormElementsByBioguideIds(selectedBioguideIds, function(legislatorsFormElements) {
       dioLegislatorData.setLegislatorsFormElements(legislatorsFormElements);
-		  $location.path('/representatives');
+		  $location.path('/compose');
     });
 	};
 

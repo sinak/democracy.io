@@ -25,7 +25,16 @@
  Write message 
 ******/
 .write-message {
-  
+  label {
+    margin-bottom: 8px;
+  }
+  .btn-orange {
+    margin-top: 20px;
+    padding: 15px 40px;
+  }
+}
+strong {
+  font-weight: 600;
 }
 #to-field {
   padding-bottom:15px;
@@ -57,4 +66,22 @@ textarea#inputMessage {
     font-size: 16px;
     content: 'Dear [Representative/Senator],';
   }
+}
+.panel {
+  border: 1px solid #f9465b;
+}
+.panel-heading {
+  background-image: linear-gradient(to right, #f9465b, #fa6444);
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+@media (min-width: $screen-sm-min ) {
+  .write-message .panel {
+    margin-top: 30px;
+  }
+}
+label small {
+  text-transform: none;
+  letter-spacing: 0;
 }

@@ -59,7 +59,7 @@ div#progress-bar {
   #pb-dot-2, #pb-check-1 { fill: $pink; }
   #progress-bar .labels .second { @extend .label.active; }
 }
-#wrapper[data-pagename="representatives"] {
+#wrapper[data-pagename="compose"] {
   #pb-dot-3, #pb-check-1, #pb-check-2 { fill: $pink; }
   #progress-bar .labels .third { @extend .label.active; }
 }

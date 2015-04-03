@@ -123,6 +123,9 @@ h1 {
   font-size: 12px;
   line-height: 21px;
   @extend a.ondark;
+  &:hover {
+    background-color: #FF4425;
+  }
 }
 label {
   text-transform: uppercase;

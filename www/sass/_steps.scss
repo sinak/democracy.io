@@ -2,11 +2,21 @@
   label {
     text-transform: none;
     letter-spacing: 0;
-    font-size: 20px;
+    font-size: 18px;
     color: $gray;
     font-weight: 200;
+    padding-left:5px;
   }
   .checkbox {
     margin-bottom: 15px;
   }
+  p {
+    margin-bottom:25px;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+}
+.pick-legislators .whitebox-container {
+  padding-bottom: 30px;
+  padding-top: 20px;
 }

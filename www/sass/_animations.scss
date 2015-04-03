@@ -36,7 +36,6 @@
     }
   }
 }
-
 #wrapper[data-pagename="location"] {
   div#progress-bar {
     opacity: 1;
@@ -49,6 +48,7 @@
     animation: draw 2s ease 0.5s 1 forwards;
   }
   #pb-dot-2 {
+    opacity: 0;
     animation: moveRight 2s ease 0.5s 1 forwards;
   }
   #pb-check-1 {
@@ -66,6 +66,33 @@
     #pb-line-1 {
       stroke-dashoffset: 0;
     }
+  }
+}
+#wrapper[data-pagename="representatives"] {
+  div#progress-bar {
+    opacity: 1;
+  }
+  #pb-line-1 {
+    stroke-dashoffset: 0;
+    stroke-width: 1;
+  }
+  #pb-line-2 {
+    stroke-width: 1;
+    stroke-linejoin: butt;
+    stroke-dasharray: 170;
+    stroke-dashoffset: 170;
+    animation: draw 2s ease 0.5s 1 forwards;
+  }
+  #pb-dot-3 {
+    opacity: 0;
+    animation: moveRight 2s ease 0.5s 1 forwards;
+  }
+  #pb-check-1 {
+    opacity: 1;
+  }
+  #pb-check-2 {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease 1.5s 1 forwards;
   }
 }
 
@@ -91,9 +118,11 @@
 }
 @keyframes moveRight {
   0% {
+    opacity: 1;
     transform: translate(-186px, 0);
   }
   100% {
+    opacity: 1;
     transform: none;
   }
 }

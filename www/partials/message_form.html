@@ -3,14 +3,11 @@
   <div class="write-message whitebox col-md-10">
       <button class="btn-sm btn-warning back-button" ng-click="dioPageNav.back()">Go back</button>
       
-    <div ng-show="!loadingDelay && !legislators">
-      <h1>LOADING</h1>
-    </div>
-    <div class="whitebox-container" ng-show="legislators">
+    <div class="whitebox-container" ><!--ng-show="legislators"-->
 
       <div class="row">
-        <div class="col-md-12">
-          <label id="to-field">This message will be sent to:</label>
+        <div class="col-md-12" id="to-field">
+          <label>This message will be sent to:</label>
             <span ng-repeat="legislator in legislators">
               <span>{{legislator.title}}. {{legislator.firstName}} {{legislator.lastName}}<span ng-hide="$last">,</span></span>
           </span>
@@ -24,10 +21,12 @@
         </div>
       </div>
 
-      <label for="inputMessage">Message</label>
       <div class="row">
         <div class="form-group col-md-9">
-          <textarea id="inputMessage" class="form-control" cols="30" rows="10">Dear Representative,</textarea>
+        <label for="inputMessage">Message</label>
+        <div id="textarea-container">
+          <textarea id="inputMessage" class="form-control" cols="30" rows="10"></textarea>
+        </div>
         </div>
         <div class="col-md-3">
           <div class="panel panel-warning">

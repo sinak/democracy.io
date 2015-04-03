@@ -29,13 +29,13 @@ div#progress-bar {
     left: 0;
   }
   .second {
-    width: 45%;
+    width: 44%;
     position: absolute;
     left: 50%;
     margin-left: -22%;
   }
   .third {
-    width: 27%;
+    width: 28%;
     position: absolute;
     right: 0;
     margin-right: -8%;
@@ -59,7 +59,7 @@ div#progress-bar {
   #pb-dot-2, #pb-check-1 { fill: $pink; }
   #progress-bar .labels .second { @extend .label.active; }
 }
-#wrapper[data-pagename="write-message"] {
+#wrapper[data-pagename="representatives"] {
   #pb-dot-3, #pb-check-1, #pb-check-2 { fill: $pink; }
   #progress-bar .labels .third { @extend .label.active; }
 }

@@ -26,7 +26,7 @@ var MessageFormController = function($scope, $location, dioLegislatorData, dioAp
       // TODO: There should probably be a lag-delayed (~350ms) loading modal before firing the API call
       dioApi.findLegislatorsByLatLng(params.lat, params.lng, cb);
     } else {
-    //  $scope.dioPageNav.back();
+      $scope.dioPageNav.back();
     }
   };
 
@@ -43,7 +43,7 @@ var MessageFormController = function($scope, $location, dioLegislatorData, dioAp
 
       dioApi.legislatorFormElementsByBioguideIds(selectedBioguideIds, cb);
     } else {
-    //  $scope.dioPageNav.back();
+      $scope.dioPageNav.back();
     }
   };
 
@@ -69,22 +69,22 @@ var MessageFormController = function($scope, $location, dioLegislatorData, dioAp
     //		};
 	};
 
-  // if (isEmpty(dioLegislatorData.legislators)) {
-  //   //attemptToFetchLegislatorData($location.search()); TODO?
-  //   $location.path('/');
-  // } else {
-  //   $scope.setLegislators();
-  // }
+  if (isEmpty(dioLegislatorData.legislators)) {
+    //attemptToFetchLegislatorData($location.search()); TODO?
+    $location.path('/');
+  } else {
+    $scope.setLegislators();
+  }
 
-  // var selectedBioguideIds = map(dioLegislatorData.getSelectedLegislators(), function(legislator) {
-  //     return legislator.bioguideId;
-  //   });
+  var selectedBioguideIds = map(dioLegislatorData.getSelectedLegislators(), function(legislator) {
+      return legislator.bioguideId;
+    });
 
-  // if (isEmpty(dioLegislatorData.legislatorsFormElements)) {
-  //   attemptToFetchLegislatorForm(selectedBioguideIds);
-  // } else {
-  //   $scope.setLegislatorForm();
-  // }
+  if (isEmpty(dioLegislatorData.legislatorsFormElements)) {
+    attemptToFetchLegislatorForm(selectedBioguideIds);
+  } else {
+    $scope.setLegislatorForm();
+  }
 
 
 };

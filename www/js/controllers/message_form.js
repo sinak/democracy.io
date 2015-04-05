@@ -49,7 +49,6 @@ var MessageFormController = function($scope, $location, dioLegislatorData, dioAp
 
   $scope.setLegislators = function() {
     $scope.legislators = dioLegislatorData.getSelectedLegislators();
-    console.log('legistlators:', $scope.legislators);
     $scope.selectedLegislators = dioLegislatorData.selectedLegislators;
   };
 

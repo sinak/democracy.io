@@ -9,8 +9,11 @@
     <div class="whitebox-container" ng-show="legislators">
       <p>Choose which representatives you'd like to write to:</p>
       <div class="repOption checkbox" ng-repeat="legislator in legislators">
-          <input type="checkbox" ng-model="selectedLegislators[legislator.bioguideId]" id="{{legislator.bioguideId}}" unchecked> 
-          <label for="{{legislator.bioguideId}}">{{legislator.title}}. {{legislator.firstName}} {{legislator.lastName}}
+        <input type="checkbox"
+               ng-model="selectedLegislators[legislator.bioguideId]"
+               id="[[legislator.bioguideId]]" unchecked>
+        <label for="[[legislator.bioguideId]]">
+          [[legislator.title]]. [[legislator.firstName]] [[legislator.lastName]]
         </label>
       </div>
       <button type="submit" class="btn btn-lg btn-orange" ng-click="submit()">

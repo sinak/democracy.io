@@ -9,7 +9,10 @@
         <div class="col-md-12" id="to-field">
           <label>This message will be sent to:</label>
             <span ng-repeat="legislator in legislators">
-              <span>{{legislator.title}}. {{legislator.firstName}} {{legislator.lastName}}<span ng-hide="$last">,</span></span>
+              <span>
+                [[legislator.title]]. [[legislator.firstName]] [[legislator.lastName]]
+              <span ng-hide="$last">,</span>
+            </span>
           </span>
         </div>
       </div>
@@ -74,7 +77,7 @@
         <div class="form-group col-md-6">
           <label for="inputTopic">Topic</label>
           <select class="form-control" id="inputTopic">
-            <option ng-repeat="topic in topics" value="{{topic}}">{{topic}}</option>
+            <option ng-repeat="topic in topics" value="[[topic]]">[[topic]]</option>
           </select>
         </div>
       </div>

@@ -1,0 +1,9 @@
+<nav class="navbar navbar-static">
+  <div class="container">
+    <div class="navbar-header">
+      <div class="navbar-brand">
+        {>"components/svg-logo"/}
+      </div>
+    </div>
+  </div>
+</nav>

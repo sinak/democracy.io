@@ -20,4 +20,9 @@ var Legislator = function(options) {
   this.aliases = isEmpty(options.aliases) ? [] : options.aliases;
 };
 
+
+Legislator.prototype.displayName = function() {
+  return ' '.join([this.title + '.', this.firstName, this.lastName]);
+};
+
 module.exports = Legislator;

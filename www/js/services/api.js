@@ -68,4 +68,4 @@ var api = function ($http, dioConfig) {
 
 };
 
-module.exports = api;
+module.exports = ['$http', 'dioConfig', api];

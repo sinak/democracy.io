@@ -1,6 +1,6 @@
 module.exports = {
-  api: require('./api'),
-  pageNav: require('./page_nav'),
+  dioApi: require('./api'),
+  dioPageNav: require('./page_nav'),
   modelsHttpInterceptor: require('./models_http_interceptor'),
-  legislatorData: require('./legislator_data')
+  dioLegislatorData: require('./legislator_data')
 };

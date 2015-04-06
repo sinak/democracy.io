@@ -2,10 +2,10 @@
  * Simple service wrapping the history back and forward calls.
  */
 
-var pageNav = function($window) {
+var pageNav = function($window, $location) {
   return {
     back: function() {
-      $window.history.back();
+      $location.path('/');
     },
     forward: function() {
       $window.history.forward();

@@ -4,18 +4,26 @@
 
 var isEmpty = require('lodash.isEmpty');
 var map = require('lodash.map');
+var forEach = require('lodash.forEach');
 
-var MessageFormController = function($scope, $location, dioLegislatorData, dioApi, dioPageNav) {
+var MessageFormController = function($scope, $location, $timeout, dioLegislatorData, dioApi, dioPageNav) {
+
+  $scope.loadingDelay = true;
+  
+  $timeout(function(){
+      $scope.loadingDelay = false;
+    },
+    350);
 
   $scope.dioPageNav = dioPageNav;
-
-	//TODO check if captchas are needed
 
 	//TODO fill out list of topics
 	$scope.topics = [
 		'Agriculture',
 		'Technology'
 	];
+
+  $scope.formData = {};
 
   var attemptToFetchLegislatorData = function(params) {
     if (!angular.isUndefined(params.lat) && !angular.isUndefined(params.lng)) {
@@ -35,7 +43,7 @@ var MessageFormController = function($scope, $location, dioLegislatorData, dioAp
       return legislator.bioguideId;
     });
 
-    if (!angular.isEmpty(selectedBioguideIds)){
+    if (!isEmpty(selectedBioguideIds)){
       var cb = function(legislatorsFormElements) {
         dioLegislatorData.setLegislatorsFormElements(legislatorsFormElements);
         $scope.setLegislatorForm();
@@ -47,6 +55,19 @@ var MessageFormController = function($scope, $location, dioLegislatorData, dioAp
     }
   };
 
+  var checkForCaptcha = function(){
+    var hasCaptcha = false;
+    forEach($scope.legislatorsFormElements, function(legislator){
+      forEach(legislator.formElements, function(element){
+        if (element.value === "$CAPTCHA_SOLUTION") {
+          hasCaptcha = true;
+        };
+      });
+    });
+
+    return hasCaptcha;
+  };
+
   $scope.setLegislators = function() {
     $scope.legislators = dioLegislatorData.getSelectedLegislators();
     $scope.selectedLegislators = dioLegislatorData.selectedLegislators;
@@ -55,25 +76,25 @@ var MessageFormController = function($scope, $location, dioLegislatorData, dioAp
   $scope.setLegislatorForm = function () {
     $scope.legislatorsFormElements = dioLegislatorData.getLegislatorsFormElements();
     console.log('form elements:', $scope.legislatorsFormElements);
-  }
+  };
 
 	$scope.submit = function(repData){
-    //		if (repData.hasCaptcha){
-    //			//TODO
-    //
-    //		} else {
-    //			//TODO
-    //			$location.path('/thanks');
-    //
-    //		};
+    if ($scope.hasCaptcha){
+      //TODO
+    } else {
+      //TODO
+      $location.path('/thanks');
+    };
 	};
 
-  if (isEmpty(dioLegislatorData.legislators)) {
+  if (isEmpty(dioLegislatorData.legislators) || isEmpty(dioLegislatorData.selectedLegislators)) {
     //attemptToFetchLegislatorData($location.search()); TODO?
     $location.path('/');
   } else {
     $scope.setLegislators();
   }
+
+  $scope.hasCaptcha = checkForCaptcha();
 
   var selectedBioguideIds = map(dioLegislatorData.getSelectedLegislators(), function(legislator) {
       return legislator.bioguideId;
@@ -84,7 +105,6 @@ var MessageFormController = function($scope, $location, dioLegislatorData, dioAp
   } else {
     $scope.setLegislatorForm();
   }
-
 
 };
 

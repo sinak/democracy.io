@@ -38,17 +38,7 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioLegisl
   };
 
 	$scope.submit = function() {
-    var selectedBioguideIds = map(dioLegislatorData.getSelectedLegislators(), function(legislator) {
-      return legislator.bioguideId;
-    });
-
-    // OPTIMIZATION: check a timed / session-stable cache for data before hitting POTC, as it's an
-    //               expensive call.
-    // TODO: There should probably be a lag-delayed (~350ms) loading modal before firing the API call
-    dioApi.legislatorFormElementsByBioguideIds(selectedBioguideIds, function(legislatorsFormElements) {
-      dioLegislatorData.setLegislatorsFormElements(legislatorsFormElements);
-		  $location.path('/compose');
-    });
+    $location.path('/compose');
 	};
 
   if (isEmpty(dioLegislatorData.legislators)) {

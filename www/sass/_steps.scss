@@ -85,3 +85,56 @@ label small {
   text-transform: none;
   letter-spacing: 0;
 }
+.emailSignup {
+  font-size: 15px;
+  label {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 15px;
+    padding-left: 0;
+  }
+}
+#thanks {
+  @extend .boxshadow;
+  border-radius: 5px;
+  background: #fff;
+  overflow: hidden;
+  p {
+    font-size: 20px;
+    text-align: center;  
+    padding: 20px 10px 110px 10px;
+  }
+
+  #triangle {
+    position: absolute;
+    left: 50%;
+    margin-left: -16px;
+    top: 0;
+  }
+  
+  #share-icons {
+    background-image: linear-gradient(to right, #FF9600, #FC4863);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index:0;
+    height: 100px;
+    text-align: center;
+    color: #fff;
+    padding-top: 25px;
+
+    a  {
+      margin-top: 15px;
+      transform: translate(0, 0);
+    
+      animation: 0.3s ease;
+      transition-duration: 0.3s;
+      transition-property: transform;
+      animation-fill-mode: both;
+      &:hover {
+        transform: translate(0, -5px);
+      }
+    }
+  }
+}

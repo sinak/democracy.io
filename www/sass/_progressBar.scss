@@ -13,6 +13,10 @@ div#progress-bar {
   margin: 0 auto 40px auto;
   position: relative;
   opacity: 0;
+  @media (max-width: $screen-xs-max) {
+    max-width: 80%;
+    margin-bottom: 60px;
+  }
 }
 #progress-bar .labels {
   margin-top: -8px;

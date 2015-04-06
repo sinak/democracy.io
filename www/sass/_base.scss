@@ -43,9 +43,12 @@ h1 {
 .header h1 {
   margin-top: 100px;
 }
-.whitebox {
-  background-color: #fff;
+.boxshadow {
   box-shadow: 0px 2px 7px 0px rgba(100, 100, 100, 0.18);
+}
+.whitebox {
+  @extend .boxshadow;
+  background-color: #fff;
   padding: 0;
   border-radius: 5px;
   margin: 0 auto 90px auto;
@@ -72,7 +75,7 @@ h1 {
     cursor:pointer;
 }
 .checkbox input[type="checkbox"]  + label:before {
-  background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" enable-background="new 0 0 50 50"><path d="M25 50c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.215 25-25 25zm0-48.482c-12.951 0-23.487 10.534-23.487 23.482s10.536 23.482 23.487 23.482c12.95 0 23.486-10.534 23.486-23.482s-10.535-23.482-23.486-23.482zM38.5 30h-27c-1.375 0-2.5-1.125-2.5-2.5v-5c0-1.375 1.125-2.5 2.5-2.5h27c1.375 0 2.5 1.125 2.5 2.5v5c0 1.375-1.125 2.5-2.5 2.5z" fill="#E6E7E8"/></svg>');
+  background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" enable-background="new 0 0 50 50"><path d="M25 50c-13.785 0-25-11.215-25-25s11.215-25 25-25 25 11.215 25 25-11.215 25-25 25zm0-48.482c-12.951 0-23.487 10.534-23.487 23.482s10.536 23.482 23.487 23.482c12.95 0 23.486-10.534 23.486-23.482s-10.535-23.482-23.486-23.482zM38.5 30h-27c-1.375 0-2.5-1.125-2.5-2.5v-5c0-1.375 1.125-2.5 2.5-2.5h27c1.375 0 2.5 1.125 2.5 2.5v5c0 1.375-1.125 2.5-2.5 2.5z" fill="#BFC0C1"/></svg>');
   background-size: cover;
 }
 .checkbox input[type="checkbox"]:checked  + label:before {

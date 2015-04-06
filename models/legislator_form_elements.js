@@ -14,6 +14,7 @@ var LegislatorFormElements = function(options) {
   options = isEmpty(options) ? {} : options;
     
   this.bioguideId = options.bioguideId;
+
   // NOTE: this assumes that key coercion has already taken place. e.g.if using POTC data, that the POTC
   //       keys have been standardized, with maxlength ==> maxLength, options_hash ==> optionsHash etc
   if (!isEmpty(options.formElements)) {

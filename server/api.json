@@ -166,6 +166,88 @@
                     }
                 }
             }
+        },
+        "/location/suggest": {
+            "get": {
+                "summary": "Retrieves a list of autocomplete suggestions for a partial address.",
+                "description": "Retrieves autocomplete suggestions for a partial address from SmartyStreets, using the client IP address to bias the search via a geoip-lite lookup.",
+                "parameters": [
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "The partial address to fetch suggestions for.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Location"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of AddressSuggestion objects matching the partial address.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/AddressSuggestion"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/location/verify": {
+            "get": {
+                "summary": "Verifies the supplied address and returns its canonical representation.",
+                "description": "Verifies the supplied address via SmartyStreets and returns a complex data object with its canonical representation. This object contains information like Zip +4 and other details.",
+                "parameters": [
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "The address to verify.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "The name of the city the address is located in.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "The two letter code for the state the address is located in. It's unclear if SmartyStreets adheres to a specific ISO standard for this, so consider it to be the conventional form.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Location"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The canonical representation of the address.",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/CanonicalAddress"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -243,6 +325,119 @@
                 "optionsHash": {
                     "type": "object",
                     "description": "An object describing the options this field can take and the corresponding value for each option."
+                }
+            }
+        },
+        "AddressSuggestion": {
+            "description": "Location object describing a suggested address.",
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "description": "The full address string for the suggestion."
+                },
+                "streetLine": {
+                    "type": "string",
+                    "description": "The street line, e.g. 123 Main Street, for the suggestion."
+                },
+                "city": {
+                    "type": "string",
+                    "description": "The city the address suggestion is located in."
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The US state the address suggestion is located in."
+                }
+            }
+        },
+        "CanonicalAddress": {
+            "description": "A canonical location object describing all aspects of a US address. This is a simplified version of the [SmartyStreets verification response](https://smartystreets.com/docs/address).",
+            "properties": {
+                "inputId": {
+                    "type": "string",
+                    "description": "Any unique identifier that you use to reference the input address. The output will be identical to the input.",
+                    "maxLength": 50
+                },
+                "inputIndex": {
+                    "type": "integer",
+                    "description": "The order in which this address was submitted with the others (0 if alone)."
+                },
+                "candidateIndex": {
+                    "type": "integer",
+                    "description": "An input address can match multiple valid addresses. This ties the candidates to the input index. For example, \"1 Rosedale Street Baltimore Maryland\" will return multiple candidates.)"
+                },
+                "deliveryLineOne": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "description": "Contains the first delivery line (usually the street address). This can include any of Primary Number, Street Name, Street Predirection, Street Postdirection, Street Suffix, Secondary Number, Secondary Designator, PMB Designator or PMB Number."
+                },
+                "lastLine": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "description": "City, state, and ZIP Code combined."
+                },
+                "components": {
+                    "type": "object",
+                    "$ref": "#/definitions/AddressComponents"
+                }
+            }
+        },
+        "AddressComponents": {
+            "description": "test",
+            "properties": {
+                "primaryNumber": {
+                    "type": "string",
+                    "maxLength": 30,
+                    "description": "The house, PO Box, or building number."
+                },
+                "streetName": {
+                    "type": "string",
+                    "maxLength": 64,
+                    "description": "The name of the street."
+                },
+                "streetPredirection": {
+                    "type": "string",
+                    "maxLength": 16,
+                    "description": "Directional information before a street name, e.g. N, SW."
+                },
+                "streetPostdirection": {
+                    "type": "string",
+                    "maxLength": 16,
+                    "description": "Directional information after a street name, e.g. N, SW."
+                },
+                "streetSuffix": {
+                    "type": "string",
+                    "maxLength": 16,
+                    "description": "Abbreviated value describing the street, e.g. St, Ave, Blvd."
+                },
+                "secondardyNumber": {
+                    "type": "string",
+                    "maxLength": 32,
+                    "description": "Apartment or suite number, if any."
+                },
+                "cityName": {
+                    "type": "string",
+                    "maxLength": 64,
+                    "description": "The accepted/proper name of the city."
+                },
+                "defaultCityName": {
+                    "type": "string",
+                    "maxLength": 64,
+                    "description": ".The default city name for the address. This field will not be present if the default city name is equal to the value of the city name field."
+                },
+                "stateAbbreviation": {
+                    "type": "string",
+                    "maxLength": 2,
+                    "description": "The two-letter state abbreviation."
+                },
+                "zipcode": {
+                    "type": "string",
+                    "maxLength": 5,
+                    "description": "The 5-digit ZIP Code"
+                },
+                "plus4Code": {
+                    "type": "string",
+                    "maxLength": 4,
+                    "description": "The 4-digit add-on code (more specific than 5-digit ZIP)."
                 }
             }
         },

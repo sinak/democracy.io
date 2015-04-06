@@ -12,7 +12,8 @@ var writeToThemAnimation = function($timeout) {
     scope: {
       animateMsg: '@',    // The text to animate
       speed: '@',         // The speed at which new message chars are rendered
-      initialDelay: '@'   // The initial delay before starting message animation
+      initialDelay: '@',  // The initial delay before starting message animation
+      showFull: '&'       // Whether or not to show the full message immediately
     },
     templateUrl: '/partials/animated_msg.html',
     controller: function($scope, $element, $attrs) {
@@ -34,7 +35,13 @@ var writeToThemAnimation = function($timeout) {
         }
       };
 
-      $timeout($scope.displayCharacter, initialDelay);
+      if ($scope.showFull()) {
+        $scope.hasFinishedTyping = true;
+        $scope.displayedMsg = $scope.animateMsg;
+      } else {
+        $timeout($scope.displayCharacter, initialDelay);
+      }
+
     }
   };
 

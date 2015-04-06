@@ -20,7 +20,8 @@
            dio-write-to-them-animation=""
            animate-msg="Write to your representatives"
            initial-delay="1000"
-           speed="95">
+           speed="95"
+           show-full="pageFrom !== 'new-visit'">
       </div>
     </div>
 

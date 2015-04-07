@@ -37,6 +37,10 @@
   }
 }
 #wrapper[data-pagename="location"] {
+  h1.header {
+    margin-top: 100px;
+    animation: removeTopMargin 1.5s ease 0.5s 1 forwards;
+  }
   div#progress-bar {
     opacity: 1;
   }
@@ -69,6 +73,9 @@
   }
 }
 #wrapper[data-pagename="compose"] {
+  h1.header {
+    animation: fadeInUp 0.5s ease 1.5s 1 forwards;
+  }
   div#progress-bar {
     opacity: 1;
   }
@@ -91,6 +98,32 @@
     opacity: 1;
   }
   #pb-check-2 {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease 1s 1 forwards;
+  }
+}
+#wrapper[data-pagename="thanks"] {
+  h1.header {
+    animation: fadeInUp 0.5s ease 1.5s 1 forwards;
+  }
+  div#progress-bar {
+    opacity: 1;
+  }
+  #pb-line-1 {
+    stroke-dashoffset: 0;
+    stroke-width: 1;
+  }
+  #pb-line-2 {
+    stroke-dashoffset: 0;
+    stroke-width: 1;
+  }
+  #pb-check-1 {
+    opacity: 1;
+  }
+  #pb-check-2 {
+    opacity: 1;
+  }
+  #pb-check-3 {
     opacity: 0;
     animation: fadeInUp 0.5s ease 1s 1 forwards;
   }
@@ -129,6 +162,11 @@
 @keyframes blink{
   to{
     opacity: 0;
+  }
+}
+@keyframes removeTopMargin{
+  to{
+    margin-top: 0;
   }
 }
 @keyframes draw {

@@ -4,6 +4,9 @@ html, body {
 html {
   position: relative;
 }
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
 body {
   background-image: url('/static/img/bg.jpg');
   background-size: cover;

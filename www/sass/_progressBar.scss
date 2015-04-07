@@ -67,6 +67,6 @@ div#progress-bar {
   #pb-dot-3, #pb-check-1, #pb-check-2 { fill: $pink; }
   #progress-bar .labels .third { @extend .label.active; }
 }
-#wrapper[data-pagename="share"] {
+#wrapper[data-pagename="thanks"] {
   #pb-check-3, #pb-check-1, #pb-check-2 { fill: $pink; }
 }

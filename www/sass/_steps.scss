@@ -96,13 +96,13 @@ label small {
 }
 #thanks {
   @extend .boxshadow;
-  border-radius: 5px;
+  border-radius: 10px;
   background: #fff;
   overflow: hidden;
   p {
     font-size: 20px;
     text-align: center;  
-    padding: 20px 10px 110px 10px;
+    padding: 20px 10px 130px 10px;
   }
 
   #triangle {
@@ -119,21 +119,24 @@ label small {
     left: 0;
     right: 0;
     z-index:0;
-    height: 100px;
+    height: 120px;
     text-align: center;
     color: #fff;
-    padding-top: 25px;
+    padding-top: 30px;
+    border-bottom-left-radius: 10px; 
+    border-bottom-right-radius: 10px;
+    overflow: hidden;
 
     a  {
-      margin-top: 15px;
       transform: translate(0, 0);
+      display: block;
     
       animation: 0.3s ease;
       transition-duration: 0.3s;
       transition-property: transform;
       animation-fill-mode: both;
       &:hover {
-        transform: translate(0, -5px);
+        transform: translate(0, -7px);
       }
     }
   }

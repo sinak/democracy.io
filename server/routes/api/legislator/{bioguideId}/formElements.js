@@ -5,7 +5,8 @@
 var lodash = require('lodash');
 
 var makeLFEModelFromPOTCResponse = require('../../helpers/make_lfe_model_from_potc_response');
-var thirdPartyAPIs = require('../../../../services/third_party_apis');
+var potc = require('../../../../services/third-party-apis/potc');
+
 
 var get = function (req, res) {
   var bioguideId = req.params.bioguideId;
@@ -19,7 +20,7 @@ var get = function (req, res) {
     }
   };
 
-  thirdPartyAPIs.getFormElementsForRepIdsFromPOTC([bioguideId], req.app.locals.CONFIG, cb);
+  potc.getFormElementsForRepIdsFromPOTC([bioguideId], req.app.locals.CONFIG, cb);
 };
 
 

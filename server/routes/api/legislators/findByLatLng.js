@@ -6,7 +6,7 @@ var changeCaseKeys = require('change-case-keys');
 var lodash = require('lodash');
 
 var Legislator = require('../../../../models').Legislator;
-var thirdPartyAPIs = require('../../../services/third_party_apis');
+var sunlight = require('../../../services/third-party-apis/sunlight');
 
 
 var get = function (req, res) {
@@ -22,7 +22,7 @@ var get = function (req, res) {
     }
   };
 
-  thirdPartyAPIs.locateLegislatorsViaSunlight(
+  sunlight.locateLegislatorsViaSunlight(
     req.params.latitude, req.params.longitude, req.app.locals.CONFIG, cb);
 };
 

@@ -10,19 +10,27 @@
 
     {>"components/nav-bar"/}
 
-    <!--TODO(leah): couple issues to discuss here:
-      * seems like if it's not a new visit that the typeahead shouldn't animate back in
-      * the removal is a little abrupt - it causes a layout shift that's a bit meh, would
-        consider including an elem with the same height to avoid this.
-    -->
-    <div ng-if="pageName == 'home'">
-      <div class="header"
+    <div ng-switch ng-cloak on="pageName">
+      <div ng-switch-when="home" 
+           class="header"
            dio-write-to-them-animation=""
            animate-msg="Write to your representatives"
            initial-delay="1000"
-           speed="95"
+           speed="50">
            show-full="pageFrom !== 'new-visit'">
       </div>
+      <h1 ng-switch-when="location" 
+           class="header">
+           Who do you want to write to?
+      </h1>
+      <h1 ng-switch-when="compose" 
+           class="header">
+           Write your message      
+      </h1>
+      <h1 ng-switch-when="thanks" 
+            class="header">
+           Message sent!
+      </h1>
     </div>
 
     {>"components/progress-bar"/}

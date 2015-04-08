@@ -44,7 +44,8 @@ var makePreferenceStringFromUSCityRegionData = function(cityRegionData) {
   if (lodash.isNull(cityRegionData)) {
     return null;
   } else {
-
+    var geoBits = lodash.compact([cityRegionData.city, cityRegionData.region]);
+    return lodash.isEmpty(geoBits) ? null : geoBits.join(',');
   }
 };
 

@@ -6,12 +6,14 @@ var expect = require('chai').expect;
 var lodash = require('lodash');
 var nestedDescribe = require('nested-describe');
 
-var getUSCityRegionDataForIP = require('../../../server/services/geolocation').getUSCityRegionDataForIP;
+var geolocation = require('../../../server/services/geolocation');
 
 
 nestedDescribe('server.services.geolocation', function () {
 
   it('should make geodata responses from supplied IP addresses', function() {
+    var getUSCityRegionDataForIP = geolocation.getUSCityRegionDataForIP;
+
     // NOTE: these tests assume that you're using geoip-lite version 1.1.6
     // They may fail and need updating when the associated maxmind db changes.
     var carolinaPuertoRico = '24.41.255.255';
@@ -28,6 +30,20 @@ nestedDescribe('server.services.geolocation', function () {
 
     var shrewsburyGeoData = getUSCityRegionDataForIP(shrewsburyUK);
     expect(shrewsburyGeoData).to.be.null;
+  });
+
+  it('should make preference strings from supplied geodata objects', function() {
+    var makePreferenceStringFromUSCityRegionData = geolocation.makePreferenceStringFromUSCityRegionData;
+
+    expect(makePreferenceStringFromUSCityRegionData(null))
+      .to.be.null;
+
+    expect(makePreferenceStringFromUSCityRegionData({city: 'Carolina', region: null}))
+      .to.be.equal('Carolina');
+
+    expect(makePreferenceStringFromUSCityRegionData({city: 'Cupertino', region: 'CA'}))
+      .to.be.equal('Cupertino,CA');
+
   });
 
 });

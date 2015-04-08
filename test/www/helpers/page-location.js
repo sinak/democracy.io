@@ -1,5 +1,5 @@
 /**
- * Tests for the API helper methods.
+ * Tests for the page location helpers.
  */
 
 var expect = require('chai').expect;

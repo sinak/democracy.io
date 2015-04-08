@@ -74,7 +74,6 @@
     "lodash.map": "^3.1.0",
     "meddleware": "^3.0.0",
     "morgan": "^1.5.1",
-    "ng-autocomplete": "^1.0.0",
     "request": "^2.53.0",
     "shush": "0.0.1",
     "sprintf-js": "^1.0.2",

@@ -7,12 +7,15 @@
       <!-- TODO: pressing enter on the input field doesn't submit. -->
       <label for="inputAddress">Enter your address:</label>
       <div class="input-group">
-        <input type="text" class="form-control input-lg"
-               ng-autocomplete
-               placeholder="1600 Pennsylvania Ave, Washington DC, 20500"
-               options="ngAutocompleteOptions"
-               details="data.geocode"
-               ng-model="data.address">
+        <div angucomplete-alt
+             id="address-suggestions"
+             placeholder="1600 Pennsylvania Ave, Washington DC, 20500"
+             pause="400"
+             selected-object="data.address"
+             title-field="text"
+             remote-url="/api/1/location/suggest?address="
+             input-class="form-control input-lg">
+        </div>
         <span class="input-group-btn">
           <button type="submit"
                   ng-disabled="data.invalidGeocode"
@@ -22,8 +25,6 @@
           </button>
         </span>
       </div>
-
-          [[test]]
 
       <div class="alert alert-danger"
            ng-show="data.invalidGeocode && !data.addressPristine">

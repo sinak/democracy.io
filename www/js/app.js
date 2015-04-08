@@ -8,7 +8,8 @@ var controllers = require('./controllers');
 var directives = require('./directives');
 var services = require('./services');
 
-var democracyApp = angular.module('democracyIoApp', ['ngRoute', 'ngAutocomplete', 'ngCookies']);
+var democracyApp = angular.module(
+  'democracyIoApp', ['ngRoute', 'ngCookies', 'angucomplete-alt']);
 democracyApp.config(function($provide, $httpProvider, $interpolateProvider) {
   $provide.factory('modelsHttpInterceptor', services.modelsHttpInterceptor);
   $httpProvider.interceptors.push('modelsHttpInterceptor');
@@ -31,8 +32,8 @@ democracyApp.directive('dioWriteToThemAnimation', directives.writeToThemAnimatio
 
 // Require modules that are used but not referenced directly
 require('angular-route');
-require('ng-autocomplete');
 require('angular-cookies');
+require('angucomplete-alt');
 
 // Require local modules generated as part of the build process
 require('../../.build/dioAppSettings');

@@ -16,17 +16,9 @@ $pink: #EE325A;
 @import "hover.css/scss/hacks";
 @import "hover.css/scss/effects/background-transitions/bounce-to-right.scss";
 
-// Import IE10 fix
-//@import "ie_10_fix";
-
-// Import Bootstrap Compass integration
-//@import "bootstrap-compass";
-
-// Import custom Bootstrap variables
-//@import "bootstrap-variables";
-
 @import 'base';
 @import 'footer';
 @import 'progressBar';
 @import 'steps';
 @import 'animations';
+@import 'angucomplete';

@@ -60,7 +60,7 @@
     "dustjs-helpers": "^1.6.1",
     "dustjs-linkedin": "^2.6.1",
     "engine-munger": "^0.2.5",
-    "geoip-lite": "^1.1.6",
+    "geoip-lite": "1.1.6",
     "hover.css": "^2.0.2",
     "kraken-js": "^1.0.3",
     "lodash": "^3.3.1",
@@ -75,6 +75,7 @@
     "request": "^2.53.0",
     "shush": "0.0.1",
     "sprintf-js": "^1.0.2",
-    "swaggerize-express": "^3.0.3"
+    "swaggerize-express": "^3.0.3",
+    "us": "^1.0.3"
   }
 }

@@ -4,7 +4,8 @@
 
 var path = require('path');
 var url = require('url');
-var request = require('request');
+
+var makeRequest = require('./third-party-api').makeRequest;
 
 
 /**
@@ -34,14 +35,7 @@ var makeSunlightUrl = function(pathname, params, config) {
  */
 var locateLegislatorsViaSunlight = function(lat, lng, config, cb) {
   var sunlightUrl = makeSunlightUrl('/legislators/locate', {latitude: lat, longitude: lng}, config);
-
-  request({url: sunlightUrl, json: true}, function (err, response, body) {
-    if (!err && response.statusCode == 200) {
-      cb(body, null);
-    } else {
-      cb(null, err);
-    }
-  });
+  makeRequest({method: 'GET', url: sunlightUrl, json: true}, cb);
 };
 
 
@@ -53,14 +47,7 @@ var locateLegislatorsViaSunlight = function(lat, lng, config, cb) {
  */
 var fetchActiveLegislatorBioViaSunlight = function(bioguideId, config, cb) {
   var sunlightUrl = makeSunlightUrl('/legislators', {'bioguide_id': bioguideId}, config);
-
-  request({url: sunlightUrl, json: true}, function (err, response, body) {
-    if (!err && response.statusCode == 200) {
-      cb(body, null);
-    } else {
-      cb(null, err);
-    }
-  });
+  makeRequest({method: 'GET', url: sunlightUrl, json: true}, cb);
 };
 
 

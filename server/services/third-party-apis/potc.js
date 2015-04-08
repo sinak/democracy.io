@@ -4,7 +4,8 @@
 
 var path = require('path');
 var url = require('url');
-var request = require('request');
+
+var makeRequest = require('./third-party-api').makeRequest;
 
 
 /**
@@ -31,14 +32,7 @@ var makePOTCUrl = function(pathname, config) {
  */
 var getFormElementsForRepIdsFromPOTC = function(bioguideIds, config, cb) {
   var potcURL = makePOTCUrl('retrieve-form-elements', config);
-  var jsonBody = {'bio_ids': bioguideIds};
-  request.post({url: potcURL, json: true, body: jsonBody}, function (err, response, body) {
-    if (!err && response.statusCode == 200) {
-      cb(body, null);
-    } else {
-      cb(null, err);
-    }
-  });
+  makeRequest({method: 'POST', url: potcURL, json: true, body: {'bio_ids': bioguideIds}}, cb);
 };
 
 

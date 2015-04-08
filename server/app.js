@@ -19,6 +19,9 @@ var options = {
 };
 
 app.use(kraken(options));
+// Enabled so that req.ip will pull IP address from the X-Forwarded header, see:
+//   http://expressjs.com/guide/behind-proxies.html
+app.enable('trust proxy');
 
 app.use(swaggerize({
   api: path.join(__dirname, '/api.json'),

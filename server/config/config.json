@@ -47,7 +47,11 @@
 
     "API": {
       "SUNLIGHT_BASE_URL": "https://congress.api.sunlightfoundation.com",
-      "POTC_BASE_URL": "https://congress-forms.fightforthefuture.org"
+      "POTC_BASE_URL": "https://congress-forms.fightforthefuture.org",
+      "SMARTY_STREETS": {
+        "AUTOCOMPLETE_URL": "https://autocomplete-api.smartystreets.com",
+        "ADDRESS_URL": "https://api.smartystreets.com"
+      }
     },
 
     "CREDENTIALS": "import:./credentials"

@@ -32,6 +32,8 @@ democracyApp.directive('dioWriteToThemAnimation', directives.writeToThemAnimatio
 
 // Require modules that are used but not referenced directly
 require('angular-route');
+require('ng-autocomplete');
+require('angular-animate');
 require('angular-cookies');
 require('angucomplete-alt');
 

@@ -36,6 +36,11 @@
     }
   }
 }
+.ng-scope.ng-leave {
+    @extend .animated;
+    animation-name: fadeDownOut;
+}
+
 #wrapper[data-pagename="location"] {
   h1.header {
     margin-top: 100px;
@@ -104,6 +109,7 @@
 }
 #wrapper[data-pagename="thanks"] {
   h1.header {
+    opacity: 0;
     animation: fadeInUp 0.5s ease 1.5s 1 forwards;
   }
   div#progress-bar {

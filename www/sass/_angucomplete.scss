@@ -3,7 +3,7 @@
 }
 
 .angucomplete-dropdown {
-  border-color: #ececec;
+  border-color: #eee;
   border-width: 1px;
   border-style: solid;
   border-radius: 2px;
@@ -12,9 +12,9 @@
   cursor: pointer;
   z-index: 9999;
   position: absolute;
-  /*top: 32px;
-  left: 0px;
-  */
+  top: 55px;
+  width: 100.2%;
+  border-top: #aaa;
   margin-top: -6px;
   background-color: #ffffff;
 }

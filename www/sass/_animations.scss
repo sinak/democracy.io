@@ -1,8 +1,28 @@
-// Homepage animations
+// Global animation class (extended below)
 .animated {
   animation-duration: 0.5s;
   animation-fill-mode: both;
 }
+body {
+  @extend .animated;
+  transition: height .1s linear;   
+}
+// Animation for all form sections
+#form-scope.ng-scope.ng-leave {
+    @extend .animated;
+    animation-name: fadeDown30;
+}
+#form-scope.ng-scope.ng-enter {
+    @extend .animated;
+    animation-name: fadeUp30;
+    animation-delay: 0.5s;
+    opacity: 0;
+}
+#form-scope.ng-scope.ng-enter:nth-child(2) {
+  display: none;
+}
+
+// Home-screen-specific animations
 #wrapper[data-pagename="home"] {
   .header h1::after {
       content: '|';
@@ -35,52 +55,57 @@
       animation: draw 2s ease 2.5s 1 forwards;
     }
   }
-}
-.ng-scope.ng-leave {
-    @extend .animated;
-    animation-name: fadeDownOut;
-}
-
-#wrapper[data-pagename="location"] {
-  h1.header {
-    margin-top: 100px;
-    animation: removeTopMargin 1.5s ease 0.5s 1 forwards;
+  &[data-pagefrom="location"] {
+    .header h1 {
+      margin-top: 0px;
+      animation: addTopMargin 1.5s ease 0.5s 1 forwards;
+    }
+    h1.header {
+    display: none;
+    }
   }
+}
+  h1.header {
+    margin-top: 0;
+  }
+#wrapper[data-pagename="location"] {
   div#progress-bar {
     opacity: 1;
   }
-  #pb-line-1 {
-    stroke-width: 1;
-    stroke-linejoin: butt;
-    stroke-dasharray: 170;
-    stroke-dashoffset: 170;
-    animation: draw 2s ease 0.5s 1 forwards;
+  #pb-check-1 {
+    animation: none;
+    opacity: 1;
   }
   #pb-dot-2 {
-    opacity: 0;
-    animation: moveRight 2s ease 0.5s 1 forwards;
+    animation: none;
   }
-  #pb-check-1 {
-    opacity: 0;
-    animation: fadeInUp 0.5s ease 1.5s 1 forwards;
+  #pb-line-1 {
+    stroke-dashoffset: 0;
+    stroke-width: 1;
   }
-  &[data-from="new-visit"] {
-    #pb-check-1 {
-      animation: none;
-      opacity: 1;
-    }
-    #pb-dot-2 {
-      animation: none;
+  // Animations when moving forwards
+  &[data-pagefrom="home"] {
+    h1.header {
+      margin-top: 100px;
+      animation: removeTopMargin 1.5s ease 0.5s 1 forwards;
     }
     #pb-line-1 {
-      stroke-dashoffset: 0;
+      stroke-linejoin: butt;
+      stroke-dasharray: 170;
+      stroke-dashoffset: 170;
+      animation: draw 2s ease 0.5s 1 forwards;
+    }
+    #pb-dot-2 {
+      opacity: 0;
+      animation: moveRight 2.5s ease 0s 1 forwards;
+    }
+    #pb-check-1 {
+      opacity: 0;
+      animation: fadeInUp 0.5s ease 1.5s 1 forwards;
     }
   }
 }
 #wrapper[data-pagename="compose"] {
-  h1.header {
-    animation: fadeInUp 0.5s ease 1.5s 1 forwards;
-  }
   div#progress-bar {
     opacity: 1;
   }
@@ -97,7 +122,7 @@
   }
   #pb-dot-3 {
     opacity: 0;
-    animation: moveRight 2s ease 0.5s 1 forwards;
+    animation: moveRight 2.5s ease 0s 1 forwards;
   }
   #pb-check-1 {
     opacity: 1;
@@ -108,10 +133,6 @@
   }
 }
 #wrapper[data-pagename="thanks"] {
-  h1.header {
-    opacity: 0;
-    animation: fadeInUp 0.5s ease 1.5s 1 forwards;
-  }
   div#progress-bar {
     opacity: 1;
   }
@@ -152,11 +173,35 @@
   }
   100% {
     opacity: 0;
-    transform: translate3d(0, 30%, 0);
+    transform: translate3d(0, 30px, 0);
+  }
+}
+@keyframes fadeDown30 {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+}
+@keyframes fadeUp30 {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
   }
 }
 @keyframes moveRight {
   0% {
+    opacity: 1;
+    transform: translate(-186px, 0);
+  }
+  20% {
     opacity: 1;
     transform: translate(-186px, 0);
   }
@@ -173,6 +218,11 @@
 @keyframes removeTopMargin{
   to{
     margin-top: 0;
+  }
+}
+@keyframes addTopMargin{
+  to{
+    margin-top: 100px;
   }
 }
 @keyframes draw {

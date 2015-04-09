@@ -36,7 +36,7 @@
     {>"components/progress-bar"/}
 
     <div class="container">
-      <div ng-view></div>
+      <div ng-view id="form-scope"></div>
     </div>
 
   </div>

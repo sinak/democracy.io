@@ -8,11 +8,11 @@ html {
   display: none !important;
 }
 body {
-  background-image: url('/static/img/bg.jpg');
-  background-size: cover;
+  background-image: url('/static/img/bg-fade.jpg');
+  background-size: cover auto;
   background-repeat: no-repeat;
-  background-position: center;
-  background-color: #F0F0F0;
+  background-position: top center;
+  background-color: #eeeeee;
   min-height: 100%;
   margin-bottom: 170px;
   font-family: 'Open Sans', sans-serif;

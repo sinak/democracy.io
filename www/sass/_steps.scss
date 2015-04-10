@@ -1,4 +1,27 @@
-.whitebox.pick-legislators {
+/******
+ Loading 
+******/
+#loading {
+  margin: 0 0 2em;
+  height: 100px;
+  max-width: 309px;
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto 1em;
+  vertical-align: top;
+  text-align: center;
+  &:before {
+    display: none;
+  }
+  p {
+    font-size: 18px;
+  }
+}
+
+/******
+ Pick legislators 
+******/
+#pick-legislators {
   label {
     text-transform: none;
     letter-spacing: 0;
@@ -16,7 +39,7 @@
     font-size: 18px;
   }
 }
-.pick-legislators .whitebox-container {
+#pick-legislators .whitebox-container {
   padding-bottom: 30px;
   padding-top: 20px;
 }

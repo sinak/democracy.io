@@ -1,25 +1,32 @@
 // Global animation class (extended below)
 .animated {
-  animation-duration: 0.5s;
+  animation-duration: .5s;
   animation-fill-mode: both;
 }
 body {
   @extend .animated;
   transition: height .1s linear;   
 }
+
 // Animation for all form sections
-#form-scope.ng-scope.ng-leave {
-    @extend .animated;
-    animation-name: fadeDown30;
-}
-#form-scope.ng-scope.ng-enter {
+#form-scope.ng-enter {
     @extend .animated;
     animation-name: fadeUp30;
     animation-delay: 0.5s;
     opacity: 0;
 }
-#form-scope.ng-scope.ng-enter:nth-child(2) {
+#form-scope.ng-leave {
+    @extend .animated;
+    animation-name: fadeDown30;
+}
+#form-scope.ng-enter:nth-child(2) {
   display: none;
+}
+
+// Animations for loading box
+#loading.ng-leave {
+    @extend .animated;
+    animation-name: fadeDown30;
 }
 
 // Home-screen-specific animations
@@ -65,9 +72,6 @@ body {
     }
   }
 }
-  h1.header {
-    margin-top: 0;
-  }
 #wrapper[data-pagename="location"] {
   div#progress-bar {
     opacity: 1;
@@ -82,6 +86,12 @@ body {
   #pb-line-1 {
     stroke-dashoffset: 0;
     stroke-width: 1;
+  }
+  #pick-legislators {
+    @extend .animated;
+    animation-name: fadeUp30;
+    animation-delay: 0.5s;
+    opacity: 0;
   }
   // Animations when moving forwards
   &[data-pagefrom="home"] {
@@ -130,6 +140,12 @@ body {
   #pb-check-2 {
     opacity: 0;
     animation: fadeInUp 0.5s ease 1s 1 forwards;
+  }
+  .write-message.ng-enter {
+    @extend .animated;
+    animation-name: fadeUp30;
+    animation-delay: 0.5s;
+    opacity: 0;
   }
 }
 #wrapper[data-pagename="thanks"] {

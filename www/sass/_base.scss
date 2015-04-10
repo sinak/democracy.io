@@ -44,7 +44,12 @@ h1 {
   color: #444444;
 }
 .header h1 {
+  // Appears on first page
   margin-top: 100px;
+}
+h1.header {
+  // Appears on other pages
+  margin-top: 0;
 }
 .boxshadow {
   box-shadow: 0px 2px 7px 0px rgba(100, 100, 100, 0.18);

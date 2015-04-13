@@ -48,20 +48,20 @@
       </div>
 
       <div class="row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-sm-8 col-md-9">
           <label for="inputSubject">Subject</label>
           <input type="text" class="form-control" id="inputSubject" ng-model="formData.subject">
         </div>
       </div>
 
       <div class="row">
-        <div class="form-group col-md-9">
-        <label for="inputMessage">Message</label>
-        <div id="textarea-container">
-          <textarea id="inputMessage" class="form-control" cols="30" rows="10" ng-model="formData.message"></textarea>
+        <div class="form-group col-sm-8 col-md-9">
+          <label for="inputMessage">Message</label>
+          <div id="textarea-container">
+            <textarea id="inputMessage" class="form-control" cols="30" rows="10" ng-model="formData.message"></textarea>
+          </div>
         </div>
-        </div>
-        <div class="col-md-3">
+        <div class="col-sm-4 col-md-3 hidden-xs">
           <div class="panel">
             <div class="panel-heading">
               GUIDELINES:
@@ -75,19 +75,19 @@
       </div>
 
       <div class="row">
-        <div class="col-md-3 form-group">
+        <div class="col-sm-4 col-md-3 form-group">
           <label for="inputFirstName">First name</label>
           <input type="text" class="form-control" id="inputFirstName" ng-model="formData.firstName">
         </div>
 
-        <div class="col-md-3 form-group">
+        <div class="col-sm-4 form-group">
           <label for="inputLastName">Last name</label>
           <input type="text" class="form-control" id="inputLastName" ng-model="formData.lastName">
         </div>
       </div>
 
       <div class="row">
-        <div class="col-md-3 form-group">
+        <div class="col-sm-4 form-group">
           <label for="inputPrefix">Prefix</label>
           <select class="form-control" id="inputPrefix" ng-model="formData.prefix">
             <option value="Mr">Mr</option>
@@ -97,14 +97,14 @@
           </select>
         </div>
 
-        <div class="col-md-3 form-group">
+        <div class="col-sm-4 form-group">
           <label for="inputPhoneNumber">Phone number <small>(optional)</small></label>
           <input type="text" class="form-control" id="inputPhoneNumber" ng-model="formData.phoneNumber">
         </div>
       </div>
 
       <div class="row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-sm-4 col-md-6">
           <label for="inputTopic">Topic</label>
           <select class="form-control" id="inputTopic" ng-model="formData.topic">
             <option ng-repeat="topic in topics" value="[[topic]]">[[topic]]</option>

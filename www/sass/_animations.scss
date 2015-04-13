@@ -49,7 +49,7 @@ body {
     animation-name: fadeInUp;
     animation-delay: 3s; // Reduces jittering
   }
-  .email.whitebox {
+  #address.whitebox {
     @extend .animated;
     animation-name: fadeInUp;
     animation-delay: 3s; // Reduces jittering

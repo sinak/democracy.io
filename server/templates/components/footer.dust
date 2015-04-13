@@ -2,14 +2,14 @@
   <div class="container">
     <div class="logo">
       <div class="row">
-        <div class="col-md-9">
+        <div class="hidden-xs col-sm-9">
           <svg class="logo" preserveAspectRatio="none" viewBox="0 0 1760 200">
               <use xlink:href="#s-text"></use>
           </svg>
 
           <p>Send message to members of the US Senate and House of Representatives</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-sm-3">
           <div class="pull-right">
             <div>
               <a href="/privacy">Privacy Policy</a>

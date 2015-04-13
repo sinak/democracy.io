@@ -42,6 +42,12 @@
 #pick-legislators .whitebox-container {
   padding-bottom: 30px;
   padding-top: 20px;
+  @media (max-width: $screen-xs-max) {
+    padding-bottom: 25px;
+    padding-top: 10px;
+    padding-left:15px;
+    padding-right: 15px;
+  }
 }
 
 /******
@@ -117,11 +123,22 @@ label small {
     padding-left: 0;
   }
 }
+
+
+/******
+ Thanks 
+******/
 #thanks {
   @extend .boxshadow;
   border-radius: 10px;
   background: #fff;
   overflow: hidden;
+
+  @media (max-width: $screen-xs-max) {
+    width: 85%;
+    margin: 0 auto;
+  }
+
   p {
     font-size: 20px;
     text-align: center;  

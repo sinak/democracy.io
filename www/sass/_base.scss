@@ -42,10 +42,20 @@ h1 {
   font-size: 60px;
   text-align: center;
   color: #444444;
+  @media (max-width: $screen-sm-max) {
+    font-size: 50px;
+  }
+  @media (max-width: $screen-xs-max) {
+    font-size: 35px;
+  }
 }
 .header h1 {
   // Appears on first page
   margin-top: 100px;
+
+  @media (max-width: $screen-xs-max) {
+    margin-top: 60px;
+  }
 }
 h1.header {
   // Appears on other pages
@@ -53,6 +63,13 @@ h1.header {
 }
 .boxshadow {
   box-shadow: 0px 2px 7px 0px rgba(100, 100, 100, 0.18);
+}
+.whitebox-container {
+  padding: 27px 30px 34px 30px;
+  
+  @media (max-width: $screen-xs-max) {
+    padding: 17px 10px 14px 10px;
+  }
 }
 .whitebox {
   @extend .boxshadow;
@@ -62,6 +79,11 @@ h1.header {
   margin: 0 auto 90px auto;
   float: none;
 
+  @media (max-width: $screen-xs-max) {
+    margin-bottom:40px;
+    max-width: 95%;
+  }
+
   &::before {
     content: '';
     display: block;
@@ -70,6 +92,7 @@ h1.header {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     background-image: linear-gradient(to right, #FF8900, #FF4127);
+
   }
   label {
     margin-bottom: 11px;
@@ -98,9 +121,6 @@ h1.header {
     margin-bottom: -8px;
     margin-right: 10px;
 }
-.whitebox-container {
-  padding: 27px 30px 34px 30px;
-}
 
 // Logos
 .navbar-brand .text {
@@ -119,8 +139,15 @@ h1.header {
   // margin-top: 50px;
   max-width: 250px;
   margin-top: 0;
-}
 
+  @media (max-width: $screen-xs-max) {
+    width: 90%;
+    max-width: 230px;
+    position:relative;
+    left: 5%;
+    stroke-width: 10;
+  }
+}
 
 .back-button {
   @extend .pull-right;
@@ -182,4 +209,21 @@ label {
   border-color: #ccc;
   color: #aaa;
   opacity: 1;
+}
+
+/*****************
+ Styles specific to mobile view
+ ****************/
+@media (max-width: $screen-xs-max) {
+ #address {
+   .input-group .form-control:first-child {
+    font-size: 14px;
+   }
+   button.btn-orange.btn-lg {
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+   }
+  }
+  .back-button { display: none;}
 }

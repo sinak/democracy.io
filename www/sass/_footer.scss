@@ -7,6 +7,10 @@
   background-color: white;
   padding-top: 30px;
   z-index:-1;
+
+  @media (max-width: $screen-xs-max) {
+    height: 78px;
+  }
 }
 #footer svg {
   width: 200px;

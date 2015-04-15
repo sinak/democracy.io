@@ -11,7 +11,7 @@ var config = require('../config').browserify;
 var bundleLogger = require('../util/bundle_logger');
 var handleErrors = require('../util/handle_errors');
 
-gulp.task('browserify', ['appSettings', 'partials'], function() {
+gulp.task('browserify', function() {
 
   var bundler = browserify({
     // Required watchify args

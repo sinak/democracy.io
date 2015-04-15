@@ -7,9 +7,13 @@
  */
 
 var gulp  = require('gulp');
+var runSequence = require('run-sequence');
+
 var config = require('../config');
 
-gulp.task('watch', ['setWatch', 'browserify', 'browserSync'], function() {
+gulp.task('watch', function() {
   gulp.watch(config.sass.watch, ['css']);
-  gulp.watch(config.partials.paths, ['partials', 'browserify']);
+  gulp.watch(config.partials.paths, function(cb) {
+    runSequence('partials', 'browserify', cb);
+  });
 });

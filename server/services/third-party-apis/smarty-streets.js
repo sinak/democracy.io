@@ -24,6 +24,7 @@ var makeSmartyStreetsUrl = function(baseURL, pathname, params, config) {
 var verifyAddress = function(params, config, cb) {
   var ssURL = makeSmartyStreetsUrl(
     config.API.SMARTY_STREETS.ADDRESS_URL, 'street-address', params, config);
+  console.log(ssURL);
   makeRequest({method: 'GET', url: ssURL, json: true}, cb);
 };
 

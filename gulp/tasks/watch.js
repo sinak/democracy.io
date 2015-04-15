@@ -6,14 +6,14 @@
  *       as a dependency here.
  */
 
-var gulp  = require('gulp');
+var gulp = require('gulp');
 var runSequence = require('run-sequence');
 
 var config = require('../config');
 
 gulp.task('watch', function() {
   gulp.watch(config.sass.watch, ['css']);
-  gulp.watch(config.partials.paths, function(cb) {
-    runSequence('partials', 'browserify', cb);
+  gulp.watch(config.partials.paths, function() {
+    runSequence('partials');
   });
 });

@@ -11,6 +11,10 @@ var api = function ($http, dioConfig) {
 
   return {
 
+    makeRelativeAPIURL: function(path) {
+      return helpers.makeRelativeAPIUrl(siteConfig.API_BASE_URL, siteConfig.API_VERSION, path);
+    },
+
     makeAPICall: function(opts, cb) {
       $http(opts)
         .success(function(data) {
@@ -21,6 +25,16 @@ var api = function ($http, dioConfig) {
         });
     },
 
+    verifyAddress: function(address, cb) {
+      var opts = {
+        url: this.makeRelativeAPIURL('location/verify'),
+        method: 'GET',
+        params: {address: address}
+      };
+
+      this.makeAPICall(opts, cb);
+    },
+
     /**
      *
      * @param lat
@@ -28,8 +42,7 @@ var api = function ($http, dioConfig) {
      */
     findLegislatorsByLatLng: function(lat, lng, cb) {
       var opts = {
-        url: helpers.makeRelativeAPIUrl(
-          siteConfig.API_BASE_URL, siteConfig.API_VERSION, '/legislators/findByLatLng'),
+        url: this.makeRelativeAPIURL('/legislators/findByLatLng'),
         method: 'GET',
         params: {latitude: lat, longitude: lng},
         modelClass: models.Legislator
@@ -40,8 +53,7 @@ var api = function ($http, dioConfig) {
 
     legislatorFormElementsByBioguideIds: function(bioguideIds, cb) {
       var opts = {
-        url: helpers.makeRelativeAPIUrl(
-          siteConfig.API_BASE_URL, siteConfig.API_VERSION, '/formElements/findByLegislatorBioguideIds'),
+        url: this.makeRelativeAPIURL('/formElements/findByLegislatorBioguideIds'),
         method: 'GET',
         params: {bioguideIds: bioguideIds},
         modelClass: models.LegislatorFormElements

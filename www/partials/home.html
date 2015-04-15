@@ -4,32 +4,52 @@
   <div id="address" class="whitebox col-sm-11 col-md-8 col-lg-7">
     <!-- <a class="back-button" href="#">Go back</a> -->
     <div class="whitebox-container">
-      <!-- TODO: pressing enter on the input field doesn't submit. -->
-      <label for="inputAddress">Enter your address:</label>
-      <div class="input-group">
-        <div angucomplete-alt
-             id="address-suggestions"
-             placeholder="1600 Pennsylvania Ave, Washington DC, 20500"
-             pause="400"
-             selected-object="data.address"
-             title-field="text"
-             remote-url="/api/1/location/suggest?address="
-             input-class="form-control input-lg">
-        </div>
-        <span class="input-group-btn">
-          <button type="submit"
-                  ng-disabled="data.invalidGeocode"
-                  class="btn btn-lg btn-orange"
-                  ng-click="submit(data.geocode.geometry.location)">
-            Submit
-          </button>
-        </span>
-      </div>
+      <label>Enter your address:</label>
 
-      <div class="alert alert-danger"
-           ng-show="data.invalidGeocode && !data.addressPristine">
-        No Address Found
-      </div>
+        <form name="addressForm" ng-controller="AddressFormController">
+          <div class="input-group">
+            <input type="text"
+                   name="address"
+                   autocomplete="street-address"
+                   ng-required="true"
+                   ng-pattern="patterns.address"
+                   ng-model="addressData.address"
+                   class="form-control input-lg"
+                   placeholder="1600 Pennsylvania Ave">
+            <input type="text"
+                   name="city"
+                   autocomplete="address-level2"
+                   ng-required="false"
+                   ng-pattern="patterns.city"
+                   ng-model="addressData.city"
+                   class="form-control input-lg"
+                   placeholder="Washington DC">
+            <input type="tel"
+                   name="postal"
+                   autocomplete="postal-code"
+                   ng-required="true"
+                   ng-pattern="patterns.postal"
+                   ng-model="addressData.postal"
+                   class="form-control input-lg"
+                   placeholder="20500">
+          </div>
+
+          <span class="input-group-btn">
+            <button type="submit"
+                    ng-disabled="!addressForm.$valid"
+                    class="btn btn-lg btn-orange"
+                    ng-click="validateAddress()">
+              Submit
+            </button>
+          </span>
+
+          <div class="alert alert-danger"
+               ng-show="data.invalidGeocode && !addressForm.$pristine">
+            No Address Found
+          </div>
+
+        </form>
+
     </div>
   </div>
 </div>

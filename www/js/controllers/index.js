@@ -1,10 +1,11 @@
 // TODO(leah): Could just use require-dir to figure this stuff out.
 
 module.exports = {
-  SendMessageController: require('./send-message'),
   AboutController: require('./about'),
+  AddressFormController: require('./address-form'),
   HomeController: require('./home'),
-  MessageFormController: require('./message_form'),
   LegislatorPickerController: require('./legislator_picker'),
+  MessageFormController: require('./message_form'),
+  SendMessageController: require('./send-message'),
   ThanksController: require('./thanks')
 };

@@ -167,41 +167,6 @@
                 }
             }
         },
-        "/location/suggest": {
-            "get": {
-                "summary": "Retrieves a list of autocomplete suggestions for a partial address.",
-                "description": "Retrieves autocomplete suggestions for a partial address from SmartyStreets, using the client IP address to bias the search via a geoip-lite lookup.",
-                "parameters": [
-                    {
-                        "name": "address",
-                        "in": "query",
-                        "description": "The partial address to fetch suggestions for.",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "tags": [
-                    "Location"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "An array of AddressSuggestion objects matching the partial address.",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/AddressSuggestion"
-                            }
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
         "/location/verify": {
             "get": {
                 "summary": "Verifies the supplied address and returns its canonical representation.",
@@ -212,20 +177,6 @@
                         "in": "query",
                         "description": "The address to verify.",
                         "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "city",
-                        "in": "query",
-                        "description": "The name of the city the address is located in.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "state",
-                        "in": "query",
-                        "description": "The two letter code for the state the address is located in. It's unclear if SmartyStreets adheres to a specific ISO standard for this, so consider it to be the conventional form.",
-                        "required": false,
                         "type": "string"
                     }
                 ],
@@ -325,27 +276,6 @@
                 "optionsHash": {
                     "type": "object",
                     "description": "An object describing the options this field can take and the corresponding value for each option."
-                }
-            }
-        },
-        "AddressSuggestion": {
-            "description": "Location object describing a suggested address.",
-            "properties": {
-                "text": {
-                    "type": "string",
-                    "description": "The full address string for the suggestion."
-                },
-                "streetLine": {
-                    "type": "string",
-                    "description": "The street line, e.g. 123 Main Street, for the suggestion."
-                },
-                "city": {
-                    "type": "string",
-                    "description": "The city the address suggestion is located in."
-                },
-                "state": {
-                    "type": "string",
-                    "description": "The US state the address suggestion is located in."
                 }
             }
         },

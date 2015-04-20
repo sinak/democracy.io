@@ -141,13 +141,14 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
     //grab different topic options
     var topicOptions = [];
 
-    map($scope.legislatorsFormElements, function(legislatorForm){
+    forEach($scope.legislatorsFormElements, function(legislatorForm){
       var newOptions = findWhere(legislatorForm.formElements, {'value': '$TOPIC'});
 
       if (!angular.isUndefined(newOptions)){
         topicOptions.push({
           bio_id: legislatorForm.bioguideId,
-          options: newOptions.optionsHash
+          options: newOptions.optionsHash,
+          selected: ''
         });
       } 
       
@@ -156,15 +157,17 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
     console.log('topic options:', topicOptions)
   };
 
-  var prepareFromSubmission = function(){
+  var prepareFormSubmission = function(){
     $scope.formSubmissions = [];
     $scope.formSubmissions = map($scope.legislators, function(legislator){
       var legislatorSubmission = {
         "bio_id": legislator.bioguideId,
-        "fields": {
-
-        }
+        "fields": {}
       };
+
+      legislatorSubmission.fields.$NAME_PREFIX = $scope.formData.$NAME_PREFIX;
+      legislatorSubmission.fields.$NAME_FIRST = $scope.formData.$NAME_FIRST;
+      legislatorSubmission.fields.$NAME_LAST = $scope.formData.$NAME_LAST;
 
       legislatorSubmission = customizeGreetings(legislatorSubmission, legislator.lastName);
 
@@ -173,7 +176,7 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
   };
 
   var customizeGreetings = function(submission, lastName){
-    var greeting = "Dear " + lastName + ", \n" //TODO - grab rep name and check new line
+    var greeting = "Dear " + lastName + ", \n";
 
     submission.fields.message = greeting + submission.fields.message;
 
@@ -184,7 +187,7 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
     
     //create JSON form submission object
     $scope.submitted = true;
-    $scope.formSubmissions = prepareFromSubmission();
+    $scope.formSubmissions = prepareFormSubmission();
 
     if ($scope.joinEmailList) {
       // TODO add to eff email list

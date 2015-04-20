@@ -37,7 +37,7 @@
       CAPTCHA!
     </div>
 
-    <form name="messageForm" class="whitebox-container" ng-show="legislatorsFormElements && !submitted">
+    <form name="messageForm" class="whitebox-container" ng-show="legislatorsFormElements && !submitted" novalidate>
 
       <div class="row">
         <div class="col-md-12" id="to-field">
@@ -54,7 +54,7 @@
       <div class="row">
         <div class="form-group col-sm-8 col-md-9">
           <label for="inputSubject">Subject</label>
-          <input type="text" class="form-control" id="inputSubject" ng-model="formData.subject" required>
+          <input type="text" class="form-control" id="inputSubject" ng-model="formData.subject" ng-required='true'>
         </div>
       </div>
 
@@ -62,7 +62,7 @@
         <div class="form-group col-sm-8 col-md-9">
         <label for="inputMessage">Message</label>
         <div id="textarea-container">
-          <textarea form="messageForm" id="inputMessage" class="form-control" cols="30" rows="10" ng-model="formData.message" required></textarea>
+          <textarea form="messageForm" id="inputMessage" class="form-control" cols="30" rows="10" ng-model="formData.message" ng-required='true'></textarea>
         </div>
         </div>
         <div class="col-sm-4 col-md-3 hidden-xs">
@@ -81,19 +81,19 @@
       <div class="row">
         <div class="col-sm-4 col-md-3 form-group">
           <label for="inputFirstName">First name</label>
-          <input type="text" class="form-control" id="inputFirstName" ng-model="formData.firstName" required>
+          <input type="text" class="form-control" id="inputFirstName" ng-model="formData.firstName" ng-required='true'>
         </div>
 
         <div class="col-sm-4 col-md-3 form-group">
           <label for="inputLastName">Last name</label>
-          <input type="text" class="form-control" id="inputLastName" ng-model="formData.lastName" required>
+          <input type="text" class="form-control" id="inputLastName" ng-model="formData.lastName" ng-required='true'>
         </div>
       </div>
 
       <div class="row">
         <div class="col-sm-4 col-md-3 form-group">
           <label for="inputPrefix">Prefix</label>
-          <select form="messageForm" class="form-control" id="inputPrefix" ng-model="formData.prefix" required>
+          <select form="messageForm" class="form-control" id="inputPrefix" ng-model="formData.prefix" ng-required='true'>
             <option value="Mr">Mr</option>
             <option value="Ms">Ms</option>
             <option value="Mrs">Mrs</option>
@@ -103,14 +103,14 @@
 
         <div class="col-sm-4 col-md-3 form-group">
           <label for="inputPhoneNumber">Phone number</label>
-          <input type="text" class="form-control" id="inputPhoneNumber" ng-model="formData.phoneNumber" required>
+          <input type="text" class="form-control" id="inputPhoneNumber" ng-model="formData.phoneNumber" ng-required='true'>
         </div>
       </div>
 
       <div class="row">
         <div class="form-group col-sm-4 col-md-6">
           <label for="inputTopic">Topic</label>
-          <select form="messageForm" class="form-control" id="inputTopic" ng-model="formData.topic" required>
+          <select form="messageForm" class="form-control" id="inputTopic" ng-model="formData.topic" ng-required='true'>
             <option ng-repeat="topic in topics" value="[[topic]]">[[topic]]</option>
           </select>
         </div>
@@ -119,7 +119,7 @@
       <div class="row">
         <div class="col-md-6 form-group">
           <label for="inputEmail">Email Address</label>
-          <input type="email" class="form-control" id="inputEmail" ng-model="formData.email" required>
+          <input type="email" class="form-control" id="inputEmail" ng-model="formData.email" ng-required='true'>
         </div>
       </div>
 
@@ -134,7 +134,7 @@
       <button type="submit"
               class="btn btn-orange btn-lg"
               ng-click="send()"
-              ng-disabled="messageFrom.$invalid">
+              ng-disabled="messageForm.$invalid">
         Send!
       </button>
     </form>

@@ -84,14 +84,14 @@
           <input type="text" class="form-control" id="inputFirstName" ng-model="formData.firstName" required>
         </div>
 
-        <div class="col-sm-4 form-group">
+        <div class="col-sm-4 col-md-3 form-group">
           <label for="inputLastName">Last name</label>
           <input type="text" class="form-control" id="inputLastName" ng-model="formData.lastName" required>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-4 form-group">
+        <div class="col-sm-4 col-md-3 form-group">
           <label for="inputPrefix">Prefix</label>
           <select form="messageForm" class="form-control" id="inputPrefix" ng-model="formData.prefix" required>
             <option value="Mr">Mr</option>
@@ -101,7 +101,7 @@
           </select>
         </div>
 
-        <div class="col-sm-4 form-group">
+        <div class="col-sm-4 col-md-3 form-group">
           <label for="inputPhoneNumber">Phone number</label>
           <input type="text" class="form-control" id="inputPhoneNumber" ng-model="formData.phoneNumber" required>
         </div>
@@ -126,7 +126,7 @@
       <div class="row">
         <div class="form-group col-md-12 checkbox emailSignup" >
           <p>Democracy.io is a free service provided by the <a href="https://eff.org">Electronic Frontier Foundation</a>, a 501(c)(3) non-profit dedicated to fighting for your rights in the digital age.</p>
-          <input type="checkbox" id="emailSignup" unchecked> 
+          <input type="checkbox" id="emailSignup" model="joinEmailList" unchecked> 
           <label for="emailSignup">Want to stay up to date with the EFF and our work? Check this box to sign up for email updates (<a href="https://www.eff.org/policy">privacy policy</a>).</label>
         </div>
       </div>

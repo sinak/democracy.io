@@ -6,11 +6,9 @@ var isEmpty = require('lodash.isEmpty');
 var map = require('lodash.map');
 
 
-var LegislatorPickerController = function($scope, $location, $timeout, dioLegislatorData, dioApi, dioPageNav) {
+var LegislatorPickerController = function($scope, $location, $timeout, dioLegislatorData, dioApi) {
 
   // TODO(leah): Wire this on to the rootscope?
-  $scope.dioPageNav = dioPageNav;
-
   $scope.loadingDelay = true;
   
   $timeout(function(){
@@ -28,7 +26,7 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioLegisl
       
       dioApi.findLegislatorsByLatLng(params.lat, params.lng, cb);
 		} else {
-			$scope.dioPageNav.back();
+			// TODO send back a page;
 		}
   };
 

@@ -7,17 +7,16 @@ var map = require('lodash.map');
 var forEach = require('lodash.forEach');
 var findWhere = require('lodash.findWhere')
 
-var MessageFormController = function($scope, $location, $timeout, dioLegislatorData, dioApi, dioPageNav) {
+var MessageFormController = function($scope, $location, $timeout, dioLegislatorData, dioApi) {
 
   $scope.loadingDelay = true;
   $scope.submitted = false;
+  $scope.joinEmailList = false;
   
   $timeout(function(){
       $scope.loadingDelay = false;
     },
     350);
-
-  $scope.dioPageNav = dioPageNav;
 
 	//TODO fill out list of topics
 	$scope.topics = [
@@ -79,7 +78,7 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
       };
       dioApi.findLegislatorsByLatLng(params.lat, params.lng, cb);
     } else {
-      $scope.dioPageNav.back();
+      // send back
     }
   };
 
@@ -108,7 +107,7 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
 
       // END TEMPORARY STUB
 
-      //$scope.dioPageNav.back(); REVERT
+      // go back code
     }
   };
 
@@ -186,6 +185,11 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
     //create JSON form submission object
     $scope.submitted = true;
     $scope.formSubmissions = prepareFromSubmission();
+
+    if ($scope.joinEmailList) {
+      // TODO add to eff email list
+      // $scope.formData.email
+    }
 
     if ($scope.hasCaptcha){
       // TODO

@@ -25,7 +25,9 @@ var get = function (req, res) {
           inputId: rawAddress['input_id'],
           inputIndex: rawAddress['input_index'],
           address: address,
-          addressComponents: changeCaseKeys(rawAddress['components'], 'camelize')
+          longitude: rawAddress['metadata']['longitude'],
+          latitude: rawAddress['metadata']['latitude'],
+          components: changeCaseKeys(rawAddress['components'], 'camelize')
         });
       });
       res.json(modelResponse);

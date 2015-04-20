@@ -1,5 +1,5 @@
 /**
- * Top level controller for the democracy.io app.
+ * Controller to manage the address input form.
  */
 
 var isEmpty = require('lodash.isEmpty');
@@ -28,7 +28,11 @@ var AddressFormController = function($scope, dioApi) {
 
   $scope.verifyAddress = function(address) {
     var cb = function(canonicalAddress) {
-      console.log(canonicalAddress);
+      //      dioLegislatorData.clearData();
+      //      $location
+      //          .path('/location')
+      //          .search({lat: lat, lng: lng});
+
       $scope.data.verifyingAddress = false;
     };
 

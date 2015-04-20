@@ -15,8 +15,10 @@ function CanonicalAddress(options) {
   this.inputId = options.inputId;
   this.inputIndex = options.inputIndex;
   this.address = options.address;
+  this.longitude = options.longitude;
+  this.latitude = options.latitude;
 
-  this.components = new AddressComponents(options.addressComponents);
+  this.components = new AddressComponents(options.components);
 }
 
 module.exports = CanonicalAddress;

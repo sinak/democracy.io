@@ -3,7 +3,6 @@
 module.exports = {
   AboutController: require('./about'),
   AddressFormController: require('./address-form'),
-  HomeController: require('./home'),
   LegislatorPickerController: require('./legislator_picker'),
   MessageFormController: require('./message_form'),
   SendMessageController: require('./send-message'),

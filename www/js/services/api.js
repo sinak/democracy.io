@@ -29,7 +29,8 @@ var api = function ($http, dioConfig) {
       var opts = {
         url: this.makeRelativeAPIURL('location/verify'),
         method: 'GET',
-        params: {address: address}
+        params: {address: address},
+        modelClass: models.CanonicalAddress
       };
 
       this.makeAPICall(opts, cb);

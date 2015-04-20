@@ -7,7 +7,6 @@ var configureRoutes = function($routeProvider) {
 
   $routeProvider
     .when('/', {
-      controller: 'HomeController',
       templateUrl: '/partials/home.html',
       title: 'Write to your representatives'
     })

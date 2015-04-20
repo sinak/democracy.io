@@ -165,10 +165,31 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
         "fields": {}
       };
 
-      legislatorSubmission.fields.$NAME_PREFIX = $scope.formData.$NAME_PREFIX;
-      legislatorSubmission.fields.$NAME_FIRST = $scope.formData.$NAME_FIRST;
-      legislatorSubmission.fields.$NAME_LAST = $scope.formData.$NAME_LAST;
+      legislatorSubmission.fields.$NAME_PREFIX = $scope.formData.prefix;
+      legislatorSubmission.fields.$NAME_FIRST = $scope.formData.firstName;
+      legislatorSubmission.fields.$NAME_LAST = $scope.formData.lastName;
+      legislatorSubmission.fields.$NAME_FULL = $scope.formData.firstName + " " + $scope.fromData.lastName;
+      legislatorSubmission.fields.$ADDRESS_STREET = ''; //TODO
 
+      /*
+        $ADDRESS_CITY
+        $ADDRESS_STATE_POSTAL_ABBREV
+        $ADDRESS_STATE_FULL
+        $ADDRESS_COUNTY
+        $ADDRESS_ZIP5
+        $ADDRESS_ZIP4
+        $ADDRESS_ZIP_PLUS_4
+        $PHONE
+        $PHONE_PARENTHESES
+        $EMAIL
+        $TOPIC
+        $SUBJECT
+        $MESSAGE
+        $CAMPAIGN_UUID
+        $ORG_URL
+        $ORG_NAME
+      */
+      
       legislatorSubmission = customizeGreetings(legislatorSubmission, legislator.lastName);
 
       return legislatorSubmission;

@@ -291,19 +291,10 @@
                     "type": "integer",
                     "description": "The order in which this address was submitted with the others (0 if alone)."
                 },
-                "candidateIndex": {
-                    "type": "integer",
-                    "description": "An input address can match multiple valid addresses. This ties the candidates to the input index. For example, \"1 Rosedale Street Baltimore Maryland\" will return multiple candidates.)"
-                },
-                "deliveryLineOne": {
+                "address": {
                     "type": "string",
                     "maxLength": 50,
                     "description": "Contains the first delivery line (usually the street address). This can include any of Primary Number, Street Name, Street Predirection, Street Postdirection, Street Suffix, Secondary Number, Secondary Designator, PMB Designator or PMB Number."
-                },
-                "lastLine": {
-                    "type": "string",
-                    "maxLength": 50,
-                    "description": "City, state, and ZIP Code combined."
                 },
                 "components": {
                     "type": "object",
@@ -339,7 +330,7 @@
                     "maxLength": 16,
                     "description": "Abbreviated value describing the street, e.g. St, Ave, Blvd."
                 },
-                "secondardyNumber": {
+                "secondaryNumber": {
                     "type": "string",
                     "maxLength": 32,
                     "description": "Apartment or suite number, if any."

@@ -107,11 +107,11 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" ng-repeat="legislator in topicOptions">
         <div class="form-group col-sm-4 col-md-6">
-          <label for="inputTopic">Topic</label>
-          <select form="messageForm" class="form-control" id="inputTopic" ng-model="formData.topic" ng-required='true'>
-            <option ng-repeat="topic in topics" value="[[topic]]">[[topic]]</option>
+          <label for="inputTopic">[[legislator.name]]'s Topic</label>
+          <select form="messageForm" class="form-control" id="inputTopic" ng-model="legislator.selected" ng-required='true'>
+            <option ng-repeat="topic in legislator.options" value="[[topic]]">[[topic]]</option>
           </select>
         </div>
       </div>

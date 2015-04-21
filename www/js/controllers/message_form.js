@@ -25,7 +25,7 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
 	];
 
   $scope.formData = {
-    '$NAME_FIRST': {
+    /*'$NAME_FIRST': {
       'label': 'First Name',
       'maxlength': null,
       'value': '',
@@ -66,7 +66,7 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
       'maxlength': 5,
       'value': '',
       'options_hash': null
-    }
+    }*/
   };
   $scope.formSubmissions = [];
 
@@ -138,23 +138,29 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
   };
 
   $scope.createFormFields = function (){
+    // check for county TODO
+
     //grab different topic options
-    var topicOptions = [];
+    $scope.topicOptions = [];
 
     forEach($scope.legislatorsFormElements, function(legislatorForm){
       var newOptions = findWhere(legislatorForm.formElements, {'value': '$TOPIC'});
 
       if (!angular.isUndefined(newOptions)){
-        topicOptions.push({
+        var legislatorDetails = findWhere($scope.legislators, {'bioguideId': legislatorForm.bioguideId});
+        var optionName = legislatorDetails.title + ". " + legislatorDetails.lastName;
+
+        $scope.topicOptions.push({
           bio_id: legislatorForm.bioguideId,
-          options: newOptions.optionsHash,
+          name: optionName,
+          options: Object.keys(newOptions.optionsHash),
           selected: ''
         });
       } 
       
     });
 
-    console.log('topic options:', topicOptions)
+    console.log('topic options:', $scope.topicOptions)
   };
 
   var prepareFormSubmission = function(){
@@ -170,38 +176,29 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
       legislatorSubmission.fields.$NAME_LAST = $scope.formData.lastName;
       legislatorSubmission.fields.$NAME_FULL = $scope.formData.firstName + " " + $scope.fromData.lastName;
       legislatorSubmission.fields.$ADDRESS_STREET = ''; //TODO
-
-      /*
-        $ADDRESS_CITY
-        $ADDRESS_STATE_POSTAL_ABBREV
-        $ADDRESS_STATE_FULL
-        $ADDRESS_COUNTY
-        $ADDRESS_ZIP5
-        $ADDRESS_ZIP4
-        $ADDRESS_ZIP_PLUS_4
-        $PHONE
-        $PHONE_PARENTHESES
-        $EMAIL
-        $TOPIC
-        $SUBJECT
-        $MESSAGE
-        $CAMPAIGN_UUID
-        $ORG_URL
-        $ORG_NAME
-      */
+      legislatorSubmission.fields.$ADDRESS_CITY = ''; //TODO
+      legislatorSubmission.fields.$ADDRESS_STATE_POSTAL_ABBREV = ''; //TODO
+      legislatorSubmission.fields.$ADDRESS_STATE_FULL = ''; //TODO
+      legislatorSubmission.fields.$ADDRESS_COUNTY = ''; //TODO
+      legislatorSubmission.fields.$ADDRESS_ZIP5 = ''; //TODO
+      legislatorSubmission.fields.$ADDRESS_ZIP4 = ''; //TODO
+      legislatorSubmission.fields.$ADDRESS_ZIP_PLUS_4 = ''; //TODO
+      legislatorSubmission.fields.$PHONE = ''; //TODO
+      legislatorSubmission.fields.$PHONE_PARENTHESES = ''; //TODO
+      legislatorSubmission.fields.$EMAIL = $scope.formData.email;
+      legislatorSubmission.fields.$TOPIC = ''; //TODO
+      legislatorSubmission.fields.$SUBJECT = $scope.formData.subject;
+      legislatorSubmission.fields.$MESSAGE = $scope.formData.message;
+      legislatorSubmission.fields.$CAMPAIGN_UUID = ''; //TODO
+      legislatorSubmission.fields.$ORG_URL = ''; //TODO
+      legislatorSubmission.fields.$ORG_NAME = ''; //TODO
       
-      legislatorSubmission = customizeGreetings(legislatorSubmission, legislator.lastName);
+      //customize greeting
+      var greeting = "Dear " + legislator.title + " " + legislator.lastName + ", \n";
+      legislatorSubmission.fields.message = greeting + submission.fields.message;
 
       return legislatorSubmission;
     })
-  };
-
-  var customizeGreetings = function(submission, lastName){
-    var greeting = "Dear " + lastName + ", \n";
-
-    submission.fields.message = greeting + submission.fields.message;
-
-    return submission;
   };
 
 	$scope.send = function(repData){

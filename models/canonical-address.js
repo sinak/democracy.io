@@ -15,6 +15,7 @@ function CanonicalAddress(options) {
   this.inputId = options.inputId;
   this.inputIndex = options.inputIndex;
   this.address = options.address;
+  this.county = options.county;
   this.longitude = options.longitude;
   this.latitude = options.latitude;
 

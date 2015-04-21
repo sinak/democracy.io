@@ -2,70 +2,53 @@
  *
  */
 
-var isEmpty = require('lodash.isEmpty');
-var map = require('lodash.map');
-var forEach = require('lodash.forEach');
 var findWhere = require('lodash.findWhere')
+var forEach = require('lodash.forEach');
+var isEmpty = require('lodash.isEmpty');
+var keys = require('lodash.keys');
+var map = require('lodash.map');
+var pick = require('lodash.pick');
 
-var MessageFormController = function($scope, $location, $timeout, dioLegislatorData, dioApi) {
+
+var MessageFormController = function($scope, $location, $timeout, dioData, dioApi) {
 
   $scope.loadingDelay = true;
   $scope.submitted = false;
   $scope.joinEmailList = false;
   
-  $timeout(function(){
-      $scope.loadingDelay = false;
-    },
-    350);
+  $timeout(function() {
+    $scope.loadingDelay = false;
+  }, 350);
 
+  /**
+   *
+   * @type {{}}
+   */
   $scope.formData = {};
+
+  /**
+   *
+   * @type {Array}
+   */
   $scope.formSubmissions = [];
 
-  var attemptToFetchLegislatorData = function(params) {
-    if (!angular.isUndefined(params.lat) && !angular.isUndefined(params.lng)) {
-      var cb = function(legislators) {
-        dioLegislatorData.setLegislators(legislators);
-        $scope.setLegislators();
+  $scope.fetchLegislatorFormElements = function(bioguideIds) {
+    if (!isEmpty(bioguideIds)) {
+      var cb = function(legislatorsFormElements) {
+        dioData.setLegislatorsFormElements(legislatorsFormElements);
+        $scope.setLocalData();
       };
-      dioApi.findLegislatorsByLatLng(params.lat, params.lng, cb);
+
+      dioApi.legislatorFormElementsByBioguideIds(bioguideIds, cb);
     } else {
-      // send back
+      // TODO(leah): Skip back a page, unless we implement a more generic approach.
     }
   };
 
-  var attemptToFetchLegislatorForm = function(selectedBioguideIds) {
-    var selectedBioguideIds = map(dioLegislatorData.getSelectedLegislators(), function(legislator) {
-      return legislator.bioguideId;
-    });
-
-    if (!isEmpty(selectedBioguideIds)){
-      var cb = function(legislatorsFormElements) {
-        dioLegislatorData.setLegislatorsFormElements(legislatorsFormElements);
-        $scope.setLegislatorForm();
-      };
-
-      dioApi.legislatorFormElementsByBioguideIds(selectedBioguideIds, cb);
-    } else {
-      // TEMPORARY STUB FOR EASIER CODING
-      selectedBioguideIds = ["P000197", "B000711", "F000062"]
-
-      var cb = function(legislatorsFormElements) {
-        dioLegislatorData.setLegislatorsFormElements(legislatorsFormElements);
-        $scope.setLegislatorForm();
-      };
-
-      dioApi.legislatorFormElementsByBioguideIds(selectedBioguideIds, cb);
-
-      // END TEMPORARY STUB
-
-      // go back code
-    }
-  };
-
-  var checkForCaptcha = function(){
+  var checkForCaptcha = function() {
     var hasCaptcha = false;
-    forEach($scope.legislatorsFormElements, function(legislator){
-      forEach(legislator.formElements, function(element){
+    forEach($scope.legislatorsFormElements, function(legislator) {
+      forEach(legislator.formElements, function(element) {
         if (element.value === "$CAPTCHA_SOLUTION") {
           hasCaptcha = true;
         };
@@ -75,25 +58,16 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
     return hasCaptcha;
   };
 
-  $scope.setLegislators = function() {
-    $scope.legislators = dioLegislatorData.getSelectedLegislators();
-    $scope.selectedLegislators = dioLegislatorData.selectedLegislators;
-    console.log('legislators:', $scope.legislators);
-    console.log('selected legislators:', $scope.selectedLegislators);
-  };
-
   $scope.setLegislatorForm = function () {
-    $scope.legislatorsFormElements = dioLegislatorData.getLegislatorsFormElements();
-    console.log('form elements:', $scope.legislatorsFormElements);
     $scope.createFormFields();
   };
 
-  $scope.createFormFields = function (){
+  $scope.createFormFields = function () {
    
     $scope.countyOptions = [];
     $scope.topicOptions = [];
 
-    forEach($scope.legislatorsFormElements, function(legislatorForm){
+    forEach($scope.legislatorsFormElements, function(legislatorForm) {
 
       // Assemble County Options
       var newCountyOptions = findWhere(legislatorForm.formElements, {'value': '$ADDRESS_COUNTY'});
@@ -101,9 +75,9 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
       $scope.formData.county = {
         selected: '',
         options: ''
-      }
+      };
 
-      if (!angular.isUndefined(newCountyOptions)){
+      if (!angular.isUndefined(newCountyOptions)) {
         var countyOptions = newCountyOptions.optionsHash;
 
         //TODO logic for fuzzy matching county
@@ -116,7 +90,7 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
       // Assemble Topic Options
       var newTopicOptions = findWhere(legislatorForm.formElements, {'value': '$TOPIC'});
 
-      if (!angular.isUndefined(newTopicOptions)){
+      if (!angular.isUndefined(newTopicOptions)) {
         var legislatorDetails = findWhere($scope.legislators, {'bioguideId': legislatorForm.bioguideId});
         var optionName = legislatorDetails.title + ". " + legislatorDetails.lastName;
 
@@ -133,9 +107,9 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
     console.log('topic options:', $scope.topicOptions)
   };
 
-  var prepareFormSubmissions = function(){
+  var prepareFormSubmissions = function() {
     $scope.formSubmissions = [];
-    $scope.formSubmissions = map($scope.legislators, function(legislator){
+    $scope.formSubmissions = map($scope.legislators, function(legislator) {
       var legislatorSubmission = {
         "bio_id": legislator.bioguideId,
         "fields": {}
@@ -184,9 +158,9 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
     })
   };
 
-	$scope.send = function(repData){
+	$scope.send = function(repData) {
     
-    //create JSON form submission object
+    // create JSON form submission object
     $scope.submitted = true;
     $scope.formSubmissions = prepareFormSubmissions();
 
@@ -195,13 +169,13 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
       // $scope.formData.email
     }
 
-    var cb = function(data){
+    var cb = function(data) {
       //TODO - hand off to CAPTCHA controller
-    }
+    };
 
     dioApi.submitMessageToReps($scope.formSubmissions, cb);
 
-    if ($scope.hasCaptcha){
+    if ($scope.hasCaptcha) {
       $location.path('/capcha');
     } else {
       
@@ -209,23 +183,21 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
     };
 	};
 
-  //ON PAGE LOAD:
+  // ON PAGE LOAD:
 
-  // check if they started at the beginning and populate legislator data
-  if (isEmpty(dioLegislatorData.legislators) || isEmpty(dioLegislatorData.selectedLegislators)) {
-    attemptToFetchLegislatorData($location.search());
+  $scope.setLocalData = function() {
+    $scope.legislators = dioData.getSelectedLegislators();
+    $scope.bioguideIdsBySelection = dioData.getBioguideIdsBySelection();
+    $scope.legislatorsFormElements = dioData.getLegislatorsFormElements();
+  };
+
+  if (!dioData.hasLegislatorsFormElements()) {
+    var bioguideIds = keys(pick(dioData.getBioguideIdsBySelection(), function(val) {
+      return val;
+    }));
+    $scope.fetchLegislatorFormElements(bioguideIds);
   } else {
-    $scope.setLegislators();
-  }
-
-  var selectedBioguideIds = map(dioLegislatorData.getSelectedLegislators(), function(legislator) {
-      return legislator.bioguideId;
-  });
-
-  if (isEmpty(dioLegislatorData.legislatorsFormElements)) {
-    attemptToFetchLegislatorForm(selectedBioguideIds);
-  } else {
-    $scope.setLegislatorForm();
+    $scope.setLocalData();
   }
 
   $scope.hasCaptcha = checkForCaptcha();

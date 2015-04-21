@@ -10,7 +10,9 @@ var services = require('./services');
 var filters = require('./filters');
 
 var democracyApp = angular.module(
-  'democracyIoApp', ['ngRoute', 'ngCookies', 'ngAnimate', 'angucomplete-alt', 'ngSanitize', 'democracyFilters']);
+  'democracyIoApp',
+  ['ngRoute', 'ngStorage', 'ngAnimate', 'angucomplete-alt', 'ngSanitize', 'democracyFilters']
+);
 
 democracyApp.config(function($provide, $httpProvider, $interpolateProvider) {
   $provide.factory('modelsHttpInterceptor', services.modelsHttpInterceptor);
@@ -36,7 +38,7 @@ democracyApp.directive('dioWriteToThemAnimation', directives.writeToThemAnimatio
 // Require modules that are used but not referenced directly
 require('angular-route');
 require('angular-animate');
-require('angular-cookies');
+require('ng-storage');
 require('angucomplete-alt');
 require('angular-sanitize');
 

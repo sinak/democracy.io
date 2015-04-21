@@ -296,6 +296,11 @@
                     "maxLength": 50,
                     "description": "Contains the first delivery line (usually the street address). This can include any of Primary Number, Street Name, Street Predirection, Street Postdirection, Street Suffix, Secondary Number, Secondary Designator, PMB Designator or PMB Number."
                 },
+                "county": {
+                  "type": "string",
+                  "maxLength": 64,
+                  "description": "The name of the county the address is in"
+                },
                 "latitude": {
                     "type": "number",
                     "format": "double",
@@ -359,6 +364,11 @@
                     "type": "string",
                     "maxLength": 2,
                     "description": "The two-letter state abbreviation."
+                },
+                "stateName": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "description": "The full state or territory name."
                 },
                 "zipcode": {
                     "type": "string",

@@ -6,6 +6,7 @@ var changeCaseKeys = require('change-case-keys');
 var filter = require('lodash.filter');
 var isEmpty = require('lodash.isEmpty');
 var map = require('lodash.map');
+var us = require('us');
 
 var models = require('../../../../models');
 var smartyStreets = require('../../../services/third-party-apis/smarty-streets');
@@ -21,13 +22,18 @@ var get = function (req, res) {
           return !isEmpty(addressBit);
         }).join(', ');
 
+        var components = rawAddress['components'];
+        var usRegion = us.lookup(components['state_abbreviation']);
+        components.stateName = usRegion !== undefined ? usRegion.name : '';
+
         return new models.CanonicalAddress({
           inputId: rawAddress['input_id'],
           inputIndex: rawAddress['input_index'],
           address: address,
           longitude: rawAddress['metadata']['longitude'],
           latitude: rawAddress['metadata']['latitude'],
-          components: changeCaseKeys(rawAddress['components'], 'camelize')
+          county: rawAddress['metadata']['county_name'],
+          components: changeCaseKeys(components, 'camelize')
         });
       });
       res.json(modelResponse);

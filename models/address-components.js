@@ -19,6 +19,7 @@ function AddressComponents(options) {
   this.cityName = options.cityName;
   this.defaultCityName = options.defaultCityName;
   this.stateAbbreviation = options.stateAbbreviation;
+  this.stateName = options.stateName;
   this.zipcode = options.zipcode;
   this.plus4Code = options.plus4Code;
 }

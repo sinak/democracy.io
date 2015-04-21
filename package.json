@@ -68,17 +68,24 @@
     "kraken-js": "^1.0.3",
     "lodash": "^3.3.1",
     "lodash.filter": "^3.1.0",
-    "lodash.foreach": "^3.0.1",
     "lodash.findwhere": "^3.0.1",
+    "lodash.foreach": "^3.0.1",
     "lodash.isarray": "^3.0.1",
     "lodash.isempty": "^3.0.1",
+    "lodash.isnumber": "^3.0.1",
     "lodash.isundefined": "^3.0.0",
+    "lodash.keys": "^3.0.6",
     "lodash.map": "^3.1.0",
+    "lodash.partial": "^3.1.0",
+    "lodash.pick": "^3.1.0",
+    "lodash.zipobject": "^3.0.0",
     "meddleware": "^3.0.0",
     "morgan": "^1.5.1",
+    "ng-storage": "^0.3.0",
     "request": "^2.53.0",
     "shush": "0.0.1",
     "sprintf-js": "^1.0.2",
-    "swaggerize-express": "^3.0.3"
+    "swaggerize-express": "^3.0.3",
+    "us": "^1.0.3"
   }
 }

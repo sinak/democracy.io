@@ -163,7 +163,7 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
     console.log('topic options:', $scope.topicOptions)
   };
 
-  var prepareFormSubmission = function(){
+  var prepareFormSubmissions = function(){
     $scope.formSubmissions = [];
     $scope.formSubmissions = map($scope.legislators, function(legislator){
       var legislatorSubmission = {
@@ -174,7 +174,7 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
       legislatorSubmission.fields.$NAME_PREFIX = $scope.formData.prefix;
       legislatorSubmission.fields.$NAME_FIRST = $scope.formData.firstName;
       legislatorSubmission.fields.$NAME_LAST = $scope.formData.lastName;
-      legislatorSubmission.fields.$NAME_FULL = $scope.formData.firstName + " " + $scope.fromData.lastName;
+      legislatorSubmission.fields.$NAME_FULL = $scope.formData.firstName + " " + $scope.formData.lastName;
       legislatorSubmission.fields.$ADDRESS_STREET = ''; //TODO
       legislatorSubmission.fields.$ADDRESS_CITY = ''; //TODO
       legislatorSubmission.fields.$ADDRESS_STATE_POSTAL_ABBREV = ''; //TODO
@@ -186,17 +186,20 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
       legislatorSubmission.fields.$PHONE = ''; //TODO
       legislatorSubmission.fields.$PHONE_PARENTHESES = ''; //TODO
       legislatorSubmission.fields.$EMAIL = $scope.formData.email;
-      legislatorSubmission.fields.$TOPIC = ''; //TODO
+      
+      var selectedTopic = findWhere($scope.topicOptions ,{'bio_id':legislator.bioguideId})
+      if (!angular.isUndefined(selectedTopic)) {
+        legislatorSubmission.fields.$TOPIC = selectedTopic.selected;
+      } else {
+        legislatorSubmission.fields.$TOPIC = null;
+      }
+
       legislatorSubmission.fields.$SUBJECT = $scope.formData.subject;
-      legislatorSubmission.fields.$MESSAGE = $scope.formData.message;
+      legislatorSubmission.fields.$MESSAGE = "Dear " + legislator.title + " " + legislator.lastName + ", \n" + $scope.formData.message;
       legislatorSubmission.fields.$CAMPAIGN_UUID = ''; //TODO
       legislatorSubmission.fields.$ORG_URL = ''; //TODO
       legislatorSubmission.fields.$ORG_NAME = ''; //TODO
       
-      //customize greeting
-      var greeting = "Dear " + legislator.title + " " + legislator.lastName + ", \n";
-      legislatorSubmission.fields.message = greeting + submission.fields.message;
-
       return legislatorSubmission;
     })
   };
@@ -205,17 +208,19 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
     
     //create JSON form submission object
     $scope.submitted = true;
-    $scope.formSubmissions = prepareFormSubmission();
+    $scope.formSubmissions = prepareFormSubmissions();
 
     if ($scope.joinEmailList) {
       // TODO add to eff email list
       // $scope.formData.email
     }
 
+    dioApi.submitMessageToReps($scope.formSubmissions);
+
     if ($scope.hasCaptcha){
-      // TODO
+      $location.path('/capcha');
     } else {
-      dioApi.submitMessageToReps($scope.formSubmissions);
+      
       $location.path('/thanks');
     };
 	};

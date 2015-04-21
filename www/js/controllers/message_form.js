@@ -18,56 +18,7 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
     },
     350);
 
-	//TODO fill out list of topics
-	$scope.topics = [
-		'Agriculture',
-		'Technology'
-	];
-
-  $scope.formData = {
-    /*'$NAME_FIRST': {
-      'label': 'First Name',
-      'maxlength': null,
-      'value': '',
-      'options_hash': null
-    },
-    '$NAME_LAST': {
-      'label': 'Last Name',
-      'maxlength': null,
-      'value': '',
-      'options_hash': null
-    },
-    '$SUBJECT': {
-      'label': 'Subject',
-      'maxlength': null,
-      'value': '',
-      'options_hash': null
-    },
-    '$MESSAGE': {
-      'label': 'Message',
-      'maxlength': null,
-      'value': '',
-      'options_hash': null
-    },
-    '$PREFIX': {
-      'label': 'Prefix',
-      'maxlength': null,
-      'value': '',
-      'options_hash': null
-    },
-    '$ADDRESS_STREET': {
-      'label': 'Address',
-      'maxlength': null,
-      'value': '',
-      'options_hash': null
-    },
-    '$ADDRESS_ZIP5': {
-      'lable': 'Zip5',
-      'maxlength': 5,
-      'value': '',
-      'options_hash': null
-    }*/
-  };
+  $scope.formData = {};
   $scope.formSubmissions = [];
 
   var attemptToFetchLegislatorData = function(params) {
@@ -138,22 +89,31 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
   };
 
   $scope.createFormFields = function (){
-    // check for county TODO
-
-    //grab different topic options
+   
+    $scope.countyOptions = [];
     $scope.topicOptions = [];
 
     forEach($scope.legislatorsFormElements, function(legislatorForm){
-      var newOptions = findWhere(legislatorForm.formElements, {'value': '$TOPIC'});
 
-      if (!angular.isUndefined(newOptions)){
+      // Assemble County Options
+      var newCountyOptions = findWhere(legislatorForm.formElements, {'value': '$ADDRESS_COUNTY'});
+
+      if (!angular.isUndefined(newCountryOptions)){
+        //TODO logic for fuzzy matching county
+        var countryOptions = newCountryOptions.optionsHash;
+      }
+
+      // Assemble Topic Options
+      var newTopicOptions = findWhere(legislatorForm.formElements, {'value': '$TOPIC'});
+
+      if (!angular.isUndefined(newTopicOptions)){
         var legislatorDetails = findWhere($scope.legislators, {'bioguideId': legislatorForm.bioguideId});
         var optionName = legislatorDetails.title + ". " + legislatorDetails.lastName;
 
         $scope.topicOptions.push({
           bio_id: legislatorForm.bioguideId,
           name: optionName,
-          options: Object.keys(newOptions.optionsHash),
+          options: Object.keys(newTopicOptions.optionsHash),
           selected: ''
         });
       } 

@@ -3,6 +3,7 @@
 module.exports = {
   AboutController: require('./about'),
   AddressFormController: require('./address-form'),
+  CaptchaController: require('./captcha'),
   LegislatorPickerController: require('./legislator_picker'),
   MessageFormController: require('./message_form'),
   SendMessageController: require('./send-message'),

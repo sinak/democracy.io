@@ -73,8 +73,14 @@ var api = function ($http, dioConfig) {
     /**
      *
      */
-    submitCaptchaResponse: function() {
+    submitCaptchaResponse: function(uid, answer, cb) {
+      var opts = {
+        url: this.makeRelativeAPIURL(''), //TODO
+        method: 'POST',
+        params: {answer: answer, uid: uid},
+      };
 
+      //this.makeAPICall(opts, cb);
     }
 
   };

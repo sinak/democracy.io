@@ -20,6 +20,11 @@ var configureRoutes = function($routeProvider) {
       templateUrl: '/partials/message_form.html',
       title: 'Write your letter'
     })
+    .when('/captcha', {
+      controller: 'CaptchaController',
+      templateUrl: '/partials/captcha.html',
+      title: 'Fill out the captcha'
+    })
     .when('/thanks', {
       controller: '',
       templateUrl: '/partials/thanks.html',

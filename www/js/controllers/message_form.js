@@ -98,9 +98,19 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
       // Assemble County Options
       var newCountyOptions = findWhere(legislatorForm.formElements, {'value': '$ADDRESS_COUNTY'});
 
-      if (!angular.isUndefined(newCountryOptions)){
+      $scope.formData.county = {
+        selected: '',
+        options: ''
+      }
+
+      if (!angular.isUndefined(newCountyOptions)){
+        var countyOptions = newCountyOptions.optionsHash;
+
         //TODO logic for fuzzy matching county
-        var countryOptions = newCountryOptions.optionsHash;
+
+        if (!$scope.formData.county.selected) {
+          $scope.formData.county.options = countyOptions;
+        }
       }
 
       // Assemble Topic Options
@@ -139,7 +149,7 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
       legislatorSubmission.fields.$ADDRESS_CITY = ''; //TODO
       legislatorSubmission.fields.$ADDRESS_STATE_POSTAL_ABBREV = ''; //TODO
       legislatorSubmission.fields.$ADDRESS_STATE_FULL = ''; //TODO
-      legislatorSubmission.fields.$ADDRESS_COUNTY = ''; //TODO
+      legislatorSubmission.fields.$ADDRESS_COUNTY = $scope.formData.county.selected;
       legislatorSubmission.fields.$ADDRESS_ZIP5 = ''; //TODO
       legislatorSubmission.fields.$ADDRESS_ZIP4 = ''; //TODO
       legislatorSubmission.fields.$ADDRESS_ZIP_PLUS_4 = ''; //TODO

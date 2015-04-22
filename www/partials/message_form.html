@@ -103,6 +103,15 @@
         </div>
       </div>
 
+      <div class="row" ng-if="formData.county.options">
+        <div class="form-group col-sm-4 col-md-6">
+          <label for="inputCounty">County</label>
+          <select form="messageForm" class="form-control" id="inputCounty" ng-model="formData.county.selected" ng-required='true'>
+            <option ng-repeat="county in formData.county.options" value="[[county]]">[[county]]</option>
+          </select>
+        </div>
+      </div>
+
       <div class="row" ng-repeat="legislator in topicOptions">
         <div class="form-group col-sm-4 col-md-6">
           <label for="inputTopic">[[legislator.name]]'s Topic</label>

@@ -4,6 +4,7 @@
 
 var helpers = require('../helpers/api_helpers');
 var models = require('../../../models');
+var forEach = require('lodash.forEach');
 
 var api = function ($http, dioConfig) {
 
@@ -66,8 +67,10 @@ var api = function ($http, dioConfig) {
     /**
      *
      */
-    submitMessageToReps: function() {
-
+    submitMessageToReps: function(submissions, cb) {
+      forEach(submissions, function(submission){
+        // TODO, API Submission
+      })
     },
 
     /**

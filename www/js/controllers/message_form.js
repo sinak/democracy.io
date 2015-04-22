@@ -185,7 +185,11 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
       // $scope.formData.email
     }
 
-    dioApi.submitMessageToReps($scope.formSubmissions);
+    var cb = function(data){
+      //TODO - hand off to CAPTCHA controller
+    }
+
+    dioApi.submitMessageToReps($scope.formSubmissions, cb);
 
     if ($scope.hasCaptcha){
       $location.path('/capcha');

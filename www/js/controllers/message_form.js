@@ -153,13 +153,23 @@ var MessageFormController = function($scope, $location, $timeout, dioLegislatorD
       legislatorSubmission.fields.$ADDRESS_ZIP5 = ''; //TODO
       legislatorSubmission.fields.$ADDRESS_ZIP4 = ''; //TODO
       legislatorSubmission.fields.$ADDRESS_ZIP_PLUS_4 = ''; //TODO
-      legislatorSubmission.fields.$PHONE = ''; //TODO
-      legislatorSubmission.fields.$PHONE_PARENTHESES = ''; //TODO
+      
+
+      var phoneString = $scope.formData.phoneNumber.toString();
+      var hyphenatedPhone = phoneString.slice(0,3) + "-" + phoneString.slice(3,6) + "-" + phoneString.slice(6);
+      var parensPhone = "(" + phoneString.slice(0,3) + ") " + phoneString.slice(3,6) + "-" + phoneString.slice(6);
+      legislatorSubmission.fields.$PHONE = hyphenatedPhone;
+      legislatorSubmission.fields.$PHONE_PARENTHESES = parensPhone;
+
       legislatorSubmission.fields.$EMAIL = $scope.formData.email;
       
-      var selectedTopic = findWhere($scope.topicOptions ,{'bio_id':legislator.bioguideId})
+      var selectedTopic = findWhere($scope.topicOptions, {'bio_id':legislator.bioguideId});
       if (!angular.isUndefined(selectedTopic)) {
-        legislatorSubmission.fields.$TOPIC = selectedTopic.selected;
+        var legislatorForm = findWhere($scope.legislatorsFormElements, {'bioguideId': legislator.bioguideId});
+        var topicsList = findWhere(legislatorForm.formElements, {'value:': '$TOPIC'});
+        var topicValue = topicsList.optionsHash[selectedTopic.selected];
+
+        legislatorSubmission.fields.$TOPIC = topicValue;
       } else {
         legislatorSubmission.fields.$TOPIC = null;
       }

@@ -99,7 +99,14 @@
 
         <div class="col-sm-4 col-md-3 form-group">
           <label for="inputPhoneNumber">Phone number</label>
-          <input type="text" class="form-control" id="inputPhoneNumber" ng-model="formData.phoneNumber" ng-required='true'>
+          <input type="number"
+                 class="form-control" 
+                 id="inputPhoneNumber" 
+                 ng-model="formData.phoneNumber" 
+                 ng-required='true'
+                 min="0"
+                 ng-minlength="10"
+                 ng-maxlength="10">
         </div>
       </div>
 

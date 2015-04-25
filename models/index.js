@@ -2,7 +2,7 @@ module.exports = {
   AddressComponents: require('./address-components'),
   CanonicalAddress: require('./canonical-address'),
   Error: require('./error'),
-  FormElement: require('./form_element'),
+  FormElement: require('./form-element'),
   Legislator: require('./legislator'),
-  LegislatorFormElements: require('./legislator_form_elements')
+  LegislatorFormElements: require('./legislator-form-elements')
 };

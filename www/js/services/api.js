@@ -53,7 +53,7 @@ var api = function ($http, dioConfig) {
       this.makeAPICall(opts, cb);
     },
 
-    legislatorFormElementsByBioguideIds: function(bioguideIds, cb) {
+    legislatorFormElemsByBioguideIds: function(bioguideIds, cb) {
       var opts = {
         url: this.makeRelativeAPIURL('/formElements/findByLegislatorBioguideIds'),
         method: 'GET',

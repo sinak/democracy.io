@@ -15,7 +15,7 @@ var writeToThemAnimation = function($timeout) {
       initialDelay: '@',  // The initial delay before starting message animation
       showFull: '&'       // Whether or not to show the full message immediately
     },
-    templateUrl: '/partials/animated_msg.html',
+    templateUrl: '/partials/animated-msg.html',
     controller: function($scope, $element, $attrs) {
       $scope.displayedMsg = '';
       $scope.hasFinishedTyping = false;

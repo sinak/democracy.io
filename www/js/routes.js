@@ -12,12 +12,12 @@ var configureRoutes = function($routeProvider) {
     })
     .when('/location', {
       controller: 'LegislatorPickerController',
-      templateUrl: '/partials/legislator_picker.html',
+      templateUrl: '/partials/legislator-picker.html',
       title: 'Select your recipients'
     })
     .when('/compose', {
       controller: 'MessageFormController',
-      templateUrl: '/partials/message_form.html',
+      templateUrl: '/partials/message-form.html',
       title: 'Write your letter'
     })
     .when('/captcha', {

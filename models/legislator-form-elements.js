@@ -7,7 +7,7 @@
 var isEmpty = require('lodash.isempty');
 var map = require('lodash.map');
 
-var FormElement = require('./form_element');
+var FormElement = require('./form-element');
 
 
 var LegislatorFormElements = function(options) {
@@ -30,5 +30,13 @@ var LegislatorFormElements = function(options) {
   }
 };
 
+LegislatorFormElements.prototype.requiresCaptcha = function() {
+  for (var i = 0; i < this.formElements.length; ++i) {
+    if (this.formElements[i].value === '$CAPTCHA_SOLUTION') {
+      return true;
+    }
+  }
+  return false;
+};
 
 module.exports = LegislatorFormElements;

@@ -30,6 +30,23 @@ body {
 }
 
 // Home-screen-specific animations
+#address {
+  #addressInputs {
+    max-width: 100%;
+    transition: max-width 0.5s ease;
+  }
+  #addressInputs.addressValid {
+    max-width: 80%;
+  }
+  #submitAddress {
+    max-width: 0;
+    overflow: hidden;
+    transition: max-width 0.5s ease;
+  }
+  #submitAddress.addressValid {
+    max-width: 200px;
+  }
+}
 #wrapper[data-pagename="home"] {
   .header h1::after {
       content: '|';

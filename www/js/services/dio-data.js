@@ -18,18 +18,24 @@ var zipObject = require('lodash.zipObject');
 
 var models = require('../../../models');
 
-var legislatorData = function($sessionStorage) {
+var legislatorData = function(locker) {
 
-  $sessionStorage.$default({
-    LEGISLATORS: [],
-    BIOGUIDE_IDS_BY_SELECTION: {},
-    CANONICAL_ADDRESS: new models.CanonicalAddress(),
-    LEGISLATOR_FORM_ELEMENTS: []
-  });
+  var DATA_KEYS = {
+    CA: 'CANONICAL_ADDRESS',
+    L: 'LEGISLATORS',
+    LFE: 'LEGISLATOR_FORM_ELEMENTS',
+    BIBS: 'BIOGUIDE_IDS_BY_SELECTION'
+  };
+
+  var DEFAULT_VALUES = {};
+  DEFAULT_VALUES[DATA_KEYS.CA] = new models.CanonicalAddress();
+  DEFAULT_VALUES[DATA_KEYS.L] = [];
+  DEFAULT_VALUES[DATA_KEYS.LFE] = [];
+  DEFAULT_VALUES[DATA_KEYS.BIBS] = {};
 
   var getValue = function(key, model) {
     try {
-      var rawObj = $sessionStorage[key];
+      var rawObj = locker.get(key, DEFAULT_VALUES[key]);
       if (model === undefined) {
         return rawObj;
       } else {
@@ -47,33 +53,31 @@ var legislatorData = function($sessionStorage) {
   };
 
   var setValue = function(key, val) {
-    $sessionStorage[key] = val;
+    locker.put(key, val);
   };
 
   var hasValue = function(key) {
-    // NOTE: this uses isEmpty, which is going to check collections etc correctly, but won't
-    //       deal with numbers, e.g. isEmpty([]) == true, isEmpty(12) == true
-    return !isEmpty(getValue(key));
+    return locker.has(key);
   };
 
   var removeValue = function(key) {
-    delete $sessionStorage[key];
+    locker.forget(key);
   };
 
   var api = {
 
     clearData: function() {
-      $sessionStorage.$reset();
+      locker.clean();
     },
 
     setLegislators: function(legislators) {
-      setValue('LEGISLATORS', legislators);
+      setValue(DATA_KEYS.L, legislators);
 
       var selectedLegislators = zipObject(map(legislators, function(legislator) {
         return [legislator.bioguideId, true];
       }));
 
-      setValue('BIOGUIDE_IDS_BY_SELECTION', selectedLegislators);
+      setValue(DATA_KEYS.BIBS, selectedLegislators);
     },
 
     getSelectedLegislators: function() {
@@ -87,10 +91,10 @@ var legislatorData = function($sessionStorage) {
 
   // Add setter / getter functions to serialize the models
   var objectKeys = [
-    {name: 'CanonicalAddress', model: models.CanonicalAddress, key: 'CANONICAL_ADDRESS'},
-    {name: 'Legislators', model: models.Legislator, key: 'LEGISLATORS'},
-    {name: 'LegislatorsFormElements', model: models.LegislatorFormElements, key: 'LEGISLATOR_FORM_ELEMENTS'},
-    {name: 'BioguideIdsBySelection', key: 'BIOGUIDE_IDS_BY_SELECTION'}
+    {name: 'CanonicalAddress', model: models.CanonicalAddress, key: DATA_KEYS.CA},
+    {name: 'Legislators', model: models.Legislator, key: DATA_KEYS.L},
+    {name: 'LegislatorsFormElements', model: models.LegislatorFormElements, key: DATA_KEYS.LFE},
+    {name: 'BioguideIdsBySelection', key: DATA_KEYS.BIBS}
   ];
 
   forEach(objectKeys, function(obj) {

@@ -11,15 +11,21 @@ var filters = require('./filters');
 
 var democracyApp = angular.module(
   'democracyIoApp',
-  ['ngRoute', 'ngStorage', 'ngAnimate', 'angucomplete-alt', 'ngSanitize', 'democracyFilters']
+  ['ngRoute', 'angular-locker', 'ngAnimate', 'ngSanitize', 'democracyFilters']
 );
 
-democracyApp.config(function($provide, $httpProvider, $interpolateProvider) {
+democracyApp.config(function($provide, $httpProvider, $interpolateProvider, lockerProvider) {
   $provide.factory('modelsHttpInterceptor', services.modelsHttpInterceptor);
   $httpProvider.interceptors.push('modelsHttpInterceptor');
 
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
+
+  lockerProvider
+    .setDefaultDriver('session')
+    .setDefaultNamespace('dio')
+    .setSeparator('.')
+    .setEventsEnabled(false);
 });
 
 democracyApp.config(require('./routes'));
@@ -38,8 +44,7 @@ democracyApp.directive('dioWriteToThemAnimation', directives.writeToThemAnimatio
 // Require modules that are used but not referenced directly
 require('angular-route');
 require('angular-animate');
-require('ng-storage');
-require('angucomplete-alt');
+require('angular-locker/src/angular-locker');
 require('angular-sanitize');
 
 // Require local modules generated as part of the build process

@@ -11,6 +11,7 @@ $slowDuration: 0.4s;
 // Variables
 $pink: #EE325A;
 
+
 @import "hover.css/scss/options";
 @import "hover.css/scss/mixins";
 @import "hover.css/scss/hacks";
@@ -21,4 +22,3 @@ $pink: #EE325A;
 @import 'progressBar';
 @import 'steps';
 @import 'animations';
-@import 'angucomplete';

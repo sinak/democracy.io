@@ -22,7 +22,7 @@ gulp.task('browserify', function() {
 
   var reportFinished = function() {
     // Log when bundling completes
-    bundleLogger.end(config.outputName)
+    bundleLogger.end(config.outputName);
   };
 
   var bundle = function() {

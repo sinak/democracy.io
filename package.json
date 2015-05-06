@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/l12s/democracy.io",
   "devDependencies": {
-    "browser-sync": "^2.2.2",
+    "browser-sync": "2.5.3",
     "browserify": "^9.0.3",
     "chai": "^2.2.0",
     "gulp": "^3.8.10",

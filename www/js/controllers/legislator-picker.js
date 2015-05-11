@@ -7,7 +7,6 @@ var isEmpty = require('lodash.isEmpty');
 var isNumber = require('lodash.isNumber');
 var map = require('lodash.map');
 
-
 var LegislatorPickerController = function($scope, $location, $timeout, dioData, dioApi) {
 
   // TODO(leah): Wire this on to the rootscope?
@@ -16,6 +15,14 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioData, 
   $timeout(function() {
     $scope.loadingDelay = false;
   }, 350);
+
+  $scope.goBack = function(){
+    if (dioData.hasCanonicalAddress) {
+      $location.path('/');
+    } else {
+      $location.path('/');
+    }
+  };
 
   /**
    * The Legislator objects the user can pick from.
@@ -35,7 +42,7 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioData, 
         dioData.setLegislators(legislators);
         $scope.setLocalData();
       };
-      
+
       dioApi.findLegislatorsByLatLng(
         canonicalAddress.latitude, canonicalAddress.longitude, cb);
 		} else {
@@ -58,6 +65,10 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioData, 
       return selected;
     }));
   };
+
+  if (!dioData.hasCanonicalAddress()){
+    $location.path('/');
+  }
 
   if (!dioData.hasLegislators()) {
     $scope.fetchLegislators(dioData.getCanonicalAddress());

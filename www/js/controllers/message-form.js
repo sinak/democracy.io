@@ -21,6 +21,14 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     $scope.loadingDelay = false;
   }, 350);
 
+  $scope.goBack = function(){
+    if (dioData.hasCanonicalAddress) {
+      $location.path('/location');
+    } else {
+      $location.path('/');
+    }
+  };
+
   /**
    * Whether any of the legislators to message require captchas.
    * @type {boolean}
@@ -234,6 +242,10 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     $scope.hasCaptcha = $scope.legislatorsUseCaptchas();
     $scope.createFormFields();
   };
+
+  if (!dioData.hasCanonicalAddress()){
+    $location.path('/');
+  }
 
   if (!dioData.hasLegislatorsFormElements()) {
     var bioguideIds = keys(pick(dioData.getBioguideIdsBySelection(), function(val) {

@@ -22,7 +22,7 @@ body {
 #form-scope.ng-enter:nth-child(2) {
   display: none;
 }
-
+  
 // Animations for loading box
 #loading.ng-leave {
     @extend .animated;
@@ -32,19 +32,34 @@ body {
 // Home-screen-specific animations
 #address {
   #addressInputs {
-    max-width: 100%;
-    transition: max-width 0.5s ease;
+    width: 100%;
+    transition: width 0.5s ease;
   }
-  #addressInputs.addressValid {
-    max-width: 80%;
+
+  @media (min-width: $screen-sm-min) {
+    #addressInputs.addressValid {
+      width: 75%;
+    }
   }
-  #submitAddress {
-    max-width: 0;
-    overflow: hidden;
-    transition: max-width 0.5s ease;
+  @media (min-width: $screen-sm-min) {
+    #submitAddress {
+      max-width: 0;
+      overflow: hidden;
+      transition: max-width 0.5s ease;
+    }
+    #submitAddress.addressValid {
+      max-width: 25%;
+    }
   }
-  #submitAddress.addressValid {
-    max-width: 200px;
+  @media (max-width: $screen-xs-max) {
+    #submitAddress {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    #submitAddress.addressValid {
+      max-height: 100px;
+    }
   }
 }
 #wrapper[data-pagename="home"] {

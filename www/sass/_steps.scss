@@ -29,6 +29,31 @@
 #address .btn-lg.btn-orange {
   margin-top: 25px;
 }
+@media (min-width: $screen-sm-min) {
+  #address #addressInputs {
+    float:left;
+  }
+  #address #submitAddress {
+    float:right;
+    width: 25%;
+    margin-top: 96px;
+    text-align: right;
+  }
+}
+@media (max-width: $screen-xs-max) {
+  #address {
+    .whitebox-container {
+      padding: 20px;
+    }
+    .input-group .form-control:first-child {
+     font-size: 14px;
+    }
+    button.btn-orange.btn-lg {
+      font-size: 18px;
+      margin-top:0;
+    }
+  }
+}
 
 /******
  Pick legislators 

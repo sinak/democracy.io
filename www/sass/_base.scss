@@ -215,15 +215,5 @@ label {
  Styles specific to mobile view
  ****************/
 @media (max-width: $screen-xs-max) {
- #address {
-   .input-group .form-control:first-child {
-    font-size: 14px;
-   }
-   button.btn-orange.btn-lg {
-    font-size: 14px;
-    padding-left: 10px;
-    padding-right: 10px;
-   }
-  }
   .back-button { display: none;}
 }

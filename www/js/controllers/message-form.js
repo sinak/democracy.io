@@ -12,11 +12,11 @@ var pick = require('lodash.pick');
 
 
 var MessageFormController = function($scope, $location, $timeout, dioData, dioApi) {
-
+  $scope.address = dioData.getCanonicalAddress();
   $scope.loadingDelay = true;
   $scope.submitted = false;
   $scope.joinEmailList = false;
-  
+
   $timeout(function() {
     $scope.loadingDelay = false;
   }, 350);
@@ -157,15 +157,18 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
       legislatorSubmission.fields.$NAME_FIRST = $scope.formData.firstName;
       legislatorSubmission.fields.$NAME_LAST = $scope.formData.lastName;
       legislatorSubmission.fields.$NAME_FULL = $scope.formData.firstName + ' ' + $scope.formData.lastName;
-      legislatorSubmission.fields.$ADDRESS_STREET = ''; //TODO
-      legislatorSubmission.fields.$ADDRESS_CITY = ''; //TODO
-      legislatorSubmission.fields.$ADDRESS_STATE_POSTAL_ABBREV = ''; //TODO
-      legislatorSubmission.fields.$ADDRESS_STATE_FULL = ''; //TODO
-      legislatorSubmission.fields.$ADDRESS_COUNTY = $scope.formData.county.selected;
-      legislatorSubmission.fields.$ADDRESS_ZIP5 = ''; //TODO
-      legislatorSubmission.fields.$ADDRESS_ZIP4 = ''; //TODO
-      legislatorSubmission.fields.$ADDRESS_ZIP_PLUS_4 = ''; //TODO
-      
+      legislatorSubmission.fields.$ADDRESS_STREET =
+        $scope.address.components.primaryNumber + " " +
+        $scope.address.components.streetName + " " +
+        $scope.address.components.streetSuffix;
+      legislatorSubmission.fields.$ADDRESS_CITY = $scope.address.components.cityName;
+      legislatorSubmission.fields.$ADDRESS_STATE_POSTAL_ABBREV = $scope.address.components.stateAbbreviation;
+      legislatorSubmission.fields.$ADDRESS_STATE_FULL = $scope.address.components.stateName;
+      legislatorSubmission.fields.$ADDRESS_COUNTY = $scope.address.county;
+      legislatorSubmission.fields.$ADDRESS_ZIP5 = $scope.address.components.zipcode;
+      legislatorSubmission.fields.$ADDRESS_ZIP4 = $scope.address.components.plus4Code;
+      legislatorSubmission.fields.$ADDRESS_ZIP_PLUS_4 = $scope.address.components.zipcode + "-" + $scope.address.components.plus4Code;
+
 
       var phoneString = $scope.formData.phoneNumber.toString();
       var hyphenatedPhone = phoneString.slice(0,3) + '-' + phoneString.slice(3,6) + '-' + phoneString.slice(6);
@@ -174,7 +177,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
       legislatorSubmission.fields.$PHONE_PARENTHESES = parensPhone;
 
       legislatorSubmission.fields.$EMAIL = $scope.formData.email;
-      
+
       var selectedTopic = findWhere($scope.topicOptions, {bioguideId: legislator.bioguideId});
       if (!angular.isUndefined(selectedTopic)) {
         var legislatorForm = findWhere($scope.legislatorsFormElements, {bioguideId: legislator.bioguideId});
@@ -194,13 +197,13 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
       legislatorSubmission.fields.$CAMPAIGN_UUID = ''; //TODO
       legislatorSubmission.fields.$ORG_URL = ''; //TODO
       legislatorSubmission.fields.$ORG_NAME = ''; //TODO
-      
+
       return legislatorSubmission;
     })
   };
 
 	$scope.send = function(repData) {
-    
+
     // create JSON form submission object
     $scope.submitted = true;
     $scope.formSubmissions = prepareFormSubmissions();

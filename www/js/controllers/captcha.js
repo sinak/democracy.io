@@ -18,7 +18,7 @@ var CaptchaController = function($scope, $location, $timeout, dioApi) {
   $timeout(function(){
   	$scope.captchasReceived = [
   		{
-  			link: '/captchas/e410e577123c5e19a526ad3f6b.png',
+  			link: '/static/img/difficult-captcha.jpg',
   			uid: '123456',
   			answer: '',
   			success: false,

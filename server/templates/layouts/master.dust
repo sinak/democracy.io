@@ -22,6 +22,11 @@
 	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
+  <meta property='og:url' content='https://democracy.io/'>
+  <meta property='og:title' content='Democracy.io'>
+  <meta property='og:description' content='Write to your representatives.'>
+  <meta property='og:image' content='https://democracy.io/static/img/opengraph.jpg'>
+
   <link rel="stylesheet" href="{CONFIG.SITE.STATIC_URL}/css/dio.min.css" />
 </head>
 

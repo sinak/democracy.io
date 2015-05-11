@@ -23,6 +23,13 @@ var CaptchaController = function($scope, $location, $timeout, dioApi) {
   			answer: '',
   			success: false,
   			waitingForResponse: false
+  		},
+			{
+  			link: '/static/img/difficult-captcha.jpg',
+  			uid: '123456',
+  			answer: '',
+  			success: false,
+  			waitingForResponse: false
   		}
   	]
   },

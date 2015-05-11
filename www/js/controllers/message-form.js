@@ -21,6 +21,14 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     $scope.loadingDelay = false;
   }, 350);
 
+  $scope.goBack = function(){
+    if (dioData.hasCanonicalAddress) {
+      $location.path('/location');
+    } else {
+      $location.path('/');
+    }
+  };
+
   /**
    * Whether any of the legislators to message require captchas.
    * @type {boolean}
@@ -101,6 +109,10 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
       countyElem = findWhere(specialOptions, {value: '$ADDRESS_COUNTY'});
       if (isEmpty($scope.countyData) && !isEmpty(countyElem)) {
         $scope.countyData = $scope.parseCountyOptions(countyElem);
+      } else {
+        $scope.formData.county = {
+          selected: $scope.address.county
+        };
       }
 
       topicElem = findWhere(specialOptions, {value: '$TOPIC'});
@@ -164,7 +176,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
       legislatorSubmission.fields.$ADDRESS_CITY = $scope.address.components.cityName;
       legislatorSubmission.fields.$ADDRESS_STATE_POSTAL_ABBREV = $scope.address.components.stateAbbreviation;
       legislatorSubmission.fields.$ADDRESS_STATE_FULL = $scope.address.components.stateName;
-      legislatorSubmission.fields.$ADDRESS_COUNTY = $scope.address.county;
+      legislatorSubmission.fields.$ADDRESS_COUNTY = $scope.formData.county.selected;
       legislatorSubmission.fields.$ADDRESS_ZIP5 = $scope.address.components.zipcode;
       legislatorSubmission.fields.$ADDRESS_ZIP4 = $scope.address.components.plus4Code;
       legislatorSubmission.fields.$ADDRESS_ZIP_PLUS_4 = $scope.address.components.zipcode + "-" + $scope.address.components.plus4Code;
@@ -234,6 +246,10 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     $scope.hasCaptcha = $scope.legislatorsUseCaptchas();
     $scope.createFormFields();
   };
+
+  if (!dioData.hasCanonicalAddress()){
+    $location.path('/');
+  }
 
   if (!dioData.hasLegislatorsFormElements()) {
     var bioguideIds = keys(pick(dioData.getBioguideIdsBySelection(), function(val) {

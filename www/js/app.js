@@ -11,7 +11,7 @@ var filters = require('./filters');
 
 var democracyApp = angular.module(
   'democracyIoApp',
-  ['ngRoute', 'angular-locker', 'ngAnimate', 'ngSanitize', 'democracyFilters']
+  ['ngRoute', 'angular-locker', 'ngAnimate', 'ngSanitize', 'democracyFilters', 'ui.utils.masks']
 );
 
 democracyApp.config(function($provide, $httpProvider, $interpolateProvider, lockerProvider) {
@@ -46,6 +46,7 @@ require('angular-route');
 require('angular-animate');
 require('angular-locker/src/angular-locker');
 require('angular-sanitize');
+require('angular-input-masks')
 
 // Require local modules generated as part of the build process
 require('../../.build/dioAppSettings');

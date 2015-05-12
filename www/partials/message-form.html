@@ -99,14 +99,19 @@
 
         <div class="col-sm-4 col-md-3 form-group">
           <label for="inputPhoneNumber">Phone number</label>
-          <input type="number"
+          <input type="text"
+                 name="phone"
                  class="form-control"
                  id="inputPhoneNumber"
                  ng-model="formData.phoneNumber"
                  ng-required='true'
-                 min="0"
-                 ng-minlength="10"
-                 ng-maxlength="10">
+                 ui-mask="(999) 999-9999" ui-us-phone-number>
+        </div>
+      </div>
+
+      <div class="row" ng-if="!messageForm.phone.$valid">
+        <div class="col-sm-8 col-md-6">
+          <div class="alert alert-danger" role="alert">Please enter a valid phone number</div>
         </div>
       </div>
 

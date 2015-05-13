@@ -132,7 +132,12 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
    * @param legislator
    */
   $scope.parseTopicOptions = function(topicElem, legislator) {
-    var options = keys(topicElem.optionsHash);
+    var options;
+    if (Array.isArray(topicElem.optionsHash)) {
+      options = topicElem.optionsHash;
+    } else {
+      options = keys(topicElem.optionsHash);
+    }
 
     return {
       bioguideId: legislator.bioguideId,
@@ -194,7 +199,12 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
       if (!angular.isUndefined(selectedTopic)) {
         var legislatorForm = findWhere($scope.legislatorsFormElements, {bioguideId: legislator.bioguideId});
         var topicsList = findWhere(legislatorForm.formElements, {value: '$TOPIC'});
-        var topicValue = topicsList.optionsHash[selectedTopic.selected];
+        var topicValue;
+        if (Array.isArray(topicsList.optionsHash)){
+          topicValue = selectedTopic.selected;
+        } else {
+          topicValue = topicsList.optionsHash[selectedTopic.selected];
+        }
 
         legislatorSubmission.fields.$TOPIC = topicValue;
       } else {
@@ -211,7 +221,8 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
       legislatorSubmission.fields.$ORG_NAME = ''; //TODO
 
       return legislatorSubmission;
-    })
+    });
+    return $scope.formSubmissions;
   };
 
 	$scope.send = function(repData) {

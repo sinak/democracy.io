@@ -118,7 +118,7 @@
       <div class="row" ng-if="countyData.options">
         <div class="form-group col-sm-4 col-md-6">
           <label for="inputCounty">County</label>
-          <select class="form-control" id="inputCounty" ng-model="formData.county.selected" ng-required="true">
+          <select class="form-control" name="county" id="inputCounty" ng-model="formData.county.selected" ng-required="true">
             <option ng-repeat="county in countyData.options" value="[[county]]">[[county]]</option>
           </select>
         </div>
@@ -127,7 +127,7 @@
       <div class="row" ng-repeat="legislator in topicOptions">
         <div class="form-group col-sm-4 col-md-6">
           <label for="inputTopic">[[legislator.name]]'s Topic</label>
-          <select class="form-control" id="inputTopic" ng-model="legislator.selected" ng-required="true">
+          <select class="form-control" name="topic" id="inputTopic" ng-model="legislator.selected" ng-required="true">
             <option ng-repeat="topic in legislator.options" value="[[topic]]">[[topic]]</option>
           </select>
         </div>
@@ -164,6 +164,7 @@
               <li ng-if="messageForm.lastName.$invalid">Last Name</li>
               <li ng-if="messageForm.prefix.$invalid">Prefix</li>
               <li ng-if="messageForm.phone.$invalid">Phone Number</li>
+              <li ng-if="messageForm.county.$invalid">County</li>
               <li ng-if="messageForm.email.$invalid">Email</li>
             </ul>
           </div>

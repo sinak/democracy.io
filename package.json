@@ -49,8 +49,7 @@
     "require-dir": "^0.3.0",
     "run-sequence": "^1.0.2",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^2.4.0",
-    "angular-ui-utils": "~0.1.1"
+    "watchify": "^2.4.0"
   },
   "dependencies": {
     "adaro": "^0.1.7",

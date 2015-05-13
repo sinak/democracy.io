@@ -50,7 +50,7 @@
       <div class="row">
         <div class="form-group col-sm-8 col-md-9">
           <label for="inputSubject">Subject</label>
-          <input type="text" class="form-control" id="inputSubject" ng-model="formData.subject" ng-required='true'>
+          <input type="text" name="subject" class="form-control" id="inputSubject" ng-model="formData.subject" ng-required='true'>
         </div>
       </div>
 
@@ -58,7 +58,7 @@
         <div class="form-group col-sm-8 col-md-9">
         <label for="inputMessage">Message</label>
         <div id="textarea-container">
-          <textarea id="inputMessage" class="form-control" cols="30" rows="10" ng-model="formData.message" ng-required='true'></textarea>
+          <textarea id="inputMessage" name="message" class="form-control" cols="30" rows="10" ng-model="formData.message" ng-required='true'></textarea>
         </div>
         </div>
         <div class="col-sm-4 col-md-3 hidden-xs">
@@ -77,19 +77,19 @@
       <div class="row">
         <div class="col-sm-4 col-md-3 form-group">
           <label for="inputFirstName">First name</label>
-          <input type="text" class="form-control" id="inputFirstName" ng-model="formData.firstName" ng-required='true'>
+          <input type="text" name="firstName" class="form-control" id="inputFirstName" ng-model="formData.firstName" ng-required='true'>
         </div>
 
         <div class="col-sm-4 col-md-3 form-group">
           <label for="inputLastName">Last name</label>
-          <input type="text" class="form-control" id="inputLastName" ng-model="formData.lastName" ng-required='true'>
+          <input type="text" name="lastName" class="form-control" id="inputLastName" ng-model="formData.lastName" ng-required='true'>
         </div>
       </div>
 
       <div class="row">
         <div class="col-sm-4 col-md-3 form-group">
           <label for="inputPrefix">Prefix</label>
-          <select class="form-control" id="inputPrefix" ng-model="formData.prefix" ng-required='true'>
+          <select class="form-control" name="prefix" id="inputPrefix" ng-model="formData.prefix" ng-required='true'>
             <option value="Mr">Mr</option>
             <option value="Ms">Ms</option>
             <option value="Mrs">Mrs</option>
@@ -105,11 +105,11 @@
                  id="inputPhoneNumber"
                  ng-model="formData.phoneNumber"
                  ng-required='true'
-                 ui-mask="(999) 999-9999" ui-us-phone-number>
+                 ui-mask="(999) 999-9999">
         </div>
       </div>
 
-      <div class="row" ng-if="!messageForm.phone.$valid">
+      <div class="row" ng-if="!messageForm.phone.$valid && !messageForm.phone.$pristine">
         <div class="col-sm-8 col-md-6">
           <div class="alert alert-danger" role="alert">Please enter a valid phone number</div>
         </div>
@@ -136,7 +136,7 @@
       <div class="row">
         <div class="col-md-6 form-group">
           <label for="inputEmail">Email Address</label>
-          <input type="email" class="form-control" id="inputEmail" ng-model="formData.email" ng-required="true">
+          <input type="email" name="input" class="form-control" id="inputEmail" ng-model="formData.email" ng-required="true">
         </div>
       </div>
 
@@ -154,6 +154,21 @@
               ng-disabled="messageForm.$invalid">
         Send!
       </button>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-warning" role="alert" ng-if="messageForm.$invalid">Please enter the following information:
+            <ul>
+              <li ng-if="messageForm.subject.$invalid">Subject</li>
+              <li ng-if="messageForm.message.$invalid">Message</li>
+              <li ng-if="messageForm.firstName.$invalid">First Name</li>
+              <li ng-if="messageForm.lastName.$invalid">Last Name</li>
+              <li ng-if="messageForm.prefix.$invalid">Prefix</li>
+              <li ng-if="messageForm.phone.$invalid">Phone Number</li>
+              <li ng-if="messageForm.email.$invalid">Email</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
 </div>

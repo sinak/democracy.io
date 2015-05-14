@@ -96,6 +96,7 @@
   }
   .btn-orange {
     margin-top: 20px;
+    margin-bottom: 20px;
     padding: 15px 40px;
   }
 }
@@ -154,6 +155,7 @@ label small {
 .emailSignup {
   font-size: 15px;
   margin-top:20px;
+  margin-bottom:0;
   label {
     text-transform: none;
     letter-spacing: 0;
@@ -174,7 +176,9 @@ label small {
     margin-bottom:10px;
   }
 }
-
+.write-message .whitebox-container {
+  padding-bottom:10px;
+}
 .write-message .alert-danger {
   background-color: #FFEFEF;
   border: 1px solid $brand-primary;

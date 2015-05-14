@@ -153,6 +153,7 @@ label small {
 }
 .emailSignup {
   font-size: 15px;
+  margin-top:20px;
   label {
     text-transform: none;
     letter-spacing: 0;
@@ -161,6 +162,24 @@ label small {
   }
 }
 
+#messageFormValidation {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border: 0;
+  border-top: 1px solid $brand-primary;
+  background-color: #FFEFEF;
+  color: $brand-primary;
+
+  p {
+    margin-bottom:10px;
+  }
+}
+
+.write-message .alert-danger {
+  background-color: #FFEFEF;
+  border: 1px solid $brand-primary;
+  color: $brand-primary;
+}
 
 /******
  Thanks 

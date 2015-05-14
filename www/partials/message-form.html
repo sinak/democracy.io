@@ -1,37 +1,37 @@
 <!-- Page 3 -->
 <div class="row">
 
+  <div id="loading" class="whitebox" ng-if="!loadingDelay && !legislatorsFormElements">
+    <svg  version="1.1"
+          id="loading-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          width="40px"
+          height="40px"
+          viewBox="0 0 40 40"
+          enable-background="new 0 0 40 40"
+          xml:space="preserve">
+      <path opacity="0.2" fill="#FF8901" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+        s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+        c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+      <path fill="#EE335B" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+        C22.32,8.481,24.301,9.057,26.013,10.047z">
+        <animateTransform attributeType="xml"
+          attributeName="transform"
+          type="rotate"
+          from="0 20 20"
+          to="360 20 20"
+          dur="0.5s"
+          repeatCount="indefinite"/>
+      </path>
+    </svg>
+    <p>This'll just take one moment ...</p>
+  </div>
+
   <div class="write-message whitebox col-md-10">
     <button class="btn-sm btn-warning back-button" ng-click="goBack()">Go back</button>
-
-    <div id="loading" class="whitebox" ng-if="!loadingDelay && !legislatorsFormElements">
-      <svg  version="1.1"
-            id="loading-svg"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0px"
-            y="0px"
-            width="40px"
-            height="40px"
-            viewBox="0 0 40 40"
-            enable-background="new 0 0 40 40"
-            xml:space="preserve">
-        <path opacity="0.2" fill="#FF8901" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
-          s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
-          c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
-        <path fill="#EE335B" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
-          C22.32,8.481,24.301,9.057,26.013,10.047z">
-          <animateTransform attributeType="xml"
-            attributeName="transform"
-            type="rotate"
-            from="0 20 20"
-            to="360 20 20"
-            dur="0.5s"
-            repeatCount="indefinite"/>
-        </path>
-      </svg>
-      <p>This'll just take one moment ...</p>
-    </div>
 
     <form name="messageForm" class="whitebox-container" ng-show="legislatorsFormElements" novalidate>
 
@@ -140,36 +140,36 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="form-group col-md-12 checkbox emailSignup" >
-          <p>Democracy.io is a free service provided by the <a href="https://eff.org">Electronic Frontier Foundation</a>, a 501(c)(3) non-profit dedicated to fighting for your rights in the digital age.</p>
+      <div class="form-group  emailSignup" >
+        <p>Democracy.io is a free service of the <a href="https://eff.org">Electronic Frontier Foundation</a>, a 501(c)(3) non-profit dedicated to fighting for your rights in the digital age.</p>
+        <div class="checkbox">
           <input type="checkbox" id="emailSignup" model="joinEmailList" unchecked>
           <label for="emailSignup">Want to stay up to date with the EFF and our work? Check this box to sign up for email updates (<a href="https://www.eff.org/policy">privacy policy</a>).</label>
         </div>
       </div>
 
+
+
       <button type="submit"
               class="btn btn-orange btn-lg"
               ng-click="send()"
-              ng-disabled="messageForm.$invalid">
+              ng-if="!messageForm.$invalid">
         Send!
       </button>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-warning" role="alert" ng-if="messageForm.$invalid">Please enter the following information:
-            <ul>
-              <li ng-if="messageForm.subject.$invalid">Subject</li>
-              <li ng-if="messageForm.message.$invalid">Message</li>
-              <li ng-if="messageForm.firstName.$invalid">First Name</li>
-              <li ng-if="messageForm.lastName.$invalid">Last Name</li>
-              <li ng-if="messageForm.prefix.$invalid">Prefix</li>
-              <li ng-if="messageForm.phone.$invalid">Phone Number</li>
-              <li ng-if="messageForm.county.$invalid">County</li>
-              <li ng-if="messageForm.email.$invalid">Email</li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </form>
+
+    <div class="alert alert-warning" id="messageFormValidation" role="alert" ng-if="messageForm.$invalid">
+      <p><strong>Please fill in the following required fields  to submit your message:</strong></p>
+      <ul>
+        <li ng-if="messageForm.subject.$invalid">Subject</li>
+        <li ng-if="messageForm.message.$invalid">Message</li>
+        <li ng-if="messageForm.firstName.$invalid">First Name</li>
+        <li ng-if="messageForm.lastName.$invalid">Last Name</li>
+        <li ng-if="messageForm.prefix.$invalid">Prefix</li>
+        <li ng-if="messageForm.phone.$invalid">Phone Number</li>
+        <li ng-if="messageForm.county.$invalid">County</li>
+        <li ng-if="messageForm.email.$invalid">Email</li>
+      </ul>
+    </div>
   </div>
 </div>

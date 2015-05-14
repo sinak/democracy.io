@@ -1,51 +1,53 @@
 <div class="row">
+
+	<div id="loading" class="whitebox" ng-if="!loadingDelay && !captchasReceived">
+    <svg  version="1.1"
+          id="loading-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          width="40px"
+          height="40px"
+          viewBox="0 0 40 40"
+          enable-background="new 0 0 40 40"
+          xml:space="preserve">
+      <path opacity="0.2" fill="#FF8901" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+        s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+        c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+      <path fill="#EE335B" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+        C22.32,8.481,24.301,9.057,26.013,10.047z">
+        <animateTransform attributeType="xml"
+          attributeName="transform"
+          type="rotate"
+          from="0 20 20"
+          to="360 20 20"
+          dur="0.5s"
+          repeatCount="indefinite"/>
+      </path>
+    </svg>
+    <p>This'll just take one moment ...</p>
+  </div>
+
 	<div class="whitebox col-md-10">
 
-		<div id="loading" class="whitebox" ng-if="!loadingDelay && !captchasReceived">
-	      <svg  version="1.1"
-	            id="loading-svg"
-	            xmlns="http://www.w3.org/2000/svg"
-	            xmlns:xlink="http://www.w3.org/1999/xlink"
-	            x="0px"
-	            y="0px"
-	            width="40px"
-	            height="40px"
-	            viewBox="0 0 40 40"
-	            enable-background="new 0 0 40 40"
-	            xml:space="preserve">
-	        <path opacity="0.2" fill="#FF8901" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
-	          s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
-	          c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
-	        <path fill="#EE335B" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
-	          C22.32,8.481,24.301,9.057,26.013,10.047z">
-	          <animateTransform attributeType="xml"
-	            attributeName="transform"
-	            type="rotate"
-	            from="0 20 20"
-	            to="360 20 20"
-	            dur="0.5s"
-	            repeatCount="indefinite"/>
-	        </path>
-	      </svg>
-	      <p>This'll just take one moment ...</p>
-	    </div>
-
 		<div class="whitebox-container" ng-show="captchasReceived">
-			<div ng-repeat="captcha in captchasReceived" ng-show="!captcha.success">
+			<p>Some legislators require that you complete a CAPTCHA to verify that you're really human. Type the CAPTCHA text into the form and click submit.</p>
+			<div ng-repeat="captcha in captchasReceived" ng-show="!captcha.success" id="captchaContainer">
 				<div ng-show="!captcha.waitingForResponse">
+					<img src="[[captcha.link]]" alt="This is an image captcha. Unfortunately we cannot provide an audio based captcha at this time.">
+
 					<div class="row">
-						<img src="[[captcha.link]]" alt="This is an image captcha, unfortunately we cannot provide an audio based captcha at this time">	
-					</div>
-					<div class="row">
-						<div class="col-md-3">
-							<input type="text" class="form-control" ng-model="captcha.answer">
-						</div>
-						<div class="col-md-3">
-							<button class="btn btn-orange btn-lg" ng-disabled="!captcha.answer" ng-click="submit(captcha)">Submit</button>
+						<div class="col-sm-6">
+							<div class="form-group">
+						    <label for="captcha[[$index]]">Enter CAPTCHA text</label>
+								<input id="captcha[[$index]]" type="text" class="form-control" ng-model="captcha.answer">
+							</div>
 						</div>
 					</div>
+					<button class="btn btn-orange btn-lg" ng-disabled="!captcha.answer" ng-click="submit(captcha)">Submit</button>
 				</div>
-				<div id="loading" class="whitebox" ng-show="captcha.waitingForResponse">
+				<div id="loading" ng-show="captcha.waitingForResponse">
 				  <svg  version="1.1"
 			            id="loading-svg"
 			            xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +73,7 @@
 			            repeatCount="indefinite"/>
 			        </path>
 			      </svg>
-			      <p>Verifying</p>
+			      <p>Submitting the CAPTCHA text.</p> <p class="small">This may take up to 90 seconds - thanks for being patient!</p>
 				</div>
 			</div>
 		</div>

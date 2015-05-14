@@ -180,6 +180,26 @@ body {
     opacity: 0;
   }
 }
+
+#wrapper[data-pagename="captcha"] {
+  div#progress-bar {
+    opacity: 1;
+  }
+  #pb-line-1 {
+    stroke-dashoffset: 0;
+    stroke-width: 1;
+  }
+  #pb-line-2 {
+    stroke-dashoffset: 0;
+    stroke-width: 1;
+  }
+  #pb-check-1 {
+    opacity: 1;
+  }
+  #pb-check-2 {
+    opacity: 1;
+  }
+}
 #wrapper[data-pagename="thanks"] {
   div#progress-bar {
     opacity: 1;

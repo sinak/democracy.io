@@ -27,6 +27,10 @@
            class="header">
            Write your message      
       </h1>
+      <h1 ng-switch-when="captcha" 
+            class="header">
+           Verify that you're a human
+      </h1>
       <h1 ng-switch-when="thanks" 
             class="header">
            Message sent!

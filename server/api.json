@@ -10,6 +10,9 @@
         "https"
     ],
     "basePath": "/api/1",
+    "consumes": [
+        "application/json"
+    ],
     "produces": [
         "application/json"
     ],
@@ -199,6 +202,39 @@
                     }
                 }
             }
+        },
+        "/message": {
+            "post": {
+                "summary": "Sends a message to the user's representative(s) via POTC.",
+                "description": "Sends a message to one or more representatives via the Phantom of the Capitol API.",
+                "parameters": [
+                    {
+                        "name": "msg",
+                        "in": "body",
+                        "description": "The message object to send via POTC.",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/Message"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Message"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "todo",
+                        "type": "object"
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -297,9 +333,9 @@
                     "description": "Contains the first delivery line (usually the street address). This can include any of Primary Number, Street Name, Street Predirection, Street Postdirection, Street Suffix, Secondary Number, Secondary Designator, PMB Designator or PMB Number."
                 },
                 "county": {
-                  "type": "string",
-                  "maxLength": 64,
-                  "description": "The name of the county the address is in"
+                    "type": "string",
+                    "maxLength": 64,
+                    "description": "The name of the county the address is in"
                 },
                 "latitude": {
                     "type": "number",
@@ -318,7 +354,7 @@
             }
         },
         "AddressComponents": {
-            "description": "test",
+            "description": "Contains detailed components comprising an address.",
             "properties": {
                 "primaryNumber": {
                     "type": "string",
@@ -378,6 +414,15 @@
                 "plus4Code": {
                     "type": "string",
                     "maxLength": 4,
+                    "description": "The 4-digit add-on code (more specific than 5-digit ZIP)."
+                }
+            }
+        },
+        "Message": {
+            "description": "Contains the message, sender data (title, email etc.) and any message metadata required to send a message to a user's representative(s).",
+            "properties": {
+                "hat": {
+                    "type": "string",
                     "description": "The 4-digit add-on code (more specific than 5-digit ZIP)."
                 }
             }

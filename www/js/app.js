@@ -18,6 +18,9 @@ democracyApp.config(function($provide, $httpProvider, $interpolateProvider, lock
   $provide.factory('modelsHttpInterceptor', services.modelsHttpInterceptor);
   $httpProvider.interceptors.push('modelsHttpInterceptor');
 
+  // Switch the header name so that express finds it.
+  $httpProvider.defaults.xsrfHeaderName = 'X-CSRF-Token';
+
   $interpolateProvider.startSymbol('[[');
   $interpolateProvider.endSymbol(']]');
 

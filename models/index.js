@@ -4,5 +4,6 @@ module.exports = {
   Error: require('./error'),
   FormElement: require('./form-element'),
   Legislator: require('./legislator'),
-  LegislatorFormElements: require('./legislator-form-elements')
+  LegislatorFormElements: require('./legislator-form-elements'),
+  Message: require('./message')
 };

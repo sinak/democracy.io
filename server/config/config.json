@@ -34,10 +34,34 @@
     "static": {
       "module": {
         "name": "serve-static",
-        "arguments": [".build", {}
+        "arguments": [
+          ".build",
+          {}
         ]
       }
+    },
+
+    "swaggerize": {
+      "module": {
+        "name": "swaggerize-express",
+        "arguments": [
+          {
+            "api": "../../../server/api.json",
+            "handlers": "../../../../server/routes/api"
+          }
+        ]
+      },
+      "priority": 210
+    },
+
+    "ngXSRF": {
+      "enabled": true,
+      "module": {
+        "name": "../../../../server/middleware/ng-xsrf"
+      },
+      "priority": 115
     }
+
   },
 
   "CONFIG": {

@@ -2,7 +2,7 @@
  * API service for the Democracy.io app.
  */
 
-var helpers = require('../helpers/api_helpers');
+var helpers = require('../helpers/api-helpers');
 var models = require('../../../models');
 var forEach = require('lodash.forEach');
 

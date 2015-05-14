@@ -1,5 +1,5 @@
 module.exports = {
   dioApi: require('./api'),
-  modelsHttpInterceptor: require('./models_http_interceptor'),
+  modelsHttpInterceptor: require('./models-http-interceptor'),
   dioData: require('./dio-data')
 };

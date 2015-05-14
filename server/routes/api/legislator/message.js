@@ -2,7 +2,7 @@
  * Handles posting a new message to POTC.
  */
 
-var models = require('../../../models');
+var models = require('../../../../models');
 
 
 var post = function (req, res) {

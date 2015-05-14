@@ -203,7 +203,7 @@
                 }
             }
         },
-        "/message": {
+        "/legislator/{bioguideId}/message": {
             "post": {
                 "summary": "Sends a message to the user's representative(s) via POTC.",
                 "description": "Sends a message to one or more representatives via the Phantom of the Capitol API.",
@@ -217,6 +217,13 @@
                             "type": "object",
                             "$ref": "#/definitions/Message"
                         }
+                    },
+                    {
+                        "name": "bioguideId",
+                        "in": "path",
+                        "description": "Identifier for this member in various Congressional sources. Originally taken from the Congressional Biographical Directory, but used in many places.",
+                        "required": true,
+                        "type": "string"
                     }
                 ],
                 "tags": [

@@ -6,7 +6,7 @@ var expect = require('chai').expect;
 var lodash = require('lodash');
 var nestedDescribe = require('nested-describe');
 
-var apiHelpers = require('../../../www/js/helpers/api_helpers');
+var apiHelpers = require('../../../www/js/helpers/api-helpers');
 var models = require('../../../models');
 
 

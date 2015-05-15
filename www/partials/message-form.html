@@ -98,15 +98,14 @@
         </div>
 
         <div class="col-sm-4 col-md-3 form-group">
-          <label>
-            <input type="text"
-                   name="phone"
-                   class="form-control"
-                   ng-model="formData.phoneNumber"
-                   ng-required="true"
-                   ui-mask="(999) 999-9999">
-            Phone number
-          </label>
+          <label for="inputPhoneNumber">Phone number</label>
+          <input type="text"
+                 name="phone"
+                 id="inputPhoneNumber"
+                 class="form-control"
+                 ng-model="formData.phoneNumber"
+                 ng-required="true"
+                 ui-mask="(999) 999-9999">
         </div>
       </div>
 
@@ -137,7 +136,7 @@
           <select class="form-control"
                   name="topic"
                   id="inputTopic"
-                  ng-model="legislator.selected"
+                  ng-model="topicOptions[legislator.bioguideId].selected"
                   ng-required="true">
             <option ng-repeat="topic in legislator.options" value="[[topic]]">
               [[topic]]

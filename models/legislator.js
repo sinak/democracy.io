@@ -4,12 +4,23 @@
  * @constructor
  */
 
+var create = require('lodash.create');
 var isEmpty = require('lodash.isempty');
+
+var Model = require('./model');
 
 
 var Legislator = function(options) {
-  options = isEmpty(options) ? {} : options;
+  Model.call(this, options);
+};
 
+
+Legislator.prototype = create(Model.prototype, {
+  'constructor': Model
+});
+
+
+Legislator.prototype.setProperties = function(options) {
   this.bioguideId = options.bioguideId;
   this.title = options.title;
   this.firstName = options.firstName;
@@ -24,5 +35,6 @@ var Legislator = function(options) {
 Legislator.prototype.displayName = function() {
   return ' '.join([this.title + '.', this.firstName, this.lastName]);
 };
+
 
 module.exports = Legislator;

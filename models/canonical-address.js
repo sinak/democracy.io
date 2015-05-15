@@ -4,15 +4,24 @@
  * @constructor
  */
 
+var create = require('lodash.create');
 var isEmpty = require('lodash.isempty');
 var isUndefined = require('lodash.isUndefined');
 
 var AddressComponents = require('./address-components');
+var Model = require('./model');
 
 
 function CanonicalAddress(options) {
-  options = isEmpty(options) ? {} : options;
-    
+  Model.call(this, options);
+}
+
+CanonicalAddress.prototype = create(Model.prototype, {
+  'constructor': Model
+});
+
+
+CanonicalAddress.prototype.setProperties = function(options) {
   this.inputId = options.inputId;
   this.inputIndex = options.inputIndex;
   this.address = options.address;
@@ -20,8 +29,8 @@ function CanonicalAddress(options) {
   this.longitude = options.longitude;
   this.latitude = options.latitude;
 
-  this.components = new AddressComponents(options.components);
-}
+  this.setModelProperty('components', options.components, AddressComponents);
+};
 
 
 CanonicalAddress.prototype.streetAddress = function() {

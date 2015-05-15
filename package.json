@@ -73,6 +73,7 @@
     "hover.css": "^2.0.2",
     "kraken-js": "^1.0.3",
     "lodash": "^3.3.1",
+    "lodash.create": "^3.1.0",
     "lodash.filter": "^3.1.0",
     "lodash.findwhere": "^3.0.1",
     "lodash.foreach": "^3.0.1",

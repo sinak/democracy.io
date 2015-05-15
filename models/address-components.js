@@ -4,12 +4,22 @@
  * @constructor
  */
 
+var create = require('lodash.create');
 var isEmpty = require('lodash.isempty');
+
+var Model = require('./model');
 
 
 function AddressComponents(options) {
-  options = isEmpty(options) ? {} : options;
+  Model.call(this, options);
+}
 
+AddressComponents.prototype = create(Model.prototype, {
+  'constructor': Model
+});
+
+
+AddressComponents.prototype.setProperties = function(options) {
   this.primaryNumber = options.primaryNumber;
   this.streetName = options.streetName;
   this.streetPredirection = options.streetPredirection;
@@ -22,6 +32,7 @@ function AddressComponents(options) {
   this.stateName = options.stateName;
   this.zipcode = options.zipcode;
   this.plus4Code = options.plus4Code;
-}
+};
+
 
 module.exports = AddressComponents;

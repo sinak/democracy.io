@@ -129,12 +129,15 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
 
     // create JSON form submission object
     $scope.submitted = true;
-    var messages = helpers.makeMessages(
-      $scope.legislators,
-      $scope.formData,
-      $scope.messageForm.phone.$viewValue,
-      $scope.topicOptions
-    );
+    var messages = map($scope.legislators, function(legislator) {
+      return helpers.makeMessage(
+        legislator,
+        $scope.formData,
+        $scope.messageForm.phone.$viewValue,
+        $scope.topicOptions,
+        $scope.canonicalAddress
+      );
+    });
 
     if ($scope.joinEmailList) {
       // TODO add to eff email list
@@ -164,6 +167,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     $scope.legislators = dioData.getSelectedLegislators();
     $scope.bioguideIdsBySelection = dioData.getBioguideIdsBySelection();
     $scope.legislatorsFormElements = dioData.getLegislatorsFormElements();
+    $scope.canonicalAddress = dioData.getCanonicalAddress();
 
     $scope.hasCaptcha = $scope.legislatorsUseCaptchas();
     $scope.createFormFields();

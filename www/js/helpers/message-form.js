@@ -12,6 +12,8 @@ var keys = require('lodash.keys');
 var map = require('lodash.map');
 var pick = require('lodash.pick');
 
+var models = require('../../../models');
+
 
 /**
  * Parse out the topic options for a given legislator.
@@ -58,7 +60,6 @@ var makeSenderInfo = function(formData, parensPhone) {
     namePrefix: formData.prefix,
     firstName: formData.firstName,
     lastName: formData.lastName,
-    fullName: formData.firstName + ' ' + formData.lastName,
     email: formData.email,
     phone: parensPhone.replace('(', '').replace(')', '').replace(' ', '-'),
     parenPhone: parensPhone
@@ -93,12 +94,12 @@ var makeMessageInfo = function(legislator, formData, topic) {
 
 /**
  *
- * @returns {{campaignUUID: string, orgURL: string, orgName: string}}
+ * @returns {{}}
  */
 var makeCampaignInfo = function() {
 
   return {
-    campaignUUID: '',
+    uuid: '',
     orgURL: '',
     orgName: ''
   };
@@ -112,31 +113,27 @@ var makeCampaignInfo = function() {
  * @param formData
  * @param phoneValue
  * @param topicOptions
+ * @param address
  * @returns {*}
  */
-var makeMessages = function(legislators, formData, phoneValue, topicOptions) {
-  var messages = map(legislators, function(legislator) {
-    var legislatorSubmission = {
-      bioguideId: legislator.bioguideId
-    };
+var makeMessage = function(legislator, formData, phoneValue, topicOptions, address) {
+  var messageInfo = makeMessageInfo(legislator, formData, topicOptions[legislator.bioguideId]);
 
-    var senderInfo = helpers.makeSenderInfo(formData, phoneValue);
-
-    var messageInfo = helpers.makeMessageInfo(
-      legislator, formData, topicOptions[legislator.bioguideId]);
-
-    var campaignInfo = helpers.makeCampaignInfo();
-
-    return legislatorSubmission;
+  return new models.Message({
+    bioguideId: legislator.bioguideId,
+    topic: messageInfo.topic,
+    subject: messageInfo.subject,
+    message: messageInfo.message,
+    sender: makeSenderInfo(formData, phoneValue),
+    canonicalAddress: address,
+    campaign: makeCampaignInfo()
   });
-
-  return messages;
 };
 
 
 module.exports.parseTopicOptions = parseTopicOptions;
 module.exports.parseCountyOptions = parseCountyOptions;
-module.exports.makeMessages = makeMessages;
+module.exports.makeMessage = makeMessage;
 module.exports.makeSenderInfo = makeSenderInfo;
 module.exports.makeMessageInfo = makeMessageInfo;
 module.exports.makeCampaignInfo = makeCampaignInfo;

@@ -4,27 +4,33 @@
  * @constructor
  */
 
+var create = require('lodash.create');
 var isEmpty = require('lodash.isempty');
+
+var Campaign = require('./campaign');
+var CanonicalAddress = require('./canonical-address');
+var Model = require('./model');
+var MessageSender = require('./message-sender');
 
 
 var Message = function(options) {
-  options = isEmpty(options) ? {} : options;
-
-  this.bioguideId = options.bioguideId;
+  Model.call(this, options);
 };
 
+Message.prototype = create(Model.prototype, {
+  'constructor': Model
+});
 
-Message.prototype.update = function(canonicalAddress) {
-  this.$ADDRESS_STREET = canonicalAddress.streetAddress();
-  this.$ADDRESS_CITY = canonicalAddress.components.cityName;
-  this.$ADDRESS_STATE_POSTAL_ABBREV = canonicalAddress.components.stateAbbreviation;
-  this.$ADDRESS_STATE_FULL = canonicalAddress.components.stateName;
 
-  //  this.$ADDRESS_COUNTY = $scope.formData.county.selected;
+Message.prototype.setProperties = function(options) {
+  this.bioguideId = options.bioguideId;
+  this.topic = options.topic;
+  this.subject = options.subject;
+  this.message = options.message;
 
-  this.$ADDRESS_ZIP5 = canonicalAddress.components.zipcode;
-  this.$ADDRESS_ZIP4 = canonicalAddress.components.plus4Code;
-  this.$ADDRESS_ZIP_PLUS_4 = canonicalAddress.fullZipCode();
+  this.setModelProperty('sender', options.sender, MessageSender);
+  this.setModelProperty('canonicalAddress', options.canonicalAddress, CanonicalAddress);
+  this.setModelProperty('campaign', options.campaign, Campaign);
 };
 
 

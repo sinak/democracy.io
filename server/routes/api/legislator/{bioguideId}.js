@@ -9,7 +9,7 @@ var sunlight = require('../../../services/third-party-apis/sunlight');
 
 
 var get = function (req, res) {
-  var cb = function(response, err) {
+  var cb = function(err, response) {
     if (err === null) {
       var legislator = new Legislator(changeCaseKeys(response['results'][0], 'camelize'));
       res.json(legislator);

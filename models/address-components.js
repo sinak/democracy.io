@@ -6,6 +6,7 @@
 
 var create = require('lodash.create');
 var isEmpty = require('lodash.isempty');
+var isUndefined = require('lodash.isUndefined');
 
 var Model = require('./model');
 
@@ -32,6 +33,13 @@ AddressComponents.prototype.setProperties = function(options) {
   this.stateName = options.stateName;
   this.zipcode = options.zipcode;
   this.plus4Code = options.plus4Code;
+};
+
+
+AddressComponents.prototype.fullZipCode = function() {
+  var zip = this.components.zipcode;
+  return isUndefined(this.components.plus4Code) ?
+    zip : zip + '-' + this.components.plus4Code;
 };
 
 

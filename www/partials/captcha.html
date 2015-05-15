@@ -33,20 +33,28 @@
 
 		<div class="whitebox-container" ng-show="captchasReceived">
 			<p>Some legislators require that you complete a CAPTCHA to verify that you're really human. Type the CAPTCHA text into the form and click submit.</p>
-			<div ng-repeat="captcha in captchasReceived" ng-show="!captcha.success" id="captchaContainer">
-				<div ng-show="!captcha.waitingForResponse">
-					<img src="[[captcha.link]]" alt="This is an image captcha. Unfortunately we cannot provide an audio based captcha at this time.">
+			<div ng-repeat="captcha in captchasReceived"
+           ng-show="!captcha.success"
+           id="captchaContainer">
+
+        <div ng-show="!captcha.waitingForResponse">
+					<img src="[[captcha.link]]"
+               alt="This is an image captcha. Unfortunately we cannot provide an audio based captcha at this time.">
 
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
 						    <label for="captcha[[$index]]">Enter CAPTCHA text</label>
-								<input id="captcha[[$index]]" type="text" class="form-control" ng-model="captcha.answer">
+								<input id="captcha[[$index]]"
+                       type="text"
+                       class="form-control"
+                       ng-model="captcha.answer">
 							</div>
 						</div>
 					</div>
 					<button class="btn btn-orange btn-lg" ng-disabled="!captcha.answer" ng-click="submit(captcha)">Submit</button>
 				</div>
+
 				<div id="loading" ng-show="captcha.waitingForResponse">
 				  <svg  version="1.1"
 			            id="loading-svg"
@@ -75,6 +83,7 @@
 			      </svg>
 			      <p>Submitting the CAPTCHA text.</p> <p class="small">This may take up to 90 seconds - thanks for being patient!</p>
 				</div>
+
 			</div>
 		</div>
 	</div>

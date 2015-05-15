@@ -89,10 +89,13 @@
       <div class="row">
         <div class="col-sm-4 col-md-3 form-group">
           <label for="inputPrefix">Prefix</label>
-          <select class="form-control" name="prefix" id="inputPrefix" ng-model="formData.prefix" ng-required='true'>
+          <select class="form-control"
+                  name="prefix" id="inputPrefix"
+                  ng-model="formData.prefix"
+                  ng-required="true">
             <option value="Mr">Mr</option>
-            <option value="Ms">Ms</option>
             <option value="Mrs">Mrs</option>
+            <option value="Ms">Ms</option>
             <option value="Dr">Dr</option>
           </select>
         </div>

@@ -14,7 +14,7 @@ var smartyStreets = require('../../../services/third-party-apis/smarty-streets')
 
 var get = function (req, res) {
   // TODO(leah): Move this cb to a helper w/ a model process layer, so it's not copy-pasted everywhere.
-  var cb = function(response, err) {
+  var cb = function(err, response) {
     if (err === null) {
       var modelResponse = map(response, function(rawAddress) {
         var address = [rawAddress['delivery_line_1'], rawAddress['delivery_line_2'], rawAddress['last_line']];

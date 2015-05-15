@@ -14,9 +14,9 @@ var makeRequest = function(params, cb) {
 
   request(params, function (err, response, body) {
     if (!err && response.statusCode == 200) {
-      cb(body, null);
+      cb(null, body);
     } else {
-      cb(null, err);
+      cb(err, null);
     }
   });
 

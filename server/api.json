@@ -61,6 +61,44 @@
                 }
             }
         },
+        "/legislators/message": {
+            "post": {
+                "summary": "Sends a message to one or more representatives.",
+                "description": "Sends a message to one or more representatives via the Phantom of the Capitol API.",
+                "parameters": [
+                    {
+                        "name": "msgs",
+                        "in": "body",
+                        "description": "The message object to send via POTC.",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/definitions/Message"
+                            }
+                        }
+                    }
+                ],
+                "tags": [
+                    "Message"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success acknowledgement.",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/Success"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/legislator/{bioguideId}": {
             "get": {
                 "summary": "Biographical information for a specific legislator.",

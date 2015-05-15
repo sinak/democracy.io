@@ -11,7 +11,7 @@ var sunlight = require('../../../services/third-party-apis/sunlight');
 
 var get = function (req, res) {
 
-  var cb = function(response, err) {
+  var cb = function(err, response) {
     if (err === null) {
       var legislators = lodash.map(response['results'], function(rawLegislator) {
         return new Legislator(changeCaseKeys(rawLegislator, 'camelize'))

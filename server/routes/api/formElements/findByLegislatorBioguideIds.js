@@ -4,17 +4,17 @@
 
 var lodash = require('lodash');
 
-var makeLFEModelFromPOTCResponse = require('../helpers/make_lfe_model_from_potc_response');
+var makeLegislatorFormElements = require('../helpers/potc').makeLegislatorFormElements;
 var potc = require('../../../services/third-party-apis/potc');
 
 
 var get = function (req, res) {
   var bioguideIds = req.params.bioguideIds;
 
-  var cb = function(response, err) {
+  var cb = function(err, response) {
     if (err === null) {
       var results = lodash.reduce(response, function (results, val, bioguideId) {
-        results.push(makeLFEModelFromPOTCResponse(val, bioguideId));
+        results.push(makeLegislatorFormElements(val, bioguideId));
         return results;
       }, []);
 

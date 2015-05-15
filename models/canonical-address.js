@@ -6,7 +6,6 @@
 
 var create = require('lodash.create');
 var isEmpty = require('lodash.isempty');
-var isUndefined = require('lodash.isUndefined');
 
 var AddressComponents = require('./address-components');
 var Model = require('./model');
@@ -43,11 +42,5 @@ CanonicalAddress.prototype.streetAddress = function() {
   ].join(' ');
 };
 
-
-CanonicalAddress.prototype.fullZipCode = function() {
-  var zip = this.components.zipcode;
-  return isUndefined(this.components.plus4Code) ?
-    zip : zip + '-' + this.components.plus4Code;
-};
 
 module.exports = CanonicalAddress;

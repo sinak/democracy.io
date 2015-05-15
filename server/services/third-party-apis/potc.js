@@ -36,5 +36,16 @@ var getFormElementsForRepIdsFromPOTC = function(bioguideIds, config, cb) {
 };
 
 
+/**
+ * Sends a message to a representative via POTC.
+ * @param message
+ */
+var sendMessage = function(message, config, cb) {
+  var potcURL = makePOTCUrl('', config);
+  makeRequest({method: 'POST', url: potcURL, json: true, body: message}, cb);
+};
+
+
 module.exports.makePOTCUrl = makePOTCUrl;
 module.exports.getFormElementsForRepIdsFromPOTC = getFormElementsForRepIdsFromPOTC;
+module.exports.sendMessage = sendMessage;

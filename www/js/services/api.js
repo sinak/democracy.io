@@ -67,18 +67,15 @@ var api = function ($http, dioConfig) {
     /**
      *
      */
-    submitMessageToReps: function(submissions, cb) {
+    submitMessageToReps: function(messages, cb) {
       var opts = {
-        url: this.makeRelativeAPIURL('/message'),
+        url: this.makeRelativeAPIURL('/legislators/message'),
         method: 'POST',
         withCredentials: true,
-        data: {}
+        data: messages
       };
 
       // this.makeAPICall(opts, cb);
-      //      forEach(submissions, function(submission){
-      //        // TODO, API Submission
-      // })
     },
 
     /**

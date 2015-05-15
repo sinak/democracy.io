@@ -16,7 +16,6 @@ var helpers = require('../helpers/message-form');
 
 
 var MessageFormController = function($scope, $location, $timeout, dioData, dioApi) {
-  $scope.address = dioData.getCanonicalAddress();
   $scope.loadingDelay = true;
   $scope.submitted = false;
   $scope.joinEmailList = false;
@@ -43,7 +42,9 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
    *
    * @type {{}}
    */
-  $scope.formData = {};
+  $scope.formData = {
+    prefix: 'Ms'
+  };
 
   /**
    *
@@ -56,7 +57,6 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
    * @type {Array}
    */
   $scope.topicOptions = {};
-
 
   /**
    * Fetch LegislatorFormElements models from the server for the supplied bioguideIds.
@@ -135,7 +135,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
         $scope.formData,
         $scope.messageForm.phone.$viewValue,
         $scope.topicOptions,
-        $scope.canonicalAddress
+        $scope.address
       );
     });
 
@@ -145,7 +145,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     }
 
     var cb = function(data) {
-      //TODO - hand off to CAPTCHA controller
+      // TODO - hand off to CAPTCHA controller
     };
 
     dioApi.submitMessageToReps(messages, cb);
@@ -167,7 +167,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     $scope.legislators = dioData.getSelectedLegislators();
     $scope.bioguideIdsBySelection = dioData.getBioguideIdsBySelection();
     $scope.legislatorsFormElements = dioData.getLegislatorsFormElements();
-    $scope.canonicalAddress = dioData.getCanonicalAddress();
+    $scope.address = dioData.getCanonicalAddress();
 
     $scope.hasCaptcha = $scope.legislatorsUseCaptchas();
     $scope.createFormFields();

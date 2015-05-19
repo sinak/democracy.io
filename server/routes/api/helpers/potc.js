@@ -7,7 +7,7 @@ var lodash = require('lodash');
 var models = require('../../../../models');
 
 
-var makePOTCMessage = function(message) {
+var makePOTCMessage = function(message, campaignTag) {
 
   var fields = {
     $NAME_PREFIX: message.sender.namePrefix,
@@ -36,9 +36,11 @@ var makePOTCMessage = function(message) {
     $ORG_NAME: message.campaign.orgName
   };
 
+  var campaignTag = lodash.isEmpty(message.campaign.uuid) ? campaignTag : message.campaign.uuid;
   return {
     'bio_id': message.bioguideId,
-    fields: fields
+    fields: fields,
+    'campaign_tag': campaignTag
   }
 };
 

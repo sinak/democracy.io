@@ -12,8 +12,10 @@ var filter = require('lodash.filter');
 var forEach = require('lodash.forEach');
 var isArray = require('lodash.isArray');
 var isEmpty = require('lodash.isEmpty');
+var keys = require('lodash.keys');
 var map = require('lodash.map');
 var partial = require('lodash.partial');
+var pick = require('lodash.pick');
 var zipObject = require('lodash.zipObject');
 
 var models = require('../../../models');
@@ -85,6 +87,13 @@ var legislatorData = function(locker) {
       return filter(this.getLegislators(), function(legislator) {
         return bioguideIdsBySelection[legislator.bioguideId];
       }, this);
+    },
+
+    getSelectedBioguideIds: function() {
+      var bioguideIdsBySelection = getValue('BIOGUIDE_IDS_BY_SELECTION');
+      return keys(pick(bioguideIdsBySelection, function(val) {
+        return val;
+      }));
     }
 
   };

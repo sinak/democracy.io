@@ -4,6 +4,7 @@
 
 var angular = require('angular');
 
+var Error = require('../../../models').Error;
 var coerceJSONResponseToModelResponse = require('../helpers/api-helpers').coerceJSONResponseToModelResponse;
 
 
@@ -15,7 +16,7 @@ var modelHttpInterceptor = function($q) {
       var requestOptions = response.config;
 
       if (!angular.isUndefined(requestOptions.modelClass)) {
-        // The double .data access is due to usage of Jsend style responses on the server
+        // The double .data access is due to usage of JSend style responses on the server
         var data = response.data.data;
         response.data = coerceJSONResponseToModelResponse(data, requestOptions.modelClass);
       }
@@ -24,7 +25,7 @@ var modelHttpInterceptor = function($q) {
     },
 
     responseError: function(rejection) {
-      // TODO(leah): Update this to produce error objects
+      rejection.data = coerceJSONResponseToModelResponse(rejection.data.data, Error);
       return $q.reject(rejection);
     }
 

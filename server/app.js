@@ -4,9 +4,6 @@
 
 var path = require('path');
 
-// Explicitly set the config dir, so that it gets pulled from www/config
-process.env['NODE_CONFIG_DIR'] = path.join(__dirname, 'config');
-
 var bodyParser = require('body-parser');
 var compression = require('compression');
 var config = require('config');

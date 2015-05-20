@@ -17,11 +17,7 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioData, 
   }, 350);
 
   $scope.goBack = function(){
-    if (dioData.hasCanonicalAddress) {
-      $location.path('/');
-    } else {
-      $location.path('/');
-    }
+    $location.path('/');
   };
 
   /**
@@ -31,28 +27,41 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioData, 
   $scope.legislators = [];
 
   /**
-   * A map from bioguideId to whether or not the user has selected them to speak to.
+   * Map from bioguideId to whether the user has selected that rep to message.
    * @type {{}}
    */
   $scope.bioguideIdsBySelection = {};
 
-  $scope.fetchLegislators = function(canonicalAddress) {
-    if (isNumber(canonicalAddress.latitude) && isNumber(canonicalAddress.longitude)) {
-      var cb = function(legislators) {
-        dioData.setLegislators(legislators);
-        $scope.setLocalData();
-      };
-
-      dioApi.findLegislatorsByLatLng(
-        canonicalAddress.latitude, canonicalAddress.longitude, cb);
-		} else {
-			// TODO send back a page;
-		}
+  /**
+   * Whether any rep has been selected to message.
+   * @returns {*}
+   */
+  $scope.anyRepSelected = function() {
+    return isEmpty(filter($scope.bioguideIdsBySelection, function(selected) {
+      return selected;
+    }));
   };
 
-  $scope.setLocalData = function() {
-    $scope.legislators = dioData.getLegislators();
-    $scope.bioguideIdsBySelection = dioData.getBioguideIdsBySelection();
+  $scope.fetchLegislators = function(canonicalAddress) {
+
+    var cb = function(err, legislators) {
+      var legislatorsFound = !isEmpty(legislators);
+      var serverErr = !isEmpty(err);
+
+      if (legislatorsFound && !serverErr) {
+        dioData.setLegislators(legislators);
+        $scope.setLocalData();
+      } else {
+        if (serverErr) {
+          // TODO(sina): Show a server error, try again later
+        } else {
+          // TODO(sina): Decide what to do here. Maybe clear dio-data and kick the user back?
+        }
+      }
+    };
+
+    dioApi.findLegislatorsByLatLng(
+      canonicalAddress.latitude, canonicalAddress.longitude, cb);
   };
 
 	$scope.submit = function() {
@@ -60,14 +69,16 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioData, 
     $location.path('/compose');
 	};
 
-  $scope.anyLegislatorSelected = function() {
-    return isEmpty(filter($scope.bioguideIdsBySelection, function(selected) {
-      return selected;
-    }));
+  /**
+   * Stitches data from dio data to the local $scope.
+   */
+  $scope.setLocalData = function() {
+    $scope.legislators = dioData.getLegislators();
+    $scope.bioguideIdsBySelection = dioData.getBioguideIdsBySelection();
   };
 
   if (!dioData.hasCanonicalAddress()){
-    $location.path('/');
+    $scope.goBack();
   }
 
   if (!dioData.hasLegislators()) {

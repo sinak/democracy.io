@@ -36,5 +36,3 @@ module.exports = function(config) {
 
   return swaggerizeApp;
 };
-
-

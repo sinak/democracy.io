@@ -23,15 +23,16 @@ var AddressFormController = function($scope, $location, dioApi, dioData) {
 
   $scope.data = {
     address: '',
-    invalidAddress: false,
     verifyingAddress: false
   };
 
   $scope.verifyAddress = function(address) {
-    var cb = function(canonicalAddresses) {
+    var cb = function(err, canonicalAddresses) {
       $scope.data.verifyingAddress = false;
+      var addressFound = !isEmpty(canonicalAddresses);
+      var serverErr = !isEmpty(err);
 
-      if (!isEmpty(canonicalAddresses)) {
+      if (addressFound && !serverErr) {
         dioData.clearData();
         // It's possible to get multiple verified addresses for a single source address.
         // We've been unable to find an example of this to test though, so for now just pick
@@ -39,7 +40,11 @@ var AddressFormController = function($scope, $location, dioApi, dioData) {
         dioData.setCanonicalAddress(canonicalAddresses[0]);
         $location.path('/location');
       } else {
-        // TODO(leah/sina): Show some kind of address not found error
+        if (serverErr) {
+          // TODO(sina): Show a server error, try again later
+        } else {
+          // TODO(sina): Show an address not found error
+        }
       }
 
     };
@@ -47,17 +52,23 @@ var AddressFormController = function($scope, $location, dioApi, dioData) {
     dioApi.verifyAddress(address, cb);
   };
 
-  $scope.validateAddress = function() {
-    var filteredBits = filter(
+  $scope.getAddressString = function() {
+     var filteredBits = filter(
       [$scope.addressData.address, $scope.addressData.city, $scope.addressData.postal],
       function(val) {
         return !isEmpty(val);
       }
     );
 
-    $scope.data.address = filteredBits.join(', ');
-    $scope.data.verifyingAddress = true;
-    $scope.verifyAddress($scope.data.address);
+    return filteredBits.join(', ');
+  };
+
+  $scope.validateAddress = function() {
+    if ($scope.addressForm.$valid) {
+      $scope.data.address = $scope.getAddressString();
+      $scope.data.verifyingAddress = true;
+      $scope.verifyAddress($scope.data.address);
+    }
   };
 
 };

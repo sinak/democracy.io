@@ -17,13 +17,13 @@ var api = function ($http, dioConfig) {
     },
 
     makeAPICall: function(opts, cb) {
-//      $http(opts)
-//        .success(function(data) {
-//          cb(data);
-//        })
-//        .error(function(data, status, headers, config) {
-//          // TODO(leah): Get a reasonable err msg out of this.
-//        });
+      $http(opts)
+        .success(function(data) {
+          cb(null, data);
+        })
+        .error(function(data, status, headers, config) {
+          cb(data, null);
+        });
     },
 
     verifyAddress: function(address, cb) {

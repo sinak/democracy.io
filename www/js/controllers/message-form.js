@@ -8,9 +8,7 @@ var forEach = require('lodash.forEach');
 var isArray = require('lodash.isArray');
 var isEmpty = require('lodash.isEmpty');
 var isUndefined = require('lodash.isUndefined');
-var keys = require('lodash.keys');
 var map = require('lodash.map');
-var pick = require('lodash.pick');
 
 var helpers = require('../helpers/message-form');
 
@@ -24,11 +22,11 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     $scope.loadingDelay = false;
   }, 350);
 
-  $scope.goBack = function(){
-    if (dioData.hasCanonicalAddress) {
-      $location.path('/location');
-    } else {
+  $scope.goBack = function() {
+    if (!dioData.hasCanonicalAddress()) {
       $location.path('/');
+    } else {
+      $location.path('/location');
     }
   };
 
@@ -63,23 +61,30 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
    * @param {Array} bioguideIds
    */
   $scope.fetchlegislatorFormElems = function(bioguideIds) {
-    if (!isEmpty(bioguideIds)) {
-      var cb = function(legislatorsFormElements) {
+    var cb = function(err, legislatorsFormElements) {
+      var lfeFound = !isEmpty(legislatorsFormElements);
+      var serverErr = !isEmpty(err);
+
+      if (lfeFound) {
         dioData.setLegislatorsFormElements(legislatorsFormElements);
         $scope.setLocalData();
-      };
+      } else {
+        if (serverErr) {
+          // TODO(sina): Show a server err
+        } else {
+          // TODO(all): Figure out what to do here
+        }
+      }
+    };
 
-      dioApi.legislatorFormElemsByBioguideIds(bioguideIds, cb);
-    } else {
-      // TODO(leah): Skip back a page, unless we implement a more generic approach.
-    }
+    dioApi.legislatorFormElemsByBioguideIds(bioguideIds, cb);
   };
 
   /**
-   * Check whether or not any legislators require captchas.
+   * Check whether or not any reps require captchas.
    * @returns {boolean}
    */
-  $scope.legislatorsUseCaptchas = function() {
+  $scope.repsUseCaptchas = function() {
     for (var i = 0; i < $scope.legislatorsFormElements.length; ++i) {
       if ($scope.legislatorsFormElements[i].requiresCaptcha()) {
         return true;
@@ -169,24 +174,22 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     $scope.legislatorsFormElements = dioData.getLegislatorsFormElements();
     $scope.address = dioData.getCanonicalAddress();
 
-    $scope.hasCaptcha = $scope.legislatorsUseCaptchas();
+    $scope.hasCaptcha = $scope.repsUseCaptchas();
     $scope.createFormFields();
   };
-
 
   /**
    * Fetch data from the session store.
    */
   $scope.fetchDataFromStore = function() {
-    if (!dioData.hasCanonicalAddress()){
-      $location.path('/');
+    var validData = dioData.hasBioguideIdsBySelection() && dioData.hasCanonicalAddress();
+    var selectedBioguideIds = dioData.getSelectedBioguideIds();
+    if (!validData || isEmpty(selectedBioguideIds)) {
+      $scope.goBack();
     }
 
     if (!dioData.hasLegislatorsFormElements()) {
-      var bioguideIds = keys(pick(dioData.getBioguideIdsBySelection(), function(val) {
-        return val;
-      }));
-      $scope.fetchlegislatorFormElems(bioguideIds);
+      $scope.fetchlegislatorFormElems(selectedBioguideIds);
     } else {
       $scope.setLocalData();
     }

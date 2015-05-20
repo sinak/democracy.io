@@ -21,6 +21,7 @@ Error.prototype = create(Model.prototype, {
 
 
 Error.prototype.setProperties = function(options) {
+  // TODO(leah): Update this to be consistent with our config server-side.
   this.code = options.code;
   this.message = options.message;
   this.fields = options.fields;

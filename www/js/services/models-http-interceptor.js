@@ -25,7 +25,7 @@ var modelHttpInterceptor = function($q) {
     },
 
     responseError: function(rejection) {
-      rejection.data = coerceJSONResponseToModelResponse(rejection.data.data, Error);
+      rejection.data = coerceJSONResponseToModelResponse(rejection.data, Error);
       return $q.reject(rejection);
     }
 

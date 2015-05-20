@@ -25,7 +25,7 @@ var makeRelativeAPIUrl = function(apiBaseUrl, apiVersion, urlSuffix) {
  * @returns {*}
  */
 var coerceJSONResponseToModelResponse = function(jsonData, modelClass) {
- if (isArray(jsonData)) {
+  if (isArray(jsonData)) {
     return map(jsonData, function(modelData) {
       return new modelClass(modelData);
     });

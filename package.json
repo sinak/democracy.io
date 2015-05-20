@@ -97,7 +97,7 @@
     "serve-static": "^1.9.3",
     "shush": "0.0.1",
     "sprintf-js": "^1.0.2",
-    "swaggerize-express": "^3.0.3",
+    "swaggerize-express": "^4.0.1",
     "us": "^1.0.3"
   }
 }

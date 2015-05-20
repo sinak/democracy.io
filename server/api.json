@@ -552,7 +552,15 @@
             }
         },
         "Success": {
-            "description": "Success response."
+            "description": "Success response.",
+            "properties": {
+                "status": {
+                    "type": "string"
+                },
+                "data": {
+                    "type": "object"
+                }
+            }
         },
         "Error": {
             "properties": {
@@ -560,10 +568,13 @@
                     "type": "integer",
                     "format": "int32"
                 },
+                "status": {
+                    "type": "string"
+                },
                 "message": {
                     "type": "string"
                 },
-                "fields": {
+                "data": {
                     "type": "string"
                 }
             }

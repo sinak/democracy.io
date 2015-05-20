@@ -21,11 +21,30 @@ Error.prototype = create(Model.prototype, {
 
 
 Error.prototype.setProperties = function(options) {
-  // TODO(leah): Update this to be consistent with our config server-side.
-  this.code = options.code;
-  this.message = options.message;
-  this.fields = options.fields;
-};
 
+  /**
+   * The HTTP code of the response.
+   * @type {number}
+   */
+  this.code = options.code;
+
+  /**
+   * An error status, typically just 'error'
+   * @type {string}
+   */
+  this.status = options.status;
+
+  /**
+   * A user or log friendly message describing the error.
+   * @type {string}
+   */
+  this.message = options.message;
+
+  /**
+   * Object describing the field by field errors.
+   * @type {{}}
+   */
+  this.data = options.data;
+};
 
 module.exports = Error;

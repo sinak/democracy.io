@@ -10,12 +10,19 @@ var swaggerizeExpress = require('swaggerize-express');
 
 
 var errHandler = function(err, req, res, next) {
-  // TODO(leah): Figure out the correct JSON body
-  res.json({
-    status: 'error',
-    data: []
+  var validationErrors = {};
+  lodash.forEach(err.details, function(err) {
+    validationErrors[err.path] = err.message;
   });
-  console.log(err);
+
+  var errJson = {
+    status: 'error',
+    code: res.statusCode,
+    message: err.toString(),
+    data: validationErrors
+  };
+  res.json(errJson);
+
   next(err);
 };
 
@@ -30,7 +37,34 @@ module.exports = function(config) {
   var onMountListener = lodash.values(swaggerizeApp.listeners('mount')[1])[0];
   swaggerizeApp.removeAllListeners();
   swaggerizeApp.once('mount', function(parent) {
+    // swaggerize-express does a really annoying config action where it overrides the parent
+    // app's settings for the following keys to its own values.
+    // As our server is a mixed API and view server, that causes issues, so switch the changed keys
+    // back to the initial settings.
+    var settingsKeys = [
+      'x-powered-by',
+      'trust proxy',
+      'jsonp callback name',
+      'json replacer',
+      'json spaces',
+      'case sensitive routing',
+      'strict routing',
+      'views',
+      'view cache',
+      'view engine'
+    ];
+
+    var settings = {};
+    lodash.forEach(settingsKeys, function(key) {
+      settings[key] = parent.get(key);
+    });
+
     onMountListener(parent);
+
+    lodash.forEach(settings, function(val, key) {
+      parent.set(key, val)
+    });
+
     parent.use(errHandler);
   });
 

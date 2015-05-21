@@ -9,8 +9,7 @@ var isArray = require('lodash.isArray');
 var isEmpty = require('lodash.isEmpty');
 var isUndefined = require('lodash.isUndefined');
 var keys = require('lodash.keys');
-var map = require('lodash.map');
-var pick = require('lodash.pick');
+var startsWith = require('lodash.startswith');
 
 var models = require('../../../models');
 
@@ -37,15 +36,19 @@ var parseTopicOptions = function(topicElem, legislator) {
 /**
  * Parse out the county options from a county FormElement.
  * @param countyElem
+ * @param addressCounty
  * @returns {{)}}
  */
-var parseCountyOptions = function(countyElem) {
-  // TODO(leah): Confirm that the county list is actually the same across legislators and
-  //             that there's no examples of "CountyA" vs "County A" etc.
+var parseCountyOptions = function(countyElem, addressCounty) {
+  var countyOptions = countyElem.optionsHash;
+  // Guess the correct county based on the address.county value
+  var selectedCounty = filter(countyOptions, function(countyOption) {
+    return addressCounty === countyOption || startsWith(countyOption, addressCounty);
+  })[0];
 
   return {
-    selected: countyElem.optionsHash[0],
-    options: countyElem.optionsHash
+    selected: isUndefined(selectedCounty) ? countyOptions[0] : selectedCounty,
+    options: countyOptions
   };
 };
 
@@ -132,58 +135,92 @@ var makeMessage = function(legislator, formData, phoneValue, topicOptions, addre
 
 
 /**
- * Create supplementary form fields from the LegislatorFormElements models.
+ * Gets data to populate a county field from the LegislatorFormElements objects.
+ *
+ * NOTE: The current contact congress data shows no cases where > 1 rep for a given location supports
+ *       county data in their contact form. So, find the first example of county data and use that.
+ *       This will need to be updated where > 1 reps adopt county data.
+ *
+ * @param legislatorsFormElements
  */
-var createFormFields = function(legislatorsFormElements, legislators, countyData, address) {
+var getCountyData = function(legislatorsFormElements, addressCounty) {
+  var countyKey = '$ADDRESS_COUNTY';
+  var countyElem;
 
-  var formFieldData = {
-    countyData: {},
-    formData: {
-      prefix: 'Ms'
-    },
-    topicOptions: {}
-  };
-
-  var specialOptionKeys = [
-    '$ADDRESS_COUNTY',
-    '$TOPIC'
-  ];
-
-  var topicElem, countyElem, specialOptions;
-  forEach(legislatorsFormElements, function(legislatorFormElems) {
-
-    specialOptions = filter(legislatorFormElems.formElements, function(formElem) {
-      return specialOptionKeys.indexOf(formElem.value) !== -1;
+  for (var i = 0, countyElemArr; i < legislatorsFormElements.length; ++i) {
+    countyElemArr = filter(legislatorsFormElements[i].formElements, function(formElem) {
+      return formElem.value === countyKey;
     });
-
-    // TODO(leah): This seems wrong. Not clear that canonicalAddress.country is really the right thing
-    //             to grab here.
-    countyElem = findWhere(specialOptions, {value: '$ADDRESS_COUNTY'});
-    if (isEmpty(countyData) && !isEmpty(countyElem)) {
-      formFieldData.countyData = parseCountyOptions(countyElem);
-    } else {
-      formFieldData.formData.county = {
-        selected: address.county
-      };
+    if (countyElemArr.length > 0) {
+      countyElem = countyElemArr[0];
     }
+  }
 
-    topicElem = findWhere(specialOptions, {value: '$TOPIC'});
-    if (!isEmpty(topicElem)) {
+  var countyData = {};
+  if (!isUndefined(countyElem)) {
+    countyData = parseCountyOptions(countyElem, addressCounty);
+  }
+
+  return countyData;
+};
+
+
+/**
+ *
+ * @param legislatorsFormElements
+ * @param legislators
+ * @returns {{}}
+ */
+var getTopicOptions = function(legislatorsFormElements, legislators) {
+  var topicKey = '$TOPIC';
+  var topicOptions = {};
+
+  var topicElem;
+  forEach(legislatorsFormElements, function(legislatorFormElems) {
+    topicElem = filter(legislatorFormElems.formElements, function(formElem) {
+      return formElem.value === topicKey;
+    })[0];
+
+    if (!isUndefined(topicElem)) {
       topicElem = parseTopicOptions(
         topicElem,
         findWhere(legislators, {bioguideId: legislatorFormElems.bioguideId})
       );
-      formFieldData.topicOptions[legislatorFormElems.bioguideId] = topicElem;
+      topicOptions[legislatorFormElems.bioguideId] = topicElem;
     }
   });
+
+  return topicOptions;
+};
+
+
+/**
+ * Create supplementary form fields from the LegislatorFormElements models.
+ */
+var createFormFields = function(legislatorsFormElements, legislators, address) {
+  var countyData = getCountyData(legislatorsFormElements, address.county);
+
+  var formFieldData = {
+    countyData: countyData,
+    formData: {
+      prefix: 'Ms',
+      county: countyData.selected
+    },
+    topicOptions: getTopicOptions(legislatorsFormElements, legislators)
+  };
 
   return formFieldData;
 };
 
 
 module.exports.createFormFields = createFormFields;
-module.exports.parseTopicOptions = parseTopicOptions;
+
+module.exports.getCountyData = getCountyData;
 module.exports.parseCountyOptions = parseCountyOptions;
+
+module.exports.getTopicOptions = getTopicOptions;
+module.exports.parseTopicOptions = parseTopicOptions;
+
 module.exports.makeMessage = makeMessage;
 module.exports.makeSenderInfo = makeSenderInfo;
 module.exports.makeMessageInfo = makeMessageInfo;

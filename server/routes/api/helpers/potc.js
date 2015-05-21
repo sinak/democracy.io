@@ -31,14 +31,12 @@ var makePOTCMessage = function(message, campaignTag) {
     $TOPIC: message.topic,
     $SUBJECT: message.subject,
     $MESSAGE: message.message,
-    $CAPTCHA_SOLUTION: null,
     $CAMPAIGN_UUID: message.campaign.uuid,
-    // $PERMALINK: null,
     $ORG_URL: message.campaign.orgURL,
     $ORG_NAME: message.campaign.orgName
   };
 
-  var campaignTag = lodash.isEmpty(message.campaign.uuid) ? campaignTag : message.campaign.uuid;
+  var campaignTag = lodash.isEmpty(message.campaign.tag) ? campaignTag : message.campaign.tag;
   return {
     'bio_id': message.bioguideId,
     fields: fields,

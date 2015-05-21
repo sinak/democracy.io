@@ -126,9 +126,9 @@
           <select class="form-control"
                   name="county"
                   id="inputCounty"
-                  ng-model="formData.county.selected"
+                  ng-model="formData.county"
+                  ng-options="county as county for county in countyData.options"
                   ng-required="true">
-            <option ng-repeat="county in countyData.options" value="[[county]]">[[county]]</option>
           </select>
         </div>
       </div>

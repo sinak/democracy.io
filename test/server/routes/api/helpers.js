@@ -98,7 +98,7 @@ nestedDescribe('server.routes.api.helpers', function () {
       }
     });
 
-    var potcMessage = helpers.makePOTCMessage(testMessage);
+    var potcMessage = helpers.makePOTCMessage(testMessage, 'test');
 
     expect(potcMessage)
       .to.deep.equal({
@@ -123,12 +123,11 @@ nestedDescribe('server.routes.api.helpers', function () {
           '$TOPIC': null,
           '$SUBJECT': 'Test',
           '$MESSAGE': 'Dear Sen Roberts, \ttest',
-          '$CAPTCHA_SOLUTION': null,
           '$CAMPAIGN_UUID': '',
           '$ORG_URL': '',
           '$ORG_NAME': ''
         },
-        'campaign_tag': undefined
+        'campaign_tag': 'test'
       });
   });
 

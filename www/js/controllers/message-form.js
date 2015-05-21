@@ -138,7 +138,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
   $scope.setLocalData = function() {
     $scope.legislators = dioData.getSelectedLegislators();
     var legFormElements = dioData.getLegislatorsFormElements();
-    var bioguideIdsBySelection = dioData.hasBioguideIdsBySelection();
+    var bioguideIdsBySelection = dioData.getBioguideIdsBySelection();
     $scope.legislatorsFormElements = filter(legFormElements, function(lfe) {
       return bioguideIdsBySelection[lfe.bioguideId];
     });
@@ -146,7 +146,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
 
     $scope.hasCaptcha = $scope.repsUseCaptchas();
     var formFieldData = helpers.createFormFields(
-      $scope.legislatorsFormElements, $scope.legislators, $scope.countyData, $scope.address);
+      $scope.legislatorsFormElements, $scope.legislators, $scope.address);
 
     $scope.countyData = formFieldData.countyData;
     $scope.topicOptions = formFieldData.topicOptions;

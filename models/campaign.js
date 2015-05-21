@@ -22,6 +22,7 @@ Campaign.prototype = create(Model.prototype, {
 
 Campaign.prototype.setProperties = function(options) {
   this.uuid = options.uuid;
+  this.tag = options.tag;
   this.orgURL = options.orgURL;
   this.orgName = options.orgName;
 };

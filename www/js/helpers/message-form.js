@@ -138,7 +138,9 @@ var createFormFields = function(legislatorsFormElements, legislators, countyData
 
   var formFieldData = {
     countyData: {},
-    formData: {},
+    formData: {
+      prefix: 'Ms'
+    },
     topicOptions: {}
   };
 
@@ -174,6 +176,8 @@ var createFormFields = function(legislatorsFormElements, legislators, countyData
       formFieldData.topicOptions[legislatorFormElems.bioguideId] = topicElem;
     }
   });
+
+  return formFieldData;
 };
 
 

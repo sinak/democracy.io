@@ -37,9 +37,8 @@ AddressComponents.prototype.setProperties = function(options) {
 
 
 AddressComponents.prototype.fullZipCode = function() {
-  var zip = this.components.zipcode;
-  return isUndefined(this.components.plus4Code) ?
-    zip : zip + '-' + this.components.plus4Code;
+  var zip = this.zipcode;
+  return isUndefined(this.plus4Code) ? zip : zip + '-' + this.plus4Code;
 };
 
 

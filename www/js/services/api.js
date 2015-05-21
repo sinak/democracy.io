@@ -75,7 +75,8 @@ var api = function ($http, dioConfig) {
         data: messages
       };
 
-      // this.makeAPICall(opts, cb);
+      console.log(JSON.stringify(messages));
+      this.makeAPICall(opts, cb);
     },
 
     /**

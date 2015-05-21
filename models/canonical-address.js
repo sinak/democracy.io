@@ -5,6 +5,7 @@
  */
 
 var create = require('lodash.create');
+var filter = require('lodash.filter');
 var isEmpty = require('lodash.isempty');
 
 var AddressComponents = require('./address-components');
@@ -33,13 +34,17 @@ CanonicalAddress.prototype.setProperties = function(options) {
 
 
 CanonicalAddress.prototype.streetAddress = function() {
-  // TODO(leah): This probably isn't sufficient in many cases, update to use the
-  //             component info more efficiently.
-  return [
-    this.components.primaryNumber,
-    this.components.streetName,
-    this.components.streetSuffix
-  ].join(' ');
+  var streetAddress = this.components.primaryNumber;
+  if (!isEmpty(this.components.streetPredirection)) {
+    streetAddress += ' ' + this.components.streetPredirection;
+  }
+  streetAddress += ' ' + this.components.streetName;
+  if (!isEmpty(this.components.streetPostdirection)) {
+    streetAddress += ' ' + this.components.streetPostdirection;
+  }
+  streetAddress += ' ' + this.components.streetSuffix;
+
+  return streetAddress;
 };
 
 

@@ -14,6 +14,9 @@ var helpers = require('../helpers/message-form');
 
 
 var MessageFormController = function($scope, $location, $timeout, dioData, dioApi) {
+  // TODO(leah): Nitpicks:
+  //   * wire up the error fields to use better show conditions, so the phone err msg etc doesn't immediately show on typing
+
   $scope.loadingDelay = true;
   $scope.submitted = false;
   $scope.joinEmailList = false;
@@ -93,7 +96,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     return false;
   };
 
-	$scope.send = function(repData) {
+	$scope.send = function() {
 
     // create JSON form submission object
     $scope.submitted = true;
@@ -107,34 +110,38 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
       );
     });
 
-    if ($scope.joinEmailList) {
-      // TODO add to eff email list
-      // $scope.formData.email
-    }
+    var cb = function(err, res) {
+      var res = !isEmpty(res);
+      var serverErr = !isEmpty(err);
 
-    var cb = function(data) {
-      // TODO - hand off to CAPTCHA controller
+      if (res) {
+        // TODO(leah): Update this, the response will determine it.
+        if ($scope.hasCaptcha) {
+          $location.path('/captcha');
+        } else {
+          $location.path('/thanks');
+        }
+      } else {
+        if (serverErr) {
+
+        }
+      }
     };
 
     dioApi.submitMessageToReps(messages, cb);
 
-    if ($scope.hasCaptcha) {
-      $location.path('/captcha');
-    } else {
-      $location.path('/thanks');
-    }
 	};
-
-  // TODO(leah): Nitpicks:
-  //   * wire up the error fields to use better show conditions, so the phone err msg etc doesn't immediately show on typing
 
   /**
    * Set local scope values for values fetched from the session store.
    */
   $scope.setLocalData = function() {
     $scope.legislators = dioData.getSelectedLegislators();
-    $scope.bioguideIdsBySelection = dioData.getBioguideIdsBySelection();
-    $scope.legislatorsFormElements = dioData.getLegislatorsFormElements();
+    var legFormElements = dioData.getLegislatorsFormElements();
+    var bioguideIdsBySelection = dioData.hasBioguideIdsBySelection();
+    $scope.legislatorsFormElements = filter(legFormElements, function(lfe) {
+      return bioguideIdsBySelection[lfe.bioguideId];
+    });
     $scope.address = dioData.getCanonicalAddress();
 
     $scope.hasCaptcha = $scope.repsUseCaptchas();

@@ -16,6 +16,7 @@ var helpers = require('../helpers/message-form');
 var MessageFormController = function($scope, $location, $timeout, dioData, dioApi) {
   // TODO(leah): Nitpicks:
   //   * wire up the error fields to use better show conditions, so the phone err msg etc doesn't immediately show on typing
+  //   * The "Dear [Rep / Senator] text scrolls over other text entered in that box
 
   $scope.loadingDelay = true;
   $scope.submitted = false;
@@ -110,7 +111,6 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
       );
     });
 
-    console.log(JSON.stringify(messages));
     var cb = function(err, res) {
       var res = !isEmpty(res);
       var serverErr = !isEmpty(err);

@@ -22,10 +22,9 @@ var post = function (req, res) {
   };
   var cb = apiCallback(res, makeResponse);
 
-  cb(null, {});
-//  async.parallel(map(potcMessages, function(message) {
-//    return partial(potc.sendMessage, message, req.app.locals.CONFIG)
-//  }), cb);
+  async.parallel(map(potcMessages, function(message) {
+    return partial(potc.sendMessage, message, req.app.locals.CONFIG)
+  }), cb);
 };
 
 

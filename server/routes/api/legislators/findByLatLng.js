@@ -19,7 +19,7 @@ var get = function (req, res) {
   var cb = apiCallback(res, makeResponse);
 
   sunlight.locateLegislatorsViaSunlight(
-    req.params.latitude, req.params.longitude, req.app.locals.CONFIG, cb);
+    req.query.latitude, req.query.longitude, req.app.locals.CONFIG, cb);
 };
 
 

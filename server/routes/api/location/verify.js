@@ -48,7 +48,7 @@ var get = function (req, res) {
   //       {street: '123 Main St, San Francisco, CA 9411', city: 'San Francisco', state: 'CA'}
   //       confuses SS and kicks back an empty results array.
   //       So, just supply the full address returned from the API call.
-  var params = {street: req.params.address};
+  var params = {street: req.query.address};
   smartyStreets.verifyAddress(params, req.app.locals.CONFIG, cb);
 };
 

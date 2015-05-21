@@ -93,43 +93,6 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     return false;
   };
 
-  /**
-   * Create supplementary form fields from the LegislatorFormElements models.
-   */
-  $scope.createFormFields = function() {
-
-    var specialOptionKeys = [
-      '$ADDRESS_COUNTY',
-      '$TOPIC'
-    ];
-
-    var topicElem, countyElem, specialOptions;
-    forEach($scope.legislatorsFormElements, function(legislatorFormElems) {
-
-      specialOptions = filter(legislatorFormElems.formElements, function(formElem) {
-        return specialOptionKeys.indexOf(formElem.value) !== -1;
-      });
-
-      countyElem = findWhere(specialOptions, {value: '$ADDRESS_COUNTY'});
-      if (isEmpty($scope.countyData) && !isEmpty(countyElem)) {
-        $scope.countyData = helpers.parseCountyOptions(countyElem);
-      } else {
-        $scope.formData.county = {
-          selected: $scope.address.county
-        };
-      }
-
-      topicElem = findWhere(specialOptions, {value: '$TOPIC'});
-      if (!isEmpty(topicElem)) {
-        topicElem = helpers.parseTopicOptions(
-          topicElem,
-          findWhere($scope.legislators, {bioguideId: legislatorFormElems.bioguideId})
-        );
-        $scope.topicOptions[legislatorFormElems.bioguideId] = topicElem;
-      }
-    });
-  };
-
 	$scope.send = function(repData) {
 
     // create JSON form submission object
@@ -175,7 +138,12 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     $scope.address = dioData.getCanonicalAddress();
 
     $scope.hasCaptcha = $scope.repsUseCaptchas();
-    $scope.createFormFields();
+    var formFieldData = helpers.createFormFields(
+      $scope.legislatorsFormElements, $scope.legislators, $scope.countyData, $scope.address);
+
+    $scope.countyData = formFieldData.countyData;
+    $scope.topicOptions = formFieldData.topicOptions;
+    $scope.formData = formFieldData.formData;
   };
 
   /**

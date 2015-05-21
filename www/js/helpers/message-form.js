@@ -131,6 +131,53 @@ var makeMessage = function(legislator, formData, phoneValue, topicOptions, addre
 };
 
 
+/**
+ * Create supplementary form fields from the LegislatorFormElements models.
+ */
+var createFormFields = function(legislatorsFormElements, legislators, countyData, address) {
+
+  var formFieldData = {
+    countyData: {},
+    formData: {},
+    topicOptions: {}
+  };
+
+  var specialOptionKeys = [
+    '$ADDRESS_COUNTY',
+    '$TOPIC'
+  ];
+
+  var topicElem, countyElem, specialOptions;
+  forEach(legislatorsFormElements, function(legislatorFormElems) {
+
+    specialOptions = filter(legislatorFormElems.formElements, function(formElem) {
+      return specialOptionKeys.indexOf(formElem.value) !== -1;
+    });
+
+    // TODO(leah): This seems wrong. Not clear that canonicalAddress.country is really the right thing
+    //             to grab here.
+    countyElem = findWhere(specialOptions, {value: '$ADDRESS_COUNTY'});
+    if (isEmpty(countyData) && !isEmpty(countyElem)) {
+      formFieldData.countyData = parseCountyOptions(countyElem);
+    } else {
+      formFieldData.formData.county = {
+        selected: address.county
+      };
+    }
+
+    topicElem = findWhere(specialOptions, {value: '$TOPIC'});
+    if (!isEmpty(topicElem)) {
+      topicElem = parseTopicOptions(
+        topicElem,
+        findWhere(legislators, {bioguideId: legislatorFormElems.bioguideId})
+      );
+      formFieldData.topicOptions[legislatorFormElems.bioguideId] = topicElem;
+    }
+  });
+};
+
+
+module.exports.createFormFields = createFormFields;
 module.exports.parseTopicOptions = parseTopicOptions;
 module.exports.parseCountyOptions = parseCountyOptions;
 module.exports.makeMessage = makeMessage;

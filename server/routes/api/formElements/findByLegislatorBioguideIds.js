@@ -10,7 +10,7 @@ var potc = require('../../../services/third-party-apis/potc');
 
 
 var get = function (req, res) {
-  var bioguideIds = req.params.bioguideIds;
+  var bioguideIds = req.query.bioguideIds;
 
   var makeResponse = function(data) {
     return lodash.reduce(data, function (results, val, bioguideId) {

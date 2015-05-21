@@ -35,7 +35,9 @@ var error = function(res, err, opt_statusCode) {
   var statusCode = isUndefined(opt_statusCode) ? opt_statusCode : 500;
   res.status(statusCode).json({
     status: 'error',
-    data: []
+    message: err.toString(),
+    code: opt_statusCode || 400,
+    data: null
   });
 };
 

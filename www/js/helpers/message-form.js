@@ -65,7 +65,8 @@ var makeSenderInfo = function(formData, parensPhone) {
     lastName: formData.lastName,
     email: formData.email,
     phone: parensPhone.replace('(', '').replace(')', '').replace(' ', '-'),
-    parenPhone: parensPhone
+    parenPhone: parensPhone,
+    county: formData.county
   };
 
 };

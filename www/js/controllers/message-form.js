@@ -110,6 +110,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
       );
     });
 
+    console.log(JSON.stringify(messages));
     var cb = function(err, res) {
       var res = !isEmpty(res);
       var serverErr = !isEmpty(err);

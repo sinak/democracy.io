@@ -60,7 +60,7 @@ nestedDescribe('server.routes.api.helpers', function () {
 
   it('should make a POTC message from a Message model', function() {
 
-    var testMessage = new Message({
+    var robertsMessage = new Message({
       'bioguideId': 'R000307',
       'topic': null,
       'subject': 'Test',
@@ -98,9 +98,9 @@ nestedDescribe('server.routes.api.helpers', function () {
       }
     });
 
-    var potcMessage = helpers.makePOTCMessage(testMessage, 'test');
+    var robertsPotcMessage = helpers.makePOTCMessage(robertsMessage, 'test');
 
-    expect(potcMessage)
+    expect(robertsPotcMessage)
       .to.deep.equal({
         'bio_id': 'R000307',
         'fields': {
@@ -113,7 +113,7 @@ nestedDescribe('server.routes.api.helpers', function () {
           '$ADDRESS_CITY': 'Wichita',
           '$ADDRESS_STATE_POSTAL_ABBREV': 'KS',
           '$ADDRESS_STATE_FULL': 'Kansas',
-          '$ADDRESS_COUNTY': null,
+          '$ADDRESS_COUNTY': undefined,
           '$ADDRESS_ZIP5': '11111',
           '$ADDRESS_ZIP4': '1111',
           '$ADDRESS_ZIP_PLUS_4': '11111-1111',
@@ -129,6 +129,78 @@ nestedDescribe('server.routes.api.helpers', function () {
         },
         'campaign_tag': 'test'
       });
+
+
+    var vitterMessage = new Message({
+      bioguideId: 'V000127',
+      topic: 'Agriculture',
+      subject: 'Test',
+      message: 'Dear Sen Vitter, \nTest',
+      sender: {
+        namePrefix: 'Ms',
+        firstName: 'First',
+        lastName: 'Last',
+        email: 'test@test.com',
+        phone: '111-111-111',
+        parenPhone: '(111) 111-1111',
+        county: 'Orleans Parish'
+      },
+      canonicalAddress: {
+        inputIndex: 0,
+        address: '4774 Test Ave, New Orleans LA 11111-1111',
+        county: 'Orleans',
+        longitude: -90.07447,
+        latitude: 30.00592,
+        components: {
+          primaryNumber: '4774',
+          streetName: 'Test',
+          streetSuffix: 'Ave',
+          cityName: 'New Orleans',
+          stateAbbreviation: 'LA',
+          stateName: 'Louisiana',
+          zipcode: '11111',
+          plus4Code: '1111'
+        }
+      },
+      campaign: {
+        uuid: '',
+        orgURL: '',
+        orgName: ''
+      }
+    });
+
+    var vitterPotcMessage = helpers.makePOTCMessage(vitterMessage, 'test');
+
+    expect(vitterPotcMessage)
+      .to.deep.equal({
+        bio_id: 'V000127',
+        fields: {
+          '$NAME_PREFIX': 'Ms',
+          '$NAME_FIRST': 'First',
+          '$NAME_LAST': 'Last',
+          '$NAME_FULL': 'First Last',
+          '$ADDRESS_STREET': '4774 Test Ave',
+          '$ADDRESS_STREET_2': null,
+          '$ADDRESS_CITY': 'New Orleans',
+          '$ADDRESS_STATE_POSTAL_ABBREV': 'LA',
+          '$ADDRESS_STATE_FULL': 'Louisiana',
+          '$ADDRESS_COUNTY': 'Orleans Parish',
+          '$ADDRESS_ZIP5': '11111',
+          '$ADDRESS_ZIP4': '1111',
+          '$ADDRESS_ZIP_PLUS_4': '11111-1111',
+          '$PHONE': '111-111-111',
+          '$PHONE_PARENTHESES': '(111) 111-1111',
+          '$EMAIL': 'test@test.com',
+          '$TOPIC': 'Agriculture',
+          '$SUBJECT': 'Test',
+          '$MESSAGE': 'Dear Sen Vitter, \nTest',
+          '$CAMPAIGN_UUID': '',
+          '$ORG_URL': '',
+          '$ORG_NAME': ''
+        },
+        campaign_tag: 'test'
+      });
+
   });
 
 });

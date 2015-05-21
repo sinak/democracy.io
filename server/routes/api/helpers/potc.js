@@ -17,11 +17,11 @@ var makePOTCMessage = function(message, campaignTag) {
     $NAME_LAST: message.sender.lastName,
     $NAME_FULL: message.sender.fullName(),
     $ADDRESS_STREET: message.canonicalAddress.streetAddress(),
-    $ADDRESS_STREET_2: null,
+    $ADDRESS_STREET_2: null, // This is never set
     $ADDRESS_CITY: addrComponents.cityName,
     $ADDRESS_STATE_POSTAL_ABBREV: addrComponents.stateAbbreviation,
     $ADDRESS_STATE_FULL: addrComponents.stateName,
-    $ADDRESS_COUNTY: null,
+    $ADDRESS_COUNTY: message.sender.county,
     $ADDRESS_ZIP5: addrComponents.zipcode,
     $ADDRESS_ZIP4: addrComponents.plus4Code,
     $ADDRESS_ZIP_PLUS_4: addrComponents.fullZipCode(),

@@ -26,6 +26,7 @@ MessageSender.prototype.setProperties = function(options) {
   this.email = options.email;
   this.phone = options.phone;
   this.parenPhone = options.parenPhone;
+  this.county = options.county;
 };
 
 

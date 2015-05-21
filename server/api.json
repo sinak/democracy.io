@@ -531,6 +531,10 @@
                 "parenPhone": {
                     "type": "string",
                     "description": "The sender's phone number, formatted like (123) 456-7891."
+                },
+                "county": {
+                  "type": "string",
+                  "description": "The county, as formatted by the rep, the user is located in."
                 }
             }
         },

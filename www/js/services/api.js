@@ -72,7 +72,8 @@ var api = function ($http, dioConfig) {
         url: this.makeRelativeAPIURL('/legislators/message'),
         method: 'POST',
         withCredentials: true,
-        data: messages
+        data: messages,
+        modelClass: models.MessageResponse
       };
 
       this.makeAPICall(opts, cb);

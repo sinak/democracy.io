@@ -26,7 +26,8 @@ var legislatorData = function(locker) {
     CA: 'CANONICAL_ADDRESS',
     L: 'LEGISLATORS',
     LFE: 'LEGISLATOR_FORM_ELEMENTS',
-    BIBS: 'BIOGUIDE_IDS_BY_SELECTION'
+    BIBS: 'BIOGUIDE_IDS_BY_SELECTION',
+    MR: 'MESSAGE_RESPONSES'
   };
 
   var DEFAULT_VALUES = {};
@@ -103,7 +104,8 @@ var legislatorData = function(locker) {
     {name: 'CanonicalAddress', model: models.CanonicalAddress, key: DATA_KEYS.CA},
     {name: 'Legislators', model: models.Legislator, key: DATA_KEYS.L},
     {name: 'LegislatorsFormElements', model: models.LegislatorFormElements, key: DATA_KEYS.LFE},
-    {name: 'BioguideIdsBySelection', key: DATA_KEYS.BIBS}
+    {name: 'BioguideIdsBySelection', key: DATA_KEYS.BIBS},
+    {name: 'MessageResponses', model: models.MessageResponse, key: DATA_KEYS.MR}
   ];
 
   forEach(objectKeys, function(obj) {

@@ -3,6 +3,9 @@
  */
 
 var ThanksController = function($scope) {
+
+  // TODO(all): Use the message-response objects to customize the thanks page
+
   $scope.shares = [
     {
       name: 'Facebook',
@@ -22,7 +25,7 @@ var ThanksController = function($scope) {
   ];
 
   $scope.sharePopup = function(link) {
-    window.open(link,"Share","width=650,height=400");
+    window.open(link, 'Share', 'width=650,height=400');
   };
 };
 

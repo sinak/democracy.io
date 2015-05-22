@@ -35,12 +35,6 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
   };
 
   /**
-   * Whether any of the legislators to message require captchas.
-   * @type {boolean}
-   */
-  $scope.hasCaptcha = false;
-
-  /**
    *
    * @type {{}}
    */
@@ -88,9 +82,9 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
    * Check whether or not any reps require captchas.
    * @returns {boolean}
    */
-  $scope.repsUseCaptchas = function() {
-    for (var i = 0; i < $scope.legislatorsFormElements.length; ++i) {
-      if ($scope.legislatorsFormElements[i].requiresCaptcha()) {
+  $scope.repsUseCaptchas = function(messageResponses) {
+    for (var i = 0; i < messageResponses.length; ++i) {
+      if (messageResponses[i].status === 'captcha_needed') {
         return true;
       }
     }
@@ -111,21 +105,20 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
       );
     });
 
-    var cb = function(err, res) {
-      var res = !isEmpty(res);
+    var cb = function(err, messageResponses) {
       var serverErr = !isEmpty(err);
 
-      if (res) {
-        // TODO(leah): Update this, the response will determine it.
-        if ($scope.hasCaptcha) {
+      if (!serverErr) {
+        var hasCaptcha = $scope.repsUseCaptchas(messageResponses);
+
+        dioData.setMessageResponses(messageResponses);
+        if (hasCaptcha) {
           $location.path('/captcha');
         } else {
           $location.path('/thanks');
         }
       } else {
-        if (serverErr) {
-
-        }
+        // TODO(sina): do something here
       }
     };
 
@@ -145,7 +138,6 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     });
     $scope.address = dioData.getCanonicalAddress();
 
-    $scope.hasCaptcha = $scope.repsUseCaptchas();
     var formFieldData = helpers.createFormFields(
       $scope.legislatorsFormElements, $scope.legislators, $scope.address);
 

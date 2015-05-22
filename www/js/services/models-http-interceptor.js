@@ -5,7 +5,7 @@
 var angular = require('angular');
 
 var Error = require('../../../models').Error;
-var coerceJSONResponseToModelResponse = require('../helpers/api-helpers').coerceJSONResponseToModelResponse;
+var coerceJSONResponseToModelResponse = require('../helpers/api').coerceJSONResponseToModelResponse;
 
 
 var modelHttpInterceptor = function($q) {

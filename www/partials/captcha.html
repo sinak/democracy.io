@@ -34,7 +34,6 @@
 			<p>Some legislators require that you complete a CAPTCHA to verify that you're really human. Type the CAPTCHA text into the form and click submit.</p>
 			<div ng-repeat="captcha in captchasReceived"
            ng-show="!captcha.success"
-					 ng-hide="!captcha"
            id="captchaContainer">
 
         <div ng-show="!captcha.waitingForResponse">

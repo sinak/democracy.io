@@ -27,7 +27,7 @@ var makeSunlightUrl = function(pathname, params, config) {
 
 
 /**
- * Finds members of the US Congress by lat / lng from the Sunglight Legislators API.
+ * Finds members of the US Congress by lat / lng from the Sunlight Legislators API.
  * @param lat
  * @param lng
  * @param config

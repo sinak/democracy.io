@@ -2,6 +2,7 @@
  *
  */
 
+var filter = require('lodash.filter');
 var isEmpty = require('lodash.isEmpty');
 var map = require('lodash.map');
 
@@ -66,20 +67,19 @@ var CaptchaController = function($scope, $location, $timeout, dioData, dioApi) {
       $scope.goBack();
     }
 
-    $scope.captchasReceived = map(messageResponses, function(messageResponse) {
-      if (!angular.isUndefined(messageResponse.url)) {
-        $scope.captchasRemaining += 1;
-        return {
-          link: messageResponse.url,
-          uid: messageResponse.uid,
-          answer: '',
-          success: false,
-          waitingForResponse: false,
-          bioguideId: messageResponse.bioguideId
-        };
-      } else {
-        return null;
-      }
+    var captchasReceived = map(messageResponses, function(messageResponse) {
+      $scope.captchasRemaining += 1;
+      return {
+        link: messageResponse.url,
+        uid: messageResponse.uid,
+        answer: '',
+        success: false,
+        waitingForResponse: false,
+        bioguideId: messageResponse.bioguideId
+      };
+    });
+    $scope.captchasReceived = filter(captchasReceived, function(captcha) {
+      return !angular.isUndefined(captcha.link);
     });
   };
 

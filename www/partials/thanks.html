@@ -11,7 +11,9 @@
       </svg>
 
       <div class="col-xs-4" ng-repeat="share in shares">
-        <a class="share-link" ng-click="sharePopup(share.link)" ng-bind-html="share.graphic | trusted_html">
+        <a class="share-link"
+           ng-click="sharePopup(share.link)"
+           ng-bind-html="safeGraphic(share)">
         </a>
       </div>
     </div>

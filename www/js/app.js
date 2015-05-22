@@ -7,11 +7,10 @@ var angular = require('angular');
 var controllers = require('./controllers');
 var directives = require('./directives');
 var services = require('./services');
-var filters = require('./filters');
 
 var democracyApp = angular.module(
   'democracyIoApp',
-  ['ngRoute', 'angular-locker', 'ngAnimate', 'ngSanitize', 'democracyFilters', 'ui.mask']
+  ['ngRoute', 'angular-locker', 'ngAnimate', 'ngSanitize', 'ui.mask']
 );
 
 democracyApp.config(function($provide, $httpProvider, $interpolateProvider, lockerProvider) {

@@ -4,7 +4,7 @@
   <div class="write-message whitebox col-md-10">
     <button class="btn-sm btn-warning back-button" ng-click="goBack()">Go back</button>
 
-    <div id="loading" class="whitebox-container" ng-if="!loadingDelay && !legislatorsFormElements">
+    <div id="loading" class="whitebox-container" ng-if="(!loadingDelay && !legislatorsFormElements) || sending">
       <svg  version="1.1"
             id="loading-svg"
             xmlns="http://www.w3.org/2000/svg"
@@ -30,10 +30,11 @@
             repeatCount="indefinite"/>
         </path>
       </svg>
-      <p>This'll just take one moment ...</p>
+      <p ng-if="!loadingDelay  && !legislatorsFormElements">This'll just take one moment ...</p>
+      <p ng-if="sending">Sending your message now...</p>
     </div>
 
-    <form name="messageForm" class="whitebox-container" ng-show="legislatorsFormElements" novalidate>
+    <form name="messageForm" class="whitebox-container" ng-show="legislatorsFormElements && !sending" novalidate>
 
       <div class="row">
         <div class="col-md-12" id="to-field">

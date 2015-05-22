@@ -21,6 +21,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
   $scope.loadingDelay = true;
   $scope.submitted = false;
   $scope.joinEmailList = false;
+  $scope.sending = false;
 
   $timeout(function() {
     $scope.loadingDelay = false;
@@ -119,9 +120,11 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
         }
       } else {
         // TODO(sina): do something here
+        $scope.sending = false;
       }
     };
 
+    $scope.sending = true;
     dioApi.submitMessageToReps(messages, cb);
 
 	};

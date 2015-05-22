@@ -7,5 +7,6 @@ module.exports = {
   Legislator: require('./legislator'),
   LegislatorFormElements: require('./legislator-form-elements'),
   Message: require('./message'),
-  MessageSender: require('./message-sender')
+  MessageSender: require('./message-sender'),
+  MessageResponse: require('./message-response')
 };

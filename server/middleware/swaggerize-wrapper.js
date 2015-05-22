@@ -52,7 +52,6 @@ var mountHandler = function(onMountListener, parent) {
     settings[key] = parent.get(key);
   });
 
-  var  oldLength = parent._router.stack.length;
   onMountListener(parent);
 
   lodash.forEach(settings, function(val, key) {

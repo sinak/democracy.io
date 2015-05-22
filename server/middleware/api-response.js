@@ -32,10 +32,10 @@ var response = function(res, data) {
 
 
 var error = function(res, err, opt_statusCode) {
-  var statusCode = isUndefined(opt_statusCode) ? opt_statusCode : 500;
+  var statusCode = isUndefined(opt_statusCode) ? 400 : opt_statusCode;
   res.status(statusCode).json({
     status: 'error',
-    message: err.toString(),
+    message: err.message,
     code: opt_statusCode || 400,
     data: null
   });
@@ -52,7 +52,7 @@ module.exports = function(config) {
     };
     res[namespace] = {
       response: partial(response, res),
-      error: partial(response, res)
+      error: partial(error, res)
     };
     next();
   };

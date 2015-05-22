@@ -17,13 +17,22 @@ var post = function (req, res) {
     return makePOTCMessage(new models.Message(rawMsg), req.app.locals.CONFIG.CAMPAIGNS.DEFAULT_TAG);
   });
 
-  var makeResponse = function(data) {
-    return data;
+  var makeResponse = function(results) {
+    return map(results, function(res) {
+      return new models.MessageResponse(res);
+    });
   };
   var cb = apiCallback(res, makeResponse);
 
+  var makeAPICall = function(message, config, cb) {
+    potc.sendMessage(message, config, function(err, res) {
+      res.bioguideId = message['bio_id'];
+      cb(err, res);
+    });
+  };
+
   async.parallel(map(potcMessages, function(message) {
-    return partial(potc.sendMessage, message, req.app.locals.CONFIG)
+    return partial(makeAPICall, message, req.app.locals.CONFIG)
   }), cb);
 };
 

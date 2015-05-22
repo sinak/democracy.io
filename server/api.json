@@ -84,10 +84,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Success acknowledgement.",
-                        "schema": {
-                            "type": "object",
-                            "$ref": "#/definitions/Success"
+                        "description": "Message response acknowledgement.",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/MessageResponse"
                         }
                     },
                     "default": {
@@ -269,10 +269,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Success acknowledgement.",
+                        "description": "Message response acknowledgement.",
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/Success"
+                            "$ref": "#/definitions/MessageResponse"
                         }
                     },
                     "default": {
@@ -556,6 +556,23 @@
                 "orgName": {
                     "type": "string",
                     "description": "The name of the organization running the campaign."
+                }
+            }
+        },
+        "MessageResponse": {
+            "description": "",
+            "properties": {
+                "bioguideId": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "uid": {
+                    "type": "string"
                 }
             }
         },

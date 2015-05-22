@@ -12,12 +12,18 @@ var post = function (req, res) {
   var message = new models.Message(req.body);
   var potcMessage = makePOTCMessage(message, req.app.locals.CONFIG.CAMPAIGNS.DEFAULT_TAG);
 
-  var makeResponse = function(data) {
-    return data;
-  };
-  var cb = apiCallback(res, makeResponse);
+  if (message.bioguideId !== req.params.bioguideId) {
+    res.DIO_API.error(new Error('legislator bioguideId does not match message bioguideId'));
+  } else {
+    var makeResponse = function(res) {
+      res.bioguideId = message.bioguideId;
+      return new models.MessageResponse(res);
+    };
+    var cb = apiCallback(res, makeResponse);
 
-  potc.sendMessage(potcMessage, req.app.locals.CONFIG, cb);
+    potc.sendMessage(potcMessage, req.app.locals.CONFIG, cb);
+  }
+
 };
 
 

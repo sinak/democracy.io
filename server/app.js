@@ -18,7 +18,7 @@ var serveStatic = require('serve-static');
 var session = require('express-session');
 
 var apiResponse = require('./middleware/api-response');
-var ipFilter = require('./middleware/ip-filter');
+var ipThrottle = require('./middleware/ip-throttle');
 var ngXsrf = require('./middleware/ng-xsrf');
 var swaggerizeWrapper = require('./middleware/swaggerize-wrapper');
 
@@ -41,8 +41,8 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-// See NOTE in ipFilter for why this isn't regex restricted to msg routes
-app.use(ipFilter(config.get('REQUEST_THROTTLING')));
+// See NOTE in ipThrottle for why this isn't regex restricted to msg routes
+app.use(ipThrottle(config.get('REQUEST_THROTTLING')));
 var RedisStore = connectRedis(session);
 app.use(session({
   store: new RedisStore({ttl: 7 * 24 * 60 * 60}),

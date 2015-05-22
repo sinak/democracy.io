@@ -1,6 +1,6 @@
 {>"layouts/master" /}
 
 {<body}
-    <h1>{@pre type="content" key="header"/}</h1>
-    <p>{@pre type="content" key="description"/}</p>
+    <h1>Internal server error</h1>
+    <p>The URL <code>{url}</code> had the following error <code>{err}</code>.</p>
 {/body}

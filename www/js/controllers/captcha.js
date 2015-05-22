@@ -67,16 +67,20 @@ var CaptchaController = function($scope, $location, $timeout, dioData, dioApi) {
     }
 
     $scope.captchasReceived = map(messageResponses, function(messageResponse) {
-      return {
-        link: messageResponse.url,
-        uid: messageResponse.uid,
-        answer: '',
-        success: false,
-        waitingForResponse: false,
-        bioguideId: messageResponse.bioguideId
-      };
+      if (!angular.isUndefined(messageResponse.url)) {
+        $scope.captchasRemaining += 1;
+        return {
+          link: messageResponse.url,
+          uid: messageResponse.uid,
+          answer: '',
+          success: false,
+          waitingForResponse: false,
+          bioguideId: messageResponse.bioguideId
+        };
+      } else {
+        return null;
+      }
     });
-    $scope.captchasRemaining = $scope.captchasReceived.length;
   };
 
   $scope.fetchDataFromStore();

@@ -283,6 +283,41 @@
                     }
                 }
             }
+        },
+        "/captchaSolution": {
+            "post": {
+                "summary": "Sends a captcha solution to POTC.",
+                "description": "Sends a captcha solution to POTC.",
+                "parameters": [
+                    {
+                        "name": "solution",
+                        "in": "body",
+                        "description": "The captcha solution to send to POTC.",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/CaptchaSolution"
+                        }
+                    }
+                ],
+                "tags": [
+                    "captcha"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Captcha solution acknowledgement.",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -560,7 +595,7 @@
             }
         },
         "MessageResponse": {
-            "description": "",
+            "description": "POTC response describing the results from attempting to send a message.",
             "properties": {
                 "bioguideId": {
                     "type": "string"
@@ -569,6 +604,20 @@
                     "type": "string"
                 },
                 "url": {
+                    "type": "string"
+                },
+                "uid": {
+                    "type": "string"
+                }
+            }
+        },
+        "CaptchaSolution": {
+            "description": "Solution for a captcha challenge.",
+            "properties": {
+                "bioguideId": {
+                    "type": "string"
+                },
+                "answer": {
                     "type": "string"
                 },
                 "uid": {

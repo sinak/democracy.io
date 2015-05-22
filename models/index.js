@@ -2,6 +2,7 @@ module.exports = {
   AddressComponents: require('./address-components'),
   Campaign: require('./campaign'),
   CanonicalAddress: require('./canonical-address'),
+  CaptchaSolution: require('./captcha-solution'),
   Error: require('./error'),
   FormElement: require('./form-element'),
   Legislator: require('./legislator'),

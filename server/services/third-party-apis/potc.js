@@ -46,6 +46,16 @@ var sendMessage = function(message, config, cb) {
 };
 
 
+/**
+ * Sends a captcha solution to POTC.
+ */
+var solveCaptcha = function(solution, config, cb) {
+  var potcURL = makePOTCUrl('fill-out-captcha', config);
+  makeRequest({method: 'POST', url: potcURL, json: true, body: solution}, cb);
+};
+
+
 module.exports.makePOTCUrl = makePOTCUrl;
 module.exports.getFormElementsForRepIdsFromPOTC = getFormElementsForRepIdsFromPOTC;
 module.exports.sendMessage = sendMessage;
+module.exports.solveCaptcha = solveCaptcha;

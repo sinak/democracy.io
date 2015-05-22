@@ -15,10 +15,12 @@ var modelHttpInterceptor = function($q) {
     response: function(response) {
       var requestOptions = response.config;
 
-      if (!angular.isUndefined(requestOptions.modelClass)) {
+      if (requestOptions.apiCall) {
         // The double .data access is due to usage of JSend style responses on the server
         var data = response.data.data;
-        response.data = coerceJSONResponseToModelResponse(data, requestOptions.modelClass);
+        if (!angular.isUndefined(requestOptions.modelClass)) {
+          response.data = coerceJSONResponseToModelResponse(data, requestOptions.modelClass);
+        }
       }
 
       return response;

@@ -17,6 +17,7 @@ var api = function ($http, dioConfig) {
     },
 
     makeAPICall: function(opts, cb) {
+      opts.apiCall = true;
       $http(opts)
         .success(function(data) {
           cb(null, data);
@@ -71,7 +72,6 @@ var api = function ($http, dioConfig) {
       var opts = {
         url: this.makeRelativeAPIURL('/legislators/message'),
         method: 'POST',
-        withCredentials: true,
         data: messages,
         modelClass: models.MessageResponse
       };
@@ -82,14 +82,14 @@ var api = function ($http, dioConfig) {
     /**
      *
      */
-    submitCaptchaResponse: function(uid, answer, cb) {
+    submitCaptchaResponse: function(captchaSolution, cb) {
       var opts = {
-        url: this.makeRelativeAPIURL(''), //TODO
+        url: this.makeRelativeAPIURL('captchaSolution'),
         method: 'POST',
-        params: {answer: answer, uid: uid}
+        data: captchaSolution
       };
 
-      //this.makeAPICall(opts, cb); TODO
+      this.makeAPICall(opts, cb);
     }
 
   };

@@ -51,7 +51,11 @@
 							</div>
 						</div>
 					</div>
-					<button class="btn btn-orange btn-lg" ng-disabled="!captcha.answer" ng-click="submit(captcha)">Submit</button>
+					<button class="btn btn-orange btn-lg"
+                  ng-disabled="!captcha.answer"
+                  ng-click="submit(captcha)">
+            Submit
+          </button>
 				</div>
 
 				<div id="loading" ng-show="captcha.waitingForResponse">

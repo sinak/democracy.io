@@ -5,6 +5,8 @@
 var isEmpty = require('lodash.isEmpty');
 var map = require('lodash.map');
 
+var CaptchaSolution = require('../../../models').CaptchaSolution;
+
 
 var CaptchaController = function($scope, $location, $timeout, dioData, dioApi) {
 
@@ -31,23 +33,28 @@ var CaptchaController = function($scope, $location, $timeout, dioData, dioApi) {
   $scope.submit = function(captcha) {
   	captcha.waitingForResponse = true;
 
-  	var cb = function(response) {
-  		if (response.success) {
-  			captcha.success = true;
-				var index = $scope.captchasReceived.indexOf(captcha);
-				if (index > -1) {
-					$scope.captchasReceived.splice(index, 1);
-				}
-  		} else {
-  			// TODO - work up fail state
-  		}
+  	var cb = function(err, response) {
+      var serverErr = !isEmpty(err);
 
-  		if ($scope.captchasRemaining === 0) {
-  			$location.path('/thanks');
-  		}
+      if (!serverErr) {
+        var status = response.status;
+
+        if (status === 'success') {
+          captcha.success = true;
+          $scope.captchasRemaining -= 1;
+        } else {
+          // TODO(sina): Show a "solution" failed, plz retry message by the captcha
+        }
+
+        if ($scope.captchasRemaining === 0) {
+          $location.path('/thanks');
+        }
+      } else {
+        // TODO(sina): Throw a try again later err
+      }
   	};
 
-  	dioApi.submitCaptchaResponse(captcha.uid, captcha.answer, cb);
+  	dioApi.submitCaptchaResponse(new CaptchaSolution(captcha), cb);
   };
 
   /**
@@ -65,7 +72,8 @@ var CaptchaController = function($scope, $location, $timeout, dioData, dioApi) {
         uid: messageResponse.uid,
         answer: '',
         success: false,
-        waitingForResponse: false
+        waitingForResponse: false,
+        bioguideId: messageResponse.bioguideId
       };
     });
     $scope.captchasRemaining = $scope.captchasReceived.length;

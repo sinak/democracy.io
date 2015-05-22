@@ -20,7 +20,7 @@ var errHandler = function(err, req, res, next) {
   var errJson = {
     status: 'error',
     code: res.statusCode,
-    message: err.toString(),
+    message: err.message,
     data: validationErrors
   };
   res.json(errJson);

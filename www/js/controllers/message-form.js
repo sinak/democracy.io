@@ -119,8 +119,12 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
           $location.path('/thanks');
         }
       } else {
-        // TODO(sina): do something here
-        $scope.sending = false;
+        if (err.code === 429) {
+          // TODO(sina): show a "too many messages" err
+        } else {
+          // TODO(sina): do something here
+          $scope.sending = false;
+        }
       }
     };
 

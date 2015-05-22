@@ -6,7 +6,7 @@ var path = require('path');
 
 var bodyParser = require('body-parser');
 var compression = require('compression');
-var config = require('config');
+var config = require('config').get('SERVER');
 var consolidate = require('consolidate');
 var dust = require('dustjs-linkedin');
 var express = require('express');
@@ -18,6 +18,7 @@ var serveStatic = require('serve-static');
 var session = require('express-session');
 
 var apiResponse = require('./middleware/api-response');
+var ipFilter = require('./middleware/ip-filter');
 var ngXsrf = require('./middleware/ng-xsrf');
 var swaggerizeWrapper = require('./middleware/swaggerize-wrapper');
 
@@ -27,20 +28,25 @@ var buildDir = path.join(__dirname, '../.build');
 
 var app = express();
 
-app.locals['CONFIG'] = config.get('SERVER');
+app.locals['CONFIG'] = config;
 
 app.engine('dust', consolidate.dust);
 app.set('views', path.join(__dirname, 'templates'));
 app.set('view engine', 'dust');
+app.enable('trust proxy');
 
 app.use(serveFavicon(path.join(buildDir, 'static/img/favicon.ico')));
 app.use(serveStatic(buildDir, {}));
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+// See NOTE in ipFilter for why this isn't regex restricted to msg routes
+app.use(ipFilter(config.get('REQUEST_THROTTLING')));
+// TODO(devops): add in a real session store instead of defaulting to the in memory store
 app.use(session({
   key: 'connect.sid',
-  secret: 'keyboard cat',
+  secret: config.get('CREDENTIALS').get('SESSION.SECRET'),
   cookie: {
     path: '/',
     httpOnly: true,
@@ -66,7 +72,6 @@ app.use(swaggerizeWrapper({
   'api': path.join(__dirname, 'api.json'),
   'handlers': path.join(__dirname, 'routes/api')
 }));
-
 
 app.on('start', function () {
   console.log('Application ready to serve requests.');

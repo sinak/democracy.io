@@ -94,12 +94,14 @@
     "lodash.zipobject": "^3.0.0",
     "lusca": "^1.1.0",
     "morgan": "^1.5.3",
+    "redis": "^0.12.1",
     "request": "^2.53.0",
     "serve-favicon": "^2.2.1",
     "serve-static": "^1.9.3",
     "shush": "0.0.1",
     "sprintf-js": "^1.0.2",
     "swaggerize-express": "4.0.1",
+    "tokenthrottle-redis": "^1.1.0",
     "us": "^1.0.3"
   }
 }

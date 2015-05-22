@@ -21,8 +21,49 @@
     },
 
     "CREDENTIALS": {
+      "CREDENTIALS": {
+        "SUNLIGHT": {
+          "API_KEY": ""
+        },
 
+        "POTC": {
+          "DEBUG_KEY": ""
+        },
+
+        "SMARTY_STREETS": {
+          "ID": "",
+          "TOKEN": ""
+        },
+
+        "SESSION": {
+          "SECRET": ""
+        }
+      }
+    },
+
+    "REQUEST_THROTTLING": {
+      "THROTTLE": {
+        "rate": 200,
+        "window": 604800000,
+        "expiry": 604800,
+        "overrides": {
+          "127.0.0.1": {
+            "rate": 0
+          },
+          "::1": {
+            "rate": 0
+          },
+          "::ffff:127.0.0.1": {
+            "rate": 0
+          }
+        }
+      },
+      "REDIS": {
+        "PORT": 6379,
+        "HOSTNAME": "127.0.0.1"
+      }
     }
+
   },
 
   "WWW": {

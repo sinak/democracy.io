@@ -3,9 +3,9 @@
  */
 
 var path = require('path');
-
 var bodyParser = require('body-parser');
 var compression = require('compression');
+var connectRedis = require('connect-redis');
 var config = require('config').get('SERVER');
 var consolidate = require('consolidate');
 var dust = require('dustjs-linkedin');
@@ -43,8 +43,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // See NOTE in ipFilter for why this isn't regex restricted to msg routes
 app.use(ipFilter(config.get('REQUEST_THROTTLING')));
-// TODO(devops): add in a real session store instead of defaulting to the in memory store
+var RedisStore = connectRedis(session);
 app.use(session({
+  store: new RedisStore({ttl: 7 * 24 * 60 * 60}),
   key: 'connect.sid',
   secret: config.get('CREDENTIALS').get('SESSION.SECRET'),
   cookie: {

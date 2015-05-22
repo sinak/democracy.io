@@ -68,6 +68,7 @@
     "change-case-keys": "0.0.4",
     "compression": "^1.4.4",
     "config": "^1.12.0",
+    "connect-redis": "^2.3.0",
     "consolidate": "^0.12.1",
     "dustjs-helpers": "1.6.1",
     "dustjs-linkedin": "2.6",

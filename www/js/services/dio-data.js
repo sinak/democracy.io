@@ -118,4 +118,4 @@ var legislatorData = function(locker) {
   return api;
 };
 
-module.exports = legislatorData;
+module.exports = ['locker', legislatorData];

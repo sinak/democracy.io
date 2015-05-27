@@ -35,4 +35,4 @@ var modelHttpInterceptor = function($q) {
 };
 
 
-module.exports = modelHttpInterceptor;
+module.exports = ['$q', modelHttpInterceptor];

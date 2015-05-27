@@ -33,4 +33,8 @@ var ThanksController = function($scope, $sce) {
   };
 };
 
+ThanksController.$inject = [
+  '$scope', '$sce'
+];
+
 module.exports = ThanksController;

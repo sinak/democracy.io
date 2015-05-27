@@ -41,4 +41,4 @@ var configureRoutes = function($routeProvider) {
 
 };
 
-module.exports = configureRoutes;
+module.exports = ['$routeProvider', configureRoutes];

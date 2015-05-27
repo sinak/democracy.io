@@ -11,12 +11,12 @@
     {>"components/nav-bar"/}
 
     <div ng-switch ng-cloak on="pageName">
-      <div ng-switch-when="home" 
+      <div ng-switch-when="home"
            class="header"
            dio-write-to-them-animation=""
            animate-msg="Write to your representatives"
            initial-delay="1000"
-           speed="50">
+           speed="50"
            show-full="pageFrom !== 'new-visit'">
       </div>
       <h1 ng-switch-when="location" 

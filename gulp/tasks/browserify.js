@@ -7,6 +7,7 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var path = require('path');
 var source = require('vinyl-source-stream');
+var minifyify = require('minifyify');
 var watchify  = require('watchify');
 
 var bundleLogger = require('../util/bundle-logger');
@@ -22,6 +23,12 @@ gulp.task('browserify', function() {
     ],
     debug: !gutil.env.production
   });
+  if (gutil.env.production) {
+    bundler.plugin('minifyify', {
+      map: 'bundle.map.json',
+      output: path.join(config.STATIC_DIR, 'js/bundle.map.json')
+    });
+  }
 
   var reportFinished = function() {
     bundleLogger.end('dio.min.js');

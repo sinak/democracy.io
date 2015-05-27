@@ -13,7 +13,7 @@ var democracyApp = angular.module(
   ['ngRoute', 'angular-locker', 'ngAnimate', 'ngSanitize', 'ui.mask']
 );
 
-democracyApp.config(function($provide, $httpProvider, $interpolateProvider, lockerProvider) {
+var configureApp = function($provide, $httpProvider, $interpolateProvider, lockerProvider) {
   $provide.factory('modelsHttpInterceptor', services.modelsHttpInterceptor);
   $httpProvider.interceptors.push('modelsHttpInterceptor');
 
@@ -28,7 +28,8 @@ democracyApp.config(function($provide, $httpProvider, $interpolateProvider, lock
     .setDefaultNamespace('dio')
     .setSeparator('.')
     .setEventsEnabled(false);
-});
+};
+democracyApp.config(['$provide', '$httpProvider', '$interpolateProvider', 'lockerProvider', configureApp]);
 
 democracyApp.config(require('./routes'));
 

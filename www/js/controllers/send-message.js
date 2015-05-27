@@ -33,5 +33,9 @@ var SendMessageController = function($scope, $location) {
 
 };
 
+SendMessageController.$inject = [
+  '$scope', '$location'
+];
+
 
 module.exports = SendMessageController;

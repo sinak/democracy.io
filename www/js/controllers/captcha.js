@@ -87,4 +87,8 @@ var CaptchaController = function($scope, $location, $timeout, dioData, dioApi) {
 
 };
 
+CaptchaController.$inject = [
+  '$scope', '$location', '$timeout', 'dioData', 'dioApi'
+];
+
 module.exports = CaptchaController;

@@ -7,7 +7,7 @@ var writeToThemAnimation = function($timeout) {
   var defaultDelay = 1000;
   var defaultSpeed = 50;
 
-  return {
+  var spec = {
     restrict: 'A',
     scope: {
       animateMsg: '@',    // The text to animate
@@ -45,6 +45,8 @@ var writeToThemAnimation = function($timeout) {
     }
   };
 
+  spec.controller.$inject = ['$scope', '$element', '$attrs'];
+  return spec;
 };
 
-module.exports = writeToThemAnimation;
+module.exports = ['$timeout', writeToThemAnimation];

@@ -89,4 +89,8 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioData, 
 
 };
 
+LegislatorPickerController.$inject = [
+  '$scope', '$location', '$timeout', 'dioData', 'dioApi'
+];
+
 module.exports = LegislatorPickerController;

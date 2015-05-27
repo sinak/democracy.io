@@ -174,4 +174,8 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
 
 };
 
+MessageFormController.$inject = [
+  '$scope', '$location', '$timeout', 'dioData', 'dioApi'
+];
+
 module.exports = MessageFormController;

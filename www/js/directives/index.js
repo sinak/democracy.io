@@ -1,3 +1,3 @@
 module.exports = {
-  writeToThemAnimation: require('./write-to-them-animation')
+  'writeToThemAnimation': require('./write-to-them-animation')
 };

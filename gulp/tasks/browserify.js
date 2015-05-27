@@ -8,8 +8,8 @@ var source = require('vinyl-source-stream');
 var watchify  = require('watchify');
 
 var config = require('../config').browserify;
-var bundleLogger = require('../util/bundle_logger');
-var handleErrors = require('../util/handle_errors');
+var bundleLogger = require('../util/bundle-logger');
+var handleErrors = require('../util/handle-errors');
 
 gulp.task('browserify', function() {
 

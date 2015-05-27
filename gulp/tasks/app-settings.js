@@ -9,21 +9,21 @@ var ngConstant = require('gulp-ng-constant');
 var path = require('path');
 var rename = require('gulp-rename');
 
-var appSettingsConfig = require('../config').appSettings;
+var gulpConfig = require('../config');
 
 gulp.task('appSettings', function() {
-  var appConfig = {};
-
-  appConfig[appSettingsConfig.configVarName] = config.get('WWW');
-  appConfig[appSettingsConfig.configVarName]['MODE'] = config.get('MODE');
+  var appConfig = {
+    dioConfig: config.get('WWW')
+  };
+  appConfig['dioConfig']['MODE'] = config.get('MODE');
 
   gulp.src('')
     .pipe(ngConstant({
-      name: appSettingsConfig.moduleName,
+      name: 'democracyIoApp',
       deps: false,
       constants: appConfig,
       wrap: 'commonjs'
     }))
-    .pipe(rename(appSettingsConfig.fileName))
-    .pipe(gulp.dest(appSettingsConfig.dest));
+    .pipe(rename('dioAppSettings.js'))
+    .pipe(gulp.dest(gulpConfig.BUILD_DIR));
 });

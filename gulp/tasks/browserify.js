@@ -4,35 +4,37 @@
 
 var browserify = require('browserify');
 var gulp = require('gulp');
+var gutil = require('gulp-util');
+var path = require('path');
 var source = require('vinyl-source-stream');
 var watchify  = require('watchify');
 
-var config = require('../config').browserify;
 var bundleLogger = require('../util/bundle-logger');
+var config = require('../config');
 var handleErrors = require('../util/handle-errors');
 
 gulp.task('browserify', function() {
 
   var bundler = browserify({
-    // Required watchify args
     cache: {}, packageCache: {}, fullPaths: true,
-    entries: config.entries,
-    debug: config.debug
+    entries: [
+      './www/js/app.js'
+    ],
+    debug: !gutil.env.production
   });
 
   var reportFinished = function() {
-    // Log when bundling completes
-    bundleLogger.end(config.outputName);
+    bundleLogger.end('dio.min.js');
   };
 
   var bundle = function() {
-    bundleLogger.start(config.outputName);
+    bundleLogger.start('dio.min.js');
 
     return bundler
       .bundle()
       .on('error', handleErrors)
-      .pipe(source(config.outputName))
-      .pipe(gulp.dest(config.dest))
+      .pipe(source('dio.min.js'))
+      .pipe(gulp.dest(path.join(config.STATIC_DIR, 'js')))
       .on('end', reportFinished);
   };
 

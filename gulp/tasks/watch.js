@@ -7,13 +7,14 @@
  */
 
 var gulp = require('gulp');
+var path = require('path');
 var runSequence = require('run-sequence');
 
 var config = require('../config');
 
 gulp.task('watch', function() {
-  gulp.watch(config.sass.watch, ['css']);
-  gulp.watch(config.partials.paths, function() {
+  gulp.watch(path.join(config.WWW_DIR, 'sass/**.scss'), ['css']);
+  gulp.watch(path.join(config.WWW_DIR, 'partials/**/*.html'), function() {
     runSequence('partials');
   });
 });

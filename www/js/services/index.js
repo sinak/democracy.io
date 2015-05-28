@@ -1,5 +1,6 @@
 module.exports = {
-  'dioApi': require('./api'),
+  'dioAPI': require('./api'),
+  '$exceptionHandler': require('./error-bus'),
   'modelsHttpInterceptor': require('./models-http-interceptor'),
   'dioData': require('./dio-data')
 };

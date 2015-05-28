@@ -9,7 +9,7 @@ var map = require('lodash.map');
 var CaptchaSolution = require('../../../models').CaptchaSolution;
 
 
-var CaptchaController = function($scope, $location, $timeout, dioData, dioApi) {
+var CaptchaController = function($scope, $location, $timeout, dioData, dioAPI) {
 
   /**
    *
@@ -55,7 +55,7 @@ var CaptchaController = function($scope, $location, $timeout, dioData, dioApi) {
       }
   	};
 
-  	dioApi.submitCaptchaResponse(new CaptchaSolution(captcha), cb);
+  	dioAPI.submitCaptchaResponse(new CaptchaSolution(captcha), cb);
   };
 
   /**
@@ -88,7 +88,7 @@ var CaptchaController = function($scope, $location, $timeout, dioData, dioApi) {
 };
 
 CaptchaController.$inject = [
-  '$scope', '$location', '$timeout', 'dioData', 'dioApi'
+  '$scope', '$location', '$timeout', 'dioData', 'dioAPI'
 ];
 
 module.exports = CaptchaController;

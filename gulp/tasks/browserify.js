@@ -24,7 +24,7 @@ gulp.task('browserify', function() {
     debug: !gutil.env.production
   });
   // NOTE: as debug is on, sourcemaps will be produced as a data URL and appended to the file.
-  //       For prod, build the sourcemap, but push it to another file
+
   if (gutil.env.production) {
     bundler.plugin('minifyify', {
       map: '/static/js/bundle.map.js',

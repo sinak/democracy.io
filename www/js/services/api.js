@@ -90,6 +90,19 @@ var api = function ($http, dioConfig) {
       };
 
       this.makeAPICall(opts, cb);
+    },
+
+    logException: function(exception) {
+      var opts = {
+        url: this.makeRelativeAPIURL('exception'),
+        method: 'POST',
+        data: exception
+      };
+
+      // Pass in a noop cb, so the exception log is best-effort
+      this.makeAPICall(opts, function() {
+
+      });
     }
 
   };

@@ -13,7 +13,7 @@ var map = require('lodash.map');
 var helpers = require('../helpers/message-form');
 
 
-var MessageFormController = function($scope, $location, $timeout, dioData, dioApi) {
+var MessageFormController = function($scope, $location, $timeout, dioData, dioAPI) {
   // TODO(leah): Nitpicks:
   //   * wire up the error fields to use better show conditions, so the phone err msg etc doesn't immediately show on typing
   //   * The "Dear [Rep / Senator] text scrolls over other text entered in that box
@@ -76,7 +76,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
       }
     };
 
-    dioApi.legislatorFormElemsByBioguideIds(bioguideIds, cb);
+    dioAPI.legislatorFormElemsByBioguideIds(bioguideIds, cb);
   };
 
   /**
@@ -129,7 +129,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
     };
 
     $scope.sending = true;
-    dioApi.submitMessageToReps(messages, cb);
+    dioAPI.submitMessageToReps(messages, cb);
 
 	};
 
@@ -175,7 +175,7 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAp
 };
 
 MessageFormController.$inject = [
-  '$scope', '$location', '$timeout', 'dioData', 'dioApi'
+  '$scope', '$location', '$timeout', 'dioData', 'dioAPI'
 ];
 
 module.exports = MessageFormController;

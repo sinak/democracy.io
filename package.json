@@ -103,6 +103,7 @@
     "serve-static": "^1.9.3",
     "shush": "0.0.1",
     "sprintf-js": "^1.0.2",
+    "stacktrace-js": "0.6.3",
     "swaggerize-express": "4.0.1",
     "tokenthrottle-redis": "^1.1.0",
     "us": "^1.0.3"

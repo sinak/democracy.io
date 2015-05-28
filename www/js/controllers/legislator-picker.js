@@ -7,7 +7,7 @@ var isEmpty = require('lodash.isEmpty');
 var isNumber = require('lodash.isNumber');
 var map = require('lodash.map');
 
-var LegislatorPickerController = function($scope, $location, $timeout, dioData, dioApi) {
+var LegislatorPickerController = function($scope, $location, $timeout, dioData, dioAPI) {
 
   // TODO(leah): Wire this on to the rootscope?
   $scope.loadingDelay = true;
@@ -60,7 +60,7 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioData, 
       }
     };
 
-    dioApi.findLegislatorsByLatLng(
+    dioAPI.findLegislatorsByLatLng(
       canonicalAddress.latitude, canonicalAddress.longitude, cb);
   };
 
@@ -90,7 +90,7 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioData, 
 };
 
 LegislatorPickerController.$inject = [
-  '$scope', '$location', '$timeout', 'dioData', 'dioApi'
+  '$scope', '$location', '$timeout', 'dioData', 'dioAPI'
 ];
 
 module.exports = LegislatorPickerController;

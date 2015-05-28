@@ -9,5 +9,6 @@ module.exports = {
   LegislatorFormElements: require('./legislator-form-elements'),
   Message: require('./message'),
   MessageSender: require('./message-sender'),
-  MessageResponse: require('./message-response')
+  MessageResponse: require('./message-response'),
+  NgException: require('./ng-exception')
 };

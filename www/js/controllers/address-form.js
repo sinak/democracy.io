@@ -6,7 +6,7 @@ var isEmpty = require('lodash.isEmpty');
 var filter = require('lodash.filter');
 
 
-var AddressFormController = function($scope, $location, dioData, dioApi) {
+var AddressFormController = function($scope, $location, dioData, dioAPI) {
 
   // See https://developers.google.com/web/fundamentals/input/form/provide-real-time-validation
   $scope.patterns = {
@@ -49,7 +49,7 @@ var AddressFormController = function($scope, $location, dioData, dioApi) {
 
     };
 
-    dioApi.verifyAddress(address, cb);
+    dioAPI.verifyAddress(address, cb);
   };
 
   $scope.getAddressString = function() {
@@ -74,7 +74,7 @@ var AddressFormController = function($scope, $location, dioData, dioApi) {
 };
 
 AddressFormController.$inject = [
-  '$scope', '$location', 'dioData', 'dioApi'
+  '$scope', '$location', 'dioData', 'dioAPI'
 ];
 
 module.exports = AddressFormController;

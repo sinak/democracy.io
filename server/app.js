@@ -22,6 +22,7 @@ var ipThrottle = require('./middleware/ip-throttle');
 var ngXsrf = require('./middleware/ng-xsrf');
 var swaggerizeWrapper = require('./middleware/swaggerize-wrapper');
 
+var env = process.env.NODE_ENV || 'development';
 // NOTE: The app currently assumes a flat deploy with the server serving static assets directly.
 //       This is due to our not knowing the deploy env at the current time.
 var buildDir = path.join(__dirname, '../.build');
@@ -36,7 +37,9 @@ app.set('view engine', 'dust');
 app.enable('trust proxy');
 
 app.use(serveFavicon(path.join(buildDir, 'static/img/favicon.ico')));
-app.use(serveStatic(buildDir, {}));
+if (env === 'development') {
+  app.use(serveStatic(buildDir, {}));
+}
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -44,6 +47,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 // See NOTE in ipThrottle for why this isn't regex restricted to msg routes
 app.use(ipThrottle(config.get('REQUEST_THROTTLING')));
 var RedisStore = connectRedis(session);
+
 app.use(session({
   store: new RedisStore({ttl: 7 * 24 * 60 * 60}),
   key: 'connect.sid',

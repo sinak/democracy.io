@@ -4,8 +4,7 @@
   "description": "Contact your US representatives",
   "main": "server.js",
   "scripts": {
-    "test": "gulp test",
-    "postinstall": "node bin/fix-expressroutes.js"
+    "test": "gulp test"
   },
   "repository": {
     "type": "git",
@@ -104,7 +103,7 @@
     "shush": "0.0.1",
     "sprintf-js": "^1.0.2",
     "stacktrace-js": "0.6.3",
-    "swaggerize-express": "4.0.1",
+    "swaggerize-express": "4.0.2",
     "tokenthrottle-redis": "^1.1.0",
     "us": "^1.0.3"
   }

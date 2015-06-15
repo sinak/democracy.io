@@ -3,7 +3,7 @@
  */
 
 var map = require('lodash.map');
-var isArray = require('lodash.isArray');
+var isArray = require('lodash.isarray');
 
 
 /**

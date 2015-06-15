@@ -24,6 +24,6 @@ gulp.task('appSettings', function() {
       constants: appConfig,
       wrap: 'commonjs'
     }))
-    .pipe(rename('dioAppSettings.js'))
+    .pipe(rename('dio-app-settings.js'))
     .pipe(gulp.dest(gulpConfig.BUILD_DIR));
 });

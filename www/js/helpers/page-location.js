@@ -2,7 +2,7 @@
  * Helpers for page location and navigation.
  */
 
-var isEmpty = require('lodash.isEmpty');
+var isEmpty = require('lodash.isempty');
 var isUndefined = require('lodash.isundefined');
 
 /**

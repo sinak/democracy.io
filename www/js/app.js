@@ -52,5 +52,5 @@ require('angular-sanitize');
 require('angular-ui-utils/modules/mask/mask');
 
 // Require local modules generated as part of the build process
-require('../../.build/dioAppSettings');
+require('../../.build/dio-app-settings');
 require('../../.build/partials/partials');

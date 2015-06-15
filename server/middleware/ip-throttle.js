@@ -2,8 +2,8 @@
  * Restricts access to designated URLs by IP address and time period.
  */
 
-var isEmpty = require('lodash.isEmpty');
-var isUndefined = require('lodash.isUndefined');
+var isEmpty = require('lodash.isempty');
+var isUndefined = require('lodash.isundefined');
 var redis = require('redis');
 var tokenThrottleRedis = require('tokenthrottle-redis');
 

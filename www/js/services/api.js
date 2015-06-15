@@ -4,7 +4,7 @@
 
 var helpers = require('../helpers/api');
 var models = require('../../../models');
-var forEach = require('lodash.forEach');
+var forEach = require('lodash.foreach');
 
 var api = function ($http, dioConfig) {
 

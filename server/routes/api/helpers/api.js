@@ -2,7 +2,7 @@
  *
  */
 
-var isUndefined = require('lodash.isUndefined');
+var isUndefined = require('lodash.isundefined');
 
 
 var apiCallback = function(res, makeResponse) {

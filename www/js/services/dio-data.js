@@ -9,14 +9,14 @@
  */
 
 var filter = require('lodash.filter');
-var forEach = require('lodash.forEach');
-var isArray = require('lodash.isArray');
-var isEmpty = require('lodash.isEmpty');
+var forEach = require('lodash.foreach');
+var isArray = require('lodash.isarray');
+var isEmpty = require('lodash.isempty');
 var keys = require('lodash.keys');
 var map = require('lodash.map');
 var partial = require('lodash.partial');
 var pick = require('lodash.pick');
-var zipObject = require('lodash.zipObject');
+var zipObject = require('lodash.zipobject');
 
 var models = require('../../../models');
 

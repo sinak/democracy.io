@@ -4,8 +4,8 @@
  * @returns {Function}
  */
 
-var isEmpty = require('lodash.isEmpty');
-var isUndefined = require('lodash.isUndefined');
+var isEmpty = require('lodash.isempty');
+var isUndefined = require('lodash.isundefined');
 
 module.exports = function(config) {
   config = isEmpty(config) ? {} : config;

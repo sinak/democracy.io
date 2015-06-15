@@ -4,7 +4,7 @@
 
 var changeCaseKeys = require('change-case-keys');
 var filter = require('lodash.filter');
-var isEmpty = require('lodash.isEmpty');
+var isEmpty = require('lodash.isempty');
 var map = require('lodash.map');
 var us = require('us');
 

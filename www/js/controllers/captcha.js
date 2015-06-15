@@ -3,7 +3,7 @@
  */
 
 var filter = require('lodash.filter');
-var isEmpty = require('lodash.isEmpty');
+var isEmpty = require('lodash.isempty');
 var map = require('lodash.map');
 
 var CaptchaSolution = require('../../../models').CaptchaSolution;

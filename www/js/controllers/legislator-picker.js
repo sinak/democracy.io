@@ -3,8 +3,8 @@
  */
 
 var filter = require('lodash.filter');
-var isEmpty = require('lodash.isEmpty');
-var isNumber = require('lodash.isNumber');
+var isEmpty = require('lodash.isempty');
+var isNumber = require('lodash.isnumber');
 var map = require('lodash.map');
 
 var LegislatorPickerController = function($scope, $location, $timeout, dioData, dioAPI) {

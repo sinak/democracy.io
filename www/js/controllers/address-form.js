@@ -2,7 +2,7 @@
  * Controller to manage the address input form.
  */
 
-var isEmpty = require('lodash.isEmpty');
+var isEmpty = require('lodash.isempty');
 var filter = require('lodash.filter');
 
 

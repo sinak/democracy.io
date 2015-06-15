@@ -6,8 +6,8 @@
  */
 
 var isArray = require('lodash.isarray');
-var isEmpty = require('lodash.isEmpty');
-var isUndefined = require('lodash.isUndefined');
+var isEmpty = require('lodash.isempty');
+var isUndefined = require('lodash.isundefined');
 var map = require('lodash.map');
 var partial = require('lodash.partial');
 

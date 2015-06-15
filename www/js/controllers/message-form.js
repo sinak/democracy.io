@@ -2,12 +2,12 @@
  *
  */
 
-var findWhere = require('lodash.findWhere');
+var findWhere = require('lodash.findwhere');
 var filter = require('lodash.filter');
-var forEach = require('lodash.forEach');
-var isArray = require('lodash.isArray');
-var isEmpty = require('lodash.isEmpty');
-var isUndefined = require('lodash.isUndefined');
+var forEach = require('lodash.foreach');
+var isArray = require('lodash.isarray');
+var isEmpty = require('lodash.isempty');
+var isUndefined = require('lodash.isundefined');
 var map = require('lodash.map');
 
 var helpers = require('../helpers/message-form');

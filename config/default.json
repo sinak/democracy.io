@@ -60,7 +60,8 @@
       },
       "REDIS": {
         "PORT": 6379,
-        "HOSTNAME": "127.0.0.1"
+        "HOSTNAME": "127.0.0.1",
+        "PASS": null
       }
     }
 

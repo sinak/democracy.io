@@ -26,7 +26,7 @@ module.exports = function(config) {
   var targetedMethod = 'POST';
 
   var redisOptions = config.get('REDIS');
-  var redisClient = redis.createClient(redisOptions.PORT, redisOptions.HOSTNAME);
+  var redisClient = redis.createClient(redisOptions.PORT, redisOptions.HOSTNAME, { auth_pass: redisOptions.PASS });
   var throttle = tokenThrottleRedis(config.get('THROTTLE'), redisClient);
 
   return function(req, res, next) {

@@ -21,23 +21,21 @@
     },
 
     "CREDENTIALS": {
-      "CREDENTIALS": {
-        "SUNLIGHT": {
-          "API_KEY": ""
-        },
+      "SUNLIGHT": {
+        "API_KEY": ""
+      },
 
-        "POTC": {
-          "DEBUG_KEY": ""
-        },
+      "POTC": {
+        "DEBUG_KEY": ""
+      },
 
-        "SMARTY_STREETS": {
-          "ID": "",
-          "TOKEN": ""
-        },
+      "SMARTY_STREETS": {
+        "ID": "",
+        "TOKEN": ""
+      },
 
-        "SESSION": {
-          "SECRET": ""
-        }
+      "SESSION": {
+        "SECRET": ""
       }
     },
 

@@ -5,7 +5,7 @@
 }
 body {
   @extend .animated;
-  transition: height .1s linear;   
+  transition: height .1s linear;
 }
 
 // Animation for all form sections
@@ -22,7 +22,7 @@ body {
 #form-scope.ng-enter:nth-child(2) {
   display: none;
 }
-  
+
 // Animations for loading box
 #loading.ng-leave {
     @extend .animated;
@@ -86,7 +86,7 @@ body {
     animation-name: fadeInUp;
     animation-delay: 3s; // Reduces jittering
   }
-  #progress-bar-svg { 
+  #progress-bar-svg {
     #pb-circle-1, #pb-circle-2, #pb-circle-3 {
       stroke-linejoin: butt;
       stroke-dasharray: 500;
@@ -297,4 +297,38 @@ body {
   to {
       stroke-dashoffset: 0;
   }
+}
+
+
+// Animated Logo About Page
+
+/* About page styles */
+#wrapper[data-pagename="about"] {
+  .navbar-brand {
+    .text {
+      fill: none;
+      stroke-width: 7;
+      stroke-linejoin: butt;
+      stroke-dasharray: 700;
+      stroke-dashoffset: 700;
+      animation: draw 2s linear 1.6s 1 forwards;
+      animation-repeat: 1;
+      position: absolute;
+    }
+    svg {
+      font: 12em/1 Open Sans, Impact;
+      text-transform: uppercase;
+      margin: 0;
+      letter-spacing:40px;
+      font-weight: 800;
+      max-width: 550px;
+      margin-top: 50px;
+    }
+  }
+  @keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+        stroke-dasharray: 0;
+        }
+    }
 }

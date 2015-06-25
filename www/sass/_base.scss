@@ -221,7 +221,7 @@ label {
 /*****************
  About page
  ****************/
-#about {
+#wrapper[data-pagename="about"] {
   p, ul {
     font-size: 20px;
     line-height: 1.6;
@@ -232,5 +232,12 @@ label {
   h2 {
     margin-top: 30px;
     margin-bottom: 15px;
+  }
+  div#progress-bar {
+    display: none;
+    animation-name: none;
+  }
+  #form-scope {
+    margin-top: 100px;
   }
 }

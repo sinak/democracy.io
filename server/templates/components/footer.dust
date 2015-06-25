@@ -12,10 +12,13 @@
         <div class="col-sm-3">
           <div class="pull-right">
             <div>
+              <a href="/#/about">About</a>
+            </div>
+            <div>
               <a href="https://www.eff.org/policy">Privacy Policy</a>
             </div>
             <div>
-              <a href="/contact">Contact Us</a>
+              <a href="democracy@eff.org">Contact Us</a>
             </div>
           </div>
         </div>

@@ -34,6 +34,7 @@ app.locals['CONFIG'] = config;
 app.engine('dust', consolidate.dust);
 app.set('views', path.join(__dirname, 'templates'));
 app.set('view engine', 'dust');
+// NOTE: this assumes you're running behind an nginx instance or other proxy
 app.enable('trust proxy');
 
 app.use(serveFavicon(path.join(buildDir, 'static/img/favicon.ico')));

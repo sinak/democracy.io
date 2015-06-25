@@ -2,11 +2,13 @@
  * Restricts access to designated URLs by IP address and time period.
  */
 
+var bcrypt = require('bcrypt');
 var isEmpty = require('lodash.isempty');
 var isUndefined = require('lodash.isundefined');
 var redis = require('redis');
 var tokenThrottleRedis = require('tokenthrottle-redis');
 
+var IP_SALT = require('config').get('SERVER.CREDENTIALS.IP.SALT');
 
 module.exports = function(config) {
 
@@ -30,7 +32,6 @@ module.exports = function(config) {
   var throttle = tokenThrottleRedis(config.get('THROTTLE'), redisClient);
 
   return function(req, res, next) {
-    var ipAddr = req.ip;
 
     // NOTE: path is checked and restricted here due to an issue with working with
     //       swaggerize-express. For some reason using this middleware with a path
@@ -43,17 +44,26 @@ module.exports = function(config) {
     var path = req.path;
 
     if (path.match(pathRegex) && req.method === targetedMethod) {
-      throttle.rateLimit(ipAddr, function (err, limited) {
-        if (limited) {
-          // Confusingly, the error handler mounted in swaggerize-wrapper will be
-          // responsible for grabbing this error and returning a JSend formatted
-          // response.
-          // See swaggerize-wrapper for details.
-          res.statusCode = 429;
-          next(new Error('too many requests'));
-        } else {
-          next();
+      var ipAddr = req.ip;
+      bcrypt.hash(ipAddr, IP_SALT, function (err, hashedIpAddr) {
+        console.log(hashedIpAddr);
+        if (err) {
+          next(new Error('could not throttle IP address'));
         }
+
+        throttle.rateLimit(hashedIpAddr, function (err, limited) {
+          if (limited) {
+            // Confusingly, the error handler mounted in swaggerize-wrapper will be
+            // responsible for grabbing this error and returning a JSend formatted
+            // response.
+            // See swaggerize-wrapper for details.
+            res.statusCode = 429;
+            next(new Error('too many requests'));
+          } else {
+            next();
+          }
+        });
+
       });
     } else {
       next();

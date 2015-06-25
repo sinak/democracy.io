@@ -34,6 +34,18 @@ npm install
 gulp build
 ```
 
+### credentials
+
+Generate a salt for encrypting IP addresses and store it in your local.json file, under: SERVER > CREDENTIALS > IP > SALT
+
+```
+var bcrypt = require('bcrypt');
+var salt = bcrypt.genSaltSync(10);
+console.log(salt);
+```
+
+Set a session secret and store it in your local.json file, under: SERVER > CREDENTIALS > SESSION > SECRET
+
 ## App Configuration
 
 App config is controlled via the [node-config](https://github.com/lorenwest/node-config) module.

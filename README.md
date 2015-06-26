@@ -1,6 +1,8 @@
 Democracy.io
 ============
 
+[![Build Status](https://travis-ci.org/EFForg/democracy.io.svg?branch=master)](https://travis-ci.org/EFForg/democracy.io)
+
 Express & Angular app for sending messages to Senate and House members
 
 ## Table of Contents
@@ -23,7 +25,7 @@ It uses APIs from:
 
 ## Getting started
 
-### Redis 
+### Redis
 
 Ensure that redis is running locally: http://redis.io/topics/quickstart
 

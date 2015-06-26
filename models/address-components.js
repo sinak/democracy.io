@@ -6,7 +6,7 @@
 
 var create = require('lodash.create');
 var isEmpty = require('lodash.isempty');
-var isUndefined = require('lodash.isUndefined');
+var isUndefined = require('lodash.isundefined');
 
 var Model = require('./model');
 

@@ -2,7 +2,7 @@
  *
  */
 
-var isEmpty = require('lodash.isEmpty');
+var isEmpty = require('lodash.isempty');
 
 var Model = function(options) {
   this.setProperties(isEmpty(options) ? {} : options);

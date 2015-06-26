@@ -1,5 +1,5 @@
 /******
- Loading 
+ Loading
 ******/
 #loading {
   margin: 0 0 2em;
@@ -20,14 +20,25 @@
 
 
 /******
- Home 
+ Home
 ******/
 
 #address .whitebox-container {
-  padding-bottom: 20px;
+  padding: 0;
+}
+#address .whitebox-container > form {
+  padding: 27px 30px 15px 30px;
+  @extend .clearfix;
 }
 #address .btn-lg.btn-orange {
   margin-top: 25px;
+  right: 2px;
+}
+#address .whitebox-footer {
+  a, a:visited, a:hover, a:active {
+    color: inherit;
+    text-decoration: underline;
+  }
 }
 @media (min-width: $screen-sm-min) {
   #address #addressInputs {
@@ -42,21 +53,20 @@
 }
 @media (max-width: $screen-xs-max) {
   #address {
-    .whitebox-container {
-      padding: 20px;
+    .btn-lg.btn-orange {
+      left:0;
+      margin-top:5px;
+      margin-bottom:10px;
+      font-size: 18px;
     }
     .input-group .form-control:first-child {
      font-size: 14px;
-    }
-    button.btn-orange.btn-lg {
-      font-size: 18px;
-      margin-top:0;
     }
   }
 }
 
 /******
- Pick legislators 
+ Pick legislators
 ******/
 #pick-legislators {
   label {
@@ -88,7 +98,7 @@
 }
 
 /******
- Write message 
+ Write message
 ******/
 .write-message {
   label {
@@ -126,7 +136,7 @@ textarea#inputMessage {
     left: 12px;
     letter-spacing: 0;
     text-transform: none;
-    font-family: 'Droid Serif', serif;
+    font-family: 'DroidSerif', serif;
     -webkit-font-smoothing: antialiased;
     color: #999;
     z-index: 1;
@@ -186,7 +196,7 @@ label small {
 }
 
 /******
- CAPTCHA 
+ CAPTCHA
 ******/
 
 #captchaContainer {
@@ -205,7 +215,7 @@ label small {
 }
 
 /******
- Thanks 
+ Thanks
 ******/
 #thanks {
   @extend .boxshadow;
@@ -220,7 +230,7 @@ label small {
 
   p {
     font-size: 20px;
-    text-align: center;  
+    text-align: center;
     padding: 20px 10px 130px 10px;
   }
 
@@ -230,7 +240,7 @@ label small {
     margin-left: -16px;
     top: 0;
   }
-  
+
   #share-icons {
     background-image: linear-gradient(to right, #FF9600, #FC4863);
     position: absolute;
@@ -242,7 +252,7 @@ label small {
     text-align: center;
     color: #fff;
     padding-top: 30px;
-    border-bottom-left-radius: 10px; 
+    border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     overflow: hidden;
 
@@ -250,7 +260,7 @@ label small {
       transform: translate(0, 0);
       display: block;
       cursor: pointer;
-    
+
       animation: 0.3s ease;
       transition-duration: 0.3s;
       transition-property: transform;

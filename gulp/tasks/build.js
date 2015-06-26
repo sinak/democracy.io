@@ -7,7 +7,7 @@ var runSequence = require('run-sequence');
 
 gulp.task('build', function(cb) {
   runSequence(
-    ['img', 'appSettings', 'partials', 'css'],
+    ['img', 'appSettings', 'partials', 'css','fonts'],
     'browserify',
     cb
   );

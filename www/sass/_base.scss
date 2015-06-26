@@ -15,7 +15,7 @@ body {
   background-color: #eeeeee;
   min-height: 100%;
   margin-bottom: 170px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'OpenSans', sans-serif;
   font-weight: 300;
 }
 a.ondark {
@@ -38,7 +38,7 @@ a.ondark {
   // @extend .ro-gradient;
 }
 h1 {
-  font-family: 'Droid Serif', serif;
+  font-family: 'DroidSerif', serif;
   font-size: 60px;
   text-align: center;
   color: #444444;
@@ -71,6 +71,13 @@ h1.header {
     padding: 17px 10px 14px 10px;
   }
 }
+.whitebox-footer {
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  color: #888;
+  font-size: 12px;
+  background-color: #f9f9f9;
+}
 .whitebox {
   @extend .boxshadow;
   background-color: #fff;
@@ -78,6 +85,7 @@ h1.header {
   border-radius: 5px;
   margin: 0 auto 90px auto;
   float: none;
+  overflow:hidden;
 
   @media (max-width: $screen-xs-max) {
     margin-bottom:40px;
@@ -223,15 +231,34 @@ label {
  ****************/
 #wrapper[data-pagename="about"] {
   p, ul {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.6;
+    margin-bottom:15px;
+    font-weight: 400;
+  }
+  p.lead {
+    font-size: 24px;
+    margin-bottom:25px;
+    line-height: 1.8;
+    font-weight: 300;
   }
   ul li {
     margin-bottom: 10px;
+    list-style-type: none;
+    &:before {
+      font-family: 'democracy-io';
+      content: "a";
+      font-size: 28px;
+      margin-left: -27px;
+      position:relative;
+      top:8px;
+      right:5px;
+    }
   }
   h2 {
-    margin-top: 30px;
-    margin-bottom: 15px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: 400;
   }
   div#progress-bar {
     display: none;

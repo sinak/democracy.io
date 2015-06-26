@@ -8,7 +8,7 @@
         <form name="addressForm" ng-controller="AddressFormController">
           <!-- See https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs
                for details on where the autocomplete etc values come from -->
-          
+
           <div id="addressInputs" ng-class="{addressValid: addressForm.$valid}" class="clearfix">
             <div class="form-group">
               <label for="streetAddress1">Street address</label>
@@ -69,6 +69,10 @@
           </div>
 
         </form>
+
+        <div class="whitebox-footer text-center">
+          Democracy.io uses the <a href="https://smartystreets.com/" target="_blank">SmartyStreets Geocoding API</a> and the <a href="https://sunlightlabs.github.io/congress/" target="_blank">Sunlight Congress API</a> to look up your representatives.
+        </div>
 
     </div>
   </div>

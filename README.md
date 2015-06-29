@@ -69,7 +69,7 @@ Alternately, you can use:
 ## Run tests
 
 ```
-gulp test
+npm run test
 ```
 
 ## Running the server

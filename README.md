@@ -74,11 +74,13 @@ npm run test
 
 ## Running the server
 
-Spins up a local server to serve the app.
+Spins up a local server to serve the app, including proxying browsersync on top of the excess server.
 
 ```
 gulp serve
 ```
+
+For instructions on running in production check [/devops/README.md](devops/README.md).
 
 ## Angular app
 

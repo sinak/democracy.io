@@ -33,7 +33,7 @@ Ensure that redis is running locally: http://redis.io/topics/quickstart
 
 ```
 npm install
-gulp build
+npm run build
 ```
 
 ### credentials

@@ -13,8 +13,8 @@
 - Set environment variable NODE_ENV to `production`
 - `local.json` file needs to exist in the `/config` folder that contains the app credentials.
 - `npm install`
-- `gulp build` (builds static assets)
-- `gulp test` (to run tests) 
+- `npm run build` (builds static assets)
+- `npm run test` (to run tests) 
 - start the app using process manager (which should be set up to call `node server.js`)
 
 

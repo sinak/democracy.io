@@ -38,7 +38,7 @@ gulp build
 
 ### credentials
 
-Generate a salt for encrypting IP addresses and store it in your local.json file, under: SERVER > CREDENTIALS > IP > SALT
+After you've run `npm install` you can generate a salt in the node CLI for encrypting IP addresses and store it in your local.json file, under: SERVER > CREDENTIALS > IP > SALT
 
 ```
 var bcrypt = require('bcrypt');

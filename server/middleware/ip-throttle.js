@@ -28,7 +28,11 @@ module.exports = function(config) {
   var targetedMethod = 'POST';
 
   var redisOptions = config.get('REDIS');
-  var redisClient = redis.createClient(redisOptions.PORT, redisOptions.HOSTNAME, { auth_pass: redisOptions.PASS });
+  var redisClient = redis.createClient(
+    redisOptions.PORT, redisOptions.HOSTNAME, { auth_pass: redisOptions.PASS });
+  // NOTE: values will be expired from Redis after the number of seconds (not ms!) specified for the
+  //       expiry field in the config JSON files. See https://www.npmjs.com/package/tokenthrottle-redis
+  //       options for where this is documented.
   var throttle = tokenThrottleRedis(config.get('THROTTLE'), redisClient);
 
   return function(req, res, next) {
@@ -46,7 +50,6 @@ module.exports = function(config) {
     if (path.match(pathRegex) && req.method === targetedMethod) {
       var ipAddr = req.ip;
       bcrypt.hash(ipAddr, IP_SALT, function (err, hashedIpAddr) {
-        console.log(hashedIpAddr);
         if (err) {
           next(new Error('could not throttle IP address'));
         }

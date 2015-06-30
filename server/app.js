@@ -6,7 +6,6 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var compression = require('compression');
 var connectRedis = require('connect-redis');
-var config = require('config').get('SERVER');
 var consolidate = require('consolidate');
 var dust = require('dustjs-linkedin');
 var express = require('express');
@@ -16,6 +15,13 @@ var morgan = require('morgan');
 var serveFavicon = require('serve-favicon');
 var serveStatic = require('serve-static');
 var session = require('express-session');
+
+// pm2 sets a NODE_APP_INSTANCE that causes problems with https://github.com/lorenwest/node-config/wiki/Strict-Mode
+// As a workaround we move NODE_APP_INSTANCE aside during configuration loading
+var app_instance = process.env.NODE_APP_INSTANCE;
+process.env.NODE_APP_INSTANCE = "";
+var config = require('config').get('SERVER');
+process.env.NODE_APP_INSTANCE = app_instance;
 
 var apiResponse = require('./middleware/api-response');
 var ipThrottle = require('./middleware/ip-throttle');

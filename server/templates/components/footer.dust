@@ -18,7 +18,9 @@
               <a href="https://www.eff.org/policy">Privacy Policy</a>
             </div>
             <div>
-              <a href="democracy@eff.org">Contact Us</a>
+              <a href="mailto:democracy@eff.org?Subject=Democracy.io" target="_top">
+                Contact Us
+              </a>
             </div>
           </div>
         </div>

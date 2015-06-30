@@ -4,7 +4,6 @@
 
 var autoprefixer = require('gulp-autoprefixer');
 var gulp = require('gulp');
-var gutil = require('gulp-util');
 var minifyCSS = require('gulp-minify-css');
 var path = require('path');
 var rename = require('gulp-rename');
@@ -19,7 +18,7 @@ gulp.task('css', function() {
     }))
     .pipe(autoprefixer({ browsers: ['> 0.1%'] }))
 
-  if (gutil.env.production) {
+  if (process.env.NODE_ENV === 'production') {
     stream = stream
       .pipe(minifyCSS())
   }

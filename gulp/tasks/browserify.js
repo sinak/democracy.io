@@ -4,7 +4,6 @@
 
 var browserify = require('browserify');
 var gulp = require('gulp');
-var gutil = require('gulp-util');
 var path = require('path');
 var source = require('vinyl-source-stream');
 var minifyify = require('minifyify');
@@ -16,16 +15,20 @@ var handleErrors = require('../util/handle-errors');
 
 gulp.task('browserify', function() {
 
+  var isProd = process.env.NODE_ENV === 'production';
   var bundler = browserify({
-    cache: {}, packageCache: {}, fullPaths: true,
+    cache: {},
+    packageCache: {},
+    fullPaths: true,
     entries: [
       './www/js/app.js'
     ],
-    debug: !gutil.env.production
+    // NOTE: this is always true as minifyify requires it, even in prod mode
+    debug: true
   });
-  // NOTE: as debug is on, sourcemaps will be produced as a data URL and appended to the file.
 
-  if (gutil.env.production) {
+  // NOTE: as debug is on, sourcemaps will be produced as a data URL and appended to the file.
+  if (isProd) {
     bundler.plugin('minifyify', {
       map: '/static/js/bundle.map.js',
       output: path.join(config.STATIC_DIR, 'js/bundle.map.js')

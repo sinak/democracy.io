@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "gulp test",
-    "build": "gulp build"
+    "build": "gulp build",
+    "build:prod": "gulp build:prod"
   },
   "repository": {
     "type": "git",

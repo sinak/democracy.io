@@ -12,3 +12,9 @@ gulp.task('build', function(cb) {
     cb
   );
 });
+
+
+gulp.task('build:prod', function(cb) {
+  process.env.NODE_ENV = 'production';
+  gulp.run('build');
+});

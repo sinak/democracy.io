@@ -1,0 +1,55 @@
+{
+  /**
+   * This is a sample configuration file for PM2
+   */
+
+  /**
+   * Here we declare the apps that must be managed by PM2
+   * All options are listed here:
+   * https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#json-app-declaration
+   *
+   */
+  apps : [
+
+    // First application
+    {
+      name      : "DIO",
+      script    : "server.js",
+      env: {
+        COMMON_VARIABLE: "true"
+      },
+      env_production : {
+        NODE_ENV: "production"
+      }
+    }
+  ],
+
+
+  /**
+   * PM2 helps you to deploy apps over your servers
+   * For more help go to :
+   * https://github.com/Unitech/PM2/blob/master/ADVANCED_README.md#deployment-pm2--090
+   */
+  deploy : {
+    production : {
+      user : "sina",
+      host : "democracyio.int.eff.org",
+      ref  : "origin/master",
+      repo : "git@github.com:EFForg/democracy.io.git",
+      path : "/www/democracy.io",
+      "post-deploy" : "gulp build; gulp test; pm2 startOrRestart ecosystem.json5 --env production"
+    }
+    /*
+    dev : {
+      user : "node",
+      host : "democracyio.int.eff.org",
+      ref  : "origin/master",
+      repo : "git@github.com:repo.git",
+      path : "/var/www/development",
+      "post-deploy" : "pm2 startOrRestart ecosystem.json5 --env dev",
+      env  : {
+        NODE_ENV: "dev"
+      }
+    }*/
+  }
+}

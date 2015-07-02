@@ -23,14 +23,14 @@
   <meta property='og:description' content='Write to your representatives.'>
   <meta property='og:image' content='https://democracy.io/static/img/opengraph.jpg'>
 
-  <link rel="stylesheet" href="{CONFIG.SITE.STATIC_URL}/css/dio.min.css" />
+  <link rel="stylesheet" href="/static/{CONFIG.VERSION}/css/dio.min.css" />
 </head>
 
 <body>
   {+body /}
 </body>
 
-<script src="{CONFIG.SITE.STATIC_URL}/js/dio.min.js"></script>
+<script src="/static/{CONFIG.VERSION}/js/dio.min.js"></script>
 {+afterBody /}
 
 </html>

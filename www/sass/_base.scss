@@ -8,7 +8,7 @@ html {
   display: none !important;
 }
 body {
-  background-image: url('/static/img/bg-fade.jpg');
+  background-image: url('/static/{$VERSION}/img/bg-fade.jpg');
   background-size: cover auto;
   background-repeat: no-repeat;
   background-position: top center;

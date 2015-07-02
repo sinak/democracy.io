@@ -9,6 +9,8 @@ var app = require('./server/app');
 
 var server;
 
+// TODO(leah): Something about the way this gets started and handled via gulp serve is broken, so that EADDRESSINUSE
+//             errs turn up sporadically.
 server = http.createServer(app);
 server.listen(process.env.PORT || 3000);
 server.on('listening', function () {

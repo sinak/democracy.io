@@ -9,14 +9,16 @@ var path = require('path');
 var rename = require('gulp-rename');
 
 var gulpConfig = require('../config');
+var version = require('../../package.json').version;
 
 gulp.task('appSettings', function() {
   var appConfig = {
     dioConfig: config.get('WWW')
   };
   appConfig['dioConfig']['MODE'] = config.get('MODE');
+  appConfig['dioConfig']['VERSION'] = version;
 
-  gulp.src('')
+  return gulp.src('')
     .pipe(ngConstant({
       name: 'democracyIoApp',
       deps: false,
@@ -25,4 +27,6 @@ gulp.task('appSettings', function() {
     }))
     .pipe(rename('dio-app-settings.js'))
     .pipe(gulp.dest(gulpConfig.BUILD_DIR));
+
+
 });

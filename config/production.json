@@ -1,5 +1,13 @@
 {
 
-  "MODE": "production"
+  "MODE": "production",
+
+  "SERVER": {
+
+    "STATIC": {
+      "maxAge": "86400000"
+    }
+
+  }
 
 }

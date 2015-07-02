@@ -18,10 +18,10 @@ var session = require('express-session');
 
 // pm2 sets a NODE_APP_INSTANCE that causes problems with https://github.com/lorenwest/node-config/wiki/Strict-Mode
 // As a workaround we move NODE_APP_INSTANCE aside during configuration loading
-var app_instance = process.env.NODE_APP_INSTANCE;
-process.env.NODE_APP_INSTANCE = "";
+var appInstance = process.env.NODE_APP_INSTANCE;
+process.env.NODE_APP_INSTANCE = '';
 var config = require('config').get('SERVER');
-process.env.NODE_APP_INSTANCE = app_instance;
+process.env.NODE_APP_INSTANCE = appInstance;
 
 var apiResponse = require('./middleware/api-response');
 var ipThrottle = require('./middleware/ip-throttle');
@@ -44,9 +44,9 @@ app.set('view engine', 'dust');
 app.enable('trust proxy');
 
 app.use(serveFavicon(path.join(buildDir, 'static/img/favicon.ico')));
-if (env === 'development') {
-  app.use(serveStatic(buildDir, {}));
-}
+// NOTE: EFF doesn't use CDNs, so rely on static serve w/ a caching layer in front of it in prod
+console.log(config.get('STATIC'));
+app.use(serveStatic(buildDir, config.get('STATIC')));
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

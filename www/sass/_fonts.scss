@@ -1,36 +1,48 @@
 // Open Sans light
 @font-face {
   font-family: 'OpenSans';
-  src: url("/static/fonts/OpenSans-Light.eot");
-  src: url("/static/fonts/OpenSans-Light.eot?#iefix") format("embedded-opentype"), url("/static/fonts/OpenSans-Light.woff") format("woff"), url("/static/fonts/OpenSans-Light.ttf") format("truetype"), url("/static/fonts/OpenSans-Light.svg#OpenSansLight") format("svg");
+  src: url("/static/{$VERSION}/fonts/OpenSans-Light.eot");
+  src: url("/static/{$VERSION}/fonts/OpenSans-Light.eot?#iefix") format("embedded-opentype"),
+       url("/static/{$VERSION}/fonts/OpenSans-Light.woff") format("woff"),
+       url("/static/{$VERSION}/fonts/OpenSans-Light.ttf") format("truetype"),
+       url("/static/{$VERSION}/fonts/OpenSans-Light.svg#OpenSansLight") format("svg");
   font-weight: 300;
-  font-style: normal; }
+  font-style: normal;
+}
 
 // Open Sans Normal
 @font-face {
   font-family: 'OpenSans';
-  src: url("/static/fonts/OpenSans-Regular.eot");
-  src: url("/static/fonts/OpenSans-Regular.eot?#iefix") format("embedded-opentype"), url("/static/fonts/OpenSans-Regular.woff") format("woff"), url("/static/fonts/OpenSans-Regular.ttf") format("truetype"), url("/static/fonts/OpenSans-Regular.svg#OpenSansRegular") format("svg");
+  src: url("/static/{$VERSION}/fonts/OpenSans-Regular.eot");
+  src: url("/static/{$VERSION}/fonts/OpenSans-Regular.eot?#iefix") format("embedded-opentype"),
+       url("/static/{$VERSION}/fonts/OpenSans-Regular.woff") format("woff"),
+       url("/static/{$VERSION}/fonts/OpenSans-Regular.ttf") format("truetype"),
+       url("/static/{$VERSION}/fonts/OpenSans-Regular.svg#OpenSansRegular") format("svg");
   font-weight: 400;
-  font-style: normal; }
+  font-style: normal;
+}
 
 // Open Sans Bold
 @font-face {
   font-family: 'OpenSans';
-  src: url("/static/fonts/OpenSans-SemiBold.eot");
-  src: url("/static/fonts/OpenSans-SemiBold.eot?#iefix") format("embedded-opentype"), url("/static/fonts/OpenSans-SemiBold.woff") format("woff"), url("/static/fonts/OpenSans-SemiBold.ttf") format("truetype"), url("/static/fonts/OpenSans-SemiBold.svg#OpenSansBold") format("svg");
+  src: url("/static/{$VERSION}/fonts/OpenSans-Semibold.eot");
+  src: url("/static/{$VERSION}/fonts/OpenSans-Semibold.eot?#iefix") format("embedded-opentype"),
+       url("/static/{$VERSION}/fonts/OpenSans-Semibold.woff") format("woff"),
+       url("/static/{$VERSION}/fonts/OpenSans-Semibold.ttf") format("truetype"),
+       url("/static/{$VERSION}/fonts/OpenSans-Semibold.svg#OpenSansBold") format("svg");
   font-weight: bold;
-  font-style: normal; }
+  font-style: normal;
+}
 
 // Droid Serif
 @font-face {
     font-family: 'DroidSerif';
-    src: url('/static/fonts/droidserif-regular-webfont.eot');
-    src: url('/static/fonts/droidserif-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/fonts/droidserif-regular-webfont.woff2') format('woff2'),
-         url('/static/fonts/droidserif-regular-webfont.woff') format('woff'),
-         url('/static/fonts/droidserif-regular-webfont.ttf') format('truetype'),
-         url('/static/fonts/droidserif-regular-webfont.svg#droid_serifregular') format('svg');
+    src: url('/static/{$VERSION}/fonts/droidserif-regular-webfont.eot');
+    src: url('/static/{$VERSION}/fonts/droidserif-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/{$VERSION}/fonts/droidserif-regular-webfont.woff2') format('woff2'),
+         url('/static/{$VERSION}/fonts/droidserif-regular-webfont.woff') format('woff'),
+         url('/static/{$VERSION}/fonts/droidserif-regular-webfont.ttf') format('truetype'),
+         url('/static/{$VERSION}/fonts/droidserif-regular-webfont.svg#droid_serifregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -40,11 +52,11 @@
 
 @font-face {
   font-family: "democracy-io";
-  src:url("/static/fonts/democracy-io.eot");
-  src:url("/static/fonts/democracy-io.eot?#iefix") format("embedded-opentype"),
-    url("/static/fonts/democracy-io.woff") format("woff"),
-    url("/static/fonts/democracy-io.ttf") format("truetype"),
-    url("/static/fonts/democracy-io.svg#democracy-io") format("svg");
+  src:url("/static/{$VERSION}/fonts/democracy-io.eot");
+  src:url("/static/{$VERSION}/fonts/democracy-io.eot?#iefix") format("embedded-opentype"),
+    url("/static/{$VERSION}/fonts/democracy-io.woff") format("woff"),
+    url("/static/{$VERSION}/fonts/democracy-io.ttf") format("truetype"),
+    url("/static/{$VERSION}/fonts/democracy-io.svg#democracy-io") format("svg");
   font-weight: normal;
   font-style: normal;
 

@@ -7,8 +7,8 @@
       "DEFAULT_TAG": "democracy.io"
     },
 
-    "SITE": {
-      "STATIC_URL": "/static"
+    "STATIC": {
+      "maxAge": 0
     },
 
     "API": {

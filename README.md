@@ -72,7 +72,7 @@ Alternately, you can use:
 npm run test
 ```
 
-## Running the server
+## Running the server locally
 
 Spins up a local server to serve the app, including proxying browsersync on top of the excess server.
 
@@ -80,7 +80,15 @@ Spins up a local server to serve the app, including proxying browsersync on top 
 gulp serve
 ```
 
-For instructions on running in production check [/devops/README.md](devops/README.md).
+## Deploying
+
+To deploy the server, simply run:
+
+```
+pm2 deploy ecosystem.json5 production
+```
+
+For more instructions on setting up a production server, check [/devops/README.md](devops/README.md).
 
 ## Angular app
 

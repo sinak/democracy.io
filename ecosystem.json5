@@ -37,7 +37,7 @@
       ref  : "origin/master",
       repo : "git@github.com:EFForg/democracy.io.git",
       path : "/www/democracy.io",
-      "post-deploy" : "npm install; gulp build; gulp test; pm2 startOrRestart ecosystem.json5 --env production"
+      "post-deploy" : "npm install; npm build; npm test; pm2 startOrRestart ecosystem.json5 --env production"
     }
     /*
     dev : {

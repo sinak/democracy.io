@@ -28,5 +28,4 @@ gulp.task('appSettings', function() {
     .pipe(rename('dio-app-settings.js'))
     .pipe(gulp.dest(gulpConfig.BUILD_DIR));
 
-
 });

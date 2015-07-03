@@ -6,7 +6,13 @@
 var lodash = require('lodash');
 
 var routes = [
-  [{path: '/', name: 'home'}, {get: require('./app/home')}]
+  [
+    {path: '/', name: 'home'}, {get: require('./app/home')}
+  ],
+  [
+    {path: '/loaderio-da87df4ad13efbd70ba62b11dcbf241b/', name: 'loaderio'},
+    {get: function(req, res) {res.send('loaderio-da87df4ad13efbd70ba62b11dcbf241b');}}
+  ]
 ];
 
 

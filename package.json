@@ -6,7 +6,7 @@
   "scripts": {
     "test": "gulp test",
     "build": "gulp build",
-    "build:prod": "gulp build:r"
+    "build-prod": "gulp build:r"
   },
   "repository": {
     "type": "git",

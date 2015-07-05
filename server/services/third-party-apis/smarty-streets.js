@@ -28,10 +28,7 @@ var verifyAddress = function(params, config, cb) {
   var params = {
     method: 'GET',
     url: ssURL,
-    json: true,
-    headers: {
-      'X-Include-Invalid': true
-    }
+    json: true
   };
   makeRequest(params, cb);
 };

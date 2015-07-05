@@ -27,6 +27,7 @@ var AddressFormController = function($scope, $location, dioData, dioAPI) {
   };
 
   $scope.verifyAddress = function(address) {
+    $scope.error = null;
     var cb = function(err, canonicalAddresses) {
       $scope.data.verifyingAddress = false;
       var addressFound = !isEmpty(canonicalAddresses);
@@ -41,9 +42,9 @@ var AddressFormController = function($scope, $location, dioData, dioAPI) {
         $location.path('/location');
       } else {
         if (serverErr) {
-          // TODO(sina): Show a server error, try again later
+          $scope.error = "There appears to be a problem with the server. Please try again, and if the problem persists, email democracy@eff.org with the address you used so we can try and fix the issue.";
         } else {
-          // TODO(sina): Show an address not found error
+          $scope.error = "Your address was not recognized. Please check the address and try again.";
         }
       }
 

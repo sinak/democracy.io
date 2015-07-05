@@ -8,64 +8,66 @@
         <form name="addressForm" ng-controller="AddressFormController">
           <!-- See https://developers.google.com/web/fundamentals/input/form/label-and-name-inputs
                for details on where the autocomplete etc values come from -->
-
-          <div id="addressInputs" ng-class="{addressValid: addressForm.$valid}" class="clearfix">
-            <div class="form-group">
-              <label for="streetAddress1">Street address</label>
-              <input type="text"
-                     id="streetAddress1"
-                     name="address"
-                     autocomplete="street-address"
-                     ng-required="true"
-                     ng-pattern="patterns.address"
-                     ng-model="addressData.address"
-                     class="form-control input-lg"
-                     placeholder="1600 Pennsylvania Ave">
-            </div>
-            <div class="row">
-              <div class="col-sm-8">
-                <div class="form-group">
-                  <label for="city1">City</label>
-                  <input type="text"
-                         id="city1"
-                         name="city"
-                         autocomplete="address-level2"
-                         ng-required="true"
-                         ng-pattern="patterns.city"
-                         ng-model="addressData.city"
-                         class="form-control input-lg"
-                         placeholder="Washington DC">
+          
+          <div class="clearfix">
+            <div id="addressInputs" ng-class="{addressValid: addressForm.$valid}" class="clearfix">
+              <div class="form-group">
+                <label for="streetAddress1">Street address</label>
+                <input type="text"
+                       id="streetAddress1"
+                       name="address"
+                       autocomplete="street-address"
+                       ng-required="true"
+                       ng-pattern="patterns.address"
+                       ng-model="addressData.address"
+                       class="form-control input-lg"
+                       placeholder="1600 Pennsylvania Ave">
+              </div>
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="form-group">
+                    <label for="city1">City</label>
+                    <input type="text"
+                           id="city1"
+                           name="city"
+                           autocomplete="address-level2"
+                           ng-required="true"
+                           ng-pattern="patterns.city"
+                           ng-model="addressData.city"
+                           class="form-control input-lg"
+                           placeholder="Washington DC">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="zip1">Zip code</label>
+                    <input type="tel"
+                           id="zip1"
+                           name="postal"
+                           autocomplete="postal-code"
+                           ng-required="true"
+                           ng-pattern="patterns.postal"
+                           ng-model="addressData.postal"
+                           class="form-control input-lg"
+                           placeholder="20500">
+                  </div>
                 </div>
               </div>
-              <div class="col-sm-4">
-                <div class="form-group">
-                  <label for="zip1">Zip code</label>
-                  <input type="tel"
-                         id="zip1"
-                         name="postal"
-                         autocomplete="postal-code"
-                         ng-required="true"
-                         ng-pattern="patterns.postal"
-                         ng-model="addressData.postal"
-                         class="form-control input-lg"
-                         placeholder="20500">
-                </div>
-              </div>
             </div>
-          </div>
 
-          <div ng-class="{addressValid: addressForm.$valid}" class="clearfix" id="submitAddress">
-            <button type="submit"
-                    class="btn btn-lg btn-orange"
-                    ng-click="validateAddress()">
-            Submit
-            </button>
+            <div ng-class="{addressValid: addressForm.$valid}" class="clearfix" id="submitAddress">
+              <button type="submit"
+                      class="btn btn-lg btn-orange"
+                      ng-click="validateAddress()">
+              Submit
+              </button>
+            </div>
           </div>
 
 
           <div class="alert alert-danger"
-               ng-show="data.invalidGeocode && !addressForm.$pristine">
-            No Address Found
+               ng-show="error && !addressForm.$pristine">
+            [[ error ]]
           </div>
 
         </form>

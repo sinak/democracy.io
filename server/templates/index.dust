@@ -55,4 +55,6 @@
       angular.bootstrap(document, ['democracyIoApp']);
     });
   </script>
+
+  {>"components/piwik"/}
 {/afterBody}

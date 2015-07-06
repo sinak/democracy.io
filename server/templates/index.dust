@@ -10,6 +10,9 @@
 
     {>"components/nav-bar"/}
 
+    <noscript>
+    <div class="text-center"><h3>Democracy.io requires Javascript to work.</h3><h4>Please load the site using a browser that supports Javascript.</h4></div></noscript>
+
     <div ng-switch ng-cloak on="pageName">
       <div ng-switch-when="home"
            class="header"

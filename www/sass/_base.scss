@@ -14,12 +14,12 @@ body {
   background-position: top center;
   background-color: #eeeeee;
   min-height: 100%;
-  margin-bottom: 131px;
+  margin-bottom: 150px;
   font-family: 'OpenSans', sans-serif;
   font-weight: 300;
 
   @media (max-width: $screen-xs-max) {
-    margin-bottom: 89px;
+    margin-bottom: 108px;
   }
 }
 a.ondark {

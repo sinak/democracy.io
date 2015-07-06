@@ -3,19 +3,28 @@
  */
 
 var gulp = require('gulp');
+var path = require('path');
 var runSequence = require('run-sequence');
+var supervisor = require('gulp-supervisor');
 
-// setWatch is depended on here as browserify needs it set to turn on watchify
-gulp.task('serve', function(cb) {
+gulp.task('supervisor', function() {
+  // NOTE: This won't refresh the browser on server-side .js changes. As this is
+  //       designed as a single-page app, that's considered fine.
+  supervisor(path.join(__dirname, '../../server.js'), {
+      watch: [
+        path.join(__dirname, '../../server'),
+        path.join(__dirname, '../../config')
+      ],
+      extensions: ['js', 'json']
+  });
+});
+
+gulp.task('serve', function() {
+  // Run supervisor first, so the express server is ready when browser-sync starts
   runSequence(
+    'supervisor',
     'setWatch',
-    'build',
-    'watch',
-    'browserSync',
-    function() {
-      // This is a bit weird, but not a huge deal.
-      var server = require('../../server');
-      cb();
-    }
+    ['build', 'watch'],
+    'browserSync'
   );
 });

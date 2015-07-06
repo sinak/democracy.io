@@ -74,7 +74,7 @@ npm run test
 
 ## Running the server locally
 
-Spins up a local server to serve the app, including proxying browsersync on top of the excess server.
+Spins up a local server to serve the app, including proxying browsersync on top of the express server.
 
 ```
 gulp serve

@@ -171,6 +171,10 @@ label small {
   font-size: 15px;
   margin-top:20px;
   margin-bottom:0;
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
   label {
     text-transform: none;
     letter-spacing: 0;

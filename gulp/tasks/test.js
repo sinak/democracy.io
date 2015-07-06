@@ -17,7 +17,13 @@ gulp.task('testServer', function() {
   return gulp.src(path.join(config.TEST_DIR, '**/*.js'))
     .pipe(gulpMocha({
       reporter: 'spec'
-    }));
+    }))
+    .once('error', function () {
+      process.exit(1);
+    })
+    .once('end', function () {
+      process.exit();
+    });
 });
 
 gulp.task('test', ['testFE', 'testServer'], function() {

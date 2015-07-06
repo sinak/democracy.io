@@ -18,7 +18,7 @@
         "AUTOCOMPLETE_URL": "https://autocomplete-api.smartystreets.com",
         "ADDRESS_URL": "https://api.smartystreets.com"
       },
-      "EFF_CIVIC_CRM_URL": " https://supporters.eff.org/civicrm"
+      "EFF_CIVIC_CRM_URL": " https://supporters.eff.org"
     },
 
     "CREDENTIALS": {

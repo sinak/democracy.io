@@ -128,13 +128,18 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAP
 
     $scope.sending = true;
     dioAPI.submitMessageToReps(messages, cb);
+
     if ($scope.joinEmailList) {
-      // TODO(leah/sina): Make a MessageSender object to send to the subscription endpoint
-      var messageSender = {};
+      var messageSender = {
+        first_name: $scope.fromData.firstName,
+        last_name: $scope.formData.lastName,
+        email: $scope.formData.email
+      };
       var subRequest = new SubscriptionRequest({
         canonicalAddress: $scope.address,
         sender: messageSender
       });
+      console.log('Subscription request:', subRequest);
       dioAPI.subscribeToEFFList(subRequest, function() {
         // no-op as EFF subscription is best-effort only
       });

@@ -10,30 +10,28 @@ var models = require('../../../models');
 var post = function (req, res) {
   var request = new models.SubscriptionRequest(req.body);
 
-  // TODO(leah): Pull out the relevant params
   var params = {
     'contact_params': {
-      email: '',
-      'first_name': '',
-      'last_name': '',
+      email: request.sender.email,
+      'first_name': request.sender.first_name,
+      'last_name': request.sender.last_name,
       source: 'democracy.io',
       subscribe: true,
       'opt_in': false
     },
     'address_params': {
       street: '',
-      city: request.components.cityName,
-      state: request.components.stateName,
-      zip: request.components.zipcode,
-      // hardcoded for now
-      country: 'USA'
+      city: request.canonicalAddress.components.cityName,
+      state: request.canonicalAddress.components.stateName,
+      zip: request.canonicalAddress.components.zipcode,
+      country: 'USA' // hardcoded for now
     }
   };
 
   var cb = apiCallback(res, function() {
     // TODO(leah): Look at the format of the response on this
     return {
-
+      
     };
   });
 

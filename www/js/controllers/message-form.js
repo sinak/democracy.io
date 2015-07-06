@@ -8,6 +8,8 @@ var isUndefined = require('lodash.isundefined');
 var map = require('lodash.map');
 
 var SubscriptionRequest = require('../../../models').SubscriptionRequest;
+var MessageSender = require('../../../models').MessageSender;
+
 var helpers = require('../helpers/message-form');
 
 
@@ -130,16 +132,15 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAP
     dioAPI.submitMessageToReps(messages, cb);
 
     if ($scope.joinEmailList) {
-      var messageSender = {
-        first_name: $scope.fromData.firstName,
-        last_name: $scope.formData.lastName,
+      var messageSender = new MessageSender({
+        firstName: $scope.formData.firstName,
+        lastName: $scope.formData.lastName,
         email: $scope.formData.email
-      };
+      });
       var subRequest = new SubscriptionRequest({
         canonicalAddress: $scope.address,
         sender: messageSender
       });
-      console.log('Subscription request:', subRequest);
       dioAPI.subscribeToEFFList(subRequest, function() {
         // no-op as EFF subscription is best-effort only
       });

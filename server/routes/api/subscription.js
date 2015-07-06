@@ -13,8 +13,8 @@ var post = function (req, res) {
   var params = {
     'contact_params': {
       email: request.sender.email,
-      'first_name': request.sender.first_name,
-      'last_name': request.sender.last_name,
+      'first_name': request.sender.firstName,
+      'last_name': request.sender.lastName,
       source: 'democracy.io',
       subscribe: true,
       'opt_in': false
@@ -31,13 +31,15 @@ var post = function (req, res) {
   var cb = apiCallback(res, function() {
     // TODO(leah): Look at the format of the response on this
     return {
-      
+
     };
   });
 
-  //effCivicCRM.subscribeToEFFMailingList(params, config, function(err, res) {
-  //  cb(err, res);
-  //});
+  effCivicCRM.subscribeToEFFMailingList(params, req.app.locals.CONFIG, function(err, res) {
+
+  console.log("Error", err, "Resolution", res);
+   cb(err, res);
+  });
 };
 
 

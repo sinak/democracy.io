@@ -35,6 +35,7 @@ var subscribeToEFFMailingList = function(params, config, cb) {
   };
 
   makeRequest(params, cb);
+
 };
 
 

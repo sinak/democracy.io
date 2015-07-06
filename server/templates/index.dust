@@ -8,45 +8,54 @@
        id="wrapper"
        class="content">
 
-    {>"components/nav-bar"/}
+    <div class="main">
+    
+      {>"components/nav-bar"/}
 
-    <noscript>
-    <div class="text-center"><h3>Democracy.io requires Javascript to work.</h3><h4>Please load the site using a browser that supports Javascript.</h4></div></noscript>
+      <noscript>
+      <div class="text-center"><h3>Democracy.io requires Javascript to work.</h3><h4>Please load the site using a browser that supports Javascript.</h4></div></noscript>
 
-    <div ng-switch ng-cloak on="pageName">
-      <div ng-switch-when="home"
-           class="header"
-           dio-write-to-them-animation=""
-           animate-msg="Write to your representatives"
-           initial-delay="1000"
-           speed="50"
-           show-full="pageFrom !== 'new-visit'">
+      <div ng-switch ng-cloak on="pageName">
+        <div ng-switch-when="home"
+             class="header"
+             dio-write-to-them-animation=""
+             animate-msg="Write to your representatives"
+             initial-delay="1000"
+             speed="50"
+             show-full="pageFrom !== 'new-visit'">
+        </div>
+        <h1 ng-switch-when="location" 
+             class="header">
+             Who do you want to write to?
+        </h1>
+        <h1 ng-switch-when="compose" 
+             class="header">
+             Write your message      
+        </h1>
+        <h1 ng-switch-when="captcha" 
+              class="header">
+             Verify that you're a human
+        </h1>
+        <h1 ng-switch-when="thanks" 
+              class="header">
+             Message sent!
+        </h1>
       </div>
-      <h1 ng-switch-when="location" 
-           class="header">
-           Who do you want to write to?
-      </h1>
-      <h1 ng-switch-when="compose" 
-           class="header">
-           Write your message      
-      </h1>
-      <h1 ng-switch-when="captcha" 
-            class="header">
-           Verify that you're a human
-      </h1>
-      <h1 ng-switch-when="thanks" 
-            class="header">
-           Message sent!
-      </h1>
+
+      {>"components/progress-bar"/}
+
+      <div class="container">
+        <div ng-view id="form-scope">
+        </div>
+      </div>
     </div>
 
-    {>"components/progress-bar"/}
-
-    <div class="container">
-      <div ng-view id="form-scope"></div>
+    <div ng-if="pageName === 'home'" id="whydio">
+      {>"components/video"/}
     </div>
 
   </div>
+
 
   {>"components/footer"/}
 

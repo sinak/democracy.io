@@ -1,0 +1,12 @@
+<div class="container" >
+  <div class="row">
+    <div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+      <h2>Why we built Democracy.io</h2>
+      <img class="img-responsive" src="/static/{CONFIG.VERSION}/img/browser-header.png">
+      <video controls width="100%">
+        <source src="https://d1cv406lx4hgxd.cloudfront.net/dio-1.2c.mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+  </div>
+</div>

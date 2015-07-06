@@ -14,9 +14,13 @@ body {
   background-position: top center;
   background-color: #eeeeee;
   min-height: 100%;
-  margin-bottom: 170px;
+  margin-bottom: 131px;
   font-family: 'OpenSans', sans-serif;
   font-weight: 300;
+
+  @media (max-width: $screen-xs-max) {
+    margin-bottom: 89px;
+  }
 }
 a.ondark {
   color: #fff;

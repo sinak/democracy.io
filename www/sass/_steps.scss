@@ -22,7 +22,24 @@
 /******
  Home
 ******/
-
+div#whydio {
+  background-color: #fff;
+  padding-bottom: 50px;
+  border-top: 1px solid #CCCCCC;
+  video {
+    border: 1px solid #CCCCCC;
+    border-top: 0;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    overflow:hidden;
+  }
+  h2 {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom:25px;
+    font-weight: 100;
+  }
+}
 #address .whitebox-container {
   padding: 0;
 }

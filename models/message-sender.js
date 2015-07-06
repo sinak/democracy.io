@@ -5,7 +5,6 @@
  */
 
 var create = require('lodash.create');
-var isEmpty = require('lodash.isempty');
 
 var Model = require('./model');
 

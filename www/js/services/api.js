@@ -4,7 +4,6 @@
 
 var helpers = require('../helpers/api');
 var models = require('../../../models');
-var forEach = require('lodash.foreach');
 
 var api = function ($http, dioConfig) {
 
@@ -73,6 +72,20 @@ var api = function ($http, dioConfig) {
         url: this.makeRelativeAPIURL('/legislators/message'),
         method: 'POST',
         data: messages,
+        modelClass: models.MessageResponse
+      };
+
+      this.makeAPICall(opts, cb);
+    },
+
+    /**
+     *
+     */
+    subscribeToEFFList: function(subRequest, cb) {
+      var opts = {
+        url: this.makeRelativeAPIURL('/subscription'),
+        method: 'POST',
+        data: subRequest,
         modelClass: models.MessageResponse
       };
 

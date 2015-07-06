@@ -319,8 +319,8 @@
                 }
             }
         },
-      "/exception": {
-          "post": {
+        "/exception": {
+            "post": {
                 "summary": "Logs a client side exception.",
                 "description": "Logs a client side exception sent from the Angular error bus.",
                 "parameters": [
@@ -352,8 +352,43 @@
                         }
                     }
                 }
-          }
-      }
+            }
+        },
+        "/subscription": {
+            "post": {
+                "summary": "Subscribes a user to the EFF email list.",
+                "description": "Subscribes a user to the EFF email list.",
+                "parameters": [
+                    {
+                        "name": "sub",
+                        "in": "body",
+                        "description": "",
+                        "required": "true",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/SubscriptionRequest"
+                        }
+                    }
+                    ]
+            },
+            "tags": [
+                "Subscription"
+            ],
+            "responses": {
+                "200": {
+                    "description": "Subscription acknowledgement.",
+                    "schema": {
+                        "type": "object"
+                    }
+                },
+                "default": {
+                    "description": "Unexpected error",
+                    "schema": {
+                        "$ref": "#/definitions/Error"
+                    }
+                }
+            }
+        }
     },
     "definitions": {
         "Legislator": {
@@ -685,6 +720,19 @@
                 },
                 "data": {
                     "type": "object"
+                }
+            }
+        },
+        "SubscriptionRequest": {
+            "description": "A subscription request.",
+            "properties": {
+                "sender": {
+                    "type": "object",
+                    "$ref": "#/definitions/MessageSender"
+                },
+                "canonicalAddress": {
+                    "type": "object",
+                    "$ref": "#/definitions/CanonicalAddress"
                 }
             }
         },

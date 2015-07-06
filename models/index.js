@@ -10,5 +10,6 @@ module.exports = {
   Message: require('./message'),
   MessageSender: require('./message-sender'),
   MessageResponse: require('./message-response'),
-  NgException: require('./ng-exception')
+  NgException: require('./ng-exception'),
+  SubscriptionRequest: require('./subscription-request')
 };

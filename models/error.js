@@ -4,7 +4,6 @@
  * @constructor
  */
 
-var isEmpty = require('lodash.isempty');
 var create = require('lodash.create');
 
 var Model = require('./model');

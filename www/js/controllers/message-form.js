@@ -2,14 +2,12 @@
  *
  */
 
-var findWhere = require('lodash.findwhere');
 var filter = require('lodash.filter');
-var forEach = require('lodash.foreach');
-var isArray = require('lodash.isarray');
 var isEmpty = require('lodash.isempty');
 var isUndefined = require('lodash.isundefined');
 var map = require('lodash.map');
 
+var SubscriptionRequest = require('../../../models').SubscriptionRequest;
 var helpers = require('../helpers/message-form');
 
 
@@ -130,7 +128,17 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAP
 
     $scope.sending = true;
     dioAPI.submitMessageToReps(messages, cb);
-
+    if ($scope.joinEmailList) {
+      // TODO(leah/sina): Make a MessageSender object to send to the subscription endpoint
+      var messageSender = {};
+      var subRequest = new SubscriptionRequest({
+        canonicalAddress: $scope.address,
+        sender: messageSender
+      });
+      dioAPI.subscribeToEFFList(subRequest, function() {
+        // no-op as EFF subscription is best-effort only
+      });
+    }
 	};
 
   /**

@@ -20,8 +20,8 @@
              class="header"
              dio-write-to-them-animation=""
              animate-msg="Write to your representatives"
-             initial-delay="1000"
-             speed="50"
+             initial-delay="500"
+             speed="30"
              show-full="pageFrom !== 'new-visit'">
         </div>
         <h1 ng-switch-when="location" 

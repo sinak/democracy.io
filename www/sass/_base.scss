@@ -22,6 +22,9 @@ body {
     margin-bottom: 108px;
   }
 }
+.main {
+  min-height: 700px;
+}
 a.ondark {
   color: #fff;
   &:visited, &:active {
@@ -58,7 +61,7 @@ h1 {
   margin-top: 100px;
 
   @media (max-width: $screen-xs-max) {
-    margin-top: 60px;
+    margin-top: 30px;
   }
 }
 h1.header {

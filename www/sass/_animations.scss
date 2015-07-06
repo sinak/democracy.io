@@ -62,7 +62,23 @@ body {
     }
   }
 }
+// Home styles when pressing "back"
 #wrapper[data-pagename="home"] {
+  div#progress-bar {
+    opacity: 1;
+  }
+  
+  &[data-pagefrom="location"] {
+    .header h1 {
+      @media (min-width: $screen-sm-min) {
+        margin-top: 0;
+        animation: addTopMargin 1.5s ease 0.5s 1 forwards;
+      }
+    }
+  }
+}
+// Home styles for fresh site load
+#wrapper[data-pagename="home"][data-pagefrom="new-visit"] {
   .header h1::after {
       content: '|';
       display: inline;
@@ -79,19 +95,19 @@ body {
     opacity: 0;
     @extend .animated;
     animation-name: fadeInUp;
-    animation-delay: 3s; // Reduces jittering
+    animation-delay: 1.5s; // Reduces jittering
   }
   #address.whitebox {
     @extend .animated;
     animation-name: fadeInUp;
-    animation-delay: 3s; // Reduces jittering
+    animation-delay: 1.5s; // Reduces jittering
   }
   #progress-bar-svg {
     #pb-circle-1, #pb-circle-2, #pb-circle-3 {
       stroke-linejoin: butt;
       stroke-dasharray: 500;
       stroke-dashoffset: -500;
-      animation: draw 2s ease 2.5s 1 forwards;
+      animation: draw 1.5s ease 1s 1 forwards;
     }
   }
   &[data-pagefrom="location"] {
@@ -128,8 +144,10 @@ body {
   // Animations when moving forwards
   &[data-pagefrom="home"] {
     h1.header {
-      margin-top: 100px;
-      animation: removeTopMargin 1.5s ease 0.5s 1 forwards;
+      @media (min-width: $screen-sm-min) {
+        margin-top: 100px;
+        animation: removeTopMargin 1.5s ease 0.5s 1 forwards;
+      }
     }
     #pb-line-1 {
       stroke-linejoin: butt;

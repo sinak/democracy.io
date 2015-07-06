@@ -7,8 +7,6 @@ var path = require('path');
 var runSequence = require('run-sequence');
 var supervisor = require('gulp-supervisor');
 
-var app = require('../../server/app');
-
 gulp.task('supervisor', function() {
   // NOTE: This won't refresh the browser on server-side .js changes. As this is
   //       designed as a single-page app, that's considered fine.

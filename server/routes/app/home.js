@@ -4,6 +4,8 @@
 
 var home = function(req, res) {
   res.render('index');
+  console.log('ip:', req.ip);
+  console.log('ips:', req.ips);
 };
 
 

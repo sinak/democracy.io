@@ -72,6 +72,11 @@ var AddressFormController = function($scope, $location, dioData, dioAPI) {
     }
   };
 
+  $scope.autoplayVideo = function() {
+    console.log('Video play triggered');
+    angular.element('#video')[0].play();
+  };
+
 };
 
 AddressFormController.$inject = [

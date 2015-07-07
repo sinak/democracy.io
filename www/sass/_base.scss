@@ -13,14 +13,17 @@ body {
   background-repeat: no-repeat;
   background-position: top center;
   background-color: #eeeeee;
-  min-height: 100%;
+  // min-height: 100%;
   margin-bottom: 150px;
   font-family: 'OpenSans', sans-serif;
   font-weight: 300;
 
   @media (max-width: $screen-xs-max) {
-    margin-bottom: 108px;
+    margin-bottom: 100px;
   }
+}
+#anon-stats {
+  height: 0;
 }
 .main {
   min-height: 700px;

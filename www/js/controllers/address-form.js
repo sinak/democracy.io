@@ -6,7 +6,7 @@ var isEmpty = require('lodash.isempty');
 var filter = require('lodash.filter');
 
 
-var AddressFormController = function($scope, $location, dioData, dioAPI) {
+var AddressFormController = function($scope, $location, dioData, dioAPI, $timeout) {
 
   // See https://developers.google.com/web/fundamentals/input/form/provide-real-time-validation
   $scope.patterns = {
@@ -72,15 +72,18 @@ var AddressFormController = function($scope, $location, dioData, dioAPI) {
     }
   };
 
-  $scope.autoplayVideo = function() {
+  $scope.video = {};
+  $scope.video.autoplayVideo = function() {
     console.log('Video play triggered');
-    angular.element('#video')[0].play();
+    $timeout(function() {
+      document.querySelectorAll('#video')[0].play();
+    }, 1000);
   };
 
 };
 
 AddressFormController.$inject = [
-  '$scope', '$location', 'dioData', 'dioAPI'
+  '$scope', '$location', 'dioData', 'dioAPI', '$timeout'
 ];
 
 module.exports = AddressFormController;

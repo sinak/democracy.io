@@ -20,6 +20,7 @@
   margin: 0;
   letter-spacing:40px;
   font-weight: 800;
+  max-height: 100px; // Fixes SVG issue in Safari 7
 }
 #footer svg {
   width: 250px;

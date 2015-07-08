@@ -74,10 +74,12 @@ var AddressFormController = function($scope, $location, dioData, dioAPI, $timeou
 
   $scope.video = {};
   $scope.video.autoplayVideo = function() {
-    console.log('Video play triggered');
+    var vidEl = document.querySelectorAll('#video')[0];
+    var contEl = document.querySelectorAll('#video-container')[0];
+    angular.element(contEl).addClass('ng-enter');
     $timeout(function() {
-      document.querySelectorAll('#video')[0].play();
-    }, 1000);
+      vidEl.play();
+    }, 1500);
   };
 
 };

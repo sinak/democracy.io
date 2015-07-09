@@ -7,7 +7,7 @@ var filter = require('lodash.filter');
 
 
 var AddressFormController = function($scope, $location, dioData, dioAPI, $timeout) {
-  var priorAddress = dioData.getCanonicalAddress()
+  var priorAddress = dioData.getCanonicalAddress();
 
   // See https://developers.google.com/web/fundamentals/input/form/provide-real-time-validation
   $scope.patterns = {
@@ -15,7 +15,6 @@ var AddressFormController = function($scope, $location, dioData, dioAPI, $timeou
     city: new RegExp(/[a-zA-Z\d\s\-\,\#\.\+]+/),
     postal: new RegExp(/^\d{5,6}(?:[-\s]\d{4})?$/)
   };
-  console.log (priorAddress.components)
   if (priorAddress.address) {
     $scope.addressData = {
       address: priorAddress.components.primaryNumber + " " + priorAddress.components.streetName + " " + priorAddress.components.streetSuffix,

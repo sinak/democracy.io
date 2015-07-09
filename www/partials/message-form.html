@@ -167,7 +167,7 @@
       <button type="submit"
               class="btn btn-orange btn-lg"
               ng-click="send()"
-              ng-if="!messageForm.$invalid">
+              ng-show="!messageForm.$invalid">
         Send!
       </button>
     </form>
@@ -175,7 +175,7 @@
     <div class="alert alert-warning"
          id="messageFormValidation"
          role="alert"
-         ng-if="!messageForm.$pristine && messageForm.$invalid">
+         ng-show="!messageForm.$pristine && messageForm.$invalid">
       <p><strong>Please fill in the following required fields  to submit your message:</strong></p>
       <ul>
         <li ng-if="messageForm.subject.$invalid">Subject</li>

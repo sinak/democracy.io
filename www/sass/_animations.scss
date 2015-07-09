@@ -348,7 +348,7 @@ body {
       stroke-linejoin: butt;
       stroke-dasharray: 700;
       stroke-dashoffset: 700;
-      animation: draw 1.5s linear 0.5s 1 forwards;
+      animation: drawLogo 1.5s linear 0.5s 1 forwards;
       animation-repeat: 1;
       position: absolute;
     }
@@ -362,7 +362,7 @@ body {
       margin-top: 50px;
     }
   }
-  @keyframes draw {
+  @keyframes drawLogo {
     to {
         stroke-dashoffset: 0;
         stroke-dasharray: 0;

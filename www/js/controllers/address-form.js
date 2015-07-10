@@ -7,7 +7,19 @@ var filter = require('lodash.filter');
 
 
 var AddressFormController = function($scope, $location, dioData, dioAPI, $timeout) {
-  var priorAddress = dioData.getCanonicalAddress();
+  var priorCanonicalAddress = dioData.getCanonicalAddress().components;
+
+  var priorAddress = '';
+  if (priorCanonicalAddress.primaryNumber) priorAddress += priorCanonicalAddress.primaryNumber + " ";
+  if (priorCanonicalAddress.streetName) priorAddress += priorCanonicalAddress.streetName + " ";
+  if (priorCanonicalAddress.streetSuffix) priorAddress += priorCanonicalAddress.streetSuffix;
+
+  var priorCity = '';
+  if (priorCanonicalAddress.cityName) priorCity += priorCanonicalAddress.cityName;
+  if (priorCanonicalAddress.stateAbbreviation) priorCity += ", " + priorCanonicalAddress.stateAbbreviation;
+
+  var priorPostal = '';
+  if (priorCanonicalAddress.zipcode) priorPostal = priorCanonicalAddress.zipcode;
 
   // See https://developers.google.com/web/fundamentals/input/form/provide-real-time-validation
   $scope.patterns = {
@@ -15,11 +27,11 @@ var AddressFormController = function($scope, $location, dioData, dioAPI, $timeou
     city: new RegExp(/[a-zA-Z\d\s\-\,\#\.\+]+/),
     postal: new RegExp(/^\d{5,6}(?:[-\s]\d{4})?$/)
   };
-  if (priorAddress.address) {
+  if (priorCanonicalAddress.streetName) {
     $scope.addressData = {
-      address: priorAddress.components.primaryNumber + " " + priorAddress.components.streetName + " " + priorAddress.components.streetSuffix,
-      city: priorAddress.components.cityName + ', ' + priorAddress.components.stateAbbreviation,
-      postal: priorAddress.components.zipcode
+      address: priorAddress,
+      city: priorCity,
+      postal: priorPostal
     };
   } else {
     $scope.addressData = {

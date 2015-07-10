@@ -124,9 +124,9 @@ body {
   #progress-bar-svg {
     #pb-circle-1, #pb-circle-2, #pb-circle-3 {
       stroke-linejoin: butt;
-      stroke-dasharray: 500;
-      stroke-dashoffset: -500;
-      animation: draw 1.5s ease 1s 1 forwards;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      animation: draw 1.5s ease 1.8s 1 forwards;
     }
   }
   &[data-pagefrom="location"] {
@@ -344,11 +344,12 @@ body {
   .navbar-brand {
     .text {
       fill: none;
-      stroke-width: 7;
+      stroke: url(#linearGradient-1);
+      stroke-width: 1px;
       stroke-linejoin: butt;
-      stroke-dasharray: 700;
-      stroke-dashoffset: 700;
-      animation: drawLogo 1.5s linear 0.5s 1 forwards;
+      stroke-dasharray: 200;
+      stroke-dashoffset: -125;
+      animation: drawLogo 1.5s ease 0.5s 1 forwards;
       animation-repeat: 1;
       position: absolute;
     }
@@ -362,10 +363,10 @@ body {
       margin-top: 50px;
     }
   }
-  @keyframes drawLogo {
-    to {
-        stroke-dashoffset: 0;
-        stroke-dasharray: 0;
-        }
-    }
 }
+
+@keyframes drawLogo {
+  to {
+      stroke-dashoffset: 0;
+      }
+  }

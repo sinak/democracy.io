@@ -3,7 +3,7 @@
     <div class="logo">
       <div class="row">
         <div class="hidden-xs col-sm-9">
-          <svg class="logo" preserveAspectRatio="none" viewBox="0 0 2200 200">
+          <svg class="logo" preserveAspectRatio="none" viewBox="0 0 228 20" >
               <use xlink:href="#s-text"></use>
           </svg>
 

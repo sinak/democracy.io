@@ -142,8 +142,7 @@ h1.header {
 
 // Logos
 .navbar-brand .text {
-  fill: none;
-  stroke-width: 9;
+  stroke-width: 0;
   // stroke-linejoin: butt;
   // stroke-dasharray: 500;
   // stroke-dashoffset: 500;
@@ -163,7 +162,6 @@ h1.header {
     max-width: 230px;
     position:relative;
     left: 5%;
-    stroke-width: 10;
   }
 }
 

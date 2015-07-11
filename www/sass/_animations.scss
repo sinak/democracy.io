@@ -63,16 +63,10 @@ body {
   }
 }
 #video-container {
-  h2, div {
+  div {
     opacity: 0;
   }
   &.ng-enter {
-    h2 {
-      @extend .animated;
-      animation-name: fadeUp30;
-      animation-delay: 0s;
-      opacity: 0;
-    }
     div {
       @extend .animated;
       animation-name: fadeUp30;
@@ -80,6 +74,18 @@ body {
       opacity: 0;
     }
   }
+}
+#about.ng-enter {
+  @extend .animated;
+  animation-name: fadeUp30;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+#showAbout.ng-hide {
+  @extend .animated;
+  animation-name: fadeDown30;
+  animation-delay: 0.2s;
+  opacity: 0;
 }
 // Home styles when pressing "back"
 #wrapper[data-pagename="home"] {
@@ -164,7 +170,7 @@ body {
   &[data-pagefrom="home"] {
     h1.header {
       @media (min-width: $screen-sm-min) {
-        margin-top: 100px;
+        margin-top: 70px;
         animation: removeTopMargin 1.5s ease 0.5s 1 forwards;
       }
     }
@@ -327,7 +333,7 @@ body {
 }
 @keyframes addTopMargin{
   to{
-    margin-top: 100px;
+    margin-top: 70px;
   }
 }
 @keyframes draw {

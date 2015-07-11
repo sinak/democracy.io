@@ -10,7 +10,7 @@ var services = require('./services');
 
 var democracyApp = angular.module(
   'democracyIoApp',
-  ['ngRoute', 'angular-locker', 'ngAnimate', 'ngSanitize', 'ui.mask', 'angular-inview']
+  ['ngRoute', 'angular-locker', 'ngAnimate', 'ngSanitize', 'ui.mask', 'angular-inview','duScroll']
 );
 
 var configureApp = function($provide, $httpProvider, $interpolateProvider, lockerProvider) {
@@ -51,6 +51,7 @@ require('angular-locker/src/angular-locker');
 require('angular-sanitize');
 require('angular-inview/angular-inview');
 require('angular-ui-utils/modules/mask/mask');
+require('angular-scroll/angular-scroll');
 
 // Require local modules generated as part of the build process
 require('../../.build/dio-app-settings');

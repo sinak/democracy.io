@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="330px" height="223px" viewBox="0 0 330 223" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.2 (12043) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-eff</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="icon-eff" sketch:type="MSLayerGroup" transform="translate(1.000000, 1.000000)">
+            <path d="M217.53544,0.126057762 C278.664601,0.126057762 328.211521,49.4952238 328.211521,110.425801 C328.211521,171.356379 278.664601,220.723152 217.53544,220.723152 C156.412684,220.723152 106.855358,171.356379 106.855358,110.425801 C106.855358,49.4952238 156.412684,0.126057762 217.53544,0.126057762 Z" id="Fill-3" stroke="#F93469" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            <path d="M0.277768856,36.9006173 L184.743506,36.9006173 L184.743506,61.3973105 L65.859236,61.3973105 L65.859236,94.0909495 L180.629805,94.0909495 L180.629805,118.601206 L65.859236,118.601206 L65.859236,159.449505 L184.743506,159.449505 L184.743506,183.958166 L0.277768856,183.958166 L0.277768856,36.9006173" id="Fill-4" stroke="#1EA2FF" sketch:type="MSShapeGroup"></path>
+            <path d="M209.335255,36.9006173 L209.335255,102.252791 L221.625127,102.252791 L221.625127,77.729769 L229.838119,77.729769 L229.838119,65.4854116 L221.625127,65.4854116 L221.625127,49.1314116 L233.917399,49.1314116 L233.917399,36.9006173 L209.335255,36.9006173" id="Fill-5" stroke="#F93469" sketch:type="MSShapeGroup"></path>
+            <path d="M209.335255,118.601206 L209.335255,183.958166 L221.625127,183.958166 L221.625127,159.449505 L229.838119,159.449505 L229.838119,147.188394 L221.625127,147.188394 L221.625127,130.843968 L233.917399,130.843968 L233.917399,118.601206 L209.335255,118.601206" id="Fill-6" stroke="#F93469" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

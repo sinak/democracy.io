@@ -22,6 +22,9 @@ body {
     margin-bottom: 100px;
   }
 }
+[ng-click],[data-ng-click],[x-ng-click] {
+    cursor: pointer;
+}
 #anon-stats {
   height: 0;
 }
@@ -61,7 +64,7 @@ h1 {
 }
 .header h1 {
   // Appears on first page
-  margin-top: 100px;
+  margin-top: 70px;
 
   @media (max-width: $screen-xs-max) {
     margin-top: 30px;
@@ -232,47 +235,4 @@ label {
  ****************/
 @media (max-width: $screen-xs-max) {
   .back-button { display: none;}
-}
-
-/*****************
- About page
- ****************/
-#wrapper[data-pagename="about"] {
-  p, ul {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom:15px;
-    font-weight: 400;
-  }
-  p.lead {
-    font-size: 24px;
-    margin-bottom:25px;
-    line-height: 1.8;
-    font-weight: 300;
-  }
-  ul li {
-    margin-bottom: 10px;
-    list-style-type: none;
-    &:before {
-      font-family: 'democracy-io';
-      content: "a";
-      font-size: 28px;
-      margin-left: -27px;
-      position:relative;
-      top:8px;
-      right:5px;
-    }
-  }
-  h2 {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    font-weight: 400;
-  }
-  div#progress-bar {
-    display: none;
-    animation-name: none;
-  }
-  #form-scope {
-    margin-top: 100px;
-  }
 }

@@ -6,7 +6,7 @@ var isEmpty = require('lodash.isempty');
 var filter = require('lodash.filter');
 
 
-var AddressFormController = function($scope, $location, dioData, dioAPI, $timeout) {
+var AddressFormController = function($scope, $location, dioData, dioAPI, $timeout, $document) {
   var priorCanonicalAddress = dioData.getCanonicalAddress().components;
 
   var priorAddress = '';
@@ -92,20 +92,38 @@ var AddressFormController = function($scope, $location, dioData, dioAPI, $timeou
     }
   };
 
-  $scope.video = {};
-  $scope.video.autoplayVideo = function() {
+  $scope.autoplayVideo = function(event, inview, inviewpart) {
+    console.log(event,inview,inviewpart);
     var vidEl = document.querySelectorAll('#video')[0];
     var contEl = document.querySelectorAll('#video-container')[0];
-    angular.element(contEl).addClass('ng-enter');
-    $timeout(function() {
-      vidEl.play();
-    }, 1500);
+    if (inview === true) {
+      angular.element(contEl).addClass('ng-enter');
+      $timeout(function() {
+        vidEl.play();
+      }, 1500);
+    }
+    else if (inview === false) {
+      vidEl.pause();
+    }
+  };
+
+  $scope.showAbout = function() {
+    var leadEl = document.querySelectorAll('#about-lead')[0];
+    var aboutEl = document.querySelectorAll('#about')[0];
+    var toggleEl = document.querySelectorAll('#showAbout')[0];
+    angular.element(aboutEl).addClass('ng-enter').removeClass('hidden');
+    angular.element(toggleEl).addClass('ng-hide');
+    $document.scrollToElement(angular.element(leadEl), 0, 1000);
+  };
+
+  $scope.animate = function(a,b,c){
+    console.log(a,b,c);
   };
 
 };
 
 AddressFormController.$inject = [
-  '$scope', '$location', 'dioData', 'dioAPI', '$timeout'
+  '$scope', '$location', 'dioData', 'dioAPI', '$timeout', "$document"
 ];
 
 module.exports = AddressFormController;

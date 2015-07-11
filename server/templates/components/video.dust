@@ -34,7 +34,7 @@
         </div>
         <div class="row">
           <div class="col-md-4 hidden-xs v-center">
-            <img class="img-responsive" src="/static/{CONFIG.VERSION}/img/icon-plane.svg"  >
+            <img class="img-responsive" src="/static/{CONFIG.VERSION}/img/icon-plane.svg" in-view="animate($event,$inview,$inviewpart)" >
           </div>
           <div class="col-md-8 v-center">
             <h2>How it works</h2>

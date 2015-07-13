@@ -1,7 +1,7 @@
 <!-- Page 3 -->
 <div class="row">
 
-  <div class="write-message whitebox col-md-10">
+  <div class="write-message whitebox col-md-8">
     <button class="btn-sm btn-warning back-button" ng-click="goBack()">Go back</button>
 
     <div id="loading" class="whitebox-container" ng-if="(!loadingDelay && !legislatorsFormElements) || sending">
@@ -31,7 +31,7 @@
         </path>
       </svg>
       <p ng-if="!loadingDelay  && !legislatorsFormElements">This'll just take one moment ...</p>
-      <p ng-if="sending">Sending your message now...</p>
+      <p ng-if="sending">Sending your message now. This may take up to 30 seconds.</p>
     </div>
 
     <form name="messageForm" class="whitebox-container" ng-show="legislatorsFormElements && !sending" novalidate>

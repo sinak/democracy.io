@@ -177,7 +177,8 @@ h1.header {
   background-color: #FF4425;
   color: #fff;
   padding: 0px 10px 2px 10px;
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 400;
   line-height: 21px;
   @extend a.ondark;
   &:hover, &:active, &:focus {

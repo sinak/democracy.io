@@ -3,18 +3,15 @@
   bottom: 0;
   width: 100%;
   border-top: 1px solid #C0C0C0;
-  height: 150px;
-  background-color: white;
-  padding-top: 30px;
+  height: 230px;  
+  background-color: rgb(200, 200, 200);
+  padding-top: 50px;
 
   @media (max-width: $screen-xs-max) {
-    height: 108px;
+    height: 188px;
   }
 }
-#footer .pull-right {
-  text-align: right;
-}
-.navbar-brand svg, #footer svg {
+.navbar-brand svg, #footer svg.logo {
   font: 220px/1 Open Sans, Impact;
   text-transform: uppercase;
   margin: 0;
@@ -24,7 +21,28 @@
 
   stroke: none;
 }
-#footer svg {
+#footer svg.logo {
   width: 250px;
-  fill: #aaa;
+  fill: #fff;
+}
+#footer .eff-logo svg{
+  margin-left: 10px;
+  position: relative;
+  top:3px;
+}
+#footer .links {
+  text-align: right;
+  line-height: 2.4;
+  a {
+    color: #2c2c2c;
+    padding-left:1px;
+    padding-right:1px;
+    border-bottom: 1px solid #eee;
+    transition: color 0.3s ease;
+    &:hover,&:active {
+      text-decoration: none;
+      color: $pink;
+      border-bottom: 1px solid #fff;
+    }
+  }
 }

@@ -371,24 +371,15 @@ body {
       stroke-dashoffset: 0;
   }
 }
-
-
-// Animated Logo About Page
-
-/* About page styles */
-#footer {
-  svg {
+@keyframes drawLogo {
+  to {
+    stroke-dashoffset: 0;
   }
 }
 
-@keyframes drawLogo {
-  to {
-      stroke-dashoffset: 0;
-      }
-  }
-
-// About animations
-
+/*******************
+ About animations
+*******************/
 #icon-plane, #icon-chat, #icon-speaker, #icon-logo, #icon-eff {
   @extend .animated;
   animation-duration: 1s;
@@ -416,3 +407,17 @@ body {
   animation-repeat: 1;
 }
 
+
+/*******************
+ Message form animations
+*******************/
+.form-note.ng-hide-remove {
+  @extend .animated;
+  opacity: 0;
+  animation: fadeUp30 0.3s ease 0s 1 forwards;
+}
+.form-note.ng-hide {
+  @extend .animated;
+  opacity: 0;
+  animation: fadeDown30 0.3s ease 0s 1 forwards;
+}

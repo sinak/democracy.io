@@ -1,7 +1,7 @@
 <!-- Page 3 -->
 <div class="row">
 
-  <div class="write-message whitebox col-md-8">
+  <div class="write-message whitebox col-md-11">
     <button class="btn-sm btn-warning back-button" ng-click="goBack()">Go back</button>
 
     <div id="loading" class="whitebox-container" ng-if="(!loadingDelay && !legislatorsFormElements) || sending">
@@ -65,7 +65,7 @@
         <div class="col-sm-4 col-md-3 hidden-xs">
           <div class="panel">
             <div class="panel-heading">
-              GUIDELINES:
+              Guidelines:
             </div>
             <div class="panel-body">
                 <p>Be <strong>polite</strong> and concise.</p>
@@ -76,47 +76,58 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-4 col-md-3 form-group">
-          <label for="inputFirstName">First name</label>
-          <input type="text" name="firstName" class="form-control" id="inputFirstName" ng-model="formData.firstName" ng-required='true'>
-        </div>
-
-        <div class="col-sm-4 col-md-3 form-group">
-          <label for="inputLastName">Last name</label>
-          <input type="text" name="lastName" class="form-control" id="inputLastName" ng-model="formData.lastName" ng-required='true'>
+        <div class="col-sm-8 col-md-6">
+          <div class="form-group">
+            <label for="inputEmail">Your Email Address</label>
+            <input type="email" name="email" class="form-control" id="inputEmail" ng-model="formData.email" ng-required="true">
+          </div>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-4 col-md-3 form-group">
-          <label for="inputPrefix">Prefix</label>
-          <select class="form-control"
-                  name="prefix" id="inputPrefix"
-                  ng-model="formData.prefix"
-                  ng-required="true">
-            <option value="Mr">Mr</option>
-            <option value="Mrs">Mrs</option>
-            <option value="Ms">Ms</option>
-            <option value="Dr">Dr</option>
-          </select>
-        </div>
-
-        <div class="col-sm-4 col-md-3 form-group">
-          <label for="inputPhoneNumber">Phone number</label>
-          <input type="text"
-                 name="phone"
-                 id="inputPhoneNumber"
-                 class="form-control"
-                 ng-model="formData.phoneNumber"
-                 ng-required="true"
-                 ui-mask="(999) 999-9999">
-        </div>
-      </div>
-
-      <div class="row" ng-if="!messageForm.phone.$valid && !messageForm.phone.$pristine">
         <div class="col-sm-8 col-md-6">
-          <div class="alert alert-danger" role="alert">
-            Please enter a valid phone number
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label for="inputFirstName">First name</label>
+              <input type="text" name="firstName" class="form-control" id="inputFirstName" ng-model="formData.firstName" ng-required='true'>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="inputLastName">Last name</label>
+              <input type="text" name="lastName" class="form-control" id="inputLastName" ng-model="formData.lastName" ng-required='true'>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label for="inputPrefix">Prefix</label>
+              <select class="form-control"
+                      name="prefix" id="inputPrefix"
+                      ng-model="formData.prefix"
+                      ng-required="true"
+                      ng-focus="prefixFocus = true"
+                      ng-blur="prefixFocus = false">
+                <option value="Mr">Mr</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Ms">Ms</option>
+                <option value="Dr">Dr</option>
+              </select>
+            </div>
+            <div class="col-sm-6 form-group" ng-class="{'has-error' : (!messageForm.phone.$valid && !messageForm.phone.$pristine)}">
+              <label for="inputPhoneNumber">Phone number</label>
+              <input type="text"
+                     name="phone"
+                     id="inputPhoneNumber"
+                     class="form-control"
+                     ng-model="formData.phoneNumber"
+                     ng-required="true"
+                     ui-mask="(999) 999-9999">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-6 hidden-xs form-note" ng-show="prefixFocus">
+          <div class="panel panel-compact" id="prefixNote">
+            <div class="panel-body">
+                Members of Congress's contact forms require gendered titles. <span class="hidden-sm">EFF believes the options provided are limiting and we are looking into alternatives.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -134,29 +145,35 @@
         </div>
       </div>
 
-      <div class="row" ng-repeat="legislator in topicOptions">
-        <div class="form-group col-sm-4 col-md-6">
-          <label for="inputTopic">[[legislator.name]]'s Topic</label>
-          <select class="form-control"
-                  name="topic"
-                  id="inputTopic"
-                  ng-model="topicOptions[legislator.bioguideId].selected"
-                  ng-required="true">
-            <option ng-repeat="topic in legislator.options" value="[[topic]]">
-              [[topic]]
-            </option>
-          </select>
-        </div>
-      </div>
-
       <div class="row">
-        <div class="col-md-6 form-group">
-          <label for="inputEmail">Email Address</label>
-          <input type="email" name="email" class="form-control" id="inputEmail" ng-model="formData.email" ng-required="true">
+        <div class="col-sm-6">
+          <div class="form-group" ng-repeat="legislator in topicOptions">
+            <label for="inputTopic">[[legislator.name]]'s Topic</label>
+            <select class="form-control"
+                    name="topic"
+                    id="inputTopic"
+                    ng-model="topicOptions[legislator.bioguideId].selected"
+                    ng-required="true"
+                    ng-focus="$parent.topicFocus = true"
+                    ng-blur="$parent.topicFocus = false"
+                    >
+              <option ng-repeat="topic in legislator.options" value="[[topic]]">
+                [[topic]]
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-6 hidden-xs form-note" ng-show="topicFocus">
+          <div class="panel panel-compact" id="prefixNote">
+            <div class="panel-body">
+                These topic fields are required by Members of Congress to submit messages via their contact forms.
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="form-group  emailSignup" >
+      <div class="form-group emailSignup" >
         <p>Democracy.io is a free service of the <a href="https://eff.org">Electronic Frontier Foundation</a>, a 501(c)(3) non-profit dedicated to fighting for your rights in the digital age.</p>
         <div class="checkbox">
           <input type="checkbox" id="emailSignup" ng-model="joinEmailList" unchecked>

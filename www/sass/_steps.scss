@@ -197,6 +197,16 @@ textarea#inputMessage {
   color: #fff;
   font-size: 12px;
   letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.panel-body {
+  padding-bottom: 10px;
+}
+.panel.panel-compact .panel-body {
+  padding: 10px;
+}
+#prefixNote.panel {
+  margin-top: 30px;
 }
 @media (min-width: $screen-sm-min ) {
   .write-message .panel {

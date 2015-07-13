@@ -54,7 +54,10 @@ div#whydio {
  a {
   color: inherit;
   border-bottom: 1px solid #bbb;
-  &:hover {
+  &.img-link {
+    border-bottom: none;
+  }
+  &.img-link, &:hover {
     text-decoration: none;
   }
  }

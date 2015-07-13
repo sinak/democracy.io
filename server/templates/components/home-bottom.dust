@@ -15,11 +15,15 @@
   </div>
   <div id="about-lead">
     <div class="container">
-      <h2>We think democracy thrives when people’s voices are heard. The easier it is for you to reach your member of Congress, the better. It&rsquo;s that simple.</h2>
-      <div class="text-center" id="showAbout">
-        <span class="btn btn-lg btn-outline" ng-click="showAbout()">
-          Read more <i class="icon-angle-down"></i>
-        </span>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <h2>Democracy thrives when people’s voices are heard. The easier it is for you to contact Congress, the better. It&rsquo;s that simple.</h2>
+          <div class="text-center" id="showAbout">
+            <span class="btn btn-lg btn-outline" ng-click="showAbout()">
+              Read more <i class="icon-angle-down"></i>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -54,7 +58,7 @@
         <div class="row">
           <div class="col-md-8 v-center">
             <h2>We don&rsquo;t tell people what to say</h2>
-            <p>This project is hosted by the Electronic Frontier Foundation, but it&rsquo;s a neutral tool. We don&rsquo;t control or influence the messages that are sent through Democracy.io. We&rsquo;re committed to free speech, and we support the free speech rights of our users.</p>
+            <p>This project is hosted by the <a href="https://eff.org">Electronic Frontier Foundation</a> (EFF), but it&rsquo;s a neutral tool. We don&rsquo;t control or influence the messages that are sent through Democracy.io. We&rsquo;re committed to free speech, and we support the free speech rights of our users.</p>
             <p>Sometimes we may oppose what people choose to tell their legislators. Even in those cases, we won&rsquo;t censor what individuals choose to say. In fact, we think society benefits from a plurality of voices speaking on a broad range of topics, and as a free speech organization this is a value we hold dear, even if we disagree with the message.</p>
             <p>While we have tried to make the best tool we can, please understand that Democracy.io may have bugs or other technical issues, as is offered without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the <a href="https://github.com/EFForg/democracy.io/blob/master/LICENSE">license</a> for more details.</p>
           </div>

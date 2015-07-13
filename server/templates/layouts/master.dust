@@ -3,13 +3,12 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>{+title /}</title>
+  <title>Democracy.io - Contact Members of Congress</title>
 
   <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<meta name="description" content="Send emails to members of the United States House and Senate in just a few easy steps.">
 	<link rel="icon" href="/static/img/favicon.ico">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -19,9 +18,16 @@
 	<![endif]-->
 
   <meta property='og:url' content='https://democracy.io/'>
-  <meta property='og:title' content='Democracy.io'>
-  <meta property='og:description' content='Write to your representatives.'>
-  <meta property='og:image' content='https://democracy.io/static/img/opengraph.jpg'>
+  <meta property='og:title' content='Democracy.io - Contact your Members of Congress'>
+  <meta property='og:description' content="Democracy thrives when people’s voices are heard. Send a message to your legislatures using EFF's simple new tool.">
+  <meta property='og:image' content='https://democracy.io/static/{CONFIG.VERSION}/img/opengraph.jpg'>
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@eff">
+  <meta name="twitter:creator" content="@eff">
+  <meta name="twitter:title" content="Democracy.io: Contact Congress easily">
+  <meta name="twitter:description" content="Democracy thrives when people’s voices are heard. Contact your representatives simply and easily.">
+  <meta name="twitter:image" content="https://democracy.io/static/{CONFIG.VERSION}/img/opengraph.jpg">
 
   <link rel="stylesheet" href="/static/{CONFIG.VERSION}/css/dio.min.css" />
 </head>

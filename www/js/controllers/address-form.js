@@ -93,16 +93,25 @@ var AddressFormController = function($scope, $location, dioData, dioAPI, $timeou
   };
 
   $scope.autoplayVideo = function(event, inview, inviewpart) {
-    console.log(event,inview,inviewpart);
-    var vidEl = document.querySelectorAll('#video')[0];
-    var contEl = document.querySelectorAll('#video-container')[0];
-    if (inview === true) {
-      angular.element(contEl).addClass('ng-enter');
-      $timeout(function() {
-        vidEl.play();
-      }, 1500);
+    // If all of video is in-view, then play
+    if (inview && inviewpart === 'both') {
+      var vidEl = document.querySelectorAll('#video')[0];
+      var contEl = document.querySelectorAll('#video-container')[0];
+      if (inview === true) {
+        if (angular.element(contEl).hasClass('ng-enter')){
+          vidEl.play();
+        }
+        else {
+          angular.element(contEl).addClass('ng-enter');
+          $timeout(function() {
+            vidEl.play();
+          }, 1500);
+        }
+      }
     }
-    else if (inview === false) {
+    // If video leaves view, pause.
+    else if (!inview || inviewpart !== 'both') {
+      var vidEl = document.querySelectorAll('#video')[0];
       vidEl.pause();
     }
   };
@@ -114,11 +123,21 @@ var AddressFormController = function($scope, $location, dioData, dioAPI, $timeou
     angular.element(aboutEl).addClass('ng-enter').removeClass('hidden');
     angular.element(toggleEl).addClass('ng-hide');
     $document.scrollToElement(angular.element(leadEl), 0, 1000);
+    window.readMoreOpen = true;
   };
 
-  $scope.animate = function(a,b,c){
-    console.log(a,b,c);
+  $scope.animate = function(event,inview,inviewpart){
+    //console.log(readMoreOpen, event, inview, inviewpart);
+    if (typeof readMoreOpen !== 'undefined' && readMoreOpen === true && inview && inviewpart === 'both') {
+      console.log('hi sina');
+      angular.element(event.inViewTarget).addClass('icon-enter');
+    }
   };
+
+  $timeout(function() {
+    window.readMoreOpen = true;
+    $scope.showAbout();
+  }, 2000);
 
 };
 

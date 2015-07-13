@@ -3,7 +3,7 @@
     <div class="logo">
       <div class="row">
         <div class="hidden-xs col-sm-9">
-          <svg class="logo" preserveAspectRatio="none" viewBox="0 0 228 20" >
+          <svg class="logo" preserveAspectRatio="none" viewBox="0 0 232 20" >
               <use xlink:href="#s-text"></use>
           </svg>
 
@@ -11,9 +11,6 @@
         </div>
         <div class="col-sm-3">
           <div class="pull-right">
-            <div>
-              <a href="/#/about">About</a>
-            </div>
             <div>
               <a href="https://www.eff.org/policy">Privacy Policy</a>
             </div>

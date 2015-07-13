@@ -307,6 +307,36 @@ body {
     transform: none;
   }
 }
+@keyframes fadeUp30P {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeRightIn30P {
+  0% {
+    opacity: 0;
+    transform: translate3d(-30%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeUpRightIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(-100%, 100%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+}
 @keyframes moveRight {
   0% {
     opacity: 1;
@@ -346,28 +376,8 @@ body {
 // Animated Logo About Page
 
 /* About page styles */
-#wrapper[data-pagename="about"] {
-  .navbar-brand {
-    .text {
-      fill: none;
-      stroke: url(#linearGradient-1);
-      stroke-width: 1px;
-      stroke-linejoin: butt;
-      stroke-dasharray: 200;
-      stroke-dashoffset: -125;
-      animation: drawLogo 1.5s ease 0.5s 1 forwards;
-      animation-repeat: 1;
-      position: absolute;
-    }
-    svg {
-      font: 12em/1 Open Sans, Impact;
-      text-transform: uppercase;
-      margin: 0;
-      letter-spacing:40px;
-      font-weight: 800;
-      max-width: 550px;
-      margin-top: 50px;
-    }
+#footer {
+  svg {
   }
 }
 
@@ -376,3 +386,33 @@ body {
       stroke-dashoffset: 0;
       }
   }
+
+// About animations
+
+#icon-plane, #icon-chat, #icon-speaker, #icon-logo, #icon-eff {
+  @extend .animated;
+  animation-duration: 1s;
+  opacity: 0;
+}
+#icon-plane.icon-enter {
+  animation-name: fadeUpRightIn;
+}
+#icon-chat.icon-enter,#icon-eff.icon-enter {
+  animation-name: fadeUp30P;
+}
+#icon-speaker.icon-enter {
+  animation-name: fadeRightIn30P;
+}
+#icon-logo.icon-enter {
+  @extend .animated;
+  opacity: 1;
+  fill: none;
+  stroke: $pink;
+  stroke-width: 1px;
+  stroke-linejoin: butt;
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  animation: drawLogo 2.5s ease 0s 1 forwards;
+  animation-repeat: 1;
+}
+

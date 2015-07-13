@@ -26,15 +26,15 @@
   <div id="about" class="hidden">
     <div class="container">      
       <div class="whitebox-container clearfix">
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2">
+        <div class="row how">
+          <div class="col-md-8 col-md-offset-2 lead">
             <p>Failure to effectively reach members of Congress has disastrous consequences. Studies shows that politicians <a href="https://www.ocf.berkeley.edu/~broockma/broockman_skovron_asymmetric_misperceptions.pdf"> fundamentally misconceive</a> their constituents&rsquo; views, making it harder for them to represent us in the lawmaking process.</p>
             <p>That&rsquo;s why we built democracy.io: a new tool to put you in touch with your members of Congress&mdash;with as few clicks as possible.</p>
           </div>
         </div>
         <div class="row">
           <div class="col-md-4 hidden-xs v-center">
-            <img class="img-responsive" src="/static/{CONFIG.VERSION}/img/icon-plane.svg" in-view="animate($event,$inview,$inviewpart)" >
+            <img id="icon-plane" class="img-responsive" src="/static/{CONFIG.VERSION}/img/icon-plane.svg" in-view="animate($event,$inview,$inviewpart)" />
           </div>
           <div class="col-md-8 v-center">
             <h2>How it works</h2>
@@ -50,19 +50,19 @@
 
         <div class="row">
           <div class="col-md-8 v-center">
-            <h2>We don&rsquo;t tell people what to say.</h2>
+            <h2>We don&rsquo;t tell people what to say</h2>
             <p>This project is hosted by the Electronic Frontier Foundation, but it&rsquo;s a neutral tool. We don&rsquo;t control or influence the messages that are sent through Democracy.io. We&rsquo;re committed to free speech, and we support the free speech rights of our users.</p>
             <p>Sometimes we may oppose what people choose to tell their legislators. Even in those cases, we won&rsquo;t censor what individuals choose to say. In fact, we think society benefits from a plurality of voices speaking on a broad range of topics, and as a free speech organization this is a value we hold dear, even if we disagree with the message.</p>
             <p>While we have tried to make the best tool we can, please understand that Democracy.io may have bugs or other technical issues, as is offered without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the <a href="https://github.com/EFForg/democracy.io/blob/master/LICENSE">license</a> for more details.</p>
           </div>
           <div class="col-md-4 hidden-xs v-center">
-            <img class="img-responsive pull-right" src="/static/{CONFIG.VERSION}/img/icon-chat.svg">
+            <img id="icon-chat" class="img-responsive pull-right" src="/static/{CONFIG.VERSION}/img/icon-chat.svg" in-view="animate($event,$inview,$inviewpart)" />
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-4 hidden-xs v-center">
-            <img class="img-responsive" src="/static/{CONFIG.VERSION}/img/icon-speaker.svg">
+            <img id="icon-speaker" class="img-responsive" src="/static/{CONFIG.VERSION}/img/icon-speaker.svg" in-view="animate($event,$inview,$inviewpart)">
           </div>
           <div class="col-md-8 v-center">
             <h2>Why we&rsquo;re doing this.</h2>
@@ -80,12 +80,15 @@
 
           </div>
           <div class="col-md-4 hidden-xs v-center">
-            <img class="img-responsive" src="/static/{CONFIG.VERSION}/img/icon-eff.svg">
+            <img id="icon-eff" class="img-responsive" src="/static/{CONFIG.VERSION}/img/icon-eff.svg" in-view="animate($event,$inview,$inviewpart)" />
           </div>
         </div>
         
         <div class="row">
-          <div class="col-md-8 col-md-offset-1">
+          <div class="col-md-6 hidden-xs v-center">
+            <svg id="icon-logo" class="img-responsive" in-view="animate($event,$inview,$inviewpart)" preserveAspectRatio="none" viewBox="0 0 232 20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#s-text"></use></svg>
+          </div>
+          <div class="col-md-6  v-center">
             <h2>Jump in, change the world.</h2>
             <p>Want to help with this and future technology projects? If you&rsquo;re a web developer who might want to occasionally volunteer, send an email to rainey@eff.org and also sign up with <a href="https://taskforce.is"> Taskforce</a>, a volunteer group that works with EFF on many projects to make the Internet more awesome and free.</p>
             <p>We <i class="icon-heart"></i> democracy.</p>

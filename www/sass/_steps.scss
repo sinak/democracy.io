@@ -32,7 +32,7 @@ div#whydio {
     border-bottom-left-radius: 10px;
     overflow:hidden;
   }
-  h2 {
+  #video-container h2 {
     text-align: center;
     margin-top: 50px;
     margin-bottom:35px;
@@ -332,9 +332,12 @@ label small {
   color: #fff;
   margin-top: 40px;
   padding-bottom:40px;
+  padding-top: 25px;
   h2 {
     font-family: "DroidSerif";
     line-height: 1.6;
+    margin-bottom: 25px;
+    text-align: center;
   }
   a {
     color: #fff;
@@ -363,11 +366,9 @@ label small {
     margin-bottom:15px;
     font-weight: 400;
   }
-  p.lead {
+  div.lead p {
     font-size: 24px;
-    margin-bottom:25px;
-    line-height: 1.8;
-    font-weight: 300;
+    margin-bottom: 30px;
   }
   ul li {
     margin-bottom: 10px;
@@ -382,6 +383,13 @@ label small {
       right:5px;
     }
   }
+  .row {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  .row:first-child {
+    margin-top: 0;
+  }
   .v-center {
     @media (min-width: $screen-md-min) {
       float:none;
@@ -390,16 +398,19 @@ label small {
       margin-right:-4px;
     }
     img {
-      padding-top: 80px;
+      padding-top: 30px;
     }
   }
   h2 {
-    margin-top: 80px;
+    font-weight: 100;
+    font-size: 36px;
     margin-bottom: 20px;
-    font-weight: 400;
-    text-align: left;
   }
-  .col-md-8 {
+  .col-md-8, .col-md-6 {
     margin-top: 30px;
+  }
+  #icon-logo {
+    max-width: 80%;
+    margin: 0 auto;
   }
 }

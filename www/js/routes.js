@@ -30,11 +30,6 @@ var configureRoutes = function($routeProvider) {
       templateUrl: '/partials/thanks.html',
       title: 'Message sent!'
     })
-    .when('/about', {
-      controller: 'AboutController',
-      templateUrl: '/partials/about.html',
-      title: 'About'
-    })
     .otherwise({
       redirectTo: '/'
     });

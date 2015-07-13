@@ -12,7 +12,6 @@ Democracy.io FE
 
 ## [Controllers](/www/js/controllers)
 
-- [**<code>about</code>**](/www/js/controllers/about.js) - Shows an about page with info on democracy.io
 - [**<code>address-form</code>**](/www/js/controllers/address-form.js) - Shows a form to enter the user's address 
 - [**<code>captcha</code>**](/www/js/controllers/captcha.js) - Shows a form displaying captcha's from reps, allowing the user to solve them and submit their message 
 - [**<code>legislator-picker</code>**](/www/js/controllers/legislator-picker.js) - Displays a picker for selecting the reps to write to

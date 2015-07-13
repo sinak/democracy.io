@@ -51,7 +51,7 @@
     </div>
 
     <div ng-if="pageName === 'home'" id="whydio">
-      {>"components/video"/}
+      {>"components/home-bottom"/}
     </div>
 
   </div>

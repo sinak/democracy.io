@@ -134,11 +134,6 @@ var AddressFormController = function($scope, $location, dioData, dioAPI, $timeou
     }
   };
 
-  $timeout(function() {
-    window.readMoreOpen = true;
-    $scope.showAbout();
-  }, 2000);
-
 };
 
 AddressFormController.$inject = [

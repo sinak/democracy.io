@@ -33,8 +33,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4 hidden-xs v-center">
-            <img id="icon-plane" class="img-responsive" src="/static/{CONFIG.VERSION}/img/icon-plane.svg" in-view="animate($event,$inview,$inviewpart)" />
+          <div class="col-md-4 hidden-xs hidden-sm v-center">
+
+            <svg id="icon-plane" class="img-responsive" width="261" height="261" in-view="animate($event,$inview,$inviewpart)" viewBox="0 0 261 261" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <title>icon-plane</title><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="a"><stop stop-color="#FFF" offset="0%"/><stop stop-color="#F1F1F1" offset="100%"/></linearGradient><path id="b" d="M0 139.286l74.286 27.857L83.57 260 130 195l65 65L260 0 0 139.286z"/></defs><g fill="none" fill-rule="evenodd"><g transform="translate(0 1)"><use stroke="#1EA2FF" fill="url(#a)" xlink:href="#b"/><use xlink:href="#b"/></g><path d="M184.96 224.67L130 168.143 204.286 66l-111.43 89.26-47.936-17.992L231.795 37.156 184.96 224.67z" stroke="#F93469" stroke-dasharray="3" fill="#FFF"/></g>
+            </svg>
           </div>
           <div class="col-md-8 v-center">
             <h2>How it works</h2>
@@ -55,13 +58,13 @@
             <p>Sometimes we may oppose what people choose to tell their legislators. Even in those cases, we won&rsquo;t censor what individuals choose to say. In fact, we think society benefits from a plurality of voices speaking on a broad range of topics, and as a free speech organization this is a value we hold dear, even if we disagree with the message.</p>
             <p>While we have tried to make the best tool we can, please understand that Democracy.io may have bugs or other technical issues, as is offered without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the <a href="https://github.com/EFForg/democracy.io/blob/master/LICENSE">license</a> for more details.</p>
           </div>
-          <div class="col-md-4 hidden-xs v-center">
+          <div class="col-md-4 hidden-xs hidden-sm v-center">
             <img id="icon-chat" class="img-responsive pull-right" src="/static/{CONFIG.VERSION}/img/icon-chat.svg" in-view="animate($event,$inview,$inviewpart)" />
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-4 hidden-xs v-center">
+          <div class="col-md-4 hidden-xs  hidden-sm v-center">
             <img id="icon-speaker" class="img-responsive" src="/static/{CONFIG.VERSION}/img/icon-speaker.svg" in-view="animate($event,$inview,$inviewpart)">
           </div>
           <div class="col-md-8 v-center">
@@ -79,13 +82,13 @@
             <p>The backend system that delivers these messages to Congress was written by EFF employee <a href="https://twitter.com/legind">William Budington</a>, drawing inspiration from work by the Participatory Politics Foundation. Delivery is made possible by the open source <a href="https://github.com/unitedstates/contact-congress">contact-congress</a> dataset that was started by the Sunlight Foundation and completed with help from <a href="https://www.eff.org/deeplinks/2014/04/dear-web-developers-thank-you-youre-awesome-and-wow-did-really-just-happen"> over 100 EFF volunteer web developers,</a> (and in particular <a href="https://www.eff.org/about/volunteer-technologists"> these five individuals</a>). The dataset is now maintained by EFF, the Sunlight Foundation, and Action Network.</p>
 
           </div>
-          <div class="col-md-4 hidden-xs v-center">
+          <div class="col-md-4 hidden-xs hidden-sm v-center">
             <img id="icon-eff" class="img-responsive" src="/static/{CONFIG.VERSION}/img/icon-eff.svg" in-view="animate($event,$inview,$inviewpart)" />
           </div>
         </div>
         
         <div class="row">
-          <div class="col-md-6 hidden-xs v-center">
+          <div class="col-md-6 hidden-xs  hidden-sm v-center">
             <svg id="icon-logo" class="img-responsive" in-view="animate($event,$inview,$inviewpart)" preserveAspectRatio="none" viewBox="0 0 232 20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#s-text"></use></svg>
           </div>
           <div class="col-md-6  v-center">

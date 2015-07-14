@@ -88,7 +88,7 @@
             <h2>Why we&rsquo;re doing this.</h2>
             <p>First, we want contacting your elected officials to be easy. Then more people will do it. And that&rsquo;s good for democracy.</p>
             <p>We also want to show off the functionality of the tools EFF has been creating over the last several years. We are working from an <a href="https://github.com/unitedstates/contact-congress">open data set</a> originally created by the Participatory Politics Foundation and later adopted by and improved upon by the Sunlight Foundation, EFF, and several collaborating organizations. Together, we&rsquo;ve been working on a large-scale project to improve how Internet users contact elected officials and other decision makers.</p>
-            <p>Democracy.io lets you test out one of these tools&mdash;emailing members of Congress&mdash;but we&rsquo;re also creating simple ways to send Tweets to members of Congress, call Congress, sign petitions, and submit official comments to government agencies. If you&rsquo;re an advocacy organization that likes how this works, check out our <a href="https://github.com/EFForg"> Github page</a> and contact <a href="mailto:rainey@eff.org?Subject=Democracy.io" target="_top">rainey@eff.org</a> to discuss whether these free software, user-focused tools are a good solution for your advocacy needs.</p>
+            <p>Democracy.io lets you test out one of these tools&mdash;emailing members of Congress&mdash;but we&rsquo;re also creating simple ways to send Tweets to members of Congress, call Congress, sign petitions, and submit official comments to government agencies. If you&rsquo;re an advocacy organization that likes how this works, check out our <a href="https://github.com/EFForg"> Github page</a> and contact <a href="mailto:democracy@eff.org?Subject=Democracy.io" target="_top">democracy@eff.org</a> to discuss whether these free software, user-focused tools are a good solution for your advocacy needs.</p>
           </div>
         </div>
         
@@ -113,7 +113,7 @@
           </div>
           <div class="col-md-6  v-center">
             <h2>Jump in, change the world.</h2>
-            <p>Want to help with this and future technology projects? If you&rsquo;re a web developer who might want to occasionally volunteer, send an email to rainey@eff.org and also sign up with <a href="https://taskforce.is"> Taskforce</a>, a volunteer group that works with EFF on many projects to make the Internet more awesome and free.</p>
+            <p>Want to help with this and future technology projects? If you&rsquo;re a web developer who might want to occasionally volunteer, send an email to <a href="mailto:democracy@eff.org">democracy@eff.org</a> and also sign up with <a href="https://taskforce.is"> Taskforce</a>, a volunteer group that works with EFF on many projects to make the Internet more awesome and free.</p>
             <p>We <i class="icon-heart"></i> democracy.</p>
           </div>
         </div>

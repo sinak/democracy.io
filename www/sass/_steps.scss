@@ -340,16 +340,24 @@ label small {
  Home page page
  ****************/
 #whydio #about-lead {
-  background: linear-gradient(to right, $brand-primary, $pink); 
-  color: #fff;
-  margin-top: 40px;
-  padding-bottom:40px;
-  padding-top: 25px;
+  margin-top: 60px;
+  background-color: #222;
+  &:before {
+    content: ' ';
+    display: block;
+    height: 15px;
+    background: linear-gradient(to right, $brand-primary, $pink); 
+  }
   h2 {
     font-family: "DroidSerif";
     line-height: 1.6;
     margin-bottom: 25px;
+    margin-top: 40px;
     text-align: center;
+    color: #fff;
+  }
+  .col-md-10 {
+    margin-bottom: 40px;
   }
   a {
     color: #fff;
@@ -359,9 +367,10 @@ label small {
     border-radius: 10px;
     font-weight: 100;
     transition: background-color 0.3s ease;
+    color: #fff;
     &:hover, a:hover {
       color: #fff;
-      background-color: $pink;
+      background-color: $brand-primary;
       text-decoration: none;
     }
   }
@@ -371,16 +380,27 @@ label small {
   }
 }
 #whydio #about {
-  padding-top:30px;
+  background: linear-gradient(to bottom, #eee, #fff);
   p, ul {
     font-size: 16px;
     line-height: 1.6;
     margin-bottom:15px;
     font-weight: 400;
   }
-  div.lead p {
-    font-size: 24px;
-    margin-bottom: 30px;
+  svg {
+    margin-top: 30px;
+  }
+  div.lead {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 30px;
+    p {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+  }
+  & > .container > .row {
+    margin-top: 0;
   }
   ul li {
     margin-bottom: 10px;
@@ -398,9 +418,13 @@ label small {
   .row {
     margin-top: 40px;
     margin-bottom: 40px;
+    &:first-child {
+      margin-top:0;
+    }
   }
-  .row.how {
+  .container.how {
     margin-top: 0;
+    margin-bottom:0;
   }
   .v-center {
     @media (min-width: $screen-md-min) {
@@ -416,7 +440,7 @@ label small {
   h2 {
     font-weight: 100;
     font-size: 36px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
   .col-md-8, .col-md-6 {
     margin-top: 30px;

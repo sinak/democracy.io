@@ -28,95 +28,101 @@
     </div>
   </div>
   <div id="about" class="hidden">
-    <div class="container">      
-      <div class="whitebox-container clearfix">
-        <div class="row how">
-          <div class="col-md-8 col-md-offset-2 lead">
+    <div class="lead">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
             <p>Failure to effectively reach members of Congress has disastrous consequences. Studies show that politicians <a href="https://www.ocf.berkeley.edu/~broockma/broockman_skovron_asymmetric_misperceptions.pdf"> fundamentally misconceive</a> their constituents&rsquo; views, making it harder for them to represent us in the lawmaking process.</p>
             <p>That&rsquo;s why we built Democracy.io: a new tool to put you in touch with your members of Congress&mdash;with as few clicks as possible.</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-4 hidden-xs hidden-sm v-center">
-            <svg id="icon-plane" class="img-responsive" in-view="animate($event,$inview,$inviewpart)" width="265" height="265" viewBox="0 0 265 265" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <defs>
-                <linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="b"><stop stop-color="#fff" offset="0%"/><stop stop-color="#F1F1F1" offset="100%"/></linearGradient><linearGradient x1="50%" y1="0%" x2="50%" y2="85.947%" id="a"><stop stop-color="#1BA0FD" offset="0%"/><stop stop-color="#F93468" offset="100%"/></linearGradient><path id="c" d="M0 139.286l74.286 27.857 9.286 92.857 46.429-65 65 65 65-260-260 139.286z"/>
-              </defs>
-              <g fill="none"><g transform="translate(3 2)"><use stroke="url(#a)" stroke-width="2" fill="url(#b)" xlink:href="#c"/><use xlink:href="#c"/></g><path d="M132.138 172.981l81.944-112.673-122.916 98.46-52.879-19.846 206.14-110.432-51.663 206.844-60.626-62.354z" stroke="#F93469" stroke-dasharray="7" fill-opacity=".99" fill="#fff"/></g>
-            </svg>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="row">
+            <div class="col-md-4 hidden-xs hidden-sm v-center">
+              <svg id="icon-plane" class="img-responsive" in-view="animate($event,$inview,$inviewpart)" width="265" height="265" viewBox="0 0 265 265" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <defs>
+                  <linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="b"><stop stop-color="#fff" offset="0%"/><stop stop-color="#F1F1F1" offset="100%"/></linearGradient><linearGradient x1="50%" y1="0%" x2="50%" y2="85.947%" id="a"><stop stop-color="#1BA0FD" offset="0%"/><stop stop-color="#F93468" offset="100%"/></linearGradient><path id="c" d="M0 139.286l74.286 27.857 9.286 92.857 46.429-65 65 65 65-260-260 139.286z"/>
+                </defs>
+                <g fill="none"><g transform="translate(3 2)"><use stroke="url(#a)" stroke-width="2" fill="#fff" xlink:href="#c"/><use xlink:href="#c"/></g><path d="M132.138 172.981l81.944-112.673-122.916 98.46-52.879-19.846 206.14-110.432-51.663 206.844-60.626-62.354z" stroke="#F93469" stroke-dasharray="7" fill-opacity=".99" fill="#fff"/></g>
+              </svg>
+            </div>
+            <div class="col-md-8 v-center">
+              <h2>Simple and easy to use</h2>
+              <p>We make it possible for you to email your two senators and representative through a single website. You submit one message&mdash;not three different messages on three different forms on three different websites.</p>
+              <p>Some key features:</p>
+              <ul>
+                <li><strong>All your senators and representatives on one website.</strong></li>
+                <li><strong>Say whatever you want.</strong> Many activism platforms want you to send a pre-written message about a specific topic. We let you tell Congress exactly what&rsquo;s on your mind.</li>
+                <li><strong>Free software.</strong> All our code is licensed under the <a href="https://github.com/EFForg/democracy.io/blob/master/LICENSE" target="_blank">AGPL</a>, which means people can create new versions with different features and continue to improve on our original idea.</li>
+              </ul>
+            </div>
           </div>
-          <div class="col-md-8 v-center">
-            <h2>Simple and easy to use</h2>
-            <p>We make it possible for you to email your two senators and representative through a single website. You submit one message&mdash;not three different messages on three different forms on three different websites.</p>
-            <p>Some key features:</p>
-            <ul>
-              <li><strong>All your senators and representatives on one website.</strong></li>
-              <li><strong>Say whatever you want.</strong> Many activism platforms want you to send a pre-written message about a specific topic. We let you tell Congress exactly what&rsquo;s on your mind.</li>
-              <li><strong>Free software.</strong> All our code is licensed under the <a href="https://github.com/EFForg/democracy.io/blob/master/LICENSE" target="_blank">AGPL</a>, which means people can create new versions with different features and continue to improve on our original idea.</li>
-            </ul>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-8 v-center">
-            <h2>We don&rsquo;t tell people what to say</h2>
-            <p>This project is hosted by the <a href="https://eff.org">Electronic Frontier Foundation</a> (EFF), but it&rsquo;s a neutral tool. We don&rsquo;t control or influence the messages that are sent through Democracy.io. We&rsquo;re committed to free speech, and we support the free speech rights of our users.</p>
-            <p>Sometimes we may oppose what people choose to tell their legislators. Even in those cases, we won&rsquo;t censor what individuals choose to say. We think society benefits from a plurality of voices speaking on a broad range of topics, and as a free speech organization this is a value we hold dear, even if we disagree with the message.</p>
-            <p>While we have tried to make the best tool we can, please understand that Democracy.io may have bugs or other technical issues, as is offered without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the <a href="https://github.com/EFForg/democracy.io/blob/master/LICENSE">license</a> for more details.</p>
+          <div class="row">
+            <div class="col-md-8 v-center">
+              <h2>We don&rsquo;t tell people what to say</h2>
+              <p>This project is hosted by the <a href="https://eff.org">Electronic Frontier Foundation</a> (EFF), but it&rsquo;s a neutral tool. We don&rsquo;t control or influence the messages that are sent through Democracy.io. We&rsquo;re committed to free speech, and we support the free speech rights of our users.</p>
+              <p>Sometimes we may oppose what people choose to tell their legislators. Even in those cases, we won&rsquo;t censor what individuals choose to say. We think society benefits from a plurality of voices speaking on a broad range of topics, and as a free speech organization this is a value we hold dear, even if we disagree with the message.</p>
+              <p>While we have tried to make the best tool we can, please understand that Democracy.io may have bugs or other technical issues, as is offered without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose. See the <a href="https://github.com/EFForg/democracy.io/blob/master/LICENSE">license</a> for more details.</p>
+            </div>
+            <div class="col-md-4 hidden-xs hidden-sm v-center">
+              <svg id="icon-chat" class="img-responsive pull-right" in-view="animate($event,$inview,$inviewpart)"width="261" height="261" viewBox="0 0 261 261" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <defs>
+                  <linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="b2"><stop stop-color="#fff" offset="0%"/><stop stop-color="#F1F1F1" offset="100%"/></linearGradient>
+                  <linearGradient x1="50%" y1="0%" x2="50%" y2="85.947%" id="a2"><stop stop-color="#1BA0FD" offset="0%"/><stop stop-color="#F93468" offset="100%"/></linearGradient>
+                  <path id="c2" d="M9.962 9.962h159.385v59.769h9.962v-69.731h-179.308v139.462h69.731v-9.962h-59.769v-119.538z"/><path id="d2" d="M79.692 79.692v139.462h101.234l39.846 39.846h8.343v-39.846h29.885v-139.462h-179.308z"/>
+                  <linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="e2"><stop stop-color="#fff" offset="0%"/><stop stop-color="#E8FCFF" offset="100%"/></linearGradient>
+                </defs>
+                <g transform="translate(1 1)" fill="none">
+                  <g id="Shape2">
+                    <use stroke="url(#a2)" stroke-width="2" fill="#fff" xlink:href="#c2"/><use xlink:href="#c2"/></g>
+                  <g><use stroke="url(#a2)" stroke-width="2" fill="#fff"" xlink:href="#d2"/><use xlink:href="#d2"/></g>
+                  <path d="M218.49 207.914v33.819l-34.243-33.819h-95.257v-118.924h159.385v118.924h-29.885z" stroke="#F93469" stroke-dasharray="7" fill-opacity=".99" fill="#fff"/>
+                  <circle stroke="#F93469" fill="url(#e2)" cx="128" cy="149" r="9"/><circle stroke="#F93469" fill="url(#e2)" cx="170" cy="149" r="9"/><circle stroke="#F93469" fill="url(#e2)" cx="212" cy="149" r="9"/>
+                </g>
+              </svg>
+            </div>
           </div>
-          <div class="col-md-4 hidden-xs hidden-sm v-center">
-            <svg id="icon-chat" class="img-responsive pull-right" in-view="animate($event,$inview,$inviewpart)"width="261" height="261" viewBox="0 0 261 261" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <defs>
-                <linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="b2"><stop stop-color="#fff" offset="0%"/><stop stop-color="#F1F1F1" offset="100%"/></linearGradient>
-                <linearGradient x1="50%" y1="0%" x2="50%" y2="85.947%" id="a2"><stop stop-color="#1BA0FD" offset="0%"/><stop stop-color="#F93468" offset="100%"/></linearGradient>
-                <path id="c2" d="M9.962 9.962h159.385v59.769h9.962v-69.731h-179.308v139.462h69.731v-9.962h-59.769v-119.538z"/><path id="d2" d="M79.692 79.692v139.462h101.234l39.846 39.846h8.343v-39.846h29.885v-139.462h-179.308z"/>
-                <linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="e2"><stop stop-color="#fff" offset="0%"/><stop stop-color="#E8FCFF" offset="100%"/></linearGradient>
-              </defs>
-              <g transform="translate(1 1)" fill="none">
-                <g id="Shape2">
-                  <use stroke="url(#a2)" stroke-width="2" fill="url(#b2)" xlink:href="#c2"/><use xlink:href="#c2"/></g>
-                <g><use stroke="url(#a2)" stroke-width="2" fill="url(#b2)" xlink:href="#d2"/><use xlink:href="#d2"/></g>
-                <path d="M218.49 207.914v33.819l-34.243-33.819h-95.257v-118.924h159.385v118.924h-29.885z" stroke="#F93469" stroke-dasharray="7" fill-opacity=".99" fill="#fff"/>
-                <circle stroke="#F93469" fill="url(#e2)" cx="128" cy="149" r="9"/><circle stroke="#F93469" fill="url(#e2)" cx="170" cy="149" r="9"/><circle stroke="#F93469" fill="url(#e2)" cx="212" cy="149" r="9"/>
-              </g>
-            </svg>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-4 hidden-xs  hidden-sm v-center">
-            <img >
+          <div class="row">
+            <div class="col-md-4 hidden-xs  hidden-sm v-center">
+              <img >
 
-            <svg id="icon-speaker" class="img-responsive" in-view="animate($event,$inview,$inviewpart)" width="276" height="253" viewBox="0 0 276 253" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="b3"><stop stop-color="#fff" offset="0%"/><stop stop-color="#F1F1F1" offset="100%"/></linearGradient><linearGradient x1="50%" y1="0%" x2="50%" y2="85.947%" id="a3"><stop stop-color="#1BA0FD" offset="0%"/><stop stop-color="#F93468" offset="100%"/></linearGradient><path id="c3" d="M13.636 51.473c0-14.308 8.764-26.696 21.243-31.931h-2.699c-14.407 0-26.326 11.446-28.429 26.243-2.103.349-3.751 2.757-3.751 5.618 0 3.001 1.788 5.374 4.066 5.549 2.524 12.702 12.304 22.962 24.433 24.009h.035c.491 0 .982.209 1.472.314.386.07.771.14 1.157.244-10.481-5.967-17.527-17.169-17.527-30.046z"/><path id="d3" d="M154.492 20.736c-.39-1.019-.814-1.968-1.239-2.917-2.302-5.061-5.099-9.138-8.286-12.161-3.966-3.69-8.534-5.659-13.244-5.659-2.939 0-5.807.773-8.534 2.249h-.035l-1.275.703c-17.352 10.192-36.863 16.238-57.579 17.362-2.302.141-4.603.07-6.905.07h-14.979c-12.04 5.272-20.893 17.749-20.893 32.159 0 12.934 6.799 24.286 16.927 30.261 4.603 3.831 14.767 4.112 14.165 8.4-.673 4.639-1.948 7.697-2.762 10.79-.46 1.687-8.357 25.622-8.959 50.857 0 .703 0 1.3.071 2.32.071 1.019.779 2.249 3.01 2.249h27.196c2.337 0 3.435-1.16 3.293-3.269-.071-.668-.212-1.511-.283-2.285-.85-8.119-1.629-17.503-1.169-28.679.46-11.95 1.841-18.241 2.479-21.545.744-3.655 2.691-7.873 4.285-10.649 10.907.316 32.897 6.783 40.759 10.157 0 0 2.55 1.195 3.577 1.828 2.479 1.195 5.028 1.792 7.649 1.792.319 0 .637 0 .956-.035 4.356-.246 8.57-3.409 12.288-6.854 3.222-2.987 5.985-7.1 8.286-12.161.425-.984.85-1.968 1.239-3.023 3.399-8.787 5.241-19.647 5.241-30.964s-1.841-22.212-5.276-30.999z"/><linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="e3"><stop stop-color="#fff" offset="0%"/><stop stop-color="#F7F7F7" offset="100%"/></linearGradient></defs><g fill="none"><g stroke="#F93469" fill-opacity=".99" stroke-dasharray="7" fill="#fff"><path d="M194.395 252.363s80.503-35.757 80.503-125.677c0-89.919-80.503-125.677-80.503-125.677M177.557 222.576s61.547-27.337 61.547-96.083-61.547-96.083-61.547-96.083M159.334 198.674s46.16-20.503 46.16-72.062-46.16-72.062-46.16-72.062"/></g><g><g id="Shape" transform="translate(1) translate(0 72.315)"><use stroke="url(#a3)" stroke-width="2" fill="url(#b3)" xlink:href="#c3"/><use xlink:href="#c3"/></g><g transform="translate(1) translate(0 72.315)"><use stroke="url(#a3)" stroke-width="2" fill="#fff" xlink:href="#d3"/><use xlink:href="#d3"/></g><path d="M136.279 166.47c-3.942 0-7.535-5.166-10.256-11.704-3.174-7.592-5.198-18.663-5.198-30.964 0-12.371 2.023-23.478 5.232-31.069 2.721-6.467 6.314-10.368 10.221-10.368 3.942 0 7.5 3.936 10.256 10.368 3.209 7.592 5.232 18.698 5.232 31.069 0 12.301-2.023 23.372-5.198 30.964-2.721 6.502-6.349 11.704-10.29 11.704z" stroke="#1EA2FF" stroke-width="2" fill="url(#e3)"/></g></g></svg>
+              <svg id="icon-speaker" class="img-responsive" in-view="animate($event,$inview,$inviewpart)" width="276" height="253" viewBox="0 0 276 253" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="b3"><stop stop-color="#fff" offset="0%"/><stop stop-color="#F1F1F1" offset="100%"/></linearGradient><linearGradient x1="50%" y1="0%" x2="50%" y2="85.947%" id="a3"><stop stop-color="#1BA0FD" offset="0%"/><stop stop-color="#F93468" offset="100%"/></linearGradient><path id="c3" d="M13.636 51.473c0-14.308 8.764-26.696 21.243-31.931h-2.699c-14.407 0-26.326 11.446-28.429 26.243-2.103.349-3.751 2.757-3.751 5.618 0 3.001 1.788 5.374 4.066 5.549 2.524 12.702 12.304 22.962 24.433 24.009h.035c.491 0 .982.209 1.472.314.386.07.771.14 1.157.244-10.481-5.967-17.527-17.169-17.527-30.046z"/><path id="d3" d="M154.492 20.736c-.39-1.019-.814-1.968-1.239-2.917-2.302-5.061-5.099-9.138-8.286-12.161-3.966-3.69-8.534-5.659-13.244-5.659-2.939 0-5.807.773-8.534 2.249h-.035l-1.275.703c-17.352 10.192-36.863 16.238-57.579 17.362-2.302.141-4.603.07-6.905.07h-14.979c-12.04 5.272-20.893 17.749-20.893 32.159 0 12.934 6.799 24.286 16.927 30.261 4.603 3.831 14.767 4.112 14.165 8.4-.673 4.639-1.948 7.697-2.762 10.79-.46 1.687-8.357 25.622-8.959 50.857 0 .703 0 1.3.071 2.32.071 1.019.779 2.249 3.01 2.249h27.196c2.337 0 3.435-1.16 3.293-3.269-.071-.668-.212-1.511-.283-2.285-.85-8.119-1.629-17.503-1.169-28.679.46-11.95 1.841-18.241 2.479-21.545.744-3.655 2.691-7.873 4.285-10.649 10.907.316 32.897 6.783 40.759 10.157 0 0 2.55 1.195 3.577 1.828 2.479 1.195 5.028 1.792 7.649 1.792.319 0 .637 0 .956-.035 4.356-.246 8.57-3.409 12.288-6.854 3.222-2.987 5.985-7.1 8.286-12.161.425-.984.85-1.968 1.239-3.023 3.399-8.787 5.241-19.647 5.241-30.964s-1.841-22.212-5.276-30.999z"/><linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="e3"><stop stop-color="#fff" offset="0%"/><stop stop-color="#F7F7F7" offset="100%"/></linearGradient></defs><g fill="none"><g stroke="#F93469" fill-opacity=".99" stroke-dasharray="7" fill="none"><path d="M194.395 252.363s80.503-35.757 80.503-125.677c0-89.919-80.503-125.677-80.503-125.677M177.557 222.576s61.547-27.337 61.547-96.083-61.547-96.083-61.547-96.083M159.334 198.674s46.16-20.503 46.16-72.062-46.16-72.062-46.16-72.062"/></g><g><g id="Shape" transform="translate(1) translate(0 72.315)"><use stroke="url(#a3)" stroke-width="2" fill="url(#b3)" xlink:href="#c3"/><use xlink:href="#c3"/></g><g transform="translate(1) translate(0 72.315)"><use stroke="url(#a3)" stroke-width="2" fill="#fff" xlink:href="#d3"/><use xlink:href="#d3"/></g><path d="M136.279 166.47c-3.942 0-7.535-5.166-10.256-11.704-3.174-7.592-5.198-18.663-5.198-30.964 0-12.371 2.023-23.478 5.232-31.069 2.721-6.467 6.314-10.368 10.221-10.368 3.942 0 7.5 3.936 10.256 10.368 3.209 7.592 5.232 18.698 5.232 31.069 0 12.301-2.023 23.372-5.198 30.964-2.721 6.502-6.349 11.704-10.29 11.704z" stroke="#1EA2FF" stroke-width="2" fill="url(#e3)"/></g></g></svg>
+            </div>
+            <div class="col-md-8 v-center">
+              <h2>Why we&rsquo;re doing this.</h2>
+              <p>First, we want contacting your elected officials to be easy. Then more people will do it. And that&rsquo;s good for democracy.</p>
+              <p>We also want to show off the functionality of the tools EFF has been creating over the last several years. We are working from the <a href="https://github.com/unitedstates/contact-congress">contact-congress</a> dataset originally created by the <a href="http://www.participatorypolitics.org/">Participatory Politics Foundation</a> and later adopted by and improved upon by <a href="http://sunlightfoundation.com/">the Sunlight Foundation</a>, EFF, and several collaborating organizations. Together, we&rsquo;ve been working on a large-scale project to improve how Internet users contact elected officials and other decision makers.</p>
+              <p>Democracy.io lets you test out one of these tools&mdash;emailing members of Congress&mdash;but we&rsquo;re also creating simple ways to send Tweets to members of Congress, call Congress, sign petitions, and submit official comments to government agencies. If you&rsquo;re an advocacy organization that likes how this works, check out our <a href="https://github.com/EFForg"> Github page</a> and contact <a href="mailto:democracy@eff.org?Subject=Democracy.io" target="_top">democracy@eff.org</a> to discuss whether these free software, user-focused tools are a good solution for your advocacy needs.</p>
+            </div>
           </div>
-          <div class="col-md-8 v-center">
-            <h2>Why we&rsquo;re doing this.</h2>
-            <p>First, we want contacting your elected officials to be easy. Then more people will do it. And that&rsquo;s good for democracy.</p>
-            <p>We also want to show off the functionality of the tools EFF has been creating over the last several years. We are working from the <a href="https://github.com/unitedstates/contact-congress">contact-congress</a> dataset originally created by the <a href="http://www.participatorypolitics.org/">Participatory Politics Foundation</a> and later adopted by and improved upon by <a href="http://sunlightfoundation.com/">the Sunlight Foundation</a>, EFF, and several collaborating organizations. Together, we&rsquo;ve been working on a large-scale project to improve how Internet users contact elected officials and other decision makers.</p>
-            <p>Democracy.io lets you test out one of these tools&mdash;emailing members of Congress&mdash;but we&rsquo;re also creating simple ways to send Tweets to members of Congress, call Congress, sign petitions, and submit official comments to government agencies. If you&rsquo;re an advocacy organization that likes how this works, check out our <a href="https://github.com/EFForg"> Github page</a> and contact <a href="mailto:democracy@eff.org?Subject=Democracy.io" target="_top">democracy@eff.org</a> to discuss whether these free software, user-focused tools are a good solution for your advocacy needs.</p>
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="col-md-8 v-center">
-            <h2>Who is behind this project</h2>
-            <p>Democracy.io was built by three amazing programmers who want to make the world a better place&mdash;<a href="https://twitter.com/sinak">Sina Khanifar</a>, <a href="http://l12s.com">Leah Jones</a>, and <a href="https://twitter.com/randylubin/">Randy Lubin</a>, as part of a project for the Electronic Frontier Foundation. It&rsquo;s maintained by the Electronic Frontier Foundation.</p>
-            <p>The backend system that delivers these messages to Congress was written by EFF employee <a href="https://twitter.com/legind">William Budington</a>. The <a href="https://github.com/unitedstates/contact-congress">contact-congress</a> dataset that was completed with help from <a href="https://www.eff.org/deeplinks/2014/04/dear-web-developers-thank-you-youre-awesome-and-wow-did-really-just-happen"> over 100 EFF volunteer web developers,</a> (and in particular <a href="https://www.eff.org/about/volunteer-technologists"> these five individuals</a>). The dataset is now maintained by EFF, the Sunlight Foundation, and Action Network.</p>
+          
+          <div class="row">
+            <div class="col-md-8 v-center">
+              <h2>Who is behind this project</h2>
+              <p>Democracy.io was built by three amazing programmers who want to make the world a better place&mdash;<a href="https://twitter.com/sinak">Sina Khanifar</a>, <a href="http://l12s.com">Leah Jones</a>, and <a href="https://twitter.com/randylubin/">Randy Lubin</a>, as part of a project for the Electronic Frontier Foundation. It&rsquo;s maintained by the Electronic Frontier Foundation.</p>
+              <p>The backend system that delivers these messages to Congress was written by EFF employee <a href="https://twitter.com/legind">William Budington</a>. The <a href="https://github.com/unitedstates/contact-congress">contact-congress</a> dataset that was completed with help from <a href="https://www.eff.org/deeplinks/2014/04/dear-web-developers-thank-you-youre-awesome-and-wow-did-really-just-happen"> over 100 EFF volunteer web developers,</a> (and in particular <a href="https://www.eff.org/about/volunteer-technologists"> these five individuals</a>). The dataset is now maintained by EFF, the Sunlight Foundation, and Action Network.</p>
 
+            </div>
+            <div class="col-md-4 hidden-xs hidden-sm v-center">
+              <svg id="icon-eff" class="img-responsive" in-view="animate($event,$inview,$inviewpart)"             <svg id="icon-speaker" class="img-responsive" in-view="animate($event,$inview,$inviewpart)" width="331" height="223" viewBox="0 0 331 223" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a4"><stop stop-color="#F85528" offset="0%"/><stop stop-color="#F93468" offset="100%"/></linearGradient></defs><g fill="none"><path d="M218.535 1.126c61.129 0 110.676 49.369 110.676 110.3s-49.547 110.297-110.676 110.297c-61.123 0-110.68-49.367-110.68-110.297 0-60.931 49.557-110.3 110.68-110.3z" stroke="url(#a4)" fill="#fff"/><path d="M1.278 37.901h184.466v24.497h-118.884v32.694h114.771v24.51h-114.771v40.848h118.884v24.509h-184.466v-147.058" stroke="#1EA2FF"/><path d="M210.335 37.901v65.352h12.29v-24.523h8.213v-12.244h-8.213v-16.354h12.292v-12.231h-24.582" stroke="#F93469"/><path d="M210.335 184.958h12.29v-24.509h8.213v-12.261h-8.213v-16.344h12.292v-12.243h-24.582v65.357z" stroke="#F93469"/></g></svg>
+            </div>
           </div>
-          <div class="col-md-4 hidden-xs hidden-sm v-center">
-            <svg id="icon-eff" class="img-responsive" in-view="animate($event,$inview,$inviewpart)"             <svg id="icon-speaker" class="img-responsive" in-view="animate($event,$inview,$inviewpart)" width="331" height="223" viewBox="0 0 331 223" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a"><stop stop-color="#F85528" offset="0%"/><stop stop-color="#F93468" offset="100%"/></linearGradient></defs><g fill="none"><path d="M218.535 1.126c61.129 0 110.676 49.369 110.676 110.3s-49.547 110.297-110.676 110.297c-61.123 0-110.68-49.367-110.68-110.297 0-60.931 49.557-110.3 110.68-110.3z" stroke="url(#a)" fill="#fff"/><path d="M1.278 37.901h184.466v24.497h-118.884v32.694h114.771v24.51h-114.771v40.848h118.884v24.509h-184.466v-147.058" stroke="#1EA2FF"/><path d="M210.335 37.901v65.352h12.29v-24.523h8.213v-12.244h-8.213v-16.354h12.292v-12.231h-24.582" stroke="#F93469"/><path d="M210.335 184.958h12.29v-24.509h8.213v-12.261h-8.213v-16.344h12.292v-12.243h-24.582v65.357z" stroke="#F93469"/></g></svg>
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="col-md-6 hidden-xs  hidden-sm v-center">
-            <svg id="icon-logo" class="img-responsive" in-view="animate($event,$inview,$inviewpart)" preserveAspectRatio="none" viewBox="0 0 232 20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#s-text"></use></svg>
-          </div>
-          <div class="col-md-6  v-center">
-            <h2>Jump in, change the world.</h2>
-            <p>Want to help with this and future technology projects? If you&rsquo;re a web developer who might want to occasionally volunteer, send an email to <a href="mailto:democracy@eff.org">democracy@eff.org</a> and also sign up with <a href="https://taskforce.is"> Taskforce</a>, a volunteer group that works with EFF on many projects to make the Internet more awesome and free.</p>
-            <p>We <i class="icon-heart"></i> democracy.</p>
+          
+          <div class="row">
+            <div class="col-md-6 hidden-xs  hidden-sm v-center">
+              <svg id="icon-logo" class="img-responsive" in-view="animate($event,$inview,$inviewpart)" preserveAspectRatio="none" viewBox="0 0 232 20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#s-text"></use></svg>
+            </div>
+            <div class="col-md-6  v-center">
+              <h2>Jump in, change the world.</h2>
+              <p>Want to help with this and future technology projects? If you&rsquo;re a web developer who might want to occasionally volunteer, send an email to <a href="mailto:democracy@eff.org">democracy@eff.org</a> and also sign up with <a href="https://taskforce.is"> Taskforce</a>, a volunteer group that works with EFF on many projects to make the Internet more awesome and free.</p>
+              <p>We <i class="icon-heart"></i> democracy.</p>
+            </div>
           </div>
         </div>
       </div>

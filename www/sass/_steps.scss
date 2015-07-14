@@ -342,6 +342,7 @@ label small {
 #whydio #about-lead {
   margin-top: 60px;
   background-color: #222;
+  -webkit-font-smoothing: antialiased; // Makes light-on-dark text look better in Chrome.
   &:before {
     content: ' ';
     display: block;

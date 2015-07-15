@@ -1,56 +1,39 @@
+// Open Sans light
 @font-face {
-    font-family: 'Work Sans Web';
-    src: url('/static/{$VERSION}/fonts/worksans-bold-webfont.eot');
-    src: url('/static/{$VERSION}/fonts/worksans-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/{$VERSION}/fonts/worksans-bold-webfont.woff2') format('woff2'),
-         url('/static/{$VERSION}/fonts/worksans-bold-webfont.woff') format('woff'),
-         url('/static/{$VERSION}/fonts/worksans-bold-webfont.ttf') format('truetype'),
-         url('/static/{$VERSION}/fonts/worksans-bold-webfont.svg#work_sansbold') format('svg');
-    font-weight: bold;
-    font-style: normal;
-
+  font-family: 'OpenSans';
+  src: url("/static/{$VERSION}/fonts/OpenSans-Light.eot");
+  src: url("/static/{$VERSION}/fonts/OpenSans-Light.eot?#iefix") format("embedded-opentype"),
+       url("/static/{$VERSION}/fonts/OpenSans-Light.woff") format("woff"),
+       url("/static/{$VERSION}/fonts/OpenSans-Light.ttf") format("truetype"),
+       url("/static/{$VERSION}/fonts/OpenSans-Light.svg#OpenSansLight") format("svg");
+  font-weight: 300;
+  font-style: normal;
 }
 
-
+// Open Sans Normal
 @font-face {
-    font-family: 'Work Sans Web';
-    src: url('/static/{$VERSION}/fonts/worksans-extrabold-webfont.eot');
-    src: url('/static/{$VERSION}/fonts/worksans-extrabold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/{$VERSION}/fonts/worksans-extrabold-webfont.woff2') format('woff2'),
-         url('/static/{$VERSION}/fonts/worksans-extrabold-webfont.woff') format('woff'),
-         url('/static/{$VERSION}/fonts/worksans-extrabold-webfont.ttf') format('truetype'),
-         url('/static/{$VERSION}/fonts/worksans-extrabold-webfont.svg#work_sansextrabold') format('svg');
-    font-weight: 900;
-    font-style: normal;
-
+  font-family: 'OpenSans';
+  src: url("/static/{$VERSION}/fonts/OpenSans-Regular.eot");
+  src: url("/static/{$VERSION}/fonts/OpenSans-Regular.eot?#iefix") format("embedded-opentype"),
+       url("/static/{$VERSION}/fonts/OpenSans-Regular.woff") format("woff"),
+       url("/static/{$VERSION}/fonts/OpenSans-Regular.ttf") format("truetype"),
+       url("/static/{$VERSION}/fonts/OpenSans-Regular.svg#OpenSansRegular") format("svg");
+  font-weight: 400;
+  font-style: normal;
 }
 
-
+// Open Sans Bold
 @font-face {
-    font-family: 'Work Sans Web';
-    src: url('/static/{$VERSION}/fonts/worksans-regular-webfont.eot');
-    src: url('/static/{$VERSION}/fonts/worksans-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/{$VERSION}/fonts/worksans-regular-webfont.woff2') format('woff2'),
-         url('/static/{$VERSION}/fonts/worksans-regular-webfont.woff') format('woff'),
-         url('/static/{$VERSION}/fonts/worksans-regular-webfont.ttf') format('truetype'),
-         url('/static/{$VERSION}/fonts/worksans-regular-webfont.svg#work_sansregular') format('svg');
-    font-weight: 400;
-    font-style: normal;
-
+  font-family: 'OpenSans';
+  src: url("/static/{$VERSION}/fonts/OpenSans-Semibold.eot");
+  src: url("/static/{$VERSION}/fonts/OpenSans-Semibold.eot?#iefix") format("embedded-opentype"),
+       url("/static/{$VERSION}/fonts/OpenSans-Semibold.woff") format("woff"),
+       url("/static/{$VERSION}/fonts/OpenSans-Semibold.ttf") format("truetype"),
+       url("/static/{$VERSION}/fonts/OpenSans-Semibold.svg#OpenSansBold") format("svg");
+  font-weight: bold;
+  font-style: normal;
 }
 
-@font-face {
-    font-family: 'Work Sans Web';
-    src: url('/static/{$VERSION}/fonts/worksans-thin-webfont.eot');
-    src: url('/static/{$VERSION}/fonts/worksans-thin-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/static/{$VERSION}/fonts/worksans-thin-webfont.woff2') format('woff2'),
-         url('/static/{$VERSION}/fonts/worksans-thin-webfont.woff') format('woff'),
-         url('/static/{$VERSION}/fonts/worksans-thin-webfont.ttf') format('truetype'),
-         url('/static/{$VERSION}/fonts/worksans-thin-webfont.svg#work_sansthin') format('svg');
-    font-weight: 300;
-    font-style: normal;
-
-}
 
 @font-face {
     font-family: 'Source Serif Pro';

@@ -12,7 +12,7 @@
 #progress-bar {
   text-align: center;
   max-width: 440px;
-  font-size: 0.8em;
+  font-size: 0.7em;
   line-height: 1.1em;
   margin: 0 auto 4em auto;
   position: relative;
@@ -27,7 +27,7 @@
   text-transform: uppercase;
   span {
     display: inline-block;
-    opacity: 0.5;
+    opacity: 0.8;
     transition: opacity $transitionDuration $easing;
   }
   .first {

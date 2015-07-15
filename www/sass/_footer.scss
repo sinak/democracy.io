@@ -2,8 +2,11 @@
   width: 100%;
   font-size: 0.8em;
   color: #555;
-  opacity: 0.7;
-  transition: all $transitionDuration $easing;
+  background: linear-gradient(to bottom, #FFF, rgba(255,255,255,0.5));
+  .row div {
+      opacity: 0.7;
+      transition: all $transitionDuration $easing;
+  }
   .container {
     border-top: 1px solid #A1A1A1;
     border-color: rgba(0,0,0,0.1);
@@ -29,7 +32,7 @@
     position: relative;
     top:3px;
   }
-  &:hover {
+  &:hover .row div {
     opacity: 1;
   }
 }

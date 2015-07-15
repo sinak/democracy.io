@@ -5,6 +5,8 @@ Democracy.io
 
 Express & Angular app for sending messages to Senate and House members
 
+(c) 2015 Electronic Frontier Foundation
+
 ## Table of Contents
 
 * [Background Info](#background-info)

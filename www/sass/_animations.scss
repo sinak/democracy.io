@@ -1,7 +1,8 @@
 // Global animation class (extended below)
 .animated {
-  animation-duration: .5s;
+  animation-duration: 1s;
   animation-fill-mode: both;
+  animation-timing-function: $easing;
 }
 body {
   @extend .animated;
@@ -29,36 +30,83 @@ body {
     animation-name: fadeDown30;
 }
 
+// Form element transitions 
+.repOption, .write-message .whitebox-container > div, .ng-enter #addressInputs > div {
+  @extend .animated;
+  animation-name: fadeUp30;
+  @for $i from 1 through 10 {
+      &:nth-child(#{$i}) { 
+       @include animation-delay(0.1s * $i + 0.5s); 
+      }
+    }
+}
+
 // Home-screen-specific animations
 #address {
+  
   #addressInputs {
     width: 100%;
-    transition: width 0.5s ease;
+    transition: width 0.5s $easing;
+    position: relative;
+  }
+  
+  .row {
+      transition: max-width $transitionDuration $easing;
+    }
+  
+  #submitAddress {
+    opacity: 0;
+    positon: relative;
+    transition: all $transitionDuration $easing;
+    z-index: -1;
+    display: block;
+    max-height: 0px;
+    overflow: hidden;
+    margin-bottom: 1em;
+    .btn {
+      padding: 1.1em;
+      display: block;
+      width: 100%;
+    }
+  }
+  
+  .ng-valid-pattern.ng-valid.ng-valid-required {
+      #submitAddress {
+        opacity: 1;
+        z-index: 1;
+        max-height: 100px;
+      }
   }
 
   @media (min-width: $screen-sm-min) {
-    #addressInputs.addressValid {
-      width: 75%;
-    }
-  }
-  @media (min-width: $screen-sm-min) {
-    #submitAddress {
-      max-width: 0;
-      overflow: hidden;
-      transition: max-width 0.5s ease;
-    }
-    #submitAddress.addressValid {
-      max-width: 25%;
-    }
-  }
-  @media (max-width: $screen-xs-max) {
-    #submitAddress {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-    }
-    #submitAddress.addressValid {
-      max-height: 100px;
+      #submitAddress {
+        position: absolute;
+        right: 0;
+        bottom: 1em;
+        margin: 0;
+        max-height: 1000px;
+        overflow: visible;
+        transform: translate3d(100%,0,0);
+        .btn {
+          padding: 1.1em 2em;
+          display: inline-block;
+          width: auto;
+        }
+      }
+      .row {
+        max-width: 105%;
+      }
+    .ng-valid-pattern.ng-valid.ng-valid-required {
+      #submitAddress {
+        transform: translate3d(0,0,0);
+        max-height: 1000px;
+      }
+      .row {
+        max-width: 80%;
+      }
+      .whitebox-footer {
+        color: rgba(0,0,0,0);
+      }
     }
   }
 }
@@ -97,7 +145,6 @@ body {
     .header h1 {
       @media (min-width: $screen-sm-min) {
         margin-top: 0;
-        animation: addTopMargin 1.5s ease 0.5s 1 forwards;
       }
     }
   }
@@ -108,7 +155,7 @@ body {
       content: '|';
       display: inline;
       opacity: 1;
-      animation: blink 0.7s linear 0s infinite;
+      animation: blink 0.7s $easing 0s infinite;
       position:relative;
       bottom: 5px;
   }
@@ -132,13 +179,12 @@ body {
       stroke-linejoin: butt;
       stroke-dasharray: 100;
       stroke-dashoffset: 100;
-      animation: draw 1.5s ease 1.8s 1 forwards;
+      animation: draw 1.5s $easing 1.8s 1 forwards;
     }
   }
   &[data-pagefrom="location"] {
     .header h1 {
       margin-top: 0px;
-      animation: addTopMargin 1.5s ease 0.5s 1 forwards;
     }
     h1.header {
     display: none;
@@ -171,22 +217,22 @@ body {
     h1.header {
       @media (min-width: $screen-sm-min) {
         margin-top: 70px;
-        animation: removeTopMargin 1.5s ease 0.5s 1 forwards;
+        animation: removeTopMargin 1.5s $easing 0.5s 1 forwards;
       }
     }
     #pb-line-1 {
       stroke-linejoin: butt;
       stroke-dasharray: 170;
       stroke-dashoffset: 170;
-      animation: draw 2s ease 0.5s 1 forwards;
+      animation: draw 2s $easing 0.5s 1 forwards;
     }
     #pb-dot-2 {
       opacity: 0;
-      animation: moveRight 2.5s ease 0s 1 forwards;
+      animation: moveRight 2.5s $easing 0s 1 forwards;
     }
     #pb-check-1 {
       opacity: 0;
-      animation: fadeInUp 0.5s ease 1.5s 1 forwards;
+      animation: fadeInUp 0.5s $easing 1.5s 1 forwards;
     }
   }
 }
@@ -203,18 +249,18 @@ body {
     stroke-linejoin: butt;
     stroke-dasharray: 170;
     stroke-dashoffset: 170;
-    animation: draw 2s ease 0.5s 1 forwards;
+    animation: draw 2s $easing 0.5s 1 forwards;
   }
   #pb-dot-3 {
     opacity: 0;
-    animation: moveRight 2.5s ease 0s 1 forwards;
+    animation: moveRight 2.5s $easing 0s 1 forwards;
   }
   #pb-check-1 {
     opacity: 1;
   }
   #pb-check-2 {
     opacity: 0;
-    animation: fadeInUp 0.5s ease 1s 1 forwards;
+    animation: fadeInUp 0.5s $easing 1s 1 forwards;
   }
   .write-message.ng-enter {
     @extend .animated;
@@ -263,7 +309,7 @@ body {
   }
   #pb-check-3 {
     opacity: 0;
-    animation: fadeInUp 0.5s ease 1s 1 forwards;
+    animation: fadeInUp 0.5s $easing 1s 1 forwards;
   }
 }
 
@@ -317,6 +363,26 @@ body {
     transform: none;
   }
 }
+@keyframes fadeLeftIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(30%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeLeftOut {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-30%, 0, 0);
+  }
+}
 @keyframes fadeRightIn30P {
   0% {
     opacity: 0;
@@ -356,16 +422,6 @@ body {
     opacity: 0;
   }
 }
-@keyframes removeTopMargin{
-  to{
-    margin-top: 0;
-  }
-}
-@keyframes addTopMargin{
-  to{
-    margin-top: 70px;
-  }
-}
 @keyframes draw {
   to {
       stroke-dashoffset: 0;
@@ -403,7 +459,7 @@ body {
   stroke-linejoin: butt;
   stroke-dasharray: 130;
   stroke-dashoffset: 130;
-  animation: drawLogo 2.5s ease 0s 1 forwards;
+  animation: drawLogo 2.5s $easing 0s 1 forwards;
   animation-repeat: 1;
 }
 
@@ -414,10 +470,10 @@ body {
 .form-note.ng-hide-remove {
   @extend .animated;
   opacity: 0;
-  animation: fadeUp30 0.3s ease 0s 1 forwards;
+  animation: fadeUp30 0.3s $easing 0s 1 forwards;
 }
 .form-note.ng-hide {
   @extend .animated;
   opacity: 0;
-  animation: fadeDown30 0.3s ease 0s 1 forwards;
+  animation: fadeDown30 0.3s $easing 0s 1 forwards;
 }

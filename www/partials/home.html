@@ -51,16 +51,19 @@
                            placeholder="20500">
                   </div>
                 </div>
+
               </div>
+              
+                <div ng-class="{addressValid: addressForm.$valid}" class="clearfix" id="submitAddress">
+                  <button type="submit"
+                          class="btn btn-lg btn-orange"
+                          ng-click="validateAddress()">
+                  Submit
+                  </button>
+                </div>
             </div>
 
-            <div ng-class="{addressValid: addressForm.$valid}" class="clearfix" id="submitAddress">
-              <button type="submit"
-                      class="btn btn-lg btn-orange"
-                      ng-click="validateAddress()">
-              Submit
-              </button>
-            </div>
+            
           </div>
 
 

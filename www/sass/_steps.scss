@@ -13,7 +13,7 @@
     display: none;
   }
   p {
-    font-size: 18px;
+    font-size: 1.1em;
   }
 }
 
@@ -21,32 +21,37 @@
 /******
  Home
 ******/
-div#whydio {
-  background-color: #fff;
-  border-top: 1px solid #CCCCCC;
+#whydio {
+  padding-bottom: 2em;
+  background: #fff;
   video {
     border: 1px solid #CCCCCC;
     border-top: 0;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
     overflow:hidden;
   }
   #video-container h2 {
     text-align: center;
-    margin-top: 50px;
-    margin-bottom:35px;
-    font-weight: 100;
   }
 }
+.form-control {
+  font-size: 1em;
+  line-height: 1.5em;
+  padding: 0.8em;
+  height: auto;
+  box-shadow: none;
+  border-radius: $border-radius;
+}
 #address {
-  margin-bottom: 30px;
+  margin-bottom: 2em;
 }
 #brand {
  text-transform: uppercase;
  letter-spacing: 1px;
- font-size: 10px; 
+ font-size: 0.7em; 
  text-align: center;
- margin-bottom: 60px;
+ margin-bottom: 6em;
  img {
   margin-bottom: 3px;
  }
@@ -65,16 +70,11 @@ div#whydio {
   padding: 0;
 }
 #address .whitebox-container > form {
-  padding: 27px 30px 15px 30px;
+  padding: 1.5em;
+  padding-bottom: 0.5em;
   @extend .clearfix;
 }
-#address .btn-lg.btn-orange {
-  margin-top: 25px;
-  right: 2px;
-}
 #address .alert.alert-danger {
-  margin-bottom: 5px;
-  margin-top:5px;
   background-color: #fff;
 }
 #address .whitebox-footer {
@@ -83,31 +83,6 @@ div#whydio {
     text-decoration: underline;
   }
 }
-@media (min-width: $screen-sm-min) {
-  #address #addressInputs {
-    float:left;
-  }
-  #address #submitAddress {
-    float:right;
-    width: 25%;
-    margin-top: 96px;
-    text-align: right;
-  }
-}
-@media (max-width: $screen-xs-max) {
-  #address {
-    .btn-lg.btn-orange {
-      left:0;
-      margin-top:5px;
-      margin-bottom:10px;
-      font-size: 18px;
-    }
-    .input-group .form-control:first-child {
-     font-size: 14px;
-    }
-  }
-}
-
 /******
  Pick legislators
 ******/
@@ -115,28 +90,25 @@ div#whydio {
   label {
     text-transform: none;
     letter-spacing: 0;
-    font-size: 18px;
+    font-size: 1.1em;
     color: $gray;
-    font-weight: 200;
     padding-left:5px;
   }
   .checkbox {
-    margin-bottom: 15px;
+    margin-bottom: 1em;
   }
   p {
-    margin-bottom:25px;
-    margin-top: 10px;
-    font-size: 18px;
+    margin-bottom:2em;
+    font-size: 1.1em;
   }
 }
 #pick-legislators .whitebox-container {
-  padding-bottom: 30px;
-  padding-top: 20px;
   @media (max-width: $screen-xs-max) {
-    padding-bottom: 25px;
-    padding-top: 10px;
-    padding-left:15px;
-    padding-right: 15px;
+    padding: 1em;
+    padding-bottom: 2em;
+  }
+  .btn {
+    margin-top: 1em;
   }
 }
 
@@ -148,24 +120,23 @@ div#whydio {
     margin-bottom: 8px;
   }
   .btn-orange {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 15px 40px;
+    margin-top: 0 1em;
+    padding: 0.65em 3.5em;
   }
 }
 strong {
-  font-weight: 600;
+  font-weight: bold;
 }
 #to-field {
-  padding-bottom:15px;
-  font-size: 18px;
+  padding-bottom:1em;
+  font-size: 1.1em;
 }
 #to-field label {
   display: block;
 }
 
 textarea#inputMessage {
-  padding-top: 40px;
+  padding-top: 3.5em;
   position: relative;
 }
 
@@ -176,43 +147,41 @@ textarea#inputMessage {
     position: absolute;
     top: 1px;
     left: 1px;
-    right: 20px;
+    width:99%;
+    padding: 0.8em;
     letter-spacing: 0;
     text-transform: none;
-    font-family: 'DroidSerif', serif;
     -webkit-font-smoothing: antialiased;
     color: #999;
+    background: #FFF;
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);
     z-index: 1;
-    font-size: 16px;
     content: 'Dear [Representative/Senator],';
-    background-color: #fff;
-    padding-left: 12px;
-    padding-top: 12px;
-    padding-bottom: 10px;
   }
 }
 .panel {
   border: 1px solid #f9465b;
 }
 .panel-heading {
-  background-image: linear-gradient(to right, #f9465b, #fa6444);
+  background-image: linear-gradient(to right, $brand-primary, $pink); 
   color: #fff;
-  font-size: 12px;
-  letter-spacing: 1.5px;
+  font-size: 0.8em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .panel-body {
-  padding-bottom: 10px;
+  font-size: 0.9em;
+  line-height: 1.5em;
 }
 .panel.panel-compact .panel-body {
   padding: 10px;
 }
 #prefixNote.panel {
-  margin-top: 30px;
+  margin-top: 2em;
 }
 @media (min-width: $screen-sm-min ) {
   .write-message .panel {
-    margin-top: 30px;
+    margin-top: 2em;
   }
 }
 label small {
@@ -220,8 +189,8 @@ label small {
   letter-spacing: 0;
 }
 .emailSignup {
-  font-size: 15px;
-  margin-top:20px;
+  font-size: 0.9em;
+  margin-top:1em;
   margin-bottom:0;
   a {
     color: inherit;
@@ -230,30 +199,44 @@ label small {
   label {
     text-transform: none;
     letter-spacing: 0;
-    font-size: 15px;
     padding-left: 0;
   }
 }
 
+.alert {
+  padding: 1.5em;
+}
 #messageFormValidation {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
   border: 0;
-  border-top: 1px solid $brand-primary;
-  background-color: #FFEFEF;
+  border-top: 1px solid lighten($brand-primary, 30%);
+  background-color: lighten($brand-primary, 40%);
   color: $brand-primary;
   margin-bottom: 0;
 
   p {
-    margin-bottom:10px;
+    margin-bottom:1em;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li {
+      display: inline;
+      &:after {
+        content: ', ';
+      }
+      &:last-child:after {
+        display: none;
+      }
+    }
   }
 }
-.write-message .whitebox-container {
-  padding-bottom:10px;
-}
-.write-message .alert-danger {
-  background-color: #FFEFEF;
-  border: 1px solid $brand-primary;
+
+.alert-danger {
+  background-color: lighten($brand-primary,40%);
+  border: 1px solid lighten($brand-primary,30%);
   color: $brand-primary;
 }
 
@@ -262,17 +245,12 @@ label small {
 ******/
 
 #captchaContainer {
-  margin-top: 20px;
+  margin-top: 1em;
   img {
-    margin-bottom: 15px;
+    margin-bottom: 1em;
   }
   #loading {
     height: auto;
-    font-weight: 400;
-    p.small {
-      font-size: 16px;
-      font-weight: 300;
-    }
   }
 }
 
@@ -281,7 +259,7 @@ label small {
 ******/
 #thanks {
   @extend .boxshadow;
-  border-radius: 10px;
+  border-radius: $border-radius;
   background: #fff;
   overflow: hidden;
 
@@ -291,9 +269,9 @@ label small {
   }
 
   p {
-    font-size: 20px;
+    font-size: 1.2em;
     text-align: center;
-    padding: 20px 10px 130px 10px;
+    padding: 1em 1em 8em 1em;
   }
 
   #triangle {
@@ -304,7 +282,7 @@ label small {
   }
 
   #share-icons {
-    background-image: linear-gradient(to right, #FF9600, #FC4863);
+    background-image: linear-gradient(to right, $brand-primary, $pink); 
     position: absolute;
     bottom: 0;
     left: 0;
@@ -313,9 +291,9 @@ label small {
     height: 120px;
     text-align: center;
     color: #fff;
-    padding-top: 30px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    padding-top: 2em;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
     overflow: hidden;
 
     a  {
@@ -340,38 +318,29 @@ label small {
  Home page page
  ****************/
 #whydio #about-lead {
-  margin-top: 60px;
-  background-color: #4a4a4a;
+  background-color: $brand-primary;
   -webkit-font-smoothing: antialiased; // Makes light-on-dark text look better in Chrome.
-  &:before {
-    content: ' ';
-    display: block;
-    height: 15px;
-    background: linear-gradient(to right, $brand-primary, $pink); 
-  }
+  background: linear-gradient(to right, $brand-primary, $pink); 
+
   h2 {
-    font-family: "DroidSerif";
-    line-height: 1.6;
-    margin-bottom: 25px;
-    margin-top: 40px;
     text-align: center;
+    font-family: $heading;
     color: #fff;
   }
   .col-md-10 {
-    margin-bottom: 40px;
+    margin-bottom: 2.5em;
   }
   a {
     color: #fff;
   }
   .btn-outline {
-    border: 1px solid #fff;
-    border-radius: 10px;
-    font-weight: 100;
-    transition: background-color 0.3s ease;
+    border-color: #FFF;
+    background:none;
     color: #fff;
     &:hover, a:hover {
-      color: #fff;
-      background-color: $brand-primary;
+      background: #fff;
+      box-shadow: inset 0 0 0 3em #FFF, 0 5px 10px rgba(0,0,0,0.2);
+      color: $brand-primary;
       text-decoration: none;
     }
   }
@@ -381,31 +350,30 @@ label small {
   }
 }
 #whydio #about {
-  background: linear-gradient(to bottom, #eee, #fff);
+  padding: 1em;
   p, ul {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom:15px;
-    font-weight: 400;
+    margin-bottom:1em;
   }
   svg {
-    margin-top: 30px;
+    margin-top: 1em;
     stroke-linecap: round;
   }
   div.lead {
-    margin-top: 0;
     margin-bottom: 0;
-    padding-top: 30px;
+    font-weight: normal;
+    @media (max-width: $screen-sm-min) {
+     margin-top: 2em; 
+    }
     p {
-      font-size: 20px;
-      margin-bottom: 20px;
+      font-size: 1.1em;
+      margin-bottom: 1em;
     }
   }
   & > .container > .row {
     margin-top: 0;
   }
   ul li {
-    margin-bottom: 10px;
+    margin-bottom: 1em;
     list-style-type: none;
     &:before {
       font-family: 'democracy-io';
@@ -418,8 +386,8 @@ label small {
     }
   }
   .row {
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 1em;
+    margin-bottom: 1em;
     &:first-child {
       margin-top:0;
     }
@@ -435,17 +403,27 @@ label small {
       vertical-align:middle;
       margin-right:-4px;
     }
+
     img {
-      padding-top: 30px;
+      padding-top: 2em;
     }
   }
   h2 {
-    font-weight: 100;
-    font-size: 36px;
-    margin-bottom: 25px;
+    font-size: 2em;
+    margin-bottom: 1em;
+    @media (max-width: $screen-sm-min) {
+      margin-top:1em;
+      margin-bottom: 0.5em;
+      font-size: 1.2em;
+      line-height: 1.25em;
+      font-weight: bold;  
+    }
   }
   .col-md-8, .col-md-6 {
-    margin-top: 30px;
+    margin-top: 2em;
+    @media (max-width: $screen-sm-min) {
+     margin-top:0; 
+    }
   }
   #icon-logo {
     max-width: 80%;

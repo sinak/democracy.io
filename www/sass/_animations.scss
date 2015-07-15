@@ -1,7 +1,8 @@
 // Global animation class (extended below)
 .animated {
-  animation-duration: .5s;
+  animation-duration: 1s;
   animation-fill-mode: both;
+  animation-timing-function: $easing;
 }
 body {
   @extend .animated;
@@ -33,7 +34,7 @@ body {
 #address {
   #addressInputs {
     width: 100%;
-    transition: width 0.5s ease;
+    transition: width 0.5s $easing;
   }
 
   @media (min-width: $screen-sm-min) {
@@ -45,7 +46,7 @@ body {
     #submitAddress {
       max-width: 0;
       overflow: hidden;
-      transition: max-width 0.5s ease;
+      transition: max-width 0.5s $easing;
     }
     #submitAddress.addressValid {
       max-width: 25%;
@@ -55,7 +56,7 @@ body {
     #submitAddress {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.5s ease;
+      transition: max-height 0.5s $easing;
     }
     #submitAddress.addressValid {
       max-height: 100px;
@@ -97,7 +98,7 @@ body {
     .header h1 {
       @media (min-width: $screen-sm-min) {
         margin-top: 0;
-        animation: addTopMargin 1.5s ease 0.5s 1 forwards;
+        animation: addTopMargin 1.5s $easing 0.5s 1 forwards;
       }
     }
   }
@@ -108,7 +109,7 @@ body {
       content: '|';
       display: inline;
       opacity: 1;
-      animation: blink 0.7s linear 0s infinite;
+      animation: blink 0.7s $easing 0s infinite;
       position:relative;
       bottom: 5px;
   }
@@ -132,13 +133,13 @@ body {
       stroke-linejoin: butt;
       stroke-dasharray: 100;
       stroke-dashoffset: 100;
-      animation: draw 1.5s ease 1.8s 1 forwards;
+      animation: draw 1.5s $easing 1.8s 1 forwards;
     }
   }
   &[data-pagefrom="location"] {
     .header h1 {
       margin-top: 0px;
-      animation: addTopMargin 1.5s ease 0.5s 1 forwards;
+      animation: addTopMargin 1.5s $easing 0.5s 1 forwards;
     }
     h1.header {
     display: none;
@@ -171,22 +172,22 @@ body {
     h1.header {
       @media (min-width: $screen-sm-min) {
         margin-top: 70px;
-        animation: removeTopMargin 1.5s ease 0.5s 1 forwards;
+        animation: removeTopMargin 1.5s $easing 0.5s 1 forwards;
       }
     }
     #pb-line-1 {
       stroke-linejoin: butt;
       stroke-dasharray: 170;
       stroke-dashoffset: 170;
-      animation: draw 2s ease 0.5s 1 forwards;
+      animation: draw 2s $easing 0.5s 1 forwards;
     }
     #pb-dot-2 {
       opacity: 0;
-      animation: moveRight 2.5s ease 0s 1 forwards;
+      animation: moveRight 2.5s $easing 0s 1 forwards;
     }
     #pb-check-1 {
       opacity: 0;
-      animation: fadeInUp 0.5s ease 1.5s 1 forwards;
+      animation: fadeInUp 0.5s $easing 1.5s 1 forwards;
     }
   }
 }
@@ -203,18 +204,18 @@ body {
     stroke-linejoin: butt;
     stroke-dasharray: 170;
     stroke-dashoffset: 170;
-    animation: draw 2s ease 0.5s 1 forwards;
+    animation: draw 2s $easing 0.5s 1 forwards;
   }
   #pb-dot-3 {
     opacity: 0;
-    animation: moveRight 2.5s ease 0s 1 forwards;
+    animation: moveRight 2.5s $easing 0s 1 forwards;
   }
   #pb-check-1 {
     opacity: 1;
   }
   #pb-check-2 {
     opacity: 0;
-    animation: fadeInUp 0.5s ease 1s 1 forwards;
+    animation: fadeInUp 0.5s $easing 1s 1 forwards;
   }
   .write-message.ng-enter {
     @extend .animated;
@@ -263,7 +264,7 @@ body {
   }
   #pb-check-3 {
     opacity: 0;
-    animation: fadeInUp 0.5s ease 1s 1 forwards;
+    animation: fadeInUp 0.5s $easing 1s 1 forwards;
   }
 }
 
@@ -403,7 +404,7 @@ body {
   stroke-linejoin: butt;
   stroke-dasharray: 130;
   stroke-dashoffset: 130;
-  animation: drawLogo 2.5s ease 0s 1 forwards;
+  animation: drawLogo 2.5s $easing 0s 1 forwards;
   animation-repeat: 1;
 }
 
@@ -414,10 +415,10 @@ body {
 .form-note.ng-hide-remove {
   @extend .animated;
   opacity: 0;
-  animation: fadeUp30 0.3s ease 0s 1 forwards;
+  animation: fadeUp30 0.3s $easing 0s 1 forwards;
 }
 .form-note.ng-hide {
   @extend .animated;
   opacity: 0;
-  animation: fadeDown30 0.3s ease 0s 1 forwards;
+  animation: fadeDown30 0.3s $easing 0s 1 forwards;
 }

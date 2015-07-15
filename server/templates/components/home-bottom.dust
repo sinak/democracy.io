@@ -1,18 +1,4 @@
 <div ng-controller="AddressFormController">
-  <div class="container">
-    <div class="row">
-      <div id="video-container" class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-        <h2>Why we built Democracy.io</h2>
-        <div>
-          <img class="img-responsive" src="/static/{CONFIG.VERSION}/img/browser-header.png" >
-          <video id="video" in-view="autoplayVideo($event,$inview,$inviewpart)" controls width="100%">
-            <source src="https://d1cv406lx4hgxd.cloudfront.net/dio-1.2.1c.mp4">
-            Your browser does not support HTML5 video.
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
   <div id="about-lead">
     <div class="container">
       <div class="row">
@@ -128,5 +114,21 @@
       </div>
     </div>
   </div>
+  
+    <div class="container">
+    <div class="row">
+      <div id="video-container" class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+        <h2>Why we built Democracy.io</h2>
+        <div>
+          <img class="img-responsive" src="/static/{CONFIG.VERSION}/img/browser-header.png" >
+          <video id="video" in-view="autoplayVideo($event,$inview,$inviewpart)" controls width="100%">
+            <source src="https://d1cv406lx4hgxd.cloudfront.net/dio-1.2.1c.mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 </div>
 

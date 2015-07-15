@@ -35,7 +35,6 @@ div#whydio {
     text-align: center;
     margin-top: 50px;
     margin-bottom:35px;
-    font-weight: 100;
   }
 }
 #address {
@@ -117,7 +116,6 @@ div#whydio {
     letter-spacing: 0;
     font-size: 18px;
     color: $gray;
-    font-weight: 200;
     padding-left:5px;
   }
   .checkbox {
@@ -154,7 +152,7 @@ div#whydio {
   }
 }
 strong {
-  font-weight: 600;
+  font-weight: bold;
 }
 #to-field {
   padding-bottom:15px;
@@ -268,10 +266,8 @@ label small {
   }
   #loading {
     height: auto;
-    font-weight: 400;
     p.small {
       font-size: 16px;
-      font-weight: 300;
     }
   }
 }
@@ -340,15 +336,10 @@ label small {
  Home page page
  ****************/
 #whydio #about-lead {
-  margin-top: 60px;
-  background-color: #4a4a4a;
+  background-color: $brand-primary;
   -webkit-font-smoothing: antialiased; // Makes light-on-dark text look better in Chrome.
-  &:before {
-    content: ' ';
-    display: block;
-    height: 15px;
-    background: linear-gradient(to right, $brand-primary, $pink); 
-  }
+  background: linear-gradient(to right, $brand-primary, $pink); 
+
   h2 {
     font-family: "DroidSerif";
     line-height: 1.6;
@@ -364,14 +355,12 @@ label small {
     color: #fff;
   }
   .btn-outline {
-    border: 1px solid #fff;
-    border-radius: 10px;
-    font-weight: 100;
-    transition: background-color 0.3s ease;
+    border-color: #FFF;
     color: #fff;
     &:hover, a:hover {
-      color: #fff;
-      background-color: $brand-primary;
+      background: #fff;
+      box-shadow: none;
+      color: $brand-primary;
       text-decoration: none;
     }
   }
@@ -386,7 +375,6 @@ label small {
     font-size: 16px;
     line-height: 1.6;
     margin-bottom:15px;
-    font-weight: 400;
   }
   svg {
     margin-top: 30px;
@@ -396,6 +384,7 @@ label small {
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 30px;
+    font-weight: normal;
     p {
       font-size: 20px;
       margin-bottom: 20px;
@@ -440,9 +429,9 @@ label small {
     }
   }
   h2 {
-    font-weight: 100;
     font-size: 36px;
     margin-bottom: 25px;
+    font-weight: 300;
   }
   .col-md-8, .col-md-6 {
     margin-top: 30px;

@@ -6,7 +6,7 @@ var isEmpty = require('lodash.isempty');
 var filter = require('lodash.filter');
 
 
-var AddressFormController = function($scope, $location, dioData, dioAPI, $timeout, $document) {
+var AddressFormController = /*@ngInject*/ function($scope, $location, dioData, dioAPI, $timeout, $document) {
   var priorCanonicalAddress = dioData.getCanonicalAddress().components;
 
   var priorAddress = '';
@@ -129,15 +129,11 @@ var AddressFormController = function($scope, $location, dioData, dioAPI, $timeou
   $scope.animate = function(event,inview,inviewpart){
     //console.log(readMoreOpen, event, inview, inviewpart);
     if (typeof readMoreOpen !== 'undefined' && readMoreOpen === true && inview && inviewpart === 'both') {
-      console.log('hi sina');
       angular.element(event.inViewTarget).addClass('icon-enter');
     }
   };
 
 };
 
-AddressFormController.$inject = [
-  '$scope', '$location', 'dioData', 'dioAPI', '$timeout', "$document"
-];
 
 module.exports = AddressFormController;

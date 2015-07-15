@@ -23,6 +23,7 @@
     "autoprefixer-core": "^5.2.1",
     "browser-sync": "2.7.13",
     "browserify": "^9.0.3",
+
     "chai": "^2.2.0",
     "gulp": "^3.8.10",
     "gulp-add-src": "^0.2.0",

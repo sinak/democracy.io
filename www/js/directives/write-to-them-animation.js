@@ -16,7 +16,7 @@ var writeToThemAnimation = function($timeout) {
       showFull: '&'       // Whether or not to show the full message immediately
     },
     templateUrl: '/partials/animated-msg.html',
-    controller: function($scope, $element, $attrs) {
+    controller: /*@ngInject*/ function($scope, $element, $attrs) {
       $scope.displayedMsg = '';
       $scope.hasFinishedTyping = false;
 
@@ -45,7 +45,6 @@ var writeToThemAnimation = function($timeout) {
     }
   };
 
-  spec.controller.$inject = ['$scope', '$element', '$attrs'];
   return spec;
 };
 

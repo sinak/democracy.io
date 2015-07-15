@@ -13,7 +13,7 @@ var MessageSender = require('../../../models').MessageSender;
 var helpers = require('../helpers/message-form');
 
 
-var MessageFormController = function($scope, $location, $timeout, dioData, dioAPI) {
+var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, dioData, dioAPI) {
   // TODO(leah): Nitpicks:
   //   * wire up the error fields to use better show conditions, so the phone err msg etc doesn't immediately show on typing
   //   * The "Dear [Rep / Senator] text scrolls over other text entered in that box
@@ -187,9 +187,5 @@ var MessageFormController = function($scope, $location, $timeout, dioData, dioAP
   $scope.fetchDataFromStore();
 
 };
-
-MessageFormController.$inject = [
-  '$scope', '$location', '$timeout', 'dioData', 'dioAPI'
-];
 
 module.exports = MessageFormController;

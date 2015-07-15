@@ -7,6 +7,7 @@ var gulp = require('gulp');
 var path = require('path');
 var source = require('vinyl-source-stream');
 var minifyify = require('minifyify');
+var ngAnnotate = require('browserify-ngannotate');
 var watchify  = require('watchify');
 
 var bundleLogger = require('../util/bundle-logger');
@@ -16,6 +17,12 @@ var handleErrors = require('../util/handle-errors');
 gulp.task('browserify', function() {
 
   var isProd = process.env.NODE_ENV === 'production';
+
+  var transforms = [];
+  if (isProd) {
+    transforms.push(ngAnnotate);
+  }
+
   var bundler = browserify({
     cache: {},
     packageCache: {},
@@ -24,7 +31,8 @@ gulp.task('browserify', function() {
       './www/js/app.js'
     ],
     // NOTE: this is always true as minifyify requires it, even in prod mode
-    debug: true
+    debug: true,
+    transform: transforms
   });
 
   // NOTE: as debug is on, sourcemaps will be produced as a data URL and appended to the file.

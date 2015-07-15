@@ -7,7 +7,7 @@ var isEmpty = require('lodash.isempty');
 var isNumber = require('lodash.isnumber');
 var map = require('lodash.map');
 
-var LegislatorPickerController = function($scope, $location, $timeout, dioData, dioAPI) {
+var LegislatorPickerController = /*@ngInject*/ function($scope, $location, $timeout, dioData, dioAPI) {
 
   // TODO(leah): Wire this on to the rootscope?
   $scope.loadingDelay = true;
@@ -88,9 +88,5 @@ var LegislatorPickerController = function($scope, $location, $timeout, dioData, 
   }
 
 };
-
-LegislatorPickerController.$inject = [
-  '$scope', '$location', '$timeout', 'dioData', 'dioAPI'
-];
 
 module.exports = LegislatorPickerController;

@@ -9,7 +9,7 @@ var map = require('lodash.map');
 var CaptchaSolution = require('../../../models').CaptchaSolution;
 
 
-var CaptchaController = function($scope, $location, $timeout, dioData, dioAPI) {
+var CaptchaController =  /*@ngInject*/ function($scope, $location, $timeout, dioData, dioAPI) {
 
   /**
    *
@@ -86,9 +86,5 @@ var CaptchaController = function($scope, $location, $timeout, dioData, dioAPI) {
   $scope.fetchDataFromStore();
 
 };
-
-CaptchaController.$inject = [
-  '$scope', '$location', '$timeout', 'dioData', 'dioAPI'
-];
 
 module.exports = CaptchaController;

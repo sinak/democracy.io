@@ -2,7 +2,7 @@
  *
  */
 
-var ThanksController = function($scope, $sce) {
+var ThanksController = /*@ngInject*/ function($scope, $sce) {
 
   // TODO(all): Use the message-response objects to customize the thanks page
 
@@ -32,9 +32,5 @@ var ThanksController = function($scope, $sce) {
     window.open(link, 'Share', 'width=650,height=400');
   };
 };
-
-ThanksController.$inject = [
-  '$scope', '$sce'
-];
 
 module.exports = ThanksController;

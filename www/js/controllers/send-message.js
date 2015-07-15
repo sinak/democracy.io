@@ -11,7 +11,7 @@
 var getPageState = require('../helpers/page-location').getPageState;
 
 
-var SendMessageController = function($scope, $location) {
+var SendMessageController = /*@ngInject*/ function($scope, $location) {
 
   /**
    * The last page the user was on within the send message flow.
@@ -32,10 +32,6 @@ var SendMessageController = function($scope, $location) {
 	});
 
 };
-
-SendMessageController.$inject = [
-  '$scope', '$location'
-];
 
 
 module.exports = SendMessageController;

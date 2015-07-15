@@ -341,14 +341,9 @@ label small {
  ****************/
 #whydio #about-lead {
   margin-top: 60px;
-  background-color: #4a4a4a;
+  background-color: $pink;
+  background: linear-gradient(to right, $brand-primary, $pink);
   -webkit-font-smoothing: antialiased; // Makes light-on-dark text look better in Chrome.
-  &:before {
-    content: ' ';
-    display: block;
-    height: 15px;
-    background: linear-gradient(to right, $brand-primary, $pink); 
-  }
   h2 {
     font-family: "DroidSerif";
     line-height: 1.6;

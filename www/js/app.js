@@ -14,7 +14,7 @@ var democracyApp = angular.module(
 );
 
 var configureApp = function($provide, $locationProvider, $httpProvider, $interpolateProvider, lockerProvider) {
-  $locationProvider.html5Mode(true);
+  //$locationProvider.html5Mode(true);
 
   $provide.factory('modelsHttpInterceptor', services.modelsHttpInterceptor);
   $httpProvider.interceptors.push('modelsHttpInterceptor');

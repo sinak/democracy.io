@@ -23,6 +23,18 @@ body {
   display: none;
 }
 
+
+// Form element transitions 
+.repOption, .write-message .whitebox-container > div, .ng-enter #addressInputs > div {
+  @extend .animated;
+  animation-name: fadeUp30;
+  @for $i from 1 through 10 {
+      &:nth-child(#{$i}) { 
+       @include animation-delay(0.1s * $i + 0.5s); 
+      }
+    }
+}
+
 // Animations for loading box
 #loading.ng-leave {
     @extend .animated;

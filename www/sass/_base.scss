@@ -14,19 +14,16 @@ body {
   background-position: top center;
   background-color: #eeeeee;
   // min-height: 100%;
-  margin-bottom: 230px;
   font-family: 'OpenSans', sans-serif;
   font-weight: 300;
 
-  @media (max-width: $screen-xs-max) {
-    margin-bottom: 200px;
-  }
 }
 [ng-click],[data-ng-click],[x-ng-click] {
     cursor: pointer;
 }
 #anon-stats {
   height: 0;
+  overflow:hidden;
 }
 .main {
   min-height: 700px;
@@ -112,7 +109,7 @@ h1.header {
     background-color: #000;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
-    background-image: linear-gradient(to right, #FF8900, #FF4127);
+    background-image: linear-gradient(to right, #FF8900, $pink);
 
   }
   label {
@@ -173,8 +170,8 @@ h1.header {
   display: inline-block;
   border-radius: 0;
   border-width: 0;
-  border-bottom-left-radius: 5px;
-  background-color: #FF4425;
+  border-bottom-left-radius: 3px;
+  background-color: $pink;
   color: #fff;
   padding: 0px 10px 2px 10px;
   font-size: 13px;
@@ -182,7 +179,7 @@ h1.header {
   line-height: 21px;
   @extend a.ondark;
   &:hover, &:active, &:focus {
-    background-color: #FF4425;
+    background-color: $pink;
   }
 }
 label {
@@ -206,6 +203,9 @@ label {
     height: 54px;
   }
 }
+.form-control {
+  border-radius: $border-radius;
+}
 .btn-orange {
   @extend a.ondark;
   color: #3C3C3C;
@@ -213,6 +213,7 @@ label {
   border: 1px solid #f85628;
   margin-left: 0 !important;
   font-weight: 300;
+  border-radius: $border-radius;
   @include bounce-to-right;
   &:hover {
     text-decoration: none;

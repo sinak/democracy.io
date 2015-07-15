@@ -95,7 +95,7 @@ var AddressFormController = function($scope, $location, dioData, dioAPI, $timeou
   $scope.autoplayVideo = function(event, inview, inviewpart) {
     // If all of video is in-view, then play
     if (inview && inviewpart === 'both') {
-      var vidEl = document.querySelectorAll('#video')[0];
+      var vidEl = document.querySelectorAll('video#video')[0];
       var contEl = document.querySelectorAll('#video-container')[0];
       if (inview === true) {
         if (angular.element(contEl).hasClass('ng-enter')){
@@ -111,7 +111,7 @@ var AddressFormController = function($scope, $location, dioData, dioAPI, $timeou
     }
     // If video leaves view, pause.
     else if (!inview || inviewpart !== 'both') {
-      var vidEl = document.querySelectorAll('#video')[0];
+      var vidEl = document.querySelectorAll('video#video')[0];
       vidEl.pause();
     }
   };

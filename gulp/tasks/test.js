@@ -20,6 +20,6 @@ gulp.task('testServer', function() {
     }));
 });
 
-gulp.task('test', ['testFE', 'testServer'], function() {
+gulp.task('test', ['check-deps', 'testFE', 'testServer'], function() {
 
 });

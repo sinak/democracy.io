@@ -24,7 +24,7 @@
               </a>
             </div>
             <div>
-              <a href="mailto:democracy@eff.org?Subject=Contact%20Congress%20API&body=I%27m%20interested%20in%20using%20an%20API%20for%20delivering%20emailing%20Congress.%20I%27d%20be%20using%20it%20for%20...">
+              <a href="mailto:democracy@eff.org?Subject=Contact%20Congress%20API&amp;body=I%27m%20interested%20in%20using%20an%20API%20for%20delivering%20email%20to%20Congress.%20I%27d%20be%20using%20it%20for%20...">
                 Email delivery API
               </a>
             </div>

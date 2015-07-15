@@ -318,6 +318,26 @@ body {
     transform: none;
   }
 }
+@keyframes fadeLeftIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(30%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeLeftOut {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-30%, 0, 0);
+  }
+}
 @keyframes fadeRightIn30P {
   0% {
     opacity: 0;

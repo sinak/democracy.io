@@ -11,6 +11,7 @@ var replace = require('gulp-replace');
 var sass = require('gulp-sass');
 var postcss = require('gulp-postcss');
 
+var browserSyncInstance = require('../util/browser-sync-instance');
 var config = require('../config');
 var version = require('../../package.json').version;
 
@@ -34,5 +35,6 @@ gulp.task('css', function() {
   return stream
     .pipe(rename('dio.min.css'))
     .pipe(replace('{$VERSION}', version))
-    .pipe(gulp.dest(path.join(config.STATIC_DIR, 'css')));
+    .pipe(gulp.dest(path.join(config.STATIC_DIR, 'css')))
+    .pipe(browserSyncInstance.stream({match: '**/*.css'}));
 });

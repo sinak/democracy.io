@@ -10,6 +10,7 @@ var minifyify = require('minifyify');
 var ngAnnotate = require('browserify-ngannotate');
 var watchify  = require('watchify');
 
+var browserSyncInstance = require('../util/browser-sync-instance');
 var bundleLogger = require('../util/bundle-logger');
 var config = require('../config');
 var handleErrors = require('../util/handle-errors');
@@ -55,6 +56,7 @@ gulp.task('browserify', function() {
       .on('error', handleErrors)
       .pipe(source('dio.min.js'))
       .pipe(gulp.dest(path.join(config.STATIC_DIR, 'js')))
+      .pipe(browserSyncInstance.stream({match: '**/*.js', once: true}))
       .on('end', reportFinished);
   };
 

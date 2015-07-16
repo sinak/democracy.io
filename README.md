@@ -90,7 +90,7 @@ To deploy the server, simply run:
 pm2 deploy ecosystem.json5 production
 ```
 
-For more instructions on setting up a production server, check [/devops/README.md](devops/README.md).
+For more instructions on setting up a production server, check [/deployment/README.md](deployment/README.md).
 
 ## Angular app
 

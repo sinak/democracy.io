@@ -2,13 +2,13 @@
  *
  */
 
-var apiCallback = require('./helpers/api').apiCallback;
+var apiHelpers = require('./helpers');
 var effCivicCRM = require('../../services/third-party-apis/eff-civic-crm');
 var models = require('../../../models');
 
 
 var post = function (req, res) {
-  var request = new models.SubscriptionRequest(req.body);
+  var request = apiHelpers.getModelData(req.body, models.SubscriptionRequest);
 
   var params = {
     'contact_params': {
@@ -28,7 +28,7 @@ var post = function (req, res) {
     }
   };
 
-  var cb = apiCallback(res, function() {
+  var cb = apiHelpers.apiCallback(res, function() {
     // TODO(leah): Look at the format of the response on this
     return {
 
@@ -36,9 +36,7 @@ var post = function (req, res) {
   });
 
   effCivicCRM.subscribeToEFFMailingList(params, req.app.locals.CONFIG, function(err, res) {
-
-  console.log("Error", err, "Resolution", res);
-   cb(err, res);
+    cb(err, res);
   });
 };
 

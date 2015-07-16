@@ -7,8 +7,9 @@ var runSequence = require('run-sequence');
 
 
 var build = function(env) {
-  process.env.NODE_ENV = env;
+
   return function(cb) {
+    process.env.NODE_ENV = env;
     runSequence(
       ['img', 'appSettings', 'partials', 'css','fonts'],
       'browserify',
@@ -17,5 +18,5 @@ var build = function(env) {
   };
 };
 
-gulp.task('build', build('dev'));
+gulp.task('build', build('development'));
 gulp.task('build:prod', build('production'));

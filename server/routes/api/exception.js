@@ -2,11 +2,12 @@
  *
  */
 
+var apiHelpers = require('./helpers');
 var models = require('../../../models');
 
 
 var post = function (req, res) {
-  var exception = new models.NgException(req.body);
+  var exception = apiHelpers.getModelData(req.body, models.NgException);
   console.log(exception);
 
   // TODO(sina): log this to disk once our FE logging is setup

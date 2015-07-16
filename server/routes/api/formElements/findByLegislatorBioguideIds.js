@@ -4,8 +4,7 @@
 
 var lodash = require('lodash');
 
-var makeLegislatorFormElements = require('../helpers/potc').makeLegislatorFormElements;
-var apiCallback = require('../helpers/api').apiCallback;
+var apiHelpers = require('../helpers');
 var potc = require('../../../services/third-party-apis/potc');
 
 
@@ -14,12 +13,12 @@ var get = function (req, res) {
 
   var makeResponse = function(data) {
     return lodash.reduce(data, function (results, val, bioguideId) {
-      results.push(makeLegislatorFormElements(val, bioguideId));
+      results.push(apiHelpers.makeLegislatorFormElements(val, bioguideId));
       return results;
     }, []);
   };
 
-  var cb = apiCallback(res, makeResponse);
+  var cb = apiHelpers.apiCallback(res, makeResponse);
   potc.getFormElementsForRepIdsFromPOTC(bioguideIds, req.app.locals.CONFIG, cb);
 };
 

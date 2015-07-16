@@ -62,7 +62,7 @@ Set a session secret and store it in your local.json file, under: SERVER > CREDE
 
 App config is controlled via the [node-config](https://github.com/lorenwest/node-config) module.
 
-To set credentials, create a local.json file under the [config dir](/config) and override the SERVER.CREDENTIALS setting.
+To set credentials, create a local-dev.json file under the [config dir](/config) and override the SERVER.CREDENTIALS setting.
 
 Alternately, you can use:
 * [Environment variables](https://github.com/lorenwest/node-config/wiki/Environment-Variables)

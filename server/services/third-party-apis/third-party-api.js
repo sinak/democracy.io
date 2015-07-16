@@ -12,7 +12,7 @@ var request = require('request');
  */
 var makeRequest = function(params, cb) {
 
-  request(params, function (err, response, body) {
+  request(params, function(err, response, body) {
     if (!err && response.statusCode == 200) {
       cb(null, body);
     } else {

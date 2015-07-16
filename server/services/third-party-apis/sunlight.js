@@ -33,8 +33,8 @@ var makeSunlightUrl = function(pathname, params, config) {
  * @param config
  * @param cb
  */
-var locateLegislatorsViaSunlight = function(lat, lng, config, cb) {
-  var sunlightUrl = makeSunlightUrl('/legislators/locate', {latitude: lat, longitude: lng}, config);
+var locateLegislatorsViaSunlight = function(locQuery, config, cb) {
+  var sunlightUrl = makeSunlightUrl('/legislators/locate', locQuery, config);
   makeRequest({method: 'GET', url: sunlightUrl, json: true}, cb);
 };
 

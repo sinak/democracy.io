@@ -1,3 +1,43 @@
 {
+  "MODE": "TEST",
+
+  "SERVER": {
+    "API": {
+      "SUNLIGHT_BASE_URL": "https://dio-sunlightfoundation.com",
+      "POTC_BASE_URL": "https://dio-congressforms.com",
+      "SMARTY_STREETS": {
+        "ADDRESS_URL": "https://dio-smartystreets.com"
+      },
+      "EFF_CIVIC_CRM_URL": " https://dio-eff.org"
+    },
+
+    "CREDENTIALS": {
+      "SUNLIGHT": {
+        "API_KEY": "test"
+      },
+
+      "POTC": {
+        "DEBUG_KEY": "test"
+      },
+
+      "SMARTY_STREETS": {
+        "ID": "test-id",
+        "TOKEN": "test-token"
+      },
+
+      "EFF_CIVIC_CRM": {
+        "SITE_KEY": "test"
+      },
+
+      "SESSION": {
+        "SECRET": "test"
+      },
+
+      "IP": {
+        "SALT": "$2a$10$rzc4vyxhIhYeztlSCxj5sO"
+      }
+    }
+  }
+
 
 }

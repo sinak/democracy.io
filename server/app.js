@@ -4,7 +4,6 @@
 
 var path = require('path');
 var bodyParser = require('body-parser');
-var compression = require('compression');
 var connectRedis = require('connect-redis');
 var consolidate = require('consolidate');
 var dust = require('dustjs-linkedin');
@@ -24,7 +23,6 @@ var config = require('config').get('SERVER');
 config.VERSION = require('../package.json').version;
 process.env.NODE_APP_INSTANCE = appInstance;
 
-var apiResponse = require('./middleware/api-response');
 var ipThrottle = require('./middleware/ip-throttle');
 var ngXsrf = require('./middleware/ng-xsrf');
 var swaggerizeWrapper = require('./middleware/swaggerize-wrapper');
@@ -77,9 +75,6 @@ app.use(lusca({
 }));
 app.use(ngXsrf());
 app.use(expressEnrouten({directory: 'routes'}));
-app.use(apiResponse({
-  namespace: 'DIO_API'
-}));
 app.use(swaggerizeWrapper({
   'api': path.join(__dirname, 'api.json'),
   'handlers': path.join(__dirname, 'routes/api')

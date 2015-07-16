@@ -6,11 +6,11 @@ var expect = require('chai').expect;
 var lodash = require('lodash');
 var nestedDescribe = require('nested-describe');
 
-var Message = require('../../../../models').Message;
-var helpers = require('../../../../server/routes/api/helpers/potc');
+var potcHelpers = require('../../../../../server/routes/api/helpers/potc');
+var models = require('../../../../../models');
 
 
-nestedDescribe('server.routes.api.helpers', function () {
+nestedDescribe('server.routes.api.helpers.potc', function () {
 
   it('should make a LegislatorFormElements model from a POTC response', function () {
     var simplifiedPOTCResponse = {
@@ -33,7 +33,7 @@ nestedDescribe('server.routes.api.helpers', function () {
     };
 
     var results = lodash.reduce(simplifiedPOTCResponse, function (results, val, bioguideId) {
-      results.push(helpers.makeLegislatorFormElements(val, bioguideId));
+      results.push(potcHelpers.makeLegislatorFormElements(val, bioguideId));
       return results;
     }, []);
 
@@ -60,7 +60,7 @@ nestedDescribe('server.routes.api.helpers', function () {
 
   it('should make a POTC message from a Message model', function() {
 
-    var robertsMessage = new Message({
+    var robertsMessage = new models.Message({
       'bioguideId': 'R000307',
       'topic': null,
       'subject': 'Test',
@@ -98,7 +98,7 @@ nestedDescribe('server.routes.api.helpers', function () {
       }
     });
 
-    var robertsPotcMessage = helpers.makePOTCMessage(robertsMessage, 'test');
+    var robertsPotcMessage = potcHelpers.makePOTCMessage(robertsMessage, 'test');
 
     expect(robertsPotcMessage)
       .to.deep.equal({
@@ -131,7 +131,7 @@ nestedDescribe('server.routes.api.helpers', function () {
       });
 
 
-    var vitterMessage = new Message({
+    var vitterMessage = new models.Message({
       bioguideId: 'V000127',
       topic: 'Agriculture',
       subject: 'Test',
@@ -169,7 +169,7 @@ nestedDescribe('server.routes.api.helpers', function () {
       }
     });
 
-    var vitterPotcMessage = helpers.makePOTCMessage(vitterMessage, 'test');
+    var vitterPotcMessage = potcHelpers.makePOTCMessage(vitterMessage, 'test');
 
     expect(vitterPotcMessage)
       .to.deep.equal({

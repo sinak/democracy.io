@@ -1,0 +1,35 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "bioguideId": "P000197",
+      "title": "Rep",
+      "firstName": "Nancy",
+      "lastName": "Pelosi",
+      "nickname": null,
+      "middleName": null,
+      "nameSuffix": null,
+      "aliases": []
+    },
+    {
+      "bioguideId": "B000711",
+      "title": "Sen",
+      "firstName": "Barbara",
+      "lastName": "Boxer",
+      "nickname": null,
+      "middleName": null,
+      "nameSuffix": null,
+      "aliases": []
+    },
+    {
+      "bioguideId": "F000062",
+      "title": "Sen",
+      "firstName": "Dianne",
+      "lastName": "Feinstein",
+      "nickname": null,
+      "middleName": null,
+      "nameSuffix": null,
+      "aliases": []
+    }
+  ]
+}

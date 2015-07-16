@@ -54,6 +54,8 @@
     "minifyify": "^7.0.0",
     "mocha": "^2.2.5",
     "nested-describe": "^1.0.2",
+    "nock": "^2.7.0",
+    "node-mocks-http": "^1.4.3",
     "numeral": "^1.5.3",
     "pretty-hrtime": "^1.0.0",
     "randomstring": "^1.0.6",

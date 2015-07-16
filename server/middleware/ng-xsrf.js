@@ -15,5 +15,4 @@ module.exports = function(config) {
     res.cookie(cookieName, res.locals._csrf);
     next();
   };
-
 };

@@ -5,21 +5,20 @@
 var changeCaseKeys = require('change-case-keys');
 
 var Legislator = require('../../../../models').Legislator;
-var apiHelpers = require('../helpers');
+var resHelpers = require('../helpers/response');
 var sunlight = require('../../../services/third-party-apis/sunlight');
 
 
 var get = function (req, res) {
-  sunlight.fetchActiveLegislatorBioViaSunlight(
-    req.params.bioguideId,
-    req.app.locals.CONFIG,
-    function(err, data) {
-      if (err) {
-        res.status(400).json(apiHelpers.makeError(err));
-      }
+  var bioguideId = req.params.bioguideId;
 
-      var modelData = new Legislator(changeCaseKeys(data['results'][0], 'camelize'));
-      res.json(apiHelpers.makeResponse(modelData));
+  sunlight.fetchActiveLegislatorBioViaSunlight(bioguideId, req.app.locals.CONFIG, function(err, data) {
+    if (err) {
+      res.status(400).json(resHelpers.makeError(err));
+    }
+
+    var modelData = new Legislator(changeCaseKeys(data['results'][0], 'camelize'));
+    res.json(resHelpers.makeResponse(modelData));
   });
 };
 

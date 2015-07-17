@@ -1,0 +1,39 @@
+{
+  "description": "Details of the sender of a specific message.",
+  "properties": {
+    "namePrefix": {
+      "type": "string",
+      "description": "The name prefix, e.g. Ms.",
+      "enum": [
+        "Ms",
+        "Mr",
+        "Mrs",
+        "Dr"
+      ]
+    },
+    "firstName": {
+      "type": "string",
+      "description": "The sender's first name."
+    },
+    "lastName": {
+      "type": "string",
+      "description": "The sender's last name."
+    },
+    "email": {
+      "type": "string",
+      "description": "The sender's email address."
+    },
+    "phone": {
+      "type": "string",
+      "description": "The sender's phone number, formatted like 123-456-7891."
+    },
+    "parenPhone": {
+      "type": "string",
+      "description": "The sender's phone number, formatted like (123) 456-7891."
+    },
+    "county": {
+      "type": "string",
+      "description": "The county, as formatted by the rep, the user is located in."
+    }
+  }
+}

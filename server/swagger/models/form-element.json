@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "value": {
+      "type": "string",
+      "description": "The name of the field."
+    },
+    "maxLength": {
+      "type": "integer",
+      "format": "int32",
+      "description": "The max length for this field."
+    },
+    "optionsHash": {
+      "type": "object",
+      "description": "An object describing the options this field can take and the corresponding value for each option."
+    }
+  }
+}

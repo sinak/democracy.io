@@ -55,9 +55,10 @@ var AddressFormController = /*@ngInject*/ function($scope, $location, dioData, d
   };
 
   $scope.autoplayVideo = function(event, inview, inviewpart) {
+    var vidEl;
     // If all of video is in-view, then play
     if (inview && inviewpart === 'both') {
-      var vidEl = document.querySelectorAll('#video')[0];
+      vidEl = document.querySelectorAll('#video')[0];
       var contEl = document.querySelectorAll('#video-container')[0];
       if (inview === true) {
         if (angular.element(contEl).hasClass('ng-enter')){
@@ -70,10 +71,9 @@ var AddressFormController = /*@ngInject*/ function($scope, $location, dioData, d
           }, 1500);
         }
       }
-    }
-    // If video leaves view, pause.
-    else if (!inview || inviewpart !== 'both') {
-      var vidEl = document.querySelectorAll('#video')[0];
+    } else if (!inview || inviewpart !== 'both') {
+      // If video leaves view, pause.
+      vidEl = document.querySelectorAll('#video')[0];
       vidEl.pause();
     }
   };

@@ -1,0 +1,32 @@
+{
+  "post": {
+    "summary": "Subscribes a user to the EFF email list.",
+    "description": "Subscribes a user to the EFF email list.",
+    "parameters": [
+      {
+        "name": "sub",
+        "in": "body",
+        "description": "Request containing details for the user to subscribe.",
+        "required": true,
+        "schema": {
+          "type": "object",
+          "$ref": "#/definitions/SubscriptionRequest"
+        }
+      }
+    ],
+    "tags": [
+      "Subscription"
+    ],
+    "responses": {
+      "200": {
+        "description": "Subscription acknowledgement.",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "default": {
+        "$ref": "#/responses/UnexpectedError"
+      }
+    }
+  }
+}

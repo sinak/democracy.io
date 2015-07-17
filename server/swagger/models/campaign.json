@@ -1,0 +1,21 @@
+{
+  "description": "Details of the campaign a message belongs to.",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "description": "A unique id for the campaign."
+    },
+    "tag": {
+      "type": "string",
+      "description": "A tag for for the campaign."
+    },
+    "orgURL": {
+      "type": "string",
+      "description": "The URL of the organization running the campaign."
+    },
+    "orgName": {
+      "type": "string",
+      "description": "The name of the organization running the campaign."
+    }
+  }
+}

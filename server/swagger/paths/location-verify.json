@@ -1,0 +1,30 @@
+{
+  "get": {
+    "summary": "Verifies the supplied address and returns its canonical representation.",
+    "description": "Verifies the supplied address via SmartyStreets and returns a complex data object with its canonical representation. This object contains information like Zip +4 and other details.",
+    "parameters": [
+      {
+        "name": "address",
+        "in": "query",
+        "description": "The address to verify.",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "tags": [
+      "Location"
+    ],
+    "responses": {
+      "200": {
+        "description": "The canonical representation of the address.",
+        "schema": {
+          "type": "object",
+          "$ref": "#/definitions/CanonicalAddress"
+        }
+      },
+      "default": {
+        "$ref": "#/responses/UnexpectedError"
+      }
+    }
+  }
+}

@@ -11,14 +11,14 @@ var makeRequest = require('./third-party-api').makeRequest;
 /**
  * Make an appropriately configured URL for the POTC API.
  * @param pathname
- * @param params
- * @param config
+ * @param baseURL
+ * @param debugKey
  * @returns {*}
  */
-var makePOTCUrl = function(pathname, config) {
-  var potcURL = url.parse(config.API.POTC_BASE_URL);
+var makePOTCUrl = function(pathname, baseURL, debugKey) {
+  var potcURL = url.parse(baseURL);
   potcURL.pathname = pathname;
-  potcURL.query = {'debug_key': config.CREDENTIALS.POTC.DEBUG_KEY};
+  potcURL.query = {'debug_key': debugKey};
 
   return url.format(potcURL);
 };
@@ -26,12 +26,16 @@ var makePOTCUrl = function(pathname, config) {
 
 /**
  * Fetches form elements for the supplied repIds from Phantom of the Capitol.
- * @param repIds
+ * @param bioguideIds
  * @param config
  * @param cb
  */
 var getFormElementsForRepIdsFromPOTC = function(bioguideIds, config, cb) {
-  var potcURL = makePOTCUrl('retrieve-form-elements', config);
+  var potcURL = makePOTCUrl(
+    'retrieve-form-elements',
+    config.get('API.POTC_BASE_URL'),
+    config.get('CREDENTIALS.POTC.DEBUG_KEY')
+  );
   makeRequest({method: 'POST', url: potcURL, json: true, body: {'bio_ids': bioguideIds}}, cb);
 };
 
@@ -39,9 +43,15 @@ var getFormElementsForRepIdsFromPOTC = function(bioguideIds, config, cb) {
 /**
  * Sends a message to a representative via POTC.
  * @param message
+ * @param config
+ * @param cb
  */
 var sendMessage = function(message, config, cb) {
-  var potcURL = makePOTCUrl('fill-out-form', config);
+  var potcURL = makePOTCUrl(
+    'fill-out-form',
+    config.get('API.POTC_BASE_URL'),
+    config.get('CREDENTIALS.POTC.DEBUG_KEY')
+  );
   makeRequest({method: 'POST', url: potcURL, json: true, body: message}, cb);
 };
 
@@ -50,7 +60,11 @@ var sendMessage = function(message, config, cb) {
  * Sends a captcha solution to POTC.
  */
 var solveCaptcha = function(solution, config, cb) {
-  var potcURL = makePOTCUrl('fill-out-captcha', config);
+  var potcURL = makePOTCUrl(
+    'fill-out-captcha',
+    config.get('API.POTC_BASE_URL'),
+    config.get('CREDENTIALS.POTC.DEBUG_KEY')
+  );
   makeRequest({method: 'POST', url: potcURL, json: true, body: solution}, cb);
 };
 

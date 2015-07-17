@@ -21,7 +21,7 @@ var api = function ($http, dioConfig) {
         .success(function(data) {
           cb(null, data);
         })
-        .error(function(data, status, headers, config) {
+        .error(function(data) {
           cb(data, null);
         });
     },
@@ -41,6 +41,7 @@ var api = function ($http, dioConfig) {
      *
      * @param lat
      * @param lng
+     * @param cb
      */
     findLegislatorsByLatLng: function(lat, lng, cb) {
       var opts = {

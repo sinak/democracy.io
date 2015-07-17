@@ -1,0 +1,17 @@
+{
+  "description": "POTC response describing the results from attempting to send a message.",
+  "properties": {
+    "bioguideId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "uid": {
+      "type": "string"
+    }
+  }
+}

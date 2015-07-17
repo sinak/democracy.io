@@ -1,0 +1,33 @@
+{
+  "description": "Contains the message, sender data (title, email etc.) and any message metadata required to send a message to a user's representative(s).",
+  "properties": {
+    "bioguideId": {
+      "type": "string",
+      "description": "The biographical id of the legislator to message."
+    },
+    "topic": {
+      "type": "string",
+      "description": "The topic of the message to send."
+    },
+    "subject": {
+      "type": "string",
+      "description": "The subject of the message to send."
+    },
+    "message": {
+      "type": "string",
+      "description": "The text of the message to send."
+    },
+    "sender": {
+      "type": "object",
+      "$ref": "#/definitions/MessageSender"
+    },
+    "canonicalAddress": {
+      "type": "object",
+      "$ref": "#/definitions/CanonicalAddress"
+    },
+    "campaign": {
+      "type": "object",
+      "$ref": "#/definitions/Campaign"
+    }
+  }
+}

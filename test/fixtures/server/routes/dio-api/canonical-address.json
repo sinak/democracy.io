@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "address": "100 Test St, San Francisco CA 94110-2907",
+      "components": {
+        "cityName": "San Francisco",
+        "plus4Code": "2907",
+        "primaryNumber": "3800",
+        "stateAbbreviation": "CA",
+        "stateName": "California",
+        "streetName": "20th",
+        "streetSuffix": "St",
+        "zipcode": "94114"
+      },
+      "county": "San Francisco",
+      "inputIndex": 0,
+      "latitude": 38.24809,
+      "longitude": -121.941
+    }
+  ],
+  "status": "success"
+}

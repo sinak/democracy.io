@@ -1,0 +1,46 @@
+{
+  "description": "A simplified description of a US Congressional legislator.",
+  "properties": {
+    "bioguideId": {
+      "type": "string",
+      "description": "Identifier for this member in various Congressional sources. Originally taken from the Congressional Biographical Directory, but used in many places."
+    },
+    "title": {
+      "type": "string",
+      "description": "The legislator's title",
+      "enum": [
+        "Sen",
+        "Rep",
+        "Del",
+        "Com"
+      ]
+    },
+    "firstName": {
+      "type": "string",
+      "description": "The member’s first name. This may or may not be the name they are usually called."
+    },
+    "lastName": {
+      "type": "string",
+      "description": "The member’s last name."
+    },
+    "nickname": {
+      "type": "string",
+      "description": "The member’s nickname. If present, usually safe to assume this is the name they go by."
+    },
+    "middleName": {
+      "type": "string",
+      "description": "The member’s middle name, if they have one."
+    },
+    "nameSuffix": {
+      "type": "string",
+      "description": "A name suffix, if the member uses one. For example, “Jr.” or “III”."
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "An array of common names combinations for a Congressperson if a combination does not exist, the result will be null and the index will be consistent."
+    }
+  }
+}

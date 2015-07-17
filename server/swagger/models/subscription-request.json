@@ -1,0 +1,11 @@
+{
+  "description": "A subscription request.",
+  "properties": {
+    "sender": {
+      "$ref": "#/definitions/MessageSender"
+    },
+    "canonicalAddress": {
+      "$ref": "#/definitions/CanonicalAddress"
+    }
+  }
+}

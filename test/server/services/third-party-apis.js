@@ -6,6 +6,8 @@ var expect = require('chai').expect;
 var lodash = require('lodash');
 var nestedDescribe = require('nested-describe');
 
+var config = require('config').get('SERVER');
+var eff = require('../../../server/services/third-party-apis/eff-civic-crm');
 var potc = require('../../../server/services/third-party-apis/potc');
 var smartyStreets = require('../../../server/services/third-party-apis/smarty-streets');
 var sunlight = require('../../../server/services/third-party-apis/sunlight');
@@ -13,43 +15,45 @@ var sunlight = require('../../../server/services/third-party-apis/sunlight');
 
 nestedDescribe('server.services.third-party-apis', function () {
 
-  var config = {
-    API: {
-      SUNLIGHT_BASE_URL: 'https://sunlight.com',
-      POTC_BASE_URL: 'https://potc.com',
-      SMARTY_STREETS: {
-        AUTOCOMPLETE_URL: 'https://autcomplete.ss.com',
-        ADDRESS_URL: 'https://api.ss.com'
-      }
-    },
-    CREDENTIALS: {
-      SUNLIGHT: {
-        API_KEY: 'fake-key'
-      },
-      POTC: {
-        DEBUG_KEY: 'fake-key'
-      },
-      SMARTY_STREETS: {
-        ID: 'fake-id',
-        TOKEN: 'fake-token'
-      }
-    }
-  };
-
   it('should make a sunlight foundation URL', function() {
-    expect(sunlight.makeSunlightUrl('test', {'test': 'test'}, config))
-      .to.be.equal('https://sunlight.com/test?test=test&apikey=fake-key');
+    var sunlightUrl = sunlight.makeSunlightUrl(
+      'test',
+      {test: 'test'},
+      config.get('API.SUNLIGHT_BASE_URL'),
+      config.get('CREDENTIALS.SUNLIGHT.API_KEY')
+    );
+    expect(sunlightUrl)
+      .to.be.equal('https://congress.api.sunlightfoundation.com/test?test=test&apikey=test');
   });
 
   it('should make a POTC URL', function() {
-    expect(potc.makePOTCUrl('test', config))
-      .to.be.equal('https://potc.com/test?debug_key=fake-key');
+    var potcURL = potc.makePOTCUrl(
+      'test',
+      config.get('API.POTC_BASE_URL'),
+      config.get('CREDENTIALS.POTC.DEBUG_KEY')
+    );
+
+    expect(potcURL)
+      .to.be.equal('https://congressforms.eff.org/test?debug_key=test');
   });
 
   it('should make a SmartyStreets URL', function() {
-    var ssURL = smartyStreets.makeSmartyStreetsUrl('https://autcomplete.ss.com', 'test', {'test': 'test'}, config);
+    var ssURL = smartyStreets.makeSmartyStreetsUrl(
+      config.get('API.SMARTY_STREETS.ADDRESS_URL'),
+      'street-address',
+      {'test': 'test'},
+      {ID: 'fake-id', TOKEN: 'fake-token'}
+    );
     expect(ssURL)
-      .to.be.equal('https://autcomplete.ss.com/test?test=test&auth-id=fake-id&auth-token=fake-token');
+      .to.be.equal('https://api.smartystreets.com/street-address?test=test&auth-id=fake-id&auth-token=fake-token');
+  });
+
+  it('should make an EFF CivicCRM URL', function() {
+    var effURL = eff.makeEFFCivicCRMUrl(
+      config.get('API.EFF_CIVIC_CRM_URL'), 'civicrm/eff-action-api');
+    expect(effURL)
+      .to.be.equal('https://supporters.eff.org/civicrm/eff-action-api')
   });
 
 });
+

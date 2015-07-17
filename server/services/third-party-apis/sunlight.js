@@ -12,14 +12,15 @@ var makeRequest = require('./third-party-api').makeRequest;
  * Make an appropriately configured URL for the Sunlight API.
  * @param pathname
  * @param params
- * @param config
+ * @param baseURL
+ * @param apiKey
  * @returns {*}
  */
-var makeSunlightUrl = function(pathname, params, config) {
-  var sunlightUrl = url.parse(config.API.SUNLIGHT_BASE_URL);
+var makeSunlightUrl = function(pathname, params, baseURL, apiKey) {
+  var sunlightUrl = url.parse(baseURL);
   sunlightUrl.pathname = pathname;
 
-  params.apikey = config.CREDENTIALS.SUNLIGHT.API_KEY;
+  params.apikey = apiKey;
   sunlightUrl.query = params;
 
   return url.format(sunlightUrl);
@@ -28,13 +29,17 @@ var makeSunlightUrl = function(pathname, params, config) {
 
 /**
  * Finds members of the US Congress by lat / lng from the Sunlight Legislators API.
- * @param lat
- * @param lng
+ * @param locQuery
  * @param config
  * @param cb
  */
 var locateLegislatorsViaSunlight = function(locQuery, config, cb) {
-  var sunlightUrl = makeSunlightUrl('/legislators/locate', locQuery, config);
+  var sunlightUrl = makeSunlightUrl(
+    '/legislators/locate',
+    locQuery,
+    config.get('API.SUNLIGHT_BASE_URL'),
+    config.get('CREDENTIALS.SUNLIGHT.API_KEY')
+  );
   makeRequest({method: 'GET', url: sunlightUrl, json: true}, cb);
 };
 
@@ -46,7 +51,13 @@ var locateLegislatorsViaSunlight = function(locQuery, config, cb) {
  * @param cb
  */
 var fetchActiveLegislatorBioViaSunlight = function(bioguideId, config, cb) {
-  var sunlightUrl = makeSunlightUrl('/legislators', {'bioguide_id': bioguideId}, config);
+  var sunlightUrl = makeSunlightUrl(
+    '/legislators',
+    {'bioguide_id': bioguideId},
+    config.get('API.SUNLIGHT_BASE_URL'),
+    config.get('CREDENTIALS.SUNLIGHT.API_KEY')
+  );
+
   makeRequest({method: 'GET', url: sunlightUrl, json: true}, cb);
 };
 

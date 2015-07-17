@@ -2,7 +2,7 @@
  *
  */
 
-var apiHelpers = require('./helpers');
+var apiHelpers = require('./helpers/api');
 var models = require('../../../models');
 
 

@@ -11,6 +11,15 @@ var appConfig = require('config').get('SERVER');
 appConfig.VERSION = require('../../package.json').version;
 
 
+var getAPIRequest = function(reqConfig) {
+  var request = getHTTPRequest(reqConfig);
+
+  request.swagger = {};
+
+  return request;
+};
+
+
 var getHTTPRequest = function(reqConfig) {
   var req = httpMocks.createRequest(reqConfig);
 
@@ -45,4 +54,5 @@ var expectJSONResponse = function(res, expected, cb) {
 
 module.exports.getHTTPRequest = getHTTPRequest;
 module.exports.getHTTPResponse = getHTTPResponse;
+module.exports.getAPIRequest = getAPIRequest;
 module.exports.expectJSONResponse = expectJSONResponse;

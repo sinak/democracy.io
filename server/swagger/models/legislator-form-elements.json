@@ -1,0 +1,14 @@
+{
+  "properties": {
+    "bioguideId": {
+      "type": "string",
+      "description": "Identifier for this member in various Congressional sources. Originally taken from the Congressional Biographical Directory, but used in many places."
+    },
+    "formElements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/FormElement"
+      }
+    }
+  }
+}

@@ -6,12 +6,11 @@ var changeCaseKeys = require('change-case-keys');
 var map = require('lodash.map');
 
 var Legislator = require('../../../../models').Legislator;
-var apiHelpers = require('../helpers');
+var resHelpers = require('../helpers/response');
 var sunlight = require('../../../services/third-party-apis/sunlight');
 
 
 var get = function (req, res) {
-
   var locQuery = {
     latitude: req.query.latitude,
     longitude: req.query.longitude
@@ -19,13 +18,13 @@ var get = function (req, res) {
 
   sunlight.locateLegislatorsViaSunlight(locQuery, req.app.locals.CONFIG, function(err, data) {
     if (err) {
-      res.status(400).json(apiHelpers.makeError(err));
+      res.status(400).json(resHelpers.makeError(err));
     }
 
     var modelData = map(data['results'], function(rawLegislator) {
       return new Legislator(changeCaseKeys(rawLegislator, 'camelize'))
     });
-    res.json(apiHelpers.makeResponse(modelData));
+    res.json(resHelpers.makeResponse(modelData));
   });
 };
 

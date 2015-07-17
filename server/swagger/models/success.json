@@ -1,0 +1,11 @@
+{
+  "description": "Success response.",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object"
+    }
+  }
+}

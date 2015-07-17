@@ -8,6 +8,8 @@ var isArray = require('lodash.isarray');
 
 /**
  * Construct a relative, versioned API URL from an URL path.
+ * @param apiBaseUrl
+ * @param apiVersion
  * @param urlSuffix
  * @returns {string}
  */

@@ -7,7 +7,7 @@ var writeToThemAnimation = function($timeout) {
   var defaultDelay = 1000;
   var defaultSpeed = 50;
 
-  var spec = {
+  return {
     restrict: 'A',
     scope: {
       animateMsg: '@',    // The text to animate
@@ -24,8 +24,7 @@ var writeToThemAnimation = function($timeout) {
       var animationSpeed = parseInt($attrs.speed) || defaultSpeed;
 
       $scope.displayCharacter = function() {
-        var newChar = $scope.animateMsg[$scope.displayedMsg.length];
-        $scope.displayedMsg += newChar;
+        $scope.displayedMsg += $scope.animateMsg[$scope.displayedMsg.length];
         if ($scope.animateMsg !== $scope.displayedMsg) {
           $timeout($scope.displayCharacter, animationSpeed);
         } else {
@@ -45,7 +44,6 @@ var writeToThemAnimation = function($timeout) {
     }
   };
 
-  return spec;
 };
 
 module.exports = ['$timeout', writeToThemAnimation];

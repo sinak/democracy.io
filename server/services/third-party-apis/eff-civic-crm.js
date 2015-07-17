@@ -1,7 +1,7 @@
 /**
  * Helpers for working with the EFF Civic CRM APIs.
  */
-  
+
 var path = require('path');
 var url = require('url');
 
@@ -18,13 +18,13 @@ var makeEFFCivicCRMUrl = function(baseURL, pathname) {
 
 var subscribeToEFFMailingList = function(params, config, cb) {
   var effURL = makeEFFCivicCRMUrl(
-    config.get('API.EFF_CIVIC_CRM_URL'), 'civicrm/eff-action-api', params, config);
+    config.get('API.EFF_CIVIC_CRM_URL'), 'civicrm/eff-action-api');
 
   // To use the EFF Civic CRM API, you send it a POST request, that request must contain:
   //   * The action method to call, in our case import_contact
   //   * The site_key to auth the request
   //   * A JSON string containing details of the person to subscribe
-  var params = {
+  var requestParams = {
     method: 'POST',
     url: effURL,
     formData: {
@@ -34,8 +34,7 @@ var subscribeToEFFMailingList = function(params, config, cb) {
     }
   };
 
-  makeRequest(params, cb);
-
+  makeRequest(requestParams, cb);
 };
 
 

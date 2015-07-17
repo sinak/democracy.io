@@ -1,0 +1,37 @@
+{
+  "description": "A canonical location object describing all aspects of a US address. This is a simplified version of the [SmartyStreets verification response](https://smartystreets.com/docs/address).",
+  "properties": {
+    "inputId": {
+      "type": "string",
+      "description": "Any unique identifier that you use to reference the input address. The output will be identical to the input.",
+      "maxLength": 50
+    },
+    "inputIndex": {
+      "type": "integer",
+      "description": "The order in which this address was submitted with the others (0 if alone)."
+    },
+    "address": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "Contains the first delivery line (usually the street address). This can include any of Primary Number, Street Name, Street Predirection, Street Postdirection, Street Suffix, Secondary Number, Secondary Designator, PMB Designator or PMB Number."
+    },
+    "county": {
+      "type": "string",
+      "maxLength": 64,
+      "description": "The name of the county the address is in"
+    },
+    "latitude": {
+      "type": "number",
+      "format": "double",
+      "description": "The latitude for this address."
+    },
+    "longitude": {
+      "type": "number",
+      "format": "double",
+      "description": "The longitude for this address."
+    },
+    "components": {
+      "$ref": "#/definitions/AddressComponents"
+    }
+  }
+}

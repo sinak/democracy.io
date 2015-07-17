@@ -109,10 +109,9 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
 
     var cb = function(err, messageResponses) {
       var serverErr = !isEmpty(err);
-      var hasCaptcha = $scope.repsUseCaptchas(messageResponses);
 
       if (!serverErr) {
-
+        var hasCaptcha = $scope.repsUseCaptchas(messageResponses);
         dioData.setMessageResponses(messageResponses);
         if (hasCaptcha) {
           $location.path('/captcha');

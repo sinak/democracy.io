@@ -1,0 +1,33 @@
+{
+  "get": {
+    "summary": "Fetches the form elements to contact a legislator.",
+    "description": "Fetches a JSON object describing the form elements the user needs to fill out to be able to contact their legislator via their online form.",
+    "parameters": [
+      {
+        "name": "bioguideId",
+        "in": "path",
+        "description": "Identifier for this member in various Congressional sources. Originally taken from the Congressional Biographical Directory, but used in many places.",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "tags": [
+      "Legislator",
+      "FormElements"
+    ],
+    "responses": {
+      "200": {
+        "description": "A LegislatorFormElements object describing the form elements the user needs to complete to contact the legislator matching the supplied bioguideId.",
+        "schema": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/LegislatorFormElements"
+          }
+        }
+      },
+      "default": {
+        "$ref": "#/responses/UnexpectedError"
+      }
+    }
+  }
+}

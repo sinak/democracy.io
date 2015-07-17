@@ -1,0 +1,107 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Democracy.io API",
+        "description": "Internal API used by the democracy.io site",
+        "version": "1.0.0"
+    },
+    "host": "api.democracy.io",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/api/1",
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+
+    "paths": {
+        "/legislators/findByLatLng": {
+            "$ref": "paths/legislators/find-by-lat-lng.json"
+        },
+        "/legislators/message": {
+            "$ref": "paths/legislators/message.json"
+        },
+        "/legislator/{bioguideId}": {
+            "$ref": "paths/legislator/{bioguideId}.json"
+        },
+        "/legislator/{bioguideId}/formElements": {
+            "$ref": "paths/legislator/{bioguideId}-form-elements.json"
+        },
+        "/legislator/{bioguideId}/message": {
+            "$ref": "paths/legislator/{bioguideId}-message.json"
+        },
+        "/formElements/findByLegislatorBioguideIds": {
+            "$ref": "paths/form-elements-find-by-legislator-bioguideIds.json"
+        },
+        "/location/verify": {
+            "$ref": "paths/location-verify.json"
+        },
+        "/captchaSolution": {
+            "$ref": "paths/captcha-solution.json"
+        },
+        "/exception": {
+            "$ref": "paths/exception.json"
+        },
+        "/subscription": {
+            "$ref": "paths/subscription.json"
+        }
+    },
+
+    "responses": {
+        "UnexpectedError": {
+            "description": "Unexpected error",
+            "schema": {
+                "$ref": "#/definitions/Error"
+            }
+        }
+    },
+
+    "definitions": {
+        "AddressComponents": {
+            "$ref": "models/address-components.json"
+        },
+        "Campaign": {
+            "$ref": "models/campaign.json"
+        },
+        "CanonicalAddress": {
+            "$ref": "models/canonical-address.json"
+        },
+        "CaptchaSolution": {
+            "$ref": "models/captcha-solution.json"
+        },
+        "Error": {
+            "$ref": "models/error.json"
+        },
+        "FormElement": {
+            "$ref": "models/form-element.json"
+        },
+        "Legislator": {
+            "$ref": "models/legislator.json"
+        },
+        "LegislatorFormElements": {
+            "$ref": "models/legislator-form-elements.json"
+        },
+        "Message": {
+            "$ref": "models/message.json"
+        },
+        "MessageResponse": {
+            "$ref": "models/message-response.json"
+        },
+        "MessageSender": {
+            "$ref": "models/message-sender.json"
+        },
+        "NgException": {
+            "$ref": "models/ng-exception.json"
+        },
+        "SubscriptionRequest": {
+            "$ref": "models/subscription-request.json"
+        },
+        "Success": {
+            "$ref": "models/success.json"
+        }
+    }
+
+}

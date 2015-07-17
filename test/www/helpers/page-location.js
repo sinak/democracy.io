@@ -22,7 +22,7 @@ nestedDescribe('www.helpers.page-location', function() {
       .to.be.deep.equal({pageFrom: 'home', pageName: 'location'});
 
     // Existing visit, going back to the home page
-    var repPickerPageState = pageLocation.getPageState('/', 'location', {});
+    repPickerPageState = pageLocation.getPageState('/', 'location', {});
     expect(repPickerPageState)
       .to.be.deep.equal({pageFrom: 'location', pageName: 'home'});
   });

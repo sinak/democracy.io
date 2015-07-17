@@ -8,20 +8,34 @@ var lodash = require('lodash');
 var nestedDescribe = require('nested-describe');
 var nock = require('nock');
 
+var dioAPIFixtures = require('../../fixtures').load('routes.dio-api');
 var legislatorByBioguideId = require('../../../../server/routes/api/legislator/{bioguideId}');
-var formElemsByBioguideId = require('../../../../server/routes/api/legislator/{bioguideId}/formElements');
-var sendMessage = require('../../../../server/routes/api/legislator/{bioguideId}/message');
+var formElemsByBioguideId = require('../../../../server/routes/api/legislator/{bioguideId}/form-elements');
 var testUtils = require('../../utils');
+var thirdPartyFixtures = require('../../fixtures').load('routes.third-party-api');
+
+// TODO(leah): Switch here + elsewhere to use the JSON schema to validate API responses.
+
 
 nestedDescribe('routes.api.legislator', function() {
 
-  it('should fetch a legislator object for a specific bioguideId', function(done) {
-    var mockData = lodash.cloneDeep(require('./fixtures/third-party-api-responses/sunlight-legislators'));
+  var mockHTTPCalls = function() {
+    var mockData = lodash.cloneDeep(thirdPartyFixtures.get('sunlight-legislators'));
     mockData.results = lodash.slice(mockData.results, 0, 1);
     nock(config.get('SERVER.API.SUNLIGHT_BASE_URL'))
       .get('/legislators?bioguide_id=P000197&apikey=test')
       .reply(200, mockData);
 
+    nock(config.get('SERVER.API.POTC_BASE_URL'))
+      .post('/retrieve-form-elements?debug_key=test', {
+        'bio_ids': ['P000197']
+      })
+      .reply(200, thirdPartyFixtures.get('potc-form-elements'));
+  };
+
+  before(mockHTTPCalls);
+
+  it('should fetch a legislator object for a specific bioguideId', function(done) {
     var req = testUtils.getHTTPRequest({
       method: 'GET',
       url: '/api/1/legislator/P000197',
@@ -31,18 +45,11 @@ nestedDescribe('routes.api.legislator', function() {
     });
 
     var res = testUtils.getHTTPResponse();
-    testUtils.expectJSONResponse(
-      res, require('./fixtures/dio-api-responses/legislator'), done);
+    testUtils.expectJSONResponse(res, dioAPIFixtures.get('legislator'), done);
     legislatorByBioguideId.get(req, res);
   });
 
   it('should get form elements for a specific bioguideId', function(done) {
-    nock(config.get('SERVER.API.POTC_BASE_URL'))
-      .post('/retrieve-form-elements?debug_key=test', {
-        'bio_ids': ['P000197']
-      })
-      .reply(200, require('./fixtures/third-party-api-responses/potc-form-elements'));
-
     var req = testUtils.getHTTPRequest({
       method: 'POST',
       url: '/api/1/legislator/P000197/formElements',
@@ -52,30 +59,10 @@ nestedDescribe('routes.api.legislator', function() {
     });
 
     var res = testUtils.getHTTPResponse();
-    testUtils.expectJSONResponse(
-      res, require('./fixtures/dio-api-responses/legislator-form-elements'), done);
+    testUtils.expectJSONResponse(res, dioAPIFixtures.get('legislator-form-elements'), done);
     formElemsByBioguideId.get(req, res);
   });
 
-  it('should send a message to a specific legislator', function(done) {
-    var message = {};
-    nock(config.get('SERVER.API.POTC_BASE_URL'))
-      .post('/fill-out-form?debug_key=test', message)
-      .reply(200, {});
-
-    var req = testUtils.getHTTPRequest({
-      method: 'POST',
-      url: '/api/1/legislator/P000197/message',
-      params: {
-        bioguideId: 'P000197'
-      }
-    });
-
-    // TODO(leah): Update and resolve this once the Swagger stuff is done.
-    done();
-    //var res = testUtils.getHTTPResponse();
-    //testUtils.expectJSONResponse(res, {}, done);
-    //sendMessage.post(req, res);
-  });
+  // TODO(leah): Add tests for the message call
 
 });

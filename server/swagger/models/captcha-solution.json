@@ -1,0 +1,14 @@
+{
+  "description": "Solution for a captcha challenge.",
+  "properties": {
+    "bioguideId": {
+      "type": "string"
+    },
+    "answer": {
+      "type": "string"
+    },
+    "uid": {
+      "type": "string"
+    }
+  }
+}

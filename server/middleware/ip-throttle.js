@@ -22,55 +22,34 @@ module.exports = function(config) {
   // NOTE: contra the other time values, expiry is defined in seconds, not ms
   config.expiry = isUndefined(config.expiry) ? 7 * 24 * 60 * 60 : config.expiry;
 
-  // TODO(leah): Should probably move this to the options
-  // Use a *very* simple regex for now, just look for message in the path
-  var pathRegex = /message/g;
-  var targetedMethod = 'POST';
-
   var redisOptions = config.get('REDIS');
   var redisClient = redis.createClient(
-    redisOptions.PORT, redisOptions.HOSTNAME, { auth_pass: redisOptions.PASS });
+    redisOptions.PORT,
+    redisOptions.HOSTNAME,
+    {auth_pass: redisOptions.PASS}
+  );
   // NOTE: values will be expired from Redis after the number of seconds (not ms!) specified for the
   //       expiry field in the config JSON files. See https://www.npmjs.com/package/tokenthrottle-redis
   //       options for where this is documented.
   var throttle = tokenThrottleRedis(config.get('THROTTLE'), redisClient);
 
   return function(req, res, next) {
+    var ipAddr = req.ip;
+    bcrypt.hash(ipAddr, IP_SALT, function (err, hashedIpAddr) {
+      if (err) {
+        next(new Error('could not throttle IP address'));
+      }
 
-    // NOTE: path is checked and restricted here due to an issue with working with
-    //       swaggerize-express. For some reason using this middleware with a path
-    //       restriction causes the underlying route to 404 every other time it's used.
-    //       Essentially there's a deterministic coin-flip for whether the swaggerized
-    //       router handler or this is called.
-    //       If swaggerize - no throttling, if this - 404.
-    //       So, rather than spending yet more time digging into swaggerize-express'
-    //       internals, just do a path restriction here and move on.
-    var path = req.path;
-
-    if (path.match(pathRegex) && req.method === targetedMethod) {
-      var ipAddr = req.ip;
-      bcrypt.hash(ipAddr, IP_SALT, function (err, hashedIpAddr) {
-        if (err) {
-          next(new Error('could not throttle IP address'));
+      throttle.rateLimit(hashedIpAddr, function (err, limited) {
+        if (limited) {
+          res.statusCode = 429;
+          next(new Error('too many requests'));
+        } else {
+          next();
         }
-
-        throttle.rateLimit(hashedIpAddr, function (err, limited) {
-          if (limited) {
-            // Confusingly, the error handler mounted in swaggerize-wrapper will be
-            // responsible for grabbing this error and returning a JSend formatted
-            // response.
-            // See swaggerize-wrapper for details.
-            res.statusCode = 429;
-            next(new Error('too many requests'));
-          } else {
-            next();
-          }
-        });
-
       });
-    } else {
-      next();
-    }
+
+    });
 
   };
 

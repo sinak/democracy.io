@@ -1,0 +1,35 @@
+{
+  "get": {
+    "summary": "Fetches the form elements to contact one or more legislators.",
+    "description": "Fetches a JSON object describing the form elements the user needs to fill out to be able to contact their legislator(s) via their online form(s).",
+    "parameters": [
+      {
+        "name": "bioguideIds",
+        "in": "query",
+        "description": "An array of bioguideIds identifying the legislators to fetch form elements for.",
+        "required": true,
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    ],
+    "tags": [
+      "FormElements"
+    ],
+    "responses": {
+      "200": {
+        "description": "An array of LegislatorFormElements objects describing the form elements the user needs to complete to contact the legislator(s) matching the supplied bioguideId(s).",
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LegislatorFormElements"
+          }
+        }
+      },
+      "default": {
+        "$ref": "#/responses/UnexpectedError"
+      }
+    }
+  }
+}

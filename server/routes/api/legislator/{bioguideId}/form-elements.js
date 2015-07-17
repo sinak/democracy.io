@@ -4,8 +4,9 @@
 
 var lodash = require('lodash');
 
-var apiHelpers = require('../../helpers');
+var resHelpers = require('../../helpers/response');
 var potc = require('../../../../services/third-party-apis/potc');
+var potcHelpers = require('../../helpers/potc');
 
 
 var get = function (req, res) {
@@ -13,11 +14,11 @@ var get = function (req, res) {
 
   potc.getFormElementsForRepIdsFromPOTC([bioguideId], req.app.locals.CONFIG, function(err, data) {
     if (err) {
-      res.status(400).json(apiHelpers.makeError(err));
+      res.status(400).json(resHelpers.makeError(err));
     }
 
-    var modelData = apiHelpers.makeLegislatorFormElements(data[bioguideId], bioguideId);
-    res.json(apiHelpers.makeResponse(modelData));
+    var modelData = potcHelpers.makeLegislatorFormElements(data[bioguideId], bioguideId);
+    res.json(resHelpers.makeResponse(modelData));
   });
 };
 

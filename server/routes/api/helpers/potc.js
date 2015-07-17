@@ -36,7 +36,11 @@ var makePOTCMessage = function(message, campaignTag) {
     $ORG_NAME: message.campaign.orgName
   };
 
-  var campaignTag = lodash.isEmpty(message.campaign.tag) ? campaignTag : message.campaign.tag;
+  fields = lodash.pick(fields, function(val) {
+    return !lodash.isUndefined(val) && !lodash.isNull(val);
+  });
+
+  campaignTag = lodash.isEmpty(message.campaign.tag) ? campaignTag : message.campaign.tag;
   return {
     'bio_id': message.bioguideId,
     fields: fields,

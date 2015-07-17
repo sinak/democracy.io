@@ -2,34 +2,26 @@
  *
  */
 
-var path = require('path');
-var bodyParser = require('body-parser');
 var connectRedis = require('connect-redis');
 var consolidate = require('consolidate');
 var dust = require('dustjs-linkedin');
 var express = require('express');
-var expressEnrouten = require('express-enrouten');
 var lusca = require('lusca');
+var middleware = require('swagger-express-middleware');
 var morgan = require('morgan');
+var path = require('path');
 var serveFavicon = require('serve-favicon');
 var serveStatic = require('serve-static');
 var session = require('express-session');
 
-// pm2 sets a NODE_APP_INSTANCE that causes problems with https://github.com/lorenwest/node-config/wiki/Strict-Mode
-// As a workaround we move NODE_APP_INSTANCE aside during configuration loading
-var appInstance = process.env.NODE_APP_INSTANCE;
-process.env.NODE_APP_INSTANCE = '';
-var config = require('config').get('SERVER');
-config.VERSION = require('../package.json').version;
-process.env.NODE_APP_INSTANCE = appInstance;
+// NOTE: The app currently assumes a flat deploy with the server serving static assets directly.
+var BUILD_DIR = path.join(__dirname, '../.build');
 
+var apiDef = require(path.join(BUILD_DIR, 'api.json'));
+var apiErrorHandler = require('./middleware/api-error-handler');
+var config = require('./config');
 var ipThrottle = require('./middleware/ip-throttle');
 var ngXsrf = require('./middleware/ng-xsrf');
-var swaggerizeWrapper = require('./middleware/swaggerize-wrapper');
-
-var env = process.env.NODE_ENV || 'development';
-// NOTE: The app currently assumes a flat deploy with the server serving static assets directly.
-var buildDir = path.join(__dirname, '../.build');
 
 var app = express();
 
@@ -41,17 +33,16 @@ app.set('view engine', 'dust');
 // NOTE: this assumes you're running behind an nginx instance or other proxy
 app.enable('trust proxy');
 
-app.use(serveFavicon(path.join(buildDir, 'static', config.VERSION, 'img/favicon.ico')));
+app.use(serveFavicon(path.join(BUILD_DIR, 'static', config.VERSION, 'img/favicon.ico')));
 // NOTE: EFF doesn't use CDNs, so rely on static serve w/ a caching layer in front of it in prod
-app.use(serveStatic(buildDir, config.get('STATIC')));
+app.use(serveStatic(BUILD_DIR, config.get('STATIC')));
 app.use(morgan('combined'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 
-// See NOTE in ipThrottle for why this isn't regex restricted to msg routes
-app.use(ipThrottle(config.get('REQUEST_THROTTLING')));
+// Only throttle requests to the messages endpoints
+var pathRe = /^\/api.*\/message$/;
+app.use(pathRe, ipThrottle(config.get('REQUEST_THROTTLING')));
+
 var RedisStore = connectRedis(session);
-
 // Default to the same ttl as used by the request throttle
 app.use(session({
   store: new RedisStore({ttl: config.get('REQUEST_THROTTLING.THROTTLE.expiry') || 7 * 24 * 60 * 60}),
@@ -73,16 +64,33 @@ app.use(lusca({
   p3p: false,
   csp: false
 }));
-app.use(ngXsrf());
-app.use(expressEnrouten({directory: 'routes'}));
-app.use(swaggerizeWrapper({
-  'api': path.join(__dirname, 'api.json'),
-  'handlers': path.join(__dirname, 'routes/api')
-}));
 
-app.on('start', function () {
-  console.log('Application ready to serve requests.');
-  console.log('Environment: %s', app.kraken.get('env:env'));
+
+var port = process.env.PORT || 3000;
+middleware(apiDef, app, function(err, middleware) {
+  if (err) {
+    throw err;
+  }
+
+  // NOTE: install the swagger middleware at the top level of the app. This is required
+  //       as otherwise the path param is missing the /api/1 prefix and swagger metadata
+  //       doesn't get attached correctly in:
+  //          swagger-express-middleware/lib/request-metadata.js#swaggerPathMetadata
+  app.use(middleware.metadata());
+  app.use(middleware.parseRequest());
+  app.use(middleware.validateRequest());
+  app.use(apiErrorHandler());
+
+  var appRouter = require('./routes/app/router')([ngXsrf()]);
+  app.use(appRouter);
+
+  var apiRouter = require('./routes/api/router')();
+  app.use(apiDef.basePath, apiRouter);
+
+  app.listen(port, function () {
+    console.log('Server listening on http://localhost:%s', port);
+    console.log('Application ready to serve requests.');
+  });
 });
 
 

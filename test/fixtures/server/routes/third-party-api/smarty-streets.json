@@ -1,0 +1,45 @@
+[
+  {
+    "input_index": 0,
+    "candidate_index": 0,
+    "delivery_line_1": "100 Test St",
+    "last_line": "San Francisco CA 94110-2907",
+    "delivery_point_barcode": "0001",
+    "components": {
+      "primary_number": "3800",
+      "street_name": "20th",
+      "street_suffix": "St",
+      "city_name": "San Francisco",
+      "state_abbreviation": "CA",
+      "zipcode": "94114",
+      "plus4_code": "2907",
+      "delivery_point": "28",
+      "delivery_point_check_digit": "3"
+    },
+    "metadata": {
+      "record_type": "S",
+      "zip_type": "Standard",
+      "county_fips": "06075",
+      "county_name": "San Francisco",
+      "carrier_route": "C028",
+      "congressional_district": "12",
+      "rdi": "Residential",
+      "elot_sequence": "0064",
+      "elot_sort": "D",
+      "latitude": 38.24809,
+      "longitude": -121.941,
+      "precision": "Zip9",
+      "time_zone": "Pacific",
+      "utc_offset": -8,
+      "dst": true
+    },
+    "analysis": {
+      "dpv_match_code": "Y",
+      "dpv_footnotes": "AABB",
+      "dpv_cmra": "N",
+      "dpv_vacant": "N",
+      "active": "Y",
+      "footnotes": "L#"
+    }
+  }
+]

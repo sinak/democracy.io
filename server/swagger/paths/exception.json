@@ -1,0 +1,32 @@
+{
+  "post": {
+    "summary": "Logs a client side exception.",
+    "description": "Logs a client side exception sent from the Angular error bus.",
+    "parameters": [
+      {
+        "name": "err",
+        "in": "body",
+        "description": "The exception object to log to disk.",
+        "required": true,
+        "schema": {
+          "type": "object",
+          "$ref": "#/definitions/NgException"
+        }
+      }
+    ],
+    "tags": [
+      "Error"
+    ],
+    "responses": {
+      "200": {
+        "description": "Exception log acknowledgement.",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "default": {
+        "$ref": "#/responses/UnexpectedError"
+      }
+    }
+  }
+}

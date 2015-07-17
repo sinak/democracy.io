@@ -37,7 +37,7 @@ var parseTopicOptions = function(topicElem, legislator) {
  * Parse out the county options from a county FormElement.
  * @param countyElem
  * @param addressCounty
- * @returns {{)}}
+ * @returns {Object}
  */
 var parseCountyOptions = function(countyElem, addressCounty) {
   var countyOptions = countyElem.optionsHash;
@@ -113,7 +113,7 @@ var makeCampaignInfo = function() {
 
 /**
  *
- * @param legislators
+ * @param legislator
  * @param formData
  * @param phoneValue
  * @param topicOptions
@@ -123,15 +123,21 @@ var makeCampaignInfo = function() {
 var makeMessage = function(legislator, formData, phoneValue, topicOptions, address) {
   var messageInfo = makeMessageInfo(legislator, formData, topicOptions[legislator.bioguideId]);
 
-  return new models.Message({
+  var msg = new models.Message({
     bioguideId: legislator.bioguideId,
-    topic: messageInfo.topic,
     subject: messageInfo.subject,
     message: messageInfo.message,
     sender: makeSenderInfo(formData, phoneValue),
     canonicalAddress: address,
     campaign: makeCampaignInfo()
   });
+
+  // Topic can be null, and swagger doesn't support an is nullable property afaict
+  if (messageInfo.topic !== null) {
+    msg.topic = messageInfo.topic;
+  }
+
+  return msg;
 };
 
 
@@ -143,13 +149,14 @@ var makeMessage = function(legislator, formData, phoneValue, topicOptions, addre
  *       This will need to be updated where > 1 reps adopt county data.
  *
  * @param legislatorsFormElements
+ * @param addressCounty
  */
 var getCountyData = function(legislatorsFormElements, addressCounty) {
   var countyKey = '$ADDRESS_COUNTY';
   var countyElem;
 
   for (var i = 0, countyElemArr; i < legislatorsFormElements.length; ++i) {
-    countyElemArr = filter(legislatorsFormElements[i].formElements, function(formElem) {
+    countyElemArr = /** @type {Array} */ filter(legislatorsFormElements[i].formElements, function(formElem) {
       return formElem.value === countyKey;
     });
     if (countyElemArr.length > 0) {
@@ -201,7 +208,7 @@ var getTopicOptions = function(legislatorsFormElements, legislators) {
 var createFormFields = function(legislatorsFormElements, legislators, address) {
   var countyData = getCountyData(legislatorsFormElements, address.county);
 
-  var formFieldData = {
+  return {
     countyData: countyData,
     formData: {
       prefix: 'Ms',
@@ -209,8 +216,6 @@ var createFormFields = function(legislatorsFormElements, legislators, address) {
     },
     topicOptions: getTopicOptions(legislatorsFormElements, legislators)
   };
-
-  return formFieldData;
 };
 
 

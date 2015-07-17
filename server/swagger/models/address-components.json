@@ -1,0 +1,65 @@
+{
+  "description": "Contains detailed components comprising an address.",
+  "properties": {
+    "primaryNumber": {
+      "type": "string",
+      "maxLength": 30,
+      "description": "The house, PO Box, or building number."
+    },
+    "streetName": {
+      "type": "string",
+      "maxLength": 64,
+      "description": "The name of the street."
+    },
+    "streetPredirection": {
+      "type": "string",
+      "maxLength": 16,
+      "description": "Directional information before a street name, e.g. N, SW."
+    },
+    "streetPostdirection": {
+      "type": "string",
+      "maxLength": 16,
+      "description": "Directional information after a street name, e.g. N, SW."
+    },
+    "streetSuffix": {
+      "type": "string",
+      "maxLength": 16,
+      "description": "Abbreviated value describing the street, e.g. St, Ave, Blvd."
+    },
+    "secondaryNumber": {
+      "type": "string",
+      "maxLength": 32,
+      "description": "Apartment or suite number, if any."
+    },
+    "cityName": {
+      "type": "string",
+      "maxLength": 64,
+      "description": "The accepted/proper name of the city."
+    },
+    "defaultCityName": {
+      "type": "string",
+      "maxLength": 64,
+      "description": "The default city name for the address. This field will not be present if the default city name is equal to the value of the city name field."
+    },
+    "stateAbbreviation": {
+      "type": "string",
+      "maxLength": 2,
+      "description": "The two-letter state abbreviation."
+    },
+    "stateName": {
+      "type": "string",
+      "maxLength": 20,
+      "description": "The full state or territory name."
+    },
+    "zipcode": {
+      "type": "string",
+      "maxLength": 5,
+      "description": "The 5-digit ZIP Code"
+    },
+    "plus4Code": {
+      "type": "string",
+      "maxLength": 4,
+      "description": "The 4-digit add-on code (more specific than 5-digit ZIP)."
+    }
+  }
+}

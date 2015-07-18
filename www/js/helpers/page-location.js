@@ -15,6 +15,11 @@ var getPageState = function(path, oldPageName, oldLocation) {
   var isNewSession = isUndefined(oldLocation);
   var path = path.substr(1);
 
+  // New session if redirected from / 
+  if (!isUndefined(oldLocation) && !isUndefined(oldLocation.$$route) && oldLocation.$$route.originalPath === '') {
+    isNewSession = true;
+  }
+
   return {
     pageFrom: isNewSession ? 'new-visit' : oldPageName,
     pageName: isEmpty(path) ? 'home' : path

@@ -53,6 +53,11 @@ var AddressFormController = /*@ngInject*/ function($scope, $location, dioData, d
       var addressFound = !isEmpty(canonicalAddresses);
       var serverErr = !isEmpty(err);
 
+      // Check for zipcode change missed by Smarty Streets
+      if (canonicalAddresses[0].components.zipcode !== $scope.addressData.postal) {
+        addressFound = false;
+      }
+
       if (addressFound && !serverErr) {
         dioData.clearData();
         // It's possible to get multiple verified addresses for a single source address.

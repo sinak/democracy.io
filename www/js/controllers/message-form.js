@@ -108,9 +108,9 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
 
     var cb = function(err, messageResponses) {
       var serverErr = !isEmpty(err);
+      var hasCaptcha = $scope.repsUseCaptchas(messageResponses);
 
       if (!serverErr) {
-        var hasCaptcha = $scope.repsUseCaptchas(messageResponses);
 
         dioData.setMessageResponses(messageResponses);
         if (hasCaptcha) {
@@ -121,6 +121,8 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
       } else {
         if (err.code === 429) {
           // TODO(sina): show a "too many messages" err
+        } else if ((err.code !== 400 && err.code !== 500) && !hasCaptcha) {
+          $location.path('/thanks');
         } else {
           // TODO(sina): do something here
           $scope.sending = false;

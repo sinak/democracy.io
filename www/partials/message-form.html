@@ -114,6 +114,8 @@
             <div class="col-sm-6 form-group" ng-class="{'has-error' : (!messageForm.phone.$valid && !messageForm.phone.$pristine)}">
               <label for="inputPhoneNumber">Phone number</label>
               <input type="text"
+                     ng-focus="phoneFocus = true"
+                     ng-blur="phoneFocus = false"
                      name="phone"
                      id="inputPhoneNumber"
                      class="form-control"
@@ -123,10 +125,17 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-4 col-md-6 hidden-xs form-note" ng-show="prefixFocus">
+        <div class="col-sm-4 col-md-6 hidden-xs form-note" ng-if="prefixFocus">
           <div class="panel panel-compact" id="prefixNote">
             <div class="panel-body">
                 Members of Congress's contact forms require gendered titles. <span class="hidden-sm">EFF believes the options provided are limiting and we are looking into alternatives.</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-md-6 hidden-xs form-note" ng-if="phoneFocus">
+          <div class="panel panel-compact" id="phoneNote">
+            <div class="panel-body">
+                Members of Congress's contact forms require US phone numbers.
             </div>
           </div>
         </div>

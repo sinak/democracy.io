@@ -48,4 +48,12 @@ CanonicalAddress.prototype.streetAddress = function() {
 };
 
 
+CanonicalAddress.prototype.cityState = function() {
+  return [
+    this.components.cityName,
+    this.components.stateAbbreviation
+  ].join(', ');
+};
+
+
 module.exports = CanonicalAddress;

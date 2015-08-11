@@ -1,5 +1,5 @@
 /**
- * Helpers for construction the message form and parsing its data.
+ * Helpers for constructing the message form and parsing its data.
  */
 
 var findWhere = require('lodash.findwhere');

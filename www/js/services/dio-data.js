@@ -12,6 +12,7 @@ var filter = require('lodash.filter');
 var forEach = require('lodash.foreach');
 var isArray = require('lodash.isarray');
 var isEmpty = require('lodash.isempty');
+var isUndefined = require('lodash.isundefined');
 var keys = require('lodash.keys');
 var map = require('lodash.map');
 var partial = require('lodash.partial');
@@ -31,7 +32,7 @@ var legislatorData = function(locker) {
   };
 
   var DEFAULT_VALUES = {};
-  DEFAULT_VALUES[DATA_KEYS.CA] = new models.CanonicalAddress();
+  DEFAULT_VALUES[DATA_KEYS.CA] = null;
   DEFAULT_VALUES[DATA_KEYS.L] = [];
   DEFAULT_VALUES[DATA_KEYS.LFE] = [];
   DEFAULT_VALUES[DATA_KEYS.BIBS] = {};
@@ -39,7 +40,11 @@ var legislatorData = function(locker) {
   var getValue = function(key, model) {
     try {
       var rawObj = locker.get(key, DEFAULT_VALUES[key]);
-      if (model === undefined) {
+      if (isEmpty(rawObj)) {
+        return undefined;
+      }
+
+      if (isUndefined(model)) {
         return rawObj;
       } else {
         if (isArray(rawObj)) {

@@ -5,41 +5,12 @@
 var isEmpty = require('lodash.isempty');
 var filter = require('lodash.filter');
 
+var CanonicalAddress = require('../../../models').CanonicalAddress;
+var helpers = require('../helpers/address-form');
+
 
 var AddressFormController = /*@ngInject*/ function($scope, $location, dioData, dioAPI, $timeout, $document) {
-  var priorCanonicalAddress = dioData.getCanonicalAddress().components;
-
-  var priorAddress = '';
-  if (priorCanonicalAddress.primaryNumber) priorAddress += priorCanonicalAddress.primaryNumber + " ";
-  if (priorCanonicalAddress.streetName) priorAddress += priorCanonicalAddress.streetName + " ";
-  if (priorCanonicalAddress.streetSuffix) priorAddress += priorCanonicalAddress.streetSuffix;
-
-  var priorCity = '';
-  if (priorCanonicalAddress.cityName) priorCity += priorCanonicalAddress.cityName;
-  if (priorCanonicalAddress.stateAbbreviation) priorCity += ", " + priorCanonicalAddress.stateAbbreviation;
-
-  var priorPostal = '';
-  if (priorCanonicalAddress.zipcode) priorPostal = priorCanonicalAddress.zipcode;
-
-  // See https://developers.google.com/web/fundamentals/input/form/provide-real-time-validation
-  $scope.patterns = {
-    address: new RegExp(/[a-zA-Z\d\s\-\,\#\.\+]+/),
-    city: new RegExp(/[a-zA-Z\d\s\-\,\#\.\+]+/),
-    postal: new RegExp(/^\d{5,6}(?:[-\s]\d{4})?$/)
-  };
-  if (priorCanonicalAddress.streetName) {
-    $scope.addressData = {
-      address: priorAddress,
-      city: priorCity,
-      postal: priorPostal
-    };
-  } else {
-    $scope.addressData = {
-      address: '',
-      city: '',
-      postal: ''
-    };
-  }
+  $scope.addressData = helpers.getAddressData(dioData.getCanonicalAddress());
 
   $scope.data = {
     address: '',
@@ -50,29 +21,15 @@ var AddressFormController = /*@ngInject*/ function($scope, $location, dioData, d
     $scope.error = null;
     var cb = function(err, canonicalAddresses) {
       $scope.data.verifyingAddress = false;
-      var addressFound = !isEmpty(canonicalAddresses);
-      var serverErr = !isEmpty(err);
+      var validationRes = helpers.validateAddressResponse(err, canonicalAddresses, $scope.addressData.postal);
 
-      // Check for zipcode change missed by Smarty Streets
-      if (canonicalAddresses[0].components.zipcode !== $scope.addressData.postal) {
-        addressFound = false;
-      }
-
-      if (addressFound && !serverErr) {
+      if (validationRes instanceof CanonicalAddress) {
         dioData.clearData();
-        // It's possible to get multiple verified addresses for a single source address.
-        // We've been unable to find an example of this to test though, so for now just pick
-        // the first value and use that.
-        dioData.setCanonicalAddress(canonicalAddresses[0]);
+        dioData.setCanonicalAddress(validationRes);
         $location.path('/location');
       } else {
-        if (serverErr) {
-          $scope.error = "There appears to be a problem with the server. Please try again, and if the problem persists, email democracy@eff.org with the address you used so we can try and fix the issue.";
-        } else {
-          $scope.error = "Your address was not recognized. Please check the address and try again.";
-        }
+        $scope.error = validationRes;
       }
-
     };
 
     dioAPI.verifyAddress(address, cb);
@@ -127,6 +84,7 @@ var AddressFormController = /*@ngInject*/ function($scope, $location, dioData, d
     var toggleEl = document.querySelectorAll('#showAbout')[0];
     angular.element(aboutEl).addClass('ng-enter').removeClass('hidden');
     angular.element(toggleEl).addClass('ng-hide');
+    // TODO(sina): There shouldn't be document / element interaction in the controller, adapt / alter this.
     $document.scrollToElement(angular.element(leadEl), 0, 1000);
     window.readMoreOpen = true;
   };

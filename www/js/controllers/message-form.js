@@ -22,6 +22,7 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
   $scope.submitted = false;
   $scope.joinEmailList = false;
   $scope.sending = false;
+  $scope.legislatorSalutation = {'content':'Dear [Representative/Senator],'};
 
   $timeout(function() {
     $scope.loadingDelay = false;
@@ -171,6 +172,10 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
     var legislatorList = map($scope.legislators, function(legislator){
       return ' ' + legislator.title + '. ' + legislator.firstName + ' ' + legislator.lastName;
     });
+
+    $scope.legislatorSalutation = "#textarea-container::after {content:'Dear" + legislatorList + ",'}";
+
+
   };
 
   /**

@@ -39,11 +39,10 @@
       <div class="row">
         <div class="col-md-12" id="to-field">
           <label>This message will be sent to:</label>
-            <span ng-repeat="legislator in legislators">
-              <span>
-                [[legislator.title]]. [[legislator.firstName]] [[legislator.lastName]]
-              <span ng-hide="$last">,</span>
-            </span>
+          <span ng-repeat="legislator in legislators">
+            [[legislator.title]]. [[legislator.firstName]]
+            <span ng-show="$last">[[legislator.lastName]]</span>
+            <span ng-hide="$last">[[legislator.lastName]],</span>
           </span>
         </div>
       </div>
@@ -59,7 +58,13 @@
         <div class="form-group col-sm-8 col-md-9">
         <label for="inputMessage">Message</label>
         <style ng-bind-html="legislatorSalutation"></style>
-        <div id="textarea-container" ng-style="legislatorSalutation">
+        <div id="message-salutation">
+          Dear
+          <span ng-repeat="legislator in legislators">
+            [[legislator.title]]. [[legislator.firstName]] [[legislator.lastName]],
+          </span>
+        </div>
+        <div id="textarea-container">
           <textarea id="inputMessage" name="message" class="form-control" cols="30" rows="10" ng-model="formData.message" ng-required='true'></textarea>
         </div>
         </div>

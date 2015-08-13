@@ -164,9 +164,25 @@ strong {
   display: block;
 }
 
-textarea#inputMessage {
-  padding-top: 42px;
-  position: relative;
+@media (min-width: 1200px) {
+  textarea#inputMessage {
+    padding-top: 42px;
+    position: relative;
+  }
+}
+
+@media (max-width: 1200px) {
+  textarea#inputMessage {
+    padding-top: 65px;
+    position: relative;
+  }
+}
+
+@media (max-width: 400px) {
+  textarea#inputMessage {
+    padding-top: 86px;
+    position: relative;
+  }
 }
 
 #textarea-container {
@@ -181,7 +197,7 @@ textarea#inputMessage {
     text-transform: none;
     font-family: 'DroidSerif', serif;
     -webkit-font-smoothing: antialiased;
-    color: #000;
+    color: #999;
     z-index: 1;
     font-size: 16px;
     content: 'Dear [Representative/Senator],';

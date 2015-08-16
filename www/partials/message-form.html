@@ -58,6 +58,8 @@
       <div class="row">
         <div class="form-group col-sm-8 col-md-9">
         <label for="inputMessage">Message</label>
+        <style ng-bind-html="'#textarea-container::after {content:\'Dear '+ [[legislatorList]] +',\'}'"></style>
+
         <div id="textarea-container">
           <textarea id="inputMessage" name="message" class="form-control" cols="30" rows="10" ng-model="formData.message" ng-required='true'></textarea>
         </div>

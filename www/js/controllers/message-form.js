@@ -22,6 +22,7 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
   $scope.submitted = false;
   $scope.joinEmailList = false;
   $scope.sending = false;
+  $scope.legislatorList = 'Dear [Representative/Senator],';
 
   $timeout(function() {
     $scope.loadingDelay = false;
@@ -167,6 +168,11 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
     $scope.countyData = formFieldData.countyData;
     $scope.topicOptions = formFieldData.topicOptions;
     $scope.formData = formFieldData.formData;
+
+    $scope.legislatorList = map($scope.legislators, function(legislator){
+      return ' ' + legislator.title + '. ' + legislator.firstName + ' ' + legislator.lastName;
+    }).join();
+
   };
 
   /**

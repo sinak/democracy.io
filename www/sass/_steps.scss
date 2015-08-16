@@ -164,9 +164,25 @@ strong {
   display: block;
 }
 
-textarea#inputMessage {
-  padding-top: 42px;
-  position: relative;
+@media (min-width: 1200px) {
+  textarea#inputMessage {
+    padding-top: 42px;
+    position: relative;
+  }
+}
+
+@media (max-width: 1200px) {
+  textarea#inputMessage {
+    padding-top: 65px;
+    position: relative;
+  }
+}
+
+@media (max-width: 400px) {
+  textarea#inputMessage {
+    padding-top: 86px;
+    position: relative;
+  }
 }
 
 #textarea-container {

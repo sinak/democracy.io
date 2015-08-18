@@ -3,33 +3,63 @@
   "data": [
     {
       "bioguideId": "P000197",
+      "district": 12,
+      "facebookId": "86574174383",
+      "inOffice": true,
       "title": "Rep",
       "firstName": "Nancy",
       "lastName": "Pelosi",
       "nickname": null,
       "middleName": null,
       "nameSuffix": null,
-      "aliases": []
+      "aliases": [],
+      "party": "D",
+      "state": "CA",
+      "stateName": "California",
+      "twitterId": "NancyPelosi",
+      "website": "http://pelosi.house.gov",
+      "youtubeId": "nancypelosi"
     },
     {
+      "aliases": [],
       "bioguideId": "B000711",
-      "title": "Sen",
+      "district": null,
+      "facebookId": "116513005087055",
       "firstName": "Barbara",
+      "inOffice": true,
       "lastName": "Boxer",
-      "nickname": null,
       "middleName": null,
       "nameSuffix": null,
-      "aliases": []
+      "nickname": null,
+      "party": "D",
+      "state": "CA",
+      "stateName": "California",
+      "stateRank": "junior",
+      "title": "Sen",
+      "twitterId": "SenatorBoxer",
+      "website": "http://www.boxer.senate.gov",
+      "youtubeId": "SenatorBoxer"
     },
     {
+      "aliases": [],
       "bioguideId": "F000062",
-      "title": "Sen",
+      "district": null,
+      "facebookId": "334887279867783",
       "firstName": "Dianne",
+      "inOffice": true,
       "lastName": "Feinstein",
-      "nickname": null,
       "middleName": null,
       "nameSuffix": null,
-      "aliases": []
+      "nickname": null,
+      "party": "D",
+      "state": "CA",
+      "stateName": "California",
+      "stateRank": "senior",
+      "title": "Sen",
+      "twitterId": "SenFeinstein",
+      "website": "http://www.feinstein.senate.gov",
+      "youtubeId": "SenatorFeinstein"
     }
   ]
 }
+

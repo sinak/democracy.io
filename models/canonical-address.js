@@ -12,9 +12,9 @@ var AddressComponents = require('./address-components');
 var Model = require('./model');
 
 
-function CanonicalAddress(options) {
+var CanonicalAddress = function(options) {
   Model.call(this, options);
-}
+};
 
 CanonicalAddress.prototype = create(Model.prototype, {
   'constructor': Model

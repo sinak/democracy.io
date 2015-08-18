@@ -9,7 +9,7 @@ var create = require('lodash.create');
 var Model = require('./model');
 
 
-function Error(options) {
+var Error = function(options) {
   Model.call(this, options);
 };
 

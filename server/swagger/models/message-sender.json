@@ -5,10 +5,9 @@
       "type": "string",
       "description": "The name prefix, e.g. Ms.",
       "enum": [
-        "Ms",
-        "Mr",
-        "Mrs",
-        "Dr"
+        "Ms.",
+        "Mr.",
+        "Mrs."
       ]
     },
     "firstName": {

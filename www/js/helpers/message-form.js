@@ -211,7 +211,7 @@ var createFormFields = function(legislatorsFormElements, legislators, address) {
   return {
     countyData: countyData,
     formData: {
-      prefix: 'Ms',
+      prefix: 'Ms.',
       county: countyData.selected
     },
     topicOptions: getTopicOptions(legislatorsFormElements, legislators)

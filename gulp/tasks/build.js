@@ -11,7 +11,7 @@ var build = function(env) {
   return function(cb) {
     process.env.NODE_ENV = env;
     runSequence(
-      ['img', 'appSettings', 'partials', 'css','fonts'],
+      ['swagger', 'img', 'appSettings', 'partials', 'css','fonts'],
       'browserify',
       cb
     );

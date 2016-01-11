@@ -29,7 +29,11 @@ It uses APIs from:
 
 ### Redis
 
-Ensure that redis is running locally: http://redis.io/topics/quickstart
+Ensure that Redis is running locally:
+```
+sudo apt-get install redis-server
+```
+or install manually via http://redis.io/topics/quickstart - making sure to read the "Securing Redis" section, especially if you install Redis manually.
 
 ### App dependencies & build
 

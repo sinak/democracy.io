@@ -1,0 +1,4844 @@
+[
+  {
+    "firstName": "Sherrod",
+    "lastName": "Brown",
+    "bioguideId": "B000944",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "OH",
+    "district": null
+  },
+  {
+    "firstName": "Maria",
+    "lastName": "Cantwell",
+    "bioguideId": "C000127",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "WA",
+    "district": null
+  },
+  {
+    "firstName": "Benjamin",
+    "lastName": "Cardin",
+    "bioguideId": "C000141",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MD",
+    "district": null
+  },
+  {
+    "firstName": "Thomas",
+    "lastName": "Carper",
+    "bioguideId": "C000174",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "DE",
+    "district": null
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Casey",
+    "bioguideId": "C001070",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "PA",
+    "district": null
+  },
+  {
+    "firstName": "Bob",
+    "lastName": "Corker",
+    "bioguideId": "C001071",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "TN",
+    "district": null
+  },
+  {
+    "firstName": "Dianne",
+    "lastName": "Feinstein",
+    "bioguideId": "F000062",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "CA",
+    "district": null
+  },
+  {
+    "firstName": "Orrin",
+    "lastName": "Hatch",
+    "bioguideId": "H000338",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "UT",
+    "district": null
+  },
+  {
+    "firstName": "Amy",
+    "lastName": "Klobuchar",
+    "bioguideId": "K000367",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MN",
+    "district": null
+  },
+  {
+    "firstName": "Claire",
+    "lastName": "McCaskill",
+    "bioguideId": "M001170",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MO",
+    "district": null
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Menéndez",
+    "bioguideId": "M000639",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NJ",
+    "district": null
+  },
+  {
+    "firstName": "Bill",
+    "lastName": "Nelson",
+    "bioguideId": "N000032",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "FL",
+    "district": null
+  },
+  {
+    "firstName": "Bernard",
+    "lastName": "Sanders",
+    "bioguideId": "S000033",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "VT",
+    "district": null
+  },
+  {
+    "firstName": "Debbie",
+    "lastName": "Stabenow",
+    "bioguideId": "S000770",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MI",
+    "district": null
+  },
+  {
+    "firstName": "Jon",
+    "lastName": "Tester",
+    "bioguideId": "T000464",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MT",
+    "district": null
+  },
+  {
+    "firstName": "Sheldon",
+    "lastName": "Whitehouse",
+    "bioguideId": "W000802",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "RI",
+    "district": null
+  },
+  {
+    "firstName": "John",
+    "lastName": "Barrasso",
+    "bioguideId": "B001261",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "WY",
+    "district": null
+  },
+  {
+    "firstName": "Roger",
+    "lastName": "Wicker",
+    "bioguideId": "W000437",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MS",
+    "district": null
+  },
+  {
+    "firstName": "Lamar",
+    "lastName": "Alexander",
+    "bioguideId": "A000360",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "TN",
+    "district": null
+  },
+  {
+    "firstName": "Thad",
+    "lastName": "Cochran",
+    "bioguideId": "C000567",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MS",
+    "district": null
+  },
+  {
+    "firstName": "Susan",
+    "lastName": "Collins",
+    "bioguideId": "C001035",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "ME",
+    "district": null
+  },
+  {
+    "firstName": "John",
+    "lastName": "Cornyn",
+    "bioguideId": "C001056",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "TX",
+    "district": null
+  },
+  {
+    "firstName": "Richard",
+    "lastName": "Durbin",
+    "bioguideId": "D000563",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "IL",
+    "district": null
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Enzi",
+    "bioguideId": "E000285",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "WY",
+    "district": null
+  },
+  {
+    "firstName": "Lindsey",
+    "lastName": "Graham",
+    "bioguideId": "G000359",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "SC",
+    "district": null
+  },
+  {
+    "firstName": "James",
+    "lastName": "Inhofe",
+    "bioguideId": "I000024",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "OK",
+    "district": null
+  },
+  {
+    "firstName": "Mitch",
+    "lastName": "McConnell",
+    "bioguideId": "M000355",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "KY",
+    "district": null
+  },
+  {
+    "firstName": "Jeff",
+    "lastName": "Merkley",
+    "bioguideId": "M001176",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "OR",
+    "district": null
+  },
+  {
+    "firstName": "John",
+    "lastName": "Reed",
+    "bioguideId": "R000122",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "RI",
+    "district": null
+  },
+  {
+    "firstName": "James",
+    "lastName": "Risch",
+    "bioguideId": "R000584",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "ID",
+    "district": null
+  },
+  {
+    "firstName": "Pat",
+    "lastName": "Roberts",
+    "bioguideId": "R000307",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "KS",
+    "district": null
+  },
+  {
+    "firstName": "Jefferson",
+    "lastName": "Sessions",
+    "bioguideId": "S001141",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "AL",
+    "district": null
+  },
+  {
+    "firstName": "Jeanne",
+    "lastName": "Shaheen",
+    "bioguideId": "S001181",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NH",
+    "district": null
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Udall",
+    "bioguideId": "U000039",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NM",
+    "district": null
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Warner",
+    "bioguideId": "W000805",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "VA",
+    "district": null
+  },
+  {
+    "firstName": "Kirsten",
+    "lastName": "Gillibrand",
+    "bioguideId": "G000555",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NY",
+    "district": null
+  },
+  {
+    "firstName": "Alan",
+    "lastName": "Franken",
+    "bioguideId": "F000457",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MN",
+    "district": null
+  },
+  {
+    "firstName": "Chris",
+    "lastName": "Coons",
+    "bioguideId": "C001088",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "DE",
+    "district": null
+  },
+  {
+    "firstName": "Joe",
+    "lastName": "Manchin",
+    "bioguideId": "M001183",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "WV",
+    "district": null
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Aderholt",
+    "bioguideId": "A000055",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AL",
+    "district": "4"
+  },
+  {
+    "firstName": "Justin",
+    "lastName": "Amash",
+    "bioguideId": "A000367",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "3"
+  },
+  {
+    "firstName": "Kelly",
+    "lastName": "Ayotte",
+    "bioguideId": "A000368",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NH",
+    "district": null
+  },
+  {
+    "firstName": "Tammy",
+    "lastName": "Baldwin",
+    "bioguideId": "B001230",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "WI",
+    "district": null
+  },
+  {
+    "firstName": "Lou",
+    "lastName": "Barletta",
+    "bioguideId": "B001269",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "11"
+  },
+  {
+    "firstName": "Joe",
+    "lastName": "Barton",
+    "bioguideId": "B000213",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "6"
+  },
+  {
+    "firstName": "Karen",
+    "lastName": "Bass",
+    "bioguideId": "B001270",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "37"
+  },
+  {
+    "firstName": "Xavier",
+    "lastName": "Becerra",
+    "bioguideId": "B000287",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "34"
+  },
+  {
+    "firstName": "Dan",
+    "lastName": "Benishek",
+    "bioguideId": "B001271",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "1"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Bennet",
+    "bioguideId": "B001267",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "CO",
+    "district": null
+  },
+  {
+    "firstName": "Gus",
+    "lastName": "Bilirakis",
+    "bioguideId": "B001257",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "12"
+  },
+  {
+    "firstName": "Rob",
+    "lastName": "Bishop",
+    "bioguideId": "B001250",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "UT",
+    "district": "1"
+  },
+  {
+    "firstName": "Sanford",
+    "lastName": "Bishop",
+    "bioguideId": "B000490",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "2"
+  },
+  {
+    "firstName": "Diane",
+    "lastName": "Black",
+    "bioguideId": "B001273",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TN",
+    "district": "6"
+  },
+  {
+    "firstName": "Marsha",
+    "lastName": "Blackburn",
+    "bioguideId": "B001243",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TN",
+    "district": "7"
+  },
+  {
+    "firstName": "Earl",
+    "lastName": "Blumenauer",
+    "bioguideId": "B000574",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OR",
+    "district": "3"
+  },
+  {
+    "firstName": "Richard",
+    "lastName": "Blumenthal",
+    "bioguideId": "B001277",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "CT",
+    "district": null
+  },
+  {
+    "firstName": "Roy",
+    "lastName": "Blunt",
+    "bioguideId": "B000575",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MO",
+    "district": null
+  },
+  {
+    "firstName": "John",
+    "lastName": "Boozman",
+    "bioguideId": "B001236",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "AR",
+    "district": null
+  },
+  {
+    "firstName": "Madeleine",
+    "lastName": "Bordallo",
+    "bioguideId": "B001245",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GU",
+    "district": "0"
+  },
+  {
+    "firstName": "Charles",
+    "lastName": "Boustany",
+    "bioguideId": "B001255",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "LA",
+    "district": "3"
+  },
+  {
+    "firstName": "Barbara",
+    "lastName": "Boxer",
+    "bioguideId": "B000711",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "CA",
+    "district": null
+  },
+  {
+    "firstName": "Kevin",
+    "lastName": "Brady",
+    "bioguideId": "B000755",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "8"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Brady",
+    "bioguideId": "B001227",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "1"
+  },
+  {
+    "firstName": "Mo",
+    "lastName": "Brooks",
+    "bioguideId": "B001274",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AL",
+    "district": "5"
+  },
+  {
+    "firstName": "Corrine",
+    "lastName": "Brown",
+    "bioguideId": "B000911",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "5"
+  },
+  {
+    "firstName": "Vern",
+    "lastName": "Buchanan",
+    "bioguideId": "B001260",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "16"
+  },
+  {
+    "firstName": "Larry",
+    "lastName": "Bucshon",
+    "bioguideId": "B001275",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IN",
+    "district": "8"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Burgess",
+    "bioguideId": "B001248",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "26"
+  },
+  {
+    "firstName": "Richard",
+    "lastName": "Burr",
+    "bioguideId": "B001135",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NC",
+    "district": null
+  },
+  {
+    "firstName": "George",
+    "lastName": "Butterfield",
+    "bioguideId": "B001251",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "1"
+  },
+  {
+    "firstName": "Ken",
+    "lastName": "Calvert",
+    "bioguideId": "C000059",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "42"
+  },
+  {
+    "firstName": "Shelley",
+    "lastName": "Capito",
+    "bioguideId": "C001047",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "WV",
+    "district": null
+  },
+  {
+    "firstName": "Lois",
+    "lastName": "Capps",
+    "bioguideId": "C001036",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "24"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Capuano",
+    "bioguideId": "C001037",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MA",
+    "district": "7"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Carney",
+    "bioguideId": "C001083",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "DE",
+    "district": "0"
+  },
+  {
+    "firstName": "André",
+    "lastName": "Carson",
+    "bioguideId": "C001072",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IN",
+    "district": "7"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Carter",
+    "bioguideId": "C001051",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "31"
+  },
+  {
+    "firstName": "Bill",
+    "lastName": "Cassidy",
+    "bioguideId": "C001075",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "LA",
+    "district": null
+  },
+  {
+    "firstName": "Kathy",
+    "lastName": "Castor",
+    "bioguideId": "C001066",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "14"
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "Chabot",
+    "bioguideId": "C000266",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "1"
+  },
+  {
+    "firstName": "Jason",
+    "lastName": "Chaffetz",
+    "bioguideId": "C001076",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "UT",
+    "district": "3"
+  },
+  {
+    "firstName": "Judy",
+    "lastName": "Chu",
+    "bioguideId": "C001080",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "27"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Cicilline",
+    "bioguideId": "C001084",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "RI",
+    "district": "1"
+  },
+  {
+    "firstName": "Yvette",
+    "lastName": "Clarke",
+    "bioguideId": "C001067",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "9"
+  },
+  {
+    "firstName": "Wm.",
+    "lastName": "Clay",
+    "bioguideId": "C001049",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MO",
+    "district": "1"
+  },
+  {
+    "firstName": "Emanuel",
+    "lastName": "Cleaver",
+    "bioguideId": "C001061",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MO",
+    "district": "5"
+  },
+  {
+    "firstName": "James",
+    "lastName": "Clyburn",
+    "bioguideId": "C000537",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "SC",
+    "district": "6"
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Coats",
+    "bioguideId": "C000542",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "IN",
+    "district": null
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Coffman",
+    "bioguideId": "C001077",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CO",
+    "district": "6"
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "Cohen",
+    "bioguideId": "C001068",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TN",
+    "district": "9"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Cole",
+    "bioguideId": "C001053",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OK",
+    "district": "4"
+  },
+  {
+    "firstName": "K.",
+    "lastName": "Conaway",
+    "bioguideId": "C001062",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "11"
+  },
+  {
+    "firstName": "Gerald",
+    "lastName": "Connolly",
+    "bioguideId": "C001078",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VA",
+    "district": "11"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Conyers",
+    "bioguideId": "C000714",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "13"
+  },
+  {
+    "firstName": "Jim",
+    "lastName": "Cooper",
+    "bioguideId": "C000754",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TN",
+    "district": "5"
+  },
+  {
+    "firstName": "Jim",
+    "lastName": "Costa",
+    "bioguideId": "C001059",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "16"
+  },
+  {
+    "firstName": "Joe",
+    "lastName": "Courtney",
+    "bioguideId": "C001069",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CT",
+    "district": "2"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Crapo",
+    "bioguideId": "C000880",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "ID",
+    "district": null
+  },
+  {
+    "firstName": "Eric",
+    "lastName": "Crawford",
+    "bioguideId": "C001087",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AR",
+    "district": "1"
+  },
+  {
+    "firstName": "Ander",
+    "lastName": "Crenshaw",
+    "bioguideId": "C001045",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "4"
+  },
+  {
+    "firstName": "Joseph",
+    "lastName": "Crowley",
+    "bioguideId": "C001038",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "14"
+  },
+  {
+    "firstName": "Henry",
+    "lastName": "Cuellar",
+    "bioguideId": "C001063",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "28"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Culberson",
+    "bioguideId": "C001048",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "7"
+  },
+  {
+    "firstName": "Elijah",
+    "lastName": "Cummings",
+    "bioguideId": "C000984",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MD",
+    "district": "7"
+  },
+  {
+    "firstName": "Danny",
+    "lastName": "Davis",
+    "bioguideId": "D000096",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "7"
+  },
+  {
+    "firstName": "Susan",
+    "lastName": "Davis",
+    "bioguideId": "D000598",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "53"
+  },
+  {
+    "firstName": "Peter",
+    "lastName": "DeFazio",
+    "bioguideId": "D000191",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OR",
+    "district": "4"
+  },
+  {
+    "firstName": "Diana",
+    "lastName": "DeGette",
+    "bioguideId": "D000197",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CO",
+    "district": "1"
+  },
+  {
+    "firstName": "Rosa",
+    "lastName": "DeLauro",
+    "bioguideId": "D000216",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CT",
+    "district": "3"
+  },
+  {
+    "firstName": "Jeff",
+    "lastName": "Denham",
+    "bioguideId": "D000612",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "10"
+  },
+  {
+    "firstName": "Charles",
+    "lastName": "Dent",
+    "bioguideId": "D000604",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "15"
+  },
+  {
+    "firstName": "Scott",
+    "lastName": "DesJarlais",
+    "bioguideId": "D000616",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TN",
+    "district": "4"
+  },
+  {
+    "firstName": "Theodore",
+    "lastName": "Deutch",
+    "bioguideId": "D000610",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "21"
+  },
+  {
+    "firstName": "Mario",
+    "lastName": "Diaz-Balart",
+    "bioguideId": "D000600",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "25"
+  },
+  {
+    "firstName": "Lloyd",
+    "lastName": "Doggett",
+    "bioguideId": "D000399",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "35"
+  },
+  {
+    "firstName": "Joe",
+    "lastName": "Donnelly",
+    "bioguideId": "D000607",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "IN",
+    "district": null
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Doyle",
+    "bioguideId": "D000482",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "14"
+  },
+  {
+    "firstName": "Sean",
+    "lastName": "Duffy",
+    "bioguideId": "D000614",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WI",
+    "district": "7"
+  },
+  {
+    "firstName": "Jeff",
+    "lastName": "Duncan",
+    "bioguideId": "D000615",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "SC",
+    "district": "3"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Duncan",
+    "bioguideId": "D000533",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TN",
+    "district": "2"
+  },
+  {
+    "firstName": "Donna",
+    "lastName": "Edwards",
+    "bioguideId": "E000290",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MD",
+    "district": "4"
+  },
+  {
+    "firstName": "Keith",
+    "lastName": "Ellison",
+    "bioguideId": "E000288",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MN",
+    "district": "5"
+  },
+  {
+    "firstName": "Renee",
+    "lastName": "Ellmers",
+    "bioguideId": "E000291",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "2"
+  },
+  {
+    "firstName": "Eliot",
+    "lastName": "Engel",
+    "bioguideId": "E000179",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "16"
+  },
+  {
+    "firstName": "Anna",
+    "lastName": "Eshoo",
+    "bioguideId": "E000215",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "18"
+  },
+  {
+    "firstName": "Blake",
+    "lastName": "Farenthold",
+    "bioguideId": "F000460",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "27"
+  },
+  {
+    "firstName": "Sam",
+    "lastName": "Farr",
+    "bioguideId": "F000030",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "20"
+  },
+  {
+    "firstName": "Stephen",
+    "lastName": "Fincher",
+    "bioguideId": "F000458",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TN",
+    "district": "8"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Fitzpatrick",
+    "bioguideId": "F000451",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "8"
+  },
+  {
+    "firstName": "Jeff",
+    "lastName": "Flake",
+    "bioguideId": "F000444",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "AZ",
+    "district": null
+  },
+  {
+    "firstName": "Charles",
+    "lastName": "Fleischmann",
+    "bioguideId": "F000459",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TN",
+    "district": "3"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Fleming",
+    "bioguideId": "F000456",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "LA",
+    "district": "4"
+  },
+  {
+    "firstName": "Bill",
+    "lastName": "Flores",
+    "bioguideId": "F000461",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "17"
+  },
+  {
+    "firstName": "J.",
+    "lastName": "Forbes",
+    "bioguideId": "F000445",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VA",
+    "district": "4"
+  },
+  {
+    "firstName": "Jeff",
+    "lastName": "Fortenberry",
+    "bioguideId": "F000449",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NE",
+    "district": "1"
+  },
+  {
+    "firstName": "Virginia",
+    "lastName": "Foxx",
+    "bioguideId": "F000450",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "5"
+  },
+  {
+    "firstName": "Trent",
+    "lastName": "Franks",
+    "bioguideId": "F000448",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AZ",
+    "district": "8"
+  },
+  {
+    "firstName": "Rodney",
+    "lastName": "Frelinghuysen",
+    "bioguideId": "F000372",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NJ",
+    "district": "11"
+  },
+  {
+    "firstName": "Marcia",
+    "lastName": "Fudge",
+    "bioguideId": "F000455",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "11"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Garamendi",
+    "bioguideId": "G000559",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "3"
+  },
+  {
+    "firstName": "Cory",
+    "lastName": "Gardner",
+    "bioguideId": "G000562",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "CO",
+    "district": null
+  },
+  {
+    "firstName": "Scott",
+    "lastName": "Garrett",
+    "bioguideId": "G000548",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NJ",
+    "district": "5"
+  },
+  {
+    "firstName": "Bob",
+    "lastName": "Gibbs",
+    "bioguideId": "G000563",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "7"
+  },
+  {
+    "firstName": "Christopher",
+    "lastName": "Gibson",
+    "bioguideId": "G000564",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "19"
+  },
+  {
+    "firstName": "Louie",
+    "lastName": "Gohmert",
+    "bioguideId": "G000552",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "1"
+  },
+  {
+    "firstName": "Bob",
+    "lastName": "Goodlatte",
+    "bioguideId": "G000289",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VA",
+    "district": "6"
+  },
+  {
+    "firstName": "Paul",
+    "lastName": "Gosar",
+    "bioguideId": "G000565",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AZ",
+    "district": "4"
+  },
+  {
+    "firstName": "Trey",
+    "lastName": "Gowdy",
+    "bioguideId": "G000566",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "SC",
+    "district": "4"
+  },
+  {
+    "firstName": "Kay",
+    "lastName": "Granger",
+    "bioguideId": "G000377",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "12"
+  },
+  {
+    "firstName": "Charles",
+    "lastName": "Grassley",
+    "bioguideId": "G000386",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "IA",
+    "district": null
+  },
+  {
+    "firstName": "Sam",
+    "lastName": "Graves",
+    "bioguideId": "G000546",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MO",
+    "district": "6"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Graves",
+    "bioguideId": "G000560",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "14"
+  },
+  {
+    "firstName": "Al",
+    "lastName": "Green",
+    "bioguideId": "G000553",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "9"
+  },
+  {
+    "firstName": "Gene",
+    "lastName": "Green",
+    "bioguideId": "G000410",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "29"
+  },
+  {
+    "firstName": "H.",
+    "lastName": "Griffith",
+    "bioguideId": "G000568",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VA",
+    "district": "9"
+  },
+  {
+    "firstName": "Raúl",
+    "lastName": "Grijalva",
+    "bioguideId": "G000551",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AZ",
+    "district": "3"
+  },
+  {
+    "firstName": "Brett",
+    "lastName": "Guthrie",
+    "bioguideId": "G000558",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "KY",
+    "district": "2"
+  },
+  {
+    "firstName": "Luis",
+    "lastName": "Gutiérrez",
+    "bioguideId": "G000535",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "4"
+  },
+  {
+    "firstName": "Richard",
+    "lastName": "Hanna",
+    "bioguideId": "H001051",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "22"
+  },
+  {
+    "firstName": "Gregg",
+    "lastName": "Harper",
+    "bioguideId": "H001045",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MS",
+    "district": "3"
+  },
+  {
+    "firstName": "Andy",
+    "lastName": "Harris",
+    "bioguideId": "H001052",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MD",
+    "district": "1"
+  },
+  {
+    "firstName": "Vicky",
+    "lastName": "Hartzler",
+    "bioguideId": "H001053",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MO",
+    "district": "4"
+  },
+  {
+    "firstName": "Alcee",
+    "lastName": "Hastings",
+    "bioguideId": "H000324",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "20"
+  },
+  {
+    "firstName": "Joseph",
+    "lastName": "Heck",
+    "bioguideId": "H001055",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NV",
+    "district": "3"
+  },
+  {
+    "firstName": "Martin",
+    "lastName": "Heinrich",
+    "bioguideId": "H001046",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NM",
+    "district": null
+  },
+  {
+    "firstName": "Jeb",
+    "lastName": "Hensarling",
+    "bioguideId": "H001036",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "5"
+  },
+  {
+    "firstName": "Jaime",
+    "lastName": "Herrera Beutler",
+    "bioguideId": "H001056",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WA",
+    "district": "3"
+  },
+  {
+    "firstName": "Brian",
+    "lastName": "Higgins",
+    "bioguideId": "H001038",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "26"
+  },
+  {
+    "firstName": "James",
+    "lastName": "Himes",
+    "bioguideId": "H001047",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CT",
+    "district": "4"
+  },
+  {
+    "firstName": "Rubén",
+    "lastName": "Hinojosa",
+    "bioguideId": "H000636",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "15"
+  },
+  {
+    "firstName": "Mazie",
+    "lastName": "Hirono",
+    "bioguideId": "H001042",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "HI",
+    "district": null
+  },
+  {
+    "firstName": "John",
+    "lastName": "Hoeven",
+    "bioguideId": "H001061",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "ND",
+    "district": null
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Honda",
+    "bioguideId": "H001034",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "17"
+  },
+  {
+    "firstName": "Steny",
+    "lastName": "Hoyer",
+    "bioguideId": "H000874",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MD",
+    "district": "5"
+  },
+  {
+    "firstName": "Tim",
+    "lastName": "Huelskamp",
+    "bioguideId": "H001057",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "KS",
+    "district": "1"
+  },
+  {
+    "firstName": "Bill",
+    "lastName": "Huizenga",
+    "bioguideId": "H001058",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "2"
+  },
+  {
+    "firstName": "Randy",
+    "lastName": "Hultgren",
+    "bioguideId": "H001059",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "14"
+  },
+  {
+    "firstName": "Duncan",
+    "lastName": "Hunter",
+    "bioguideId": "H001048",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "50"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Hurt",
+    "bioguideId": "H001060",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VA",
+    "district": "5"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Isakson",
+    "bioguideId": "I000055",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "GA",
+    "district": null
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "Israel",
+    "bioguideId": "I000057",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "3"
+  },
+  {
+    "firstName": "Darrell",
+    "lastName": "Issa",
+    "bioguideId": "I000056",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "49"
+  },
+  {
+    "firstName": "Sheila",
+    "lastName": "Jackson Lee",
+    "bioguideId": "J000032",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "18"
+  },
+  {
+    "firstName": "Lynn",
+    "lastName": "Jenkins",
+    "bioguideId": "J000290",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "KS",
+    "district": "2"
+  },
+  {
+    "firstName": "Bill",
+    "lastName": "Johnson",
+    "bioguideId": "J000292",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "6"
+  },
+  {
+    "firstName": "Eddie",
+    "lastName": "Johnson",
+    "bioguideId": "J000126",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "30"
+  },
+  {
+    "firstName": "Henry",
+    "lastName": "Johnson",
+    "bioguideId": "J000288",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "4"
+  },
+  {
+    "firstName": "Ron",
+    "lastName": "Johnson",
+    "bioguideId": "J000293",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "WI",
+    "district": null
+  },
+  {
+    "firstName": "Sam",
+    "lastName": "Johnson",
+    "bioguideId": "J000174",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "3"
+  },
+  {
+    "firstName": "Walter",
+    "lastName": "Jones",
+    "bioguideId": "J000255",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "3"
+  },
+  {
+    "firstName": "Jim",
+    "lastName": "Jordan",
+    "bioguideId": "J000289",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "4"
+  },
+  {
+    "firstName": "Marcy",
+    "lastName": "Kaptur",
+    "bioguideId": "K000009",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "9"
+  },
+  {
+    "firstName": "William",
+    "lastName": "Keating",
+    "bioguideId": "K000375",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MA",
+    "district": "9"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Kelly",
+    "bioguideId": "K000376",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "3"
+  },
+  {
+    "firstName": "Ron",
+    "lastName": "Kind",
+    "bioguideId": "K000188",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WI",
+    "district": "3"
+  },
+  {
+    "firstName": "Peter",
+    "lastName": "King",
+    "bioguideId": "K000210",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "2"
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "King",
+    "bioguideId": "K000362",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IA",
+    "district": "4"
+  },
+  {
+    "firstName": "Adam",
+    "lastName": "Kinzinger",
+    "bioguideId": "K000378",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "16"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Kirk",
+    "bioguideId": "K000360",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "IL",
+    "district": null
+  },
+  {
+    "firstName": "John",
+    "lastName": "Kline",
+    "bioguideId": "K000363",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MN",
+    "district": "2"
+  },
+  {
+    "firstName": "Raúl",
+    "lastName": "Labrador",
+    "bioguideId": "L000573",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "ID",
+    "district": "1"
+  },
+  {
+    "firstName": "Doug",
+    "lastName": "Lamborn",
+    "bioguideId": "L000564",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CO",
+    "district": "5"
+  },
+  {
+    "firstName": "Leonard",
+    "lastName": "Lance",
+    "bioguideId": "L000567",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NJ",
+    "district": "7"
+  },
+  {
+    "firstName": "James",
+    "lastName": "Langevin",
+    "bioguideId": "L000559",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "RI",
+    "district": "2"
+  },
+  {
+    "firstName": "James",
+    "lastName": "Lankford",
+    "bioguideId": "L000575",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "OK",
+    "district": null
+  },
+  {
+    "firstName": "Rick",
+    "lastName": "Larsen",
+    "bioguideId": "L000560",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WA",
+    "district": "2"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Larson",
+    "bioguideId": "L000557",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CT",
+    "district": "1"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Latta",
+    "bioguideId": "L000566",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "5"
+  },
+  {
+    "firstName": "Patrick",
+    "lastName": "Leahy",
+    "bioguideId": "L000174",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "VT",
+    "district": null
+  },
+  {
+    "firstName": "Barbara",
+    "lastName": "Lee",
+    "bioguideId": "L000551",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "13"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Lee",
+    "bioguideId": "L000577",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "UT",
+    "district": null
+  },
+  {
+    "firstName": "Sander",
+    "lastName": "Levin",
+    "bioguideId": "L000263",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "9"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Lewis",
+    "bioguideId": "L000287",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "5"
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Lipinski",
+    "bioguideId": "L000563",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "3"
+  },
+  {
+    "firstName": "Frank",
+    "lastName": "LoBiondo",
+    "bioguideId": "L000554",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NJ",
+    "district": "2"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Loebsack",
+    "bioguideId": "L000565",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IA",
+    "district": "2"
+  },
+  {
+    "firstName": "Zoe",
+    "lastName": "Lofgren",
+    "bioguideId": "L000397",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "19"
+  },
+  {
+    "firstName": "Billy",
+    "lastName": "Long",
+    "bioguideId": "L000576",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MO",
+    "district": "7"
+  },
+  {
+    "firstName": "Nita",
+    "lastName": "Lowey",
+    "bioguideId": "L000480",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "17"
+  },
+  {
+    "firstName": "Frank",
+    "lastName": "Lucas",
+    "bioguideId": "L000491",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OK",
+    "district": "3"
+  },
+  {
+    "firstName": "Blaine",
+    "lastName": "Luetkemeyer",
+    "bioguideId": "L000569",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MO",
+    "district": "3"
+  },
+  {
+    "firstName": "Ben",
+    "lastName": "Luján",
+    "bioguideId": "L000570",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NM",
+    "district": "3"
+  },
+  {
+    "firstName": "Cynthia",
+    "lastName": "Lummis",
+    "bioguideId": "L000571",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WY",
+    "district": "0"
+  },
+  {
+    "firstName": "Stephen",
+    "lastName": "Lynch",
+    "bioguideId": "L000562",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MA",
+    "district": "8"
+  },
+  {
+    "firstName": "Carolyn",
+    "lastName": "Maloney",
+    "bioguideId": "M000087",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "12"
+  },
+  {
+    "firstName": "Kenny",
+    "lastName": "Marchant",
+    "bioguideId": "M001158",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "24"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Marino",
+    "bioguideId": "M001179",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "10"
+  },
+  {
+    "firstName": "Edward",
+    "lastName": "Markey",
+    "bioguideId": "M000133",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MA",
+    "district": null
+  },
+  {
+    "firstName": "Doris",
+    "lastName": "Matsui",
+    "bioguideId": "M001163",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "6"
+  },
+  {
+    "firstName": "John",
+    "lastName": "McCain",
+    "bioguideId": "M000303",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "AZ",
+    "district": null
+  },
+  {
+    "firstName": "Kevin",
+    "lastName": "McCarthy",
+    "bioguideId": "M001165",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "23"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "McCaul",
+    "bioguideId": "M001157",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "10"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "McClintock",
+    "bioguideId": "M001177",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "4"
+  },
+  {
+    "firstName": "Betty",
+    "lastName": "McCollum",
+    "bioguideId": "M001143",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MN",
+    "district": "4"
+  },
+  {
+    "firstName": "Jim",
+    "lastName": "McDermott",
+    "bioguideId": "M000404",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WA",
+    "district": "7"
+  },
+  {
+    "firstName": "James",
+    "lastName": "McGovern",
+    "bioguideId": "M000312",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MA",
+    "district": "2"
+  },
+  {
+    "firstName": "Patrick",
+    "lastName": "McHenry",
+    "bioguideId": "M001156",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "10"
+  },
+  {
+    "firstName": "David",
+    "lastName": "McKinley",
+    "bioguideId": "M001180",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WV",
+    "district": "1"
+  },
+  {
+    "firstName": "Cathy",
+    "lastName": "McMorris Rodgers",
+    "bioguideId": "M001159",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WA",
+    "district": "5"
+  },
+  {
+    "firstName": "Jerry",
+    "lastName": "McNerney",
+    "bioguideId": "M001166",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "9"
+  },
+  {
+    "firstName": "Patrick",
+    "lastName": "Meehan",
+    "bioguideId": "M001181",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "7"
+  },
+  {
+    "firstName": "Gregory",
+    "lastName": "Meeks",
+    "bioguideId": "M001137",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "5"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Mica",
+    "bioguideId": "M000689",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "7"
+  },
+  {
+    "firstName": "Barbara",
+    "lastName": "Mikulski",
+    "bioguideId": "M000702",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MD",
+    "district": null
+  },
+  {
+    "firstName": "Candice",
+    "lastName": "Miller",
+    "bioguideId": "M001150",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "10"
+  },
+  {
+    "firstName": "Jeff",
+    "lastName": "Miller",
+    "bioguideId": "M001144",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "1"
+  },
+  {
+    "firstName": "Gwen",
+    "lastName": "Moore",
+    "bioguideId": "M001160",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WI",
+    "district": "4"
+  },
+  {
+    "firstName": "Jerry",
+    "lastName": "Moran",
+    "bioguideId": "M000934",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "KS",
+    "district": null
+  },
+  {
+    "firstName": "Mick",
+    "lastName": "Mulvaney",
+    "bioguideId": "M001182",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "SC",
+    "district": "5"
+  },
+  {
+    "firstName": "Lisa",
+    "lastName": "Murkowski",
+    "bioguideId": "M001153",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "AK",
+    "district": null
+  },
+  {
+    "firstName": "Christopher",
+    "lastName": "Murphy",
+    "bioguideId": "M001169",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "CT",
+    "district": null
+  },
+  {
+    "firstName": "Tim",
+    "lastName": "Murphy",
+    "bioguideId": "M001151",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "18"
+  },
+  {
+    "firstName": "Patty",
+    "lastName": "Murray",
+    "bioguideId": "M001111",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "WA",
+    "district": null
+  },
+  {
+    "firstName": "Jerrold",
+    "lastName": "Nadler",
+    "bioguideId": "N000002",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "10"
+  },
+  {
+    "firstName": "Grace",
+    "lastName": "Napolitano",
+    "bioguideId": "N000179",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "32"
+  },
+  {
+    "firstName": "Richard",
+    "lastName": "Neal",
+    "bioguideId": "N000015",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MA",
+    "district": "1"
+  },
+  {
+    "firstName": "Randy",
+    "lastName": "Neugebauer",
+    "bioguideId": "N000182",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "19"
+  },
+  {
+    "firstName": "Kristi",
+    "lastName": "Noem",
+    "bioguideId": "N000184",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "SD",
+    "district": "0"
+  },
+  {
+    "firstName": "Eleanor",
+    "lastName": "Norton",
+    "bioguideId": "N000147",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "DC",
+    "district": "0"
+  },
+  {
+    "firstName": "Richard",
+    "lastName": "Nugent",
+    "bioguideId": "N000185",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "11"
+  },
+  {
+    "firstName": "Devin",
+    "lastName": "Nunes",
+    "bioguideId": "N000181",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "22"
+  },
+  {
+    "firstName": "Pete",
+    "lastName": "Olson",
+    "bioguideId": "O000168",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "22"
+  },
+  {
+    "firstName": "Steven",
+    "lastName": "Palazzo",
+    "bioguideId": "P000601",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MS",
+    "district": "4"
+  },
+  {
+    "firstName": "Frank",
+    "lastName": "Pallone",
+    "bioguideId": "P000034",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NJ",
+    "district": "6"
+  },
+  {
+    "firstName": "Bill",
+    "lastName": "Pascrell",
+    "bioguideId": "P000096",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NJ",
+    "district": "9"
+  },
+  {
+    "firstName": "Rand",
+    "lastName": "Paul",
+    "bioguideId": "P000603",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "KY",
+    "district": null
+  },
+  {
+    "firstName": "Erik",
+    "lastName": "Paulsen",
+    "bioguideId": "P000594",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MN",
+    "district": "3"
+  },
+  {
+    "firstName": "Stevan",
+    "lastName": "Pearce",
+    "bioguideId": "P000588",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NM",
+    "district": "2"
+  },
+  {
+    "firstName": "Nancy",
+    "lastName": "Pelosi",
+    "bioguideId": "P000197",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "12"
+  },
+  {
+    "firstName": "Ed",
+    "lastName": "Perlmutter",
+    "bioguideId": "P000593",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CO",
+    "district": "7"
+  },
+  {
+    "firstName": "Gary",
+    "lastName": "Peters",
+    "bioguideId": "P000595",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MI",
+    "district": null
+  },
+  {
+    "firstName": "Collin",
+    "lastName": "Peterson",
+    "bioguideId": "P000258",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MN",
+    "district": "7"
+  },
+  {
+    "firstName": "Pedro",
+    "lastName": "Pierluisi",
+    "bioguideId": "P000596",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PR",
+    "district": "0"
+  },
+  {
+    "firstName": "Chellie",
+    "lastName": "Pingree",
+    "bioguideId": "P000597",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "ME",
+    "district": "1"
+  },
+  {
+    "firstName": "Joseph",
+    "lastName": "Pitts",
+    "bioguideId": "P000373",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "16"
+  },
+  {
+    "firstName": "Ted",
+    "lastName": "Poe",
+    "bioguideId": "P000592",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "2"
+  },
+  {
+    "firstName": "Jared",
+    "lastName": "Polis",
+    "bioguideId": "P000598",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CO",
+    "district": "2"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Pompeo",
+    "bioguideId": "P000602",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "KS",
+    "district": "4"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Portman",
+    "bioguideId": "P000449",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "OH",
+    "district": null
+  },
+  {
+    "firstName": "Bill",
+    "lastName": "Posey",
+    "bioguideId": "P000599",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "8"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Price",
+    "bioguideId": "P000523",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "4"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Price",
+    "bioguideId": "P000591",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "6"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Quigley",
+    "bioguideId": "Q000023",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "5"
+  },
+  {
+    "firstName": "Charles",
+    "lastName": "Rangel",
+    "bioguideId": "R000053",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "13"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Reed",
+    "bioguideId": "R000585",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "23"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Reichert",
+    "bioguideId": "R000578",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WA",
+    "district": "8"
+  },
+  {
+    "firstName": "Harry",
+    "lastName": "Reid",
+    "bioguideId": "R000146",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NV",
+    "district": null
+  },
+  {
+    "firstName": "James",
+    "lastName": "Renacci",
+    "bioguideId": "R000586",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "16"
+  },
+  {
+    "firstName": "Reid",
+    "lastName": "Ribble",
+    "bioguideId": "R000587",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WI",
+    "district": "8"
+  },
+  {
+    "firstName": "Cedric",
+    "lastName": "Richmond",
+    "bioguideId": "R000588",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "LA",
+    "district": "2"
+  },
+  {
+    "firstName": "Edward",
+    "lastName": "Rigell",
+    "bioguideId": "R000589",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VA",
+    "district": "2"
+  },
+  {
+    "firstName": "Martha",
+    "lastName": "Roby",
+    "bioguideId": "R000591",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AL",
+    "district": "2"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Roe",
+    "bioguideId": "R000582",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TN",
+    "district": "1"
+  },
+  {
+    "firstName": "Harold",
+    "lastName": "Rogers",
+    "bioguideId": "R000395",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "KY",
+    "district": "5"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Rogers",
+    "bioguideId": "R000575",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AL",
+    "district": "3"
+  },
+  {
+    "firstName": "Dana",
+    "lastName": "Rohrabacher",
+    "bioguideId": "R000409",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "48"
+  },
+  {
+    "firstName": "Todd",
+    "lastName": "Rokita",
+    "bioguideId": "R000592",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IN",
+    "district": "4"
+  },
+  {
+    "firstName": "Thomas",
+    "lastName": "Rooney",
+    "bioguideId": "R000583",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "17"
+  },
+  {
+    "firstName": "Ileana",
+    "lastName": "Ros-Lehtinen",
+    "bioguideId": "R000435",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "27"
+  },
+  {
+    "firstName": "Peter",
+    "lastName": "Roskam",
+    "bioguideId": "R000580",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "6"
+  },
+  {
+    "firstName": "Dennis",
+    "lastName": "Ross",
+    "bioguideId": "R000593",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "15"
+  },
+  {
+    "firstName": "Lucille",
+    "lastName": "Roybal-Allard",
+    "bioguideId": "R000486",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "40"
+  },
+  {
+    "firstName": "Edward",
+    "lastName": "Royce",
+    "bioguideId": "R000487",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "39"
+  },
+  {
+    "firstName": "Marco",
+    "lastName": "Rubio",
+    "bioguideId": "R000595",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "FL",
+    "district": null
+  },
+  {
+    "firstName": "C.",
+    "lastName": "Ruppersberger",
+    "bioguideId": "R000576",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MD",
+    "district": "2"
+  },
+  {
+    "firstName": "Bobby",
+    "lastName": "Rush",
+    "bioguideId": "R000515",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "1"
+  },
+  {
+    "firstName": "Paul",
+    "lastName": "Ryan",
+    "bioguideId": "R000570",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WI",
+    "district": "1"
+  },
+  {
+    "firstName": "Tim",
+    "lastName": "Ryan",
+    "bioguideId": "R000577",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "13"
+  },
+  {
+    "firstName": "Gregorio",
+    "lastName": "Sablan",
+    "bioguideId": "S001177",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MP",
+    "district": "0"
+  },
+  {
+    "firstName": "Loretta",
+    "lastName": "Sanchez",
+    "bioguideId": "S000030",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "46"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Sarbanes",
+    "bioguideId": "S001168",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MD",
+    "district": "3"
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "Scalise",
+    "bioguideId": "S001176",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "LA",
+    "district": "1"
+  },
+  {
+    "firstName": "Janice",
+    "lastName": "Schakowsky",
+    "bioguideId": "S001145",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "9"
+  },
+  {
+    "firstName": "Adam",
+    "lastName": "Schiff",
+    "bioguideId": "S001150",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "28"
+  },
+  {
+    "firstName": "Kurt",
+    "lastName": "Schrader",
+    "bioguideId": "S001180",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OR",
+    "district": "5"
+  },
+  {
+    "firstName": "Charles",
+    "lastName": "Schumer",
+    "bioguideId": "S000148",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NY",
+    "district": null
+  },
+  {
+    "firstName": "David",
+    "lastName": "Schweikert",
+    "bioguideId": "S001183",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AZ",
+    "district": "6"
+  },
+  {
+    "firstName": "Austin",
+    "lastName": "Scott",
+    "bioguideId": "S001189",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "8"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Scott",
+    "bioguideId": "S001157",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "13"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Scott",
+    "bioguideId": "S000185",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VA",
+    "district": "3"
+  },
+  {
+    "firstName": "Tim",
+    "lastName": "Scott",
+    "bioguideId": "S001184",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "SC",
+    "district": null
+  },
+  {
+    "firstName": "F.",
+    "lastName": "Sensenbrenner",
+    "bioguideId": "S000244",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WI",
+    "district": "5"
+  },
+  {
+    "firstName": "José",
+    "lastName": "Serrano",
+    "bioguideId": "S000248",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "15"
+  },
+  {
+    "firstName": "Pete",
+    "lastName": "Sessions",
+    "bioguideId": "S000250",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "32"
+  },
+  {
+    "firstName": "Terri",
+    "lastName": "Sewell",
+    "bioguideId": "S001185",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AL",
+    "district": "7"
+  },
+  {
+    "firstName": "Richard",
+    "lastName": "Shelby",
+    "bioguideId": "S000320",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "AL",
+    "district": null
+  },
+  {
+    "firstName": "Brad",
+    "lastName": "Sherman",
+    "bioguideId": "S000344",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "30"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Shimkus",
+    "bioguideId": "S000364",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "15"
+  },
+  {
+    "firstName": "Bill",
+    "lastName": "Shuster",
+    "bioguideId": "S001154",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "9"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Simpson",
+    "bioguideId": "S001148",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "ID",
+    "district": "2"
+  },
+  {
+    "firstName": "Albio",
+    "lastName": "Sires",
+    "bioguideId": "S001165",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NJ",
+    "district": "8"
+  },
+  {
+    "firstName": "Louise",
+    "lastName": "Slaughter",
+    "bioguideId": "S000480",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "25"
+  },
+  {
+    "firstName": "Adam",
+    "lastName": "Smith",
+    "bioguideId": "S000510",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WA",
+    "district": "9"
+  },
+  {
+    "firstName": "Adrian",
+    "lastName": "Smith",
+    "bioguideId": "S001172",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NE",
+    "district": "3"
+  },
+  {
+    "firstName": "Christopher",
+    "lastName": "Smith",
+    "bioguideId": "S000522",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NJ",
+    "district": "4"
+  },
+  {
+    "firstName": "Lamar",
+    "lastName": "Smith",
+    "bioguideId": "S000583",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "21"
+  },
+  {
+    "firstName": "Jackie",
+    "lastName": "Speier",
+    "bioguideId": "S001175",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "14"
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "Stivers",
+    "bioguideId": "S001187",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "15"
+  },
+  {
+    "firstName": "Marlin",
+    "lastName": "Stutzman",
+    "bioguideId": "S001188",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IN",
+    "district": "3"
+  },
+  {
+    "firstName": "Linda",
+    "lastName": "Sánchez",
+    "bioguideId": "S001156",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "38"
+  },
+  {
+    "firstName": "Bennie",
+    "lastName": "Thompson",
+    "bioguideId": "T000193",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MS",
+    "district": "2"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Thompson",
+    "bioguideId": "T000460",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "5"
+  },
+  {
+    "firstName": "Glenn",
+    "lastName": "Thompson",
+    "bioguideId": "T000467",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "5"
+  },
+  {
+    "firstName": "Mac",
+    "lastName": "Thornberry",
+    "bioguideId": "T000238",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "13"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Thune",
+    "bioguideId": "T000250",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "SD",
+    "district": null
+  },
+  {
+    "firstName": "Patrick",
+    "lastName": "Tiberi",
+    "bioguideId": "T000462",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "12"
+  },
+  {
+    "firstName": "Scott",
+    "lastName": "Tipton",
+    "bioguideId": "T000470",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CO",
+    "district": "3"
+  },
+  {
+    "firstName": "Paul",
+    "lastName": "Tonko",
+    "bioguideId": "T000469",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "20"
+  },
+  {
+    "firstName": "Patrick",
+    "lastName": "Toomey",
+    "bioguideId": "T000461",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "PA",
+    "district": null
+  },
+  {
+    "firstName": "Niki",
+    "lastName": "Tsongas",
+    "bioguideId": "T000465",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MA",
+    "district": "3"
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Turner",
+    "bioguideId": "T000463",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "10"
+  },
+  {
+    "firstName": "Fred",
+    "lastName": "Upton",
+    "bioguideId": "U000031",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "6"
+  },
+  {
+    "firstName": "Chris",
+    "lastName": "Van Hollen",
+    "bioguideId": "V000128",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MD",
+    "district": "8"
+  },
+  {
+    "firstName": "Nydia",
+    "lastName": "Velázquez",
+    "bioguideId": "V000081",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "7"
+  },
+  {
+    "firstName": "Peter",
+    "lastName": "Visclosky",
+    "bioguideId": "V000108",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IN",
+    "district": "1"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Vitter",
+    "bioguideId": "V000127",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "LA",
+    "district": null
+  },
+  {
+    "firstName": "Tim",
+    "lastName": "Walberg",
+    "bioguideId": "W000798",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "7"
+  },
+  {
+    "firstName": "Greg",
+    "lastName": "Walden",
+    "bioguideId": "W000791",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OR",
+    "district": "2"
+  },
+  {
+    "firstName": "Timothy",
+    "lastName": "Walz",
+    "bioguideId": "W000799",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MN",
+    "district": "1"
+  },
+  {
+    "firstName": "Debbie",
+    "lastName": "Wasserman Schultz",
+    "bioguideId": "W000797",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "23"
+  },
+  {
+    "firstName": "Maxine",
+    "lastName": "Waters",
+    "bioguideId": "W000187",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "43"
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Webster",
+    "bioguideId": "W000806",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "10"
+  },
+  {
+    "firstName": "Peter",
+    "lastName": "Welch",
+    "bioguideId": "W000800",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VT",
+    "district": "0"
+  },
+  {
+    "firstName": "Lynn",
+    "lastName": "Westmoreland",
+    "bioguideId": "W000796",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "3"
+  },
+  {
+    "firstName": "Joe",
+    "lastName": "Wilson",
+    "bioguideId": "W000795",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "SC",
+    "district": "2"
+  },
+  {
+    "firstName": "Frederica",
+    "lastName": "Wilson",
+    "bioguideId": "W000808",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "24"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Wittman",
+    "bioguideId": "W000804",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VA",
+    "district": "1"
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "Womack",
+    "bioguideId": "W000809",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AR",
+    "district": "3"
+  },
+  {
+    "firstName": "Rob",
+    "lastName": "Woodall",
+    "bioguideId": "W000810",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "7"
+  },
+  {
+    "firstName": "Ron",
+    "lastName": "Wyden",
+    "bioguideId": "W000779",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "OR",
+    "district": null
+  },
+  {
+    "firstName": "John",
+    "lastName": "Yarmuth",
+    "bioguideId": "Y000062",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "KY",
+    "district": "3"
+  },
+  {
+    "firstName": "Kevin",
+    "lastName": "Yoder",
+    "bioguideId": "Y000063",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "KS",
+    "district": "3"
+  },
+  {
+    "firstName": "Don",
+    "lastName": "Young",
+    "bioguideId": "Y000033",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AK",
+    "district": "0"
+  },
+  {
+    "firstName": "Todd",
+    "lastName": "Young",
+    "bioguideId": "Y000064",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IN",
+    "district": "9"
+  },
+  {
+    "firstName": "Dean",
+    "lastName": "Heller",
+    "bioguideId": "H001041",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NV",
+    "district": null
+  },
+  {
+    "firstName": "Janice",
+    "lastName": "Hahn",
+    "bioguideId": "H001063",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "44"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Amodei",
+    "bioguideId": "A000369",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NV",
+    "district": "2"
+  },
+  {
+    "firstName": "Suzanne",
+    "lastName": "Bonamici",
+    "bioguideId": "B001278",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OR",
+    "district": "1"
+  },
+  {
+    "firstName": "Suzan",
+    "lastName": "DelBene",
+    "bioguideId": "D000617",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WA",
+    "district": "1"
+  },
+  {
+    "firstName": "Thomas",
+    "lastName": "Massie",
+    "bioguideId": "M001184",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "KY",
+    "district": "4"
+  },
+  {
+    "firstName": "Donald",
+    "lastName": "Payne",
+    "bioguideId": "P000604",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NJ",
+    "district": "10"
+  },
+  {
+    "firstName": "Brian",
+    "lastName": "Schatz",
+    "bioguideId": "S001194",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "HI",
+    "district": null
+  },
+  {
+    "firstName": "Matt",
+    "lastName": "Salmon",
+    "bioguideId": "S000018",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AZ",
+    "district": "5"
+  },
+  {
+    "firstName": "Bill",
+    "lastName": "Foster",
+    "bioguideId": "F000454",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "11"
+  },
+  {
+    "firstName": "Alan",
+    "lastName": "Grayson",
+    "bioguideId": "G000556",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "9"
+  },
+  {
+    "firstName": "Ann",
+    "lastName": "Kirkpatrick",
+    "bioguideId": "K000368",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AZ",
+    "district": "1"
+  },
+  {
+    "firstName": "Dina",
+    "lastName": "Titus",
+    "bioguideId": "T000468",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NV",
+    "district": "1"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Cotton",
+    "bioguideId": "C001095",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "AR",
+    "district": null
+  },
+  {
+    "firstName": "Kyrsten",
+    "lastName": "Sinema",
+    "bioguideId": "S001191",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AZ",
+    "district": "9"
+  },
+  {
+    "firstName": "Doug",
+    "lastName": "LaMalfa",
+    "bioguideId": "L000578",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "1"
+  },
+  {
+    "firstName": "Jared",
+    "lastName": "Huffman",
+    "bioguideId": "H001068",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "2"
+  },
+  {
+    "firstName": "Ami",
+    "lastName": "Bera",
+    "bioguideId": "B001287",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "7"
+  },
+  {
+    "firstName": "Paul",
+    "lastName": "Cook",
+    "bioguideId": "C001094",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "8"
+  },
+  {
+    "firstName": "Eric",
+    "lastName": "Swalwell",
+    "bioguideId": "S001193",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "15"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Valadao",
+    "bioguideId": "V000129",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "21"
+  },
+  {
+    "firstName": "Julia",
+    "lastName": "Brownley",
+    "bioguideId": "B001285",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "26"
+  },
+  {
+    "firstName": "Tony",
+    "lastName": "Cárdenas",
+    "bioguideId": "C001097",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "29"
+  },
+  {
+    "firstName": "Raul",
+    "lastName": "Ruiz",
+    "bioguideId": "R000599",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "36"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Takano",
+    "bioguideId": "T000472",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "41"
+  },
+  {
+    "firstName": "Alan",
+    "lastName": "Lowenthal",
+    "bioguideId": "L000579",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "47"
+  },
+  {
+    "firstName": "Juan",
+    "lastName": "Vargas",
+    "bioguideId": "V000130",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "51"
+  },
+  {
+    "firstName": "Scott",
+    "lastName": "Peters",
+    "bioguideId": "P000608",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "52"
+  },
+  {
+    "firstName": "Elizabeth",
+    "lastName": "Esty",
+    "bioguideId": "E000293",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CT",
+    "district": "5"
+  },
+  {
+    "firstName": "Ted",
+    "lastName": "Yoho",
+    "bioguideId": "Y000065",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "3"
+  },
+  {
+    "firstName": "Ron",
+    "lastName": "DeSantis",
+    "bioguideId": "D000621",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "6"
+  },
+  {
+    "firstName": "Patrick",
+    "lastName": "Murphy",
+    "bioguideId": "M001191",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "18"
+  },
+  {
+    "firstName": "Lois",
+    "lastName": "Frankel",
+    "bioguideId": "F000462",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "22"
+  },
+  {
+    "firstName": "Doug",
+    "lastName": "Collins",
+    "bioguideId": "C001093",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "9"
+  },
+  {
+    "firstName": "Tulsi",
+    "lastName": "Gabbard",
+    "bioguideId": "G000571",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "HI",
+    "district": "2"
+  },
+  {
+    "firstName": "Tammy",
+    "lastName": "Duckworth",
+    "bioguideId": "D000622",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "8"
+  },
+  {
+    "firstName": "Rodney",
+    "lastName": "Davis",
+    "bioguideId": "D000619",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "13"
+  },
+  {
+    "firstName": "Cheri",
+    "lastName": "Bustos",
+    "bioguideId": "B001286",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "17"
+  },
+  {
+    "firstName": "Jackie",
+    "lastName": "Walorski",
+    "bioguideId": "W000813",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IN",
+    "district": "2"
+  },
+  {
+    "firstName": "Susan",
+    "lastName": "Brooks",
+    "bioguideId": "B001284",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IN",
+    "district": "5"
+  },
+  {
+    "firstName": "Luke",
+    "lastName": "Messer",
+    "bioguideId": "M001189",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IN",
+    "district": "6"
+  },
+  {
+    "firstName": "Garland",
+    "lastName": "Barr",
+    "bioguideId": "B001282",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "KY",
+    "district": "6"
+  },
+  {
+    "firstName": "Elizabeth",
+    "lastName": "Warren",
+    "bioguideId": "W000817",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MA",
+    "district": null
+  },
+  {
+    "firstName": "Joseph",
+    "lastName": "Kennedy",
+    "bioguideId": "K000379",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MA",
+    "district": "4"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Delaney",
+    "bioguideId": "D000620",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MD",
+    "district": "6"
+  },
+  {
+    "firstName": "Angus",
+    "lastName": "King",
+    "bioguideId": "K000383",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "ME",
+    "district": null
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Kildee",
+    "bioguideId": "K000380",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "5"
+  },
+  {
+    "firstName": "Richard",
+    "lastName": "Nolan",
+    "bioguideId": "N000127",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MN",
+    "district": "8"
+  },
+  {
+    "firstName": "Ann",
+    "lastName": "Wagner",
+    "bioguideId": "W000812",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MO",
+    "district": "2"
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "Daines",
+    "bioguideId": "D000618",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MT",
+    "district": null
+  },
+  {
+    "firstName": "Richard",
+    "lastName": "Hudson",
+    "bioguideId": "H001067",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "8"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Pittenger",
+    "bioguideId": "P000606",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "9"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Meadows",
+    "bioguideId": "M001187",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "11"
+  },
+  {
+    "firstName": "George",
+    "lastName": "Holding",
+    "bioguideId": "H001065",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "13"
+  },
+  {
+    "firstName": "Heidi",
+    "lastName": "Heitkamp",
+    "bioguideId": "H001069",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "ND",
+    "district": null
+  },
+  {
+    "firstName": "Kevin",
+    "lastName": "Cramer",
+    "bioguideId": "C001096",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "ND",
+    "district": "0"
+  },
+  {
+    "firstName": "Deb",
+    "lastName": "Fischer",
+    "bioguideId": "F000463",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NE",
+    "district": null
+  },
+  {
+    "firstName": "Ann",
+    "lastName": "Kuster",
+    "bioguideId": "K000382",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NH",
+    "district": "2"
+  },
+  {
+    "firstName": "Michelle",
+    "lastName": "Lujan Grisham",
+    "bioguideId": "L000580",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NM",
+    "district": "1"
+  },
+  {
+    "firstName": "Grace",
+    "lastName": "Meng",
+    "bioguideId": "M001188",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "6"
+  },
+  {
+    "firstName": "Hakeem",
+    "lastName": "Jeffries",
+    "bioguideId": "J000294",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "8"
+  },
+  {
+    "firstName": "Sean",
+    "lastName": "Maloney",
+    "bioguideId": "M001185",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "18"
+  },
+  {
+    "firstName": "Chris",
+    "lastName": "Collins",
+    "bioguideId": "C001092",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "27"
+  },
+  {
+    "firstName": "Brad",
+    "lastName": "Wenstrup",
+    "bioguideId": "W000815",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "2"
+  },
+  {
+    "firstName": "Joyce",
+    "lastName": "Beatty",
+    "bioguideId": "B001281",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "3"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Joyce",
+    "bioguideId": "J000295",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "14"
+  },
+  {
+    "firstName": "Jim",
+    "lastName": "Bridenstine",
+    "bioguideId": "B001283",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OK",
+    "district": "1"
+  },
+  {
+    "firstName": "Markwayne",
+    "lastName": "Mullin",
+    "bioguideId": "M001190",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OK",
+    "district": "2"
+  },
+  {
+    "firstName": "Scott",
+    "lastName": "Perry",
+    "bioguideId": "P000605",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "4"
+  },
+  {
+    "firstName": "Keith",
+    "lastName": "Rothfus",
+    "bioguideId": "R000598",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "12"
+  },
+  {
+    "firstName": "Matthew",
+    "lastName": "Cartwright",
+    "bioguideId": "C001090",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "17"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Rice",
+    "bioguideId": "R000597",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "SC",
+    "district": "7"
+  },
+  {
+    "firstName": "Ted",
+    "lastName": "Cruz",
+    "bioguideId": "C001098",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "TX",
+    "district": null
+  },
+  {
+    "firstName": "Randy",
+    "lastName": "Weber",
+    "bioguideId": "W000814",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "14"
+  },
+  {
+    "firstName": "Beto",
+    "lastName": "O'Rourke",
+    "bioguideId": "O000170",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "16"
+  },
+  {
+    "firstName": "Joaquin",
+    "lastName": "Castro",
+    "bioguideId": "C001091",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "20"
+  },
+  {
+    "firstName": "Roger",
+    "lastName": "Williams",
+    "bioguideId": "W000816",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "25"
+  },
+  {
+    "firstName": "Marc",
+    "lastName": "Veasey",
+    "bioguideId": "V000131",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "33"
+  },
+  {
+    "firstName": "Filemon",
+    "lastName": "Vela",
+    "bioguideId": "V000132",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "34"
+  },
+  {
+    "firstName": "Chris",
+    "lastName": "Stewart",
+    "bioguideId": "S001192",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "UT",
+    "district": "2"
+  },
+  {
+    "firstName": "Timothy",
+    "lastName": "Kaine",
+    "bioguideId": "K000384",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "VA",
+    "district": null
+  },
+  {
+    "firstName": "Derek",
+    "lastName": "Kilmer",
+    "bioguideId": "K000381",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WA",
+    "district": "6"
+  },
+  {
+    "firstName": "Denny",
+    "lastName": "Heck",
+    "bioguideId": "H001064",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WA",
+    "district": "10"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Pocan",
+    "bioguideId": "P000607",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WI",
+    "district": "2"
+  },
+  {
+    "firstName": "Robin",
+    "lastName": "Kelly",
+    "bioguideId": "K000385",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "2"
+  },
+  {
+    "firstName": "Marshall",
+    "lastName": "Sanford",
+    "bioguideId": "S000051",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "SC",
+    "district": "1"
+  },
+  {
+    "firstName": "Jason",
+    "lastName": "Smith",
+    "bioguideId": "S001195",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MO",
+    "district": "8"
+  },
+  {
+    "firstName": "Cory",
+    "lastName": "Booker",
+    "bioguideId": "B001288",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NJ",
+    "district": null
+  },
+  {
+    "firstName": "Katherine",
+    "lastName": "Clark",
+    "bioguideId": "C001101",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MA",
+    "district": "5"
+  },
+  {
+    "firstName": "Bradley",
+    "lastName": "Byrne",
+    "bioguideId": "B001289",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AL",
+    "district": "1"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Jolly",
+    "bioguideId": "J000296",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "13"
+  },
+  {
+    "firstName": "Curtis",
+    "lastName": "Clawson",
+    "bioguideId": "C001102",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "19"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Brat",
+    "bioguideId": "B001290",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VA",
+    "district": "7"
+  },
+  {
+    "firstName": "Donald",
+    "lastName": "Norcross",
+    "bioguideId": "N000188",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NJ",
+    "district": "1"
+  },
+  {
+    "firstName": "Alma",
+    "lastName": "Adams",
+    "bioguideId": "A000370",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "12"
+  },
+  {
+    "firstName": "Bob",
+    "lastName": "Dold",
+    "bioguideId": "D000613",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "10"
+  },
+  {
+    "firstName": "Frank",
+    "lastName": "Guinta",
+    "bioguideId": "G000570",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NH",
+    "district": "1"
+  },
+  {
+    "firstName": "Gary",
+    "lastName": "Palmer",
+    "bioguideId": "P000609",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AL",
+    "district": "6"
+  },
+  {
+    "firstName": "French",
+    "lastName": "Hill",
+    "bioguideId": "H001072",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AR",
+    "district": "2"
+  },
+  {
+    "firstName": "Bruce",
+    "lastName": "Westerman",
+    "bioguideId": "W000821",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AR",
+    "district": "4"
+  },
+  {
+    "firstName": "Martha",
+    "lastName": "McSally",
+    "bioguideId": "M001197",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AZ",
+    "district": "2"
+  },
+  {
+    "firstName": "Ruben",
+    "lastName": "Gallego",
+    "bioguideId": "G000574",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AZ",
+    "district": "7"
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "DeSaulnier",
+    "bioguideId": "D000623",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "11"
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "Knight",
+    "bioguideId": "K000387",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "25"
+  },
+  {
+    "firstName": "Pete",
+    "lastName": "Aguilar",
+    "bioguideId": "A000371",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "31"
+  },
+  {
+    "firstName": "Ted",
+    "lastName": "Lieu",
+    "bioguideId": "L000582",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "33"
+  },
+  {
+    "firstName": "Norma",
+    "lastName": "Torres",
+    "bioguideId": "T000474",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "35"
+  },
+  {
+    "firstName": "Mimi",
+    "lastName": "Walters",
+    "bioguideId": "W000820",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CA",
+    "district": "45"
+  },
+  {
+    "firstName": "Ken",
+    "lastName": "Buck",
+    "bioguideId": "B001297",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "CO",
+    "district": "4"
+  },
+  {
+    "firstName": "Gwen",
+    "lastName": "Graham",
+    "bioguideId": "G000575",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "2"
+  },
+  {
+    "firstName": "Carlos",
+    "lastName": "Curbelo",
+    "bioguideId": "C001107",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "FL",
+    "district": "26"
+  },
+  {
+    "firstName": "Buddy",
+    "lastName": "Carter",
+    "bioguideId": "C001103",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "1"
+  },
+  {
+    "firstName": "Jody",
+    "lastName": "Hice",
+    "bioguideId": "H001071",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "10"
+  },
+  {
+    "firstName": "Barry",
+    "lastName": "Loudermilk",
+    "bioguideId": "L000583",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "11"
+  },
+  {
+    "firstName": "Rick",
+    "lastName": "Allen",
+    "bioguideId": "A000372",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "GA",
+    "district": "12"
+  },
+  {
+    "firstName": "Rod",
+    "lastName": "Blum",
+    "bioguideId": "B001294",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IA",
+    "district": "1"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Young",
+    "bioguideId": "Y000066",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IA",
+    "district": "3"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Bost",
+    "bioguideId": "B001295",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "12"
+  },
+  {
+    "firstName": "Ralph",
+    "lastName": "Abraham",
+    "bioguideId": "A000374",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "LA",
+    "district": "5"
+  },
+  {
+    "firstName": "Garret",
+    "lastName": "Graves",
+    "bioguideId": "G000577",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "LA",
+    "district": "6"
+  },
+  {
+    "firstName": "Seth",
+    "lastName": "Moulton",
+    "bioguideId": "M001196",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MA",
+    "district": "6"
+  },
+  {
+    "firstName": "Bruce",
+    "lastName": "Poliquin",
+    "bioguideId": "P000611",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "ME",
+    "district": "2"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Moolenaar",
+    "bioguideId": "M001194",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "4"
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Bishop",
+    "bioguideId": "B001293",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "8"
+  },
+  {
+    "firstName": "Dave",
+    "lastName": "Trott",
+    "bioguideId": "T000475",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "11"
+  },
+  {
+    "firstName": "Debbie",
+    "lastName": "Dingell",
+    "bioguideId": "D000624",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "12"
+  },
+  {
+    "firstName": "Brenda",
+    "lastName": "Lawrence",
+    "bioguideId": "L000581",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MI",
+    "district": "14"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "Emmer",
+    "bioguideId": "E000294",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MN",
+    "district": "6"
+  },
+  {
+    "firstName": "Ryan",
+    "lastName": "Zinke",
+    "bioguideId": "Z000018",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MT",
+    "district": "0"
+  },
+  {
+    "firstName": "David",
+    "lastName": "Rouzer",
+    "bioguideId": "R000603",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "7"
+  },
+  {
+    "firstName": "Brad",
+    "lastName": "Ashford",
+    "bioguideId": "A000373",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NE",
+    "district": "2"
+  },
+  {
+    "firstName": "Tom",
+    "lastName": "MacArthur",
+    "bioguideId": "M001193",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NJ",
+    "district": "3"
+  },
+  {
+    "firstName": "Bonnie",
+    "lastName": "Watson Coleman",
+    "bioguideId": "W000822",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NJ",
+    "district": "12"
+  },
+  {
+    "firstName": "Cresent",
+    "lastName": "Hardy",
+    "bioguideId": "H001070",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NV",
+    "district": "4"
+  },
+  {
+    "firstName": "Lee",
+    "lastName": "Zeldin",
+    "bioguideId": "Z000017",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "1"
+  },
+  {
+    "firstName": "Kathleen",
+    "lastName": "Rice",
+    "bioguideId": "R000602",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "4"
+  },
+  {
+    "firstName": "Elise",
+    "lastName": "Stefanik",
+    "bioguideId": "S001196",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "21"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Katko",
+    "bioguideId": "K000386",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "24"
+  },
+  {
+    "firstName": "Steve",
+    "lastName": "Russell",
+    "bioguideId": "R000604",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OK",
+    "district": "5"
+  },
+  {
+    "firstName": "Ryan",
+    "lastName": "Costello",
+    "bioguideId": "C001106",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "6"
+  },
+  {
+    "firstName": "Brendan",
+    "lastName": "Boyle",
+    "bioguideId": "B001296",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "PA",
+    "district": "13"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Ratcliffe",
+    "bioguideId": "R000601",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "4"
+  },
+  {
+    "firstName": "Will",
+    "lastName": "Hurd",
+    "bioguideId": "H001073",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "23"
+  },
+  {
+    "firstName": "Brian",
+    "lastName": "Babin",
+    "bioguideId": "B001291",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "TX",
+    "district": "36"
+  },
+  {
+    "firstName": "Mia",
+    "lastName": "Love",
+    "bioguideId": "L000584",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "UT",
+    "district": "4"
+  },
+  {
+    "firstName": "Donald",
+    "lastName": "Beyer",
+    "bioguideId": "B001292",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VA",
+    "district": "8"
+  },
+  {
+    "firstName": "Barbara",
+    "lastName": "Comstock",
+    "bioguideId": "C001105",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VA",
+    "district": "10"
+  },
+  {
+    "firstName": "Stacey",
+    "lastName": "Plaskett",
+    "bioguideId": "P000610",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "VI",
+    "district": "0"
+  },
+  {
+    "firstName": "Dan",
+    "lastName": "Newhouse",
+    "bioguideId": "N000189",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WA",
+    "district": "4"
+  },
+  {
+    "firstName": "Glenn",
+    "lastName": "Grothman",
+    "bioguideId": "G000576",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WI",
+    "district": "6"
+  },
+  {
+    "firstName": "Alex",
+    "lastName": "Mooney",
+    "bioguideId": "M001195",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WV",
+    "district": "2"
+  },
+  {
+    "firstName": "Evan",
+    "lastName": "Jenkins",
+    "bioguideId": "J000297",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "WV",
+    "district": "3"
+  },
+  {
+    "firstName": "Aumua",
+    "lastName": "Amata",
+    "bioguideId": "R000600",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "AS",
+    "district": "0"
+  },
+  {
+    "firstName": "Dan",
+    "lastName": "Sullivan",
+    "bioguideId": "S001198",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "AK",
+    "district": null
+  },
+  {
+    "firstName": "David",
+    "lastName": "Perdue",
+    "bioguideId": "P000612",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "GA",
+    "district": null
+  },
+  {
+    "firstName": "Joni",
+    "lastName": "Ernst",
+    "bioguideId": "E000295",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "IA",
+    "district": null
+  },
+  {
+    "firstName": "Thom",
+    "lastName": "Tillis",
+    "bioguideId": "T000476",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NC",
+    "district": null
+  },
+  {
+    "firstName": "Mike",
+    "lastName": "Rounds",
+    "bioguideId": "R000605",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "SD",
+    "district": null
+  },
+  {
+    "firstName": "Mark",
+    "lastName": "Walker",
+    "bioguideId": "W000819",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NC",
+    "district": "6"
+  },
+  {
+    "firstName": "Benjamin",
+    "lastName": "Sasse",
+    "bioguideId": "S001197",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "NE",
+    "district": null
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Donovan",
+    "bioguideId": "D000625",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "NY",
+    "district": "11"
+  },
+  {
+    "firstName": "Trent",
+    "lastName": "Kelly",
+    "bioguideId": "K000388",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "MS",
+    "district": "1"
+  },
+  {
+    "firstName": "Darin",
+    "lastName": "LaHood",
+    "bioguideId": "L000585",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "IL",
+    "district": "18"
+  },
+  {
+    "firstName": "Warren",
+    "lastName": "Davidson",
+    "bioguideId": "D000626",
+    "chamber": "house",
+    "title": "Rep",
+    "state": "OH",
+    "district": "8"
+  }
+]

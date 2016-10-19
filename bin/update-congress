@@ -1,0 +1,30 @@
+#!/bin/bash
+
+tmp=$(mktemp -d)
+yaml="$tmp/legislators.yaml"
+curl "https://raw.githubusercontent.com/unitedstates/congress-legislators/master/legislators-current.yaml" -o "$yaml"
+
+nodejs <<EOF
+  var fs = require("fs");
+  var yaml = require("js-yaml");
+  var jsonfile = require("jsonfile");
+
+  var legislators = yaml.safeLoad(fs.readFileSync('$yaml', 'utf8'));
+  legislators = legislators.map(function(legislator) {
+    var term = legislator.terms[legislator.terms.length-1];
+
+    return {
+      firstName: legislator.name.first,
+      lastName: legislator.name.last,
+      bioguideId: legislator.id.bioguide,
+      chamber: term.type == "rep" ? "house" : "senate",
+      title: term.type == "rep" ? "Rep" : "Sen",
+      state: term.state,
+      district: typeof term.district == "undefined" ? null : term.district.toString()
+    };
+  });
+
+  jsonfile.writeFileSync("congress.json", legislators, { spaces: 2 });
+EOF
+
+rm -r "$tmp"

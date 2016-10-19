@@ -60,8 +60,8 @@ var LegislatorPickerController = /*@ngInject*/ function($scope, $location, $time
       }
     };
 
-    dioAPI.findLegislatorsByLatLng(
-      canonicalAddress.latitude, canonicalAddress.longitude, cb);
+    dioAPI.findLegislatorsByDistrict(
+      canonicalAddress.components.stateAbbreviation, canonicalAddress.district, cb);
   };
 
 	$scope.submit = function() {

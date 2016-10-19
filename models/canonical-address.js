@@ -28,6 +28,7 @@ CanonicalAddress.prototype.setProperties = function(options) {
   this.county = options.county;
   this.longitude = options.longitude;
   this.latitude = options.latitude;
+  this.district = options.district;
 
   this.setModelProperty('components', options.components, AddressComponents);
 };

@@ -3,9 +3,13 @@ var jsonfile = require("jsonfile");
 var Legislator = require("../../models").Legislator;
 
 var Congress = {
-  House: {},   /* State -> District -> Legislator */
-  Senate: {},  /* State -> [Legislator] */
-  Members: {}  /* Bioguide -> Legislator */
+  House: {},    /* State -> District -> Legislator */
+  Senate: {},   /* State -> [Legislator] */
+  Members: {},  /* Bioguide -> Legislator */
+
+  validDistrict: function(state, district) {
+    return Congress.House[state] != undefined && Congress.House[state][district] != undefined;
+  }
 };
 
 jsonfile.readFileSync("congress.json").forEach(function(legislator) {

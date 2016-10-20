@@ -2,25 +2,9 @@
  *
  */
 
-var jsonfile = require("jsonfile");
 
-var Legislator = require('../../../../models').Legislator;
+var Congress = require('../../../services/congress');
 var resHelpers = require('../helpers/response');
-
-var Congress = {
-  House: {},  /* State -> District -> Legislator */
-  Senate: {}  /* State -> [Legislator] */
-};
-
-jsonfile.readFileSync("congress.json").forEach(function(legislator) {
-  if (legislator.chamber == "house") {
-    Congress.House[legislator.state] = Congress.House[legislator.state] || [];
-    Congress.House[legislator.state][legislator.district] = new Legislator(legislator);
-  } else {
-    Congress.Senate[legislator.state] = Congress.Senate[legislator.state] || [];
-    Congress.Senate[legislator.state].push(new Legislator(legislator));
-  }
-});
 
 var get = function (req, res) {
   var state = req.query.state,

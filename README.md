@@ -21,7 +21,6 @@ Express & Angular app for sending messages to Senate and House members
 Democracy.io is an app for contacting Senate & House members. It provides a user friendly wrapper around the individual member contact forms.
 
 It uses APIs from:
-* [Sunlight Foundation](https://sunlightlabs.github.io/congress/)
 * [Smarty Streets](https://smartystreets.com/docs)
 * [Phantom of the Capitol](https://github.com/EFForg/phantom-of-the-capitol)
 

@@ -26,21 +26,13 @@ nestedDescribe('www.helpers.APIHelpers', function() {
           "bioguideId": "P000197",
           "title": "Rep",
           "firstName": "Nancy",
-          "lastName": "Pelosi",
-          "nickname": null,
-          "middleName": null,
-          "nameSuffix": null,
-          "aliases": []
+          "lastName": "Pelosi"
       },
       {
           "bioguideId": "B000711",
           "title": "Sen",
           "firstName": "Barbara",
-          "lastName": "Boxer",
-          "nickname": null,
-          "middleName": null,
-          "nameSuffix": null,
-          "aliases": []
+          "lastName": "Boxer"
       }
     ];
 

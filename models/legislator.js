@@ -26,21 +26,8 @@ Legislator.prototype.setProperties = function(options) {
   this.title = options.title;
   this.firstName = options.firstName;
   this.lastName = options.lastName;
-  this.nickname = options.nickname;
-  this.middleName = options.middleName;
-  this.nameSuffix = options.nameSuffix;
-  this.aliases = isEmpty(options.aliases) ? [] : options.aliases;
-
   this.state = options.state;
-  this.stateName = options.stateName;
   this.district = options.district;
-  this.stateRank = options.stateRank;
-  this.party = options.party;
-  this.twitterId = options.twitterId;
-  this.website = options.website;
-  this.youtubeId = options.youtubeId;
-  this.facebookId = options.facebookId;
-  this.inOffice = options.inOffice;
 };
 
 

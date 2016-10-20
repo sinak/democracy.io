@@ -8,33 +8,25 @@ var nestedDescribe = require('nested-describe');
 var nock = require('nock');
 
 var dioAPIFixtures = require('../../fixtures').load('routes.dio-api');
-var findByLatLng = require('../../../../server/routes/api/legislators/find-by-lat-lng');
+var findByDistrict = require('../../../../server/routes/api/legislators/find-by-district');
 var testUtils = require('../../utils');
 var thirdPartyFixtures = require('../../fixtures').load('routes.third-party-api');
 
 nestedDescribe('routes.api.legislators', function() {
 
-  var mockHTTPCalls = function() {
-    nock(config.get('SERVER.API.SUNLIGHT_BASE_URL'))
-      .get('/legislators/locate?latitude=37.7833&longitude=-122.4167&apikey=test')
-      .reply(200, thirdPartyFixtures.get('sunlight-legislators'));
-  };
-
-  before(mockHTTPCalls);
-
-  it('should find legislators by lat lng', function(done) {
+  it('should find legislators by district', function(done) {
     var req = testUtils.getHTTPRequest({
       method: 'GET',
-      url: '/api/1/legislators/findByLatLng?latitude=37.7833&longitude=-122.4167',
+      url: '/api/1/legislators/findByDistrict?state=CA&district=18',
       query: {
-        latitude: 37.7833,
-        longitude: -122.4167
+        state: 'CA',
+        district: '12'
       }
     });
 
     var res = testUtils.getHTTPResponse();
     testUtils.expectJSONResponse(res, dioAPIFixtures.get('legislators'), done);
-    findByLatLng.get(req, res);
+    findByDistrict.get(req, res);
   });
 
 });

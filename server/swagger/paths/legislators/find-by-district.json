@@ -1,0 +1,40 @@
+{
+  "get": {
+    "summary": "Legislators' biographical information by state/district.",
+    "description": "Fetches biographical information for the US congressional representatives associated with a given congressional district.",
+    "parameters": [
+      {
+        "name": "state",
+        "in": "query",
+        "description": "Two letter state abbreviation (uppercase).",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "name": "district",
+        "in": "query",
+        "description": "District number within state. Use 0 for at large districts.",
+        "required": true,
+        "type": "number",
+        "format": "int32"
+      }
+    ],
+    "tags": [
+      "Legislators"
+    ],
+    "responses": {
+      "200": {
+        "description": "An array of legislators' biographical info.",
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Legislator"
+          }
+        }
+      },
+      "default": {
+        "$ref": "#/responses/UnexpectedError"
+      }
+    }
+  }
+}

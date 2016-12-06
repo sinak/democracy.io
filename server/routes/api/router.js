@@ -12,8 +12,8 @@ module.exports = function(middleware) {
     router.use(middleware);
   }
 
-  router.route('/legislators/findByLatLng')
-    .get(require('./legislators/find-by-lat-lng').get);
+  router.route('/legislators/findByDistrict')
+    .get(require('./legislators/find-by-district').get);
 
   router.route('/legislators/message')
     .post(require('./legislators/message').post);

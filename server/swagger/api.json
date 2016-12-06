@@ -18,8 +18,8 @@
     ],
 
     "paths": {
-        "/legislators/findByLatLng": {
-            "$ref": "paths/legislators/find-by-lat-lng.json"
+        "/legislators/findByDistrict": {
+            "$ref": "paths/legislators/find-by-district.json"
         },
         "/legislators/message": {
             "$ref": "paths/legislators/message.json"

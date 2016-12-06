@@ -2,22 +2,11 @@
   "status": "success",
   "data": {
     "bioguideId": "P000197",
-    "district": 12,
-    "facebookId": "86574174383",
-    "inOffice": true,
+    "district": "12",
     "title": "Rep",
     "firstName": "Nancy",
     "lastName": "Pelosi",
-    "nickname": null,
-    "middleName": null,
-    "nameSuffix": null,
-    "aliases": [],
-    "party": "D",
-    "state": "CA",
-    "stateName": "California",
-    "twitterId": "NancyPelosi",
-    "website": "http://pelosi.house.gov",
-    "youtubeId": "nancypelosi"
+    "state": "CA"
   }
 }
 

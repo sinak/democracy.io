@@ -12,7 +12,6 @@
     },
 
     "API": {
-      "SUNLIGHT_BASE_URL": "https://congress.api.sunlightfoundation.com",
       "POTC_BASE_URL": "https://congressforms.eff.org/",
       "SMARTY_STREETS": {
         "ADDRESS_URL": "https://api.smartystreets.com"
@@ -21,10 +20,6 @@
     },
 
     "CREDENTIALS": {
-      "SUNLIGHT": {
-        "API_KEY": ""
-      },
-
       "POTC": {
         "DEBUG_KEY": ""
       },

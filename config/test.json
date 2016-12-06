@@ -4,10 +4,6 @@
   "SERVER": {
 
     "CREDENTIALS": {
-      "SUNLIGHT": {
-        "API_KEY": "test"
-      },
-
       "POTC": {
         "DEBUG_KEY": "test"
       },

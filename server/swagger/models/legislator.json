@@ -23,66 +23,13 @@
       "type": "string",
       "description": "The member’s last name."
     },
-    "nickname": {
-      "type": "string",
-      "description": "The member’s nickname. If present, usually safe to assume this is the name they go by."
-    },
-    "middleName": {
-      "type": "string",
-      "description": "The member’s middle name, if they have one."
-    },
-    "nameSuffix": {
-      "type": "string",
-      "description": "A name suffix, if the member uses one. For example, “Jr.” or “III”."
-    },
-    "aliases": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "An array of common names combinations for a Congressperson if a combination does not exist, the result will be null and the index will be consistent."
-    },
     "state": {
       "type": "string",
       "description": "Two-letter code (uppercase) of the state this member represents."
     },
-    "stateName": {
-      "type": "string",
-      "description": "The full state name of the state this member represents."
-    },
     "district": {
       "type": "integer",
       "description": "The number of the district that a House member represents. Is null for senators."
-    },
-    "stateRank": {
-      "type": "string",
-      "enum": ["junior", "senior"],
-      "description": "(Senate only) The seniority of that Senator for that state. “junior” or “senior”."
-    },
-    "party": {
-      "type": "string",
-      "enum": ["R", "D", "I"],
-      "description": "First letter of the party this member belongs to. “R”, “D”, or “I”."
-    },
-    "twitterId": {
-      "type": "string",
-      "description": "The Twitter username for a member’s official legislative account."
-    },
-    "website": {
-      "type": "string",
-      "description": "Official legislative website."
-    },
-    "youtubeId": {
-      "type": "string",
-      "description": "The YouTube username or channel for a member’s official legislative account."
-    },
-    "facebookId": {
-      "type": "string",
-      "description": "The Facebook username or ID for a member’s official legislative Facebook presence."
-    },
-    "inOffice": {
-      "type": "boolean",
-      "description": "Whether a member is currently holding elected office in Congress."
     }
   }
 }

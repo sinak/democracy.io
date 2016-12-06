@@ -31,6 +31,7 @@ var makeCanonicalAddressFromSSResponse = function(rawAddress) {
     address: address,
     longitude: rawAddress['metadata']['longitude'],
     latitude: rawAddress['metadata']['latitude'],
+    district: rawAddress['metadata']['congressional_district'],
     county: rawAddress['metadata']['county_name'],
     components: changeCaseKeys(components, 'camelize')
   });

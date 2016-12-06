@@ -26,7 +26,7 @@ var getLegislatorByURLSlug = function(slug, cb) {
     }
 
     if (isUndefined(val)) {
-      // Call Sunlight to get the value for the cache
+      // ??
 
     } else {
       cb(null, val);

@@ -20,12 +20,6 @@ var thirdPartyFixtures = require('../../fixtures').load('routes.third-party-api'
 nestedDescribe('routes.api.legislator', function() {
 
   var mockHTTPCalls = function() {
-    var mockData = lodash.cloneDeep(thirdPartyFixtures.get('sunlight-legislators'));
-    mockData.results = lodash.slice(mockData.results, 0, 1);
-    nock(config.get('SERVER.API.SUNLIGHT_BASE_URL'))
-      .get('/legislators?bioguide_id=P000197&apikey=test')
-      .reply(200, mockData);
-
     nock(config.get('SERVER.API.POTC_BASE_URL'))
       .post('/retrieve-form-elements?debug_key=test', {
         'bio_ids': ['P000197']

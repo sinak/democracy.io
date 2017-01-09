@@ -10,18 +10,18 @@
       "state": "CA"
     },
     {
-      "bioguideId": "B000711",
-      "district": null,
-      "firstName": "Barbara",
-      "lastName": "Boxer",
-      "state": "CA",
-      "title": "Sen"
-    },
-    {
       "bioguideId": "F000062",
       "district": null,
       "firstName": "Dianne",
       "lastName": "Feinstein",
+      "state": "CA",
+      "title": "Sen"
+    },
+    {
+      "bioguideId": "H001075",
+      "district": null,
+      "firstName": "Kamala",
+      "lastName": "Harris",
       "state": "CA",
       "title": "Sen"
     }

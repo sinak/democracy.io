@@ -29,10 +29,10 @@ nestedDescribe('www.helpers.APIHelpers', function() {
           "lastName": "Pelosi"
       },
       {
-          "bioguideId": "B000711",
+          "bioguideId": "H001075",
           "title": "Sen",
-          "firstName": "Barbara",
-          "lastName": "Boxer"
+          "firstName": "Kamala",
+          "lastName": "Harris"
       }
     ];
 

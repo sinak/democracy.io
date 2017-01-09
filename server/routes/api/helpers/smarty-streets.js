@@ -25,13 +25,15 @@ var makeCanonicalAddressFromSSResponse = function(rawAddress) {
   var usRegion = us.lookup(components['state_abbreviation']);
   components.stateName = usRegion !== undefined ? usRegion.name : '';
 
+  var district = rawAddress['metadata']['congressional_district'];
+
   return new models.CanonicalAddress({
     inputId: rawAddress['input_id'],
     inputIndex: rawAddress['input_index'],
     address: address,
     longitude: rawAddress['metadata']['longitude'],
     latitude: rawAddress['metadata']['latitude'],
-    district: rawAddress['metadata']['congressional_district'],
+    district: (district == "AL" ? "0" : district),
     county: rawAddress['metadata']['county_name'],
     components: changeCaseKeys(components, 'camelize')
   });

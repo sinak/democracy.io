@@ -18,7 +18,7 @@ nestedDescribe('routes.api.form-elements', function() {
 
   var mockHTTPCalls = function() {
     nock(config.get('SERVER.API.POTC_BASE_URL'))
-      .post('/retrieve-form-elements?debug_key=test', {
+      .post('/retrieve-form-elements?debug_key='+config.get('SERVER.CREDENTIALS.POTC.DEBUG_KEY'), {
         'bio_ids': ['P000197']
       })
       .reply(200, potcFEFixtures);

@@ -17,8 +17,11 @@ var verifyLocation = require('../../../../server/routes/api/location/verify');
 nestedDescribe('routes.api.location', function() {
 
   var mockHTTPCalls = function() {
+    var url = '/street-address?street=100%20Test%20St%2C%20San%20Francisco%2C%2094110';
+    var ssc = config.get('SERVER.CREDENTIALS.SMARTY_STREETS');
+    url += '&auth-id='+ssc.ID+'&auth-token='+ssc.TOKEN;
     nock(config.get('SERVER.API.SMARTY_STREETS.ADDRESS_URL'))
-      .get('/street-address?street=100%20Test%20St%2C%20San%20Francisco%2C%2094110&auth-id=test-id&auth-token=test-token')
+      .get(url)
       .reply(200, thirdPartyFixtures.get('smarty-streets'));
   };
 

@@ -7,6 +7,7 @@ var lodash = require('lodash');
 var nestedDescribe = require('nested-describe');
 
 var config = require('config').get('SERVER');
+var appConfig = require('../../../server/app').locals.CONFIG;
 var eff = require('../../../server/services/third-party-apis/eff-civic-crm');
 var potc = require('../../../server/services/third-party-apis/potc');
 var smartyStreets = require('../../../server/services/third-party-apis/smarty-streets');
@@ -22,7 +23,7 @@ nestedDescribe('server.services.third-party-apis', function () {
     );
 
     expect(potcURL)
-      .to.be.equal('https://congressforms.eff.org/test?debug_key=test');
+      .to.be.equal(config.get('API.POTC_BASE_URL')+'/test?debug_key='+config.get('CREDENTIALS.POTC.DEBUG_KEY'));
   });
 
   it('should make a SmartyStreets URL', function() {

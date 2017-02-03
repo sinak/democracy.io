@@ -8,6 +8,7 @@ var isUndefined = require('lodash.isundefined');
 var map = require('lodash.map');
 
 var SubscriptionRequest = require('../../../models').SubscriptionRequest;
+var EmailCopyRequest = require('../../../models').EmailCopyRequest;
 var MessageSender = require('../../../models').MessageSender;
 
 var helpers = require('../helpers/message-form');
@@ -21,6 +22,7 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
   $scope.loadingDelay = true;
   $scope.submitted = false;
   $scope.joinEmailList = false;
+  $scope.sendEmailCopy = false;
   $scope.sending = false;
   $scope.legislatorList = 'Dear [Representative/Senator],';
 
@@ -147,6 +149,24 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
         // no-op as EFF subscription is best-effort only
       });
     }
+
+    if ($scope.sendEmailCopy) {
+      //TODO
+      var messageSender = new MessageSender({
+        firstName: $scope.formData.firstName,
+        lastName: $scope.formData.lastName,
+        email: $scope.formData.email
+      });
+      var emailCopyRequest = new EmailCopyRequest({
+        canonicalAddress: $scope.address,
+        sender: messageSender
+      });
+      dioAPI.subscribeToEFFList(emailCopyRequest, function() {
+        // no-op as EFF subscription is best-effort only
+      });
+    }
+
+
 	};
 
   /**

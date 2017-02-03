@@ -48,6 +48,9 @@ module.exports = function(middleware) {
   router.route('/subscription')
     .post(require('./subscription').post);
 
+  router.route('/emailCopy')
+    .post(require('./email-copy').post);
+
   return router;
 
 };

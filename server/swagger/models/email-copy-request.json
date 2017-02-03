@@ -1,0 +1,12 @@
+{
+  "description": "An email copy request.",
+  "properties": {
+    "sender": {
+      "$ref": "#/definitions/MessageSender"
+    },
+    "canonicalAddress": {
+      "$ref": "#/definitions/CanonicalAddress"
+    }
+  }
+}
+//TODO

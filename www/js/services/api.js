@@ -96,6 +96,20 @@ var api = function ($http, dioConfig) {
     /**
      *
      */
+    emailMessageToUser: function(emailCopyRequest, cb) {
+      var opts = {
+        url: this.makeRelativeAPIURL('/email-copy'),
+        method: 'POST',
+        data: emailCopyRequest,
+        modelClass: models.MessageResponse
+      };
+
+      this.makeAPICall(opts, cb);
+    },
+
+    /**
+     *
+     */
     submitCaptchaResponse: function(captchaSolution, cb) {
       var opts = {
         url: this.makeRelativeAPIURL('captchaSolution'),

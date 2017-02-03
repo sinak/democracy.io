@@ -9,8 +9,8 @@ var resHelpers = require('./helpers/response');
 
 
 var post = function (req, res) {
-  var request = apiHelpers.getModelData(req.body, models.SubscriptionRequest);
-
+  var request = apiHelpers.getModelData(req.body, models.EmailCopyRequest);
+  //TODO(Randy) all the following
   var params = {
     'contact_params': {
       email: request.sender.email,
@@ -29,7 +29,7 @@ var post = function (req, res) {
     }
   };
 
-  effCivicCRM.subscribeToEFFMailingList(params, req.app.locals.CONFIG, function(err) {
+  effCivicCRM.emailUserCopyOfMessage(params, req.app.locals.CONFIG, function(err) {
     if (err) {
       res.status(400).json(resHelpers.makeError(err));
     }

@@ -4,7 +4,7 @@
     "description": "Send a copy of the message to the user",
     "parameters": [
       {
-        "name": "sub",
+        "name": "EmailCopyRequests",
         "in": "body",
         "description": "Request containing details for the user to receive an email copy.",
         "required": true,
@@ -15,7 +15,7 @@
       }
     ],
     "tags": [
-      "Subscription"
+      "EmailCopyRequest"
     ],
     "responses": {
       "200": {

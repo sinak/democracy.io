@@ -37,6 +37,28 @@ var subscribeToEFFMailingList = function(params, config, cb) {
   makeRequest(requestParams, cb);
 };
 
+var emailUserCopyOfMessage = function(params, config, cb) {
+  //TODO(Randy) all of this section
+  var effURL = makeEFFCivicCRMUrl(
+    config.get('API.EFF_CIVIC_CRM_URL'), 'civicrm/eff-action-api');
+
+  // To use the EFF Civic CRM API, you send it a POST request, that request must contain:
+  //   * The action method to call, in our case import_contact
+  //   * The site_key to auth the request
+  //   * A JSON string containing details of the person to subscribe
+  var requestParams = {
+    method: 'POST',
+    url: effURL,
+    formData: {
+      method: 'import_contact',
+      data: JSON.stringify(params),
+      site_key: config.get('CREDENTIALS.EFF_CIVIC_CRM.SITE_KEY')
+    }
+  };
+
+  makeRequest(requestParams, cb);
+};
 
 module.exports.makeEFFCivicCRMUrl = makeEFFCivicCRMUrl;
 module.exports.subscribeToEFFMailingList = subscribeToEFFMailingList;
+module.exports.emailUserCopyOfMessage = emailUserCopyOfMessage;

@@ -98,7 +98,7 @@ var api = function ($http, dioConfig) {
      */
     emailMessageToUser: function(emailCopyRequest, cb) {
       var opts = {
-        url: this.makeRelativeAPIURL('/email-copy'),
+        url: this.makeRelativeAPIURL('/emailCopy'),
         method: 'POST',
         data: emailCopyRequest,
         modelClass: models.MessageResponse

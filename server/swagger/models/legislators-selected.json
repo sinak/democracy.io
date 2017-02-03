@@ -1,0 +1,9 @@
+{
+  "description": "The array of legeslators requested",
+  "properties": {
+    "legislators": {
+      "type": "array",
+      "description": "The list of legislators the message is going to"
+    }
+  }
+}

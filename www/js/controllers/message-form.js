@@ -151,18 +151,24 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
     }
 
     if ($scope.sendEmailCopy) {
-      //TODO
       var messageSender = new MessageSender({
         firstName: $scope.formData.firstName,
         lastName: $scope.formData.lastName,
         email: $scope.formData.email
       });
       var emailCopyRequest = new EmailCopyRequest({
-        canonicalAddress: $scope.address,
+        message: helpers.makeMessage(
+          $scope.legislators[0],
+          $scope.formData,
+          $scope.messageForm.phone.$viewValue,
+          $scope.topicOptions,
+          $scope.address
+        ),
+        legislatorsSelected: $scope.legislators,
         sender: messageSender
       });
-      dioAPI.subscribeToEFFList(emailCopyRequest, function() {
-        // no-op as EFF subscription is best-effort only
+      dioAPI.emailUserCopyOfMessage(emailCopyRequest, function() {
+        // no-op as email copy sending is best-effort only
       });
     }
 

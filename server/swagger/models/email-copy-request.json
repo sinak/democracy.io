@@ -4,9 +4,11 @@
     "sender": {
       "$ref": "#/definitions/MessageSender"
     },
-    "canonicalAddress": {
-      "$ref": "#/definitions/CanonicalAddress"
+    "message": {
+      "$ref": "#/definitions/Message"
+    },
+    "legislatorsSelected": {
+      "$ref": "#/definitions/LegislatorsSelected"
     }
   }
 }
-//TODO

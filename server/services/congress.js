@@ -9,6 +9,12 @@ var Congress = {
 
   validDistrict: function(state, district) {
     return Congress.House[state] != undefined && Congress.House[state][district] != undefined;
+  },
+
+  getLegislators: function(state, district) {
+    var reps = Congress.House[state][district];
+    var senators = Congress.Senate[state];
+    return senators ? reps.concat(senators) : reps;
   }
 };
 

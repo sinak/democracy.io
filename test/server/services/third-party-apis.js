@@ -7,7 +7,6 @@ var lodash = require('lodash');
 var nestedDescribe = require('nested-describe');
 
 var config = require('config').get('SERVER');
-var appConfig = require('../../../server/app').locals.CONFIG;
 var eff = require('../../../server/services/third-party-apis/eff-civic-crm');
 var potc = require('../../../server/services/third-party-apis/potc');
 var smartyStreets = require('../../../server/services/third-party-apis/smarty-streets');

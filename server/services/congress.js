@@ -14,7 +14,7 @@ var Congress = {
   getLegislators: function(state, district) {
     var reps = Congress.House[state][district];
     var senators = Congress.Senate[state];
-    return senators ? reps.concat(senators) : reps;
+    return senators ? [reps].concat(senators) : [reps];
   }
 };
 

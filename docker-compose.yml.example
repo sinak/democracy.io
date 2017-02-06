@@ -26,7 +26,7 @@ services:
       IP_SALT:
 
       POTC_BASE_URL: https://congressforms.eff.org
-      POTC_DEBUG_KEY: changeme
+      POTC_DEBUG_KEY:
 
       SMARTY_STREETS_ID:
       SMARTY_STREETS_TOKEN:

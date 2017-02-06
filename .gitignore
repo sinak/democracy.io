@@ -29,5 +29,9 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
+# Local configuration
+docker-compose.yml
+config/custom-environment-variables.json
+
 # Redis database file
 dump.rdb

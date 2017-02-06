@@ -1,0 +1,38 @@
+{
+  "SERVER": {
+    "API": {
+      "POTC_BASE_URL": "POTC_BASE_URL"
+    },
+
+    "CREDENTIALS": {
+      "POTC": {
+        "DEBUG_KEY": "POTC_DEBUG_KEY"
+      },
+
+      "SMARTY_STREETS": {
+        "ID": "SMARTY_STREETS_ID",
+        "TOKEN": "SMARTY_STREETS_TOKEN"
+      },
+
+      "EFF_CIVIC_CRM": {
+        "API_KEY": "EFF_CIVIC_CRM_SITE_KEY"
+      },
+
+      "SESSION": {
+        "SECRET": "SESSION_SECRET"
+      },
+
+      "IP": {
+        "SALT": "IP_SALT"
+      }
+    },
+
+    "REQUEST_THROTTLING": {
+      "REDIS": {
+        "PORT": "REDIS_PORT",
+        "HOSTNAME": "REDIS_HOST",
+        "PASS": "REDIS_PASSWORD"
+      }
+    }
+  }
+}

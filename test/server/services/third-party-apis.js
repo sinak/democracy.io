@@ -22,7 +22,7 @@ nestedDescribe('server.services.third-party-apis', function () {
     );
 
     expect(potcURL)
-      .to.be.equal('https://congressforms.eff.org/test?debug_key=test');
+      .to.be.equal(config.get('API.POTC_BASE_URL')+'/test?debug_key='+config.get('CREDENTIALS.POTC.DEBUG_KEY'));
   });
 
   it('should make a SmartyStreets URL', function() {

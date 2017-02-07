@@ -12,7 +12,7 @@
     },
 
     "API": {
-      "POTC_BASE_URL": "https://congressforms.eff.org/",
+      "POTC_BASE_URL": "https://congressforms.eff.org",
       "SMARTY_STREETS": {
         "ADDRESS_URL": "https://api.smartystreets.com"
       },

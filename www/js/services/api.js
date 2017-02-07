@@ -18,10 +18,10 @@ var api = function ($http, dioConfig) {
     makeAPICall: function(opts, cb) {
       opts.apiCall = true;
       $http(opts)
-        .success(function(data) {
-          cb(null, data);
+        .then(function(data) {
+          cb(null, data.data);
         })
-        .error(function(data) {
+        .catch(function(data) {
           cb(data, null);
         });
     },

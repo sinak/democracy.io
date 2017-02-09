@@ -22,9 +22,9 @@
     "CREDENTIALS": {
 
       "AWS": {
-        "accessKeyId": "AKIAJYOZ6R5AR25RE6FA",
-        "secretAccessKey": "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",
-        "region": "us-east-1"
+        "accessKeyId": "",
+        "secretAccessKey": "",
+        "region": ""
       },
 
       "POTC": {

@@ -20,10 +20,10 @@ var emailUserCopyOfMessage = function(params, config, cb) {
   var ses = new aws.SES({apiVersion: '2010-12-01'}); //TODO is this version the best one?
 
   // send to list
-  var to = [params.contact_params.email]
+  var to = [params.contact_params.email];
 
   // this must relate to a verified SES account
-  var from = 'randy@randylubin.com' //TODO(randy) change to EFF email verified with AWS SES
+  var from = 'example@example.com'; //TODO change to EFF email verified with AWS SES
 
   // this sends the email
   ses.sendEmail( {

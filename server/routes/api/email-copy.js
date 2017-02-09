@@ -23,8 +23,7 @@ var prepareEmailCopyBody = function (message) {
 
 var post = function (req, res) {
   var request = apiHelpers.getModelData(req.body, models.EmailCopyRequest);
-  console.log('email-copy.js called', request.sender, request.messages)
-  //TODO(Randy) all the following
+
   var params = {
     'contact_params': {
       email: request.sender.email,
@@ -38,8 +37,6 @@ var post = function (req, res) {
       message: prepareEmailCopyBody(request.messages[0].message)
     }
   };
-
-  console.log('params', params)
 
   effAWSSES.emailUserCopyOfMessage(params, req.app.locals.CONFIG, function(err) {
     if (err) {

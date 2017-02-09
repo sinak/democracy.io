@@ -3,13 +3,27 @@
  */
 
 var apiHelpers = require('./helpers/api');
-var effCivicCRM = require('../../services/third-party-apis/eff-civic-crm');
+var effAWSSES = require('../../services/third-party-apis/eff-aws-ses');
 var models = require('../../../models');
 var resHelpers = require('./helpers/response');
 
 
+var prepareEmailCopyBody = function (message) {
+  // strip out the salutation
+  message = message.split("\n");
+  message.shift();
+  message = message.join("\n");
+
+  // add thank you message from EFF
+  var thankyou = "Thank you for using Democracy.io to contact Congress. Your message was:\n\n";
+  message = thankyou.concat(message);
+
+  return message;
+}
+
 var post = function (req, res) {
   var request = apiHelpers.getModelData(req.body, models.EmailCopyRequest);
+  console.log('email-copy.js called', request.sender, request.messages)
   //TODO(Randy) all the following
   var params = {
     'contact_params': {
@@ -17,19 +31,17 @@ var post = function (req, res) {
       'first_name': request.sender.firstName,
       'last_name': request.sender.lastName,
       source: 'democracy.io',
-      subscribe: true,
-      'opt_in': false
+      email_copy: true
     },
-    'address_params': {
-      street: '',
-      city: request.canonicalAddress.components.cityName,
-      state: request.canonicalAddress.components.stateName,
-      zip: request.canonicalAddress.components.zipcode,
-      country: 'USA' // hardcoded for now
+    'message_params': {
+      subject: request.messages[0].subject,
+      message: prepareEmailCopyBody(request.messages[0].message)
     }
   };
 
-  effCivicCRM.emailUserCopyOfMessage(params, req.app.locals.CONFIG, function(err) {
+  console.log('params', params)
+
+  effAWSSES.emailUserCopyOfMessage(params, req.app.locals.CONFIG, function(err) {
     if (err) {
       res.status(400).json(resHelpers.makeError(err));
     }
@@ -38,6 +50,7 @@ var post = function (req, res) {
     var modelData = {};
     res.json(resHelpers.makeResponse(modelData));
   });
+
 };
 
 

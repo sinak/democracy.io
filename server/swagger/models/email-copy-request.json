@@ -4,11 +4,11 @@
     "sender": {
       "$ref": "#/definitions/MessageSender"
     },
-    "message": {
-      "$ref": "#/definitions/Message"
-    },
-    "legislatorsSelected": {
-      "$ref": "#/definitions/LegislatorsSelected"
+    "messages": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
     }
   }
 }

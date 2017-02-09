@@ -6,7 +6,6 @@
 
 var create = require('lodash.create');
 
-var LegislatorsSelected = require('./legislators-selected');
 var Message = require('./message');
 var Model = require('./model');
 var MessageSender = require('./message-sender');
@@ -21,9 +20,8 @@ EmailCopyRequest.prototype = create(Model.prototype, {
 });
 
 EmailCopyRequest.prototype.setProperties = function(options) {
-  this.setModelProperty('sender', options.sender, MessageSender);
-  this.setModelProperty('legislatorsSelected', options.legislatorsSelected, LegislatorsSelected);
-  this.setModelProperty('message', options.canonicalAddress, Message);
+  this.sender = options.sender;
+  this.messages = options.messages;
 };
 
 module.exports = EmailCopyRequest;

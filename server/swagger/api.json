@@ -87,9 +87,6 @@
         "Legislator": {
             "$ref": "models/legislator.json"
         },
-        "LegislatorsSelected": {
-            "$ref": "models/legislators-selected.json"
-        },
         "LegislatorFormElements": {
             "$ref": "models/legislator-form-elements.json"
         },

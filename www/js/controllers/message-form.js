@@ -133,7 +133,7 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
     };
 
     $scope.sending = true;
-    dioAPI.submitMessageToReps(messages, cb);
+    //dioAPI.submitMessageToReps(messages, cb); TODO uncomment
 
     if ($scope.joinEmailList) {
       var messageSender = new MessageSender({
@@ -156,18 +156,18 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
         lastName: $scope.formData.lastName,
         email: $scope.formData.email
       });
-      var emailCopyRequest = new EmailCopyRequest({
-        message: helpers.makeMessage(
-          $scope.legislators[0],
-          $scope.formData,
-          $scope.messageForm.phone.$viewValue,
-          $scope.topicOptions,
-          $scope.address
-        ),
-        legislatorsSelected: $scope.legislators,
+      console.log('messages', messages)
+      console.log('messageSender', messageSender)
+      /*var emailCopyRequest = new EmailCopyRequest({
+        messages: messages,
         sender: messageSender
-      });
-      dioAPI.emailUserCopyOfMessage(emailCopyRequest, function() {
+      });*/
+      var emailCopyRequest = {
+        messages: messages,
+        sender: messageSender
+      };
+      dioAPI.emailMessageToUser(emailCopyRequest, function(e) {
+        console.log('oops', e)
         // no-op as email copy sending is best-effort only
       });
     }

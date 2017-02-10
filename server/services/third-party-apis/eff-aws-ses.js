@@ -10,7 +10,7 @@ var aws = require('aws-sdk');
 
 var emailUserCopyOfMessage = function(params, config, cb) {
 
-  awsConfig = config.get('CREDENTIALS.AWS');
+  var awsConfig = config.get('CREDENTIALS.AWS');
 
 
   // load aws config
@@ -42,9 +42,7 @@ var emailUserCopyOfMessage = function(params, config, cb) {
   }
 
   , function(err, data) {
-      if(err) throw err
-          console.log('Email sent:');
-          console.log(data);
+      if(err) throw err;
    });
 
 };

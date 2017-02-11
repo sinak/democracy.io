@@ -12,9 +12,8 @@ var post = function (req, res) {
   var solution = apiHelpers.getModelData(req.body, models.CaptchaSolution);
 
   potc.solveCaptcha(solution, req.app.locals.CONFIG, function(err, data) {
-    if (err) {
-      res.status(400).json(resHelpers.makeError(err));
-    }
+    if (err)
+      return res.status(400).json(resHelpers.makeError(err));
 
     // This kicks back a {'status': $status} response. There's no real point making an object.
     res.json(resHelpers.makeResponse(data));

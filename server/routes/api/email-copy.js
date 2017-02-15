@@ -40,7 +40,7 @@ var post = function (req, res) {
 
   effAWSSES.emailUserCopyOfMessage(params, req.app.locals.CONFIG, function(err) {
     if (err) {
-      return;
+      return res.status(400).json(resHelpers.makeError(err));
     }
 
     // TODO(leah): Look at the format of the response on this

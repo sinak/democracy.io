@@ -23,7 +23,7 @@ var emailUserCopyOfMessage = function(params, config, cb) {
   var to = [params.contact_params.email];
 
   // this must relate to a verified SES account
-  var from = 'example@example.com'; //TODO change to EFF email verified with AWS SES
+  var from = config.get('API.AWS_SES_EMAIL');
 
   // this sends the email
   ses.sendEmail( {

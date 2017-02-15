@@ -32,6 +32,7 @@ node_modules
 # Local configuration
 docker-compose.yml
 config/custom-environment-variables.json
+.env
 
 # Redis database file
 dump.rdb

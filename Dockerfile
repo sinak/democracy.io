@@ -9,5 +9,6 @@ WORKDIR /opt/democracy.io
 
 COPY . ./
 
+RUN npm run build:prod
 
-CMD ["gulp", "serve"]
+CMD ["node", "server.js"]

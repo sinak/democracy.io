@@ -5,6 +5,7 @@ services:
     restart: always
     ports:
       - 3000:3000
+    env_file: .env
     # Development: override command and run gulp instead of node so that gulp reloads app on the fly
     # command: gulp serve
 

@@ -10,6 +10,7 @@ ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/democ
 WORKDIR /opt/democracy.io
 
 COPY . /opt/democracy.io
+COPY ./config/custom-environment-variables.json.example /opt/democracy.io/config/custom-environment-variables.json
 
 RUN npm run build:prod
 

@@ -71,7 +71,10 @@ var Raven = require('raven-js');
 democracyApp.config([
   'dioConfig',
   function(dioConfig) {
-    Raven.config(dioConfig.SENTRY_DSN).install();
+    Raven
+      .config(dioConfig.SENTRY_DSN)
+      .addPlugin(require('raven-js/plugins/angular'), angular)
+      .install();
   }
 ]);
 

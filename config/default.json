@@ -33,6 +33,8 @@
         "SITE_KEY": ""
       },
 
+      "SENTRY_DSN": "",
+
       "SESSION": {
         "SECRET": ""
       },
@@ -72,7 +74,9 @@
     "SITE": {
       "API_VERSION": 1,
       "API_BASE_URL": "/api"
-    }
+    },
+
+    "SENTRY_DSN": ""
   }
 
 }

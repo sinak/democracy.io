@@ -65,3 +65,13 @@ require('angular-scroll/angular-scroll');
 // Require local modules generated as part of the build process
 require('../../.build/dio-app-settings');
 require('../../.build/partials/partials');
+
+
+var Raven = require('raven-js');
+democracyApp.config([
+  'dioConfig',
+  function(dioConfig) {
+    Raven.config(dioConfig.SENTRY_DSN).install();
+  }
+]);
+

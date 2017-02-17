@@ -23,6 +23,9 @@ var config = require('./config');
 var ipThrottle = require('./middleware/ip-throttle');
 var ngXsrf = require('./middleware/ng-xsrf');
 
+var Raven = require('raven');
+Raven.config(config.CREDENTIALS.SENTRY_DSN).install();
+
 var app = express();
 
 app.locals['CONFIG'] = config;
@@ -87,11 +90,13 @@ middleware(apiDef, app, function(err, middleware) {
   var apiRouter = require('./routes/api/router')();
   app.use(apiDef.basePath, apiRouter);
 
+  app.use(Raven.requestHandler());
+  app.use(Raven.errorHandler());
+
   app.listen(port, function () {
     console.log('Server listening on http://localhost:%s', port);
     console.log('Application ready to serve requests.');
   });
 });
-
 
 module.exports = app;

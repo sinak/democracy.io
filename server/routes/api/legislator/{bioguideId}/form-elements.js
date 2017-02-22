@@ -13,9 +13,8 @@ var get = function (req, res) {
   var bioguideId = req.params.bioguideId;
 
   potc.getFormElementsForRepIdsFromPOTC([bioguideId], req.app.locals.CONFIG, function(err, data) {
-    if (err) {
-      res.status(400).json(resHelpers.makeError(err));
-    }
+    if (err)
+      return res.status(400).json(resHelpers.makeError(err));
 
     var modelData = potcHelpers.makeLegislatorFormElements(data[bioguideId], bioguideId);
     res.json(resHelpers.makeResponse(modelData));

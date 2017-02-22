@@ -7,11 +7,21 @@ var angular = require('angular');
 var controllers = require('./controllers');
 var directives = require('./directives');
 var services = require('./services');
+var Raven = require('raven-js');
 
-var democracyApp = angular.module(
-  'democracyIoApp',
-  ['ngRoute', 'angular-locker', 'ngAnimate', 'ngSanitize', 'ui.mask', 'angular-inview','duScroll']
-);
+var dioConfig = require('../../.build/dio-app-settings');
+
+var democracyAppRequires = ['ngRoute', 'angular-locker', 'ngAnimate', 'ngSanitize',
+                            'ui.mask', 'angular-inview','duScroll'];
+if (dioConfig.SENTRY_DSN) {
+  Raven.config(dioConfig.SENTRY_DSN)
+    .addPlugin(require('raven-js/plugins/angular'), angular)
+    .install();
+  democracyAppRequires.unshift('ngRaven');
+}
+
+var democracyApp = angular.module('democracyIoApp', democracyAppRequires);
+democracyApp.constant('dioConfig', dioConfig);
 
 var configureApp = function($provide, $locationProvider, $httpProvider, $interpolateProvider, lockerProvider) {
   //$locationProvider.html5Mode(true);
@@ -63,5 +73,4 @@ require('angular-ui-utils/modules/mask/mask');
 require('angular-scroll/angular-scroll');
 
 // Require local modules generated as part of the build process
-require('../../.build/dio-app-settings');
 require('../../.build/partials/partials');

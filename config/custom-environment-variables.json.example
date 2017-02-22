@@ -18,6 +18,8 @@
         "API_KEY": "EFF_CIVIC_CRM_SITE_KEY"
       },
 
+      "SENTRY_DSN": "SENTRY_DSN",
+
       "SESSION": {
         "SECRET": "SESSION_SECRET"
       },
@@ -34,5 +36,9 @@
         "PASS": "REDIS_PASSWORD"
       }
     }
+  },
+
+  "WWW": {
+    "SENTRY_DSN": "SENTRY_DSN_PUBLIC"
   }
 }

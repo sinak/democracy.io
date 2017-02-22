@@ -6,13 +6,13 @@ services:
     ports:
       - 3000:3000
     env_file: .env
+
     # Development: override command and run gulp instead of node so that gulp reloads app on the fly
     # command: gulp serve
 
     # Development: override static files with volumized files for development purposes
     # volumes:
     #   - ./bin:/opt/democracy.io/bin
-    #   - ./config:/opt/democracy.io/config
     #   - ./gulp:/opt/democracy.io/gulp
     #   - ./models:/opt/democracy.io/models
     #   - ./server:/opt/democracy.io/server

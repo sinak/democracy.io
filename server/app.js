@@ -12,7 +12,6 @@ var morgan = require('morgan');
 var path = require('path');
 var serveFavicon = require('serve-favicon');
 var serveStatic = require('serve-static');
-var session = require('express-session');
 
 // NOTE: The app currently assumes a flat deploy with the server serving static assets directly.
 var BUILD_DIR = path.join(__dirname, '../.build');
@@ -22,16 +21,6 @@ var apiErrorHandler = require('./middleware/api-error-handler');
 var config = require('./config');
 var ipThrottle = require('./middleware/ip-throttle');
 var ngXsrf = require('./middleware/ng-xsrf');
-
-var redisOptions = config.get('REQUEST_THROTTLING.REDIS');
-
-var RedisStore = connectRedis(session);
-var redisStore = new RedisStore({
-  host: redisOptions.get('HOSTNAME'),
-  port: redisOptions.get('PORT'),
-  pass: redisOptions.get('PASS'),
-  ttl: config.get('REQUEST_THROTTLING.THROTTLE.expiry') || 7 * 24 * 60 * 60
-});
 
 var Raven = require('raven');
 Raven.config(config.CREDENTIALS.SENTRY_DSN).install();
@@ -69,24 +58,8 @@ middleware(apiDef, app, function(err, middleware) {
   var pathRe = /^\/api.*\/message$/;
   app.use(pathRe, ipThrottle(config.get('REQUEST_THROTTLING')));
 
-  // Default to the same ttl as used by the request throttle
-  app.use(session({
-    store: redisStore,
-    key: 'connect.sid',
-    secret: config.get('CREDENTIALS').get('SESSION.SECRET'),
-    cookie: {
-      path: '/',
-      httpOnly: true,
-      maxAge: null
-    },
-    resave: true,
-    saveUninitialized: true,
-    // TODO(leah): figure out how to inherit this from express
-    proxy: false
-  }));
-
   app.use(lusca({
-    csrf: true,
+    csrf: false,
     xframe: 'SAMEORIGIN',
     p3p: false,
     csp: false

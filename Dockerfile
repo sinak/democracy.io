@@ -12,6 +12,5 @@ WORKDIR /opt/democracy.io
 COPY . /opt/democracy.io
 COPY ./config/custom-environment-variables.json.example /opt/democracy.io/config/custom-environment-variables.json
 
-RUN npm run build:prod
-
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["node", "server.js"]

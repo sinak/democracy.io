@@ -17,8 +17,7 @@ var post = function (req, res) {
       'first_name': request.sender.firstName,
       'last_name': request.sender.lastName,
       source: 'democracy.io',
-      subscribe: true,
-      'opt_in': false
+      subscribe: true
     },
     'address_params': {
       street: '',

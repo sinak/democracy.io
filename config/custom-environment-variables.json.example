@@ -15,7 +15,7 @@
       },
 
       "EFF_CIVIC_CRM": {
-        "API_KEY": "EFF_CIVIC_CRM_SITE_KEY"
+        "SITE_KEY": "EFF_CIVIC_CRM_SITE_KEY"
       },
 
       "SENTRY_DSN": "SENTRY_DSN",

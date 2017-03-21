@@ -279,15 +279,6 @@
     "district": null
   },
   {
-    "firstName": "Jefferson",
-    "lastName": "Sessions",
-    "bioguideId": "S001141",
-    "chamber": "senate",
-    "title": "Sen",
-    "state": "AL",
-    "district": null
-  },
-  {
     "firstName": "Jeanne",
     "lastName": "Shaheen",
     "bioguideId": "S001181",
@@ -403,15 +394,6 @@
     "title": "Rep",
     "state": "CA",
     "district": "37"
-  },
-  {
-    "firstName": "Xavier",
-    "lastName": "Becerra",
-    "bioguideId": "B000287",
-    "chamber": "house",
-    "title": "Rep",
-    "state": "CA",
-    "district": "34"
   },
   {
     "firstName": "Michael",
@@ -1935,15 +1917,6 @@
     "district": null
   },
   {
-    "firstName": "Mick",
-    "lastName": "Mulvaney",
-    "bioguideId": "M001182",
-    "chamber": "house",
-    "title": "Rep",
-    "state": "SC",
-    "district": "5"
-  },
-  {
     "firstName": "Lisa",
     "lastName": "Murkowski",
     "bioguideId": "M001153",
@@ -2160,15 +2133,6 @@
     "district": "2"
   },
   {
-    "firstName": "Mike",
-    "lastName": "Pompeo",
-    "bioguideId": "P000602",
-    "chamber": "house",
-    "title": "Rep",
-    "state": "KS",
-    "district": "4"
-  },
-  {
     "firstName": "Robert",
     "lastName": "Portman",
     "bioguideId": "P000449",
@@ -2194,15 +2158,6 @@
     "title": "Rep",
     "state": "NC",
     "district": "4"
-  },
-  {
-    "firstName": "Tom",
-    "lastName": "Price",
-    "bioguideId": "P000591",
-    "chamber": "house",
-    "title": "Rep",
-    "state": "GA",
-    "district": "6"
   },
   {
     "firstName": "Mike",
@@ -4023,15 +3978,6 @@
     "district": "6"
   },
   {
-    "firstName": "Ryan",
-    "lastName": "Zinke",
-    "bioguideId": "Z000018",
-    "chamber": "house",
-    "title": "Rep",
-    "state": "MT",
-    "district": "0"
-  },
-  {
     "firstName": "David",
     "lastName": "Rouzer",
     "bioguideId": "R000603",
@@ -4867,5 +4813,14 @@
     "title": "Rep",
     "state": "WY",
     "district": "0"
+  },
+  {
+    "firstName": "Luther",
+    "lastName": "Strange",
+    "bioguideId": "S001202",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "AL",
+    "district": null
   }
 ]

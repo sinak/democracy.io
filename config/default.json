@@ -11,6 +11,8 @@
       "maxAge": 0
     },
 
+    "MAINTENANCE_MODE": false,
+
     "API": {
       "POTC_BASE_URL": "https://congressforms.eff.org",
       "SMARTY_STREETS": {

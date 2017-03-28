@@ -4,6 +4,8 @@
       "POTC_BASE_URL": "POTC_BASE_URL"
     },
 
+    "MAINTENANCE_MODE": "MAINTENANCE_MODE",
+
     "CREDENTIALS": {
       "POTC": {
         "DEBUG_KEY": "POTC_DEBUG_KEY"

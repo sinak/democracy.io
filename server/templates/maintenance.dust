@@ -1,0 +1,24 @@
+{>"layouts/master" /}
+
+{<body}
+
+  <div ng-controller="SendMessageController"
+       data-pagename="[[pageName]]"
+       data-pagefrom="[[pageFrom]]"
+       id="wrapper"
+       class="content">
+
+    <div class="main">
+
+      {>"components/nav-bar"/}
+
+      <div class="header">
+        <h1>Offline for maintenance</h1>
+        <h2>Please check back soon!</h2>
+      </div>
+    </div>
+  </div>
+
+  {>"components/footer"/}
+
+{/body}

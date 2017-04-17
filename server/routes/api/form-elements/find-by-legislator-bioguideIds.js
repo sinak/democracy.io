@@ -13,9 +13,8 @@ var get = function (req, res) {
   var bioguideIds = req.query.bioguideIds;
 
   potc.getFormElementsForRepIdsFromPOTC(bioguideIds, req.app.locals.CONFIG, function(err, data) {
-    if (err) {
-      res.status(400).json(resHelpers.makeError(err));
-    }
+    if (err)
+      return res.status(400).json(resHelpers.makeError(err));
 
     var modelData = lodash.reduce(data, function(results, val, bioguideId) {
       results.push(potcHelpers.makeLegislatorFormElements(val, bioguideId));

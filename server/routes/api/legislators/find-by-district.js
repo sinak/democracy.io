@@ -14,7 +14,7 @@ var get = function (req, res) {
   if (!Congress.validDistrict(state, district))
     res.status(400).json(resHelpers.makeError({ message: "Bad value for state/district parameter" }));
   else {
-    var legislators = [Congress.House[state][district]].concat(Congress.Senate[state]);
+    var legislators = Congress.getLegislators(state, district);
     var bioguideIds = legislators.map(function(legislator) {
       return legislator.bioguideId;
     });

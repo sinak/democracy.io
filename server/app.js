@@ -12,7 +12,6 @@ var morgan = require('morgan');
 var path = require('path');
 var serveFavicon = require('serve-favicon');
 var serveStatic = require('serve-static');
-var session = require('express-session');
 
 // NOTE: The app currently assumes a flat deploy with the server serving static assets directly.
 var BUILD_DIR = path.join(__dirname, '../.build');
@@ -22,6 +21,9 @@ var apiErrorHandler = require('./middleware/api-error-handler');
 var config = require('./config');
 var ipThrottle = require('./middleware/ip-throttle');
 var ngXsrf = require('./middleware/ng-xsrf');
+
+var Raven = require('raven');
+Raven.config(config.CREDENTIALS.SENTRY_DSN).install();
 
 var app = express();
 
@@ -38,34 +40,6 @@ app.use(serveFavicon(path.join(BUILD_DIR, 'static', config.VERSION, 'img/favicon
 app.use(serveStatic(BUILD_DIR, config.get('STATIC')));
 app.use(morgan('combined'));
 
-// Only throttle requests to the messages endpoints
-var pathRe = /^\/api.*\/message$/;
-app.use(pathRe, ipThrottle(config.get('REQUEST_THROTTLING')));
-
-var RedisStore = connectRedis(session);
-// Default to the same ttl as used by the request throttle
-app.use(session({
-  store: new RedisStore({ttl: config.get('REQUEST_THROTTLING.THROTTLE.expiry') || 7 * 24 * 60 * 60}),
-  key: 'connect.sid',
-  secret: config.get('CREDENTIALS').get('SESSION.SECRET'),
-  cookie: {
-    path: '/',
-    httpOnly: true,
-    maxAge: null
-  },
-  resave: true,
-  saveUninitialized: true,
-  // TODO(leah): figure out how to inherit this from express
-  proxy: false
-}));
-app.use(lusca({
-  csrf: true,
-  xframe: 'SAMEORIGIN',
-  p3p: false,
-  csp: false
-}));
-
-
 var port = process.env.PORT || 3000;
 middleware(apiDef, app, function(err, middleware) {
   if (err) {
@@ -79,6 +53,18 @@ middleware(apiDef, app, function(err, middleware) {
   app.use(middleware.metadata());
   app.use(middleware.parseRequest());
   app.use(middleware.validateRequest());
+
+  // Only throttle requests to the messages endpoints
+  var pathRe = /^\/api.*\/message$/;
+  app.use(pathRe, ipThrottle(config.get('REQUEST_THROTTLING')));
+
+  app.use(lusca({
+    csrf: false,
+    xframe: 'SAMEORIGIN',
+    p3p: false,
+    csp: false
+  }));
+
   app.use(apiErrorHandler());
 
   var appRouter = require('./routes/app/router')([ngXsrf()]);
@@ -87,11 +73,13 @@ middleware(apiDef, app, function(err, middleware) {
   var apiRouter = require('./routes/api/router')();
   app.use(apiDef.basePath, apiRouter);
 
+  app.use(Raven.requestHandler());
+  app.use(Raven.errorHandler());
+
   app.listen(port, function () {
     console.log('Server listening on http://localhost:%s', port);
     console.log('Application ready to serve requests.');
   });
 });
-
 
 module.exports = app;

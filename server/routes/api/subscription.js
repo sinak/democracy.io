@@ -17,8 +17,7 @@ var post = function (req, res) {
       'first_name': request.sender.firstName,
       'last_name': request.sender.lastName,
       source: 'democracy.io',
-      subscribe: true,
-      'opt_in': false
+      subscribe: true
     },
     'address_params': {
       street: '',
@@ -30,9 +29,8 @@ var post = function (req, res) {
   };
 
   effCivicCRM.subscribeToEFFMailingList(params, req.app.locals.CONFIG, function(err) {
-    if (err) {
-      res.status(400).json(resHelpers.makeError(err));
-    }
+    if (err)
+      return res.status(400).json(resHelpers.makeError(err));
 
     // TODO(leah): Look at the format of the response on this
     var modelData = {};

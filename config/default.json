@@ -11,6 +11,8 @@
       "maxAge": 0
     },
 
+    "MAINTENANCE_MODE": false,
+
     "API": {
       "POTC_BASE_URL": "https://congressforms.eff.org",
       "SMARTY_STREETS": {
@@ -32,6 +34,8 @@
       "EFF_CIVIC_CRM": {
         "SITE_KEY": ""
       },
+
+      "SENTRY_DSN": "",
 
       "SESSION": {
         "SECRET": ""
@@ -72,7 +76,9 @@
     "SITE": {
       "API_VERSION": 1,
       "API_BASE_URL": "/api"
-    }
+    },
+
+    "SENTRY_DSN": ""
   }
 
 }

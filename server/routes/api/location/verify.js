@@ -17,9 +17,8 @@ var get = function (req, res) {
   //       So, just supply the full address returned from the API call.
   var params = {street: req.query.address};
   smartyStreets.verifyAddress(params, req.app.locals.CONFIG, function(err, data) {
-    if (err) {
-      res.status(400).json(resHelpers.makeError(err));
-    }
+    if (err)
+      return res.status(400).json(resHelpers.makeError(err));
 
     var canonicalAddresses = map(data, ssHelpers.makeCanonicalAddressFromSSResponse);
     res.json(resHelpers.makeResponse(canonicalAddresses));

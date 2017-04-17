@@ -20,9 +20,8 @@ var post = function (req, res) {
   });
 
   var onComplete = function(err, data) {
-    if (err) {
-      res.status(400).json(resHelpers.makeError(err));
-    }
+    if (err)
+      return res.status(400).json(resHelpers.makeError(err));
 
     var modelData = map(data, function(res) {
       return new models.MessageResponse(res);

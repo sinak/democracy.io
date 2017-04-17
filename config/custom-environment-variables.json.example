@@ -1,0 +1,46 @@
+{
+  "SERVER": {
+    "API": {
+      "POTC_BASE_URL": "POTC_BASE_URL"
+    },
+
+    "MAINTENANCE_MODE": "MAINTENANCE_MODE",
+
+    "CREDENTIALS": {
+      "POTC": {
+        "DEBUG_KEY": "POTC_DEBUG_KEY"
+      },
+
+      "SMARTY_STREETS": {
+        "ID": "SMARTY_STREETS_ID",
+        "TOKEN": "SMARTY_STREETS_TOKEN"
+      },
+
+      "EFF_CIVIC_CRM": {
+        "SITE_KEY": "EFF_CIVIC_CRM_SITE_KEY"
+      },
+
+      "SENTRY_DSN": "SENTRY_DSN",
+
+      "SESSION": {
+        "SECRET": "SESSION_SECRET"
+      },
+
+      "IP": {
+        "SALT": "IP_SALT"
+      }
+    },
+
+    "REQUEST_THROTTLING": {
+      "REDIS": {
+        "PORT": "REDIS_PORT",
+        "HOSTNAME": "REDIS_HOST",
+        "PASS": "REDIS_PASSWORD"
+      }
+    }
+  },
+
+  "WWW": {
+    "SENTRY_DSN": "SENTRY_DSN_PUBLIC"
+  }
+}

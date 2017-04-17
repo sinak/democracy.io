@@ -1,0 +1,24 @@
+version: '2'
+services:
+  app:
+    build: .
+    restart: always
+    ports:
+      - 3000:3000
+    env_file: .env
+
+    # Development: override command and run gulp instead of node so that gulp reloads app on the fly
+    # command: gulp serve
+
+    # Development: override static files with volumized files for development purposes
+    # volumes:
+    #   - ./bin:/opt/democracy.io/bin
+    #   - ./gulp:/opt/democracy.io/gulp
+    #   - ./models:/opt/democracy.io/models
+    #   - ./server:/opt/democracy.io/server
+    #   - ./test:/opt/democracy.io/test
+    #   - ./www:/opt/democracy.io/www
+
+  # Development: Run a local redis store instead of connecting to the production store
+  # redis:
+  #   image: redis

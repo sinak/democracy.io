@@ -21,9 +21,8 @@ var post = function (req, res) {
   }
 
   potc.sendMessage(potcMessage, req.app.locals.CONFIG, function(err, data) {
-    if (err) {
-      res.status(400).json(resHelpers.makeError(err));
-    }
+    if (err)
+      return res.status(400).json(resHelpers.makeError(err));
 
     data.bioguideId = message.bioguideId;
     res.json(resHelpers.makeResponse(new models.MessageResponse(data)));

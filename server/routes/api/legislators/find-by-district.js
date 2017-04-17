@@ -23,7 +23,7 @@ var get = function (req, res) {
       // Call the PotC API get defunct and contact_url properties for each legislator
       potc.getFormElementsForRepIdsFromPOTC(bioguideIds, req.app.locals.CONFIG, function(err, data) {
         if (err) {
-          res.status(400).json(resHelpers.makeError(err));
+          return res.status(400).json(resHelpers.makeError(err));
         }
 
         var augmentedLegislators = legislators.map(function(legislator) {

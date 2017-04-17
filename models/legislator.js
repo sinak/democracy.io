@@ -28,6 +28,8 @@ Legislator.prototype.setProperties = function(options) {
   this.lastName = options.lastName;
   this.state = options.state;
   this.district = options.district;
+  this.defunct = options.defunct;
+  this.contact_url = options.contact_url;
 };
 
 

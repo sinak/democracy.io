@@ -82,7 +82,9 @@ var legislatorData = function(locker) {
       setValue(DATA_KEYS.L, legislators);
 
       var selectedLegislators = zipObject(map(legislators, function(legislator) {
-        return [legislator.bioguideId, true];
+        var selectedStatus = true;
+        if (legislator.defunct === true) { selectedStatus = false; }
+        return [legislator.bioguideId, selectedStatus];
       }));
 
       setValue(DATA_KEYS.BIBS, selectedLegislators);

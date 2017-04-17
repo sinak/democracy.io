@@ -12,12 +12,23 @@ var findByDistrict = require('../../../../server/routes/api/legislators/find-by-
 var testUtils = require('../../utils');
 var thirdPartyFixtures = require('../../fixtures').load('routes.third-party-api');
 
+
 nestedDescribe('routes.api.legislators', function() {
+
+  var mockHTTPCalls = function() {
+    nock(config.get('SERVER.API.POTC_BASE_URL'))
+      .post('/retrieve-form-elements?debug_key=test', {
+        'bio_ids': ['P000197','F000062','H001075']
+      })
+      .reply(200, thirdPartyFixtures.get('potc-multiple-bioid-form-elements'));
+  };
+
+  before(mockHTTPCalls);
 
   it('should find legislators by district', function(done) {
     var req = testUtils.getHTTPRequest({
       method: 'GET',
-      url: '/api/1/legislators/findByDistrict?state=CA&district=18',
+      url: '/api/1/legislators/findByDistrict?state=CA&district=12',
       query: {
         state: 'CA',
         district: '12'

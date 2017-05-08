@@ -7,16 +7,14 @@ var angular = require('angular');
 var controllers = require('./controllers');
 var directives = require('./directives');
 var services = require('./services');
-var Raven = require('raven-js');
+var Raven = require('./raven-client');
 
 var dioConfig = require('../../.build/dio-app-settings');
 
 var democracyAppRequires = ['ngRoute', 'angular-locker', 'ngAnimate', 'ngSanitize',
                             'ui.mask', 'angular-inview','duScroll'];
+
 if (dioConfig.SENTRY_DSN) {
-  Raven.config(dioConfig.SENTRY_DSN)
-    .addPlugin(require('raven-js/plugins/angular'), angular)
-    .install();
   democracyAppRequires.unshift('ngRaven');
 }
 

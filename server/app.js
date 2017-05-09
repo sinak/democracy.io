@@ -22,8 +22,7 @@ var config = require('./config');
 var ipThrottle = require('./middleware/ip-throttle');
 var ngXsrf = require('./middleware/ng-xsrf');
 
-var Raven = require('raven');
-Raven.config(config.CREDENTIALS.SENTRY_DSN).install();
+var Raven = require('./raven-client');
 
 var app = express();
 

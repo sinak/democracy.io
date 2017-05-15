@@ -91,7 +91,7 @@
   },
   {
     "firstName": "Robert",
-    "lastName": "Menéndez",
+    "lastName": "Menendez",
     "bioguideId": "M000639",
     "chamber": "senate",
     "title": "Sen",
@@ -594,7 +594,7 @@
     "district": "7"
   },
   {
-    "firstName": "André",
+    "firstName": "Andre",
     "lastName": "Carson",
     "bioguideId": "C001072",
     "chamber": "house",
@@ -1234,7 +1234,7 @@
   },
   {
     "firstName": "Luis",
-    "lastName": "Gutiérrez",
+    "lastName": "Gutierrez",
     "bioguideId": "G000535",
     "chamber": "house",
     "title": "Rep",
@@ -2475,7 +2475,7 @@
     "district": "5"
   },
   {
-    "firstName": "José",
+    "firstName": "Jose",
     "lastName": "Serrano",
     "bioguideId": "S000248",
     "chamber": "house",

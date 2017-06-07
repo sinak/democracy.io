@@ -12,11 +12,15 @@ var potc = require('../../../services/third-party-apis/potc');
 var potcHelpers = require('../helpers/potc');
 var resHelpers = require('../helpers/response');
 
+var crypto = require('crypto');
+
 
 var post = function (req, res) {
   var messages = apiHelpers.getModelData(req.body, models.Message);
   var potcMessages = map(messages, function(message) {
-    return potcHelpers.makePOTCMessage(message, req.app.locals.CONFIG.get('CAMPAIGNS.DEFAULT_TAG'));
+    var tag = req.app.locals.CONFIG.get('CAMPAIGNS.DEFAULT_TAG');
+    tag += '-' + crypto.randomBytes(16).toString('hex');
+    return potcHelpers.makePOTCMessage(message, tag);
   });
 
   var onComplete = function(err, data) {

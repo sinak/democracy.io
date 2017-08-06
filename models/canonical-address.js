@@ -43,8 +43,9 @@ CanonicalAddress.prototype.streetAddress = function() {
   if (!isEmpty(this.components.streetPostdirection)) {
     streetAddress += ' ' + this.components.streetPostdirection;
   }
+  if (!isEmpty(this.components.streetSuffix)){
   streetAddress += ' ' + this.components.streetSuffix;
-
+  }
   return streetAddress;
 };
 

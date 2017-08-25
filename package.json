@@ -87,7 +87,7 @@
     "connect-redis": "^2.3.0",
     "consolidate": "^0.12.1",
     "dustjs-helpers": "1.6.1",
-    "dustjs-linkedin": "2.6",
+    "dustjs-linkedin": "^2.7.5",
     "enjoi": "^0.2.3",
     "express": "^4.8.4",
     "express-session": "^1.11.2",

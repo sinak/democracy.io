@@ -91,7 +91,6 @@
     "enjoi": "^0.2.3",
     "express": "^4.8.4",
     "express-session": "^1.11.2",
-    "geoip-lite": "1.1.6",
     "hover.css": "^2.0.2",
     "lodash": "^3.3.1",
     "lodash.create": "^3.1.0",

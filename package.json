@@ -120,7 +120,7 @@
     "shush": "0.0.1",
     "sprintf-js": "^1.0.2",
     "stacktrace-js": "0.6.3",
-    "swagger-express-middleware": "^0.4.7",
+    "swagger-express-middleware": "^1.0.0-alpha.12",
     "tokenthrottle-redis": "^1.1.0",
     "us": "^1.0.3"
   }

@@ -12,7 +12,7 @@
     },
     "address": {
       "type": "string",
-      "maxLength": 50,
+      "maxLength": 200,
       "description": "Contains the first delivery line (usually the street address). This can include any of Primary Number, Street Name, Street Predirection, Street Postdirection, Street Suffix, Secondary Number, Secondary Designator, PMB Designator or PMB Number."
     },
     "county": {

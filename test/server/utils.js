@@ -2,14 +2,14 @@
  * Utilities for working with the tests.
  */
 
-var EventEmitter = require('events').EventEmitter;
-var config = require('config');
-var expect = require('chai').expect;
-var httpMocks = require('node-mocks-http');
+var EventEmitter = require("events").EventEmitter;
+var config = require("config");
+var expect = require("chai").expect;
+var httpMocks = require("node-mocks-http");
+var startServer = require("./../../server/app");
 
-var appConfig = require('config').get('SERVER');
-appConfig.VERSION = require('../../package.json').version;
-
+var appConfig = require("config").get("SERVER");
+appConfig.VERSION = require("../../package.json").version;
 
 var getAPIRequest = function(reqConfig) {
   var request = getHTTPRequest(reqConfig);
@@ -18,7 +18,6 @@ var getAPIRequest = function(reqConfig) {
 
   return request;
 };
-
 
 var getHTTPRequest = function(reqConfig) {
   var req = httpMocks.createRequest(reqConfig);
@@ -32,27 +31,35 @@ var getHTTPRequest = function(reqConfig) {
   return req;
 };
 
-
 var getHTTPResponse = function() {
   return httpMocks.createResponse({
     eventEmitter: EventEmitter
   });
 };
 
-
 /**
  * Helper to manage the event cycle for expecting a JSON response from the API.
  */
 var expectJSONResponse = function(res, expected, cb) {
-  res.on('end', function() {
+  res.on("end", function() {
     var data = JSON.parse(res._getData());
     expect(data).to.deep.equal(expected);
     cb();
   });
 };
 
+function setupServer() {
+  let server;
+  beforeEach(function(done) {
+    server = startServer(done);
+  });
+  afterEach(function(done) {
+    server.close(done);
+  });
+}
 
 module.exports.getHTTPRequest = getHTTPRequest;
 module.exports.getHTTPResponse = getHTTPResponse;
 module.exports.getAPIRequest = getAPIRequest;
 module.exports.expectJSONResponse = expectJSONResponse;
+module.exports.setupServer = setupServer;

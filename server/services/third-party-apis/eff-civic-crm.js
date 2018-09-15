@@ -2,41 +2,57 @@
  * Helpers for working with the EFF Civic CRM APIs.
  */
 
-var path = require('path');
-var url = require('url');
+var axios = require("axios").default;
+var config = require("config");
+var qs = require("querystring");
+var logger = require("./../../logger");
 
-var makeRequest = require('./third-party-api').makeRequest;
+const EFFCivicCRM = axios.create({
+  baseURL: config.get("SERVER.API.EFF_CIVIC_CRM_URL"),
+  params: {
+    site_key: config.get("SERVER.CREDENTIALS.EFF_CIVIC_CRM.SITE_KEY")
+  }
+});
 
+EFFCivicCRM.interceptors.request.use(req => {
+  logger.http("[EFF Civic CRM] [Request]", {
+    path: req.url
+  });
+  return req;
+});
 
-var makeEFFCivicCRMUrl = function(baseURL, pathname) {
-  var effURL = url.parse(baseURL);
-  effURL.pathname = pathname;
+EFFCivicCRM.interceptors.response.use(res => {
+  logger.http(`[EFF Civic CRM] [Response]`, res);
+  return res;
+});
 
-  return url.format(effURL);
-};
-
-
-var subscribeToEFFMailingList = function(params, config, cb) {
-  var effURL = makeEFFCivicCRMUrl(
-    config.get('API.EFF_CIVIC_CRM_URL'), 'civicrm/eff-action-api');
-
+/**
+ * @param {object} params
+ * @param {object} params.contact_params
+ * @param {string} params.contact_params.email
+ * @param {string} params.contact_params.first_name
+ * @param {string} params.contact_params.last_name
+ * @param {string} params.contact_params.source
+ * @param {boolean} params.contact_params.subscribe
+ * @param {object} params.address_params
+ * @param {string} params.address_params.street
+ * @param {string} params.address_params.city
+ * @param {string} params.address_params.state
+ * @param {string} params.address_params.zip
+ * @param {string} params.address_params.country
+ */
+var subscribeToEFFMailingList = function(params) {
   // To use the EFF Civic CRM API, you send it a POST request, that request must contain:
   //   * The action method to call, in our case import_contact
   //   * The site_key to auth the request
   //   * A JSON string containing details of the person to subscribe
-  var requestParams = {
-    method: 'POST',
-    url: effURL,
-    formData: {
-      method: 'import_contact',
-      data: JSON.stringify(params),
-      site_key: config.get('CREDENTIALS.EFF_CIVIC_CRM.SITE_KEY')
-    }
+
+  const formData = {
+    method: "import_contact",
+    data: JSON.stringify(params)
   };
 
-  makeRequest(requestParams, cb);
+  return EFFCivicCRM.post("/civicrm/eff-action-api", qs.stringify(formData));
 };
 
-
-module.exports.makeEFFCivicCRMUrl = makeEFFCivicCRMUrl;
 module.exports.subscribeToEFFMailingList = subscribeToEFFMailingList;

@@ -11,5 +11,6 @@ if (argv[argv.length - 1] === 'test') {
 
 var requireDir = require('require-dir');
 
+// @ts-ignore
 requireDir('./gulp/tasks', {recurse: true});
 

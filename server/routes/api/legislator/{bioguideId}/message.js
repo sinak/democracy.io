@@ -9,6 +9,11 @@ var potcHelpers =  require('../../helpers/potc');
 var resHelpers = require('../../helpers/response');
 
 
+/**
+ * 
+ * @param {import("express").Request} req 
+ * @param {import("express").Response} res 
+ */
 var post = function (req, res) {
   var message = apiHelpers.getModelData(req.body, models.Message);
   var potcMessage = potcHelpers.makePOTCMessage(
@@ -16,17 +21,20 @@ var post = function (req, res) {
 
   if (message.bioguideId !== req.params.bioguideId) {
     var err = new Error('legislator bioguideId does not match message bioguideId');
-    res.status(400).json(apiHelpers.makeError(err));
+    res.status(400).json(resHelpers.makeError(err));
     return;
   }
 
-  potc.sendMessage(potcMessage, req.app.locals.CONFIG, function(err, data) {
-    if (err)
-      return res.status(400).json(resHelpers.makeError(err));
+  potc
+    .sendMessage(potcMessage)
+    .then(sendMessageRes => {
+      var message = Object.assign(sendMessageRes.data, { bioguideId: message.bioguideId })
 
-    data.bioguideId = message.bioguideId;
-    res.json(resHelpers.makeResponse(new models.MessageResponse(data)));
-  });
+      res.json(resHelpers.makeResponse(new models.MessageResponse(message)));
+    })
+    .catch(err => {
+      res.status(400).json(resHelpers.makeError(err));
+    })
 };
 
 

@@ -2,74 +2,83 @@
  * Helpers for interacting with the Phantom of the Capitol API.
  */
 
-var path = require('path');
-var url = require('url');
+var axios = require("axios").default;
+var config = require("config");
+const logger = require("./../../logger");
 
-var makeRequest = require('./third-party-api').makeRequest;
+const POTCApi = axios.create({
+  baseURL: config.get("SERVER.API.POTC_BASE_URL"),
+  params: {
+    debug_key: config.get("SERVER.CREDENTIALS.POTC.DEBUG_KEY")
+  }
+});
 
+POTCApi.interceptors.request.use(req => {
+  logger.http("[POTC API] [Request]", req);
+  return req;
+});
 
-/**
- * Make an appropriately configured URL for the POTC API.
- * @param pathname
- * @param baseURL
- * @param debugKey
- * @returns {*}
- */
-var makePOTCUrl = function(pathname, baseURL, debugKey) {
-  var potcURL = url.parse(baseURL);
-  potcURL.pathname = pathname;
-  potcURL.query = {'debug_key': debugKey};
-
-  return url.format(potcURL);
-};
-
+POTCApi.interceptors.response.use(res => {
+  logger.http("[POTC API] [Response]", res);
+  return res;
+});
 
 /**
  * Fetches form elements for the supplied repIds from Phantom of the Capitol.
- * @param bioguideIds
- * @param config
- * @param cb
+ * @param {string[]} bioguideIds
+ * @returns {Promise<import("axios").AxiosResponse<import("./potc-types").POTC.FormElementsRes>>}
  */
-var getFormElementsForRepIdsFromPOTC = function(bioguideIds, config, cb) {
-  var potcURL = makePOTCUrl(
-    'retrieve-form-elements',
-    config.get('API.POTC_BASE_URL'),
-    config.get('CREDENTIALS.POTC.DEBUG_KEY')
-  );
-  makeRequest({method: 'POST', url: potcURL, json: true, body: {'bio_ids': bioguideIds}}, cb);
+var getFormElementsForRepIdsFromPOTC = function(bioguideIds) {
+  return POTCApi.post("/retrieve-form-elements", {
+    bio_ids: bioguideIds
+  });
 };
 
+/**
+ * @typedef FillOutFormRequest
+ * @property {string} bio_id
+ * @property {string} campaign_tag
+ * @property {object} fields
+ */
+/**
+ * @typedef FillOutFormResponse
+ * @property {"success" | "error"} status
+ */
+/**
+ * @typedef FillOutFormCaptchaNeededResponse
+ * @property {"captcha_needed"} status
+ * @property {string} url
+ */
 
 /**
  * Sends a message to a representative via POTC.
- * @param message
- * @param config
- * @param cb
+ * @param {FillOutFormRequest} message
+ * @returns {Promise<import("axios").AxiosResponse<FillOutFormResponse | FillOutFormCaptchaNeededResponse>>}
  */
-var sendMessage = function(message, config, cb) {
-  var potcURL = makePOTCUrl(
-    'fill-out-form',
-    config.get('API.POTC_BASE_URL'),
-    config.get('CREDENTIALS.POTC.DEBUG_KEY')
-  );
-  makeRequest({method: 'POST', url: potcURL, json: true, body: message}, cb);
+var sendMessage = function(message) {
+  return POTCApi.post("/fill-out-form", message);
 };
 
+/**
+ * @typedef FillOutCaptchaBody
+ * @property {string} answer
+ * @property {string} uid
+ */
+
+/**
+ * @typedef FillOutCaptchaResponse
+ * @property {"success" | "error"} status
+ */
 
 /**
  * Sends a captcha solution to POTC.
+ * @param {FillOutCaptchaBody} solution
+ * @returns {Promise<import("axios").AxiosResponse<FillOutCaptchaResponse>>}
  */
-var solveCaptcha = function(solution, config, cb) {
-  var potcURL = makePOTCUrl(
-    'fill-out-captcha',
-    config.get('API.POTC_BASE_URL'),
-    config.get('CREDENTIALS.POTC.DEBUG_KEY')
-  );
-  makeRequest({method: 'POST', url: potcURL, json: true, body: solution}, cb);
+var solveCaptcha = function(solution) {
+  return POTCApi.post("/fill-out-captcha", solution);
 };
 
-
-module.exports.makePOTCUrl = makePOTCUrl;
 module.exports.getFormElementsForRepIdsFromPOTC = getFormElementsForRepIdsFromPOTC;
 module.exports.sendMessage = sendMessage;
 module.exports.solveCaptcha = solveCaptcha;

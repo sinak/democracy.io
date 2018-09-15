@@ -2,27 +2,37 @@
  *
  */
 
-var lodash = require('lodash');
+var potc = require("../../../services/third-party-apis/potc");
+var potcHelpers = require("../helpers/potc");
+var resHelpers = require("../helpers/response");
 
-var potc = require('../../../services/third-party-apis/potc');
-var potcHelpers = require('../helpers/potc');
-var resHelpers = require('../helpers/response');
+/**
+ *
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ */
+var get = function(req, res) {
 
 
-var get = function (req, res) {
+
+  console.log(req.query)
   var bioguideIds = req.query.bioguideIds;
 
-  potc.getFormElementsForRepIdsFromPOTC(bioguideIds, req.app.locals.CONFIG, function(err, data) {
-    if (err)
-      return res.status(400).json(resHelpers.makeError(err));
+  potc
+    .getFormElementsForRepIdsFromPOTC(bioguideIds)
+    .then(formElementsRes => {
+      var modelData = Object.keys(formElementsRes.data).map(id=> {
+        return potcHelpers.makeLegislatorFormElements(
+          formElementsRes.data[id],
+          id
+        );
+      });
 
-    var modelData = lodash.reduce(data, function(results, val, bioguideId) {
-      results.push(potcHelpers.makeLegislatorFormElements(val, bioguideId));
-      return results;
-    }, []);
-    res.json(resHelpers.makeResponse(modelData));
-  });
+      res.json(resHelpers.makeResponse(modelData));
+    })
+    .catch(err => {
+      res.status(400).json(resHelpers.makeError(err));
+    });
 };
-
 
 module.exports.get = get;

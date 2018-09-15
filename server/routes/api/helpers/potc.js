@@ -2,13 +2,17 @@
  * Helper to construct a LegislatorFormElements model from a POTC response.
  */
 
-var lodash = require('lodash');
+var lodash = require("lodash");
 
-var models = require('../../../../models');
+var models = require("../../../../models");
 
-
+/**
+ *
+ * @param {object} message
+ * @param {string} campaignTag
+ * @returns {import("./../../../services/third-party-apis/potc").FillOutFormRequest} message
+ */
 var makePOTCMessage = function(message, campaignTag) {
-
   var addrComponents = message.canonicalAddress.components;
 
   var fields = {
@@ -40,22 +44,28 @@ var makePOTCMessage = function(message, campaignTag) {
     return !lodash.isUndefined(val) && !lodash.isNull(val);
   });
 
-  campaignTag = lodash.isEmpty(message.campaign.tag) ? campaignTag : message.campaign.tag;
+  campaignTag = lodash.isEmpty(message.campaign.tag)
+    ? campaignTag
+    : message.campaign.tag;
+
   return {
-    'bio_id': message.bioguideId,
+    bio_id: message.bioguideId,
     fields: fields,
-    'campaign_tag': campaignTag
-  }
+    campaign_tag: campaignTag
+  };
 };
 
-
+/**
+ *
+ * @param {import("./../../../services/third-party-apis/potc-types").POTC.LegislatorData} potcResponse
+ * @param {string} bioguideId
+ */
 var makeLegislatorFormElements = function(potcResponse, bioguideId) {
-
-  var formElems = lodash.map(potcResponse['required_actions'], function(action) {
+  var formElems = lodash.map(potcResponse.required_actions, function(action) {
     return {
       value: action.value,
-      maxLength: action['maxlength'],
-      optionsHash: action['options_hash']
+      maxLength: action.maxlength,
+      optionsHash: action.options_hash
     };
   });
 
@@ -63,9 +73,7 @@ var makeLegislatorFormElements = function(potcResponse, bioguideId) {
     bioguideId: bioguideId,
     formElements: formElems
   });
-
 };
-
 
 module.exports.makePOTCMessage = makePOTCMessage;
 module.exports.makeLegislatorFormElements = makeLegislatorFormElements;

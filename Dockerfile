@@ -1,4 +1,4 @@
-FROM node:7-alpine
+FROM node:carbon-alpine
 
 RUN apk --update --no-cache add \
     build-base file autoconf make gcc g++ python \

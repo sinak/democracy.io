@@ -1,6 +1,9 @@
+sudo: required
 language: node_js
 node_js:
-  - "7"
+  - "8.12.0"
+script:
+  - npm run build:prod
 cache:
   directories:
     - node_modules

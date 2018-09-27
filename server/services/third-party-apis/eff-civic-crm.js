@@ -5,7 +5,7 @@
 var axios = require("axios").default;
 var config = require("config");
 var qs = require("querystring");
-var logger = require("./../../logger");
+var ServiceLogger = require("./ServiceLogger");
 
 const EFFCivicCRM = axios.create({
   baseURL: config.get("SERVER.API.EFF_CIVIC_CRM_URL"),
@@ -14,17 +14,10 @@ const EFFCivicCRM = axios.create({
   }
 });
 
-EFFCivicCRM.interceptors.request.use(req => {
-  logger.http("[EFF Civic CRM] [Request]", {
-    path: req.url
-  });
-  return req;
-});
-
-EFFCivicCRM.interceptors.response.use(res => {
-  logger.http(`[EFF Civic CRM] [Response]`, res);
-  return res;
-});
+EFFCivicCRM.interceptors.response.use(
+  ServiceLogger.createResponseInterceptor("POTC API"),
+  ServiceLogger.createErrorInterceptor("POTC API")
+);
 
 /**
  * @param {object} params

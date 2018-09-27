@@ -8,11 +8,10 @@ var dust = require("dustjs-linkedin");
 var express = require("express");
 var lusca = require("lusca");
 var middleware = require("swagger-express-middleware");
-var morgan = require("morgan");
 var path = require("path");
 var serveFavicon = require("serve-favicon");
 var serveStatic = require("serve-static");
-var logger = require('./logger');
+var logger = require("./logger");
 
 // NOTE: The app currently assumes a flat deploy with the server serving static assets directly.
 var BUILD_DIR = path.join(__dirname, "../.build");
@@ -42,9 +41,6 @@ app.use(
 );
 // NOTE: EFF doesn't use CDNs, so rely on static serve w/ a caching layer in front of it in prod
 app.use(serveStatic(BUILD_DIR, config.get("STATIC")));
-app.use(morgan("combined"));
-
-var port = process.env.PORT || 3000;
 
 middleware(apiDef, app, function(err, middleware) {
   if (err) {
@@ -84,13 +80,21 @@ middleware(apiDef, app, function(err, middleware) {
   app.use(Raven.errorHandler());
 });
 
+app.use((req, res, next) => {
+  logger.info(`[Web] ${req.method} ${req.path} - ${res.statusCode}`, {
+    params: req.params
+  });
+  next();
+});
 /**
  *
  * @param {() => void} [callback]
  */
 module.exports = function(callback = () => {}) {
+  var port = process.env.PORT || 3000;
+
   return app.listen(port, function() {
-    logger.info("Server listening on port " + port)
+    logger.info("Server listening on port " + port);
     callback();
   });
-}
+};

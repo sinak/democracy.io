@@ -2,8 +2,6 @@
  *
  */
 
-var lodash = require('lodash');
-
 var resHelpers = require('../../helpers/response');
 var potc = require('../../../../services/third-party-apis/potc');
 var potcHelpers = require('../../helpers/potc');

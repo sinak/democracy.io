@@ -12,10 +12,6 @@ var resHelpers = require("../helpers/response");
  * @param {import("express").Response} res
  */
 var get = function(req, res) {
-
-
-
-  console.log(req.query)
   var bioguideIds = req.query.bioguideIds;
 
   potc

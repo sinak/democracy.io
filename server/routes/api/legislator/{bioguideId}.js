@@ -2,18 +2,22 @@
  *
  */
 
-var Congress = require('../../../services/congress');
-var resHelpers = require('../helpers/response');
+var resHelpers = require("../helpers/response");
+const CongressLegislators = require("./../../../services/CongressLegislators");
+const Legislator = require("./../../../../models/legislator");
 
+var get = function(req, res) {
+  var bioguideId = req.params.bioguideId.toString();
 
-var get = function (req, res) {
-  var bioguideId = req.params.bioguideId;
+  var legislator = CongressLegislators.getLegislatorByID(bioguideId);
 
-  if (!Congress.Members[bioguideId])
-    res.status(400).json(resHelpers.makeError({ message: "No legislator matches this bioguide id" }));
-  else
-    res.json(resHelpers.makeResponse(Congress.Members[bioguideId]));
+  if (!legislator)
+    res.status(400).json(
+      resHelpers.makeError({
+        message: "No legislator matches this bioguide id"
+      })
+    );
+  else res.json(resHelpers.makeResponse(new Legislator(legislator)));
 };
-
 
 module.exports.get = get;

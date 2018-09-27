@@ -10,7 +10,7 @@ var models = require("../../../../models");
  *
  * @param {object} message
  * @param {string} campaignTag
- * @returns {import("./../../../services/third-party-apis/potc").FillOutFormRequest} message
+ * @returns {POTC.FillOutForm.Request} message
  */
 var makePOTCMessage = function(message, campaignTag) {
   var addrComponents = message.canonicalAddress.components;
@@ -57,7 +57,7 @@ var makePOTCMessage = function(message, campaignTag) {
 
 /**
  *
- * @param {import("./../../../services/third-party-apis/potc-types").POTC.LegislatorData} potcResponse
+ * @param {POTC.LegislatorData} potcResponse
  * @param {string} bioguideId
  */
 var makeLegislatorFormElements = function(potcResponse, bioguideId) {

@@ -1,10 +1,16 @@
 const winston = require("winston");
+const format = winston.format;
 
 /** @type {winston.LoggerOptions} */
 const development = {
   transports: [
     new winston.transports.Console({
-      level: "debug"
+      level: "debug",
+      format: format.combine(
+        format.colorize({ all: true }),
+        format.timestamp(),
+        format.simple()
+      )
     })
   ]
 };
@@ -45,5 +51,4 @@ function getEnvConfig() {
 }
 
 const logger = winston.createLogger(getEnvConfig());
-
 module.exports = logger;

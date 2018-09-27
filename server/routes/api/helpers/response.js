@@ -1,8 +1,3 @@
-var isEmpty = require('lodash.isempty');
-var isUndefined = require('lodash.isundefined');
-var partial = require('lodash.partial');
-
-
 var makeResponse = function(data) {
   return {
     status: 'success',

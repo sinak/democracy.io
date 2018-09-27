@@ -4,7 +4,7 @@
 
 var axios = require("axios").default;
 var config = require("config");
-const logger = require("./../../logger");
+const ServiceLogger = require("./ServiceLogger");
 
 const POTCApi = axios.create({
   baseURL: config.get("SERVER.API.POTC_BASE_URL"),
@@ -13,20 +13,15 @@ const POTCApi = axios.create({
   }
 });
 
-POTCApi.interceptors.request.use(req => {
-  logger.http("[POTC API] [Request]", req);
-  return req;
-});
-
-POTCApi.interceptors.response.use(res => {
-  logger.http("[POTC API] [Response]", res);
-  return res;
-});
+POTCApi.interceptors.response.use(
+  ServiceLogger.createResponseInterceptor("POTC API"),
+  ServiceLogger.createErrorInterceptor("POTC API")
+);
 
 /**
  * Fetches form elements for the supplied repIds from Phantom of the Capitol.
  * @param {string[]} bioguideIds
- * @returns {Promise<import("axios").AxiosResponse<import("./potc-types").POTC.FormElementsRes>>}
+ * @returns {Promise<import("axios").AxiosResponse<POTC.FormElementsResult>>}
  */
 var getFormElementsForRepIdsFromPOTC = function(bioguideIds) {
   return POTCApi.post("/retrieve-form-elements", {
@@ -35,25 +30,9 @@ var getFormElementsForRepIdsFromPOTC = function(bioguideIds) {
 };
 
 /**
- * @typedef FillOutFormRequest
- * @property {string} bio_id
- * @property {string} campaign_tag
- * @property {object} fields
- */
-/**
- * @typedef FillOutFormResponse
- * @property {"success" | "error"} status
- */
-/**
- * @typedef FillOutFormCaptchaNeededResponse
- * @property {"captcha_needed"} status
- * @property {string} url
- */
-
-/**
  * Sends a message to a representative via POTC.
- * @param {FillOutFormRequest} message
- * @returns {Promise<import("axios").AxiosResponse<FillOutFormResponse | FillOutFormCaptchaNeededResponse>>}
+ * @param {POTC.FillOutForm.Request} message
+ * @returns {Promise<import("axios").AxiosResponse<POTC.FillOutForm.Response>>}
  */
 var sendMessage = function(message) {
   return POTCApi.post("/fill-out-form", message);

@@ -3,7 +3,6 @@
  */
 
 var map = require("lodash.map");
-var partial = require("lodash.partial");
 
 var apiHelpers = require("../helpers/api");
 var models = require("../../../../models");
@@ -38,18 +37,6 @@ var post = function(req, res) {
     .catch(err => {
       res.status(400).json(resHelpers.makeError(err));
     });
-
-  // async.parallel(
-  //   map(potcMessages, function(message) {
-  //     return function(cb) {
-  //       potc.sendMessage(message, req.app.locals.CONFIG, function(err, res) {
-  //         res.bioguideId = message["bio_id"];
-  //         cb(err, res);
-  //       });
-  //     };
-  //   }),
-  //   onComplete
-  // );
 };
 
 module.exports.post = post;

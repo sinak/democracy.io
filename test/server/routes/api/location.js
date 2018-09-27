@@ -21,7 +21,6 @@ nestedDescribe("routes.api.location", function() {
   before(function() {
     var ssc = config.get("SERVER.CREDENTIALS.SMARTY_STREETS");
     nock(config.get("SERVER.API.SMARTY_STREETS.ADDRESS_URL"))
-    .log(console.log)
       .get("/street-address")
       .query(true)
       .reply(200, thirdPartyFixtures.get("smarty-streets"));

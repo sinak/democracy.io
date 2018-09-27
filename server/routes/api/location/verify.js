@@ -27,7 +27,6 @@ var get = function(req, res) {
       res.json(resHelpers.makeResponse(canonicalAddresses));
     })
     .catch(err => {
-      console.log(err)
       res.status(400).json(resHelpers.makeError(err));
     });
 };

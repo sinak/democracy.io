@@ -2,24 +2,21 @@
  * Runs all application tests.
  */
 
-var gulp = require('gulp');
-var gulpMocha = require('gulp-mocha');
-var path = require('path');
+var gulp = require("gulp");
+var gulpMocha = require("gulp-mocha");
+var path = require("path");
 
-var config = require('../config');
+var config = require("../config");
 
-
-gulp.task('testFE', function() {
-
-});
-
-gulp.task('testServer', function() {
-  return gulp.src(path.join(config.TEST_DIR, '**/*.js'))
-    .pipe(gulpMocha({
-      reporter: 'spec'
-    }));
-});
-
-gulp.task('test', ['check-deps', 'testFE', 'testServer'], function() {
-
+gulp.task("test", function() {
+  return gulp
+    .src(path.join(config.TEST_DIR, "**/*.js"))
+    .pipe(
+      gulpMocha({
+        reporter: "spec"
+      })
+    )
+    .once("end", () => {
+      process.exit();
+    });
 });

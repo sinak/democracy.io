@@ -1,8 +1,9 @@
 /**
- *
+ * /api/1/legislators/find-by-district
  */
 
-var Congress = require("../../../services/congress");
+const Legislator = require("../../../../models").Legislator;
+var CongressLegislators = require("../../../services/CongressLegislators");
 var potc = require("../../../services/third-party-apis/potc");
 var resHelpers = require("../helpers/response");
 
@@ -14,18 +15,13 @@ var Raven = require("../../../raven-client");
  * @param {import("express").Response} res
  */
 var get = function(req, res) {
-  var state = req.query.state,
-    district = req.query.district;
+  const { state, district } = req.query;
 
-  if (Congress.validDistrict(state, district) != true) {
-    Raven.captureMessage(JSON.stringify(Congress.validDistrict(state, district)));
-  }
+  var legislators = CongressLegislators.findLegislatorsByDistrict(
+    state,
+    district.toString()
+  );
 
-  var legislators = Congress.getLegislators(state, district).filter(function(
-    n
-  ) {
-    return n != undefined;
-  });
   var bioguideIds = legislators.map(function(legislator) {
     return legislator.bioguideId;
   });
@@ -38,18 +34,26 @@ var get = function(req, res) {
     );
   }
   // Call the PotC API get defunct and contact_url properties for each legislator
-  potc.getFormElementsForRepIdsFromPOTC(bioguideIds).then(formElementsRes => {
-    var augmentedLegislators = legislators.map(function(legislator) {
-      var legislatorData = formElementsRes.data[legislator.bioguideId];
+  potc
+    .getFormElementsForRepIdsFromPOTC(bioguideIds)
+    .then(formElementsRes => {
+      var augmentedLegislators = legislators
+        .map(function(legislator) {
+          var legislatorData = formElementsRes.data[legislator.bioguideId];
 
-      return Object.assign(legislator, {
-        defunct: legislatorData.defunct || false,
-        contact_url: legislatorData.contact_url || null
-      });
+          return {
+            ...legislator,
+            defunct: legislatorData.defunct,
+            contact_url: legislatorData.contact_url
+          };
+        })
+        .map(l => new Legislator(l));
+
+      res.json(resHelpers.makeResponse(augmentedLegislators));
+    })
+    .catch(err => {
+      console.log(err);
     });
-
-    res.json(resHelpers.makeResponse(augmentedLegislators));
-  });
 };
 
 module.exports.get = get;

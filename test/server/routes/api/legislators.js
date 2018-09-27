@@ -9,25 +9,26 @@ var nock = require("nock");
 var axios = require("axios").default;
 
 var dioAPIFixtures = require("../../fixtures").load("routes.dio-api");
-var findByDistrict = require("../../../../server/routes/api/legislators/find-by-district");
 var testUtils = require("../../utils");
 var thirdPartyFixtures = require("../../fixtures").load(
   "routes.third-party-api"
 );
+const _ = require("lodash");
 
 nestedDescribe("routes.api.legislators", function() {
   var mockHTTPCalls = function() {
     nock(config.get("SERVER.API.POTC_BASE_URL"))
-      .post("/retrieve-form-elements", {
-        bio_ids: ["P000197", "F000062", "H001075"]
+      .post("/retrieve-form-elements", function(body) {
+        let bio_ids = ["P000197", "F000062", "H001075"];
+        return _.difference(bio_ids, body.bio_ids).length === 0;
       })
-      .query({
-        debug_key: "test"
-      })
+      .query(true)
       .reply(200, thirdPartyFixtures.get("potc-multiple-bioid-form-elements"));
   };
 
   before(mockHTTPCalls);
+
+  after(() => nock.cleanAll());
 
   testUtils.setupServer();
 
@@ -41,9 +42,12 @@ nestedDescribe("routes.api.legislators", function() {
       }
     })
       .then(res => {
-        const passed = expect(res.data.data).to.deep.equal(
-          dioAPIFixtures.get("legislators").data
-        );
+        const ids = res.data.data.map(legislator => legislator.bioguideId);
+        const fixtureIds = dioAPIFixtures
+          .get("legislators")
+          .data.map(l => l.bioguideId);
+        const passed = expect(_.difference(ids, fixtureIds)).length.to.be(0);
+
         passed ? done() : done(passed);
       })
       .catch(err => done(err));

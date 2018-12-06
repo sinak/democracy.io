@@ -1,0 +1,58 @@
+{>"layouts/master" /}
+
+{<body}
+<div class="container">
+  <div class="col-lg-10" id="privacy" style="margin-left: auto; margin-right: auto; float: none; font-size: 16px;">
+    <h1>Privacy policy</h1>
+      <p>The coalition of organizations behind Democracy.io takes your privacy seriously. Among our fundemental principles:</p>
+      <ul>
+      <li>We do not sell our email list. We do not share or distribute your contact information unless specifically stated so.</li>
+      <li>We don’t ask you for personal information unless we need it.</li>
+      <li>We don’t store personal information on our servers unless required for a specific organizational effort, such as delivering a message to congress, connect you via phone to your representatives, deliver a petition or in order to communicate with you about an upcoming effort.</li>
+      </ul>
+      <h3>Website Visitors</h3>
+      <p>Like many websites, Democracy.io collects non-personally-identifying information of the sort that web browsers and servers typically make available, such as the browser type, language preference, referring site, and the date and time of each visitor request. Democracy.io’s purpose in collecting non-personally identifying information is to better understand how Democracy.io’s visitors use its website. From time to time, Democracy.io may share non-personally-identifying information in the aggregate with organizations and employees of organizations that are members of the coalition, e.g., for example the number of visitors or signups during a particular period.</p>
+      <p>Democracy.io also uses potentially personally-identifying information like Internet Protocol (IP) addresses for the purpose of geolocating users to show appropriate actions and content. For example, if you are based in the US, we will use your IP address to show you content about pending laws in the US Congress. However, Democracy.io does not store IP addresses, and would only disclose IP addresses under the same circumstances that it uses and discloses personally-identifying information as described below.</p>
+      <h3>Gathering of Personally-Identifying Information</h3>
+      <p>Certain visitors to Democracy.io's websites choose to interact with Democracy.io in ways that require Democracy.io to gather personally-identifying information. The amount and type of information that Democracy.io gathers depends on the nature of the interaction. For example, we ask visitors who sign up to be part of the day of action to provide an email address so that we may contact them. Those who engage in actions with Democracy.io – by sending an email to Congress or calling their representatives, for example – are asked to provide additional information, including as necessary the personal information required to process those actions. In each case, Democracy.io collects such information only insofar as is necessary or appropriate to fulfill the purpose of the visitor’s interaction with Democracy.io. Democracy.io does not disclose personally-identifying information other than as described below. Visitors can always refuse to supply personally-identifying information, with the caveat that it may prevent them from engaging in certain website-related activities.</p>
+      <h3>Third-party services</h3>
+      <p>Personal Data is collected for the following purposes and may be shared with the following services:
+      <ul>
+      <li>The Rocket Science Group, LLC d/b/a MailChimp (<a href="http://mailchimp.com/legal/privacy/">privacy policy</a>) - For storing email addresses, event RSVPs, and emailing users.</li>
+      <li>Action Network (<a href="https://actionnetwork.org/privacy">privacy policy</a>) - For the purpose of creating distributed event signups and managing on-the-day events.</li>
+      <li>Youtube, by Google, Inc. (<a href="http://www.youtube.com/static?gl=US&template=privacy_guidelines">privacy policy</a>) - For  storing and serving any videos used on the site.</li>
+      <li>Tint, by Hypemarks, Inc. (<a href="http://www.tintup.com/privacy">privacy policy</a>) - For livestreaming social media events on the day of the action.</li>
+      <li>reddit Inc. (<a href="http://www.reddit.com/help/privacypolicy">privacy policy</a>) - For use of the reddit widget (proxied to make the requests SSL-secured) that displays recent stories from the campaign's subreddit.</li>
+      <li>Twilio (<a href="https://www.twilio.com/legal/privacy">privacy policy</a>) - For connecting calls to Congress initiated by users on the site, the banner, or by dialing our call-in number.</li>
+      <li>Mobile Commons (<a href="http://www.mobilecommons.com/terms-and-conditions/privacy-policy/">privacy policy</a>) - For sending SMS updates about future campaigns (if explicitly requested by a user).</li>
+      <li>Twitter, Inc. (<a href="https://twitter.com/privacy">privacy policy</a>) - For showing notable tweets on the results page.</li>
+      <li>The Electronic Frontier Foundation/Necessary and Proportionate (<a href="https://www.eff.org/policy">privacy policy</a>) - International visitors will be directed to sign the Necessary and Proportionate principles against mass surveillance, which is created by EFF and uses EFF privacy policy.</li>
+      <li>Cloudfront by Amazon (<a href="http://aws.amazon.com/privacy/">privacy policy</a>) and Cloudflare (<a href="https://www.cloudflare.com/security-policy">privacy policy</a>) - Used to serve pages via a global, distributed content delivery network.</li>
+      </ul>
+      <p>In order the use particular features of the site, you may be required to share your personally-identifying information with these third-party service providers for the purpose of enabling the functionality of the site, and in some instances, for example signing up for a mail list or event, we may give one or more of these service providers limited access to the personally-identifying information that is reasonably necessary to deliver the service.</p>
+      <h3>Aggregated Statistics</h3>
+      <p>Democracy.io may collect statistics about the behavior of visitors to its websites. For instance, Democracy.io may monitor the number of users who've signed up for an event or who've visited a particular page on the website. Democracy.io may display the agregrated statistics with members of the coalition or make them available publicly. However, Democracy.io does not disclose personally-identifying information other than as described below.</p>
+      <h3>Protection of Certain Personally-Identifying Information</h3>
+      <p>Democracy.io may disclose potentially personally-identifying and personally-identifying information to members of the coalition, contractors and affiliated organizations that need to know that information in order to process it on Democracy.io’s behalf or to provide services available at Democracy.io. Some of those contractors and affiliated organizations may be located outside of your home country; by using Democracy.io’s websites, you consent to the transfer of such information to them.  For example, affiliated organizations may be asked to help deliver messages and petitions to Congress. Democracy.io may also share information such as your email address with coalition members organizations for the purpose of adding you to their mailing list, but only as explicitly authorized by you on the site or on the day of action banner.</p>
+      <p>Democracy.io will not rent or sell potentially personally-identifying and personally-identifying information to anyone. Other than to to coalition members, contractors and affiliated organizations, Democracy.io discloses potentially personally-identifying and personally-identifying information only in response to a subpoena or court order, or when Democracy.io believes in good faith that disclosure is reasonably necessary to protect the property or rights of Democracy.io, third parties or the public at large.</p>
+      <p>If we are required by law to disclose the information that you have submitted, we will attempt to provide you with notice (unless we are prohibited) that a request for your information has been made in order to give you an opportunity to object to the disclosure. We will attempt to provide this notice by email, if you have given us an email address, or by postal mail if you have entered a postal address. If you do not challenge the disclosure request, we may be legally required to turn over your information.</p>
+      <p>If you are a registered user of an Democracy.io website and have supplied your email address, Democracy.io may occasionally send you an email to tell you about new actions or events, solicit your feedback, or just keep you up to date with what’s going on with Democracy.io and our efforts. We primarily use our blog to communicate this type of information, so we expect to keep this type of email to a minimum. Democracy.io takes all measures reasonably necessary to protect against the unauthorized access, use, alteration or destruction of potentially personally-identifying and personally-identifying information.</p>
+      <h3>Cookies</h3>
+      <p>A cookie is a string of information that a website stores on a visitor’s computer, and that the visitor’s browser provides to the website each time the visitor returns. Democracy.io uses cookies to help Democracy.io identify and track visitors, their usage of Democracy.io website, and their website access preferences. Democracy.io visitors who do not wish to have cookies placed on their computers should set their browsers to refuse cookies before using Democracy.io’s websites.</p>
+      <h3>End of life personal data usage</h3>
+      <p>If the Democracy.io coalition is at some point disbanded, user information will not be transferred or acquired by a third party.</p>
+      <h3>Privacy Policy Changes</h3>
+      <p>Although most changes are likely to be minor, Democracy.io may change its Privacy Policy from time to time, and at Democracy.io’s sole discretion. We encourage visitors to frequently check this page for any changes to its Privacy Policy. Your continued use of this site after any change in this Privacy Policy will constitute your acceptance of such change.</p>
+      <p>Last modified: February 13th, 2014</p>
+      <p>&nbsp;</p><p>&nbsp;</p>
+      <p style="font-size:12px">We’d very much like to thank the people at <a href="http://www.wordpress.com/">Automattic Inc.</a> who were kind enough to offer their Privacy Policy to the world under the Creative Commons Sharealike license. Our privacy policy is a close derivative of their work. We’re therefore pleased to make our policy available under the same terms.<p>
+      <p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+  </div>
+</div>
+{/body}
+
+{>"components/footer"/}
+
+{<afterBody}
+  {>"components/piwik"/}
+{/afterBody}

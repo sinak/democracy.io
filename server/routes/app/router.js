@@ -12,6 +12,10 @@ module.exports = function(middleware) {
   router.route('/')
     .get(require('./home'));
 
+  router.route('/privacy-policy').get((req, res) => {
+    res.render("privacy-policy")
+  })
+
   return router;
 
 };

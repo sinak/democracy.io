@@ -4822,5 +4822,14 @@
     "title": "Sen",
     "state": "AL",
     "district": null
+  },
+  {
+    "firstName": "Hawley",
+    "lastName": "Joshua",
+    "bioguideId": "H001089",
+    "chamber": "senate",
+    "title": "Sen",
+    "state": "MO",
+    "district": null
   }
 ]

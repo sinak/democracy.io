@@ -19,9 +19,14 @@ POTCApi.interceptors.response.use(
 );
 
 /**
+ * @template T
+ * @typedef {import("axios").AxiosPromise<T>} AxiosPromise
+ */
+
+/**
  * Fetches form elements for the supplied repIds from Phantom of the Capitol.
- * @param {string[]} bioguideIds
- * @returns {Promise<import("axios").AxiosResponse<POTC.FormElementsResult>>}
+ * @param {string[]} bioguideIds array of legislator's bioguide ID's
+ * @returns {AxiosPromise<POTC.FormElementsResult>}
  */
 var getFormElementsForRepIdsFromPOTC = function(bioguideIds) {
   return POTCApi.post("/retrieve-form-elements", {
@@ -32,27 +37,16 @@ var getFormElementsForRepIdsFromPOTC = function(bioguideIds) {
 /**
  * Sends a message to a representative via POTC.
  * @param {POTC.FillOutForm.Request} message
- * @returns {Promise<import("axios").AxiosResponse<POTC.FillOutForm.Response>>}
+ * @returns {AxiosPromise<POTC.FillOutForm.Response>}
  */
 var sendMessage = function(message) {
   return POTCApi.post("/fill-out-form", message);
 };
 
 /**
- * @typedef FillOutCaptchaBody
- * @property {string} answer
- * @property {string} uid
- */
-
-/**
- * @typedef FillOutCaptchaResponse
- * @property {"success" | "error"} status
- */
-
-/**
  * Sends a captcha solution to POTC.
- * @param {FillOutCaptchaBody} solution
- * @returns {Promise<import("axios").AxiosResponse<FillOutCaptchaResponse>>}
+ * @param {POTC.FillOutCaptchaBody} solution
+ * @returns {AxiosPromise<POTC.FillOutCaptchaBody>}
  */
 var solveCaptcha = function(solution) {
   return POTCApi.post("/fill-out-captcha", solution);

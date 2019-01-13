@@ -2,7 +2,6 @@
  *
  */
 
-var connectRedis = require("connect-redis");
 var consolidate = require("consolidate");
 var dust = require("dustjs-linkedin");
 var express = require("express");
@@ -55,9 +54,14 @@ middleware(apiDef, app, function(err, middleware) {
   app.use(middleware.parseRequest());
   app.use(middleware.validateRequest());
 
+  // Request throttling
   // Only throttle requests to the messages endpoints
-  var pathRe = /^\/api.*\/message$/;
-  app.use(pathRe, ipThrottle(config.get("REQUEST_THROTTLING")));
+  // Steven - disabled for non production environments,
+  // this might be better to test in isolation since it has a Redis dependency
+  if (process.env.NODE_ENV === "production") {
+    var pathRe = /^\/api.*\/message$/;
+    app.use(pathRe, ipThrottle(config.get("REQUEST_THROTTLING")));
+  }
 
   app.use(
     lusca({
@@ -86,15 +90,4 @@ app.use((req, res, next) => {
   });
   next();
 });
-/**
- *
- * @param {() => void} [callback]
- */
-module.exports = function(callback = () => {}) {
-  var port = process.env.PORT || 3000;
-
-  return app.listen(port, function() {
-    logger.info("Server listening on port " + port);
-    callback();
-  });
-};
+module.exports = app;

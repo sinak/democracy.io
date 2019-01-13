@@ -1,3 +1,4 @@
+// @ts-nocheck
 var Raven = require('raven');
 var config = require('./config');
 var ravenClient = Raven.config(config.CREDENTIALS.SENTRY_DSN).install();

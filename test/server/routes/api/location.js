@@ -7,8 +7,7 @@ var expect = require("chai").expect;
 var lodash = require("lodash");
 var nestedDescribe = require("nested-describe");
 var nock = require("nock");
-var axios = require("axios").default;
-var startServer = require("./../../../../server/app");
+const DIOApi = require("./../../DIOApi");
 
 var dioAPIFixtures = require("../../fixtures").load("routes.dio-api");
 var testUtils = require("../../utils");
@@ -28,10 +27,7 @@ nestedDescribe("routes.api.location", function() {
   testUtils.setupServer();
 
   it("should verify a supplied location", function(done) {
-    axios({
-      method: "GET",
-      baseURL: "http://localhost:3000",
-      url: "/api/1/location/verify",
+    DIOApi.get("/api/1/location/verify", {
       params: {
         address: "100 Test St, San Francisco, 94110"
       }

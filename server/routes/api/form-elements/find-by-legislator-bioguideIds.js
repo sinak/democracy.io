@@ -2,7 +2,7 @@
  *
  */
 
-var potc = require("../../../services/third-party-apis/potc");
+var potc = require("../../../services/POTC");
 var potcHelpers = require("../helpers/potc");
 var resHelpers = require("../helpers/response");
 

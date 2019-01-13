@@ -22,9 +22,14 @@ SmartyStreetsAPI.interceptors.response.use(
 );
 
 /**
+ * @template T
+ * @typedef {import("axios").AxiosPromise<T>} AxiosPromise
+ */
+
+/**
  *
  * @param {SmartyStreets.StreetAddress.Body} address
- * @returns {Promise<import("axios").AxiosResponse<SmartyStreets.StreetAddress.Result[]>>}
+ * @returns {AxiosPromise<SmartyStreets.StreetAddress.Result[]>}
  */
 var verifyAddress = function(address) {
   return SmartyStreetsAPI.get("/street-address", {

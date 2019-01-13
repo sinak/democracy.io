@@ -1,4 +1,4 @@
-const CongressLegislatorsCache = require("./../../server/services/CongressLegislators/CongressLegislatorsCache");
+const LegislatorStorage = require("../../server/services/LegislatorStorage");
 const expect = require("chai").expect;
 
 /** @type {Congress.Legislator[]} */
@@ -45,8 +45,8 @@ const legislatorsFixture = [
 ];
 
 it("findLegislatorsByDistrict should find legislators by district", function() {
-  const c = new CongressLegislatorsCache();
-  c.importLegislators(legislatorsFixture);
+  const c = new LegislatorStorage();
+  c.loadLegislators(legislatorsFixture);
 
   const legislators = c.findLegislatorsByDistrict("CA", "1");
   const ids = legislators.map(l => l.bioguideId);
@@ -56,8 +56,8 @@ it("findLegislatorsByDistrict should find legislators by district", function() {
 });
 
 it("getLegislatorByID should find legislators by ID", function() {
-  const c = new CongressLegislatorsCache();
-  c.importLegislators(legislatorsFixture);
+  const c = new LegislatorStorage();
+  c.loadLegislators(legislatorsFixture);
 
   let fixture = legislatorsFixture[0];
   const legislator = c.getLegislatorByID(fixture.bioguideId);
@@ -65,16 +65,16 @@ it("getLegislatorByID should find legislators by ID", function() {
 });
 
 it("validDistrict should validate a state and district", function() {
-  const c = new CongressLegislatorsCache();
-  c.importLegislators(legislatorsFixture);
+  const c = new LegislatorStorage();
+  c.loadLegislators(legislatorsFixture);
 
   expect(c.validDistrict("invalid", "invalid")).to.equal(false);
   expect(c.validDistrict("CA", "1")).to.equal(true);
 });
 
-it("importLegislators should replace the cached legislators", function() {
-  const c = new CongressLegislatorsCache();
-  c.importLegislators(legislatorsFixture);
+it("loadLegislators should replace the cached legislators", function() {
+  const c = new LegislatorStorage();
+  c.loadLegislators(legislatorsFixture);
 
   /** @type {Congress.Legislator} */
   const replacementFixture = {
@@ -86,7 +86,7 @@ it("importLegislators should replace the cached legislators", function() {
     state: "AZ",
     title: "Sen"
   };
-  c.importLegislators([replacementFixture]);
+  c.loadLegislators([replacementFixture]);
 
   // replaced fixture
   expect(c.getLegislatorByID(replacementFixture.bioguideId)).to.contain(

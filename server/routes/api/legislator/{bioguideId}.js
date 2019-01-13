@@ -3,7 +3,7 @@
  */
 
 var resHelpers = require("../helpers/response");
-const CongressLegislators = require("./../../../services/CongressLegislators");
+const CongressLegislators = require("../../../services/Legislators");
 const Legislator = require("./../../../../models/legislator");
 
 var get = function(req, res) {

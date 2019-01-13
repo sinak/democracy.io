@@ -3,7 +3,7 @@
  */
 
 var apiHelpers = require("./helpers/api");
-var effCivicCRM = require("../../services/third-party-apis/eff-civic-crm");
+var effCivicCRM = require("../../services/eff-civic-crm");
 var models = require("../../../models");
 var resHelpers = require("./helpers/response");
 

@@ -7,7 +7,7 @@ var expect = require("chai").expect;
 var lodash = require("lodash");
 var nestedDescribe = require("nested-describe");
 var nock = require("nock");
-var axios = require("axios").default;
+const DIOApi = require("./../../DIOApi");
 
 var dioAPIFixtures = require("../../fixtures").load("routes.dio-api");
 var testUtils = require("../../utils");
@@ -32,30 +32,14 @@ nestedDescribe("routes.api.legislator", function() {
   before(mockHTTPCalls);
   testUtils.setupServer();
 
-  it("should fetch a legislator object for a specific bioguideId", function(done) {
-    axios({
-      method: "GET",
-      baseURL: "http://localhost:3000",
-      url: "/api/1/legislator/P000197"
-    })
-      .then(res => {
-        const passed = expect(res.data).to.deep.equal(
-          dioAPIFixtures.get("legislator")
-        );
-        passed ? done() : done(passed);
-      })
-      .catch(err => {
-        done(err);
-      });
+  it("should fetch a legislator object for a specific bioguideId", async function() {
+    const res = await DIOApi.get("/api/1/legislator/P000197");
+    expect(res.data).to.deep.equal(dioAPIFixtures.get("legislator"));
   });
 
   before(mockHTTPCalls);
   it("should get form elements for a specific bioguideId", function(done) {
-    axios({
-      method: "GET",
-      baseURL: "http://localhost:3000",
-      url: "/api/1/legislator/P000197/formElements"
-    })
+    DIOApi.get("/api/1/legislator/P000197/formElements")
       .then(res => {
         const passed = expect(res.data).to.deep.equal(
           dioAPIFixtures.get("legislator-form-elements")

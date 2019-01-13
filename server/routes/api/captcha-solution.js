@@ -4,13 +4,13 @@
 
 var apiHelpers = require("./helpers/api");
 var models = require("../../../models");
-var potc = require("../../services/third-party-apis/potc");
+var potc = require("../../services/POTC");
 var resHelpers = require("./helpers/response");
 
 /**
- * 
- * @param {import("express").Request} req 
- * @param {import("express").Response} res 
+ *
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
  */
 var post = function(req, res) {
   var solution = apiHelpers.getModelData(req.body, models.CaptchaSolution);

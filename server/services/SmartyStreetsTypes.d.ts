@@ -1,26 +1,6 @@
-declare namespace Congress {
-  declare type Legislator = Senator | Representative;
-  declare interface LegislatorBase {
-    firstName: string;
-    lastName: string;
-    bioguideId: string;
-    state: string;
-  }
-  interface Senator extends LegislatorBase {
-    chamber: "senate";
-    title: "Sen";
-    district: null;
-  }
-  interface Representative extends LegislatorBase {
-    chamber: "house";
-    title: "Rep";
-    district: string;
-  }
-}
-
 declare namespace SmartyStreets {
-  declare namespace StreetAddress {
-    declare interface Body {
+  export namespace StreetAddress {
+    export interface Body {
       input_id?: string;
       street: string;
       street2?: string;
@@ -33,7 +13,7 @@ declare namespace SmartyStreets {
       match?: "strict" | "range" | "invalid";
     }
 
-    declare interface Result {
+    export interface Result {
       input_id: string;
       input_index: number;
       candidate_index: number;
@@ -46,7 +26,7 @@ declare namespace SmartyStreets {
       metadata: StreetAddressResultMetadata;
     }
 
-    declare interface ResultComponents {
+    export interface ResultComponents {
       urbanization?: string;
       primary_number: string;
       street_name: string;
@@ -65,7 +45,7 @@ declare namespace SmartyStreets {
       delivery_point: string;
       delivery_point_check_digit: string;
     }
-    declare interface ResultMetadata {
+    export interface ResultMetadata {
       record_type: "F" | "G" | "H" | "P" | "R" | "S" | "[blank]";
       zip_type: "Unique" | "Military" | "POBox" | "Standard";
       county_fips: string;
@@ -94,7 +74,7 @@ declare namespace SmartyStreets {
       utf_offset: number;
       dst: string;
     }
-    declare interface ResultAnalysis {
+    export interface ResultAnalysis {
       dpv_match_code: "Y" | "N" | "S" | "D" | "[blank]";
       dpv_footnotes: string;
       dpv_cmra: "Y" | "N" | "[blank]";
@@ -105,43 +85,6 @@ declare namespace SmartyStreets {
       lacslink_code?: "A" | "00" | "09" | "14" | "92" | "[blank]";
       lacslink_indicator?: "Y" | "S" | "N" | "F" | "[blank]";
       suitelink_match?: "true" | "false";
-    }
-  }
-}
-
-declare namespace POTC {
-  declare interface FormElementsResult {
-    [key: string]: LegislatorData;
-  }
-
-  declare interface LegislatorData {
-    required_actions: RequiredAction[];
-    defunct?: boolean;
-    contact_url?: string;
-  }
-
-  declare interface RequiredAction {
-    maxlength: any;
-    value: string;
-    options_hash: any;
-  }
-
-  declare namespace FillOutForm {
-    declare interface Request {
-      bio_id: string;
-      campaign_tag: string;
-      fields: object;
-    }
-
-    declare type Response = ResponseNoCaptcha | ResponseCaptcha;
-
-    declare interface ResponseNoCaptcha {
-      status: "success" | "error";
-    }
-
-    declare interface ResponseCaptcha {
-      status: "captcha_needed";
-      url: string;
     }
   }
 }

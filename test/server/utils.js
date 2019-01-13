@@ -6,7 +6,7 @@ var EventEmitter = require("events").EventEmitter;
 var config = require("config");
 var expect = require("chai").expect;
 var httpMocks = require("node-mocks-http");
-var startServer = require("./../../server/app");
+var expressApp = require("./../../server/app");
 
 var appConfig = require("config").get("SERVER");
 appConfig.VERSION = require("../../package.json").version;
@@ -49,12 +49,17 @@ var expectJSONResponse = function(res, expected, cb) {
 };
 
 function setupServer() {
+  /** @type {import("http").Server} */
   let server;
   beforeEach(function(done) {
-    server = startServer(done);
+    server = expressApp.listen(3005, function() {
+      done();
+    });
   });
   afterEach(function(done) {
-    server.close(done);
+    server.close(function() {
+      done();
+    });
   });
 }
 

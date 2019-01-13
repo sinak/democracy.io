@@ -3,8 +3,8 @@
  */
 
 const Legislator = require("../../../../models").Legislator;
-var CongressLegislators = require("../../../services/CongressLegislators");
-var potc = require("../../../services/third-party-apis/potc");
+var CongressLegislators = require("../../../services/Legislators");
+var potc = require("../../../services/POTC");
 var resHelpers = require("../helpers/response");
 
 var Raven = require("../../../raven-client");

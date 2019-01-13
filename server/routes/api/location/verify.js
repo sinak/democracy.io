@@ -4,7 +4,7 @@
 
 var resHelpers = require("../helpers/response");
 var ssHelpers = require("../helpers/smarty-streets");
-var smartyStreets = require("../../../services/third-party-apis/smarty-streets");
+var smartyStreets = require("../../../services/SmartyStreetsAPI");
 
 /**
  *

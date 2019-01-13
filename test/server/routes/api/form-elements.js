@@ -6,9 +6,8 @@ var config = require("config");
 var expect = require("chai").expect;
 var nestedDescribe = require("nested-describe");
 var nock = require("nock");
-var axios = require("axios").default;
-var startServer = require("../../../../server/app");
 var testUtils = require("../../utils");
+const DIOApi = require("./../../DIOApi");
 
 var dioAPIFixtures = require("../../fixtures").load("routes.dio-api");
 var potcFEFixtures = require("../../fixtures").get(
@@ -29,9 +28,7 @@ nestedDescribe("routes.api.form-elements", function() {
   testUtils.setupServer();
 
   it("should get form elements for specific bioguideIds", function(done) {
-    axios({
-      baseURL: "http://localhost:3000",
-      url: "/api/1/formElements/findByLegislatorBioguideIds",
+    DIOApi.get("/api/1/formElements/findByLegislatorBioguideIds", {
       params: {
         bioguideIds: ["P000197"]
       }

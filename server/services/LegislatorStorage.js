@@ -1,16 +1,14 @@
-const logger = require("./../../logger");
+const logger = require("../logger");
+const raven = require("./../raven-client");
 
 /**
- * You probably shouldn't use this class directly
- * Stores legislator data in memory
+ * In-memory database of legislator data
  */
-class CongressLegislatorsCache {
+class LegislatorStorage {
   constructor() {
     this.legislators = {
-      /** @type {Object<string, Congress.Legislator[]>} */
       sortedByStates: {},
 
-      /** @type {Object<string, Congress.Legislator>} */
       sortedByID: {}
     };
     this.loaded = false;
@@ -23,10 +21,15 @@ class CongressLegislatorsCache {
    * @returns {Congress.Legislator[]}
    */
   findLegislatorsByDistrict(state, district) {
+    this.warnLoaded();
+
     if (this.legislators.sortedByStates.hasOwnProperty(state) === false)
       return [];
 
     return this.legislators.sortedByStates[state].filter(
+      /**
+       * @param {{ chamber: string; district: any; }} legislator
+       */
       legislator =>
         legislator.chamber === "senate" ||
         (legislator.chamber === "house" && legislator.district === district)
@@ -36,9 +39,11 @@ class CongressLegislatorsCache {
   /**
    *
    * @param {string} bioguideID
-   * @returns {Congress.Legislator}
+   * @returns {Congress.Legislator | undefined}
    */
   getLegislatorByID(bioguideID) {
+    this.warnLoaded();
+
     return this.legislators.sortedByID[bioguideID];
   }
 
@@ -49,6 +54,8 @@ class CongressLegislatorsCache {
    * @returns {boolean}
    */
   validDistrict(state, district) {
+    this.warnLoaded();
+
     const stateLegislators = this.legislators.sortedByStates[state];
 
     // state invalid
@@ -69,11 +76,13 @@ class CongressLegislatorsCache {
   }
 
   /**
-   *
+   * Loads a list of legislators. Replaces any existing legislators.
    * @param {Congress.Legislator[]} legislatorsList
    * @returns {void}
    */
-  importLegislators(legislatorsList) {
+  loadLegislators(legislatorsList) {
+    this.warnLoaded();
+
     let nextLegislators = {
       sortedByID: {},
       sortedByStates: {}
@@ -93,5 +102,23 @@ class CongressLegislatorsCache {
     this.loaded = true;
     logger.info("[Congress Legislators] Legislators cached");
   }
+
+  /**
+   * Clear the legislators. This is mainly for writing tests.
+   * @returns {void}
+   */
+  clearLegislators() {
+    this.legislators = {
+      sortedByID: {},
+      sortedByStates: {}
+    };
+  }
+  warnLoaded() {
+    if (this.loaded === false) {
+      logger.warn("Legislator data has not been loaded");
+      raven.captureMessage("Legislator data was queried but it was not loaded");
+    }
+  }
 }
-module.exports = CongressLegislatorsCache;
+
+module.exports = LegislatorStorage;

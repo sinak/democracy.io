@@ -6,7 +6,7 @@ var map = require("lodash.map");
 
 var apiHelpers = require("../helpers/api");
 var models = require("../../../../models");
-var potc = require("../../../services/third-party-apis/potc");
+var potc = require("../../../services/POTC");
 var potcHelpers = require("../helpers/potc");
 var resHelpers = require("../helpers/response");
 

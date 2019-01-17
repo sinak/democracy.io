@@ -75,6 +75,7 @@
     "change-case-keys": "0.0.4",
     "config": "^1.12.0",
     "consolidate": "^0.12.1",
+    "dustjs-linkedin": "^2.7.5",
     "express": "^4.8.4",
     "hover.css": "^2.0.2",
     "lodash": "^3.10.1",

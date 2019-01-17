@@ -11,7 +11,7 @@ var ServiceLogger = require("./ServiceLogger");
 const SmartyStreetsAPI = axios.create({
   baseURL: config.get("SERVER.API.SMARTY_STREETS.ADDRESS_URL"),
   params: {
-    "auth-id": config.get("SERVER.CREDENTIALS.SMARTY_STREETS.TOKEN"),
+    "auth-id": config.get("SERVER.CREDENTIALS.SMARTY_STREETS.ID"),
     "auth-token": config.get("SERVER.CREDENTIALS.SMARTY_STREETS.TOKEN")
   }
 });

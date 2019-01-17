@@ -19,7 +19,7 @@ expressRouter.get("/legislators/findByDistrict", async (req, res) => {
     );
   }
 
-  var legislators = DIOLegislators.findLegislators(state, district.toString());
+  var legislators = DIOLegislators.findLegislators(state, district);
 
   var bioguideIds = legislators.map(function(legislator) {
     return legislator.bioguideId;

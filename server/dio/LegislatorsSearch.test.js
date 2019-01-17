@@ -6,7 +6,7 @@ const legislatorsFixture = [
   {
     bioguideId: "1",
     chamber: "house",
-    district: "1",
+    district: 1,
     firstName: "First",
     lastName: "Last",
     state: "CA",
@@ -15,7 +15,7 @@ const legislatorsFixture = [
   {
     bioguideId: "2",
     chamber: "house",
-    district: "2",
+    district: 2,
     firstName: "First",
     lastName: "Last",
     state: "CA",
@@ -47,7 +47,7 @@ test("findLegislators should return the state's senators and the district's reps
   const c = new LegislatorSearch();
   c.loadLegislators(legislatorsFixture);
 
-  const legislators = c.findLegislators("CA", "1");
+  const legislators = c.findLegislators("CA", 1);
   const ids = legislators.map(l => l.bioguideId);
 
   expect(ids.length).toBe(3);
@@ -67,13 +67,13 @@ test("validDistrict should validate a state and district", () => {
   const c = new LegislatorSearch();
   c.loadLegislators(legislatorsFixture);
 
-  expect(c.validDistrict("invalid", "invalid")).toBe(false);
-  expect(c.validDistrict("CA", "invalid")).toBe(false);
-  expect(c.validDistrict("invalid", "1")).toBe(false);
+  expect(c.validDistrict("invalid", -1)).toBe(false);
+  expect(c.validDistrict("CA", -1)).toBe(false);
+  expect(c.validDistrict("invalid", 1)).toBe(false);
   // @ts-ignore
   expect(c.validDistrict("invalid", 1)).toBe(false);
 
-  expect(c.validDistrict("CA", "1")).toBe(true);
+  expect(c.validDistrict("CA", 1)).toBe(true);
 });
 
 test("loadLegislators should replace the cached legislators", () => {
@@ -96,7 +96,7 @@ test("loadLegislators should replace the cached legislators", () => {
   expect(c.getLegislatorByID(replacementFixture.bioguideId)).toEqual(
     replacementFixture
   );
-  expect(c.findLegislators(replacementFixture.state, "1")).toEqual(
+  expect(c.findLegislators(replacementFixture.state, 1)).toEqual(
     expect.arrayContaining([replacementFixture])
   );
 

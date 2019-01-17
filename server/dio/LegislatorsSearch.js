@@ -1,6 +1,5 @@
 const logger = require("../logger");
 const sentry = require("@sentry/node");
-const us = require("us");
 /**
  * In-memory database of legislator data
  */
@@ -19,7 +18,7 @@ class CongressLegislatorSearch {
   /**
    * finds the state's legislators and the district's
    * @param {string} state
-   * @param {string} district
+   * @param {number} district
    * @returns {DIO.Legislator[]}
    */
   findLegislators(state, district) {
@@ -49,14 +48,11 @@ class CongressLegislatorSearch {
   /**
    *
    * @param {string} state
-   * @param {string} district
+   * @param {number} district
    * @returns {boolean}
    */
   validDistrict(state, district) {
     this.warnLoaded();
-
-    // TODO: can number just be enforced for district?
-    let districtStr = district.toString();
 
     const stateLegislators = this.legislators.sortedByStates[state];
 
@@ -65,7 +61,7 @@ class CongressLegislatorSearch {
 
     const validators = [
       // valid district
-      stateLegislators.some(legislator => legislator.district === districtStr),
+      stateLegislators.some(legislator => legislator.district === district),
 
       // has reps
       stateLegislators.some(legislator => legislator.chamber === "house"),
@@ -83,8 +79,6 @@ class CongressLegislatorSearch {
    * @returns {void}
    */
   loadLegislators(legislatorsList) {
-    this.warnLoaded();
-
     let nextLegislators = {
       sortedByID: {},
       sortedByStates: {}

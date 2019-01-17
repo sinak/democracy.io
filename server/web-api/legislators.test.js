@@ -16,7 +16,7 @@ describe("routes.api.legislators", function() {
       {
         bioguideId: "1",
         chamber: "house",
-        district: "1",
+        district: 1,
         firstName: "first",
         lastName: "first",
         state: "CA",

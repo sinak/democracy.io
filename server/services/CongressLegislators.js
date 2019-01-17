@@ -68,7 +68,7 @@ function mapLegislator(legislator) {
  * @property {string} start yyyy-mm-dd
  * @property {string} end yyyy-mm-dd
  * @property {string} state state abbreviation
- * @property {string | undefined} district
+ * @property {number | undefined} district
  */
 
 /**

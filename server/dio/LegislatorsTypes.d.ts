@@ -14,6 +14,6 @@ declare namespace DIO {
   interface Representative extends LegislatorBase {
     chamber: "house";
     title: "Rep";
-    district: string;
+    district: number;
   }
 }

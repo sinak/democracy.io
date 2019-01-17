@@ -8,7 +8,7 @@ const defaultLegislatorsURL =
  * @param {string} [url=defaultLegislatorsURL]
  * @returns {Promise<DIO.Legislator[]>}
  */
-module.exports = async (url = defaultLegislatorsURL) => {
+module.exports.fetchFile = async (url = defaultLegislatorsURL) => {
   const jsonRes = await axios.get(url);
   return decode(jsonRes.data);
 };

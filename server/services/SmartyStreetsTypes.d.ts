@@ -1,6 +1,6 @@
 declare namespace SmartyStreets {
-  export namespace StreetAddress {
-    export interface Body {
+  export namespace USStreetAPI {
+    export interface Lookup {
       input_id?: string;
       street: string;
       street2?: string;
@@ -13,26 +13,27 @@ declare namespace SmartyStreets {
       match?: "strict" | "range" | "invalid";
     }
 
-    export interface Result {
+    export interface Candidate {
       input_id: string;
       input_index: number;
       candidate_index: number;
-      addressee: string;
+      addressee?: string;
       delivery_line_1: string;
-      delivery_line_2: string;
+      delivery_line_2?: string;
       last_line: string;
       delivery_point_barcode: string;
-      components: StreetAddressResultComponents;
-      metadata: StreetAddressResultMetadata;
+      components: Components;
+      metadata: Metadata;
+      analysis: Analysis;
     }
 
-    export interface ResultComponents {
+    export interface Components {
       urbanization?: string;
-      primary_number: string;
+      primary_number?: string;
       street_name: string;
       street_predirection?: string;
       street_postdirection?: string;
-      street_suffix: string;
+      street_suffix?: string;
       secondary_number?: string;
       secondary_designator?: string;
       extra_secondary_number?: string;
@@ -40,23 +41,23 @@ declare namespace SmartyStreets {
       city_name: string;
       default_city_name?: string;
       state_abbreviation: string;
-      zipcode: string;
+      zipcode?: string;
       plus4_code: string;
-      delivery_point: string;
-      delivery_point_check_digit: string;
+      delivery_point?: string;
+      delivery_point_check_digit?: string;
     }
-    export interface ResultMetadata {
+    export interface Metadata {
       record_type: "F" | "G" | "H" | "P" | "R" | "S" | "[blank]";
       zip_type: "Unique" | "Military" | "POBox" | "Standard";
       county_fips: string;
       county_name: string;
-      carrier_route: string;
-      congressional_district: string;
-      building_default_indicator: "Y" | "N";
-      rdi: "Residential" | "Commercial" | "[blank]";
-      elot_sequence: string;
-      elot_sort: string;
-      latittude: number;
+      carrier_route?: string;
+      congressional_district?: string;
+      building_default_indicator?: "Y" | "N";
+      rdi?: "Residential" | "Commercial" | "[blank]";
+      elot_sequence?: string;
+      elot_sort?: string;
+      latitude: number;
       longitude: number;
       precision:
         | "Unknown"
@@ -72,14 +73,14 @@ declare namespace SmartyStreets {
         | "Structure";
       time_zone: string;
       utf_offset: number;
-      dst: string;
+      dst: boolean;
     }
-    export interface ResultAnalysis {
-      dpv_match_code: "Y" | "N" | "S" | "D" | "[blank]";
+    export interface Analysis {
+      dpv_match_code?: "Y" | "N" | "S" | "D" | "[blank]";
       dpv_footnotes: string;
-      dpv_cmra: "Y" | "N" | "[blank]";
-      dpv_vacant: "Y" | "N" | "[blank]";
-      active: "Y" | "N" | "[blank]";
+      dpv_cmra?: "Y" | "N" | "[blank]";
+      dpv_vacant?: "Y" | "N" | "[blank]";
+      active?: "Y" | "N" | "[blank]";
       ews_match?: "true" | "[blank]";
       footnotes: string;
       lacslink_code?: "A" | "00" | "09" | "14" | "92" | "[blank]";

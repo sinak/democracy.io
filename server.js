@@ -2,19 +2,21 @@
 var app = require("./server/app");
 const logger = require("./server/logger");
 
-const Legislators = require("./server/services/Legislators");
-const LegislatorStorageUpdater = require("./server/services/LegislatorStorageUpdater");
+const Legislators = require("./server/services/CongressLegislators");
+const CongressLegislatorSearchUpdater = require("./server/services/CongressLegislatorsSearchUpdater");
 
-async function startServer() {
-  const updater = new LegislatorStorageUpdater(
+(async function startServer() {
+  const updater = new CongressLegislatorSearchUpdater(
     Legislators,
-    LegislatorStorageUpdater.HTTPAdapter
+    CongressLegislatorSearchUpdater.HTTPAdapter
   );
   await updater.update();
-  updater.schedule(120000);
+
+  const INTERVAL_IN_HOURS = 12;
+  updater.schedule(INTERVAL_IN_HOURS * 60 * 60 * 1000);
 
   const port = process.env.PORT || 3000;
   app.listen(process.env.PORT || 3000, () => {
     logger.info("Server listening on port " + port);
   });
-}
+})();

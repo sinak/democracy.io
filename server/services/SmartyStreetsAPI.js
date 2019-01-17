@@ -28,8 +28,8 @@ SmartyStreetsAPI.interceptors.response.use(
 
 /**
  *
- * @param {SmartyStreets.StreetAddress.Body} address
- * @returns {AxiosPromise<SmartyStreets.StreetAddress.Result[]>}
+ * @param {SmartyStreets.USStreetAPI.Lookup} address
+ * @returns {AxiosPromise<SmartyStreets.USStreetAPI.Candidate[]>}
  */
 var verifyAddress = function(address) {
   return SmartyStreetsAPI.get("/street-address", {

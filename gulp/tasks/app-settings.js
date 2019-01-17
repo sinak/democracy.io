@@ -4,9 +4,6 @@
 
 var config = require('config');
 var gulp = require('gulp');
-var ngConstant = require('gulp-ng-constant');
-var path = require('path');
-var rename = require('gulp-rename');
 var fs = require('fs');
 
 var gulpConfig = require('../config');

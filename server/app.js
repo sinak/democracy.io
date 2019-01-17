@@ -1,50 +1,50 @@
-/**
- *
- */
-
-var consolidate = require("consolidate");
-var dust = require("dustjs-linkedin");
 var express = require("express");
 var lusca = require("lusca");
-var middleware = require("swagger-express-middleware");
-var path = require("path");
-var serveFavicon = require("serve-favicon");
-var serveStatic = require("serve-static");
 var logger = require("./logger");
-
-// NOTE: The app currently assumes a flat deploy with the server serving static assets directly.
-var BUILD_DIR = path.join(__dirname, "../.build");
-
-var apiDef = require(path.join(BUILD_DIR, "api.json"));
-var apiErrorHandler = require("./middleware/api-error-handler");
 var config = require("./config");
-var ipThrottle = require("./middleware/ip-throttle");
-var ngXsrf = require("./middleware/ng-xsrf");
-
-var Raven = require("./raven-client");
-
+var Sentry = require("@sentry/node");
 var app = express();
+
+Sentry.init({
+  dsn: config.CREDENTIALS.SENTRY_DSN,
+  disabled: process.env.NODE_ENV === "test"
+});
 
 app.locals["CONFIG"] = config;
 
-app.engine("dust", consolidate.dust);
-app.set("views", path.join(__dirname, "templates"));
-app.set("view engine", "dust");
 // NOTE: this assumes you're running behind an nginx instance or other proxy
 app.enable("trust proxy");
 
+// security
 app.use(
-  serveFavicon(
-    path.join(BUILD_DIR, "static", config.VERSION, "img/favicon.ico")
-  )
+  lusca({
+    csrf: false,
+    xframe: "SAMEORIGIN",
+    p3p: false,
+    csp: false
+  })
 );
-// NOTE: EFF doesn't use CDNs, so rely on static serve w/ a caching layer in front of it in prod
-app.use(serveStatic(BUILD_DIR, config.get("STATIC")));
 
-middleware(apiDef, app, function(err, middleware) {
-  if (err) {
-    throw err;
-  }
+// exception tracking
+app.use(Sentry.Handlers.requestHandler());
+
+// logger
+app.use((req, res, next) => {
+  logger.info(`[Web] ${req.method} ${req.path} - ${res.statusCode}`, {
+    params: req.params
+  });
+  next();
+});
+
+// routes
+const path = require("path");
+const swaggerMiddleware = require("swagger-express-middleware");
+var BUILD_DIR = path.join(__dirname, "../.build");
+var apiDef = require(path.join(BUILD_DIR, "api.json"));
+
+// api
+swaggerMiddleware(apiDef, app, function(err, middleware) {
+  if (err) throw err;
 
   // NOTE: install the swagger middleware at the top level of the app. This is required
   //       as otherwise the path param is missing the /api/1 prefix and swagger metadata
@@ -53,41 +53,13 @@ middleware(apiDef, app, function(err, middleware) {
   app.use(middleware.metadata());
   app.use(middleware.parseRequest());
   app.use(middleware.validateRequest());
-
-  // Request throttling
-  // Only throttle requests to the messages endpoints
-  // Steven - disabled for non production environments,
-  // this might be better to test in isolation since it has a Redis dependency
-  if (process.env.NODE_ENV === "production") {
-    var pathRe = /^\/api.*\/message$/;
-    app.use(pathRe, ipThrottle(config.get("REQUEST_THROTTLING")));
-  }
-
-  app.use(
-    lusca({
-      csrf: false,
-      xframe: "SAMEORIGIN",
-      p3p: false,
-      csp: false
-    })
-  );
-
-  app.use(apiErrorHandler());
-
-  var appRouter = require("./routes/app/router")([ngXsrf()]);
-  app.use(appRouter);
-
-  var apiRouter = require("./routes/api/router")();
-  app.use(apiDef.basePath, apiRouter);
-
-  app.use(Raven.requestHandler());
-  app.use(Raven.errorHandler());
+  app.use(apiDef.basePath, require("./web-api/app"));
 });
 
-app.use((req, res, next) => {
-  logger.info(`[Web] ${req.method} ${req.path} - ${res.statusCode}`, {
-    params: req.params
-  });
-  next();
-});
+// static
+app.use(require("./web-static/app"));
+
+// error handlers - order dependent
+// app.use(Sentry.Handlers.errorHandler());
+
 module.exports = app;

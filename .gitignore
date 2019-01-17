@@ -36,3 +36,5 @@ config/custom-environment-variables.json
 
 # Redis database file
 dump.rdb
+
+**/.DS_Store

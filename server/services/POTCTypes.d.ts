@@ -1,25 +1,24 @@
 declare namespace POTC {
-  export interface FormElementsResult {
-    [key: string]: LegislatorData;
+  interface FormElementsResult {
+    [key: string]: LegislatorFormElements;
   }
-
-  export interface LegislatorData {
-    required_actions: RequiredAction[];
+  interface LegislatorFormElements {
+    required_actions: {
+      maxlength: any;
+      value: string;
+      options_hash: any;
+    }[];
     defunct?: boolean;
     contact_url?: string;
-  }
-
-  export interface RequiredAction {
-    maxlength: any;
-    value: string;
-    options_hash: any;
   }
 
   declare namespace FillOutForm {
     export interface Request {
       bio_id: string;
       campaign_tag: string;
-      fields: object;
+      fields: {
+        [key: string]: any;
+      };
     }
 
     export type Response = ResponseNoCaptcha | ResponseCaptcha;

@@ -1,9 +1,4 @@
-var bcrypt = require('bcrypt');
-var randomstring = require('randomstring');
+var crypto = require("crypto");
 
-var salt = bcrypt.genSaltSync(10);
-console.log('salt: ' + salt);
-
-
-var secret = randomstring.generate(30);
-console.log('secret: ' + secret);
+var salt = crypto.randomBytes(64).toString("base64");
+console.log("salt: " + salt);

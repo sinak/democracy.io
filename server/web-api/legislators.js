@@ -1,6 +1,7 @@
 const _ = require("lodash");
 const expressRouter = require("express").Router();
 const Legislator = require("../../models").Legislator;
+const config = require("./../config");
 var DIOLegislators = require("../dio/Legislators");
 var potc = require("../services/POTC");
 var resHelpers = require("./helpers/response");
@@ -69,7 +70,7 @@ expressRouter.post("/legislators/message", async (req, res) => {
   var messages = apiHelpers.getModelData(req.body, models.Message);
 
   var potcMessages = messages.map(message => {
-    var tag = req.app.locals.CONFIG.get("CAMPAIGNS.DEFAULT_TAG");
+    var tag = config.get("CAMPAIGNS.DEFAULT_TAG");
     tag += "-" + crypto.randomBytes(16).toString("hex");
     return potcHelpers.makePOTCMessage(message, tag);
   });

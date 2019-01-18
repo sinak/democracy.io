@@ -60,26 +60,6 @@ swaggerMiddleware(apiDef, app, function(err, middleware) {
 app.use(require("./web-static/app"));
 
 // error handlers - order dependent
-// app.use(Sentry.Handlers.errorHandler());
+app.use(Sentry.Handlers.errorHandler());
 
 module.exports = app;
-
-const Legislators = require("./dio/Legislators");
-const LegislatorsSearchUpdater = require("./dio/LegislatorsSearchUpdater");
-const CongressLegislators = require("./services/CongressLegislators");
-
-module.exports.startServer = async function() {
-  const updater = new LegislatorsSearchUpdater(
-    Legislators,
-    CongressLegislators.fetchFile
-  );
-  await updater.update();
-
-  const INTERVAL_IN_HOURS = 12;
-  updater.schedule(INTERVAL_IN_HOURS * 60 * 60 * 1000);
-
-  const port = process.env.PORT || 3000;
-  app.listen(process.env.PORT || 3000, () => {
-    logger.info("Server listening on port " + port);
-  });
-};

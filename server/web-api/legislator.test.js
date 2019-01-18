@@ -34,7 +34,6 @@ describe("routes.api.legislator", function() {
     });
   });
 
-  // beforeAll(mockHTTPCalls);
   test("should get form elements for a specific bioguideId", async () => {
     // @ts-ignore
     const mockedFormElements = POTC.getFormElementsForRepIdsFromPOTC.mockResolvedValueOnce(

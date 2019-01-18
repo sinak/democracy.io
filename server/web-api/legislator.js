@@ -2,6 +2,7 @@ const expressRouter = require("express").Router();
 const resHelpers = require("./helpers/response");
 const apiHelpers = require("./helpers/api");
 const models = require("../../models");
+const config = require("./../config");
 
 const DIOLegislators = require("../dio/Legislators");
 const Legislator = require("../../models/legislator");
@@ -54,7 +55,7 @@ expressRouter.post("/legislator/:bioguideId/message", async (req, res) => {
   var message = apiHelpers.getModelData(req.body, models.Message);
   var potcMessage = potcHelpers.makePOTCMessage(
     message,
-    req.app.locals.CONFIG.get("CAMPAIGNS.DEFAULT_TAG")
+    config.get("CAMPAIGNS.DEFAULT_TAG")
   );
 
   if (message.bioguideId !== req.params.bioguideId) {

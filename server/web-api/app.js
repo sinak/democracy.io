@@ -8,15 +8,34 @@ const express = require("express");
 const app = express();
 const config = require("./../config");
 
+function ipThrottleMiddleware() {
+  if (process.env.NODE_ENV === "test") {
+    return ipThrottle.mockBypassAdapter;
+  } else {
+    const redis = require("redis");
+    var redisOptions = config.get("REQUEST_THROTTLING.REDIS");
+    var redisClient = redis.createClient(
+      redisOptions.PORT,
+      redisOptions.HOSTNAME,
+      {
+        auth_pass: redisOptions.PASS
+      }
+    );
+
+    const redisThrottleAdapter = ipThrottle.createRedisAdapter(
+      config.get("REQUEST_THROTTLING.THROTTLE"),
+      redisClient
+    );
+
+    return ipThrottle.createMiddleware(redisThrottleAdapter);
+  }
+}
+
 // Request throttling
 // Only throttle requests to the messages endpoints
 var pathRe = /^\/api.*\/message$/;
 const ipThrottle = require("../middleware/ip-throttle");
-const throttleAdapter =
-  process.env.NODE_ENV === "test"
-    ? ipThrottle.mockBypassAdapter
-    : ipThrottle.createRedisAdapter(config.get("REQUEST_THROTTLING.THROTTLE"));
-app.use(pathRe, ipThrottle.createMiddleware(throttleAdapter));
+app.use(pathRe, ipThrottleMiddleware());
 
 // routes
 app.use(require("./captcha-solution"));

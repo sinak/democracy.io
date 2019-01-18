@@ -28,13 +28,30 @@ describe("ip throttle middleware", () => {
 });
 
 describe("ip throttle redis adapter", () => {
+  const redis = require("redis");
+  const config = require("./../config");
+  var redisOptions = config.get("REQUEST_THROTTLING.REDIS");
+  var redisClient = redis.createClient(
+    redisOptions.PORT,
+    redisOptions.HOSTNAME,
+    {
+      auth_pass: redisOptions.PASS
+    }
+  );
+  afterAll(() => {
+    redisClient.end();
+  });
   test("it should return false if throttled", async () => {
-    const redisAdapter = ipThrottle.createRedisAdapter({
-      rate: 1,
-      window: 1000,
-      expiry: 1000,
-      overrides: {}
-    });
+    const redisAdapter = ipThrottle.createRedisAdapter(
+      {
+        rate: 1,
+        window: 1000,
+        expiry: 1000,
+        overrides: {}
+      },
+      redisClient
+    );
+
     const hash = "fake hash";
     const firstCall = await redisAdapter(hash);
     expect(firstCall).toBe(false);

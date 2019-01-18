@@ -46,8 +46,9 @@ var tokenThrottleRedis = require("tokenthrottle-redis");
  * @param {number} throttleConfig.expiry
  * @param {number} throttleConfig.window
  * @param {any} throttleConfig.overrides
+ * @param {import("redis").RedisClient} redisClient
  */
-function createRedisAdapter(throttleConfig) {
+function createRedisAdapter(throttleConfig, redisClient) {
   // NOTE: requests are throttled using IP address as a key. That key is volatile in
   //       redis, with volatility of 1 week. That means that there are potentially
   //       some boundary effects v-a-v throttle boundaries, but this is a reasonable
@@ -60,14 +61,6 @@ function createRedisAdapter(throttleConfig) {
   //       expiry field in the config JSON files. See https://www.npmjs.com/package/tokenthrottle-redis
   //       options for where this is documented.
 
-  var redisOptions = config.get("REQUEST_THROTTLING.REDIS");
-  var redisClient = redis.createClient(
-    redisOptions.PORT,
-    redisOptions.HOSTNAME,
-    {
-      auth_pass: redisOptions.PASS
-    }
-  );
   const throttle = tokenThrottleRedis(throttleConfig, redisClient);
 
   /**

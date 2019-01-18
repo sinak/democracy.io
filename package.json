@@ -7,7 +7,7 @@
   },
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "NODE_APP_INSTANCE=test jest",
     "build": "gulp build",
     "build:prod": "gulp build:prod"
   },

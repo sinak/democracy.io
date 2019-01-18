@@ -12,8 +12,6 @@ var keys = require('lodash.keys');
 var startsWith = require('lodash.startswith');
 
 var models = require('../../../models');
-
-
 /**
  * Parse out the topic options for a given legislator.
  * @param topicElem
@@ -52,7 +50,6 @@ var parseCountyOptions = function(countyElem, addressCounty) {
   };
 };
 
-
 /**
  *
  * @returns {{}}
@@ -77,7 +74,6 @@ var makeSenderInfo = function(formData, parensPhone) {
  * @param legislator
  * @param formData
  * @param topic An object describing the topics for a legislator, as created by parseTopicOptions.
- * @returns {{}}
  */
 var makeMessageInfo = function(legislator, formData, topic) {
 
@@ -110,7 +106,6 @@ var makeCampaignInfo = function() {
 
 };
 
-
 /**
  *
  * @param legislator
@@ -118,7 +113,6 @@ var makeCampaignInfo = function() {
  * @param phoneValue
  * @param topicOptions
  * @param address
- * @returns {*}
  */
 var makeMessage = function(legislator, formData, phoneValue, topicOptions, address) {
   var messageInfo = makeMessageInfo(legislator, formData, topicOptions[legislator.bioguideId]);

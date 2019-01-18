@@ -8,7 +8,8 @@
 var appInstance = process.env.NODE_APP_INSTANCE;
 process.env.NODE_APP_INSTANCE = '';
 var config = require('config').get('SERVER');
-config.VERSION = require('../package.json').version;
+// @ts-ignore
+config.VERSION = require('./../package.json').version;
 process.env.NODE_APP_INSTANCE = appInstance;
 
 module.exports = config;

@@ -9,14 +9,12 @@ var isEmpty = require('lodash.isempty');
 //             angular.
 /**
  * Lookup for human readable address errors.
- * @type {{}}
  */
 var ADDRESS_ERR_LOOKUP = {
   SERVER: 'There appears to be a problem with the server. Please try again, and if the problem persists, email contact@democracy.io with the address you used so we can try and fix the issue.',
   UNRECOGNIZED: 'Your address was not recognized. Please check the address and try again.',
   MISMATCHED_ZIP: 'The zipcode you entered does not match the verified zip code for your street address. Please check the address and try again.'
 };
-
 
 /**
  * Validates that the address returned by SmartyStreets is usable.

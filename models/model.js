@@ -1,7 +1,4 @@
-/**
- *
- */
-
+// @ts-nocheck
 var isEmpty = require('lodash.isempty');
 
 var Model = function(options) {

@@ -19,7 +19,6 @@ var makeRelativeAPIUrl = function(apiBaseUrl, apiVersion, urlSuffix) {
   return url.indexOf('/') === 0 ? url : '/' + url;
 };
 
-
 /**
  *
  * @param jsonData

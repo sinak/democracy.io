@@ -2,9 +2,12 @@ sudo: required
 language: node_js
 node_js:
   - "8.12.0"
+install:
+  - npm ci
 script:
-  - npm run test
   - npm run build:prod
+  - npm run test
 cache:
   directories:
     - node_modules
+    - "$HOME/.npm"

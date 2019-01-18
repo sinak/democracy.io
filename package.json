@@ -24,6 +24,7 @@
   "devDependencies": {
     "angular-scroll": "^0.7.1",
     "autoprefixer-core": "^5.2.1",
+    "aws-sdk": "^2.10.0",
     "browser-sync": "2.7.13",
     "browserify": "^9.0.3",
     "browserify-ngannotate": "^1.0.1",

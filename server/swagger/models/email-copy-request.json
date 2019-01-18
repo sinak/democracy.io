@@ -1,0 +1,14 @@
+{
+  "description": "An email copy request.",
+  "properties": {
+    "sender": {
+      "$ref": "#/definitions/MessageSender"
+    },
+    "messages": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

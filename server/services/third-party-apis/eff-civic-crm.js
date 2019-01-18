@@ -37,6 +37,5 @@ var subscribeToEFFMailingList = function(params, config, cb) {
   makeRequest(requestParams, cb);
 };
 
-
 module.exports.makeEFFCivicCRMUrl = makeEFFCivicCRMUrl;
 module.exports.subscribeToEFFMailingList = subscribeToEFFMailingList;

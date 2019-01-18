@@ -47,6 +47,9 @@
         },
         "/subscription": {
             "$ref": "paths/subscription.json"
+        },
+        "/emailCopy": {
+            "$ref": "paths/email-copy.json"
         }
     },
 
@@ -71,6 +74,9 @@
         },
         "CaptchaSolution": {
             "$ref": "models/captcha-solution.json"
+        },
+        "EmailCopyRequest": {
+            "$ref": "models/email-copy-request.json"
         },
         "Error": {
             "$ref": "models/error.json"

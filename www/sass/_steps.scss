@@ -245,7 +245,7 @@ label small {
   text-transform: none;
   letter-spacing: 0;
 }
-.emailSignup {
+.emailSignup, .emailCopy {
   font-size: 15px;
   margin-top:20px;
   margin-bottom:0;
@@ -259,6 +259,10 @@ label small {
     font-size: 15px;
     padding-left: 0;
   }
+}
+
+.emailCopy {
+  margin-top: -15px;
 }
 
 #messageFormValidation {

@@ -38,9 +38,12 @@ describe("ip throttle redis adapter", () => {
       auth_pass: redisOptions.PASS
     }
   );
-  afterAll(() => {
-    redisClient.end();
+
+  afterAll(done => {
+    redisClient.quit();
+    redisClient.on("end", done);
   });
+
   test("it should return false if throttled", async () => {
     const redisAdapter = ipThrottle.createRedisAdapter(
       {
@@ -55,7 +58,7 @@ describe("ip throttle redis adapter", () => {
     const hash = "fake hash";
     const firstCall = await redisAdapter(hash);
     expect(firstCall).toBe(false);
-    const shouldBeThrottled = await redisAdapter("fake hash");
+    const shouldBeThrottled = await redisAdapter(hash);
     expect(shouldBeThrottled).toBe(true);
   });
 });

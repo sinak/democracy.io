@@ -16,7 +16,7 @@ class CongressLegislatorSearch {
   }
 
   /**
-   * finds the state's legislators and the district's
+   * finds the state's legislators and the district's reps
    * @param {string} state
    * @param {number} district
    * @returns {DIO.Legislator[]}

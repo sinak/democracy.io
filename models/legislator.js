@@ -30,6 +30,7 @@ Legislator.prototype.setProperties = function(options) {
   this.district = options.district;
   this.defunct = options.defunct;
   this.contact_url = options.contact_url;
+  this.comingSoon = options.comingSoon;
 };
 
 

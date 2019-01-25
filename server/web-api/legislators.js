@@ -39,21 +39,36 @@ expressRouter.get("/legislators/findByDistrict", async (req, res) => {
     bioguideIds
   );
 
-  var augmentedLegislators = legislators
-    .map(legislator => {
-      var legislatorData = formElementsRes.data[legislator.bioguideId];
+  // note: it is possible that POTC won't have data on a legislator
+  const augmentedLegislators = bioguideIds.map((id, index) => {
+    const formElementsData = formElementsRes.data;
+    const hasPOTCData = formElementsData.hasOwnProperty(id);
 
+    if (hasPOTCData) {
       return {
-        ...legislator,
-        defunct: _.isUndefined(legislatorData.defunct)
+        ...legislators[index],
+        defunct: _.isUndefined(formElementsData[id].defunct)
           ? false
-          : legislatorData.defunct,
-        contact_url: legislatorData.contact_url
+          : formElementsData[id].defunct,
+        contact_url: formElementsData[id].contact_url,
+        comingSoon: false
       };
-    })
-    .map(l => new Legislator(l));
+    } else {
+      // temporary fix for legislators without any data
+      return {
+        ...legislators[index],
+        defunct: false,
+        contact_url: undefined,
+        comingSoon: true
+      };
+    }
+  });
 
-  res.json(resHelpers.makeResponse(augmentedLegislators));
+  const augmentedLegislatorModels = augmentedLegislators.map(
+    l => new Legislator(l)
+  );
+
+  res.json(resHelpers.makeResponse(augmentedLegislatorModels));
 });
 
 /**

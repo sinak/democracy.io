@@ -45,5 +45,6 @@ app.use(require("./legislator"));
 app.use(require("./legislators"));
 app.use(require("./location"));
 app.use(require("./subscription"));
+app.use(require("./exception"));
 
 module.exports = app;

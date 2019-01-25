@@ -10,7 +10,11 @@ Sentry.init({
   disabled: process.env.NODE_ENV === "test"
 });
 
+// exception tracking
+app.use(Sentry.Handlers.requestHandler());
+
 app.locals["CONFIG"] = config;
+
 
 // NOTE: this assumes you're running behind an nginx instance or other proxy
 app.enable("trust proxy");
@@ -24,9 +28,6 @@ app.use(
     csp: false
   })
 );
-
-// exception tracking
-app.use(Sentry.Handlers.requestHandler());
 
 // logger
 app.use((req, res, next) => {

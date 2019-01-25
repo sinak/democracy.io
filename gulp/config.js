@@ -8,6 +8,5 @@ module.exports = {
   NPM_DIR: path.join(__dirname, '../node_modules'),
   STATIC_DIR: path.join(buildDir, 'static', version),
   SERVER_DIR: path.join(__dirname, '../server'),
-  TEST_DIR: path.join(__dirname, '../test'),
   WWW_DIR: path.join(__dirname, '../www')
 };

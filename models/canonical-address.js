@@ -1,3 +1,5 @@
+// @ts-nocheck - not sure how to type check this
+
 /**
  *
  * @param options

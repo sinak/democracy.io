@@ -1,6 +1,14 @@
+sudo: required
 language: node_js
 node_js:
-  - "7"
+  - "8.12.0"
+install:
+  - npm ci
+script:
+  - npm run build:prod
+  - npm run test
 cache:
   directories:
-    - node_modules
+    - "$HOME/.npm"
+services:
+  - redis-server

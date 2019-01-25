@@ -84,6 +84,7 @@ var legislatorData = function(locker) {
       var selectedLegislators = zipObject(map(legislators, function(legislator) {
         var selectedStatus = true;
         if (legislator.defunct === true) { selectedStatus = false; }
+        if (legislator.comingSoon === true) { selectedStatus = false; }
         return [legislator.bioguideId, selectedStatus];
       }));
 

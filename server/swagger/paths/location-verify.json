@@ -11,9 +11,7 @@
         "type": "string"
       }
     ],
-    "tags": [
-      "Location"
-    ],
+    "tags": ["Location"],
     "responses": {
       "200": {
         "description": "The canonical representation of the address.",
@@ -21,9 +19,6 @@
           "type": "object",
           "$ref": "#/definitions/CanonicalAddress"
         }
-      },
-      "default": {
-        "$ref": "#/responses/UnexpectedError"
       }
     }
   }

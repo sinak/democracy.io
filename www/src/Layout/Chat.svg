@@ -1,0 +1,46 @@
+<svg
+  viewBox="0 0 261 261"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+  <defs>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="b2">
+      <stop stop-color="#fff" offset="0%" />
+      <stop stop-color="#F1F1F1" offset="100%" />
+    </linearGradient>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="85.947%" id="a2">
+      <stop stop-color="#1BA0FD" offset="0%" />
+      <stop stop-color="#F93468" offset="100%" />
+    </linearGradient>
+    <path
+      id="c2"
+      d="M9.962 9.962h159.385v59.769h9.962v-69.731h-179.308v139.462h69.731v-9.962h-59.769v-119.538z"
+    />
+    <path
+      id="d2"
+      d="M79.692 79.692v139.462h101.234l39.846 39.846h8.343v-39.846h29.885v-139.462h-179.308z"
+    />
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="e2">
+      <stop stop-color="#fff" offset="0%" />
+      <stop stop-color="#E8FCFF" offset="100%" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(1 1)" fill="none">
+    <g id="Shape2">
+      <use stroke="url(#a2)" stroke-width="2" fill="#fff" href="#c2" />
+    </g>
+    <g>
+      <use stroke="url(#a2)" stroke-width="2" fill="#fff" href="#d2" />
+    </g>
+    <path
+      d="M218.49 207.914v33.819l-34.243-33.819h-95.257v-118.924h159.385v118.924h-29.885z"
+      stroke="#F93469"
+      stroke-dasharray="7"
+      fill-opacity=".99"
+      fill="#fff"
+    />
+    <circle stroke="#F93469" fill="url(#e2)" cx="128" cy="149" r="9" />
+    <circle stroke="#F93469" fill="url(#e2)" cx="170" cy="149" r="9" />
+    <circle stroke="#F93469" fill="url(#e2)" cx="212" cy="149" r="9" />
+  </g>
+</svg>

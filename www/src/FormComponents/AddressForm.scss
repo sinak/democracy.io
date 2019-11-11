@@ -1,0 +1,91 @@
+@import "./../sass/variables";
+
+#address {
+  margin-bottom: 30px;
+}
+#address .whitebox-container {
+  padding: 0;
+}
+
+#address .whitebox-container > form {
+  padding: 27px 30px 15px 30px;
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+#address .btn-lg.btn-orange {
+  margin-top: 25px;
+  right: 2px;
+}
+#address .alert.alert-danger {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  background-color: #fff;
+}
+#address .whitebox-footer {
+  a,
+  a:visited,
+  a:hover,
+  a:active {
+    color: inherit;
+    text-decoration: underline;
+  }
+}
+@media (min-width: $screen-sm-min) {
+  #address #addressInputs {
+    float: left;
+  }
+  #address #submitAddress {
+    float: right;
+    width: 25%;
+    margin-top: 96px;
+    text-align: right;
+  }
+}
+@media (max-width: $screen-xs-max) {
+  #address {
+    .btn-lg.btn-orange {
+      left: 0;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    .input-group .form-control:first-child {
+      font-size: 14px;
+    }
+  }
+}
+#address {
+  #addressInputs {
+    width: 100%;
+    transition: width 0.5s ease;
+  }
+
+  @media (min-width: $screen-sm-min) {
+    #addressInputs.addressValid {
+      width: 75%;
+    }
+  }
+  @media (min-width: $screen-sm-min) {
+    #submitAddress {
+      max-width: 0;
+      overflow: hidden;
+      transition: max-width 0.5s ease;
+    }
+    #submitAddress.addressValid {
+      max-width: 25%;
+    }
+  }
+  @media (max-width: $screen-xs-max) {
+    #submitAddress {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    #submitAddress.addressValid {
+      max-height: 100px;
+    }
+  }
+}

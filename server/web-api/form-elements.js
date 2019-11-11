@@ -1,33 +1,44 @@
+// @ts-check
 var potc = require("../services/POTC");
-var potcHelpers = require("./helpers/potc");
 var resHelpers = require("./helpers/response");
 
 const express = require("express");
 const router = express.Router();
 
+/**
+ * Requests form elements for multiple legislators from POTC
+ */
 router.get("/formElements/findByLegislatorBioguideIds", async (req, res) => {
   var bioguideIds = req.query.bioguideIds;
-  if (!bioguideIds) {
-    res.sendStatus(400);
-    return;
-  }
+  if (!bioguideIds) return res.sendStatus(400);
 
   try {
-    const formElementsRes = await potc.getFormElementsForRepIdsFromPOTC(
-      bioguideIds
-    );
-    var modelData = Object.keys(formElementsRes.data).map(id => {
-      return potcHelpers.makeLegislatorFormElements(
-        formElementsRes.data[id],
-        id
-      );
-    });
-
-    res.json(resHelpers.makeResponse(modelData));
+    var formElementsRes = await potc.getFormElements(bioguideIds);
   } catch (e) {
     console.error(e);
-    res.status(400).json(resHelpers.makeError(e));
+    return res.status(400).json(resHelpers.makeError(e));
   }
+
+  const resJSON = Object.keys(formElementsRes.data).map(bioguideId => {
+    const legislatorFormElements = formElementsRes.data[bioguideId];
+
+    return {
+      bioguideId: bioguideId,
+      formElements: legislatorFormElements.required_actions.map(action => {
+        // rename properties to camel case
+        return {
+          value: action.value,
+          maxLength: action.maxlength,
+          optionsHash: action.options_hash
+        };
+      })
+    };
+  });
+
+  res.json({
+    status: "success",
+    data: resJSON
+  });
 });
 
 module.exports = router;

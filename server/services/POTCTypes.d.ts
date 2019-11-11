@@ -4,12 +4,14 @@ declare namespace POTC {
   }
   interface LegislatorFormElements {
     required_actions: {
-      maxlength: any;
+      maxlength: number | null;
       value: string;
-      options_hash: any;
+      options_hash: {
+        [key: string]: string;
+      };
     }[];
-    defunct?: boolean;
-    contact_url?: string;
+    defunct: boolean | null;
+    contact_url: string | null;
   }
 
   declare namespace FillOutForm {

@@ -17,8 +17,7 @@
       "POTC_BASE_URL": "https://congressforms.eff.org",
       "SMARTY_STREETS": {
         "ADDRESS_URL": "https://api.smartystreets.com"
-      },
-      "EFF_CIVIC_CRM_URL": " https://supporters.eff.org"
+      }
     },
 
     "CREDENTIALS": {
@@ -29,10 +28,6 @@
       "SMARTY_STREETS": {
         "ID": "",
         "TOKEN": ""
-      },
-
-      "EFF_CIVIC_CRM": {
-        "SITE_KEY": ""
       },
 
       "SENTRY_DSN": "",

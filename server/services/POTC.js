@@ -28,7 +28,7 @@ POTCApi.interceptors.response.use(
  * @param {string[]} bioguideIds array of legislator's bioguide ID's
  * @returns {AxiosPromise<POTC.FormElementsResult>}
  */
-var getFormElementsForRepIdsFromPOTC = function(bioguideIds) {
+var getFormElements = function(bioguideIds) {
   return POTCApi.post("/retrieve-form-elements", {
     bio_ids: bioguideIds
   });
@@ -52,6 +52,6 @@ var solveCaptcha = function(solution) {
   return POTCApi.post("/fill-out-captcha", solution);
 };
 
-module.exports.getFormElementsForRepIdsFromPOTC = getFormElementsForRepIdsFromPOTC;
+module.exports.getFormElements = getFormElements;
 module.exports.sendMessage = sendMessage;
 module.exports.solveCaptcha = solveCaptcha;

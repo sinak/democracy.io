@@ -36,9 +36,7 @@ describe("routes.api.location", function() {
         zipcode: f.components.zipcode
       },
       county: f.metadata.county_name,
-      district: f.metadata.congressional_district,
-      latitude: f.metadata.latitude,
-      longitude: f.metadata.longitude
+      district: f.metadata.congressional_district
     });
   });
 });

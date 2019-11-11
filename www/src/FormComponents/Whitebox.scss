@@ -1,0 +1,65 @@
+@import "./../sass/variables";
+
+.boxshadow {
+  box-shadow: 0px 2px 7px 0px rgba(100, 100, 100, 0.18);
+}
+.whitebox-container {
+  padding: 27px 30px 34px 30px;
+
+  @media (max-width: $screen-xs-max) {
+    padding: 17px 10px 14px 10px;
+  }
+}
+.whitebox-footer {
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  color: #5f5f5f;
+  font-size: 12px;
+  background-color: #f9f9f9;
+}
+.whitebox {
+  @extend .boxshadow;
+  background-color: #fff;
+  padding: 0;
+  border-radius: 5px;
+  margin: 0 auto 90px auto;
+  float: none;
+  overflow: hidden;
+
+  @media (max-width: $screen-xs-max) {
+    margin-bottom: 40px;
+    max-width: 95%;
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    height: 5px;
+    background-color: #000;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background-image: linear-gradient(to right, #ff8900, $pink);
+  }
+  label {
+    margin-bottom: 7px;
+  }
+}
+
+.whitebox-enter {
+  opacity: 0;
+}
+
+.whitebox-enter-active {
+  animation-name: fadeUp30;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+.whitebox-exit-active {
+  animation-name: fadeDown30;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+.whitebox-exit-done {
+  display: none;
+}

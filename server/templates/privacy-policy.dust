@@ -1,4 +1,4 @@
-{>"layouts/master" /}
+{>"./layouts/master" /}
 
 {<body}
 <div class="container">
@@ -45,8 +45,4 @@
 </div>
 {/body}
 
-{>"components/footer"/}
-
-{<afterBody}
-  {>"components/piwik"/}
-{/afterBody}
+{>"./components/footer"/}

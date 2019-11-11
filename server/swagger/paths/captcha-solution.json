@@ -13,18 +13,13 @@
         }
       }
     ],
-    "tags": [
-      "captcha"
-    ],
+    "tags": ["captcha"],
     "responses": {
       "200": {
         "description": "Captcha solution acknowledgement.",
         "schema": {
           "type": "object"
         }
-      },
-      "default": {
-        "$ref": "#/responses/UnexpectedError"
       }
     }
   }

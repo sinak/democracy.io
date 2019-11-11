@@ -19,9 +19,7 @@
         "format": "int32"
       }
     ],
-    "tags": [
-      "Legislators"
-    ],
+    "tags": ["Legislators"],
     "responses": {
       "200": {
         "description": "An array of legislators' biographical info.",
@@ -31,9 +29,6 @@
             "$ref": "#/definitions/Legislator"
           }
         }
-      },
-      "default": {
-        "$ref": "#/responses/UnexpectedError"
       }
     }
   }

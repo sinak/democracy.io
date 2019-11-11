@@ -1,9 +1,9 @@
 const app = require("./app");
 const logger = require("./logger");
 
-const Legislators = require("./dio/Legislators");
-const LegislatorsSearchUpdater = require("./dio/LegislatorsSearchUpdater");
-const CongressLegislators = require("./services/CongressLegislators");
+const Legislators = require("./congress-legislators/Legislators");
+const LegislatorsSearchUpdater = require("./congress-legislators/LegislatorsSearchUpdater");
+const LegislatorsFile = require("./congress-legislators/LegislatorsFile");
 
 /**
  * waits for legislator data to load then starts server
@@ -11,7 +11,7 @@ const CongressLegislators = require("./services/CongressLegislators");
 module.exports = async function() {
   const updater = new LegislatorsSearchUpdater(
     Legislators,
-    CongressLegislators.fetchFile
+    LegislatorsFile.fetchFile
   );
   await updater.update();
 

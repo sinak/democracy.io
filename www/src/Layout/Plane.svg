@@ -1,0 +1,33 @@
+<svg
+  viewBox="0 0 265 265"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+>
+  <defs>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="97.447%" id="b">
+      <stop stop-color="#fff" offset="0%" />
+      <stop stop-color="#F1F1F1" offset="100%" />
+    </linearGradient>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="85.947%" id="a">
+      <stop stop-color="#1BA0FD" offset="0%" />
+      <stop stop-color="#F93468" offset="100%" />
+    </linearGradient>
+    <path
+      id="c"
+      d="M0 139.286l74.286 27.857 9.286 92.857 46.429-65 65 65 65-260-260 139.286z"
+    />
+  </defs>
+  <g fill="none">
+    <g transform="translate(3 2)">
+      <use stroke="url(#a)" stroke-width="2" fill="#fff" xlink:href="#c" />
+      <use xlink:href="#c" />
+    </g>
+    <path
+      d="M132.138 172.981l81.944-112.673-122.916 98.46-52.879-19.846 206.14-110.432-51.663 206.844-60.626-62.354z"
+      stroke="#F93469"
+      stroke-dasharray="7"
+      fill-opacity=".99"
+      fill="#fff"
+    />
+  </g>
+</svg>

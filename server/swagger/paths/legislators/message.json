@@ -16,9 +16,7 @@
         }
       }
     ],
-    "tags": [
-      "Message"
-    ],
+    "tags": ["Message"],
     "responses": {
       "200": {
         "description": "Message response acknowledgement.",
@@ -28,9 +26,6 @@
             "$ref": "#/definitions/MessageResponse"
           }
         }
-      },
-      "default": {
-        "$ref": "#/responses/UnexpectedError"
       }
     }
   }

@@ -5,13 +5,13 @@
 const _ = require("lodash");
 const supertest = require("supertest");
 const app = require("./../app");
-const DIOLegislators = require("../dio/Legislators");
+const DIOLegislators = require("../congress-legislators/Legislators");
 const POTCApi = require("../services/POTC");
 jest.mock("../services/POTC");
 
 describe("routes.api.legislators", function() {
   test("should find legislators by district", async () => {
-    /** @type {DIO.Legislator[]} */
+    /** @type {CongressLegislator.Legislator[]} */
     const DIOLegislatorsFixture = [
       {
         bioguideId: "1",
@@ -99,7 +99,7 @@ describe("routes.api.legislators", function() {
   });
 
   test("if POTC doesn't have data on a legislator, set comingSoon property to true", async () => {
-    /** @type {DIO.Legislator[]} */
+    /** @type {CongressLegislator.Legislator[]} */
     const DIOLegislatorsFixture = [
       {
         bioguideId: "1",

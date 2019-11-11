@@ -1,36 +1,44 @@
-Democracy.io FE
-================
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Directory structure
+## Available Scripts
 
-- [**<code>img</code>**](/www/img) - app image files
-- [**<code>js</code>**](/www/js) - js code; ng controllers, services etc.
-- [**<code>sass</code>**](/www/sass) - sass files for app style
-- [**<code>partials</code>**](/www/partials) - ng templates, cached via the [gulp/tasks/partials task](/gulp/tasks/partials.js)
+In the project directory, you can run:
 
-# Angular Components
+### `yarn start`
 
-## [Controllers](/www/js/controllers)
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-- [**<code>address-form</code>**](/www/js/controllers/address-form.js) - Shows a form to enter the user's address 
-- [**<code>captcha</code>**](/www/js/controllers/captcha.js) - Shows a form displaying captcha's from reps, allowing the user to solve them and submit their message 
-- [**<code>legislator-picker</code>**](/www/js/controllers/legislator-picker.js) - Displays a picker for selecting the reps to write to
-- [**<code>message-form</code>**](/www/js/controllers/message-form.js) - Shows a form for writing a message and supplying metadata, e.g. topic, to send to their reps
-- [**<code>send-message</code>**](/www/js/controllers/send-message.js) - Wraps the entire message send process and manages some routing logic and state
-- [**<code>thanks</code>**](/www/js/controllers/thanks.js) - Shows a thanks dialog and social media links to share the app 
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-## [Directives](/www/js/directives)
+### `yarn test`
 
-- [**<code>write-to-them-animation</code>**](/www/js/services/write-to-them-animation.js) - Manages a typewriter style animation for the "write to them" title
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## [Services](/www/js/services)
+### `yarn build`
 
-- [**<code>api</code>**](/www/js/services/api.js) - API to talk to the dio backend
-- [**<code>dio-data</code>**](/www/js/services/dio-data.js) - Session storage wrapper, provides getter / setter access to app data, e.g. user's verified address
-- [**<code>models-http-interceptor</code>**](/www/js/services/models-http-interceptor.js) - Middleware to coerce API responses to model objects
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## [Helpers](/www/js/helpers)
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-- [**<code>api</code>**](/www/js/services/api.js) - Helpers for working with the API, e.g. model coercion
-- [**<code>message-form</code>**](/www/js/services/message-form.js) - Helpers for working with the message form, mostly parsers to take legislator form elements and build usable data structures for rendering the corresponding form
-- [**<code>page-location</code>**](/www/js/services/page-location.js) - Helpers for getting page and location state
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).

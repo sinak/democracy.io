@@ -1,0 +1,109 @@
+@import "./../sass/variables";
+
+// Styles for progress-bar
+.label.active {
+  font-weight: 600;
+  -webkit-font-smoothing: antialiased;
+}
+#progress-bar-svg {
+  width: 100%;
+  margin: 0 auto;
+  max-height: 70px; // Fixes progress-bar height issue in Safari 7
+}
+div#progress-bar {
+  text-align: center;
+  max-width: 433px;
+  margin: 0 auto 40px auto;
+  position: relative;
+  opacity: 0;
+  @media (max-width: $screen-xs-max) {
+    max-width: 80%;
+    margin-bottom: 60px;
+  }
+}
+#progress-bar .labels {
+  margin-top: -8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 300;
+  span {
+    display: inline-block;
+  }
+  .first {
+    width: 28%;
+    margin-left: -6%;
+    position: absolute;
+    left: 0;
+  }
+  .second {
+    width: 44%;
+    position: absolute;
+    left: 50%;
+    margin-left: -22%;
+  }
+  .third {
+    width: 28%;
+    position: absolute;
+    right: 0;
+    margin-right: -8%;
+  }
+}
+
+#pb-check-1,
+#pb-check-2,
+#pb-check-3 {
+  fill: none;
+}
+#pb-dot-1,
+#pb-dot-2,
+#pb-dot-3 {
+  fill: none;
+}
+#pb-line-1,
+#pb-line-2 {
+  stroke-width: 0;
+}
+.active-progress {
+  #pb-dot-1 {
+    fill: $pink;
+  }
+  #progress-bar .labels .first {
+    @extend .label.active;
+  }
+}
+.active-progress {
+  #pb-dot-2,
+  #pb-check-1 {
+    fill: $pink;
+  }
+  #progress-bar .labels .second {
+    @extend .label.active;
+  }
+}
+.active-progress {
+  #pb-dot-3,
+  #pb-check-1,
+  #pb-check-2 {
+    fill: $pink;
+  }
+  #progress-bar .labels .third {
+    @extend .label.active;
+  }
+}
+.active-progress {
+  #pb-dot-3,
+  #pb-check-1,
+  #pb-check-2 {
+    fill: $pink;
+  }
+  #progress-bar .labels .third {
+    @extend .label.active;
+  }
+}
+.active-progress {
+  #pb-check-3,
+  #pb-check-1,
+  #pb-check-2 {
+    fill: $pink;
+  }
+}

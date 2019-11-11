@@ -3,7 +3,7 @@
  */
 
 var NodeCache = require('node-cache');
-var isUndefined = require('lodash.isundefined');
+var isUndefined = require("lodash/isUndefined");
 
 
 /**

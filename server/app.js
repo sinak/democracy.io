@@ -15,10 +15,13 @@ app.use(Sentry.Handlers.requestHandler());
 
 app.locals["CONFIG"] = config;
 
-
 // NOTE: this assumes you're running behind an nginx instance or other proxy
 app.enable("trust proxy");
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+});
 // security
 app.use(
   lusca({

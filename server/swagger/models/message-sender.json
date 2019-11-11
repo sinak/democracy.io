@@ -1,4 +1,5 @@
 {
+  "title": "MessageSender",
   "description": "Details of the sender of a specific message.",
   "properties": {
     "namePrefix": {

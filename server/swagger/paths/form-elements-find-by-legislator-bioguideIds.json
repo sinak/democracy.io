@@ -14,9 +14,7 @@
         }
       }
     ],
-    "tags": [
-      "FormElements"
-    ],
+    "tags": ["FormElements"],
     "responses": {
       "200": {
         "description": "An array of LegislatorFormElements objects describing the form elements the user needs to complete to contact the legislator(s) matching the supplied bioguideId(s).",
@@ -26,9 +24,6 @@
             "$ref": "#/definitions/LegislatorFormElements"
           }
         }
-      },
-      "default": {
-        "$ref": "#/responses/UnexpectedError"
       }
     }
   }

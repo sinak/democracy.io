@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="132"
+   height="92"
+   id="svg2">
+  <defs
+     id="defs4">
+    <marker
+       refX="0"
+       refY="0"
+       orient="auto"
+       style="overflow:visible"
+       id="Arrow1Lstart">
+      <path
+         d="M 0,0 L 5,-5 L -12.5,0 L 5,5 L 0,0 z "
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         id="path3359" />
+    </marker>
+  </defs>
+  <g
+     transform="translate(-66.25,-915.61225)"
+     style="display:inline"
+     id="layer6">
+    <path
+       d="M 195.25,961.61225 C 195.25,985.34825 175.986,1004.6122 152.25,1004.6122 C 128.514,1004.6122 109.25,985.34825 109.25,961.61225 C 109.25,937.87625 128.514,918.61225 152.25,918.61225 C 175.986,918.61225 195.25,937.87625 195.25,961.61225 z "
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:6;stroke-linecap:square;stroke-linejoin:miter;marker-mid:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:inline"
+       id="path3165" />
+    <path
+       d="M 97.25,932.61201 L 141.25,932.61201 L 141.25,944.61201 L 97.25,944.61201 L 97.25,932.61201 z M 97.25,978.61201 L 141.25,978.61201 L 141.25,990.61201 L 97.25,990.61201 L 97.25,978.61201 z M 97.25,954.61201 L 139.25,954.61201 L 139.25,966.61201 L 97.25,966.61201 L 97.25,954.61201 z M 69.25,932.61201 L 97.25,932.61201 L 97.25,990.61201 L 69.25,990.61201 L 69.25,932.61201 z "
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:6;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:inline"
+       id="rect2160" />
+    <path
+       d="M 195.25,961.61205 C 195.25,985.34805 175.986,1004.612 152.25,1004.612 C 128.514,1004.612 109.25,985.34805 109.25,961.61205 C 109.25,937.87605 128.514,918.61205 152.25,918.61205 C 175.986,918.61205 195.25,937.87605 195.25,961.61205 z "
+       style="fill:#cb1009;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.14825581;stroke-linecap:square;stroke-linejoin:miter;marker-mid:none;stroke-miterlimit:4;stroke-dasharray:0.14825581, 0.14825581;stroke-dashoffset:0;stroke-opacity:1;display:inline"
+       id="path3557" />
+    <path
+       d="M 97.25,932.61201 L 141.25,932.61201 L 141.25,944.61201 L 97.25,944.61201 L 97.25,932.61201 z M 97.25,978.61201 L 141.25,978.61201 L 141.25,990.61201 L 97.25,990.61201 L 97.25,978.61201 z M 97.25,954.61201 L 139.25,954.61201 L 139.25,966.61201 L 97.25,966.61201 L 97.25,954.61201 z M 69.25,932.61201 L 97.25,932.61201 L 97.25,990.61201 L 69.25,990.61201 L 69.25,932.61201 z "
+       style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:inline"
+       id="path3562" />
+    <path
+       d="M 153.25,934.61201 L 159.25,934.61201 L 159.25,938.61201 L 153.25,938.61201 L 153.25,934.61201 z M 153.25,944.61201 L 157.25,944.61201 L 157.25,948.61201 L 153.25,948.61201 L 153.25,944.61201 z M 149.25,934.61201 L 153.25,934.61201 L 153.25,958.61201 L 149.25,958.61201 L 149.25,934.61201 z "
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4.18818903;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;display:inline"
+       id="rect3140" />
+    <path
+       d="M 153.25,966.61201 L 159.25,966.61201 L 159.25,970.61201 L 153.25,970.61201 L 153.25,966.61201 z M 153.25,976.61201 L 157.25,976.61201 L 157.25,980.61201 L 153.25,980.61201 L 153.25,976.61201 z M 149.25,966.61201 L 153.25,966.61201 L 153.25,990.61201 L 149.25,990.61201 L 149.25,966.61201 z "
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4.18818903;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;stroke-opacity:1;display:inline"
+       id="rect3153" />
+  </g>
+</svg>

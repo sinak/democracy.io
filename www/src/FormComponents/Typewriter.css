@@ -1,0 +1,16 @@
+.typewriter {
+  margin-top: 70px;
+  position: relative;
+}
+.typewriter::after {
+  content: "|";
+  display: inline;
+  opacity: 1;
+  animation: blink 0.7s linear 0s infinite;
+  position: absolute;
+  bottom: 5px;
+}
+.typewriter.hasFinishedTyping::after {
+  display: none;
+  animation: none;
+}

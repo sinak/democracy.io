@@ -1,7 +1,7 @@
 Democracy.io
 ============
 
-[![Build Status](https://travis-ci.org/EFForg/democracy.io.svg?branch=master)](https://travis-ci.org/EFForg/democracy.io)
+[![Build Status](https://travis-ci.org/sinak/democracy.io.svg?branch=master)](https://travis-ci.org/sinak/democracy.io)
 
 Express & Angular app for sending messages to Senate and House members
 

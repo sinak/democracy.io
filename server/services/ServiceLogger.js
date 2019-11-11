@@ -3,6 +3,7 @@ var logger = require("../logger");
 /**
  *
  * @param {string} serviceName
+ * @returns {(res: import("axios").AxiosResponse) => import("axios").AxiosResponse}
  */
 function createResponseInterceptor(serviceName) {
   return function(res) {
@@ -18,14 +19,13 @@ module.exports.createResponseInterceptor = createResponseInterceptor;
 /**
  *
  * @param {string} serviceName
+ * @returns {(res: import("axios").AxiosError) => Promise<import("axios").AxiosError>}
  */
 function createErrorInterceptor(serviceName) {
   return function(error) {
     if (error.response) {
       logger.http(
-        `[${serviceName}] ${error.request.method} ${error.config.url} - ${
-          error.response.status
-        }`
+        `[${serviceName}] ${error.request.method} ${error.config.url} - ${error.response.status}`
       );
     }
 

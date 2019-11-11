@@ -7,7 +7,7 @@ jest.mock("../services/POTC");
 
 const app = require("../app");
 
-const CongressLegislators = require("../dio/Legislators");
+const CongressLegislators = require("../congress-legislators/Legislators");
 const legislatorsFixture = require("./__fixtures__/legislators-fixture");
 
 var potcFEFixtures = require("../services/__fixtures__/potc-form-elements.js");

@@ -1,0 +1,25 @@
+$brand-primary: #f85628;
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "~bootstrap-sass";
+
+// Animation colors
+$primaryColor: #fff;
+$secondaryColor: #fff;
+$highlightColor: #fff;
+$activeColor: #f85628;
+$slowDuration: 0.4s;
+$transitionDuration: 0.5s;
+$easing: cubic-bezier(0.5, 0, 0, 1);
+$border-radius: 2px;
+
+@import "variables";
+@import "~hover.css/scss/_options";
+@import "~hover.css/scss/_mixins";
+@import "~hover.css/scss/_hacks";
+@import "~hover.css/scss/effects/background-transitions/_bounce-to-right.scss";
+
+@import "fonts";
+@import "base";
+@import "footer";
+@import "steps";
+@import "animations";

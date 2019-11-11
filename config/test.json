@@ -13,10 +13,6 @@
         "TOKEN": "test-token"
       },
 
-      "EFF_CIVIC_CRM": {
-        "SITE_KEY": "test"
-      },
-
       "SESSION": {
         "SECRET": "test"
       },

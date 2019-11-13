@@ -1,0 +1,45 @@
+/******
+ Home
+******/
+div#whydio {
+  background-color: #fff;
+  border-top: 1px solid #cccccc;
+  video {
+    border: 1px solid #cccccc;
+    border-top: 0;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    overflow: hidden;
+  }
+  #video-container h2 {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 35px;
+    font-weight: 100;
+  }
+}
+
+#about {
+  background: linear-gradient(to bottom, #eee, #fff);
+  p,
+  ul {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-weight: 400;
+  }
+
+  ul li {
+    margin-bottom: 10px;
+    list-style-type: none;
+    &:before {
+      font-family: "democracy-io";
+      content: "a";
+      font-size: 28px;
+      margin-left: -27px;
+      position: relative;
+      top: 8px;
+      right: 5px;
+    }
+  }
+}

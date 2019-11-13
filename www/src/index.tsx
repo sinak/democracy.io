@@ -1,9 +1,24 @@
+// these imports must be at the top
+import "react-app-polyfill/ie9";
+import "react-app-polyfill/stable";
+//////////////////////////////////////////
+
+import { init } from "@sentry/browser";
 import React from "react";
 import ReactDOM from "react-dom";
-import "./sass/app.scss";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
+import App from "./App";
+import "./sass/app.scss";
+import * as serviceWorker from "./serviceWorker";
+
+if (process.env.NODE_ENV === "production") {
+  init({
+    dsn: process.env.REACT_APP_SENTRY_DSN
+    // TODO: scrub personal data
+    // beforeSend: event => {
+    // }
+  });
+}
 
 ReactDOM.render(
   <Router>

@@ -1,9 +1,9 @@
-import React, { useState, FormEvent, useEffect } from "react";
-import { CanonicalAddress, Legislator, Message } from "../../../server/Models";
-import LoadingState from "../LoadingState";
+import React, { FormEvent, useEffect, useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
-import Whitebox from "./Whitebox";
+import { Legislator } from "../../../server/Models";
+import LoadingState from "../LoadingState";
 import { ReactComponent as LoadingSpinner } from "../svg/LoadingSpinner.svg";
+import Whitebox from "./Whitebox";
 
 interface LegislatorPickerProps {
   legislators: Legislator[];
@@ -46,7 +46,7 @@ export default function LegislatorPickerForm(props: LegislatorPickerProps) {
     return (
       <Whitebox
         id="pick-legislators"
-        className="col-sm-9 col-md-8 col-md-offset-3"
+        className="col-sm-9 col-md-8"
         showBackButton={true}
         onClickBackButton={() => history.push("/")}
       >
@@ -55,28 +55,36 @@ export default function LegislatorPickerForm(props: LegislatorPickerProps) {
         <form onSubmit={handleSubmit}>
           <p>Choose which representatives you'd like to write to:</p>
 
-          {props.legislators.map(legislator => {
-            const inputID = `selectedLegislator-${legislator.bioguideId}`;
-            return (
-              <div className="repOption checkbox">
-                <input
-                  type="checkbox"
-                  id={inputID}
-                  checked={selectedBioguides.includes(legislator.bioguideId)}
-                  disabled={legislator.formStatus !== "ok"}
-                  onChange={() =>
-                    toggleSelectedBioguideId(legislator.bioguideId)
-                  }
-                ></input>
-                <label htmlFor={inputID}>
-                  {legislatorTitle(legislator)} {legislator.firstName}{" "}
-                  {legislator.lastName}
-                </label>
-              </div>
-            );
-          })}
+          <div className="my-2">
+            {props.legislators.map(legislator => {
+              const inputID = `selectedLegislator-${legislator.bioguideId}`;
+              return (
+                <div className="repOption checkbox py-1">
+                  <input
+                    type="checkbox"
+                    id={inputID}
+                    checked={selectedBioguides.includes(legislator.bioguideId)}
+                    disabled={legislator.formStatus !== "ok"}
+                    onChange={() =>
+                      toggleSelectedBioguideId(legislator.bioguideId)
+                    }
+                  ></input>
+                  <label htmlFor={inputID}>
+                    <span className="ml-1">
+                      {legislatorTitle(legislator)} {legislator.firstName}{" "}
+                      {legislator.lastName}
+                    </span>
+                  </label>
+                </div>
+              );
+            })}
+          </div>
 
-          <button type="submit" className="btn btn-lg btn-orange">
+          <button
+            type="submit"
+            className="btn btn-lg btn-orange"
+            disabled={selectedBioguides.length === 0}
+          >
             Write to them!
           </button>
         </form>
@@ -86,7 +94,7 @@ export default function LegislatorPickerForm(props: LegislatorPickerProps) {
     return (
       <Whitebox
         id="pick-legislators"
-        className="col-sm-9 col-md-8 col-md-offset-3"
+        className="col-sm-9 col-md-8"
         showBackButton={false}
       >
         <LoadingSpinner />
@@ -94,7 +102,16 @@ export default function LegislatorPickerForm(props: LegislatorPickerProps) {
       </Whitebox>
     );
   } else {
-    return <div>error</div>;
+    return (
+      <Whitebox
+        id="pick-legislators"
+        className="col-sm-9 col-md-8"
+        showBackButton={true}
+        onClickBackButton={() => history.push("/")}
+      >
+        An error occurred with the service. Please try again later
+      </Whitebox>
+    );
   }
 }
 

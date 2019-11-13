@@ -1,5 +1,4 @@
 import React, { ReactElement } from "react";
-import "./Whitebox.scss";
 
 interface WhiteboxProps {
   footer?: ReactElement;
@@ -17,7 +16,7 @@ interface WhiteboxProps {
 const Whitebox: React.FC<WhiteboxProps> = props => {
   const backButton = props.showBackButton ? (
     <button
-      className="btn-sm btn-warning back-button"
+      className="btn-sm back-button float-right"
       onClick={props.onClickBackButton}
     >
       Go back
@@ -27,7 +26,9 @@ const Whitebox: React.FC<WhiteboxProps> = props => {
     <div id={props.id} className={"whitebox " + props.className}>
       {backButton}
       <div className="whitebox-container">{props.children}</div>
-      <div className="whitebox-footer">{props.footer}</div>
+      {props.footer ? (
+        <div className="whitebox-footer">{props.footer}</div>
+      ) : null}
     </div>
   );
 };

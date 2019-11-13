@@ -3,6 +3,7 @@ import { CanonicalAddress, Legislator, Message } from "../../../server/Models";
 import Whitebox from "./Whitebox";
 import classNames from "classnames";
 import { useHistory } from "react-router-dom";
+import { sendMessages } from "../DioAPI";
 
 interface MessageFormProps {
   canonicalAddress: CanonicalAddress;
@@ -32,8 +33,9 @@ export default function MessageForm(props: MessageFormProps) {
     selectedBioguides.includes(legislator.bioguideId)
   );
 
-  function handleMessageFormSubmit(e: FormEvent) {
+  async function handleMessageFormSubmit(e: FormEvent) {
     e.preventDefault();
+
     let messages: Message[] = selectedBioguides.map(bioguideId => {
       const legislator = legislators.find(l => l.bioguideId === bioguideId);
       if (legislator === undefined) throw new Error();
@@ -61,11 +63,17 @@ export default function MessageForm(props: MessageFormProps) {
       };
       return m;
     });
+
+    try {
+      const res = await sendMessages(messages);
+    } catch (e) {
+      // TODO: handle error
+    }
   }
 
   return (
     <Whitebox
-      className="write-message col-md-10"
+      className="write-message col-lg-10"
       showBackButton={true}
       onClickBackButton={() => history.push("/pick-legislators")}
     >
@@ -155,6 +163,7 @@ export default function MessageForm(props: MessageFormProps) {
                   type="text"
                   defaultValue={email}
                   onChange={e => setEmail(e.target.value)}
+                  autoComplete="email"
                   required
                   className="form-control"
                 />
@@ -211,6 +220,7 @@ export default function MessageForm(props: MessageFormProps) {
                     type="text"
                     defaultValue={phoneNumber}
                     onChange={e => setPhoneNumber(e.target.value)}
+                    autoComplete="tel tel-national"
                     required
                     className="form-control"
                   />
@@ -274,6 +284,7 @@ export default function MessageForm(props: MessageFormProps) {
               </div>
             </div>
           </div>
+          <button className="btn btn-orange btn-lg">Send!</button>
         </form>
       </div>
     </Whitebox>

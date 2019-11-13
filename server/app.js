@@ -18,19 +18,15 @@ app.locals["CONFIG"] = config;
 // NOTE: this assumes you're running behind an nginx instance or other proxy
 app.enable("trust proxy");
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  next();
-});
 // security
-app.use(
-  lusca({
-    csrf: false,
-    xframe: "SAMEORIGIN",
-    p3p: false,
-    csp: false
-  })
-);
+// app.use(
+//   lusca({
+//     csrf: false,
+//     xframe: "SAMEORIGIN",
+//     p3p: false,
+//     csp: false
+//   })
+// );
 
 // logger
 app.use((req, res, next) => {
@@ -61,7 +57,11 @@ swaggerMiddleware(apiDef, app, function(err, middleware) {
 });
 
 // static
-app.use(require("./web-static/app"));
+// app.use(require("./web-static/app"));
+app.use(express.static(path.join(__dirname, "../www/build")));
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../www/build", "index.html"));
+// });
 
 // error handlers - order dependent
 app.use(Sentry.Handlers.errorHandler());

@@ -8,33 +8,18 @@ body {
   transition: height 0.1s linear;
 }
 
-// Animation for all form sections
-.whitebox-enter {
-  opacity: 0;
-}
-.whitebox-enter-active {
+// Form element transitions
+.repOption,
+.write-message .whitebox-container > div,
+.ng-enter #addressInputs > div {
   @extend .animated;
   animation-name: fadeUp30;
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      animation-delay: 0.1s * $i + 0.5s;
+    }
+  }
 }
-.whitebox-exit-active {
-  @extend .animated;
-  animation-name: fadeDown30;
-}
-.whitebox-exit-done {
-  display: none;
-}
-// // Form element transitions
-// .repOption,
-// .write-message .whitebox-container > div,
-// .ng-enter #addressInputs > div {
-//   @extend .animated;
-//   animation-name: fadeUp30;
-//   @for $i from 1 through 10 {
-//     &:nth-child(#{$i}) {
-//       @include animation-delay(0.1s * $i + 0.5s);
-//     }
-//   }
-// }
 
 // // Animations for loading box
 // #loading.ng-leave {
@@ -74,41 +59,16 @@ body {
   div#progress-bar {
     opacity: 1;
   }
-
-  &[data-pagefrom="location"] {
-    .header h1 {
-      @media (min-width: $screen-sm-min) {
-        margin-top: 0;
-        animation: addTopMargin 1.5s ease 0.5s 1 forwards;
-      }
-    }
-  }
 }
 // Home styles for fresh site load
 #wrapper[data-pagename="home"][data-pagefrom="new-visit"] {
-  .header h1::after {
-    content: "|";
-    display: inline;
-    opacity: 1;
-    animation: blink 0.7s linear 0s infinite;
-    position: relative;
-    bottom: 5px;
-  }
-  h1.hasFinishedTyping::after {
-    display: none;
-    animation: none;
-  }
   div#progress-bar {
     opacity: 0;
     @extend .animated;
     animation-name: fadeInUp;
     animation-delay: 1.5s; // Reduces jittering
   }
-  #address.whitebox {
-    @extend .animated;
-    animation-name: fadeInUp;
-    animation-delay: 1.5s; // Reduces jittering
-  }
+
   #progress-bar-svg {
     #pb-circle-1,
     #pb-circle-2,
@@ -117,15 +77,6 @@ body {
       stroke-dasharray: 100;
       stroke-dashoffset: 100;
       animation: draw 1.5s ease 1.8s 1 forwards;
-    }
-  }
-  &[data-pagefrom="location"] {
-    .header h1 {
-      margin-top: 0px;
-      animation: addTopMargin 1.5s ease 0.5s 1 forwards;
-    }
-    h1.header {
-      display: none;
     }
   }
 }
@@ -152,12 +103,6 @@ body {
   }
   // Animations when moving forwards
   &[data-pagefrom="home"] {
-    h1.header {
-      @media (min-width: $screen-sm-min) {
-        margin-top: 70px;
-        animation: removeTopMargin 1.5s ease 0.5s 1 forwards;
-      }
-    }
     #pb-line-1 {
       stroke-linejoin: butt;
       stroke-dasharray: 170;
@@ -340,16 +285,6 @@ body {
     opacity: 0;
   }
 }
-@keyframes removeTopMargin {
-  to {
-    margin-top: 0;
-  }
-}
-@keyframes addTopMargin {
-  to {
-    margin-top: 70px;
-  }
-}
 @keyframes draw {
   to {
     stroke-dashoffset: 0;
@@ -408,4 +343,17 @@ body {
   @extend .animated;
   opacity: 0;
   animation: fadeDown30 0.3s ease 0s 1 forwards;
+}
+
+#form-content {
+  transition-property: margin-top;
+  transition-duration: 1.5s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0.5s;
+}
+[data-pagename="home"] #form-content {
+  margin-top: 70px;
+}
+[data-pagename="location"] #form-content {
+  margin-top: 0;
 }

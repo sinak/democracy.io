@@ -1,29 +1,12 @@
-@import "./../sass/variables";
-
 #address {
   margin-bottom: 30px;
 }
-#address .whitebox-container {
-  padding: 0;
-}
 
-#address .whitebox-container > form {
-  padding: 27px 30px 15px 30px;
-  &::after {
-    display: block;
-    content: "";
-    clear: both;
-  }
-}
 #address .btn-lg.btn-orange {
   margin-top: 25px;
   right: 2px;
 }
-#address .alert.alert-danger {
-  margin-bottom: 5px;
-  margin-top: 5px;
-  background-color: #fff;
-}
+
 #address .whitebox-footer {
   a,
   a:visited,
@@ -33,7 +16,7 @@
     text-decoration: underline;
   }
 }
-@media (min-width: $screen-sm-min) {
+@include media-breakpoint-up(sm) {
   #address #addressInputs {
     float: left;
   }
@@ -44,7 +27,8 @@
     text-align: right;
   }
 }
-@media (max-width: $screen-xs-max) {
+
+@include media-breakpoint-down(sm) {
   #address {
     .btn-lg.btn-orange {
       left: 0;
@@ -63,12 +47,12 @@
     transition: width 0.5s ease;
   }
 
-  @media (min-width: $screen-sm-min) {
+  @include media-breakpoint-up(sm) {
     #addressInputs.addressValid {
       width: 75%;
     }
   }
-  @media (min-width: $screen-sm-min) {
+  @include media-breakpoint-up(sm) {
     #submitAddress {
       max-width: 0;
       overflow: hidden;
@@ -78,7 +62,7 @@
       max-width: 25%;
     }
   }
-  @media (max-width: $screen-xs-max) {
+  @include media-breakpoint-down(sm) {
     #submitAddress {
       max-height: 0;
       overflow: hidden;

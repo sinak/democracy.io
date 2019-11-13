@@ -32,12 +32,11 @@ export default function(props: TypewriterProps) {
 
   return (
     <h1
-      className={classNames("typewriter header", {
+      className={classNames("typewriter serif text-center display-4", {
         hasFinishedTyping: finished
       })}
     >
       <span>
-        {""}
         {props.message.slice(0, currentIndex)}
       </span>
     </h1>

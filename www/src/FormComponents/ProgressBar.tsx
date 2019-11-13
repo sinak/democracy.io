@@ -1,9 +1,8 @@
 import * as React from "react";
-import "./ProgressBar.scss";
 
 export default function ProgressBar() {
   return (
-    <div id="progress-bar" style={{ opacity: 1 }}>
+    <div id="progress-bar">
       <svg id="progress-bar-svg" viewBox="0 0 433 69">
         {/* drop shadow */}
         <filter id="dropshadow" x="-20%" y="-20%" width="140%" height="140%">

@@ -9,11 +9,13 @@ export default function FormProgress() {
     "/pick-legislators": " Who do you want to write to?",
     "/message": "Write your message"
   };
+
   let loc = useLocation();
 
+  const message = messages[loc.pathname] ? messages[loc.pathname] : "";
   return (
-    <div className="header">
-      <Typewriter message={messages[loc.pathname]} />
+    <div>
+      <Typewriter message={message} />
       <ProgressBar />
     </div>
   );

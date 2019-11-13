@@ -1,91 +1,56 @@
-// requires IntersectionObserver polyfill
-
-import * as React from "react";
+import React, { useEffect } from "react";
 import { ReactComponent as PlaneSVG } from "./Plane.svg";
 import { ReactComponent as ChatSVG } from "./Chat.svg";
 import { ReactComponent as SpeakerSVG } from "./Speaker.svg";
-import BrowserHeaderPNG from "./../images/browser-header.png";
 import { useInView } from "react-intersection-observer";
 import classNames from "classnames";
 
 export default function() {
-  const [ref, inView] = useInView({ threshold: 0, triggerOnce: true });
   return (
-    <div id="whydio">
+    <div id="about-lead" className="bg-primary">
       <div className="container">
-        <div className="row">
-          <div
-            ref={ref}
-            id="video-container"
-            className={classNames(
-              "col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2",
-              { "ng-enter": inView }
-            )}
-          >
-            <h2>Why we built Democracy.io</h2>
-            <div>
-              <img className="img-responsive" src={BrowserHeaderPNG} alt="" />
-              <video id="video" controls width="100%">
-                <source src="//d1cv406lx4hgxd.cloudfront.net/dio-1.2.1c.mp4" />
-                Your browser does not support HTML5 video.
-              </video>
-            </div>
+        <div className="col-md-10 mx-auto py-5">
+          <h2 className="mt-0 text-white text-center serif">
+            Democracy thrives when people’s voices are heard. The easier it is
+            for you to contact Congress, the better. It’s that simple.
+          </h2>
+          <div className="text-center" id="showAbout">
+            <button className="btn btn-lg btn-outline" ng-click="showAbout()">
+              Read more <i className="icon-angle-down" />
+            </button>
           </div>
         </div>
       </div>
-      <div id="about-lead">
+
+      <div id="about" className="py-5 font-weight-normal">
         <div className="container">
           <div className="row">
-            <div className="col-md-10 col-md-offset-1">
-              <h2>
-                Democracy thrives when people’s voices are heard. The easier it
-                is for you to contact Congress, the better. It’s that simple.
-              </h2>
-              <div className="text-center" id="showAbout">
-                <button
-                  className="btn btn-lg btn-outline"
-                  ng-click="showAbout()"
-                >
-                  Read more <i className="icon-angle-down" />
-                </button>
-              </div>
+            <div className="col-lg-8 offset-lg-2">
+              <p>
+                Failure to effectively reach members of Congress has disastrous
+                consequences. Studies show that politicians{" "}
+                <a href="http://www.vanderbilt.edu/csdi/miller-stokes/08_MillerStokes_BroockmanSkovron.pdf">
+                  {" "}
+                  fundamentally misconceive
+                </a>{" "}
+                their constituents’ views, making it harder for them to
+                represent us in the lawmaking process.
+              </p>
+              <p>
+                That’s why we built Democracy.io: a new tool to put you in touch
+                with your members of Congress—with as few clicks as possible.
+              </p>
             </div>
           </div>
-        </div>
-      </div>
-      <div id="about" className="hidden">
-        <div className="lead">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-8 col-md-offset-2">
-                <p>
-                  Failure to effectively reach members of Congress has
-                  disastrous consequences. Studies show that politicians{" "}
-                  <a href="http://www.vanderbilt.edu/csdi/miller-stokes/08_MillerStokes_BroockmanSkovron.pdf">
-                    {" "}
-                    fundamentally misconceive
-                  </a>{" "}
-                  their constituents’ views, making it harder for them to
-                  represent us in the lawmaking process.
-                </p>
-                <p>
-                  That’s why we built Democracy.io: a new tool to put you in
-                  touch with your members of Congress—with as few clicks as
-                  possible.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="container">
+
           <div className="row">
-            <div className="col-md-10 col-md-offset-1">
+            <div className="col-lg-10 offset-lg-1">
               <div className="row">
-                <div className="col-md-4 hidden-xs hidden-sm v-center">
-                  <PlaneSVG />
+                <div className="col-lg-4 d-none d-lg-flex">
+                  <PlaneSVG width={"100%"} />
                 </div>
-                <div className="col-md-8 v-center">
-                  <h2>Simple and easy to use</h2>
+                <div className="col-lg-8">
+                  <h2 className="serif text-center">Simple and easy to use</h2>
                   <p>
                     We make it possible for you to email your two senators and
                     representative through a single website. You submit one
@@ -111,6 +76,7 @@ export default function() {
                       <a
                         href="https://github.com/sinak/democracy.io/blob/master/LICENSE"
                         target="_blank"
+                        rel="noopener noreferrer"
                       >
                         AGPL
                       </a>
@@ -121,6 +87,7 @@ export default function() {
                   </ul>
                 </div>
               </div>
+
               <div className="row">
                 <div className="col-md-8 v-center">
                   <h2>We don’t tell people what to say</h2>
@@ -151,13 +118,14 @@ export default function() {
                     for more details.
                   </p>
                 </div>
-                <div className="col-md-4 hidden-xs hidden-sm v-center">
-                  <ChatSVG />
+                <div className="col-md-4 d-none d-md-block v-center">
+                  <ChatSVG width={"100%"} />
                 </div>
               </div>
+
               <div className="row">
-                <div className="col-md-4 hidden-xs  hidden-sm v-center">
-                  <SpeakerSVG />
+                <div className="col-md-4 d-none d-md-block v-center">
+                  <SpeakerSVG width={"100%"} />
                 </div>
                 <div className="col-md-8 v-center">
                   <h2>Why we’re doing this.</h2>
@@ -244,14 +212,12 @@ export default function() {
                     under the GNU Affero General Public License, Version 3.
                   </p>
                 </div>
-                <div className="col-md-4 hidden-xs hidden-sm v-center"></div>
               </div>
               <div className="row">
                 <div className="col-md-6 hidden-xs  hidden-sm v-center">
                   <svg
                     id="icon-logo"
                     className="img-responsive"
-                    in-view="animate($event,$inview,$inviewpart)"
                     preserveAspectRatio="none"
                     viewBox="0 0 232 20"
                   >

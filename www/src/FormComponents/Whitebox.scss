@@ -1,12 +1,10 @@
-@import "./../sass/variables";
-
 .boxshadow {
   box-shadow: 0px 2px 7px 0px rgba(100, 100, 100, 0.18);
 }
 .whitebox-container {
   padding: 27px 30px 34px 30px;
 
-  @media (max-width: $screen-xs-max) {
+  @include media-breakpoint-down(sm) {
     padding: 17px 10px 14px 10px;
   }
 }
@@ -20,13 +18,12 @@
 .whitebox {
   @extend .boxshadow;
   background-color: #fff;
-  padding: 0;
   border-radius: 5px;
   margin: 0 auto 90px auto;
-  float: none;
+  padding: 0 !important;
   overflow: hidden;
 
-  @media (max-width: $screen-xs-max) {
+  @include media-breakpoint-down(sm) {
     margin-bottom: 40px;
     max-width: 95%;
   }
@@ -57,9 +54,27 @@
 
 .whitebox-exit-active {
   animation-name: fadeDown30;
-  animation-duration: 0.5s;
+  animation-duration: 0.4s;
   animation-fill-mode: both;
 }
 .whitebox-exit-done {
   display: none;
+}
+
+.back-button {
+  display: inline-block;
+  border-radius: 0;
+  border-width: 0;
+  border-bottom-left-radius: 3px;
+  background-color: $pink;
+  color: #fff;
+  padding: 0px 10px 2px 10px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 21px;
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: underline;
+  }
 }

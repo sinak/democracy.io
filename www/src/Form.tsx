@@ -7,6 +7,8 @@ import FormProgress from "./FormComponents/FormProgress";
 import LegislatorPickerForm from "./FormComponents/LegislatorPickerForm";
 import MessageForm from "./FormComponents/MessageForm";
 import LoadingState from "./LoadingState";
+import { getDistrictLegislators } from "./DioAPI";
+import { ReactComponent as EFFLogoSVG } from "./svg/EFF_Logo.svg";
 
 const Form: React.FC = () => {
   // address form
@@ -18,24 +20,26 @@ const Form: React.FC = () => {
   const [canonicalAddress, setCanonicalAddress] = useState<CanonicalAddress>();
 
   // legislator picker
+  // fetching is handled in this component since others depend on the data
   const [legislators, setLegislators] = useState<Legislator[]>([]);
   const [legislatorLoadingState, setLegislatorsLoadingState] = useState(
     LoadingState.Ready
   );
 
   const [selectedBioguides, setSelectedBioguides] = useState<
-    (Legislator["bioguideId"])[]
+    Legislator["bioguideId"][]
   >([]);
 
   async function fetchLegislators(canonicalAddress: CanonicalAddress) {
     setLegislatorsLoadingState(LoadingState.Loading);
-    try {
-      const legislatorsRes = await fetch(
-        `http://localhost:3000/api/1/legislators/findByDistrict?district=${canonicalAddress.district}&state=${canonicalAddress.components.stateAbbreviation}`
-      );
-      const legislatorsJSON = await legislatorsRes.json();
 
-      const nextLegislators: Legislator[] = legislatorsJSON.data;
+    try {
+      const legislatorsRes = await getDistrictLegislators({
+        district: canonicalAddress.district,
+        state: canonicalAddress.components.stateAbbreviation
+      });
+
+      const nextLegislators: Legislator[] = legislatorsRes.data.data;
       setLegislators(nextLegislators);
       setSelectedBioguides(
         nextLegislators
@@ -45,6 +49,7 @@ const Form: React.FC = () => {
       setLegislatorsLoadingState(LoadingState.Success);
     } catch (e) {
       setLegislatorsLoadingState(LoadingState.Error);
+      // TODO: show error message
     }
   }
 
@@ -59,70 +64,86 @@ const Form: React.FC = () => {
     <div>
       <FormProgress />
       <div className="container">
-        <div className="row">
-          <SwitchTransition>
-            <CSSTransition
-              appear={true}
-              key={location.key ? location.key : "/"}
-              timeout={501}
-              classNames="whitebox"
-            >
-              <div className="form-item">
-                <Switch location={location}>
-                  <Route exact path="/">
-                    <AddressForm
-                      onSuccessfulAddress={onSuccessfulAddress}
-                      onStreetAddressChange={setStreetAddress}
-                      onCityChange={setCity}
-                      onZipCodeChange={setZipCode}
-                      streetAddress={streetAddress}
-                      city={city}
-                      zipCode={zipCode}
-                    />
-                  </Route>
+        <SwitchTransition>
+          <CSSTransition
+            appear={true}
+            key={location.key ? location.key : "/"}
+            timeout={1000}
+            classNames="whitebox"
+          >
+            <Switch location={location}>
+              <Route exact path="/">
+                <AddressForm
+                  onSuccessfulAddress={onSuccessfulAddress}
+                  onStreetAddressChange={setStreetAddress}
+                  onCityChange={setCity}
+                  onZipCodeChange={setZipCode}
+                  streetAddress={streetAddress}
+                  city={city}
+                  zipCode={zipCode}
+                />
+                <div
+                  className="text-uppercase text-center"
+                  style={{ fontSize: 10, letterSpacing: 1 }}
+                >
+                  <span className="d-none d-sm-block">
+                    Originally built by{" "}
+                    <a href="https://eff.org" className="img-link">
+                      <EFFLogoSVG width={40} />
+                    </a>{" "}
+                    now maintained by{" "}
+                    <u>
+                      <a href="https://taskforce.is">Taskforce.is</a>
+                    </u>
+                  </span>
+                  <span className="d-sm-none">
+                    Originally built by{" "}
+                    <a href="https://eff.org">Electronic Frontier Foundation</a>{" "}
+                    now maintained by{" "}
+                    <a href="https://taskforce.is">Taskforce.is</a>
+                  </span>
+                </div>
+              </Route>
 
-                  <Route exact path="/pick-legislators">
-                    {canonicalAddress ? (
-                      <LegislatorPickerForm
-                        legislators={legislators}
-                        legislatorsLoadingState={legislatorLoadingState}
-                        selectedBioguides={selectedBioguides}
-                        onSubmit={selectedBioguides =>
-                          setSelectedBioguides(selectedBioguides)
-                        }
-                      />
-                    ) : (
-                      <Redirect to="/" />
-                    )}
-                  </Route>
-
-                  <Route
-                    exact
-                    path="/message"
-                    render={routeProps => {
-                      if (canonicalAddress === undefined) {
-                        return <Redirect to="/" />;
-                      } else if (
-                        (legislators.length === 0,
-                        selectedBioguides.length === 0)
-                      ) {
-                        return <Redirect to="/pick-legislators" />;
-                      } else {
-                        return (
-                          <MessageForm
-                            canonicalAddress={canonicalAddress}
-                            selectedBioguides={selectedBioguides}
-                            legislators={legislators}
-                          />
-                        );
-                      }
-                    }}
+              <Route exact path="/pick-legislators">
+                {canonicalAddress ? (
+                  <LegislatorPickerForm
+                    legislators={legislators}
+                    legislatorsLoadingState={legislatorLoadingState}
+                    selectedBioguides={selectedBioguides}
+                    onSubmit={selectedBioguides =>
+                      setSelectedBioguides(selectedBioguides)
+                    }
                   />
-                </Switch>
-              </div>
-            </CSSTransition>
-          </SwitchTransition>
-        </div>
+                ) : (
+                  <Redirect to="/" />
+                )}
+              </Route>
+
+              <Route
+                exact
+                path="/message"
+                render={routeProps => {
+                  if (canonicalAddress === undefined) {
+                    return <Redirect to="/" />;
+                  } else if (
+                    (legislators.length === 0, selectedBioguides.length === 0)
+                  ) {
+                    return <Redirect to="/pick-legislators" />;
+                  } else {
+                    return (
+                      <MessageForm
+                        canonicalAddress={canonicalAddress}
+                        selectedBioguides={selectedBioguides}
+                        legislators={legislators}
+                      />
+                    );
+                  }
+                }}
+              />
+            </Switch>
+          </CSSTransition>
+        </SwitchTransition>
       </div>
     </div>
   );

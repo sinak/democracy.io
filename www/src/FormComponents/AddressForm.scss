@@ -1,75 +1,84 @@
-#address {
-  margin-bottom: 30px;
+#addressInputs {
+  width: 100%;
+  transition: width ease-in-out 0.5s;
 }
 
-#address .btn-lg.btn-orange {
-  margin-top: 25px;
-  right: 2px;
+#submitAddress {
+  width: 25%;
+  transition: width ease-in-out 0.5s;
+  display: none;
 }
 
-#address .whitebox-footer {
-  a,
-  a:visited,
-  a:hover,
-  a:active {
-    color: inherit;
-    text-decoration: underline;
-  }
-}
-@include media-breakpoint-up(sm) {
-  #address #addressInputs {
-    float: left;
-  }
-  #address #submitAddress {
-    float: right;
-    width: 25%;
-    margin-top: 96px;
-    text-align: right;
-  }
-}
-
-@include media-breakpoint-down(sm) {
-  #address {
-    .btn-lg.btn-orange {
-      left: 0;
-      margin-top: 5px;
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-    .input-group .form-control:first-child {
-      font-size: 14px;
-    }
-  }
-}
-#address {
+.addressValid-enter-active,
+.addressValid-enter-done {
   #addressInputs {
-    width: 100%;
-    transition: width 0.5s ease;
+    width: 75%;
+  }
+}
+
+// #submitAddress {
+//   max-height: 0;
+//   max-width: 0;
+//   overflow: hidden;
+//   transition: width 0.5s ease;
+//   transition-delay: 0.2s;
+//   display: none;
+// }
+
+// #submitAddress.addressValid {
+//   max-height: 100px;
+// }
+
+// @include media-breakpoint-up(md) {
+//   #addressInputs {
+//     width: 100%;
+//     transition: width 0.5s ease;
+//   }
+//   #addressInputs.addressValid {
+//     width: 75%;
+//   }
+
+//   #submitAddress {
+//     align-self: flex-end;
+//   }
+
+//   #submitAddress {
+//     width: 25%;
+//     text-align: right;
+//     max-width: 0;
+//     overflow: hidden;
+//     transition: max-width 0.5s ease;
+//   }
+//   #submitAddress.addressValid {
+//     max-width: 25%;
+//   }
+// }
+
+// @include media-breakpoint-down(md) {
+//   #addressInputs {
+//     width: 100%;
+//     max-width: 100%;
+//   }
+
+//   #submitAddress {
+//     width: 100%;
+//     max-width: 100%;
+//   }
+// }
+@keyframes slideInRight {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
   }
 
-  @include media-breakpoint-up(sm) {
-    #addressInputs.addressValid {
-      width: 75%;
-    }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
-  @include media-breakpoint-up(sm) {
-    #submitAddress {
-      max-width: 0;
-      overflow: hidden;
-      transition: max-width 0.5s ease;
-    }
-    #submitAddress.addressValid {
-      max-width: 25%;
-    }
-  }
-  @include media-breakpoint-down(sm) {
-    #submitAddress {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-    }
-    #submitAddress.addressValid {
-      max-height: 100px;
-    }
-  }
+}
+
+.slideInRight {
+  -webkit-animation-name: slideInRight;
+  animation-name: slideInRight;
 }

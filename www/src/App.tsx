@@ -31,7 +31,7 @@ const App: React.FC = () => {
 
 function Logo() {
   return (
-    <div id="header" className="mx-auto my-3" style={{ width: 250 }}>
+    <div id="header" className="mx-auto py-3" style={{ width: 250 }}>
       <Link to="/">
         <div className="logo animated">
           <DIOLogoSVG />

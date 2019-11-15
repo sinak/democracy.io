@@ -1,16 +1,16 @@
 body {
-  background-image: url("./../images/bg-fade.jpg");
-  background-size: cover auto;
-  background-repeat: no-repeat;
-  background-position: top center;
   background-color: #eeeeee;
-  // min-height: 100%;
   font-family: "OpenSans", sans-serif;
   font-weight: 300;
 }
 
 .main {
-  min-height: 700px;
+  background-image: url("./../images/bg-fade.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  min-height: 80vh;
+  padding-bottom: 64px;
 }
 
 .serif {
@@ -21,32 +21,14 @@ body {
   box-shadow: 0px 2px 7px 0px rgba(100, 100, 100, 0.18);
 }
 
-.input-lg {
-  height: 54px;
-}
-.input-group {
-  .btn-lg {
-    height: 54px;
-  }
-}
-
-.btn-orange {
-  color: #3c3c3c;
-  background-color: #fff;
-  border: 1px solid #f85628;
-  margin-left: 0 !important;
-  font-weight: 300;
-  border-radius: $border-radius;
+.bounce-to-right {
   @include bounce-to-right;
-  &:hover {
-    text-decoration: none;
-    font-weight: 300;
-  }
-}
-.btn-lg.btn-orange {
-  padding: 15px 30px;
-}
-.input-group .btn-orange {
-  padding: 0 30px;
 }
 
+.label-styled {
+  text-transform: uppercase;
+  color: #555;
+  font-size: 0.75rem;
+  letter-spacing: 0.1rem;
+  font-weight: 500;
+}

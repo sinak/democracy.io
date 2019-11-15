@@ -9,11 +9,10 @@ body {
 }
 
 // Form element transitions
-.repOption,
-.write-message .whitebox-container > div,
-.ng-enter #addressInputs > div {
+.fade-up-children {
   @extend .animated;
   animation-name: fadeUp30;
+
   @for $i from 1 through 10 {
     &:nth-child(#{$i}) {
       animation-delay: 0.1s * $i + 0.5s;
@@ -21,39 +20,6 @@ body {
   }
 }
 
-// // Animations for loading box
-// #loading.ng-leave {
-//   @extend .animated;
-//   animation-name: fadeDown30;
-// }
-
-// Home-screen-specific animations
-
-#video-container {
-  div {
-    opacity: 0;
-  }
-  &.ng-enter {
-    div {
-      @extend .animated;
-      animation-name: fadeUp30;
-      animation-delay: 0.2s;
-      opacity: 0;
-    }
-  }
-}
-#about.ng-enter {
-  @extend .animated;
-  animation-name: fadeUp30;
-  animation-delay: 0.2s;
-  opacity: 0;
-}
-#showAbout.ng-hide {
-  @extend .animated;
-  animation-name: fadeDown30;
-  animation-delay: 0.2s;
-  opacity: 0;
-}
 // Home styles when pressing "back"
 #wrapper[data-pagename="home"] {
   div#progress-bar {
@@ -95,12 +61,7 @@ body {
     stroke-dashoffset: 0;
     stroke-width: 1;
   }
-  #pick-legislators {
-    @extend .animated;
-    animation-name: fadeUp30;
-    animation-delay: 0.5s;
-    opacity: 0;
-  }
+
   // Animations when moving forwards
   &[data-pagefrom="home"] {
     #pb-line-1 {
@@ -144,12 +105,6 @@ body {
   #pb-check-2 {
     opacity: 0;
     animation: fadeInUp 0.5s ease 1s 1 forwards;
-  }
-  .write-message.ng-enter {
-    @extend .animated;
-    animation-name: fadeUp30;
-    animation-delay: 0.5s;
-    opacity: 0;
   }
 }
 
@@ -231,7 +186,7 @@ body {
     opacity: 0;
     transform: translate3d(0, 30px, 0);
   }
-  100% {
+  99% {
     opacity: 1;
     transform: none;
   }
@@ -328,7 +283,6 @@ body {
   stroke-dasharray: 130;
   stroke-dashoffset: 130;
   animation: drawLogo 2.5s ease 0s 1 forwards;
-  animation-repeat: 1;
 }
 
 /*******************
@@ -344,7 +298,6 @@ body {
   opacity: 0;
   animation: fadeDown30 0.3s ease 0s 1 forwards;
 }
-
 #form-content {
   transition-property: margin-top;
   transition-duration: 1.5s;
@@ -352,8 +305,8 @@ body {
   transition-delay: 0.5s;
 }
 [data-pagename="home"] #form-content {
-  margin-top: 70px;
+  margin-top: 64px;
 }
 [data-pagename="location"] #form-content {
-  margin-top: 0;
+  margin-top: 32px;
 }

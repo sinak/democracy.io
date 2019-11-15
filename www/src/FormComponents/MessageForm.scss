@@ -1,27 +1,6 @@
 /******
  Write message
 ******/
-.write-message {
-  label {
-    margin-bottom: 8px;
-  }
-  .btn-orange {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 15px 40px;
-  }
-}
-strong {
-  font-weight: 600;
-}
-#to-field {
-  padding-bottom: 15px;
-  font-size: 18px;
-}
-#to-field label {
-  display: block;
-}
-
 @media (min-width: 1200px) {
   textarea#inputMessage {
     padding-top: 42px;
@@ -67,6 +46,8 @@ strong {
 }
 .panel {
   border: 1px solid #f9465b;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .panel-heading {
   background-image: linear-gradient(to right, #f9465b, #fa6444);
@@ -74,9 +55,14 @@ strong {
   font-size: 12px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  padding: 10px 15px;
 }
 .panel-body {
-  padding-bottom: 10px;
+  padding: 10px 15px;
+  font-size: 14px;
 }
 .panel.panel-compact .panel-body {
   padding: 10px;
@@ -93,22 +79,6 @@ strong {
   }
 }
 
-.emailSignup {
-  font-size: 15px;
-  margin-top: 20px;
-  margin-bottom: 0;
-  a {
-    color: inherit;
-    text-decoration: underline;
-  }
-  label {
-    text-transform: none;
-    letter-spacing: 0;
-    font-size: 15px;
-    padding-left: 0;
-  }
-}
-
 #messageFormValidation {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
@@ -122,9 +92,7 @@ strong {
     margin-bottom: 10px;
   }
 }
-.write-message .whitebox-container {
-  padding-bottom: 10px;
-}
+
 .write-message .alert-danger {
   background-color: #ffefef;
   border: 1px solid colors("primary");

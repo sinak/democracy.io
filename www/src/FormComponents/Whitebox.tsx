@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import classNames from "classnames";
 
 interface WhiteboxProps {
   footer?: ReactElement;
@@ -23,7 +24,7 @@ const Whitebox: React.FC<WhiteboxProps> = props => {
     </button>
   ) : null;
   return (
-    <div id={props.id} className={"whitebox " + props.className}>
+    <div id={props.id} className={classNames("whitebox", props.className)}>
       {backButton}
       <div className="whitebox-container">{props.children}</div>
       {props.footer ? (

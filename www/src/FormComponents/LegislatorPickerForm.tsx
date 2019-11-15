@@ -44,73 +44,75 @@ export default function LegislatorPickerForm(props: LegislatorPickerProps) {
 
   if (props.legislatorsLoadingState === LoadingState.Success) {
     return (
-      <Whitebox
-        id="pick-legislators"
-        className="col-sm-9 col-md-8"
-        showBackButton={true}
-        onClickBackButton={() => history.push("/")}
-      >
-        {isSubmitted ? <Redirect push to="/message" /> : null}
+      <div className="col-md-10 mx-auto">
+        <Whitebox
+          id="pick-legislators"
+          showBackButton={true}
+          onClickBackButton={() => history.push("/")}
+        >
+          {isSubmitted ? <Redirect push to="/message" /> : null}
 
-        <form onSubmit={handleSubmit}>
-          <p>Choose which representatives you'd like to write to:</p>
+          <form onSubmit={handleSubmit}>
+            <p>Choose which representatives you'd like to write to:</p>
 
-          <div className="my-2">
-            {props.legislators.map(legislator => {
-              const inputID = `selectedLegislator-${legislator.bioguideId}`;
-              return (
-                <div className="repOption checkbox py-1">
-                  <input
-                    type="checkbox"
-                    id={inputID}
-                    checked={selectedBioguides.includes(legislator.bioguideId)}
-                    disabled={legislator.formStatus !== "ok"}
-                    onChange={() =>
-                      toggleSelectedBioguideId(legislator.bioguideId)
-                    }
-                  ></input>
-                  <label htmlFor={inputID}>
-                    <span className="ml-1">
-                      {legislatorTitle(legislator)} {legislator.firstName}{" "}
-                      {legislator.lastName}
-                    </span>
-                  </label>
-                </div>
-              );
-            })}
-          </div>
+            <div className="my-2">
+              {props.legislators.map(legislator => {
+                const inputID = `selectedLegislator-${legislator.bioguideId}`;
+                return (
+                  <div className="repOption checkbox py-1">
+                    <input
+                      type="checkbox"
+                      id={inputID}
+                      checked={selectedBioguides.includes(
+                        legislator.bioguideId
+                      )}
+                      disabled={legislator.formStatus !== "ok"}
+                      onChange={() =>
+                        toggleSelectedBioguideId(legislator.bioguideId)
+                      }
+                    ></input>
+                    <label htmlFor={inputID}>
+                      <span className="ml-1">
+                        {legislatorTitle(legislator)} {legislator.firstName}{" "}
+                        {legislator.lastName}
+                      </span>
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
 
-          <button
-            type="submit"
-            className="btn btn-lg btn-orange"
-            disabled={selectedBioguides.length === 0}
-          >
-            Write to them!
-          </button>
-        </form>
-      </Whitebox>
+            <button
+              type="submit"
+              className="btn btn-lg btn-outline-primary"
+              disabled={selectedBioguides.length === 0}
+            >
+              Write to them!
+            </button>
+          </form>
+        </Whitebox>
+      </div>
     );
   } else if (props.legislatorsLoadingState === LoadingState.Loading) {
     return (
-      <Whitebox
-        id="pick-legislators"
-        className="col-sm-9 col-md-8"
-        showBackButton={false}
-      >
-        <LoadingSpinner />
-        <p>Finding your representatives ...</p>
-      </Whitebox>
+      <div className="col-md-9 mx-auto">
+        <Whitebox id="pick-legislators" showBackButton={false}>
+          <LoadingSpinner />
+          <p>Finding your representatives ...</p>
+        </Whitebox>
+      </div>
     );
   } else {
     return (
-      <Whitebox
-        id="pick-legislators"
-        className="col-sm-9 col-md-8"
-        showBackButton={true}
-        onClickBackButton={() => history.push("/")}
-      >
-        An error occurred with the service. Please try again later
-      </Whitebox>
+      <div className="col-md-9 mx-auto">
+        <Whitebox
+          id="pick-legislators"
+          showBackButton={true}
+          onClickBackButton={() => history.push("/")}
+        >
+          An error occurred with the service. Please try again later
+        </Whitebox>
+      </div>
     );
   }
 }

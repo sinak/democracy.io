@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import { CanonicalAddress, Legislator } from "./../../server/Models";
@@ -8,28 +8,61 @@ import LegislatorPickerForm from "./FormComponents/LegislatorPickerForm";
 import MessageForm from "./FormComponents/MessageForm";
 import LoadingState from "./LoadingState";
 import { getDistrictLegislators } from "./DioAPI";
-import { ReactComponent as EFFLogoSVG } from "./svg/EFF_Logo.svg";
+
+interface DIOSessionStorageState {
+  streetAddress: string;
+  city: string;
+  zipCode: string;
+  canonicalAddress: CanonicalAddress | undefined;
+  legislators: Legislator[];
+  selectedBioguides: string[];
+}
 
 const Form: React.FC = () => {
+  let initialState: DIOSessionStorageState;
+  const sessionStorageState = getSessionStorage();
+
+  if (sessionStorageState) {
+    initialState = sessionStorageState;
+  } else {
+    initialState = {
+      streetAddress: "",
+      city: "",
+      zipCode: "",
+      canonicalAddress: undefined,
+      legislators: [],
+      selectedBioguides: []
+    };
+  }
+
   // address form
-  const [streetAddress, setStreetAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [zipCode, setZipCode] = useState("");
+  const [streetAddress, setStreetAddress] = useState(
+    initialState.streetAddress
+  );
+  const [city, setCity] = useState(initialState.city);
+  const [zipCode, setZipCode] = useState(initialState.zipCode);
 
   // canonical address
-  const [canonicalAddress, setCanonicalAddress] = useState<CanonicalAddress>();
+  const [canonicalAddress, setCanonicalAddress] = useState<
+    CanonicalAddress | undefined
+  >(initialState.canonicalAddress);
 
   // legislator picker
   // fetching is handled in this component since others depend on the data
-  const [legislators, setLegislators] = useState<Legislator[]>([]);
-  const [legislatorLoadingState, setLegislatorsLoadingState] = useState(
-    LoadingState.Ready
+  const [legislators, setLegislators] = useState<Legislator[]>(
+    initialState.legislators
   );
-
+  const [legislatorLoadingState, setLegislatorsLoadingState] = useState(
+    initialState.legislators.length > 0
+      ? LoadingState.Success
+      : LoadingState.Ready
+  );
   const [selectedBioguides, setSelectedBioguides] = useState<
     Legislator["bioguideId"][]
-  >([]);
+  >(initialState.selectedBioguides);
 
+  // fetch the legislators using the current canonical address
+  // sets the default selected bioguide id's
   async function fetchLegislators(canonicalAddress: CanonicalAddress) {
     setLegislatorsLoadingState(LoadingState.Loading);
 
@@ -58,6 +91,25 @@ const Form: React.FC = () => {
     fetchLegislators(canonicalAddress);
   }
 
+  // sync state changes to session storage
+  useEffect(() => {
+    setSessionStorage({
+      streetAddress,
+      city,
+      zipCode,
+      canonicalAddress,
+      legislators,
+      selectedBioguides
+    });
+  }, [
+    streetAddress,
+    city,
+    zipCode,
+    canonicalAddress,
+    legislators,
+    selectedBioguides
+  ]);
+
   let location = useLocation();
 
   return (
@@ -68,7 +120,7 @@ const Form: React.FC = () => {
           <CSSTransition
             appear={true}
             key={location.key ? location.key : "/"}
-            timeout={1000}
+            timeout={location.key ? 1000 : 2000}
             classNames="whitebox"
           >
             <Switch location={location}>
@@ -82,27 +134,6 @@ const Form: React.FC = () => {
                   city={city}
                   zipCode={zipCode}
                 />
-                <div
-                  className="text-uppercase text-center"
-                  style={{ fontSize: 10, letterSpacing: 1 }}
-                >
-                  <span className="d-none d-sm-block">
-                    Originally built by{" "}
-                    <a href="https://eff.org" className="img-link">
-                      <EFFLogoSVG width={40} />
-                    </a>{" "}
-                    now maintained by{" "}
-                    <u>
-                      <a href="https://taskforce.is">Taskforce.is</a>
-                    </u>
-                  </span>
-                  <span className="d-sm-none">
-                    Originally built by{" "}
-                    <a href="https://eff.org">Electronic Frontier Foundation</a>{" "}
-                    now maintained by{" "}
-                    <a href="https://taskforce.is">Taskforce.is</a>
-                  </span>
-                </div>
               </Route>
 
               <Route exact path="/pick-legislators">
@@ -148,5 +179,19 @@ const Form: React.FC = () => {
     </div>
   );
 };
+
+const SESSION_STORAGE_KEY = "DIOSessionStorageState";
+function setSessionStorage(state: DIOSessionStorageState) {
+  sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(state));
+}
+
+function getSessionStorage(): DIOSessionStorageState | null {
+  const item = sessionStorage.getItem(SESSION_STORAGE_KEY);
+  if (item) {
+    return JSON.parse(item);
+  } else {
+    return null;
+  }
+}
 
 export default Form;

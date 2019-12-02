@@ -1,23 +1,20 @@
-import React, { useRef, useState, useEffect } from "react";
-import { Route, useLocation, Link } from "react-router-dom";
-import Footer from "./Footer";
+import React from "react";
+import { Route } from "react-router-dom";
 import Form from "./Form";
 import HomeBottom from "./HomePage/HomePage";
-import LegacyAnimationWrapper from "./LegacyAnimationWrapper";
-import { ReactComponent as DIOLogoSVG } from "./svg/DIO_Logo.svg";
-import { ReactComponent as EFFLogoSVG } from "./svg/EFF_Logo.svg";
+import LegacyAnimationWrapper from "./Layout/LegacyAnimationWrapper";
+import HeaderLogo from "./Layout/HeaderLogo";
+import Footer from "./Layout/Footer";
 
 const App: React.FC = () => {
   return (
     <LegacyAnimationWrapper>
       <div className="main">
-        <Logo />
+        <HeaderLogo />
 
         <div id="form-content">
           <Form />
         </div>
-
-        <Route exact path="/"></Route>
       </div>
 
       <Route exact path="/">
@@ -28,17 +25,5 @@ const App: React.FC = () => {
     </LegacyAnimationWrapper>
   );
 };
-
-function Logo() {
-  return (
-    <div id="header" className="mx-auto py-3" style={{ width: 250 }}>
-      <Link to="/">
-        <div className="logo animated">
-          <DIOLogoSVG />
-        </div>
-      </Link>
-    </div>
-  );
-}
 
 export default App;

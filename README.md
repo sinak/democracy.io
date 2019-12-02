@@ -1,96 +1,64 @@
-Democracy.io
-============
+# Democracy.io
 
 [![Build Status](https://travis-ci.org/sinak/democracy.io.svg?branch=master)](https://travis-ci.org/sinak/democracy.io)
 
-Express & Angular app for sending messages to Senate and House members
-
-(c) 2015 Electronic Frontier Foundation
+Express & React app for sending messages to Senate and House members
 
 ## Table of Contents
 
-* [Background Info](#background-info)
-* [Getting Started](#getting-started)
-* [App Configuration](#app-configuration)
-* [Run tests](#run-tests)
-* [Running the server](#running-the-server)
-* [Angular App](#angular-app)
+- [Background Info](#background-info)
+- [Development](#development)
 
 ## Background Info
 
 Democracy.io is an app for contacting Senate & House members. It provides a user friendly wrapper around the individual member contact forms.
 
 It uses APIs from:
-* [Smarty Streets](https://smartystreets.com/docs)
-* [Phantom of the Capitol](https://github.com/EFForg/phantom-of-the-capitol)
+
+- [Smarty Streets](https://smartystreets.com/docs)
+- [Phantom of the Capitol](https://github.com/EFForg/phantom-of-the-capitol)
 
 ## Getting started
 
-### Redis
+### Dependencies
 
-Ensure that Redis is running locally:
-```
-sudo apt-get install redis-server
-```
-or install manually via http://redis.io/topics/quickstart - making sure to read the "Securing Redis" section, especially if you install Redis manually.
+- Node.js
+- Redis (only required in production)
 
-### App dependencies & build
+### Credentials
 
-```
-npm install
-npm run build
-```
+### Development
 
-### credentials
+In most cases, you probably want to watch for changes and have everything
+reload.
 
-You can generate required creds by running
+**Server**
 
 ```
-node bin/gen-creds.js
+$ cd server
+$ npm install
+$ npm run watch
 ```
 
-or:
+**React app**
 
-After you've run `npm install` generate a salt for encrypting IP addresses and store it in your local.json file, under: SERVER > CREDENTIALS > IP > SALT
-
-```
-var bcrypt = require('bcrypt');
-var salt = bcrypt.genSaltSync(10);
-console.log(salt);
-```
-
-Set a session secret and store it in your local.json file, under: SERVER > CREDENTIALS > SESSION > SECRET
-
-## App Configuration
-
-App config is controlled via the [node-config](https://github.com/lorenwest/node-config) module.
-
-To set credentials, create a local-dev.json file under the [config dir](/config) and override the SERVER.CREDENTIALS setting.
-
-Alternately, you can use:
-* [Environment variables](https://github.com/lorenwest/node-config/wiki/Environment-Variables)
-* [Command line options](https://github.com/lorenwest/node-config/wiki/Command-Line-Overrides)
-
-## Run tests
+In new terminal tab:
 
 ```
-npm run test
+$ cd www
+$ npm install
+$ npm run start
 ```
 
-## Running the server locally
-
-Spins up a local server to serve the app, including proxying browsersync on top of the express server.
-
-```
-gulp serve
-```
 
 ## Deploying
 
 To deploy the server, simply run:
 
 ```
+
 pm2 deploy ecosystem.json5 production
+
 ```
 
 For more instructions on setting up a production server, check [/deployment/README.md](deployment/README.md).
@@ -98,3 +66,19 @@ For more instructions on setting up a production server, check [/deployment/READ
 ## Angular app
 
 See the [www/README.md](/www/README.md) for details
+
+### Redis
+
+Ensure that Redis is running locally:
+
+```
+
+sudo apt-get install redis-server
+
+```
+
+or install manually via http://redis.io/topics/quickstart - making sure to read the "Securing Redis" section, especially if you install Redis manually.
+
+```
+
+```

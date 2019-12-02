@@ -1,0 +1,144 @@
+// @ts-check
+/**
+ * Verifies an address via SmartyStreets.
+ */
+
+const expressRouter = require("express").Router();
+const resHelpers = require("./helpers/response");
+import * as SmartyStreetsAPI from "../services/SmartyStreetsAPI";
+
+expressRouter.get("/location/verify", async (req, res) => {
+  // NOTE: SS accepts "the street line of the address, or an entire address" for this.
+  //       However, over-supplying data, e.g. giving
+  //       {street: '123 Main St, San Francisco, CA 9411', city: 'San Francisco', state: 'CA'}
+  //       confuses SS and kicks back an empty results array.
+  //       So, just supply the full address returned from the API call.
+
+  let addressQuery = [
+    req.query.streetAddress,
+    req.query.city,
+    req.query.zipCode
+  ].join(" ");
+
+  let verifyAddressRes;
+  try {
+    verifyAddressRes = await SmartyStreetsAPI.verifyAddress(addressQuery);
+  } catch (err) {
+    return res.status(400).json(resHelpers.makeError(err));
+  }
+
+  // no addresses found
+  if (verifyAddressRes.data.length === 0) {
+    return res.status(400).json({
+      status: "error",
+      message:
+        "Your address was not recognized. Please check the address and try again."
+    });
+  }
+
+  let ssCandidate = verifyAddressRes.data[0];
+  if (ssCandidate.components.zipcode !== req.query.zipCode) {
+    return res.status(400).json({
+      status: "error",
+      message:
+        "The zipcode you entered does not match the verified zip code for " +
+        "your street address. Please check the address and try again"
+    });
+  }
+
+  /** @type {import("../Models").MessageSenderAddress} */
+  const messageSenderAddress = {
+    // todo: add error handling for undefined fields
+    city: ssCandidate.components.city_name || "",
+    zip4: ssCandidate.components.plus4_code || "",
+    zip5: ssCandidate.components.zipcode || "",
+    zipPlus4: `${ssCandidate.components.zipcode}-${ssCandidate.components.plus4_code}`,
+    county: ssCandidate.metadata.county_name,
+    // district's are stored as ints everywhere else, SS uses strings
+    district: districtStringToInt(ssCandidate.metadata.congressional_district),
+    stateFull: states[ssCandidate.components.state_abbreviation],
+    statePostalAbbrev: ssCandidate.components.state_abbreviation,
+    streetAddress: ssCandidate.delivery_line_1,
+    streetAddress2: null
+  };
+
+  res.json({
+    status: "success",
+    data: messageSenderAddress
+  });
+});
+
+export default expressRouter;
+
+/**
+ *
+ * @param {string} smartyStreetsDistrict
+ * @returns {number}
+ */
+function districtStringToInt(smartyStreetsDistrict) {
+  if (smartyStreetsDistrict === "AL") return 0;
+  return parseInt(smartyStreetsDistrict);
+}
+
+/** @type {{[key: string]: string}} */
+const states = {
+  AL: "Alabama",
+  AK: "Alaska",
+  AS: "American Samoa",
+  AZ: "Arizona",
+  AR: "Arkansas",
+  CA: "California",
+  CO: "Colorado",
+  CT: "Connecticut",
+  DE: "Delaware",
+  DC: "District Of Columbia",
+  FM: "Federated States Of Micronesia",
+  FL: "Florida",
+  GA: "Georgia",
+  GU: "Guam",
+  HI: "Hawaii",
+  ID: "Idaho",
+  IL: "Illinois",
+  IN: "Indiana",
+  IA: "Iowa",
+  KS: "Kansas",
+  KY: "Kentucky",
+  LA: "Louisiana",
+  ME: "Maine",
+  MH: "Marshall Islands",
+  MD: "Maryland",
+  MA: "Massachusetts",
+  MI: "Michigan",
+  MN: "Minnesota",
+  MS: "Mississippi",
+  MO: "Missouri",
+  MT: "Montana",
+  NE: "Nebraska",
+  NV: "Nevada",
+  NH: "New Hampshire",
+  NJ: "New Jersey",
+  NM: "New Mexico",
+  NY: "New York",
+  NC: "North Carolina",
+  ND: "North Dakota",
+  MP: "Northern Mariana Islands",
+  OH: "Ohio",
+  OK: "Oklahoma",
+  OR: "Oregon",
+  PW: "Palau",
+  PA: "Pennsylvania",
+  PR: "Puerto Rico",
+  RI: "Rhode Island",
+  SC: "South Carolina",
+  SD: "South Dakota",
+  TN: "Tennessee",
+  TX: "Texas",
+  UT: "Utah",
+  VT: "Vermont",
+  VI: "Virgin Islands",
+  VA: "Virginia",
+  WA: "Washington",
+  WV: "West Virginia",
+  WI: "Wisconsin",
+  WY: "Wyoming"
+};

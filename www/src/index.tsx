@@ -1,6 +1,7 @@
 // these imports must be at the top
 import "react-app-polyfill/ie9";
 import "react-app-polyfill/stable";
+import "intersection-observer";
 //////////////////////////////////////////
 
 import { init } from "@sentry/browser";
@@ -8,7 +9,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
-import "./sass/app.scss";
+import "./Assets/sass/app.scss";
 import * as serviceWorker from "./serviceWorker";
 
 if (process.env.NODE_ENV === "production") {

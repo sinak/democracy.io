@@ -1,13 +1,13 @@
 import axios, { AxiosPromise } from "axios";
 import {
-  CanonicalAddress,
+  MessageSenderAddress,
   Legislator,
   Message,
   MessageResponse
-} from "../../server/Models";
+} from "../../server/src/Models";
 
 const API = axios.create({
-  baseURL: process.env.API_HOST || "/api/1/"
+  baseURL: process.env.API_HOST || "/api/"
 });
 
 /**
@@ -35,11 +35,9 @@ interface UnverifiedAddress {
 
 export function verifyAddress(
   address: UnverifiedAddress
-): ResponsePromise<CanonicalAddress[]> {
+): ResponsePromise<MessageSenderAddress> {
   return API.get("/location/verify", {
-    params: {
-      address: `${address.streetAddress} ${address.city} ${address.zipCode}`
-    },
+    params: address,
     headers: {
       accept: "application/json"
     }
@@ -48,15 +46,16 @@ export function verifyAddress(
 
 interface CongressionalDistrict {
   state: string;
-  district: string;
+  district: number;
 }
 
 export function getDistrictLegislators(
   congressionalDistrict: CongressionalDistrict
 ): ResponsePromise<Legislator[]> {
   return API.get("/legislators/findByDistrict", {
-    params: {
-      ...congressionalDistrict
+    params: congressionalDistrict,
+    headers: {
+      accept: "application/json"
     }
   });
 }
@@ -65,4 +64,8 @@ export function sendMessages(
   messages: Message[]
 ): ResponsePromise<MessageResponse[]> {
   return API.post("/message", messages);
+}
+
+export function solveCaptcha(potcCaptcha: { answer: string; uid: string }) {
+  return API.post("/captcha-solution", potcCaptcha);
 }

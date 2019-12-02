@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "lib": ["es2017"],
+    "target": "es2017",
+    "strict": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "outDir": "dist"
+  }
+}

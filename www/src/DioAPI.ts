@@ -3,29 +3,15 @@ import {
   MessageSenderAddress,
   Legislator,
   Message,
-  MessageResponse
+  MessageResponse,
+  LegislatorContact
 } from "../../server/src/Models";
 
 const API = axios.create({
   baseURL: process.env.API_HOST || "/api/"
 });
 
-/**
- * The data in JSON responses are wrapped
- * eg:
- *
- * ```json
- * {
- *   "status": "success",
- *   "data": [{ "foo": "bar" }]
- * }
- * ```
- */
-interface DIOResWrapper<T> {
-  status: "success";
-  data: T;
-}
-type ResponsePromise<T> = AxiosPromise<DIOResWrapper<T>>;
+type ResponsePromise<T> = AxiosPromise<T>;
 
 interface UnverifiedAddress {
   streetAddress: string;
@@ -51,7 +37,7 @@ interface CongressionalDistrict {
 
 export function getDistrictLegislators(
   congressionalDistrict: CongressionalDistrict
-): ResponsePromise<Legislator[]> {
+): ResponsePromise<LegislatorContact[]> {
   return API.get("/legislators/findByDistrict", {
     params: congressionalDistrict,
     headers: {

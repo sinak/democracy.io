@@ -1,28 +1,30 @@
-import * as Sentry from "@sentry/node";
+/**
+ * Democracy.io Server Entrypoint
+ */
 
 // load .env file
 const dotenv = require("dotenv");
-dotenv.config();
+dotenv.config({ debug: true });
 
-const app = require("./app");
-const logger = require("./logger");
+import "source-map-support/register";
+import * as Sentry from "@sentry/node";
+import Legislators from "./legislators/LegislatorsSearchInstance";
+import LegislatorsSearchUpdater from "./legislators/LegislatorsSearchUpdater";
+import * as CongressLegislatorsFile from "./datasets/congress-legislators-file";
+import logger from "./logger";
+import app from "./app";
 
 // sentry exception tracking
 Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  disabled: process.env.NODE_ENV === "test"
+  dsn: process.env.SENTRY_DSN
 });
-
-const Legislators = require("./congress-legislators/Legislators");
-const LegislatorsSearchUpdater = require("./congress-legislators/LegislatorsSearchUpdater");
-const LegislatorsFile = require("./congress-legislators/LegislatorsFile");
 
 /**
  * waits for legislator data to load then starts server
  */
 const updater = new LegislatorsSearchUpdater(
   Legislators,
-  LegislatorsFile.fetchFile
+  CongressLegislatorsFile.fetchFile
 );
 
 updater.update().then(() => {
@@ -30,7 +32,7 @@ updater.update().then(() => {
   updater.schedule(INTERVAL_IN_HOURS * 60 * 60 * 1000);
 
   const port = process.env.PORT || 3000;
-  app.default.listen(process.env.PORT || 3000, () => {
+  app.listen(process.env.PORT || 3000, () => {
     logger.info("Server listening on port " + port);
   });
 });

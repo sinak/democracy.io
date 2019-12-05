@@ -1,4 +1,8 @@
-import { Legislator, MessageSenderAddress } from "../../../server/lib/Models";
+import {
+  MessageSenderAddress,
+  LegislatorContact,
+  MessageResponse
+} from "../../../server/src/Models";
 
 const SESSION_STORAGE_KEY = "FormState";
 
@@ -9,7 +13,8 @@ export interface StoredFormState {
     zipCode: string;
   };
   messageSenderAddress: MessageSenderAddress | undefined;
-  legislators: Legislator[];
+  messageResponses: MessageResponse[];
+  legislatorContacts: LegislatorContact[];
   selectedBioguides: string[];
 }
 

@@ -3,10 +3,11 @@
  * Verifies an address via SmartyStreets.
  */
 
-const expressRouter = require("express").Router();
-const resHelpers = require("./helpers/response");
+import { Router } from "express";
 import * as SmartyStreetsAPI from "../services/SmartyStreetsAPI";
+import { MessageSenderAddress } from "../models";
 
+const expressRouter = Router();
 expressRouter.get("/location/verify", async (req, res) => {
   // NOTE: SS accepts "the street line of the address, or an entire address" for this.
   //       However, over-supplying data, e.g. giving
@@ -24,7 +25,9 @@ expressRouter.get("/location/verify", async (req, res) => {
   try {
     verifyAddressRes = await SmartyStreetsAPI.verifyAddress(addressQuery);
   } catch (err) {
-    return res.status(400).json(resHelpers.makeError(err));
+    return res.status(504).json({
+      error: "Request failed"
+    });
   }
 
   // no addresses found
@@ -37,18 +40,9 @@ expressRouter.get("/location/verify", async (req, res) => {
   }
 
   let ssCandidate = verifyAddressRes.data[0];
-  if (ssCandidate.components.zipcode !== req.query.zipCode) {
-    return res.status(400).json({
-      status: "error",
-      message:
-        "The zipcode you entered does not match the verified zip code for " +
-        "your street address. Please check the address and try again"
-    });
-  }
 
-  /** @type {import("../Models").MessageSenderAddress} */
-  const messageSenderAddress = {
-    // todo: add error handling for undefined fields
+  const messageSenderAddress: MessageSenderAddress = {
+    // TODO: add error handling for undefined fields
     city: ssCandidate.components.city_name || "",
     zip4: ssCandidate.components.plus4_code || "",
     zip5: ssCandidate.components.zipcode || "",
@@ -62,10 +56,7 @@ expressRouter.get("/location/verify", async (req, res) => {
     streetAddress2: null
   };
 
-  res.json({
-    status: "success",
-    data: messageSenderAddress
-  });
+  res.json(messageSenderAddress);
 });
 
 export default expressRouter;
@@ -75,13 +66,13 @@ export default expressRouter;
  * @param {string} smartyStreetsDistrict
  * @returns {number}
  */
-function districtStringToInt(smartyStreetsDistrict) {
+function districtStringToInt(smartyStreetsDistrict: string) {
   if (smartyStreetsDistrict === "AL") return 0;
   return parseInt(smartyStreetsDistrict);
 }
 
 /** @type {{[key: string]: string}} */
-const states = {
+const states: { [key: string]: string } = {
   AL: "Alabama",
   AK: "Alaska",
   AS: "American Samoa",

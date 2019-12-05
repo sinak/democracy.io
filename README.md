@@ -23,7 +23,6 @@ It uses APIs from:
 ### Dependencies
 
 - Node.js
-- Redis (only required in production)
 
 ### Credentials
 
@@ -67,18 +66,3 @@ For more instructions on setting up a production server, check [/deployment/READ
 
 See the [www/README.md](/www/README.md) for details
 
-### Redis
-
-Ensure that Redis is running locally:
-
-```
-
-sudo apt-get install redis-server
-
-```
-
-or install manually via http://redis.io/topics/quickstart - making sure to read the "Securing Redis" section, especially if you install Redis manually.
-
-```
-
-```

@@ -1,4 +1,12 @@
 /**
+ * contact-congress dataset
+ * https://github.com/unitedstates/contact-congress
+ *
+ * This code is currently only used in tests.
+ * In production, this data is pulled from the Phantom of the Capitol API.
+ */
+
+/**
  *
  * https://github.com/unitedstates/contact-congress/blob/21a5788e48f54f9e43f82ef18d5f94494d3feb30/documentation/schema.md
  */

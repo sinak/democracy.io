@@ -1,14 +1,68 @@
 import * as POTC from "./services/PotcAPI";
 
+/**
+ * Basic Legislator info
+ * Derived from unitedstates/congress-legislators dataset
+ */
+export interface Legislator {
+  bioguideId: string;
+  firstName: string;
+  lastName: string;
+  state: string;
+  currentTerm: LegislatorTerm;
+}
+
+export type LegislatorTerm =
+  | { chamber: "house"; district: number }
+  | { chamber: "senate" };
+
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Legislator's contact form information
+ * This is retrieved from POTC
+ */
+export interface LegislatorWebForm {
+  status: LegislatorWebFormStatus;
+  url: string | null;
+  formElements: LegislatorFormElement[];
+}
+
+export enum LegislatorWebFormStatus {
+  Ok = "ok",
+  /** Form is currently down. This is retrieved from POTC */
+  Defunct = "defunct",
+  /**
+   * Legislator was requested but not found on POTC. This most likely means that the
+   * legislator currently does not have a form.
+   */
+  ComingSoon = "coming_soon"
+}
+
+export interface LegislatorFormElement {
+  value: POTC.RetrieveFormElementsResponse[0]["required_actions"][0]["value"];
+  maxLength: POTC.RetrieveFormElementsResponse[0]["required_actions"][0]["maxlength"];
+  optionsHash:
+    | {
+        [key: string]: any;
+      }
+    | string[]
+    | null;
+}
+
+export interface LegislatorContact extends Legislator {
+  form: LegislatorWebForm;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 export interface Message {
   bioguideId: string;
   subject: string;
   message: string;
   topic: string;
-
   sender: MessageSender;
   senderAddress: MessageSenderAddress;
-  campaign: Campaign;
+  campaign: MessageCampaign;
 }
 
 export interface MessageSender {
@@ -35,50 +89,22 @@ export interface MessageSenderAddress {
   zip4: string;
   zipPlus4: string;
 }
-export interface Campaign {
+
+export interface MessageCampaign {
   uuid: string;
   orgURL: string;
   orgName: string;
 }
 
-import * as CongressLegislator from "./congress-legislators/CongressLegislators";
-
-export interface LegislatorRep extends LegislatorBase {
-  chamber: "house";
-  district: number;
-}
-
-export interface LegislatorSenator extends LegislatorBase {
-  chamber: "senate";
-  district: null;
-}
-
-export interface LegislatorBase {
-  bioguideId: CongressLegislator.Legislator["bioguideId"];
-  firstName: CongressLegislator.Legislator["firstName"];
-  lastName: CongressLegislator.Legislator["lastName"];
-  state: CongressLegislator.Legislator["state"];
-  formStatus: "ok" | "defunct" | "coming_soon";
-  contactURL: POTC.RetrieveFormElementsResponse[0]["contact_url"];
-  formElements: LegislatorFormElement[];
-}
-
-export type Legislator = LegislatorRep | LegislatorSenator;
-
-export interface LegislatorFormElement {
-  value: POTC.RetrieveFormElementsResponse[0]["required_actions"][0]["value"];
-  maxLength: POTC.RetrieveFormElementsResponse[0]["required_actions"][0]["maxlength"];
-  optionsHash:
-    | {
-        [key: string]: any;
-      }
-    | string[]
-    | null;
-}
-
+/**
+ * Response from POTC
+ */
 export interface MessageResponse {
   bioguideId: string;
-  status: string;
-  url: string;
-  uid: string;
+  potcResponse?: POTCFillOutFormResponse;
 }
+
+export type POTCFillOutFormResponse = POTC.FillOutFormResponse;
+export type POTCCaptcha = POTC.FillOutFormResponseCaptcha;
+
+////////////////////////////////////////////////////////////////////////////////

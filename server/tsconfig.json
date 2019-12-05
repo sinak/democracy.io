@@ -5,6 +5,11 @@
     "strict": true,
     "allowJs": true,
     "moduleResolution": "node",
-    "outDir": "dist"
-  }
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "dist",
+    "sourceMap": true
+  },
+  "include": ["./src"]
 }

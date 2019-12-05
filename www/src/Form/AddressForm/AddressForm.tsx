@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { FormEvent, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { MessageSenderAddress } from "../../../../server/lib/Models";
+import { MessageSenderAddress } from "../../../../server/src/Models";
 import LoadingState from "../../AsyncUtils/LoadingState";
 import Whitebox from "../Whitebox";
 import { verifyAddress } from "../../DioAPI";
@@ -50,7 +50,7 @@ export default function AddressForm(props: AddressFormProps) {
         city: city,
         zipCode: zipCode
       });
-      props.onSuccessfulAddress(res.data.data);
+      props.onSuccessfulAddress(res.data);
       setCanonicalAddressErrorMessage("");
       setCanonicalAddressLoadingState(LoadingState.Success);
     } catch (e) {

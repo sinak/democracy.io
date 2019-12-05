@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
-import { Legislator, MessageSenderAddress } from "../../../server/lib/Models";
+import {
+  Legislator,
+  MessageSenderAddress,
+  LegislatorContact,
+  MessageResponse
+} from "../../../server/src/Models";
 import AddressForm from "./AddressForm/AddressForm";
 import FormProgress from "./FormProgress/FormProgress";
 import LegislatorPickerForm from "./LegislatorPicker/LegislatorPickerForm";
@@ -25,7 +30,8 @@ export default function Form() {
       zipCode: ""
     },
     messageSenderAddress: undefined,
-    legislators: [],
+    messageResponses: [],
+    legislatorContacts: [],
     selectedBioguides: []
   };
 
@@ -38,26 +44,32 @@ export default function Form() {
   >(initialState.messageSenderAddress);
 
   // State - Legislator Picker
-  const [legislators, setLegislators] = useState<Legislator[]>(
-    initialState.legislators
-  );
+  const [legislatorContacts, setLegislatorContacts] = useState<
+    LegislatorContact[]
+  >(initialState.legislatorContacts);
 
   const [selectedBioguides, setSelectedBioguides] = useState<
     Legislator["bioguideId"][]
   >(initialState.selectedBioguides);
+
+  // State - Message Form
+  const [messageResponses, setMessageResponses] = useState<MessageResponse[]>(
+    initialState.messageResponses
+  );
 
   // sync state changes to session storage
   useEffect(() => {
     FormStateSessionStorage.setSessionStorage({
       addressInputFields,
       messageSenderAddress,
-      legislators,
-      selectedBioguides
+      legislatorContacts,
+      selectedBioguides,
+      messageResponses
     });
   }, [
     addressInputFields,
     messageSenderAddress,
-    legislators,
+    legislatorContacts,
     selectedBioguides
   ]);
 
@@ -88,9 +100,9 @@ export default function Form() {
                   {messageSenderAddress ? (
                     <LegislatorPickerForm
                       messageSenderAddress={messageSenderAddress}
-                      previousLegislators={legislators}
+                      previousLegislatorContacts={legislatorContacts}
                       previousSelectedBioguides={selectedBioguides}
-                      onLegislatorsLoaded={setLegislators}
+                      onLegislatorContactsLoaded={setLegislatorContacts}
                       onChange={setSelectedBioguides}
                     />
                   ) : (
@@ -105,7 +117,8 @@ export default function Form() {
                     if (messageSenderAddress === undefined) {
                       return <Redirect to="/" />;
                     } else if (
-                      (legislators.length === 0, selectedBioguides.length === 0)
+                      (legislatorContacts.length === 0,
+                      selectedBioguides.length === 0)
                     ) {
                       return <Redirect to="/pick-legislators" />;
                     } else {
@@ -113,7 +126,7 @@ export default function Form() {
                         <MessageForm
                           messageSenderAddress={messageSenderAddress}
                           selectedBioguides={selectedBioguides}
-                          legislators={legislators}
+                          legislatorContacts={legislatorContacts}
                         />
                       );
                     }

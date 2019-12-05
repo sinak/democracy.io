@@ -1,21 +1,26 @@
-// @ts-check
 import { Handlers as SentryMiddleware } from "@sentry/node";
-import * as express from "express";
+import express from "express";
 import * as path from "path";
-import { throttleProductionOnly } from "./middleware/ip-throttle";
 import CaptchaSolutionRouter from "./routes/captcha-solution";
 import LegislatorsRouter from "./routes/legislators";
 import LocationRouter from "./routes/location";
+import MessageRouter from "./routes/message";
+import logger from "./logger";
 
-var logger = require("./logger");
 const app = express();
+
+// json parsing
+app.use(express.json());
 
 // exception tracking
 app.use(SentryMiddleware.requestHandler());
+
+// security
 app.use((_req, res, next) => {
   res.setHeader("X-Frame-Options", "deny");
   next();
 });
+
 // NOTE: this assumes you're running behind an nginx instance or other proxy
 app.enable("trust proxy");
 
@@ -28,26 +33,24 @@ app.use((req, res, next) => {
 });
 
 ////////////////////////////////////////////////////////////////////////////////
-// routes
-// routes
+// api routes
 app.use("/api", CaptchaSolutionRouter);
-
-// Request throttling
-// Disabled unless NODE_ENV === production
-// Only throttle requests to the messages endpoints
-app.use("/api/legislators/message", throttleProductionOnly());
 app.use("/api", LegislatorsRouter);
-
 app.use("/api", LocationRouter);
+app.use("/api", MessageRouter);
 
-// static
-app.use(express.static(path.join(__dirname, "../../www/build")));
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../www/build", "index.html"));
-// });
+// static routes - requires browser app to be built in `./www_dist` directory
+//
+// - development: run `npm run start` in `/www` to start the dev server
+// - production: build the server using `npm run build` and
+//   copy `/www/build` to `/server/dist/www_build
+app.use(express.static(path.join(__dirname, "./www_dist")));
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./www_dist", "index.html"));
+});
 ////////////////////////////////////////////////////////////////////////////////
 
-// error handlers - order dependent
+// error handlers - this must be last
 app.use(SentryMiddleware.errorHandler());
 
 export default app;

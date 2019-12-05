@@ -1,26 +1,28 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
-  Legislator,
-  MessageSenderAddress
-} from "../../../../server/lib/Models";
+  MessageSenderAddress,
+  LegislatorContact
+} from "../../../../server/src/Models";
 import LoadingState from "../../AsyncUtils/LoadingState";
 import { ReactComponent as LoadingSpinner } from "./../../AsyncUtils/LoadingSpinner.svg";
 import Whitebox from "../Whitebox";
 import { getDistrictLegislators } from "./../../DioAPI";
 
 interface LegislatorPickerProps {
-  previousLegislators: Legislator[];
+  previousLegislatorContacts: LegislatorContact[];
   previousSelectedBioguides: string[];
   messageSenderAddress: MessageSenderAddress;
-  onLegislatorsLoaded: (legislators: Legislator[]) => void;
+  onLegislatorContactsLoaded: (legislators: LegislatorContact[]) => void;
   onChange: (selectedBioguides: string[]) => void;
 }
 
 export default function LegislatorPickerForm(props: LegislatorPickerProps) {
-  const [legislators, setLegislators] = useState(props.previousLegislators);
+  const [legislatorContacts, setLegislatorContacts] = useState(
+    props.previousLegislatorContacts
+  );
   const [legislatorsLoadingState, setLegislatorsLoadingState] = useState(
-    props.previousLegislators.length > 0
+    props.previousLegislatorContacts.length > 0
       ? LoadingState.SuccessCached
       : LoadingState.Loading
   );
@@ -56,14 +58,14 @@ export default function LegislatorPickerForm(props: LegislatorPickerProps) {
           state: props.messageSenderAddress.statePostalAbbrev
         });
 
-        const nextLegislators: Legislator[] = legislatorsRes.data.data;
-        setLegislators(nextLegislators);
+        const nextLegislators: LegislatorContact[] = legislatorsRes.data;
+        setLegislatorContacts(nextLegislators);
         setSelectedBioguides(
           nextLegislators
-            .filter(l => l.formStatus === "ok")
+            .filter(l => l.form.status === "ok")
             .map(l => l.bioguideId)
         );
-        props.onLegislatorsLoaded(nextLegislators);
+        props.onLegislatorContactsLoaded(nextLegislators);
         setLegislatorsLoadingState(LoadingState.Success);
       } catch (e) {
         setLegislatorsLoadingState(LoadingState.Error);
@@ -96,7 +98,7 @@ export default function LegislatorPickerForm(props: LegislatorPickerProps) {
             <p>Choose which representatives you'd like to write to:</p>
 
             <div className="my-2">
-              {legislators.map(legislator => {
+              {legislatorContacts.map(legislator => {
                 const inputID = `selectedLegislator-${legislator.bioguideId}`;
                 return (
                   <div
@@ -109,7 +111,7 @@ export default function LegislatorPickerForm(props: LegislatorPickerProps) {
                       checked={selectedBioguides.includes(
                         legislator.bioguideId
                       )}
-                      disabled={legislator.formStatus !== "ok"}
+                      disabled={legislator.form.status !== "ok"}
                       onChange={() =>
                         toggleSelectedBioguideId(legislator.bioguideId)
                       }
@@ -160,8 +162,8 @@ export default function LegislatorPickerForm(props: LegislatorPickerProps) {
   }
 }
 
-function legislatorTitle(legislator: Legislator) {
-  if (legislator.chamber === "senate") {
+function legislatorTitle(legislator: LegislatorContact) {
+  if (legislator.currentTerm.chamber === "senate") {
     return "Sen.";
   } else {
     return "Rep.";

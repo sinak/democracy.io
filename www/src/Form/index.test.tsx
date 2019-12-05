@@ -5,9 +5,9 @@ import { MemoryRouter } from "react-router-dom";
 import { render, waitForDomChange, wait } from "@testing-library/react";
 import {
   messageSenderAddressFixture,
-  legislatorRepFixture,
-  axiosResponseFixture
-} from "../TestUtils/Fixtures";
+  axiosResponseFixture,
+  legislatorContactFixture
+} from "../../../server/src/fixtures";
 
 jest.mock("./../DioAPI");
 import * as DioAPI from "./../DioAPI";
@@ -25,7 +25,8 @@ let defaultFormState = {
     zipCode: ""
   },
   messageSenderAddress: undefined,
-  legislators: [],
+  messageResponses: [],
+  legislatorContacts: [],
   selectedBioguides: []
 };
 
@@ -48,7 +49,7 @@ describe("route /message", () => {
     FormStateSessionStorage.setSessionStorage({
       ...defaultFormState,
       messageSenderAddress: messageSenderAddressFixture(),
-      legislators: [legislatorRepFixture()],
+      legislatorContacts: [legislatorContactFixture()],
       selectedBioguides: []
     });
 
@@ -65,15 +66,18 @@ describe("route /message", () => {
     FormStateSessionStorage.setSessionStorage({
       ...defaultFormState,
       messageSenderAddress: messageSenderAddressFixture(),
-      legislators: [],
+      legislatorContacts: [],
       selectedBioguides: []
     });
 
-    mockedAPI.getDistrictLegislators.mockResolvedValueOnce({
-      ...axiosResponseFixture(),
+    mockedAPI.getDistrictLegislators.mockResolvedValue({
+      config: {},
+      status: 200,
+      statusText: "",
+      headers: {},
       data: {
         status: "success",
-        data: [legislatorRepFixture()]
+        data: [legislatorContactFixture()]
       }
     });
 

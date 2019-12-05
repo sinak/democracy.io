@@ -1,8 +1,7 @@
-const LegislatorsSearch = require("../../congress-legislators/LegislatorsSearch");
-const LegislatorsSearchUpdater = require("./LegislatorsSearchUpdater");
+import LegislatorsSearch from "./LegislatorsSearch";
+import LegislatorsSearchUpdater from "./LegislatorsSearchUpdater";
 jest.useFakeTimers();
 
-/** @type {DIO.Senator} */
 const senatorFixture = {
   bioguideId: "test bioguide",
   state: "CA",

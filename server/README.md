@@ -1,15 +1,22 @@
-Democracy.io Server
-================
+# Democracy.io Server
 
-# Directory structure
+- Serves API endpoints under `/api`
+- Serves [React app](../www) under `/`
 
-- [**<code>middleware</code>**](/server/middleware) - middleware used by the app
-- [**<code>routes</code>**](/server/routes) - route definitions for API and app routes. API routes are organized by API structure, so the legislator/A00001/message endpoint would resolve to a handler in [routes/api/legislator/{bioguideId}/message.js](/server/routes/api/legislator/{bioguideId}/message.js)
-- [**<code>services</code>**](/server/services) - common services used by the app, mostly 3rd party API wrappers
-- [**<code>templates</code>**](/server/templates) - dust templates for the app
+## Scripts
 
-# App Components
+**Development**
 
-## [Services](/server/services)
+- `npm run watch` - Starts server on port **3000** and restarts the server whenever files are changed. This does **not** build the React app.
 
-- [**<code>third-party-apis</code>**](/server/services/third-party-apis) - helpers for interacting with 3rd party APIs, e.g. POTC or SmartyStreets
+**Tests**
+
+- `npm run test` - Runs all tests
+- `npm run test-fast` - Runs all tests excluding test files named `slow.test.*` which are long running tests e.g. pulling real data sources instead of mocks
+
+## Directory structure
+
+- **src/datasets** - code for parsing datasets and transforming into internal interfaces
+- **src/legislators** - In-memory database of legislator data
+- **src/routes** - API routes
+- **src/services** - External API's

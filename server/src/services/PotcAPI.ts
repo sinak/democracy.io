@@ -11,7 +11,8 @@ const POTCApi = axios.create({
   baseURL: Config.POTC_BASE_URL,
   params: {
     debug_key: Config.POTC_DEBUG_KEY
-  }
+  },
+  timeout: 60000
 });
 
 POTCApi.interceptors.response.use(
@@ -64,16 +65,22 @@ export interface FillOutFormRequest {
 }
 
 export type FillOutFormResponse =
-  | FillOutFormResponseNoCaptcha
+  | FillOutFormResponseSuccess
+  | FillOutFormResponseError
   | FillOutFormResponseCaptcha;
 
-export interface FillOutFormResponseNoCaptcha {
-  status: "success" | "error";
+export interface FillOutFormResponseSuccess {
+  status: "success";
 }
 
+export interface FillOutFormResponseError {
+  status: "error";
+  message: string;
+}
 export interface FillOutFormResponseCaptcha {
   status: "captcha_needed";
   url: string;
+  uid: string;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

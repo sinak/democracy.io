@@ -1,10 +1,12 @@
+/**
+ * Fixtures for tests
+ */
 import {
   MessageSenderAddress,
   Legislator,
-  LegislatorBase,
-  LegislatorRep,
-  LegislatorSenator
-} from "./Models";
+  LegislatorContact,
+  LegislatorWebFormStatus
+} from "./models";
 import { AxiosResponse } from "axios";
 
 export function messageSenderAddressFixture(
@@ -25,43 +27,53 @@ export function messageSenderAddressFixture(
   };
 }
 
-const baseLegislatorDefaults: LegislatorBase = {
-  bioguideId: "",
-  contactURL: "",
-  firstName: "",
-  formElements: [],
-  formStatus: "ok",
-  lastName: "",
-  state: ""
-};
-export function legislatorRepFixture(
-  partialRep?: Partial<LegislatorRep>
-): LegislatorRep {
+export function legislatorFixture(
+  partialLegislator?: Partial<Legislator>
+): Legislator {
   return {
-    ...baseLegislatorDefaults,
-    district: 0,
-    ...partialRep,
-    chamber: "house"
+    bioguideId: "",
+    currentTerm: {
+      chamber: "house",
+      district: 0
+    },
+    firstName: "",
+    lastName: "",
+    state: "",
+    ...partialLegislator
   };
 }
 
-export function legislatorSenatorFixture(
-  partialSenator?: Partial<LegislatorSenator>
-): LegislatorSenator {
+export function legislatorContactFixture(
+  partialLegislatorContact?: Partial<LegislatorContact>
+): LegislatorContact {
   return {
-    ...baseLegislatorDefaults,
-    ...partialSenator,
-    chamber: "senate",
-    district: null
+    bioguideId: "",
+    currentTerm: {
+      chamber: "house",
+      district: 0
+    },
+    firstName: "",
+    lastName: "",
+    state: "",
+    form: {
+      status: LegislatorWebFormStatus.Ok,
+      formElements: [],
+      url: ""
+    },
+    ...partialLegislatorContact
   };
 }
 
-export function axiosResponseFixture(
-  partialAxiosResponse?: Partial<AxiosResponse>
-): AxiosResponse {
+export function axiosResponseFixture<T = any>(
+  partialAxiosResponse?: Partial<AxiosResponse<T>>
+): AxiosResponse<T> {
+  let data: any = {};
+  if (partialAxiosResponse && partialAxiosResponse.data) {
+    data = partialAxiosResponse.data;
+  }
   return {
     config: {},
-    data: {},
+    data: data,
     headers: {},
     request: {},
     status: 0,

@@ -1,6 +1,5 @@
 import { AxiosResponse, AxiosError } from "axios";
-
-var logger = require("../logger");
+import logger from "./../logger";
 
 export function createResponseInterceptor(
   serviceName: string

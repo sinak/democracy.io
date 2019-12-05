@@ -1,9 +1,9 @@
 import React, { useState, FormEvent } from "react";
 import {
-  Legislator,
   Message,
-  MessageSenderAddress
-} from "../../../../server/lib/Models";
+  MessageSenderAddress,
+  LegislatorContact
+} from "../../../../server/src/Models";
 import Whitebox from "../Whitebox";
 import classNames from "classnames";
 import { useHistory } from "react-router-dom";
@@ -12,11 +12,11 @@ import LoadingState from "../../AsyncUtils/LoadingState";
 
 interface MessageFormProps {
   messageSenderAddress: MessageSenderAddress;
-  legislators: Legislator[];
+  legislatorContacts: LegislatorContact[];
   selectedBioguides: string[];
 }
 export default function MessageForm(props: MessageFormProps) {
-  const { legislators, selectedBioguides, messageSenderAddress } = props;
+  const { legislatorContacts, selectedBioguides, messageSenderAddress } = props;
 
   // message form data
   const [subject, setSubject] = useState("");
@@ -37,8 +37,8 @@ export default function MessageForm(props: MessageFormProps) {
   const [sendLoadingState, setSendLoadingState] = useState(LoadingState.Ready);
 
   // derived data
-  const selectedLegislators = legislators.filter(legislator =>
-    selectedBioguides.includes(legislator.bioguideId)
+  const selectedLegislators = legislatorContacts.filter(legislatorContact =>
+    selectedBioguides.includes(legislatorContact.bioguideId)
   );
 
   let history = useHistory();
@@ -122,7 +122,7 @@ export default function MessageForm(props: MessageFormProps) {
                 dangerouslySetInnerHTML={{
                   __html: `
                   #textarea-container::after {
-                    content: 'Dear ${legislators
+                    content: 'Dear ${selectedLegislators
                       .map(
                         l =>
                           `${legislatorTitle(l)} ${l.firstName} ${l.lastName}`
@@ -300,8 +300,8 @@ export default function MessageForm(props: MessageFormProps) {
  *
  * @param legislator
  */
-function getLegislatorTopics(legislator: Legislator): string[] {
-  const topicFormElement = legislator.formElements.find(
+function getLegislatorTopics(legislator: LegislatorContact): string[] {
+  const topicFormElement = legislator.form.formElements.find(
     fe => fe.value === "$TOPIC"
   );
 
@@ -317,8 +317,8 @@ function getLegislatorTopics(legislator: Legislator): string[] {
     : Object.keys(topicFormElement.optionsHash);
 }
 
-function legislatorTitle(legislator: Legislator) {
-  if (legislator.chamber === "senate") {
+function legislatorTitle(legislator: LegislatorContact) {
+  if (legislator.currentTerm.chamber === "senate") {
     return "Sen.";
   } else {
     return "Rep.";

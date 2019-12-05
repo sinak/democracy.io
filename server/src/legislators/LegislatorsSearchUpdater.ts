@@ -1,6 +1,10 @@
-const logger = require("../logger");
-const fs = require("fs");
-const sentry = require("@sentry/node");
+// TODO: this might be an unneccessary abstraction. we could just move this
+// into a simple function with setInterval
+import logger from "./../logger";
+import * as fs from "fs";
+import * as sentry from "@sentry/node";
+import LegislatorsSearch from "./LegislatorsSearch";
+import * as Models from "./../models";
 
 /**
  * Congress Legislators updater
@@ -15,20 +19,20 @@ const sentry = require("@sentry/node");
  *   .update()
  *   .then(() => updater.schedule(60 * 1000));
  */
-class CongressLegislatorSearchUpdater {
-  /**
-   * @param {import("../../congress-legislators/LegislatorsSearch")} searchInstance
-   * @param {(...args: any[]) => Promise<CongressLegislator.Legislator[]>} adapter Any function that resolves to an array of legislators.
-   */
-  constructor(searchInstance, adapter) {
+export default class CongressLegislatorSearchUpdater {
+  storageInstance: LegislatorsSearch;
+  adapter: (...args: any[]) => Promise<Models.Legislator[]>;
+  constructor(
+    searchInstance: LegislatorsSearch,
+    adapter: (...args: any[]) => Promise<Models.Legislator[]>
+  ) {
     this.adapter = adapter;
     this.storageInstance = searchInstance;
   }
   /**
    * Update the legislator storage
-   * @returns {Promise}
    */
-  async update() {
+  async update(): Promise<any> {
     const legislators = await this.adapter();
     this.storageInstance.loadLegislators(legislators);
 
@@ -36,10 +40,8 @@ class CongressLegislatorSearchUpdater {
   }
   /**
    * Update the legislator storage every X milliseconds
-   * @param {number} intervalMilliseconds
-   * @returns {NodeJS.Timer}
    */
-  schedule(intervalMilliseconds) {
+  schedule(intervalMilliseconds: number): NodeJS.Timer {
     let updater = setInterval(async () => {
       logger.info("[Congress Legislators] Automatic update");
 
@@ -58,14 +60,12 @@ class CongressLegislatorSearchUpdater {
   }
 }
 
-module.exports = CongressLegislatorSearchUpdater;
-
 /**
  *
  * @param {string} [filePath=congress.json]
  * @returns {Promise<CongressLegislator.Legislator[]>}
  */
-function FileAdapter(filePath = "congress.json") {
+export function FileAdapter(filePath = "congress.json") {
   return new Promise((resolve, reject) => {
     try {
       const file = fs.readFileSync(filePath, "utf8");
@@ -75,4 +75,3 @@ function FileAdapter(filePath = "congress.json") {
     }
   });
 }
-module.exports.FileAdapter = FileAdapter;

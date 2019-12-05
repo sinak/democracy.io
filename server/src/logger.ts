@@ -1,8 +1,7 @@
-const winston = require("winston");
+import * as winston from "winston";
 const format = winston.format;
 
-/** @type {winston.LoggerOptions} */
-const development = {
+const development: winston.LoggerOptions = {
   transports: [
     new winston.transports.Console({
       level: "debug",
@@ -15,8 +14,7 @@ const development = {
   ]
 };
 
-/** @type {winston.LoggerOptions} */
-const test = {
+const test: winston.LoggerOptions = {
   transports: [
     new winston.transports.Console({
       level: "error"
@@ -24,8 +22,7 @@ const test = {
   ]
 };
 
-/** @type {winston.LoggerOptions} */
-const production = {
+const production: winston.LoggerOptions = {
   transports: [
     new winston.transports.Console({
       level: "info"
@@ -33,7 +30,7 @@ const production = {
   ]
 };
 
-function getEnvConfig() {
+function getEnvConfig(): winston.LoggerOptions {
   const env = process.env.NODE_ENV;
   if (env) {
     const lowercaseEnv = env.toLowerCase();
@@ -50,5 +47,4 @@ function getEnvConfig() {
   }
 }
 
-const logger = winston.createLogger(getEnvConfig());
-module.exports = logger;
+export default winston.createLogger(getEnvConfig());

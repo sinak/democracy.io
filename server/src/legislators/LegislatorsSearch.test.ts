@@ -1,5 +1,5 @@
 import LegislatorSearch from "./LegislatorsSearch";
-import { legislatorFixture } from "./../Fixtures";
+import { legislatorFixture } from "./../fixtures";
 import { Chamber } from "../models";
 
 const legislatorsFixtures = [

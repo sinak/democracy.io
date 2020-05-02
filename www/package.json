@@ -54,7 +54,7 @@
     "@testing-library/react": "^9.3.2",
     "@types/classnames": "^2.2.9",
     "@types/jest": "24.0.22",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.14.0",
     "react-snap": "^1.23.0",
     "ts-jest": "^24.1.0"
   },

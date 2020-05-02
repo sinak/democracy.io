@@ -12,6 +12,5 @@
     "outDir": "dist",
     "sourceMap": true
   },
-  "include": ["./src/**/*"],
-  "exclude": ["*.test.ts"]
+  "include": ["./src/**/*"]
 }

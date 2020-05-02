@@ -18,7 +18,3 @@ services:
     #   - ./server:/opt/democracy.io/server
     #   - ./test:/opt/democracy.io/test
     #   - ./www:/opt/democracy.io/www
-
-  # Development: Run a local redis store instead of connecting to the production store
-  # redis:
-  #   image: redis

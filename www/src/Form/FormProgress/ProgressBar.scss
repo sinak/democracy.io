@@ -14,7 +14,7 @@ div#progress-bar {
   margin: 0 auto 40px auto;
   position: relative;
   opacity: 0;
-  @include media-breakpoint-down(sm) {
+  @media (max-width: 320px) {
     max-width: 80%;
     margin-bottom: 60px;
   }
@@ -61,7 +61,7 @@ div#progress-bar {
 #pb-line-2 {
   stroke-width: 0;
 }
-.active-progress {
+#wrapper[data-pagename="home"] {
   #pb-dot-1 {
     fill: $pink;
   }
@@ -69,7 +69,7 @@ div#progress-bar {
     @extend .label.active;
   }
 }
-.active-progress {
+#wrapper[data-pagename="location"] {
   #pb-dot-2,
   #pb-check-1 {
     fill: $pink;
@@ -78,7 +78,7 @@ div#progress-bar {
     @extend .label.active;
   }
 }
-.active-progress {
+#wrapper[data-pagename="compose"] {
   #pb-dot-3,
   #pb-check-1,
   #pb-check-2 {
@@ -88,7 +88,7 @@ div#progress-bar {
     @extend .label.active;
   }
 }
-.active-progress {
+#wrapper[data-pagename="captcha"] {
   #pb-dot-3,
   #pb-check-1,
   #pb-check-2 {
@@ -98,7 +98,7 @@ div#progress-bar {
     @extend .label.active;
   }
 }
-.active-progress {
+#wrapper[data-pagename="thanks"] {
   #pb-check-3,
   #pb-check-1,
   #pb-check-2 {

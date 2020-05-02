@@ -10,7 +10,7 @@ const expressRouter = express();
 
 const rateLimiter = new RateLimiterMemory({
   points: 30,
-  duration: 3600
+  duration: 3600,
 });
 
 // rate limit
@@ -76,8 +76,8 @@ expressRouter.post("/message", async (req, res) => {
         // campaign
         $CAMPAIGN_UUID: message.campaign.uuid,
         $ORG_URL: message.campaign.orgURL,
-        $ORG_NAME: message.campaign.orgName
-      }
+        $ORG_NAME: message.campaign.orgName,
+      },
     };
   }
 
@@ -86,23 +86,20 @@ expressRouter.post("/message", async (req, res) => {
     messageToFillOutFormBody
   );
 
-  const sendMessageRequests = potcMessages.map(message =>
-    PotcAPI.fillOutForm(message)
-  );
+  const messageResponses: Models.MessageResponse[] = [];
 
-  let messageResponses: Models.MessageResponse[] = [];
-
-  for (let i = 0; i < sendMessageRequests.length; i++) {
+  for (let message of potcMessages) {
     try {
-      const res = await sendMessageRequests[i];
+      const res = await PotcAPI.fillOutForm(message);
       messageResponses.push({
-        bioguideId: potcMessages[i].bio_id,
-        potcResponse: res.data
+        bioguideId: message.bio_id,
+        potcResponse: res.data,
       });
     } catch (e) {
       messageResponses.push({
-        bioguideId: potcMessages[i].bio_id
+        bioguideId: message.bio_id,
       });
+      console.log(e);
       captureException(e);
     }
   }

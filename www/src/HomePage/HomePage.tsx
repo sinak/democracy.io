@@ -1,33 +1,65 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ReactComponent as PlaneSVG } from "./Plane.svg";
 import { ReactComponent as ChatSVG } from "./Chat.svg";
 import { ReactComponent as SpeakerSVG } from "./Speaker.svg";
+import { ReactComponent as EFFLogoSVG } from "./EFFLogo.svg";
+import { ReactComponent as DIOLogoSVG } from "./DIOLogo.svg";
 import HomePageVideo from "./HomePageVideo";
+import { useInView } from "react-intersection-observer";
+import classNames from "classnames";
 
-export default function() {
+export default function () {
+  const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    if (isOpen === true) {
+      document
+        .getElementById("about")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [isOpen]);
   return (
     <div>
       <HomePageVideo />
 
-      <div id="about-lead" className="bg-primary">
+      <div
+        id="about-lead"
+        className="bg-primary"
+        style={{
+          backgroundColor: "#F93469",
+          background: "linear-gradient(to right,#f85628,#F93469)",
+        }}
+      >
         <div className="container">
           <div className="col-md-10 mx-auto py-5">
-            <h2 className="mt-0 text-white text-center serif">
+            <h2
+              className="mt-0 text-white text-center serif"
+              style={{ lineHeight: 1.6, fontSize: "2.25rem" }}
+            >
               Democracy thrives when people’s voices are heard. The easier it is
               for you to contact Congress, the better. It’s that simple.
             </h2>
             <div className="text-center" id="showAbout">
-              <button className="btn btn-lg btn-outline" ng-click="showAbout()">
+              <button
+                className="btn btn-lg btn-outline"
+                onClick={() => setIsOpen(true)}
+              >
                 Read more <i className="icon-angle-down" />
               </button>
             </div>
           </div>
         </div>
 
-        <div id="about" className="py-5 font-weight-normal">
+        <div
+          id="about"
+          className="py-5 font-weight-normal"
+          style={{ display: isOpen ? "block" : "none" }}
+        >
           <div className="container">
             <div className="row">
-              <div className="col-lg-8 offset-lg-2">
+              <div
+                className="col-lg-8 offset-lg-2 h5"
+                style={{ lineHeight: 1.6 }}
+              >
                 <p>
                   Failure to effectively reach members of Congress has
                   disastrous consequences. Studies show that politicians{" "}
@@ -46,14 +78,18 @@ export default function() {
               </div>
             </div>
 
-            <div className="row">
-              <div className="col-lg-10 offset-lg-1">
-                <div className="row">
-                  <div className="col-lg-4 d-none d-lg-flex">
-                    <PlaneSVG width={"100%"} />
+            <div>
+              <div className="col-lg-11">
+                <div className="row align-items-center">
+                  <div className="col-lg-4 hidden-xs">
+                    <IconAnimateInViewport
+                      svgComponent={PlaneSVG}
+                      id="icon-plane"
+                      width={"100%"}
+                    />
                   </div>
-                  <div className="col-lg-8">
-                    <h2 className="serif text-center">
+                  <div className="col-lg-8 my-4">
+                    <h2 className="serif text-center my-4">
                       Simple and easy to use
                     </h2>
                     <p>
@@ -93,9 +129,11 @@ export default function() {
                   </div>
                 </div>
 
-                <div className="row">
-                  <div className="col-md-8 v-center">
-                    <h2>We don’t tell people what to say</h2>
+                <div className="row align-items-center">
+                  <div className="col-md-8 align-items-center">
+                    <h2 className="serif text-center my-4">
+                      We don’t tell people what to say
+                    </h2>
                     <p>
                       This project is hosted by the{" "}
                       <a href="https://taskforce.is">Taskforce.is</a>, but it’s
@@ -124,17 +162,27 @@ export default function() {
                       for more details.
                     </p>
                   </div>
-                  <div className="col-md-4 d-none d-md-block v-center">
-                    <ChatSVG width={"100%"} />
+                  <div className="col-md-4 d-none d-md-flex align-items-center">
+                    <IconAnimateInViewport
+                      svgComponent={ChatSVG}
+                      id="icon-chat"
+                      width={"100%"}
+                    />
                   </div>
                 </div>
 
-                <div className="row">
-                  <div className="col-md-4 d-none d-md-block v-center">
-                    <SpeakerSVG width={"100%"} />
+                <div className="row align-items-center">
+                  <div className="col-md-4">
+                    <IconAnimateInViewport
+                      svgComponent={SpeakerSVG}
+                      id="icon-speaker"
+                      width={"100%"}
+                    />
                   </div>
-                  <div className="col-md-8 v-center">
-                    <h2>Why we’re doing this.</h2>
+                  <div className="col-md-8 my-4">
+                    <h2 className="serif my-4 text-center">
+                      Why we’re doing this.
+                    </h2>
                     <p>
                       First, we want contacting your elected officials to be
                       easy. Then more people will do it. And that’s good for
@@ -180,9 +228,11 @@ export default function() {
                     </p>
                   </div>
                 </div>
-                <div className="row">
-                  <div className="col-md-8 v-center">
-                    <h2>Who is behind this project</h2>
+                <div className="row my-4 align-items-center">
+                  <div className="col-md-8">
+                    <h2 className="serif my-4 text-center">
+                      Who is behind this project
+                    </h2>
                     <p>
                       Democracy.io was built by three amazing programmers who
                       want to make the world a better place—
@@ -220,23 +270,28 @@ export default function() {
                       under the GNU Affero General Public License, Version 3.
                     </p>
                   </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-6 hidden-xs  hidden-sm v-center">
-                    <svg
-                      id="icon-logo"
-                      className="img-responsive"
-                      preserveAspectRatio="none"
-                      viewBox="0 0 232 20"
-                    >
-                      <use
-                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                        xlinkHref="#s-text"
-                      />
-                    </svg>
+
+                  <div className="col-md-4">
+                    <IconAnimateInViewport
+                      svgComponent={EFFLogoSVG}
+                      id="icon-eff"
+                    />
                   </div>
-                  <div className="col-md-6  v-center">
-                    <h2>Jump in, change the world.</h2>
+                </div>
+                <div className="row align-items-center">
+                  <div className="col-md-6 hidden-xs hidden-sm justify-center">
+                    <div className="mx-auto" style={{ maxWidth: "80%" }}>
+                      <IconAnimateInViewport
+                        svgComponent={DIOLogoSVG}
+                        id="icon-logo"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="col-md-6">
+                    <h2 className="serif text-center my-4">
+                      Jump in, change the world.
+                    </h2>
                     <p>
                       Want to help with this and future technology projects? If
                       you’re a web developer who might want to occasionally
@@ -259,6 +314,20 @@ export default function() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function IconAnimateInViewport(
+  props: {
+    svgComponent: React.SFC<React.SVGProps<SVGSVGElement>>;
+  } & React.SVGProps<SVGSVGElement>
+) {
+  const [ref, inView, _entry] = useInView({ triggerOnce: true, threshold: 1 });
+  const className = classNames(props.className, { "icon-enter": inView });
+  return (
+    <div>
+      <props.svgComponent {...props} ref={ref} className={className} />
     </div>
   );
 }

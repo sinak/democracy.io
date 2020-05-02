@@ -1,14 +1,14 @@
-import axios, { AxiosPromise } from "axios";
+import axios, { AxiosPromise, AxiosRequestConfig } from "axios";
 import {
   MessageSenderAddress,
   Legislator,
   Message,
   MessageResponse,
-  LegislatorContact
-} from "../../server/src/Models";
+  LegislatorContact,
+} from "../../server/src/models";
 
 const API = axios.create({
-  baseURL: process.env.API_HOST || "/api/"
+  baseURL: process.env.API_HOST || "/api/",
 });
 
 type ResponsePromise<T> = AxiosPromise<T>;
@@ -25,8 +25,8 @@ export function verifyAddress(
   return API.get("/location/verify", {
     params: address,
     headers: {
-      accept: "application/json"
-    }
+      accept: "application/json",
+    },
   });
 }
 
@@ -41,15 +41,16 @@ export function getDistrictLegislators(
   return API.get("/legislators/findByDistrict", {
     params: congressionalDistrict,
     headers: {
-      accept: "application/json"
-    }
+      accept: "application/json",
+    },
   });
 }
 
 export function sendMessages(
-  messages: Message[]
+  messages: Message[],
+  config?: AxiosRequestConfig
 ): ResponsePromise<MessageResponse[]> {
-  return API.post("/message", messages);
+  return API.post("/message", messages, config);
 }
 
 export function solveCaptcha(potcCaptcha: { answer: string; uid: string }) {

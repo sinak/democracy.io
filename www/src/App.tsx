@@ -5,24 +5,30 @@ import HomeBottom from "./HomePage/HomePage";
 import LegacyAnimationWrapper from "./Layout/LegacyAnimationWrapper";
 import HeaderLogo from "./Layout/HeaderLogo";
 import Footer from "./Layout/Footer";
+import { BrowserRouter as Router } from "react-router-dom";
+import PrivacyPolicyPage from "./Layout/PrivacyPolicy";
 
 const App: React.FC = () => {
   return (
-    <LegacyAnimationWrapper>
-      <div className="main">
-        <HeaderLogo />
+    <Router>
+      <LegacyAnimationWrapper>
+        <div className="main">
+          <HeaderLogo />
 
-        <div id="form-content">
-          <Form />
+          <Route path="/privacy-policy" component={PrivacyPolicyPage} />
+
+          <div id="form-content">
+            {navigator.userAgent === "ReactSnap" ? <></> : <Form />}
+          </div>
         </div>
-      </div>
 
-      <Route exact path="/">
-        <HomeBottom />
-      </Route>
+        <Route exact path="/">
+          <HomeBottom />
+        </Route>
 
-      <Footer />
-    </LegacyAnimationWrapper>
+        <Footer />
+      </LegacyAnimationWrapper>
+    </Router>
   );
 };
 

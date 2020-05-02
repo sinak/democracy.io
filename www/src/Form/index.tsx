@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import {
   Legislator,
   MessageSenderAddress,
   LegislatorContact,
-  MessageResponse
-} from "../../../server/src/Models";
+  MessageResponse,
+} from "../../../server/src/models";
 import AddressForm from "./AddressForm/AddressForm";
 import FormProgress from "./FormProgress/FormProgress";
 import LegislatorPickerForm from "./LegislatorPicker/LegislatorPickerForm";
@@ -15,11 +15,17 @@ import Thanks from "./Thanks/Thanks";
 import * as FormStateSessionStorage from "./FormStateSessionStorage";
 import FormErrorBoundary from "./FormErrorBoundary";
 
+enum Action {
+  UPDATE_STREET_ADDRESS,
+  UPDATE_CITY,
+  UPDATE_ZIP_CODE,
+  UPDATE_MESSAGE_SENDER_ADDRESS,
+}
+
 export default function Form() {
   /**
    * State
    */
-
   // build the initial state
   // restore data from session storage or provide defaults
   let initialState: FormStateSessionStorage.StoredFormState;
@@ -27,14 +33,23 @@ export default function Form() {
     addressInputFields: {
       streetAddress: "",
       city: "",
-      zipCode: ""
+      zipCode: "",
     },
     messageSenderAddress: undefined,
     messageResponses: [],
     legislatorContacts: [],
-    selectedBioguides: []
+    selectedBioguides: [],
   };
 
+  function reducer(
+    state: FormStateSessionStorage.StoredFormState,
+    action: Action
+  ): FormStateSessionStorage.StoredFormState {
+    return {
+      ...state,
+    };
+  }
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [addressInputFields, setAddressInputFields] = useState(
     initialState.addressInputFields
   );
@@ -53,6 +68,13 @@ export default function Form() {
   >(initialState.selectedBioguides);
 
   // State - Message Form
+  const [messageSubject, setMessageSubject] = useState<string>("");
+  const [messageMessage, setMessageMessage] = useState<string>("");
+  const [messageEmail, setMessageEmail] = useState<string>("");
+  const [messageFirstName, setMessageFirstName] = useState<string>("");
+  const [messageLastName, setMessageLastName] = useState<string>("");
+  const [messagePrefix, setMessagePrefix] = useState<string>("");
+  const [messageTopics, setMessageTopics] = useState<string>("");
   const [messageResponses, setMessageResponses] = useState<MessageResponse[]>(
     initialState.messageResponses
   );
@@ -64,13 +86,13 @@ export default function Form() {
       messageSenderAddress,
       legislatorContacts,
       selectedBioguides,
-      messageResponses
+      messageResponses,
     });
   }, [
     addressInputFields,
     messageSenderAddress,
     legislatorContacts,
-    selectedBioguides
+    selectedBioguides,
   ]);
 
   let location = useLocation();
@@ -84,7 +106,7 @@ export default function Form() {
             <CSSTransition
               appear={true}
               key={location.key ? location.key : "/"}
-              timeout={location.key ? 1000 : 2000}
+              timeout={location.key ? 1000 : 1000}
               classNames="whitebox"
             >
               <Switch location={location}>
@@ -113,7 +135,7 @@ export default function Form() {
                 <Route
                   exact
                   path="/message"
-                  render={routeProps => {
+                  render={(routeProps) => {
                     if (messageSenderAddress === undefined) {
                       return <Redirect to="/" />;
                     } else if (

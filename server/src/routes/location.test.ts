@@ -98,4 +98,6 @@ describe("/api/location", function() {
 
     expect(mockedVerify).toHaveBeenCalled();
   });
+
+  test.todo("it should return a response if the Smarty Streets API call fails");
 });

@@ -9,6 +9,7 @@
     "@types/node": "12.12.6",
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.4",
+    "@types/react-input-mask": "^2.0.5",
     "@types/react-router-dom": "^5.1.2",
     "@types/react-transition-group": "^4.2.3",
     "axios": "^0.19.0",
@@ -19,9 +20,10 @@
     "react": "^16.11.0",
     "react-app-polyfill": "^1.0.4",
     "react-dom": "^16.11.0",
+    "react-input-mask": "^2.0.4",
     "react-intersection-observer": "^8.25.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "3.4.1",
     "react-transition-group": "^4.3.0",
     "typescript": "3.7.2"
   },
@@ -29,7 +31,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postbuild": "react-snap"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,6 +55,10 @@
     "@types/classnames": "^2.2.9",
     "@types/jest": "24.0.22",
     "node-sass": "^4.13.0",
+    "react-snap": "^1.23.0",
     "ts-jest": "^24.1.0"
+  },
+  "reactSnap": {
+    "inlineCss": true
   }
 }

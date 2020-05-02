@@ -3,7 +3,7 @@ import { Router } from "express";
 
 const expressRouter = Router();
 
-expressRouter.post("captcha-solution", async (req, res) => {
+expressRouter.post("/captcha-solution", async (req, res) => {
   try {
     const solveCaptchaRes = await PotcAPI.fillOutCaptcha(req.body);
     res.json(solveCaptchaRes.data);

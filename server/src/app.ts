@@ -1,11 +1,11 @@
 import { Handlers as SentryMiddleware } from "@sentry/node";
 import express from "express";
 import * as path from "path";
+import logger from "./logger";
 import CaptchaSolutionRouter from "./routes/captcha-solution";
 import LegislatorsRouter from "./routes/legislators";
 import LocationRouter from "./routes/location";
 import MessageRouter from "./routes/message";
-import logger from "./logger";
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.enable("trust proxy");
 // logger
 app.use((req, res, next) => {
   logger.info(`[Web] ${req.method} ${req.path} - ${res.statusCode}`, {
-    params: req.params
+    params: req.params,
   });
   next();
 });
@@ -44,9 +44,9 @@ app.use("/api", MessageRouter);
 // - development: run `npm run start` in `/www` to start the dev server
 // - production: build the server using `npm run build` and
 //   copy `/www/build` to `/server/dist/www_build
-app.use(express.static(path.join(__dirname, "./www_dist")));
+app.use(express.static(path.join(__dirname, "./www_build")));
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./www_dist", "index.html"));
+  res.sendFile(path.join(__dirname, "./www_build", "index.html"));
 });
 ////////////////////////////////////////////////////////////////////////////////
 

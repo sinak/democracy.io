@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import {
   MessageSenderAddress,
   LegislatorContact
-} from "../../../../server/src/Models";
+} from "../../../../server/src/models";
 import LoadingState from "../../AsyncUtils/LoadingState";
 import { ReactComponent as LoadingSpinner } from "./../../AsyncUtils/LoadingSpinner.svg";
 import Whitebox from "../Whitebox";
@@ -63,7 +63,7 @@ export default function LegislatorPickerForm(props: LegislatorPickerProps) {
         setSelectedBioguides(
           nextLegislators
             .filter(l => l.form.status === "ok")
-            .map(l => l.bioguideId)
+            .map(l => l.legislator.bioguideId)
         );
         props.onLegislatorContactsLoaded(nextLegislators);
         setLegislatorsLoadingState(LoadingState.Success);
@@ -98,28 +98,31 @@ export default function LegislatorPickerForm(props: LegislatorPickerProps) {
             <p>Choose which representatives you'd like to write to:</p>
 
             <div className="my-2">
-              {legislatorContacts.map(legislator => {
-                const inputID = `selectedLegislator-${legislator.bioguideId}`;
+              {legislatorContacts.map(legislatorContact => {
+                const inputID = `selectedLegislator-${legislatorContact.legislator.bioguideId}`;
                 return (
                   <div
-                    key={legislator.bioguideId}
+                    key={legislatorContact.legislator.bioguideId}
                     className="repOption checkbox py-1"
                   >
                     <input
                       type="checkbox"
                       id={inputID}
                       checked={selectedBioguides.includes(
-                        legislator.bioguideId
+                        legislatorContact.legislator.bioguideId
                       )}
-                      disabled={legislator.form.status !== "ok"}
+                      disabled={legislatorContact.form.status !== "ok"}
                       onChange={() =>
-                        toggleSelectedBioguideId(legislator.bioguideId)
+                        toggleSelectedBioguideId(
+                          legislatorContact.legislator.bioguideId
+                        )
                       }
                     />
                     <label htmlFor={inputID}>
                       <span className="ml-1">
-                        {legislatorTitle(legislator)} {legislator.firstName}{" "}
-                        {legislator.lastName}
+                        {legislatorTitle(legislatorContact)}{" "}
+                        {legislatorContact.legislator.firstName}{" "}
+                        {legislatorContact.legislator.lastName}
                       </span>
                     </label>
                   </div>
@@ -162,8 +165,9 @@ export default function LegislatorPickerForm(props: LegislatorPickerProps) {
   }
 }
 
-function legislatorTitle(legislator: LegislatorContact) {
-  if (legislator.currentTerm.chamber === "senate") {
+function legislatorTitle(legislatorContact: LegislatorContact) {
+  const term = legislatorContact.legislator.currentTerm;
+  if (term.chamber === "senate") {
     return "Sen.";
   } else {
     return "Rep.";

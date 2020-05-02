@@ -5,7 +5,8 @@ import {
   MessageSenderAddress,
   Legislator,
   LegislatorContact,
-  LegislatorWebFormStatus
+  LegislatorWebFormStatus,
+  Chamber,
 } from "./models";
 import { AxiosResponse } from "axios";
 
@@ -23,7 +24,7 @@ export function messageSenderAddressFixture(
     zip4: "",
     zip5: "",
     zipPlus4: "",
-    ...partialMessageSenderAddress
+    ...partialMessageSenderAddress,
   };
 }
 
@@ -33,13 +34,13 @@ export function legislatorFixture(
   return {
     bioguideId: "",
     currentTerm: {
-      chamber: "house",
-      district: 0
+      state: "",
+      chamber: Chamber.House,
+      district: 0,
     },
     firstName: "",
     lastName: "",
-    state: "",
-    ...partialLegislator
+    ...partialLegislator,
   };
 }
 
@@ -47,20 +48,16 @@ export function legislatorContactFixture(
   partialLegislatorContact?: Partial<LegislatorContact>
 ): LegislatorContact {
   return {
-    bioguideId: "",
-    currentTerm: {
-      chamber: "house",
-      district: 0
-    },
-    firstName: "",
-    lastName: "",
-    state: "",
+    legislator: legislatorFixture(),
     form: {
       status: LegislatorWebFormStatus.Ok,
-      formElements: [],
-      url: ""
+      topics: [
+        { label: "Agriculture", value: "Agr" },
+        { label: "Budget", value: "BUD" },
+      ],
+      url: "",
     },
-    ...partialLegislatorContact
+    ...partialLegislatorContact,
   };
 }
 
@@ -78,6 +75,6 @@ export function axiosResponseFixture<T = any>(
     request: {},
     status: 0,
     statusText: "",
-    ...partialAxiosResponse
+    ...partialAxiosResponse,
   };
 }

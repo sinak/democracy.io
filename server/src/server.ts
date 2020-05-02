@@ -9,30 +9,34 @@ dotenv.config({ debug: true });
 import "source-map-support/register";
 import * as Sentry from "@sentry/node";
 import Legislators from "./legislators/LegislatorsSearchInstance";
-import LegislatorsSearchUpdater from "./legislators/LegislatorsSearchUpdater";
-import * as CongressLegislatorsFile from "./datasets/congress-legislators-file";
+import * as CongressLegislators from "./datasets/congress-legislators";
 import logger from "./logger";
 import app from "./app";
 
 // sentry exception tracking
 Sentry.init({
-  dsn: process.env.SENTRY_DSN
+  dsn: process.env.SENTRY_DSN,
 });
 
-/**
- * waits for legislator data to load then starts server
- */
-const updater = new LegislatorsSearchUpdater(
-  Legislators,
-  CongressLegislatorsFile.fetchFile
-);
+logger.info("congress-legislators - Fetching dataset");
+CongressLegislators.fetch().then((legislators) => {
+  Legislators.loadLegislators(legislators);
+  logger.info("congress-legislators - Successfully loaded");
 
-updater.update().then(() => {
-  const INTERVAL_IN_HOURS = 12;
-  updater.schedule(INTERVAL_IN_HOURS * 60 * 60 * 1000);
+  // update legislators automatically
+  setInterval(async () => {
+    try {
+      const legislators = await CongressLegislators.fetch();
+      Legislators.loadLegislators(legislators);
+    } catch (e) {
+      Sentry.captureException(e);
+      logger.error("Scheduled legislators update failed", e);
+    }
+  }, 43_200);
 
+  // start web server
   const port = process.env.PORT || 3000;
-  app.listen(process.env.PORT || 3000, () => {
+  app.listen(port, () => {
     logger.info("Server listening on port " + port);
   });
 });

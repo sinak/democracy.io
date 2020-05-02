@@ -1,5 +1,4 @@
 import * as Models from "./../models";
-
 /**
  * In-memory database of legislator data
  */
@@ -51,10 +50,14 @@ export default class LegislatorSearch {
     } = {};
 
     legislatorsList.forEach(function(legislator) {
-      let hasState = legislator.state in nextLegislatorsSortedByState;
-      if (!hasState) nextLegislatorsSortedByState[legislator.state] = [];
+      let hasState =
+        legislator.currentTerm.state in nextLegislatorsSortedByState;
+      if (!hasState)
+        nextLegislatorsSortedByState[legislator.currentTerm.state] = [];
 
-      nextLegislatorsSortedByState[legislator.state].push(legislator);
+      nextLegislatorsSortedByState[legislator.currentTerm.state].push(
+        legislator
+      );
 
       nextLegislatorsSortedByID[legislator.bioguideId] = legislator;
     });

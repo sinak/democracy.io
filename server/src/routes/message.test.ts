@@ -90,4 +90,6 @@ describe("/api/message", function() {
     const arg = mockedFillOutForm.mock.calls[0][0];
     expect(arg).toMatchObject(expectedCalledWith);
   });
+
+  test.todo("returns a response if the PotC API call fails");
 });

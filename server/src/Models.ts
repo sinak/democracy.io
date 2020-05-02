@@ -8,13 +8,17 @@ export interface Legislator {
   bioguideId: string;
   firstName: string;
   lastName: string;
-  state: string;
   currentTerm: LegislatorTerm;
 }
 
 export type LegislatorTerm =
-  | { chamber: "house"; district: number }
-  | { chamber: "senate" };
+  | { state: string; chamber: Chamber.House; district: number }
+  | { state: string; chamber: Chamber.Senate };
+
+export enum Chamber {
+  House = "house",
+  Senate = "senate",
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -25,32 +29,26 @@ export type LegislatorTerm =
 export interface LegislatorWebForm {
   status: LegislatorWebFormStatus;
   url: string | null;
-  formElements: LegislatorFormElement[];
+  topics: { label: string; value: string }[];
 }
 
 export enum LegislatorWebFormStatus {
   Ok = "ok",
-  /** Form is currently down. This is retrieved from POTC */
+  /** POTC has been unable to send message to legislator */
   Defunct = "defunct",
   /**
    * Legislator was requested but not found on POTC. This most likely means that the
    * legislator currently does not have a form.
    */
-  ComingSoon = "coming_soon"
+  NotFound = "not_found",
+  /**
+   * An error occured in our code that would prevent the user from sending the form
+   */
+  DIOError = "dio_error",
 }
 
-export interface LegislatorFormElement {
-  value: POTC.RetrieveFormElementsResponse[0]["required_actions"][0]["value"];
-  maxLength: POTC.RetrieveFormElementsResponse[0]["required_actions"][0]["maxlength"];
-  optionsHash:
-    | {
-        [key: string]: any;
-      }
-    | string[]
-    | null;
-}
-
-export interface LegislatorContact extends Legislator {
+export interface LegislatorContact {
+  legislator: Legislator;
   form: LegislatorWebForm;
 }
 

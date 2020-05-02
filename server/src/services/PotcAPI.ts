@@ -10,9 +10,9 @@ import * as ServiceLogger from "./ServiceLogger";
 const POTCApi = axios.create({
   baseURL: Config.POTC_BASE_URL,
   params: {
-    debug_key: Config.POTC_DEBUG_KEY
+    debug_key: Config.POTC_DEBUG_KEY,
   },
-  timeout: 60000
+  timeout: 60000,
 });
 
 POTCApi.interceptors.response.use(
@@ -28,7 +28,7 @@ export function retrieveFormElements(
   bioguideIds: string[]
 ): AxiosPromise<RetrieveFormElementsResponse> {
   return POTCApi.post("/retrieve-form-elements", {
-    bio_ids: bioguideIds
+    bio_ids: bioguideIds,
   });
 }
 
@@ -37,9 +37,7 @@ export interface RetrieveFormElementsResponse {
     required_actions: {
       maxlength: number | null;
       value: string;
-      options_hash: {
-        [key: string]: string;
-      };
+      options_hash: { [key: string]: string } | string[];
     }[];
     defunct: boolean | null;
     contact_url: string | null;

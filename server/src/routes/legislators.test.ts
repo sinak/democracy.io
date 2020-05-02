@@ -1,23 +1,24 @@
 /*
  * Tests for all /api/{version}/legislator endpoints.
  */
-import * as _ from "lodash";
 import supertest from "supertest";
-import app from "./../app";
-import Legislators from "../legislators/LegislatorsSearchInstance";
-import * as PotcAPI from "./../services/PotcAPI";
-import { legislatorFixture, axiosResponseFixture } from "../fixtures";
 import { mocked } from "ts-jest/utils";
+import { axiosResponseFixture, legislatorFixture } from "../fixtures";
+import Legislators from "../legislators/LegislatorsSearchInstance";
+import { LegislatorContact, Chamber } from "../models";
+import app from "./../app";
+import * as PotcAPI from "./../services/PotcAPI";
 
 jest.mock("../services/PotcAPI");
 const mockedPotcAPI = mocked(PotcAPI);
 
-import { LegislatorContact } from "../models";
-
-describe("/api/legislators", function() {
+describe("/api/legislators", function () {
   beforeAll(() => {
     Legislators.loadLegislators([
-      legislatorFixture({ bioguideId: "test", state: "CA" })
+      legislatorFixture({
+        bioguideId: "test",
+        currentTerm: { state: "CA", chamber: Chamber.Senate },
+      }),
     ]);
   });
 
@@ -28,9 +29,17 @@ describe("/api/legislators", function() {
         test: {
           contact_url: "",
           defunct: true,
-          required_actions: []
-        }
-      }
+          required_actions: [
+            {
+              maxlength: null,
+              options_hash: {
+                Agriculture: "AGR",
+              },
+              value: "$TOPIC",
+            },
+          ],
+        },
+      },
     });
 
     const { body } = await supertest(app)
@@ -38,12 +47,13 @@ describe("/api/legislators", function() {
       .query({ state: "CA", district: 0 })
       .expect(200);
 
-    const legislatorContact: LegislatorContact = body.data[0];
+    const legislatorContact: LegislatorContact = body[0];
 
     expect(legislatorContact).toMatchObject({
       form: {
-        status: "defunct"
-      }
+        status: "defunct",
+        topics: [{ label: "Agriculture", value: "AGR" }],
+      },
     });
   });
 
@@ -54,9 +64,17 @@ describe("/api/legislators", function() {
         test: {
           contact_url: "",
           defunct: false,
-          required_actions: []
-        }
-      }
+          required_actions: [
+            {
+              maxlength: null,
+              options_hash: {
+                Agriculture: "AGR",
+              },
+              value: "$TOPIC",
+            },
+          ],
+        },
+      },
     });
 
     const { body } = await supertest(app)
@@ -64,12 +82,40 @@ describe("/api/legislators", function() {
       .query({ state: "CA", district: 0 })
       .expect(200);
 
-    const legislatorContact: LegislatorContact = body.data[0];
+    const legislatorContact: LegislatorContact = body[0];
 
     expect(legislatorContact).toMatchObject({
       form: {
-        status: "ok"
-      }
+        status: "ok",
+        topics: [{ label: "Agriculture", value: "AGR" }],
+      },
     });
+  });
+
+  test("it should error if topic is invalid", async () => {
+    mockedPotcAPI.retrieveFormElements.mockResolvedValueOnce({
+      ...axiosResponseFixture(),
+      data: {
+        test: {
+          contact_url: "",
+          defunct: false,
+          required_actions: [],
+        },
+      },
+    });
+
+    const { body } = await supertest(app)
+      .get("/api/legislators/findByDistrict")
+      .query({ state: "CA", district: 0 })
+      .expect(200);
+
+    console.log(body);
+  });
+  test("it should return a response if the PotC API call fails", async () => {
+    const res = await supertest(app)
+      .get("/api/legislators/findByDistrict")
+      .query({ state: "CA", district: 0 });
+
+    expect(res.status).toBeGreaterThan(299);
   });
 });

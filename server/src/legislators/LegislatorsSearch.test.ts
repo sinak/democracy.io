@@ -1,27 +1,24 @@
 import LegislatorSearch from "./LegislatorsSearch";
 import { legislatorFixture } from "./../Fixtures";
+import { Chamber } from "../models";
 
 const legislatorsFixtures = [
   legislatorFixture({
     bioguideId: "1",
-    state: "CA",
-    currentTerm: { chamber: "house", district: 1 }
+    currentTerm: { state: "CA", chamber: Chamber.House, district: 1 },
   }),
   legislatorFixture({
     bioguideId: "2",
-    state: "CA",
-    currentTerm: { chamber: "house", district: 1 }
+    currentTerm: { state: "CA", chamber: Chamber.House, district: 1 },
   }),
   legislatorFixture({
     bioguideId: "3",
-    state: "CA",
-    currentTerm: { chamber: "senate" }
+    currentTerm: { state: "CA", chamber: Chamber.Senate },
   }),
   legislatorFixture({
     bioguideId: "different state",
-    state: "OR",
-    currentTerm: { chamber: "house", district: 1 }
-  })
+    currentTerm: { state: "AZ", chamber: Chamber.House, district: 1 },
+  }),
 ];
 
 test("findLegislators should return the state's senators and the district's reps", () => {
@@ -29,7 +26,7 @@ test("findLegislators should return the state's senators and the district's reps
   c.loadLegislators(legislatorsFixtures);
 
   const legislators = c.findLegislators("CA", 1);
-  const ids = legislators.map(l => l.bioguideId);
+  const ids = legislators.map((l) => l.bioguideId);
 
   expect(ids.length).toBe(3);
   expect(ids).toEqual(expect.arrayContaining(["1", "2", "3"]));
@@ -41,7 +38,7 @@ test("loadLegislators should replace the cached legislators", () => {
 
   const replacementFixture = legislatorFixture({
     bioguideId: "replaced",
-    currentTerm: { chamber: "senate" }
+    currentTerm: { state: "GA", chamber: Chamber.Senate },
   });
   c.loadLegislators([replacementFixture]);
 
@@ -49,7 +46,7 @@ test("loadLegislators should replace the cached legislators", () => {
   expect(c.getLegislatorByID(replacementFixture.bioguideId)).toEqual(
     replacementFixture
   );
-  expect(c.findLegislators(replacementFixture.state, 1)).toEqual(
+  expect(c.findLegislators(replacementFixture.currentTerm.state, 1)).toEqual(
     expect.arrayContaining([replacementFixture])
   );
 
@@ -60,9 +57,9 @@ test("loadLegislators should replace the cached legislators", () => {
 
   expect(
     c.findLegislators(
-      legislatorsFixtures[0].state,
+      legislatorsFixtures[0].currentTerm.state,
       // @ts-ignore
-      legislatorsFixtures[0].currentTerm.district
+      legislatorsFixtures[0].currentTerm.district!
     )
   ).toHaveLength(0);
 });

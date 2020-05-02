@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -22,9 +23,9 @@ export default function Footer() {
                 Representatives.
               </span>{" "}
             </p>
-            <a className="px-3" href="/privacy-policy">
+            <Link className="px-3" to="/privacy-policy">
               Privacy Policy
-            </a>
+            </Link>
             <a
               className="px-3"
               href="mailto:contact@democracy.io?Subject=Democracy.io"

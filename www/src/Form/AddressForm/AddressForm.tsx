@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import React, { FormEvent, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { MessageSenderAddress } from "../../../../server/src/Models";
+import { MessageSenderAddress } from "../../../../server/src/models";
 import LoadingState from "../../AsyncUtils/LoadingState";
 import Whitebox from "../Whitebox";
 import { verifyAddress } from "../../DioAPI";
@@ -23,11 +23,11 @@ interface AddressFormProps {
 export default function AddressForm(props: AddressFormProps) {
   const [
     canonicalAddressLoadingState,
-    setCanonicalAddressLoadingState
+    setCanonicalAddressLoadingState,
   ] = useState(LoadingState.Ready);
   const [
     canonicalAddressErrorMessage,
-    setCanonicalAddressErrorMessage
+    setCanonicalAddressErrorMessage,
   ] = useState("");
 
   const [addressInputFields, setAddressInputFields] = useState<
@@ -36,7 +36,7 @@ export default function AddressForm(props: AddressFormProps) {
 
   const { streetAddress, city, zipCode } = addressInputFields;
   const addressValid = [streetAddress, city, zipCode].every(
-    val => val.length > 0
+    (val) => val.length > 0
   );
 
   async function submitAddressForm(e: FormEvent) {
@@ -48,7 +48,7 @@ export default function AddressForm(props: AddressFormProps) {
       const res = await verifyAddress({
         streetAddress: streetAddress,
         city: city,
-        zipCode: zipCode
+        zipCode: zipCode,
       });
       props.onSuccessfulAddress(res.data);
       setCanonicalAddressErrorMessage("");
@@ -93,10 +93,10 @@ export default function AddressForm(props: AddressFormProps) {
                     name="address-line1"
                     type="text"
                     defaultValue={streetAddress}
-                    onChange={e =>
+                    onChange={(e) =>
                       setAddressInputFields({
                         ...addressInputFields,
-                        streetAddress: e.target.value
+                        streetAddress: e.target.value,
                       })
                     }
                     placeholder="1600 Pennsylvania Ave"
@@ -115,10 +115,10 @@ export default function AddressForm(props: AddressFormProps) {
                         name="address-level2"
                         type="text"
                         defaultValue={city}
-                        onChange={e =>
+                        onChange={(e) =>
                           setAddressInputFields({
                             ...addressInputFields,
-                            city: e.target.value
+                            city: e.target.value,
                           })
                         }
                         placeholder="Washington, DC"
@@ -136,10 +136,10 @@ export default function AddressForm(props: AddressFormProps) {
                         id="zipCode"
                         type="text"
                         defaultValue={zipCode}
-                        onChange={e =>
+                        onChange={(e) =>
                           setAddressInputFields({
                             ...addressInputFields,
-                            zipCode: e.target.value
+                            zipCode: e.target.value,
                           })
                         }
                         placeholder="20500"
@@ -154,7 +154,7 @@ export default function AddressForm(props: AddressFormProps) {
               <div
                 id="submitAddress"
                 className={classNames("d-inline-block pl-md-4 mt-4 mt-lg-0", {
-                  addressValid: addressValid
+                  addressValid: addressValid,
                 })}
                 style={{ verticalAlign: "bottom" }}
               >
@@ -178,7 +178,7 @@ export default function AddressForm(props: AddressFormProps) {
               display:
                 canonicalAddressLoadingState === LoadingState.Error
                   ? "block"
-                  : "none"
+                  : "none",
             }}
           >
             <div className="alert alert-danger mt-4 mb-0" role="alert">

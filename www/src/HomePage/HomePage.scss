@@ -21,13 +21,7 @@ div#whydio {
 
 #about {
   background: linear-gradient(to bottom, #eee, #fff);
-  p,
-  ul {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 15px;
-    font-weight: 400;
-  }
+  color: #444;
 
   ul li {
     margin-bottom: 10px;
@@ -42,4 +36,51 @@ div#whydio {
       right: 5px;
     }
   }
+}
+
+#about p {
+  line-height: 1.6;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes drawLogo {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+#icon-plane,
+#icon-chat,
+#icon-speaker,
+#icon-logo,
+#icon-eff {
+  @extend .animated;
+  animation-duration: 1s;
+  opacity: 0;
+}
+#icon-plane.icon-enter {
+  animation-name: fadeUpRightIn;
+}
+#icon-chat.icon-enter,
+#icon-eff.icon-enter {
+  animation-name: fadeUp30P;
+}
+#icon-speaker.icon-enter {
+  animation-name: fadeRightIn30P;
+}
+#icon-logo.icon-enter {
+  @extend .animated;
+  opacity: 1;
+  fill: none;
+  stroke: $pink;
+  stroke-width: 1px;
+  stroke-linejoin: butt;
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  animation: drawLogo 2.5s ease 0s 1 forwards;
+  animation-repeat: 1;
 }

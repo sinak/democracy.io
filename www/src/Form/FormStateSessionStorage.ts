@@ -2,7 +2,7 @@ import {
   MessageSenderAddress,
   LegislatorContact,
   MessageResponse
-} from "../../../server/src/Models";
+} from "../../../server/src/models";
 
 const SESSION_STORAGE_KEY = "FormState";
 

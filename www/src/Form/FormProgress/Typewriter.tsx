@@ -9,7 +9,7 @@ interface TypewriterProps {
 const DISPLAY_SPEED = 30;
 const INITIAL_DELAY = 500;
 
-export default function(props: TypewriterProps) {
+export default function (props: TypewriterProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [finished, setFinished] = useState(false);
 
@@ -33,12 +33,10 @@ export default function(props: TypewriterProps) {
   return (
     <h1
       className={classNames("typewriter serif text-center display-4", {
-        hasFinishedTyping: finished
+        hasFinishedTyping: finished,
       })}
     >
-      <span>
-        {props.message.slice(0, currentIndex)}
-      </span>
+      <span>{props.message.slice(0, currentIndex)}</span>
     </h1>
   );
 }

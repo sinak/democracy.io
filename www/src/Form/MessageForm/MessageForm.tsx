@@ -1,20 +1,30 @@
-import React, { useState, FormEvent } from "react";
+import axios, { CancelTokenSource } from "axios";
+import classNames from "classnames";
+import React, { FormEvent, useRef, useState } from "react";
+import InputMask from "react-input-mask";
+import { useHistory, Redirect } from "react-router-dom";
 import {
+  LegislatorContact,
   Message,
   MessageSenderAddress,
-  LegislatorContact
-} from "../../../../server/src/Models";
-import Whitebox from "../Whitebox";
-import classNames from "classnames";
-import { useHistory } from "react-router-dom";
-import { sendMessages } from "../../DioAPI";
+} from "../../../../server/src/models";
 import LoadingState from "../../AsyncUtils/LoadingState";
+import { sendMessages } from "../../DioAPI";
+import Whitebox from "../Whitebox";
+import { ReactComponent as LoadingSpinner } from "./../../AsyncUtils/LoadingSpinner.svg";
+import { format } from "path";
 
 interface MessageFormProps {
   messageSenderAddress: MessageSenderAddress;
   legislatorContacts: LegislatorContact[];
   selectedBioguides: string[];
 }
+enum ValidationStatus {
+  Invalid,
+  Valid,
+  Init,
+}
+
 export default function MessageForm(props: MessageFormProps) {
   const { legislatorContacts, selectedBioguides, messageSenderAddress } = props;
 
@@ -28,108 +38,168 @@ export default function MessageForm(props: MessageFormProps) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [legislatorTopicsMap, setLegislatorTopicsMap] = useState<{
     [bioguideId: string]: string;
-  }>({});
+  }>(
+    legislatorContacts.reduce((prev, curr) => {
+      return {
+        ...prev,
+        [curr.legislator.bioguideId]: curr.form.topics[0].value,
+      };
+    }, {})
+  );
+  const [isValid, setIsValid] = useState(ValidationStatus.Init);
+
+  const sourceRef = useRef<CancelTokenSource>(axios.CancelToken.source());
 
   // ui state
   const [topicFocused, setTopicFocused] = useState(false);
+  const [prefixFocused, setPrefixFocused] = useState(false);
+  const [phoneFocused, setPhoneFocused] = useState(false);
 
   // async
   const [sendLoadingState, setSendLoadingState] = useState(LoadingState.Ready);
 
   // derived data
-  const selectedLegislators = legislatorContacts.filter(legislatorContact =>
-    selectedBioguides.includes(legislatorContact.bioguideId)
+  const selectedLegislatorContacts = legislatorContacts.filter(
+    (legislatorContact) =>
+      selectedBioguides.includes(legislatorContact.legislator.bioguideId)
   );
 
   let history = useHistory();
 
-  async function handleMessageFormSubmit(e: FormEvent) {
+  async function handleMessageFormSubmit(e: React.FormEvent) {
     e.preventDefault();
+    const target = e.target as HTMLFormElement;
+    if (target.checkValidity() === false) {
+      setIsValid(ValidationStatus.Invalid);
+    } else {
+      let messages: Message[] = selectedLegislatorContacts.map((contact) => {
+        return {
+          bioguideId: contact.legislator.bioguideId,
+          subject: subject,
+          message: message,
+          sender: {
+            namePrefix: prefix,
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            parenPhone: phoneNumber,
+            phone: phoneNumber,
+          },
+          campaign: {
+            orgName: "",
+            orgURL: "",
+            uuid: "",
+          },
+          senderAddress: messageSenderAddress,
+          topic: legislatorTopicsMap[contact.legislator.bioguideId],
+        };
+      });
 
-    let messages: Message[] = selectedLegislators.map(legislator => {
-      return {
-        bioguideId: legislator.bioguideId,
-        subject: subject,
-        message: message,
-        sender: {
-          namePrefix: prefix,
-          email: email,
-          firstName: firstName,
-          lastName: lastName,
-          parenPhone: phoneNumber,
-          phone: phoneNumber
-        },
-        campaign: {
-          orgName: "",
-          orgURL: "",
-          uuid: ""
-        },
-        senderAddress: messageSenderAddress,
-        topic: legislatorTopicsMap[legislator.bioguideId]
-      };
-    });
+      setSendLoadingState(LoadingState.Loading);
 
-    setSendLoadingState(LoadingState.Loading);
-
-    try {
-      const res = await sendMessages(messages);
-      setSendLoadingState(LoadingState.Success);
-    } catch (e) {
-      setSendLoadingState(LoadingState.Error);
+      try {
+        const res = await sendMessages(messages, {
+          cancelToken: sourceRef.current.token,
+        });
+        setSendLoadingState(LoadingState.Success);
+      } catch (e) {
+        if (axios.isCancel(e)) {
+          setSendLoadingState(LoadingState.Ready);
+        }
+        setSendLoadingState(LoadingState.Error);
+      }
     }
   }
 
+  if (sendLoadingState === LoadingState.Loading) {
+    return (
+      <div className="col-md-12 col-lg-11 mx-auto">
+        <Whitebox
+          id="loading"
+          className="write-message text-center"
+          showBackButton={true}
+          onClickBackButton={sourceRef.current.cancel}
+        >
+          <LoadingSpinner />
+          <p className="mx-auto" style={{ fontSize: 18, maxWidth: 320 }}>
+            Sending your message now ... this process may take up to 30 seconds.
+          </p>
+        </Whitebox>
+      </div>
+    );
+  }
+
+  if (sendLoadingState === LoadingState.Success) {
+    return <Redirect to="/thanks" />;
+  }
+
   return (
-    <div className="col-lg-10 mx-auto">
+    <div className="col-md-12 col-lg-11 mx-auto">
       <Whitebox
         className="write-message"
         showBackButton={true}
         onClickBackButton={() => history.push("/pick-legislators")}
       >
-        <form onSubmit={handleMessageFormSubmit}>
+        <form
+          onSubmit={handleMessageFormSubmit}
+          noValidate={true}
+          className={classNames("needs-validation", {
+            "was-validated": isValid === ValidationStatus.Invalid,
+          })}
+        >
           <div className="row">
             <div id="to-field" className="col-md-12">
-              <div>This message will be sent to:</div>
-              {selectedLegislators
-                .map(
-                  legislator =>
-                    `${legislatorTitle(legislator)} ${legislator.firstName} ${
-                      legislator.lastName
-                    }`
-                )
-                .join(", ")}
+              <div className="label mb-2">This message will be sent to:</div>
+              <div className="mb-2" style={{ fontSize: 18 }}>
+                {selectedLegislatorContacts
+                  .map(
+                    (contact) =>
+                      `${legislatorTitle(contact)} ${
+                        contact.legislator.firstName
+                      } ${contact.legislator.lastName}`
+                  )
+                  .join(", ")}
+              </div>
             </div>
           </div>
 
           <div className="row">
             <div className="form-group col-sm-8 col-md-9">
-              <label htmlFor="subject">Subject</label>
+              <label className="label" htmlFor="subject">
+                Subject
+              </label>
               <input
                 id="subject"
                 type="text"
                 defaultValue={subject}
-                onChange={e => setSubject(e.target.value)}
+                onChange={(e) => setSubject(e.target.value)}
                 required
                 className="form-control"
               />
+
+              <div className="invalid-feedback">Subject is required.</div>
             </div>
           </div>
 
           <div className="row">
             <div className="form-group col-sm-8 col-md-9">
-              <label htmlFor="inputMessage">Message</label>
+              <label className="label" htmlFor="inputMessage">
+                Message
+              </label>
               <style
                 dangerouslySetInnerHTML={{
                   __html: `
                   #textarea-container::after {
-                    content: 'Dear ${selectedLegislators
+                    content: 'Dear ${selectedLegislatorContacts
                       .map(
-                        l =>
-                          `${legislatorTitle(l)} ${l.firstName} ${l.lastName}`
+                        (contact) =>
+                          `${legislatorTitle(contact)} ${
+                            contact.legislator.firstName
+                          } ${contact.legislator.lastName}`
                       )
                       .join(", ")},'
                   }
-                `
+                `,
                 }}
               />
 
@@ -137,12 +207,15 @@ export default function MessageForm(props: MessageFormProps) {
                 <textarea
                   id="inputMessage"
                   defaultValue={message}
-                  onChange={e => setMessage(e.target.value)}
+                  onChange={(e) => setMessage(e.target.value)}
                   cols={30}
                   rows={10}
                   required
                   className="form-control"
                 />
+
+                <div className="invalid-feedback">Message is required.</div>
+                <div className="valid-feedback">Looks good!</div>
               </div>
             </div>
 
@@ -165,16 +238,20 @@ export default function MessageForm(props: MessageFormProps) {
           <div className="row">
             <div className="col-sm-8 col-md-6">
               <div className="form-group">
-                <label htmlFor="email">Your Email Address</label>
+                <label className="label" htmlFor="email">
+                  Your Email Address
+                </label>
                 <input
                   id="email"
-                  type="text"
+                  type="email"
                   defaultValue={email}
-                  onChange={e => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
                   required
                   className="form-control"
                 />
+                <div className="invalid-feedback">Must be a valid email</div>
+                <div className="valid-feedback">Looks good!</div>
               </div>
             </div>
           </div>
@@ -183,55 +260,108 @@ export default function MessageForm(props: MessageFormProps) {
             <div className="col-sm-8 col-md-6">
               <div className="row">
                 <div className="col-sm-6 form-group">
-                  <label htmlFor="firstName">First Name</label>
+                  <label className="label" htmlFor="firstName">
+                    First Name
+                  </label>
                   <input
                     id="firstName"
                     type="text"
                     defaultValue={firstName}
-                    onChange={e => setFirstName(e.target.value)}
+                    onChange={(e) => setFirstName(e.target.value)}
                     required
                     className="form-control"
                   />
+                  <div className="invalid-feedback">First name is required</div>
+                  <div className="valid-feedback">Looks good!</div>
                 </div>
 
                 <div className="col-sm-6 form-group">
-                  <label htmlFor="lastName">Last Name</label>
+                  <label className="label" htmlFor="lastName">
+                    Last Name
+                  </label>
                   <input
                     id="lastName"
                     type="text"
                     defaultValue={lastName}
-                    onChange={e => setLastName(e.target.value)}
+                    onChange={(e) => setLastName(e.target.value)}
                     required
                     className="form-control"
                   />
+                  <div className="invalid-feedback">Last name is required</div>
+                  <div className="valid-feedback">Looks good!</div>
                 </div>
               </div>
               <div className="row">
                 <div className="col-sm-6 form-group">
-                  <label htmlFor="prefix">Prefix</label>
+                  <label className="label" htmlFor="prefix">
+                    Prefix
+                  </label>
                   <select
-                    onChange={e => setPrefix(e.target.value)}
+                    onChange={(e) => setPrefix(e.target.value)}
                     value={prefix}
                     className="form-control"
                     autoComplete="honorific-prefix"
+                    onFocus={() => setPrefixFocused(true)}
+                    onBlur={() => setPrefixFocused(false)}
                   >
-                    {["Mr.", "Mrs.", "Ms."].map(p => (
+                    {["Mr.", "Mrs.", "Ms."].map((p) => (
                       <option value={p}>{p}</option>
                     ))}
                   </select>
                 </div>
 
                 <div className="col-sm-6 form-group">
-                  <label htmlFor="phoneNumber">Phone Number</label>
-                  <input
+                  <label className="label" htmlFor="phoneNumber">
+                    Phone Number
+                  </label>
+                  <InputMask
+                    mask="(999) 999-9999"
+                    value={phoneNumber}
                     id="phoneNumber"
                     type="text"
                     defaultValue={phoneNumber}
-                    onChange={e => setPhoneNumber(e.target.value)}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
                     autoComplete="tel tel-national"
-                    required
                     className="form-control"
+                    onFocus={() => setPhoneFocused(true)}
+                    onBlur={() => setPhoneFocused(false)}
+                    pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}"
+                    required
                   />
+                  <div className="invalid-feedback">
+                    Phone number is required
+                  </div>
+                  <div className="valid-feedback">Looks good!</div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className={classNames("col-sm-6 hidden-xs form-note", {
+                "d-none": prefixFocused === false,
+                "ng-hide": prefixFocused === false,
+              })}
+            >
+              <div className="panel panel-compact" id="prefixNote">
+                <div className="panel-body">
+                  Members of Congress's contact forms require gendered titles.{" "}
+                  <span className="hidden-sm">
+                    EFF believes the options provided are limiting and we are
+                    looking into alternatives.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className={classNames("col-sm-6 hidden-xs form-note", {
+                "d-none": phoneFocused === false,
+                "ng-hide": phoneFocused === false,
+              })}
+            >
+              <div className="panel panel-compact" id="phoneNote">
+                <div className="panel-body">
+                  Members of Congress's contact forms require US phone numbers.
                 </div>
               </div>
             </div>
@@ -239,29 +369,30 @@ export default function MessageForm(props: MessageFormProps) {
 
           <div className="row">
             <div className="col-sm-6">
-              {selectedLegislators.map(legislator => {
-                const options = getLegislatorTopics(legislator);
-
+              {selectedLegislatorContacts.map((contact) => {
                 return (
                   <div className="form-group">
-                    <label htmlFor={`topic-${legislator.bioguideId}`}>
-                      {legislatorTitle(legislator)} {legislator.lastName}'s
+                    <label
+                      className="label"
+                      htmlFor={`topic-${contact.legislator.bioguideId}`}
+                    >
+                      {legislatorTitle(contact)} {contact.legislator.lastName}'s
                       topic
                     </label>
                     <select
-                      onChange={e =>
+                      onChange={(e) =>
                         setLegislatorTopicsMap({
                           ...legislatorTopicsMap,
-                          [legislator.bioguideId]: e.target.value
+                          [contact.legislator.bioguideId]: e.target.value,
                         })
                       }
                       onFocus={() => setTopicFocused(true)}
                       onBlur={() => setTopicFocused(false)}
-                      value={legislatorTopicsMap[legislator.bioguideId]}
+                      value={legislatorTopicsMap[contact.legislator.bioguideId]}
                       className="form-control"
                     >
-                      {options.map(o => (
-                        <option value={o}>{o}</option>
+                      {contact.form.topics.map((o) => (
+                        <option value={o.value}>{o.label.trim()}</option>
                       ))}
                     </select>
                   </div>
@@ -271,7 +402,7 @@ export default function MessageForm(props: MessageFormProps) {
 
             <div
               className={classNames("col-sm-6 hidden-xs form-note", {
-                "ng-hide": topicFocused === false
+                "ng-hide": topicFocused === false,
               })}
             >
               <div className="panel panel-compact" id="prefixNote">
@@ -291,34 +422,8 @@ export default function MessageForm(props: MessageFormProps) {
   );
 }
 
-/**
- * WARNING: This function can throw
- * Returns the $TOPIC form element's `optionsHash` property
- *
- * This is needed to normalize the value since it can be
- * an object or array.
- *
- * @param legislator
- */
-function getLegislatorTopics(legislator: LegislatorContact): string[] {
-  const topicFormElement = legislator.form.formElements.find(
-    fe => fe.value === "$TOPIC"
-  );
-
-  if (!topicFormElement) {
-    throw new Error("Could not find legislator $TOPIC form element");
-  }
-  if (!topicFormElement.optionsHash) {
-    throw new Error("Legislator $TOPIC optionsHash is not defined");
-  }
-
-  return Array.isArray(topicFormElement.optionsHash)
-    ? topicFormElement.optionsHash
-    : Object.keys(topicFormElement.optionsHash);
-}
-
-function legislatorTitle(legislator: LegislatorContact) {
-  if (legislator.currentTerm.chamber === "senate") {
+function legislatorTitle(contact: LegislatorContact) {
+  if (contact.legislator.currentTerm.chamber === "senate") {
     return "Sen.";
   } else {
     return "Rep.";

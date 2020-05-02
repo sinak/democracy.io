@@ -14,7 +14,7 @@ interface WhiteboxProps {
  * classNames are merged onto the parent div
  * @param props
  */
-const Whitebox: React.FC<WhiteboxProps> = props => {
+const Whitebox: React.FC<WhiteboxProps> = (props) => {
   const backButton = props.showBackButton ? (
     <button
       className="btn-sm back-button float-right"

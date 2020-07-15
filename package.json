@@ -76,7 +76,7 @@
     "dustjs-linkedin": "^2.7.5",
     "express": "^4.8.4",
     "hover.css": "^2.0.2",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.19",
     "lodash.create": "^3.1.0",
     "lodash.filter": "^3.1.0",
     "lodash.findwhere": "^3.0.1",

@@ -108,6 +108,13 @@ gulp serve
 
 ## Deploying
 
+
+Install gulp on Mac:
+
+```
+npm install pm2 -g
+```
+
 To deploy the server, simply run:
 
 ```

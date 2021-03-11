@@ -28,13 +28,28 @@ It uses APIs from:
 
 ### Redis
 
-Ensure that Redis is running locally:
+#### PC
+
+Install and run locally on PC:
 ```
 sudo apt-get install redis-server
 ```
 or install manually via http://redis.io/topics/quickstart - making sure to read the "Securing Redis" section, especially if you install Redis manually.
 
+#### Mac
+
+Install Homebrew & NPM: https://changelog.com/posts/install-node-js-with-homebrew-on-os-x
+
+Install and run locally on Mac:
+```
+brew install redis
+```
+
+
+
 ### App dependencies & build
+
+Navigate back to democracy.io repo folder:
 
 ```
 npm install
@@ -79,6 +94,12 @@ npm run test
 
 ## Running the server locally
 
+Install gulp on Mac:
+
+```
+sudo npm install gulp-cli -g
+```
+
 Spins up a local server to serve the app, including proxying browsersync on top of the express server.
 
 ```
@@ -86,6 +107,13 @@ gulp serve
 ```
 
 ## Deploying
+
+
+Install gulp on Mac:
+
+```
+npm install pm2 -g
+```
 
 To deploy the server, simply run:
 

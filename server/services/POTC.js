@@ -31,7 +31,7 @@ POTCApi.interceptors.response.use(
 var getFormElementsForRepIdsFromPOTC = function(bioguideIds) {
   return POTCApi.post("/retrieve-form-elements", {
     bio_ids: bioguideIds
-  });
+  }, { baseURL: "http://52.1.30.228:8293" });
 };
 
 /**

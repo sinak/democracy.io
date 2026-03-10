@@ -1,7 +1,8 @@
 const axios = require("axios").default;
+const jsyaml = require("js-yaml");
 
 const defaultLegislatorsURL =
-  "https://theunitedstates.io/congress-legislators/legislators-current.json";
+  "https://raw.githubusercontent.com/unitedstates/congress-legislators/refs/heads/main/legislators-current.yaml";
 
 /**
  *
@@ -10,7 +11,12 @@ const defaultLegislatorsURL =
  */
 module.exports.fetchFile = async (url = defaultLegislatorsURL) => {
   const jsonRes = await axios.get(url);
-  return decode(jsonRes.data);
+  const yaml = jsyaml.safeLoad(jsonRes.data)
+  
+  const decoded = decode(yaml);
+  console.log(decoded);
+  return decoded;
+
 };
 
 /**

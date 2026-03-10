@@ -26,6 +26,14 @@ expressRouter.get("/legislators/findByDistrict", async (req, res) => {
     return legislator.bioguideId;
   });
 
+  if (bioguideIds.length === 0) {
+    return res.status(400).json(
+      resHelpers.makeError({
+        message: "No legislators found for the given state and district."
+      })
+    );
+  }
+
   if (!bioguideIds && !legislators) {
     return res.status(400).json(
       resHelpers.makeError({

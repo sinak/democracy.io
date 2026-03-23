@@ -1,0 +1,50 @@
+#footer {
+  width: 100%;
+  font-size: 1em;
+  color: #555;
+  background: linear-gradient(to bottom, #FFF, rgba(255,255,255,0.5));
+  .row div {
+      opacity: 0.7;
+      transition: opacity $transitionDuration $easing;
+  }
+  .container {
+    border-top: 1px solid #A1A1A1;
+    border-color: rgba(0,0,0,0.1);
+    text-align: center;
+    padding: 3em 0;
+  }
+  p {
+    margin-top:5px;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    margin-bottom: 1em;
+    padding: 0;
+    li {
+      display: inline;
+      padding: 0 1em;
+    }
+  }
+  svg.logo {
+    width: 150px;
+    fill: #333;
+  }
+  .eff-logo svg{
+    margin-left: 10px;
+    position: relative;
+    top:3px;
+  }
+  &:hover .row div {
+    opacity: 1;
+  }
+}
+.navbar-brand svg, #footer svg.logo {
+  font: 220px/1 Open Sans, Impact;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing:40px;
+  font-weight: 800;
+  max-height: 100px; // Fixes SVG issue in Safari 7
+  stroke: none;
+}

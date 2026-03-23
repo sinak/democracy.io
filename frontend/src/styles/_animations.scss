@@ -1,0 +1,435 @@
+// Global animation class (extended below)
+.animated {
+  animation-duration: .5s;
+  animation-fill-mode: both;
+}
+body {
+  @extend .animated;
+  transition: height .1s linear;
+}
+
+// Animation for all form sections
+#form-scope.ng-enter {
+    @extend .animated;
+    animation-name: fadeUp30;
+    animation-delay: 0.5s;
+    opacity: 0;
+}
+#form-scope.ng-leave {
+    @extend .animated;
+    animation-name: fadeDown30;
+}
+#form-scope.ng-enter:nth-child(2) {
+  display: none;
+}
+
+
+// Form element transitions 
+.repOption, .write-message .whitebox-container > div, .ng-enter #addressInputs > div {
+  @extend .animated;
+  animation-name: fadeUp30;
+  @for $i from 1 through 10 {
+      &:nth-child(#{$i}) { 
+       @include animation-delay(0.1s * $i + 0.5s); 
+      }
+    }
+}
+
+// Animations for loading box
+#loading.ng-leave {
+    @extend .animated;
+    animation-name: fadeDown30;
+}
+
+// Home-screen-specific animations
+#address {
+  #addressInputs {
+    width: 100%;
+    transition: width 0.5s ease;
+  }
+
+  @media (min-width: $screen-sm-min) {
+    #addressInputs.addressValid {
+      width: 75%;
+    }
+  }
+  @media (min-width: $screen-sm-min) {
+    #submitAddress {
+      max-width: 0;
+      overflow: hidden;
+      transition: max-width 0.5s ease;
+    }
+    #submitAddress.addressValid {
+      max-width: 25%;
+    }
+  }
+  @media (max-width: $screen-xs-max) {
+    #submitAddress {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    #submitAddress.addressValid {
+      max-height: 100px;
+    }
+  }
+}
+#video-container {
+  div {
+    opacity: 0;
+  }
+  &.ng-enter {
+    div {
+      @extend .animated;
+      animation-name: fadeUp30;
+      animation-delay: 0.2s;
+      opacity: 0;
+    }
+  }
+}
+#about.ng-enter {
+  @extend .animated;
+  animation-name: fadeUp30;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+#showAbout.ng-hide {
+  @extend .animated;
+  animation-name: fadeDown30;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+// Home styles when pressing "back"
+#wrapper[data-pagename="home"] {
+  div#progress-bar {
+    opacity: 1;
+  }
+  
+  &[data-pagefrom="location"] {
+    .header h1 {
+      @media (min-width: $screen-sm-min) {
+        margin-top: 0;
+        animation: addTopMargin 1.5s ease 0.5s 1 forwards;
+      }
+    }
+  }
+}
+// Home styles for fresh site load
+#wrapper[data-pagename="home"][data-pagefrom="new-visit"] {
+  .header h1::after {
+      content: '|';
+      display: inline;
+      opacity: 1;
+      animation: blink 0.7s linear 0s infinite;
+      position:relative;
+      bottom: 5px;
+  }
+  h1.hasFinishedTyping::after {
+    display: none;
+    animation: none;
+  }
+  div#progress-bar {
+    opacity: 0;
+    @extend .animated;
+    animation-name: fadeInUp;
+    animation-delay: 1.5s; // Reduces jittering
+  }
+  #address.whitebox {
+    @extend .animated;
+    animation-name: fadeInUp;
+    animation-delay: 1.5s; // Reduces jittering
+  }
+  #progress-bar-svg {
+    #pb-circle-1, #pb-circle-2, #pb-circle-3 {
+      stroke-linejoin: butt;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      animation: draw 1.5s ease 1.8s 1 forwards;
+    }
+  }
+  &[data-pagefrom="location"] {
+    .header h1 {
+      margin-top: 0px;
+      animation: addTopMargin 1.5s ease 0.5s 1 forwards;
+    }
+    h1.header {
+    display: none;
+    }
+  }
+}
+#wrapper[data-pagename="location"] {
+  div#progress-bar {
+    opacity: 1;
+  }
+  #pb-check-1 {
+    animation: none;
+    opacity: 1;
+  }
+  #pb-dot-2 {
+    animation: none;
+  }
+  #pb-line-1 {
+    stroke-dashoffset: 0;
+    stroke-width: 1;
+  }
+  #pick-legislators {
+    @extend .animated;
+    animation-name: fadeUp30;
+    animation-delay: 0.5s;
+    opacity: 0;
+  }
+  // Animations when moving forwards
+  &[data-pagefrom="home"] {
+    h1.header {
+      @media (min-width: $screen-sm-min) {
+        margin-top: 70px;
+        animation: removeTopMargin 1.5s ease 0.5s 1 forwards;
+      }
+    }
+    #pb-line-1 {
+      stroke-linejoin: butt;
+      stroke-dasharray: 170;
+      stroke-dashoffset: 170;
+      animation: draw 2s ease 0.5s 1 forwards;
+    }
+    #pb-dot-2 {
+      opacity: 0;
+      animation: moveRight 2.5s ease 0s 1 forwards;
+    }
+    #pb-check-1 {
+      opacity: 0;
+      animation: fadeInUp 0.5s ease 1.5s 1 forwards;
+    }
+  }
+}
+#wrapper[data-pagename="compose"] {
+  div#progress-bar {
+    opacity: 1;
+  }
+  #pb-line-1 {
+    stroke-dashoffset: 0;
+    stroke-width: 1;
+  }
+  #pb-line-2 {
+    stroke-width: 1;
+    stroke-linejoin: butt;
+    stroke-dasharray: 170;
+    stroke-dashoffset: 170;
+    animation: draw 2s ease 0.5s 1 forwards;
+  }
+  #pb-dot-3 {
+    opacity: 0;
+    animation: moveRight 2.5s ease 0s 1 forwards;
+  }
+  #pb-check-1 {
+    opacity: 1;
+  }
+  #pb-check-2 {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease 1s 1 forwards;
+  }
+  .write-message.ng-enter {
+    @extend .animated;
+    animation-name: fadeUp30;
+    animation-delay: 0.5s;
+    opacity: 0;
+  }
+}
+
+#wrapper[data-pagename="captcha"] {
+  div#progress-bar {
+    opacity: 1;
+  }
+  #pb-line-1 {
+    stroke-dashoffset: 0;
+    stroke-width: 1;
+  }
+  #pb-line-2 {
+    stroke-dashoffset: 0;
+    stroke-width: 1;
+  }
+  #pb-check-1 {
+    opacity: 1;
+  }
+  #pb-check-2 {
+    opacity: 1;
+  }
+}
+#wrapper[data-pagename="thanks"] {
+  div#progress-bar {
+    opacity: 1;
+  }
+  #pb-line-1 {
+    stroke-dashoffset: 0;
+    stroke-width: 1;
+  }
+  #pb-line-2 {
+    stroke-dashoffset: 0;
+    stroke-width: 1;
+  }
+  #pb-check-1 {
+    opacity: 1;
+  }
+  #pb-check-2 {
+    opacity: 1;
+  }
+  #pb-check-3 {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease 1s 1 forwards;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate(0, 30%);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@keyframes fadeDownOut {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+}
+@keyframes fadeDown30 {
+  0% {
+    opacity: 1;
+    transform: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+}
+@keyframes fadeUp30 {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeUp30P {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeRightIn30P {
+  0% {
+    opacity: 0;
+    transform: translate3d(-30%, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes fadeUpRightIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(-100%, 100%, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+}
+@keyframes moveRight {
+  0% {
+    opacity: 1;
+    transform: translate(-186px, 0);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-186px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes blink{
+  to{
+    opacity: 0;
+  }
+}
+@keyframes removeTopMargin{
+  to{
+    margin-top: 0;
+  }
+}
+@keyframes addTopMargin{
+  to{
+    margin-top: 70px;
+  }
+}
+@keyframes draw {
+  to {
+      stroke-dashoffset: 0;
+  }
+}
+@keyframes drawLogo {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/*******************
+ About animations
+*******************/
+#icon-plane, #icon-chat, #icon-speaker, #icon-logo, #icon-eff {
+  @extend .animated;
+  animation-duration: 1s;
+  opacity: 0;
+}
+#icon-plane.icon-enter {
+  animation-name: fadeUpRightIn;
+}
+#icon-chat.icon-enter,#icon-eff.icon-enter {
+  animation-name: fadeUp30P;
+}
+#icon-speaker.icon-enter {
+  animation-name: fadeRightIn30P;
+}
+#icon-logo.icon-enter {
+  @extend .animated;
+  opacity: 1;
+  fill: none;
+  stroke: $pink;
+  stroke-width: 1px;
+  stroke-linejoin: butt;
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  animation: drawLogo 2.5s ease 0s 1 forwards;
+  animation-repeat: 1;
+}
+
+
+/*******************
+ Message form animations
+*******************/
+.form-note.ng-hide-remove {
+  @extend .animated;
+  opacity: 0;
+  animation: fadeUp30 0.3s ease 0s 1 forwards;
+}
+.form-note.ng-hide {
+  @extend .animated;
+  opacity: 0;
+  animation: fadeDown30 0.3s ease 0s 1 forwards;
+}

@@ -96,3 +96,47 @@ export interface CountyData {
   selected?: string;
   options?: string[];
 }
+
+export type DraftMode = 'generate' | 'rewrite';
+
+export interface DraftRecipient {
+  bioguideId: string;
+  title: string;
+  firstName: string;
+  lastName: string;
+}
+
+export interface DraftTopic {
+  bioguideId: string;
+  legislatorName: string;
+  selectedTopic: string;
+}
+
+export interface DraftLocation {
+  stateAbbreviation: string;
+  district: number | string;
+  county?: string;
+}
+
+export interface DraftConstraints {
+  subjectMaxLength?: number;
+  messageMaxLength?: number;
+}
+
+export interface DraftMessageRequest {
+  mode: DraftMode;
+  instruction: string;
+  currentDraft?: {
+    subject?: string;
+    message?: string;
+  };
+  recipients: DraftRecipient[];
+  topics?: DraftTopic[];
+  location?: DraftLocation;
+  constraints?: DraftConstraints;
+}
+
+export interface DraftMessageResult {
+  subject: string;
+  message: string;
+}

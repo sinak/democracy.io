@@ -12,6 +12,7 @@ import legislatorRoutes from './routes/legislator.js';
 import formElementsRoutes from './routes/form-elements.js';
 import captchaSolutionRoutes from './routes/captcha-solution.js';
 import subscriptionRoutes from './routes/subscription.js';
+import draftMessageRoutes from './routes/draft-message.js';
 
 const app = express();
 
@@ -21,17 +22,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Rate limiting on message endpoints (200 requests per 7 days)
+const skipLocalRateLimit = (req: express.Request) => {
+  const ip = req.ip || '';
+  return ip === '127.0.0.1' || ip === '::1' || ip === '::ffff:127.0.0.1';
+};
+
 const messageLimiter = rateLimit({
   windowMs: 7 * 24 * 60 * 60 * 1000,
   max: 200,
   message: { status: 'error', message: 'Too many requests', code: 429, data: null },
-  skip: (req) => {
-    const ip = req.ip || '';
-    return ip === '127.0.0.1' || ip === '::1' || ip === '::ffff:127.0.0.1';
-  },
+  skip: skipLocalRateLimit,
+});
+
+const draftLimiter = rateLimit({
+  windowMs: config.draftRateLimit.windowMs,
+  max: config.draftRateLimit.max,
+  message: { status: 'error', message: 'Too many draft requests', code: 429, data: null },
+  skip: skipLocalRateLimit,
 });
 
 app.use(/\/api.*\/message$/, messageLimiter);
+app.use('/api/1/draft-message', draftLimiter);
 
 // API routes (mounted at /api/1)
 app.use('/api/1', locationRoutes);
@@ -40,6 +51,7 @@ app.use('/api/1', legislatorRoutes);
 app.use('/api/1', formElementsRoutes);
 app.use('/api/1', captchaSolutionRoutes);
 app.use('/api/1', subscriptionRoutes);
+app.use('/api/1', draftMessageRoutes);
 
 // Exception logging endpoint
 app.post('/api/1/exception', (req, res) => {

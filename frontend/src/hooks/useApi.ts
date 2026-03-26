@@ -1,6 +1,8 @@
 import type {
   CanonicalAddress,
   CaptchaSolution,
+  DraftMessageRequest,
+  DraftMessageResult,
   Legislator,
   LegislatorFormElements,
   Message,
@@ -21,6 +23,17 @@ async function apiFetch<T>(url: string, options?: RequestInit): Promise<T> {
   if (!res.ok) {
     const error: any = new Error(`API error: ${res.status}`);
     error.code = res.status;
+
+    try {
+      const json = await res.json();
+      if (typeof json?.message === 'string') {
+        error.message = json.message;
+      }
+      error.data = json?.data;
+    } catch {
+      // Ignore non-JSON error bodies.
+    }
+
     throw error;
   }
 
@@ -52,6 +65,13 @@ export function useApi() {
       return apiFetch(`${API_BASE}/legislators/message`, {
         method: 'POST',
         body: JSON.stringify(messages),
+      });
+    },
+
+    draftMessage(request: DraftMessageRequest): Promise<DraftMessageResult> {
+      return apiFetch(`${API_BASE}/draft-message`, {
+        method: 'POST',
+        body: JSON.stringify(request),
       });
     },
 

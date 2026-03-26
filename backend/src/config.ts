@@ -1,4 +1,13 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(currentDir, '../..');
+
+// Load the repo-root .env first, then allow backend/.env as a fallback for missing keys.
+dotenv.config({ path: path.join(repoRoot, '.env') });
+dotenv.config({ path: path.join(repoRoot, 'backend/.env'), override: false });
 
 export const config = {
   port: parseInt(process.env.PORT || '3001', 10),
@@ -21,4 +30,19 @@ export const config = {
 
   ipSalt: process.env.IP_SALT || 'default-salt',
   campaignTag: process.env.CAMPAIGN_TAG || 'democracy.io',
+
+  openRouter: {
+    baseUrl: process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1',
+    apiKey: process.env.OPENROUTER_API_KEY || '',
+    model: process.env.OPENROUTER_MODEL || 'minimax/minimax-m2.5:free',
+    httpReferer: process.env.OPENROUTER_HTTP_REFERER || '',
+    title: process.env.OPENROUTER_TITLE || '',
+    maxCompletionTokens: parseInt(process.env.OPENROUTER_MAX_COMPLETION_TOKENS || '700', 10),
+    temperature: parseFloat(process.env.OPENROUTER_TEMPERATURE || '0.7'),
+  },
+
+  draftRateLimit: {
+    windowMs: parseInt(process.env.DRAFT_RATE_LIMIT_WINDOW_MS || String(60 * 60 * 1000), 10),
+    max: parseInt(process.env.DRAFT_RATE_LIMIT_MAX || '20', 10),
+  },
 };

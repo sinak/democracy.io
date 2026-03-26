@@ -259,6 +259,52 @@ label {
   opacity: 1;
 }
 
+.message-form-layout {
+  @media (min-width: $screen-sm-min) {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+  }
+}
+
+.message-form-main {
+  min-width: 0;
+
+  @media (min-width: $screen-sm-min) {
+    flex: 1 1 auto;
+  }
+}
+
+.message-form-sidebar {
+  @media (max-width: $screen-xs-max) {
+    margin-top: 24px;
+  }
+
+  @media (min-width: $screen-sm-min) {
+    flex: 0 0 240px;
+    width: 240px;
+  }
+
+  .panel + .panel {
+    margin-top: 30px;
+  }
+}
+
+.ai-draft-panel {
+  .panel-heading {
+    font-weight: 400;
+  }
+}
+
+.ai-draft-actions {
+  display: flex;
+  gap: 8px;
+
+  .btn {
+    white-space: normal;
+  }
+}
+
 /*****************
  Styles specific to mobile view
  ****************/

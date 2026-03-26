@@ -120,7 +120,7 @@ export function MessageForm() {
 
   const legislatorList = localLegislators
     .map((l) => ` ${l.title}. ${l.firstName} ${l.lastName}`)
-    .join(",");
+    .join(", ");
   const isPhoneValid = /^\(\d{3}\) \d{3}-\d{4}$/.test(formData.phone || "");
   const selectedFormElements = legislatorsFormElements.filter((lfe) =>
     localLegislators.some(
@@ -283,7 +283,7 @@ export function MessageForm() {
                         <span>
                           {legislator.title}. {legislator.firstName}{" "}
                           {legislator.lastName}
-                          {i < localLegislators.length - 1 ? "," : ""}
+                          {i < localLegislators.length - 1 ? ", " : ""}
                         </span>
                       </span>
                     ))}

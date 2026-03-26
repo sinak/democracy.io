@@ -170,7 +170,7 @@ var MessageFormController = /*@ngInject*/ function($scope, $location, $timeout, 
 
     $scope.legislatorList = map($scope.legislators, function(legislator){
       return ' ' + legislator.title + '. ' + legislator.firstName + ' ' + legislator.lastName;
-    }).join();
+    }).join(', ');
 
   };
 

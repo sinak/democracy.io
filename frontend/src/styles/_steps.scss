@@ -309,54 +309,171 @@ label small {
   @extend .boxshadow;
   border-radius: 10px;
   background: #fff;
+  float: none;
   overflow: hidden;
+  margin: 0 auto 40px;
 
   @media (max-width: $screen-xs-max) {
     width: 85%;
     margin: 0 auto;
   }
 
-  p {
-    font-size: 20px;
+  .thanks-body {
+    padding: 30px 28px 22px;
     text-align: center;
-    padding: 20px 10px 130px 10px;
-  }
 
-  #triangle {
-    position: absolute;
-    left: 50%;
-    margin-left: -16px;
-    top: 0;
-  }
-
-  #share-icons {
-    background-image: linear-gradient(to right, #FF9600, #FC4863);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index:0;
-    height: 120px;
-    text-align: center;
-    color: #fff;
-    padding-top: 30px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    overflow: hidden;
-
-    a  {
-      transform: translate(0, 0);
-      display: block;
-      cursor: pointer;
-
-      animation: 0.3s ease;
-      transition-duration: 0.3s;
-      transition-property: transform;
-      animation-fill-mode: both;
-      &:hover {
-        transform: translate(0, -7px);
-      }
+    @media (max-width: $screen-xs-max) {
+      padding: 24px 18px 18px;
     }
+  }
+
+  .thanks-kicker {
+    color: $gray;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .thanks-headline {
+    color: #444;
+    font-family: "DroidSerif", serif;
+    font-size: 31px;
+    line-height: 1.35;
+    margin: 0 0 12px;
+    padding: 0;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 24px;
+    }
+  }
+
+  .thanks-subtitle {
+    color: #666;
+    font-size: 17px;
+    line-height: 1.55;
+    margin: 0;
+    padding: 0;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 15px;
+    }
+  }
+
+  .thanks-primary-actions {
+    background-image: linear-gradient(to right, #FF9600, #FC4863);
+    display: flex;
+    gap: 14px;
+    padding: 18px 20px;
+
+    @media (max-width: $screen-xs-max) {
+      flex-direction: column;
+    }
+  }
+
+  .thanks-action-button {
+    appearance: none;
+    background: #fff;
+    border: 0;
+    border-radius: 8px;
+    color: #444;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 0;
+    gap: 10px;
+    min-height: 58px;
+    padding: 0 18px;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover,
+    &:focus {
+      color: #444;
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+    }
+  }
+
+  .thanks-copy-button {
+    color: $brand-primary;
+
+    &:hover,
+    &:focus {
+      color: $brand-primary;
+    }
+  }
+
+  .thanks-feedback {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 20px;
+    padding: 14px 22px 4px;
+    text-align: center;
+  }
+
+  .thanks-social {
+    border-top: 1px solid #f1f1f1;
+    padding: 18px 22px 24px;
+    text-align: center;
+  }
+
+  .thanks-social-title {
+    color: $gray;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .thanks-social-grid {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .thanks-social-button {
+    background: transparent;
+    border: 0;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    text-align: center;
+  }
+
+  .thanks-social-icon {
+    background-image: linear-gradient(to right, #FF9600, #FC4863);
+    border-radius: 16px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 62px;
+    margin: 0 auto 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 62px;
+  }
+
+  .thanks-social-button:hover .thanks-social-icon,
+  .thanks-social-button:focus .thanks-social-icon {
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+    transform: translateY(-2px);
+  }
+
+  .thanks-social-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 }
 

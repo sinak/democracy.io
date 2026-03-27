@@ -81,6 +81,16 @@ export interface EmailCopyRequest {
   messages: Message[];
 }
 
+export interface ShareTopicRequest {
+  message: string;
+  subject?: string;
+  selectedTopics?: string[];
+}
+
+export interface ShareTopicResult {
+  topic: string;
+}
+
 export type DraftMessageMode = 'generate' | 'rewrite';
 
 export interface DraftRecipient {

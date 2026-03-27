@@ -39,6 +39,12 @@ export const config = {
     fromAddress: process.env.EMAIL_COPY_FROM_ADDRESS || process.env.EMAIL_COPY_FROM || '',
   },
 
+  database: {
+    url: process.env.DATABASE_URL || process.env.SUPABASE_DB_URL || '',
+    ssl: process.env.DATABASE_SSL,
+    sslRejectUnauthorized: process.env.DATABASE_SSL_REJECT_UNAUTHORIZED === 'true',
+  },
+
   ipSalt: process.env.IP_SALT || 'default-salt',
   campaignTag: process.env.CAMPAIGN_TAG || 'democracy.io',
 

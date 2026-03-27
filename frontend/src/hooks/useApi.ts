@@ -8,6 +8,8 @@ import type {
   LegislatorFormElements,
   Message,
   MessageResponse,
+  ShareTopicRequest,
+  ShareTopicResult,
   TopicSuggestionRequest,
   TopicSuggestionResult,
 } from '../types';
@@ -92,6 +94,13 @@ export function useApi() {
 
     suggestTopics(request: TopicSuggestionRequest): Promise<TopicSuggestionResult> {
       return apiFetch(`${API_BASE}/topic-suggestion`, {
+        method: 'POST',
+        body: JSON.stringify(request),
+      });
+    },
+
+    getShareTopic(request: ShareTopicRequest): Promise<ShareTopicResult> {
+      return apiFetch(`${API_BASE}/share-topic`, {
         method: 'POST',
         body: JSON.stringify(request),
       });

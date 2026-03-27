@@ -14,7 +14,9 @@ import captchaSolutionRoutes from './routes/captcha-solution.js';
 import subscriptionRoutes from './routes/subscription.js';
 import draftMessageRoutes from './routes/draft-message.js';
 import topicSuggestionRoutes from './routes/topic-suggestion.js';
+import shareTopicRoutes from './routes/share-topic.js';
 import messageCopyRoutes from './routes/message-copy.js';
+import { checkPostgresConnection } from './services/postgres.js';
 
 const app = express();
 
@@ -46,6 +48,7 @@ const draftLimiter = rateLimit({
 app.use(/\/api.*\/message$/, messageLimiter);
 app.use('/api/1/draft-message', draftLimiter);
 app.use('/api/1/topic-suggestion', draftLimiter);
+app.use('/api/1/share-topic', draftLimiter);
 
 // API routes (mounted at /api/1)
 app.use('/api/1', locationRoutes);
@@ -56,6 +59,7 @@ app.use('/api/1', captchaSolutionRoutes);
 app.use('/api/1', subscriptionRoutes);
 app.use('/api/1', draftMessageRoutes);
 app.use('/api/1', topicSuggestionRoutes);
+app.use('/api/1', shareTopicRoutes);
 app.use('/api/1', messageCopyRoutes);
 
 // Exception logging endpoint
@@ -94,6 +98,7 @@ async function start() {
 
   app.listen(config.port, () => {
     logger.info(`Backend server listening on http://localhost:${config.port}`);
+    void checkPostgresConnection();
   });
 }
 

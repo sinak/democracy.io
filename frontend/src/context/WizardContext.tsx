@@ -5,6 +5,7 @@ import type {
   Legislator,
   LegislatorFormElements,
   MessageResponse,
+  ShareDraft,
 } from '../types';
 
 interface WizardState {
@@ -12,6 +13,7 @@ interface WizardState {
   legislators: Legislator[];
   bioguideIdsBySelection: Record<string, boolean>;
   legislatorsFormElements: LegislatorFormElements[];
+  shareDraft: ShareDraft | null;
   messageResponses: MessageResponse[];
   emailCopyRequest: EmailCopyRequest | null;
   emailCopySent: boolean;
@@ -22,6 +24,7 @@ interface WizardContextType extends WizardState {
   setLegislators: (legs: Legislator[]) => void;
   setBioguideIdsBySelection: (sel: Record<string, boolean>) => void;
   setLegislatorsFormElements: (elems: LegislatorFormElements[]) => void;
+  setShareDraft: (draft: ShareDraft | null) => void;
   setMessageResponses: (responses: MessageResponse[]) => void;
   setEmailCopyRequest: (request: EmailCopyRequest | null) => void;
   setEmailCopySent: (sent: boolean) => void;
@@ -37,6 +40,7 @@ const defaultState: WizardState = {
   legislators: [],
   bioguideIdsBySelection: {},
   legislatorsFormElements: [],
+  shareDraft: null,
   messageResponses: [],
   emailCopyRequest: null,
   emailCopySent: false,
@@ -99,6 +103,11 @@ export function WizardProvider({ children }: { children: ReactNode }) {
     [update]
   );
 
+  const setShareDraft = useCallback(
+    (draft: ShareDraft | null) => update({ shareDraft: draft }),
+    [update]
+  );
+
   const setMessageResponses = useCallback(
     (responses: MessageResponse[]) => update({ messageResponses: responses }),
     [update]
@@ -138,6 +147,7 @@ export function WizardProvider({ children }: { children: ReactNode }) {
         setLegislators,
         setBioguideIdsBySelection,
         setLegislatorsFormElements,
+        setShareDraft,
         setMessageResponses,
         setEmailCopyRequest,
         setEmailCopySent,

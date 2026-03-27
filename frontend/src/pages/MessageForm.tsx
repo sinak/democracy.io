@@ -29,6 +29,10 @@ function countWords(value: string): number {
   return value.trim().split(/\s+/).filter(Boolean).length;
 }
 
+function getSelectedTopicsForShare(topicValues: Array<string | undefined>): string[] {
+  return Array.from(new Set(topicValues.map((value) => value?.trim()).filter(Boolean))) as string[];
+}
+
 type ApiError = Error & {
   code?: number;
 };
@@ -90,6 +94,7 @@ export function MessageForm() {
     getSelectedBioguideIds,
     bioguideIdsBySelection,
     setLegislatorsFormElements,
+    setShareDraft,
     setMessageResponses,
     setEmailCopyRequest,
     setEmailCopySent,
@@ -327,11 +332,17 @@ export function MessageForm() {
       setEmailCopyRequest(null);
       setEmailCopySent(false);
     }
+    setShareDraft(null);
 
     setSending(true);
 
     try {
       const responses = await api.submitMessages(messages);
+      setShareDraft({
+        subject: formData.subject.trim(),
+        message: formData.message.trim(),
+        selectedTopics: getSelectedTopicsForShare(messages.map((message) => message.topic)),
+      });
       setMessageResponses(responses);
       const hasCaptcha = responses.some((r) => r.status === "captcha_needed");
 
@@ -347,6 +358,7 @@ export function MessageForm() {
       navigate(hasCaptcha ? "/captcha" : "/thanks");
     } catch (error: unknown) {
       const apiError = asApiError(error);
+      setShareDraft(null);
       setEmailCopyRequest(null);
       setEmailCopySent(false);
 

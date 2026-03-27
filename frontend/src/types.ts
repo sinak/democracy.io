@@ -83,6 +83,22 @@ export interface EmailCopyRequest {
   messages: Message[];
 }
 
+export interface ShareDraft {
+  subject: string;
+  message: string;
+  selectedTopics: string[];
+}
+
+export interface ShareTopicRequest {
+  message: string;
+  subject?: string;
+  selectedTopics?: string[];
+}
+
+export interface ShareTopicResult {
+  topic: string;
+}
+
 export interface CaptchaSolution {
   bioguideId: string;
   answer: string;

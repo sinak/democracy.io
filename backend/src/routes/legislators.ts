@@ -3,9 +3,12 @@ import crypto from 'crypto';
 import { legislators } from '../dio/legislator-search.js';
 import * as potc from '../services/potc.js';
 import * as potcHelpers from '../helpers/potc.js';
+import { extractErrorMessage } from '../helpers/error-message.js';
 import { makeResponse, makeError } from '../helpers/response.js';
 import { config } from '../config.js';
-import type { Message } from '../types.js';
+import { persistMessageSubmissions } from '../services/message-submissions.js';
+import type { Message, MessageResponse } from '../types.js';
+import type { MessageSubmissionResult } from '../services/message-submissions.js';
 
 const router = Router();
 
@@ -52,15 +55,48 @@ router.get('/legislators/findByDistrict', async (req, res) => {
 
 router.post('/legislators/message', async (req, res) => {
   const messages: Message[] = Array.isArray(req.body) ? req.body : [req.body];
-
+  const batchId = crypto.randomUUID();
   const potcMessages = messages.map((message) => {
     const tag = config.campaignTag + '-' + crypto.randomBytes(16).toString('hex');
     return potcHelpers.makePOTCMessage(message, tag);
   });
 
   try {
-    const responses = await Promise.all(potcMessages.map((m) => potc.sendMessage(m)));
-    const modelData = responses.map((r) => r.data);
+    const settledResponses = await Promise.allSettled(potcMessages.map((m) => potc.sendMessage(m)));
+    const modelData: MessageResponse[] = [];
+    const persistenceResults: MessageSubmissionResult[] = [];
+    let rejectedReason: unknown;
+
+    for (const result of settledResponses) {
+      if (result.status === 'fulfilled') {
+        const responseData = result.value.data as MessageResponse;
+        modelData.push(responseData);
+        persistenceResults.push({
+          status: responseData.status || 'submitted',
+          url: responseData.url,
+          uid: responseData.uid,
+        });
+      } else {
+        rejectedReason ??= result.reason;
+        persistenceResults.push({
+          status: 'error',
+          errorMessage: extractErrorMessage(result.reason),
+        });
+      }
+    }
+
+    await persistMessageSubmissions({
+      batchId,
+      endpoint: req.originalUrl,
+      messages,
+      results: persistenceResults,
+      requestIp: req.ip,
+    });
+
+    if (rejectedReason) {
+      return res.status(400).json(makeError(rejectedReason));
+    }
+
     res.json(makeResponse(modelData));
   } catch (err) {
     res.status(400).json(makeError(err));

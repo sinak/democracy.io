@@ -91,6 +91,27 @@ export interface DraftTopic {
   selectedTopic: string;
 }
 
+export interface TopicSuggestionInput {
+  bioguideId: string;
+  legislatorName: string;
+  options: string[];
+  currentTopic?: string;
+}
+
+export interface TopicSuggestionRequest {
+  message: string;
+  topics: TopicSuggestionInput[];
+}
+
+export interface TopicSuggestionChoice {
+  bioguideId: string;
+  selectedTopic: string;
+}
+
+export interface TopicSuggestionResult {
+  topics: TopicSuggestionChoice[];
+}
+
 export interface DraftLocation {
   stateAbbreviation: string;
   district: number | string;

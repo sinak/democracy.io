@@ -7,9 +7,16 @@ import type {
   LegislatorFormElements,
   Message,
   MessageResponse,
+  TopicSuggestionRequest,
+  TopicSuggestionResult,
 } from '../types';
 
 const API_BASE = '/api/1';
+
+type ApiError = Error & {
+  code?: number;
+  data?: unknown;
+};
 
 async function apiFetch<T>(url: string, options?: RequestInit): Promise<T> {
   const res = await fetch(url, {
@@ -21,7 +28,7 @@ async function apiFetch<T>(url: string, options?: RequestInit): Promise<T> {
   });
 
   if (!res.ok) {
-    const error: any = new Error(`API error: ${res.status}`);
+    const error = new Error(`API error: ${res.status}`) as ApiError;
     error.code = res.status;
 
     try {
@@ -70,6 +77,13 @@ export function useApi() {
 
     draftMessage(request: DraftMessageRequest): Promise<DraftMessageResult> {
       return apiFetch(`${API_BASE}/draft-message`, {
+        method: 'POST',
+        body: JSON.stringify(request),
+      });
+    },
+
+    suggestTopics(request: TopicSuggestionRequest): Promise<TopicSuggestionResult> {
+      return apiFetch(`${API_BASE}/topic-suggestion`, {
         method: 'POST',
         body: JSON.stringify(request),
       });

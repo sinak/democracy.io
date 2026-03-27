@@ -13,6 +13,7 @@ import formElementsRoutes from './routes/form-elements.js';
 import captchaSolutionRoutes from './routes/captcha-solution.js';
 import subscriptionRoutes from './routes/subscription.js';
 import draftMessageRoutes from './routes/draft-message.js';
+import topicSuggestionRoutes from './routes/topic-suggestion.js';
 
 const app = express();
 
@@ -43,6 +44,7 @@ const draftLimiter = rateLimit({
 
 app.use(/\/api.*\/message$/, messageLimiter);
 app.use('/api/1/draft-message', draftLimiter);
+app.use('/api/1/topic-suggestion', draftLimiter);
 
 // API routes (mounted at /api/1)
 app.use('/api/1', locationRoutes);
@@ -52,6 +54,7 @@ app.use('/api/1', formElementsRoutes);
 app.use('/api/1', captchaSolutionRoutes);
 app.use('/api/1', subscriptionRoutes);
 app.use('/api/1', draftMessageRoutes);
+app.use('/api/1', topicSuggestionRoutes);
 
 // Exception logging endpoint
 app.post('/api/1/exception', (req, res) => {

@@ -1,10 +1,11 @@
-import { useState, useEffect, type FormEvent } from "react";
+import { useState, useEffect, useRef, type FocusEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useWizard } from "../context/WizardContext";
 import { useApi } from "../hooks/useApi";
 import { useStepGuard } from "../hooks/useStepGuard";
 import { createFormFields, makeMessage } from "../helpers/message";
 import { buildDraftMessageRequest } from "../helpers/draft-message";
+import { buildTopicSuggestionRequest } from "../helpers/topic-suggestion";
 import { LoadingSpinner } from "../components/LoadingSpinner";
 import type {
   CountyData,
@@ -20,6 +21,24 @@ function formatPhoneNumber(value: string): string {
   if (digits.length < 4) return `(${digits}`;
   if (digits.length < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+}
+
+const TOPIC_SUGGESTION_MIN_WORDS = 7;
+
+function countWords(value: string): number {
+  return value.trim().split(/\s+/).filter(Boolean).length;
+}
+
+type ApiError = Error & {
+  code?: number;
+};
+
+function asApiError(error: unknown): ApiError {
+  if (error instanceof Error) {
+    return error as ApiError;
+  }
+
+  return new Error(String(error)) as ApiError;
 }
 
 export function MessageForm() {
@@ -55,9 +74,14 @@ export function MessageForm() {
   const [prefixFocus, setPrefixFocus] = useState(false);
   const [phoneFocus, setPhoneFocus] = useState(false);
   const [topicFocus, setTopicFocus] = useState(false);
+  const [topicSuggestionLoading, setTopicSuggestionLoading] = useState(false);
   const [draftInstruction, setDraftInstruction] = useState("");
   const [draftLoading, setDraftLoading] = useState(false);
   const [draftError, setDraftError] = useState("");
+  const lastSuggestedMessageRef = useRef("");
+  const pendingTopicSuggestionMessageRef = useRef("");
+  const topicSuggestionRequestIdRef = useRef(0);
+  const manualTopicSelectionVersionRef = useRef(0);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -111,12 +135,99 @@ export function MessageForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const updateTopicSelection = (bioguideId: string, value: string) => {
+  const updateTopicSelection = (
+    bioguideId: string,
+    value: string,
+    source: "manual" | "auto" = "manual",
+  ) => {
+    if (source === "manual") {
+      manualTopicSelectionVersionRef.current += 1;
+    }
+
     setTopicOptions((prev) => ({
       ...prev,
       [bioguideId]: { ...prev[bioguideId], selected: value },
     }));
   };
+
+  async function suggestTopicsForMessage(
+    message: string,
+    options?: { requireWordThreshold?: boolean },
+  ) {
+    const normalizedMessage = message.trim();
+    if (!normalizedMessage || Object.keys(topicOptions).length === 0) {
+      return;
+    }
+
+    if (
+      options?.requireWordThreshold !== false &&
+      countWords(normalizedMessage) < TOPIC_SUGGESTION_MIN_WORDS
+    ) {
+      return;
+    }
+
+    if (
+      topicSuggestionLoading &&
+      pendingTopicSuggestionMessageRef.current === normalizedMessage
+    ) {
+      return;
+    }
+
+    if (lastSuggestedMessageRef.current === normalizedMessage) {
+      return;
+    }
+
+    const requestId = topicSuggestionRequestIdRef.current + 1;
+    const manualSelectionVersion = manualTopicSelectionVersionRef.current;
+
+    topicSuggestionRequestIdRef.current = requestId;
+    pendingTopicSuggestionMessageRef.current = normalizedMessage;
+    setTopicSuggestionLoading(true);
+
+    try {
+      const result = await api.suggestTopics(
+        buildTopicSuggestionRequest(normalizedMessage, topicOptions),
+      );
+
+      if (
+        topicSuggestionRequestIdRef.current !== requestId ||
+        manualTopicSelectionVersionRef.current !== manualSelectionVersion
+      ) {
+        return;
+      }
+
+      for (const topic of result.topics) {
+        updateTopicSelection(topic.bioguideId, topic.selectedTopic, "auto");
+      }
+
+      lastSuggestedMessageRef.current = normalizedMessage;
+    } catch (error) {
+      if (topicSuggestionRequestIdRef.current === requestId) {
+        console.warn("Topic auto-selection failed.", error);
+      }
+    } finally {
+      if (topicSuggestionRequestIdRef.current === requestId) {
+        pendingTopicSuggestionMessageRef.current = "";
+        setTopicSuggestionLoading(false);
+      }
+    }
+  }
+
+  async function handleMessageBlur(e: FocusEvent<HTMLTextAreaElement>) {
+    const nextTarget = e.relatedTarget;
+    const form = e.currentTarget.form;
+
+    if (!(nextTarget instanceof HTMLElement) || !form?.contains(nextTarget)) {
+      return;
+    }
+
+    const tagName = nextTarget.tagName.toLowerCase();
+    if (!["input", "select", "textarea"].includes(tagName)) {
+      return;
+    }
+
+    await suggestTopicsForMessage(formData.message || "");
+  }
 
   const legislatorList = localLegislators
     .map((l) => ` ${l.title}. ${l.firstName} ${l.lastName}`)
@@ -176,10 +287,12 @@ export function MessageForm() {
       setMessageResponses(responses);
       const hasCaptcha = responses.some((r) => r.status === "captcha_needed");
       navigate(hasCaptcha ? "/captcha" : "/thanks");
-    } catch (err: any) {
-      if (err?.code === 429) {
+    } catch (error: unknown) {
+      const apiError = asApiError(error);
+
+      if (apiError.code === 429) {
         // rate limited
-      } else if (err?.code !== 400 && err?.code !== 500) {
+      } else if (apiError.code !== 400 && apiError.code !== 500) {
         navigate("/thanks");
       }
       setSending(false);
@@ -227,13 +340,18 @@ export function MessageForm() {
         subject: draft.subject,
         message: draft.message,
       }));
-    } catch (err: any) {
-      if (err?.code === 429) {
+      void suggestTopicsForMessage(draft.message, {
+        requireWordThreshold: false,
+      });
+    } catch (error: unknown) {
+      const apiError = asApiError(error);
+
+      if (apiError.code === 429) {
         setDraftError(
           "The draft assistant is rate limited right now. Please try again later.",
         );
-      } else if (typeof err?.message === "string" && err.message.trim()) {
-        setDraftError(err.message);
+      } else if (typeof apiError.message === "string" && apiError.message.trim()) {
+        setDraftError(apiError.message);
       } else {
         setDraftError(
           "Could not generate a draft right now. Please try again.",
@@ -322,6 +440,7 @@ export function MessageForm() {
                         rows={10}
                         value={formData.message || ""}
                         onChange={(e) => updateField("message", e.target.value)}
+                        onBlur={(e) => void handleMessageBlur(e)}
                         required
                       />
                     </div>
@@ -494,6 +613,14 @@ export function MessageForm() {
                         </select>
                       </div>
                     ))}
+                    {topicSuggestionLoading && (
+                      <p
+                        className="topic-suggestion-status"
+                        aria-live="polite"
+                      >
+                        Choosing topics from your message...
+                      </p>
+                    )}
                   </div>
                   {topicFocus && (
                     <div className="col-sm-6 hidden-xs form-note ng-hide-remove">

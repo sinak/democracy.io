@@ -305,6 +305,47 @@ label {
   }
 }
 
+.ai-draft-button-content,
+.topic-field-loading {
+  display: inline-flex;
+  align-items: center;
+}
+
+.ai-draft-button-content,
+.topic-field-loading {
+  gap: 8px;
+}
+
+.inline-loading-spinner {
+  color: #ee335b;
+  line-height: 0;
+  flex: 0 0 auto;
+}
+
+.inline-loading-spinner svg {
+  display: block;
+}
+
+.topic-field-input {
+  position: relative;
+}
+
+.topic-field[aria-busy="true"] .topic-field-input .form-control {
+  padding-right: 128px;
+}
+
+.topic-field-loading {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
 .topic-suggestion-status {
   margin: 8px 0 0;
   font-size: 13px;

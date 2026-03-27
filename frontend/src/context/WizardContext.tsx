@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
 import type {
   CanonicalAddress,
+  EmailCopyRequest,
   Legislator,
   LegislatorFormElements,
   MessageResponse,
@@ -12,6 +13,8 @@ interface WizardState {
   bioguideIdsBySelection: Record<string, boolean>;
   legislatorsFormElements: LegislatorFormElements[];
   messageResponses: MessageResponse[];
+  emailCopyRequest: EmailCopyRequest | null;
+  emailCopySent: boolean;
 }
 
 interface WizardContextType extends WizardState {
@@ -20,6 +23,8 @@ interface WizardContextType extends WizardState {
   setBioguideIdsBySelection: (sel: Record<string, boolean>) => void;
   setLegislatorsFormElements: (elems: LegislatorFormElements[]) => void;
   setMessageResponses: (responses: MessageResponse[]) => void;
+  setEmailCopyRequest: (request: EmailCopyRequest | null) => void;
+  setEmailCopySent: (sent: boolean) => void;
   getSelectedLegislators: () => Legislator[];
   getSelectedBioguideIds: () => string[];
   clearData: () => void;
@@ -33,6 +38,8 @@ const defaultState: WizardState = {
   bioguideIdsBySelection: {},
   legislatorsFormElements: [],
   messageResponses: [],
+  emailCopyRequest: null,
+  emailCopySent: false,
 };
 
 function loadState(): WizardState {
@@ -97,6 +104,16 @@ export function WizardProvider({ children }: { children: ReactNode }) {
     [update]
   );
 
+  const setEmailCopyRequest = useCallback(
+    (request: EmailCopyRequest | null) => update({ emailCopyRequest: request }),
+    [update]
+  );
+
+  const setEmailCopySent = useCallback(
+    (sent: boolean) => update({ emailCopySent: sent }),
+    [update]
+  );
+
   const getSelectedLegislators = useCallback(() => {
     return state.legislators.filter((l) => state.bioguideIdsBySelection[l.bioguideId]);
   }, [state.legislators, state.bioguideIdsBySelection]);
@@ -122,6 +139,8 @@ export function WizardProvider({ children }: { children: ReactNode }) {
         setBioguideIdsBySelection,
         setLegislatorsFormElements,
         setMessageResponses,
+        setEmailCopyRequest,
+        setEmailCopySent,
         getSelectedLegislators,
         getSelectedBioguideIds,
         clearData,

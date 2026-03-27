@@ -54,6 +54,8 @@ export function MessageForm() {
     bioguideIdsBySelection,
     setLegislatorsFormElements,
     setMessageResponses,
+    setEmailCopyRequest,
+    setEmailCopySent,
   } = useWizard();
 
   const [loading, setLoading] = useState(legislatorsFormElements.length === 0);
@@ -70,6 +72,7 @@ export function MessageForm() {
   );
   const [countyData, setCountyData] = useState<CountyData>({});
   const [localLegislators, setLocalLegislators] = useState<Legislator[]>([]);
+  const [sendEmailCopy, setSendEmailCopy] = useState(false);
 
   const [prefixFocus, setPrefixFocus] = useState(false);
   const [phoneFocus, setPhoneFocus] = useState(false);
@@ -280,15 +283,35 @@ export function MessageForm() {
       ),
     );
 
+    if (sendEmailCopy) {
+      setEmailCopyRequest({ messages });
+      setEmailCopySent(false);
+    } else {
+      setEmailCopyRequest(null);
+      setEmailCopySent(false);
+    }
+
     setSending(true);
 
     try {
       const responses = await api.submitMessages(messages);
       setMessageResponses(responses);
       const hasCaptcha = responses.some((r) => r.status === "captcha_needed");
+
+      if (sendEmailCopy && !hasCaptcha) {
+        try {
+          await api.sendMessageCopy({ messages });
+          setEmailCopySent(true);
+        } catch (error) {
+          console.warn("Sending the email copy failed.", error);
+        }
+      }
+
       navigate(hasCaptcha ? "/captcha" : "/thanks");
     } catch (error: unknown) {
       const apiError = asApiError(error);
+      setEmailCopyRequest(null);
+      setEmailCopySent(false);
 
       if (apiError.code === 429) {
         // rate limited
@@ -632,6 +655,22 @@ export function MessageForm() {
                       </div>
                     </div>
                   )}
+                </div>
+
+                <div className="row">
+                  <div className="col-sm-8 col-md-12">
+                    <div className="message-copy-checkbox">
+                      <label htmlFor="inputSendEmailCopy">
+                        <input
+                          type="checkbox"
+                          id="inputSendEmailCopy"
+                          checked={sendEmailCopy}
+                          onChange={(e) => setSendEmailCopy(e.target.checked)}
+                        />
+                        <span>Email me a copy of this message</span>
+                      </label>
+                    </div>
+                  </div>
                 </div>
 
                 {isValid && (

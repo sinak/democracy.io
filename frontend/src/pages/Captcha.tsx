@@ -19,7 +19,12 @@ export function Captcha() {
 
   const navigate = useNavigate();
   const api = useApi();
-  const { messageResponses } = useWizard();
+  const {
+    messageResponses,
+    emailCopyRequest,
+    emailCopySent,
+    setEmailCopySent,
+  } = useWizard();
 
   const [captchas, setCaptchas] = useState<CaptchaItem[]>([]);
   const [remaining, setRemaining] = useState(0);
@@ -66,6 +71,14 @@ export function Captcha() {
         const newRemaining = remaining - 1;
         setRemaining(newRemaining);
         if (newRemaining === 0) {
+          if (emailCopyRequest && !emailCopySent) {
+            try {
+              await api.sendMessageCopy(emailCopyRequest);
+              setEmailCopySent(true);
+            } catch (error) {
+              console.warn('Sending the email copy failed.', error);
+            }
+          }
           navigate('/thanks');
         }
       } else {

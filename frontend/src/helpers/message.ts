@@ -101,6 +101,7 @@ export function makeMessage(
 
   const msg: Message = {
     bioguideId: legislator.bioguideId,
+    recipientName: `${legislator.title}. ${legislator.firstName} ${legislator.lastName}`,
     subject: formData.subject,
     message: `Dear ${legislator.title} ${legislator.lastName}, \n${formData.message}`,
     sender: {

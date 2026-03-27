@@ -28,6 +28,17 @@ export const config = {
     siteKey: process.env.EFF_CIVIC_CRM_SITE_KEY || '',
   },
 
+  emailCopy: {
+    smtpUrl: process.env.EMAIL_COPY_SMTP_URL || '',
+    smtpHost: process.env.EMAIL_COPY_SMTP_HOST || '',
+    smtpPort: parseInt(process.env.EMAIL_COPY_SMTP_PORT || '587', 10),
+    smtpSecure: process.env.EMAIL_COPY_SMTP_SECURE === 'true',
+    smtpUser: process.env.EMAIL_COPY_SMTP_USER || '',
+    smtpPass: process.env.EMAIL_COPY_SMTP_PASS || '',
+    fromName: process.env.EMAIL_COPY_FROM_NAME || 'Democracy.io',
+    fromAddress: process.env.EMAIL_COPY_FROM_ADDRESS || process.env.EMAIL_COPY_FROM || '',
+  },
+
   ipSalt: process.env.IP_SALT || 'default-salt',
   campaignTag: process.env.CAMPAIGN_TAG || 'democracy.io',
 

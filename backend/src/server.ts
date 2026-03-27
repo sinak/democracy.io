@@ -14,6 +14,7 @@ import captchaSolutionRoutes from './routes/captcha-solution.js';
 import subscriptionRoutes from './routes/subscription.js';
 import draftMessageRoutes from './routes/draft-message.js';
 import topicSuggestionRoutes from './routes/topic-suggestion.js';
+import messageCopyRoutes from './routes/message-copy.js';
 
 const app = express();
 
@@ -55,6 +56,7 @@ app.use('/api/1', captchaSolutionRoutes);
 app.use('/api/1', subscriptionRoutes);
 app.use('/api/1', draftMessageRoutes);
 app.use('/api/1', topicSuggestionRoutes);
+app.use('/api/1', messageCopyRoutes);
 
 // Exception logging endpoint
 app.post('/api/1/exception', (req, res) => {

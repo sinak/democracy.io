@@ -59,6 +59,7 @@ export interface MessageSender {
 
 export interface Message {
   bioguideId: string;
+  recipientName?: string;
   topic?: string;
   subject: string;
   message: string;
@@ -76,6 +77,10 @@ export interface MessageResponse {
   status: string;
   url?: string;
   uid?: string;
+}
+
+export interface EmailCopyRequest {
+  messages: Message[];
 }
 
 export interface CaptchaSolution {

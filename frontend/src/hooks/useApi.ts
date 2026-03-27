@@ -3,6 +3,7 @@ import type {
   CaptchaSolution,
   DraftMessageRequest,
   DraftMessageResult,
+  EmailCopyRequest,
   Legislator,
   LegislatorFormElements,
   Message,
@@ -73,6 +74,13 @@ export function useApi() {
         method: 'POST',
         body: JSON.stringify(messages),
       });
+    },
+
+    sendMessageCopy(request: EmailCopyRequest): Promise<void> {
+      return apiFetch(`${API_BASE}/message-copy`, {
+        method: 'POST',
+        body: JSON.stringify(request),
+      }).then(() => undefined);
     },
 
     draftMessage(request: DraftMessageRequest): Promise<DraftMessageResult> {

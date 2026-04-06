@@ -1,0 +1,16 @@
+// Bootstrap grid breakpoints (used throughout styles)
+$screen-xs-max: 767px;
+$screen-sm-min: 768px;
+$screen-sm-max: 991px;
+$screen-md-min: 992px;
+
+// Brand colors
+$brand-primary: #f85628;
+$pink: #F93469;
+$gray: #777;
+
+// Animation
+$slowDuration: 0.4s;
+$transitionDuration: 0.5s;
+$easing: cubic-bezier(0.5, 0, 0, 1);
+$border-radius: 2px;

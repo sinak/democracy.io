@@ -1,0 +1,27 @@
+$brand-primary: #f85628;
+@import "bootstrap-sass/assets/stylesheets/bootstrap.scss";
+
+// Animation colors
+$primaryColor: #fff;
+$secondaryColor: #fff;
+$highlightColor: #fff;
+$activeColor: #f85628;
+$slowDuration: 0.4s;
+$transitionDuration: 0.5s;
+$easing: cubic-bezier(0.5, 0, 0, 1);
+$border-radius: 2px;
+
+// Variables
+$pink: #F93469;
+
+@import "hover.css/scss/options";
+@import "hover.css/scss/mixins";
+@import "hover.css/scss/hacks";
+@import "hover.css/scss/effects/background-transitions/bounce-to-right.scss";
+
+@import 'fonts';
+@import 'base';
+@import 'footer';
+@import 'progressBar';
+@import 'steps';
+@import 'animations';

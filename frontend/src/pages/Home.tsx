@@ -141,19 +141,6 @@ export function Home() {
         </div>
       </div>
 
-      <div id="brand">
-        <span className="hidden-xs">
-          Originally built by{' '}
-          <a href="https://eff.org" className="img-link">
-            <img width="40" src="/img/eff-logo.png" alt="EFF logo" />
-          </a>{' '}
-          now maintained by <a href="https://taskforce.is">Taskforce.is</a>
-        </span>
-        <span className="visible-xs">
-          Originally built by <a href="https://eff.org">Electronic Frontier Foundation</a> now
-          maintained by <a href="https://taskforce.is">Taskforce.is</a>
-        </span>
-      </div>
     </>
   );
 }

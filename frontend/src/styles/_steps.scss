@@ -41,26 +41,6 @@ div#whydio {
 #address {
   margin-bottom: 30px;
 }
-#brand {
- text-transform: uppercase;
- letter-spacing: 1px;
- font-size: 10px;
- text-align: center;
- margin-bottom: 60px;
- img {
-  margin-bottom: 3px;
- }
- a {
-  color: inherit;
-  border-bottom: 1px solid #bbb;
-  &.img-link {
-    border-bottom: none;
-  }
-  &.img-link, &:hover {
-    text-decoration: none;
-  }
- }
-}
 #address .whitebox-container {
   padding: 0;
 }

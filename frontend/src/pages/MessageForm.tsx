@@ -123,6 +123,7 @@ export function MessageForm() {
   const [draftInstruction, setDraftInstruction] = useState("");
   const [draftLoading, setDraftLoading] = useState(false);
   const [draftError, setDraftError] = useState("");
+  const [isMobileAiPanelOpen, setIsMobileAiPanelOpen] = useState(false);
   const lastSuggestedMessageRef = useRef("");
   const pendingTopicSuggestionMessageRef = useRef("");
   const topicSuggestionRequestIdRef = useRef(0);
@@ -434,6 +435,48 @@ export function MessageForm() {
     }
   }
 
+  function renderAiDraftPanelBody(instructionId: string) {
+    return (
+      <div className="panel-body">
+        <div className="form-group">
+          <label htmlFor={instructionId}>With AI instruction</label>
+          <textarea
+            id={instructionId}
+            className="form-control"
+            rows={4}
+            value={draftInstruction}
+            onChange={(e) => setDraftInstruction(e.target.value)}
+            placeholder="Example: Ask Congress to support stronger consumer privacy protections."
+          />
+        </div>
+
+        <div className="ai-draft-actions">
+          <button
+            type="button"
+            className="btn btn-default btn-sm"
+            onClick={() => void handleDraftRequest()}
+            disabled={draftLoading}
+          >
+            {draftLoading ? (
+              <span className="ai-draft-button-content">
+                <InlineSpinner />
+                <span>Generating draft...</span>
+              </span>
+            ) : (
+              "Generate draft"
+            )}
+          </button>
+        </div>
+
+        {draftError && (
+          <div className="alert alert-warning" role="alert">
+            {draftError}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   const showLoading = (!loadingDelay && loading) || sending;
 
   return (
@@ -477,6 +520,34 @@ export function MessageForm() {
                         </span>
                       </span>
                     ))}
+                  </div>
+                </div>
+
+                <div className="ai-draft-panel-mobile">
+                  <div
+                    className={`panel ai-draft-panel ${isMobileAiPanelOpen ? "is-open" : ""}`}
+                  >
+                    <div className="panel-heading">
+                      <button
+                        type="button"
+                        className="ai-draft-accordion-toggle"
+                        aria-expanded={isMobileAiPanelOpen}
+                        aria-controls="mobileAiDraftPanelBody"
+                        onClick={() =>
+                          setIsMobileAiPanelOpen((prevOpen) => !prevOpen)
+                        }
+                      >
+                        <span>Draft with AI</span>
+                        <span className="ai-draft-accordion-meta">
+                          {isMobileAiPanelOpen ? "Hide" : "Expand"}
+                        </span>
+                      </button>
+                    </div>
+                    {isMobileAiPanelOpen ? (
+                      <div id="mobileAiDraftPanelBody">
+                        {renderAiDraftPanelBody("draftInstructionMobile")}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
 
@@ -742,45 +813,9 @@ export function MessageForm() {
               </div>
 
               <div className="message-form-sidebar">
-                <div className="panel ai-draft-panel">
+                <div className="panel ai-draft-panel ai-draft-panel-desktop">
                   <div className="panel-heading">Draft with AI</div>
-                  <div className="panel-body">
-                    <div className="form-group">
-                      <label htmlFor="draftInstruction">With AI instruction</label>
-                      <textarea
-                        id="draftInstruction"
-                        className="form-control"
-                        rows={4}
-                        value={draftInstruction}
-                        onChange={(e) => setDraftInstruction(e.target.value)}
-                        placeholder="Example: Ask Congress to support stronger consumer privacy protections."
-                      />
-                    </div>
-
-                    <div className="ai-draft-actions">
-                      <button
-                        type="button"
-                        className="btn btn-default btn-sm"
-                        onClick={() => void handleDraftRequest()}
-                        disabled={draftLoading}
-                      >
-                        {draftLoading ? (
-                          <span className="ai-draft-button-content">
-                            <InlineSpinner />
-                            <span>Generating draft...</span>
-                          </span>
-                        ) : (
-                          "Generate draft"
-                        )}
-                      </button>
-                    </div>
-
-                    {draftError && (
-                      <div className="alert alert-warning" role="alert">
-                        {draftError}
-                      </div>
-                    )}
-                  </div>
+                  {renderAiDraftPanelBody("draftInstructionDesktop")}
                 </div>
 
                 <div className="panel hidden-xs">

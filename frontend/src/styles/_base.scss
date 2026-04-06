@@ -277,7 +277,7 @@ label {
 
 .message-form-sidebar {
   @media (max-width: $screen-xs-max) {
-    margin-top: 24px;
+    display: none;
   }
 
   @media (min-width: $screen-sm-min) {
@@ -294,6 +294,38 @@ label {
   .panel-heading {
     font-weight: 400;
   }
+}
+
+.ai-draft-panel-mobile {
+  display: none;
+
+  @media (max-width: $screen-xs-max) {
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  .panel-heading {
+    padding: 0;
+  }
+}
+
+.ai-draft-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 15px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+.ai-draft-accordion-meta {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .ai-draft-actions {

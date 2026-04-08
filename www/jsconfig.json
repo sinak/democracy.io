@@ -1,8 +1,0 @@
-{
-  "extends": "./../jsconfig.base.jsonc",
-  "compilerOptions": {
-    "lib": ["dom", "es5"],
-    "target": "es5"
-  },
-  "include": ["./js/**/*"]
-}

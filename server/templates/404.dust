@@ -1,6 +1,0 @@
-{>"layouts/master" /}
-
-{<body}
-    <h1>File not found</h1>
-    <p>The URL <code>{url}</code> did not resolve to a route.</p>
-{/body}

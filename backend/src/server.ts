@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { config } from './config.js';
 import { logger } from './logger.js';
 import { legislators } from './dio/legislator-search.js';
@@ -18,7 +21,13 @@ import shareTopicRoutes from './routes/share-topic.js';
 import messageCopyRoutes from './routes/message-copy.js';
 import { checkPostgresConnection } from './services/postgres.js';
 
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(currentDir, '../..');
+const frontendDistDir = path.join(repoRoot, 'frontend/dist');
+const frontendIndexPath = path.join(frontendDistDir, 'index.html');
+
 const app = express();
+app.set('trust proxy', 1);
 
 // Middleware
 app.use(cors());
@@ -72,6 +81,16 @@ app.post('/api/1/exception', (req, res) => {
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', legislatorsLoaded: legislators.loaded });
 });
+
+if (fs.existsSync(frontendIndexPath)) {
+  app.use(express.static(frontendDistDir));
+
+  app.get(/^(?!\/api(?:\/|$)|\/health$).*/, (_req, res) => {
+    res.sendFile(frontendIndexPath);
+  });
+} else {
+  logger.warn(`Frontend build not found at ${frontendIndexPath}; serving API only`);
+}
 
 // Load legislator data, then start server
 async function start() {

@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
+
 export function Logo() {
   return (
-    <a href="/#/">
+    <Link to="/" aria-label="Democracy.io home">
       <svg
         viewBox="0 0 232 20"
         version="1.1"
@@ -23,6 +25,6 @@ export function Logo() {
         </symbol>
         <use xlinkHref="#s-text" className="text" fill="url(#linearGradient-1)" stroke="#000" />
       </svg>
-    </a>
+    </Link>
   );
 }

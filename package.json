@@ -18,6 +18,7 @@
     "build:backend": "npm run build --workspace backend",
     "build:frontend": "npm run build --workspace frontend",
     "lint": "npm run lint --workspace frontend",
+    "test:backend": "npm run test --workspace backend",
     "start": "npm run start --workspace backend"
   },
   "repository": {

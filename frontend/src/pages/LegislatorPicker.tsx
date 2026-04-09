@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useWizard } from '../context/WizardContext';
 import { useApi } from '../hooks/useApi';
 import { useStepGuard } from '../hooks/useStepGuard';
+import { getCampaignEntryPath } from '../helpers/public-campaign';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 
 export function LegislatorPicker() {
@@ -12,6 +13,7 @@ export function LegislatorPicker() {
   const api = useApi();
   const {
     canonicalAddress,
+    activeCampaign,
     legislators,
     bioguideIdsBySelection,
     setLegislators,
@@ -56,6 +58,7 @@ export function LegislatorPicker() {
   };
 
   const anySelected = Object.values(bioguideIdsBySelection).some(Boolean);
+  const entryPath = getCampaignEntryPath(activeCampaign);
 
   const handleSubmit = () => {
     navigate('/compose');
@@ -76,7 +79,7 @@ export function LegislatorPicker() {
   return (
     <div className="row">
       <div id="pick-legislators" className="whitebox col-sm-9 col-md-8 col-md-offset-3">
-        <button className="btn-sm btn-warning back-button" onClick={() => navigate('/')}>
+        <button className="btn-sm btn-warning back-button" onClick={() => navigate(entryPath)}>
           Go back
         </button>
 

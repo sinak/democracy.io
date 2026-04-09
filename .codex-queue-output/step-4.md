@@ -1,0 +1,10 @@
+Implemented the public campaign experience at [`frontend/src/pages/PublicCampaign.tsx`](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/pages/PublicCampaign.tsx#L116C1) and wired it into the existing supporter app shell in [`frontend/src/App.tsx`](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/App.tsx#L37C1). The new page uses a shared address card from [`frontend/src/components/AddressCaptureCard.tsx`](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/components/AddressCaptureCard.tsx), renders safe markdown, shows campaign stats, falls back to the red hero treatment when no usable image is available, and logs `page_view` plus `flow_start` via the existing public campaign API.
+
+Campaign context now lives in session-backed wizard state in [`frontend/src/context/WizardContext.tsx`](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/context/WizardContext.tsx#L12C1), including the active campaign and a stable campaign session id. That context is carried through `/location`, `/compose`, `/captcha`, and `/thanks`; compose prefills only an empty draft in [`frontend/src/pages/MessageForm.tsx`](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/pages/MessageForm.tsx#L183C1), message submission now includes campaign id/slug/org metadata in [`frontend/src/helpers/message.ts`](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/helpers/message.ts#L74C1), and the thank-you screen stays tied to the campaign in [`frontend/src/pages/Thanks.tsx`](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/pages/Thanks.tsx#L139C1). Generic `/` sends still stay untagged and unchanged. I also updated the frontend test shim in [`frontend/vendor/vitest/bin/vitest.mjs`](/Users/sohailkhanifar/Developer/democracy.io/frontend/vendor/vitest/bin/vitest.mjs#L27C1) so the repo’s TS/TSX frontend tests actually execute.
+
+Verification:
+- `frontend`: `npm test`
+- `backend`: `npm test`
+- full repo build: `npm run build`
+
+All passed. The build still emits existing Sass/bootstrap deprecation warnings and unresolved bootstrap font asset warnings, but the build completes successfully.

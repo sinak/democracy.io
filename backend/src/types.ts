@@ -47,7 +47,7 @@ export interface MessageSender {
   county?: string;
 }
 
-export interface Campaign {
+export interface MessageCampaignMetadata {
   uuid?: string;
   tag?: string;
   orgURL?: string;
@@ -62,7 +62,7 @@ export interface Message {
   message: string;
   sender: MessageSender;
   canonicalAddress: CanonicalAddress;
-  campaign: Campaign;
+  campaign: MessageCampaignMetadata;
 }
 
 export interface LegislatorFormElements {
@@ -154,4 +154,101 @@ export interface DraftMessageRequest {
 export interface DraftMessageResult {
   subject: string;
   message: string;
+}
+
+export type CampaignStatus = 'draft' | 'published' | 'archived' | 'disabled';
+
+export type CampaignEventType = 'page_view' | 'flow_start';
+
+export interface CampaignStats {
+  pageViews: number;
+  flowStarts: number;
+  peopleTakenAction: number;
+  totalMessagesSent: number;
+}
+
+export interface Campaign {
+  id: string;
+  organizerUserId: string;
+  organizerEmail: string;
+  title: string;
+  slug: string;
+  summary: string | null;
+  bodyMarkdown: string | null;
+  organizationName: string | null;
+  organizationUrl: string | null;
+  status: CampaignStatus;
+  publishedAt: string | null;
+  firstPublishedAt: string | null;
+  archivedAt: string | null;
+  disabledAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  stats: CampaignStats;
+}
+
+export interface PublicCampaign {
+  id: string;
+  title: string;
+  slug: string;
+  summary: string | null;
+  bodyMarkdown: string | null;
+  organizationName: string | null;
+  organizationUrl: string | null;
+  status: Extract<CampaignStatus, 'published'>;
+  publishedAt: string | null;
+  firstPublishedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  stats: CampaignStats;
+}
+
+export interface CampaignEvent {
+  id: string;
+  campaignId: string;
+  type: CampaignEventType;
+  metadata: Record<string, unknown> | null;
+  requestIpHash: string | null;
+  userAgent: string | null;
+  referrer: string | null;
+  createdAt: string;
+}
+
+export interface CreateCampaignRequest {
+  title: string;
+  slug?: string;
+  summary?: string | null;
+  bodyMarkdown?: string | null;
+  organizationName?: string | null;
+  organizationUrl?: string | null;
+}
+
+export interface UpdateCampaignRequest {
+  title?: string;
+  slug?: string;
+  summary?: string | null;
+  bodyMarkdown?: string | null;
+  organizationName?: string | null;
+  organizationUrl?: string | null;
+}
+
+export interface CampaignListResponse {
+  campaigns: Campaign[];
+}
+
+export interface CampaignDetailResponse {
+  campaign: Campaign;
+}
+
+export interface PublicCampaignResponse {
+  campaign: PublicCampaign;
+}
+
+export interface CreateCampaignEventRequest {
+  type: CampaignEventType;
+  metadata?: Record<string, unknown> | null;
+}
+
+export interface CampaignEventResponse {
+  event: CampaignEvent;
 }

@@ -9,8 +9,35 @@ const repoRoot = path.resolve(currentDir, '../..');
 dotenv.config({ path: path.join(repoRoot, '.env') });
 dotenv.config({ path: path.join(repoRoot, 'backend/.env'), override: false });
 
+function parseInteger(value: string | undefined, fallback: number) {
+  const parsed = parseInt(value || '', 10);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function parseFloatValue(value: string | undefined, fallback: number) {
+  const parsed = parseFloat(value || '');
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function normalizeUrl(value: string | undefined) {
+  return (value || '').trim().replace(/\/+$/, '');
+}
+
+function parseAdminEmails(value: string | undefined) {
+  const fallback = 'sohailkhanifar@gmail.com,sina.khanifar@gmail.com';
+
+  return (value || fallback)
+    .split(',')
+    .map((email) => email.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+const supabaseUrl = normalizeUrl(process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL);
+const supabaseIssuer = supabaseUrl ? `${supabaseUrl}/auth/v1` : '';
+const supabaseJwksUrl = supabaseIssuer ? `${supabaseIssuer}/.well-known/jwks.json` : '';
+
 export const config = {
-  port: parseInt(process.env.PORT || '3001', 10),
+  port: parseInteger(process.env.PORT, 3001),
 
   smartyStreets: {
     addressUrl: process.env.SMARTY_STREETS_ADDRESS_URL || 'https://us-street.api.smartystreets.com',
@@ -31,7 +58,7 @@ export const config = {
   emailCopy: {
     smtpUrl: process.env.EMAIL_COPY_SMTP_URL || '',
     smtpHost: process.env.EMAIL_COPY_SMTP_HOST || '',
-    smtpPort: parseInt(process.env.EMAIL_COPY_SMTP_PORT || '587', 10),
+    smtpPort: parseInteger(process.env.EMAIL_COPY_SMTP_PORT, 587),
     smtpSecure: process.env.EMAIL_COPY_SMTP_SECURE === 'true',
     smtpUser: process.env.EMAIL_COPY_SMTP_USER || '',
     smtpPass: process.env.EMAIL_COPY_SMTP_PASS || '',
@@ -45,6 +72,15 @@ export const config = {
     sslRejectUnauthorized: process.env.DATABASE_SSL_REJECT_UNAUTHORIZED === 'true',
   },
 
+  supabase: {
+    url: supabaseUrl,
+    issuer: supabaseIssuer,
+    jwksUrl: supabaseJwksUrl,
+    anonKey: process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '',
+  },
+
+  adminEmails: parseAdminEmails(process.env.ADMIN_EMAILS),
+
   ipSalt: process.env.IP_SALT || 'default-salt',
   campaignTag: process.env.CAMPAIGN_TAG || 'democracy.io',
 
@@ -54,12 +90,12 @@ export const config = {
     model: process.env.OPENROUTER_MODEL || 'minimax/minimax-m2.5:free',
     httpReferer: process.env.OPENROUTER_HTTP_REFERER || '',
     title: process.env.OPENROUTER_TITLE || '',
-    maxCompletionTokens: parseInt(process.env.OPENROUTER_MAX_COMPLETION_TOKENS || '700', 10),
-    temperature: parseFloat(process.env.OPENROUTER_TEMPERATURE || '0.7'),
+    maxCompletionTokens: parseInteger(process.env.OPENROUTER_MAX_COMPLETION_TOKENS, 700),
+    temperature: parseFloatValue(process.env.OPENROUTER_TEMPERATURE, 0.7),
   },
 
   draftRateLimit: {
-    windowMs: parseInt(process.env.DRAFT_RATE_LIMIT_WINDOW_MS || String(60 * 60 * 1000), 10),
-    max: parseInt(process.env.DRAFT_RATE_LIMIT_MAX || '20', 10),
+    windowMs: parseInteger(process.env.DRAFT_RATE_LIMIT_WINDOW_MS, 60 * 60 * 1000),
+    max: parseInteger(process.env.DRAFT_RATE_LIMIT_MAX, 20),
   },
 };

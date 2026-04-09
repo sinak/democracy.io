@@ -4,6 +4,7 @@ import type {
   Legislator,
   LegislatorFormElements,
   Message,
+  PublicCampaign,
   TopicOption,
   CountyData,
 } from '../types';
@@ -86,7 +87,11 @@ export function makeMessage(
   formData: Record<string, string>,
   phoneValue: string,
   topicOptions: Record<string, TopicOption>,
-  address: CanonicalAddress
+  address: CanonicalAddress,
+  campaign?: Pick<
+    PublicCampaign,
+    'id' | 'organizationName' | 'organizationUrl' | 'slug'
+  > | null
 ): Message {
   const topic = topicOptions[legislator.bioguideId];
   let topicValue: string | undefined;
@@ -114,7 +119,14 @@ export function makeMessage(
       county: formData.county,
     },
     canonicalAddress: address,
-    campaign: { uuid: '', orgURL: '', orgName: '' },
+    campaign: campaign
+      ? {
+          uuid: campaign.id,
+          tag: campaign.slug,
+          orgURL: campaign.organizationUrl || undefined,
+          orgName: campaign.organizationName || undefined,
+        }
+      : {},
   };
 
   if (topicValue) {

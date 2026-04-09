@@ -1,0 +1,13 @@
+Implemented the frontend auth and routing shell without touching the supporter flow or backend SPA serving. [main.tsx](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/main.tsx) now uses `BrowserRouter` and applies a legacy hash redirect shim from [legacy-hash.ts](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/helpers/legacy-hash.ts), so old `/#/...` URLs are rewritten to real paths before React mounts. [App.tsx](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/App.tsx) now splits the existing supporter wizard from the new organizer/admin shell, and the supporter homepage/message flow remains in place.
+
+Auth and organizer routing are wired through [AuthContext.tsx](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/context/AuthContext.tsx), [supabase-browser.ts](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/lib/supabase-browser.ts), [RouteGuards.tsx](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/components/RouteGuards.tsx), and the new pages under [frontend/src/pages](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/pages). That includes magic-link sign-in, `/auth/callback`, protected organizer routes, protected admin routes, typed campaign helpers in [campaign-api.ts](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/helpers/campaign-api.ts), and Democracy.io-styled placeholder shells for campaign list, create, edit, and admin moderation. The new shell styling lives in [\_platform.scss](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/styles/_platform.scss), and the shared header/footer were extracted into [SiteHeader.tsx](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/components/SiteHeader.tsx) and [AppFooter.tsx](/Users/sohailkhanifar/Developer/democracy.io/frontend/src/components/AppFooter.tsx).
+
+Frontend package/test setup was added in [frontend/package.json](/Users/sohailkhanifar/Developer/democracy.io/frontend/package.json), [frontend/vitest.config.ts](/Users/sohailkhanifar/Developer/democracy.io/frontend/vitest.config.ts), [frontend/test](/Users/sohailkhanifar/Developer/democracy.io/frontend/test), and [frontend/vendor](/Users/sohailkhanifar/Developer/democracy.io/frontend/vendor). In this offline environment, the Supabase and test packages are vendored locally so the workspace can build and test without registry access.
+
+Verification:
+- `npm run test --workspace frontend`
+- `npm run build --workspace frontend`
+
+Residual warnings:
+- The frontend build still emits existing Sass deprecation warnings from Bootstrap/Hover imports.
+- Vite still warns about `NODE_ENV=production` being present in `.env`, but the build completes successfully.

@@ -5,3 +5,5 @@ coverage/
 frontend/dist/
 backend/dist/
 node_modules/
+prompts.json
+run-codex-queue.ts

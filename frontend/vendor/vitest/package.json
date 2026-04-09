@@ -1,0 +1,12 @@
+{
+  "name": "vitest",
+  "version": "0.0.1-frontend",
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./config": "./config.js"
+  },
+  "bin": {
+    "vitest": "./bin/vitest.mjs"
+  }
+}

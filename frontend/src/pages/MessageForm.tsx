@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useWizard } from "../context/WizardContext";
 import { useApi } from "../hooks/useApi";
 import { useStepGuard } from "../hooks/useStepGuard";
+import { getCampaignComposePrefill } from "../helpers/public-campaign";
 import { createFormFields, makeMessage } from "../helpers/message";
 import { buildDraftMessageRequest } from "../helpers/draft-message";
 import { buildTopicSuggestionRequest } from "../helpers/topic-suggestion";
@@ -89,6 +90,7 @@ export function MessageForm() {
   const api = useApi();
   const {
     canonicalAddress,
+    activeCampaign,
     legislatorsFormElements,
     getSelectedLegislators,
     getSelectedBioguideIds,
@@ -128,6 +130,7 @@ export function MessageForm() {
   const pendingTopicSuggestionMessageRef = useRef("");
   const topicSuggestionRequestIdRef = useRef(0);
   const manualTopicSelectionVersionRef = useRef(0);
+  const campaignPrefillAppliedRef = useRef(false);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -176,6 +179,25 @@ export function MessageForm() {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    if (campaignPrefillAppliedRef.current) {
+      return;
+    }
+
+    const prefill = getCampaignComposePrefill(formData, activeCampaign);
+
+    if (!prefill) {
+      campaignPrefillAppliedRef.current = true;
+      return;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      ...prefill,
+    }));
+    campaignPrefillAppliedRef.current = true;
+  }, [activeCampaign, formData]);
 
   const updateField = (name: string, value: string) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -323,6 +345,7 @@ export function MessageForm() {
         formData.phone,
         topicOptions,
         canonicalAddress,
+        activeCampaign,
       ),
     );
 

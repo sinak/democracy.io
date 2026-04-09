@@ -1,9 +1,9 @@
 import crypto from 'node:crypto';
 import type { Message } from '../types.js';
-import { config } from '../config.js';
 import { logger } from '../logger.js';
 import { getPostgresPool } from './postgres.js';
 import { extractErrorMessage } from '../helpers/error-message.js';
+import { hashIpAddress } from '../helpers/ip-address.js';
 
 export interface MessageSubmissionResult {
   status: string;
@@ -18,14 +18,6 @@ interface PersistMessageSubmissionsParams {
   results: MessageSubmissionResult[];
   requestIp?: string;
   batchId?: string;
-}
-
-function hashIpAddress(ipAddress?: string) {
-  if (!ipAddress) {
-    return null;
-  }
-
-  return crypto.pbkdf2Sync(ipAddress, config.ipSalt, 10_000, 32, 'sha256').toString('base64');
 }
 
 export async function persistMessageSubmissions({

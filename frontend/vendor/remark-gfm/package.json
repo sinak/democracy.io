@@ -1,0 +1,12 @@
+{
+  "name": "remark-gfm",
+  "version": "0.0.0-local",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    }
+  },
+  "types": "./index.d.ts"
+}

@@ -1,6 +1,8 @@
 import { useEffect, useEffectEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useWizard } from '../context/WizardContext';
 import { useApi } from '../hooks/useApi';
+import { buildCampaignPublicUrl } from '../helpers/campaign-editor';
 
 const GOAL_COUNT = 3;
 
@@ -101,6 +103,18 @@ function buildShareMessage(topic: string, shareUrl: string): string {
   return `I just wrote my representatives about ${topic} using Democracy.io. I'm trying to get ${GOAL_COUNT} more people to message Congress today. Will you send one too? ${shareUrl}`;
 }
 
+function buildCampaignShareMessage(
+  campaignTitle: string,
+  shareUrl: string,
+  topic: string
+) {
+  if (!topic) {
+    return `I just wrote my representatives through the ${campaignTitle} campaign on Democracy.io. Will you send one too? ${shareUrl}`;
+  }
+
+  return `I just wrote my representatives about ${topic} through the ${campaignTitle} campaign on Democracy.io. Will you send one too? ${shareUrl}`;
+}
+
 async function copyText(value: string) {
   if (navigator.clipboard?.writeText) {
     await navigator.clipboard.writeText(value);
@@ -124,11 +138,13 @@ async function copyText(value: string) {
 
 export function Thanks() {
   const api = useApi();
-  const { shareDraft } = useWizard();
+  const { activeCampaign, shareDraft } = useWizard();
   const searchParams = new URLSearchParams(window.location.search);
   const previewTopic = searchParams.get('previewTopic')?.trim() || '';
 
-  const shareUrl = new URL('/', window.location.origin).toString();
+  const shareUrl = activeCampaign
+    ? buildCampaignPublicUrl(activeCampaign.slug)
+    : new URL('/', window.location.origin).toString();
   const selectedTopics = shareDraft?.selectedTopics || [];
   const selectedTopicsJson = JSON.stringify(selectedTopics);
   const primaryMessage = shareDraft?.message || '';
@@ -199,7 +215,11 @@ export function Thanks() {
   }, [copyStatus]);
 
   const shareMessage = buildShareMessage(shareTopic, shareUrl);
-  const smsLink = `sms:?&body=${encodeURIComponent(shareMessage)}`;
+  const campaignShareMessage = activeCampaign
+    ? buildCampaignShareMessage(activeCampaign.title, shareUrl, shareTopic)
+    : shareMessage;
+  const shareText = activeCampaign ? campaignShareMessage : shareMessage;
+  const smsLink = `sms:?&body=${encodeURIComponent(shareText)}`;
   const copyLabel =
     copyStatus === 'copied' ? 'Link copied' : copyStatus === 'error' ? 'Copy failed' : 'Copy link';
 
@@ -221,11 +241,24 @@ export function Thanks() {
     <div className="row">
       <div id="thanks" className="col-sm-8 col-md-6 col-lg-5">
         <div className="thanks-body">
-          <div className="thanks-kicker">Personal shares work best</div>
-          <p className="thanks-headline">{buildGoalCopy(shareTopic)}</p>
-          <p className="thanks-subtitle">
-            Start with a text or copy the link, then post it publicly if you want.
+          <div className="thanks-kicker">
+            {activeCampaign ? 'Campaign action complete' : 'Personal shares work best'}
+          </div>
+          <p className="thanks-headline">
+            {activeCampaign
+              ? `You took action on ${activeCampaign.title}. Help get ${GOAL_COUNT} more people to write Congress today.`
+              : buildGoalCopy(shareTopic)}
           </p>
+          <p className="thanks-subtitle">
+            {activeCampaign
+              ? `Share this campaign page so other supporters can send their own message${activeCampaign.organizationName ? ` with ${activeCampaign.organizationName}` : ''}.`
+              : 'Start with a text or copy the link, then post it publicly if you want.'}
+          </p>
+          {activeCampaign ? (
+            <p className="thanks-campaign-return">
+              <Link to={`/campaigns/${activeCampaign.slug}`}>Back to the campaign page</Link>
+            </p>
+          ) : null}
         </div>
 
         <div className="thanks-primary-actions">
@@ -245,7 +278,9 @@ export function Thanks() {
             ? 'The share link is ready to paste anywhere.'
             : copyStatus === 'error'
               ? 'Copying failed. You can still use the text button or share below.'
-              : `Topic: ${shareTopic || 'your message'}`}
+              : activeCampaign
+                ? `Campaign: ${activeCampaign.title}`
+                : `Topic: ${shareTopic || 'your message'}`}
         </div>
 
         <div className="thanks-social">
@@ -256,7 +291,7 @@ export function Thanks() {
               <button
                 type="button"
                 className="thanks-social-button"
-                onClick={() => sharePopup(share.getLink(shareUrl, shareMessage))}
+                onClick={() => sharePopup(share.getLink(shareUrl, shareText))}
                 key={share.name}
               >
                 <span className="thanks-social-icon">{share.svg}</span>

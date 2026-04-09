@@ -1,14 +1,15 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import { createContext, useContext, useRef, useState, useCallback, type ReactNode } from 'react';
 import type {
   CanonicalAddress,
   EmailCopyRequest,
   Legislator,
   LegislatorFormElements,
   MessageResponse,
+  PublicCampaign,
   ShareDraft,
 } from '../types';
 
-interface WizardState {
+export interface WizardState {
   canonicalAddress: CanonicalAddress | null;
   legislators: Legislator[];
   bioguideIdsBySelection: Record<string, boolean>;
@@ -17,6 +18,8 @@ interface WizardState {
   messageResponses: MessageResponse[];
   emailCopyRequest: EmailCopyRequest | null;
   emailCopySent: boolean;
+  activeCampaign: PublicCampaign | null;
+  campaignSessionId: string | null;
 }
 
 interface WizardContextType extends WizardState {
@@ -28,14 +31,17 @@ interface WizardContextType extends WizardState {
   setMessageResponses: (responses: MessageResponse[]) => void;
   setEmailCopyRequest: (request: EmailCopyRequest | null) => void;
   setEmailCopySent: (sent: boolean) => void;
+  setActiveCampaign: (campaign: PublicCampaign | null) => string | null;
+  clearCampaignContext: () => void;
   getSelectedLegislators: () => Legislator[];
   getSelectedBioguideIds: () => string[];
+  resetFlow: (options?: { preserveCampaignContext?: boolean }) => void;
   clearData: () => void;
 }
 
 const STORAGE_KEY = 'dio';
 
-const defaultState: WizardState = {
+export const defaultWizardState: WizardState = {
   canonicalAddress: null,
   legislators: [],
   bioguideIdsBySelection: {},
@@ -44,16 +50,18 @@ const defaultState: WizardState = {
   messageResponses: [],
   emailCopyRequest: null,
   emailCopySent: false,
+  activeCampaign: null,
+  campaignSessionId: null,
 };
 
 function loadState(): WizardState {
   try {
     const raw = sessionStorage.getItem(STORAGE_KEY);
-    if (raw) return { ...defaultState, ...JSON.parse(raw) };
+    if (raw) return { ...defaultWizardState, ...JSON.parse(raw) };
   } catch {
     // ignore
   }
-  return { ...defaultState };
+  return { ...defaultWizardState };
 }
 
 function saveState(state: WizardState) {
@@ -64,14 +72,81 @@ function saveState(state: WizardState) {
   }
 }
 
+export function createCampaignSessionId() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+
+  return `campaign-session-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+export function applyActiveCampaignState(
+  state: WizardState,
+  campaign: PublicCampaign | null,
+  createSessionId: () => string = createCampaignSessionId
+): WizardState {
+  const sameCampaign = Boolean(
+    campaign &&
+      state.activeCampaign &&
+      state.activeCampaign.id === campaign.id
+  );
+
+  const nextSessionId = campaign
+    ? sameCampaign && state.campaignSessionId
+      ? state.campaignSessionId
+      : createSessionId()
+    : null;
+
+  return {
+    ...state,
+    ...(campaign && !sameCampaign
+      ? {
+          legislators: [],
+          bioguideIdsBySelection: {},
+          legislatorsFormElements: [],
+          shareDraft: null,
+          messageResponses: [],
+          emailCopyRequest: null,
+          emailCopySent: false,
+        }
+      : {}),
+    activeCampaign: campaign,
+    campaignSessionId: nextSessionId,
+  };
+}
+
+export function buildResetWizardState(
+  state: WizardState,
+  options?: { preserveCampaignContext?: boolean }
+): WizardState {
+  return {
+    ...defaultWizardState,
+    ...(options?.preserveCampaignContext
+      ? {
+          activeCampaign: state.activeCampaign,
+          campaignSessionId: state.campaignSessionId,
+        }
+      : {}),
+  };
+}
+
 const WizardContext = createContext<WizardContextType | null>(null);
 
 export function WizardProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<WizardState>(loadState);
+  const stateRef = useRef(state);
+  stateRef.current = state;
+
+  const replaceState = useCallback((next: WizardState) => {
+    stateRef.current = next;
+    saveState(next);
+    setState(next);
+  }, []);
 
   const update = useCallback((partial: Partial<WizardState>) => {
     setState((prev) => {
       const next = { ...prev, ...partial };
+      stateRef.current = next;
       saveState(next);
       return next;
     });
@@ -123,21 +198,47 @@ export function WizardProvider({ children }: { children: ReactNode }) {
     [update]
   );
 
+  const setActiveCampaign = useCallback((campaign: PublicCampaign | null) => {
+    const next = applyActiveCampaignState(stateRef.current, campaign);
+
+    replaceState(next);
+
+    return next.campaignSessionId;
+  }, [replaceState]);
+
+  const clearCampaignContext = useCallback(() => {
+    update({
+      activeCampaign: null,
+      campaignSessionId: null,
+    });
+  }, [update]);
+
   const getSelectedLegislators = useCallback(() => {
-    return state.legislators.filter((l) => state.bioguideIdsBySelection[l.bioguideId]);
-  }, [state.legislators, state.bioguideIdsBySelection]);
+    const currentState = stateRef.current;
+
+    return currentState.legislators.filter(
+      (l) => currentState.bioguideIdsBySelection[l.bioguideId]
+    );
+  }, []);
 
   const getSelectedBioguideIds = useCallback(() => {
-    return Object.entries(state.bioguideIdsBySelection)
+    return Object.entries(stateRef.current.bioguideIdsBySelection)
       .filter(([, selected]) => selected)
       .map(([id]) => id);
-  }, [state.bioguideIdsBySelection]);
+  }, []);
+
+  const resetFlow = useCallback(
+    (options?: { preserveCampaignContext?: boolean }) => {
+      const cleared = buildResetWizardState(stateRef.current, options);
+
+      replaceState(cleared);
+    },
+    [replaceState]
+  );
 
   const clearData = useCallback(() => {
-    const cleared = { ...defaultState };
-    saveState(cleared);
-    setState(cleared);
-  }, []);
+    replaceState({ ...defaultWizardState });
+  }, [replaceState]);
 
   return (
     <WizardContext.Provider
@@ -151,8 +252,11 @@ export function WizardProvider({ children }: { children: ReactNode }) {
         setMessageResponses,
         setEmailCopyRequest,
         setEmailCopySent,
+        setActiveCampaign,
+        clearCampaignContext,
         getSelectedLegislators,
         getSelectedBioguideIds,
+        resetFlow,
         clearData,
       }}
     >

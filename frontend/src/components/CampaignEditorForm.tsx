@@ -1,10 +1,10 @@
 import { useDeferredValue } from 'react';
 import { Link } from 'react-router-dom';
+import { buildCampaignPath } from '../helpers/campaign-path';
 import {
   buildCampaignPublicUrl,
   canCopyCampaignPublicUrl,
   getCampaignStatusLabel,
-  isCampaignSlugLocked,
   type CampaignEditorErrors,
   type CampaignEditorValues,
 } from '../helpers/campaign-editor';
@@ -25,7 +25,7 @@ interface CampaignEditorFormProps {
   fieldErrors: CampaignEditorErrors;
   isUploading: boolean;
   notice: CampaignEditorNotice | null;
-  pendingAction: 'save' | 'publish' | 'archive' | null;
+  pendingAction: 'create' | 'publish' | 'archive' | null;
   onArchive: (() => void) | null;
   onCopyPublicUrl: (() => void) | null;
   onFieldChange: (field: keyof CampaignEditorValues, value: string) => void;
@@ -116,14 +116,14 @@ export function CampaignEditorSidebar({
             <p>
               {campaign
                 ? getCampaignStatusLabel(campaign)
-                : 'Draft preview for the future public campaign page'}
+                : 'Preview this campaign before you create it'}
             </p>
           </div>
 
           <div className="organizer-preview-body">
             {publicUrl ? (
               <div className="organizer-preview-meta">
-                <span>Future public URL</span>
+                <span>Public URL</span>
                 <p>{publicUrl}</p>
               </div>
             ) : null}
@@ -165,22 +165,33 @@ export function CampaignEditorSidebar({
       {showPublishingNotes ? (
         <HelperCard title="Publishing notes">
           <p>
-            Slugs stay editable until the first publish. After that, the public path locks even if
-            the campaign is archived later.
+            Organizers can only edit campaign content during creation. After that, the campaign is
+            read-only and can only be enabled or disabled.
           </p>
           <p>
-            Markdown accepts regular formatting, links, and external image URLs. Raw HTML is shown as
-            plain text and never rendered.
+            Public campaign routes live at the root now, so reserved paths like
+            {' '}
+            <strong>/location</strong>
+            {' '}
+            and
+            {' '}
+            <strong>/organizer</strong>
+            {' '}
+            cannot be used as campaign slugs.
+          </p>
+          <p>
+            Markdown accepts regular formatting, links, and external image URLs. Raw HTML is shown
+            as plain text and never rendered.
           </p>
           {hasRawHtml ? (
             <p className="organizer-helper-warning">
-              HTML tags were detected in the description. They will be ignored in preview and on the
-              future public page.
+              HTML tags were detected in the description. They will be ignored in preview and on
+              the public page.
             </p>
           ) : null}
           <p>
             Background images upload into the public <strong>campaign-assets</strong> bucket under
-            your user folder, then the resulting public URL is saved with the draft.
+            your user folder, then the resulting public URL is saved with the campaign.
           </p>
           {campaign ? (
             <dl className="organizer-meta-list organizer-meta-list--compact">
@@ -189,7 +200,7 @@ export function CampaignEditorSidebar({
                 <dd>{formatDate(campaign.createdAt)}</dd>
               </div>
               <div>
-                <dt>First publish</dt>
+                <dt>First enabled</dt>
                 <dd>{formatDate(campaign.firstPublishedAt)}</dd>
               </div>
             </dl>
@@ -216,26 +227,20 @@ export function CampaignEditorForm({
   values,
 }: CampaignEditorFormProps) {
   const isDisabledByAdmin = campaign?.status === 'disabled';
-  const slugLocked = isCampaignSlugLocked(campaign);
-  const canPublish = !isDisabledByAdmin && (!campaign || campaign.status === 'draft');
-  const canArchive = Boolean(campaign && campaign.status !== 'disabled' && campaign.status !== 'archived');
-  const saveLabel =
-    !campaign || campaign.status === 'draft' ? 'Save draft' : 'Save changes';
+  const isReadOnly = Boolean(campaign);
+  const canEnable = Boolean(campaign && !isDisabledByAdmin && campaign.status !== 'published');
+  const canDisable = Boolean(campaign && campaign.status === 'published');
 
   return (
     <div className="organizer-editor-shell">
       {campaign?.status === 'disabled' ? (
         <div className="alert alert-danger organizer-inline-alert">
-          This campaign is currently disabled by an admin. You can review the content here, but
-          editing and publishing are paused until the campaign is restored.
+          This campaign is currently disabled by an admin. The public page stays unavailable until
+          an admin restores it.
         </div>
-      ) : null}
-
-      {campaign?.firstPublishedAt ? (
+      ) : campaign ? (
         <div className="alert alert-info organizer-inline-alert">
-          This campaign has already been published once, so the slug is locked at
-          {' '}
-          <strong>/{campaign.slug}</strong>.
+          Campaign content is locked after creation. From here you can only enable or disable it.
         </div>
       ) : null}
 
@@ -247,7 +252,7 @@ export function CampaignEditorForm({
           <EditorField error={fieldErrors.title} label="Campaign title">
             <input
               className="form-control input-lg"
-              disabled={isDisabledByAdmin}
+              disabled={isReadOnly}
               name="title"
               type="text"
               value={values.title}
@@ -261,16 +266,16 @@ export function CampaignEditorForm({
                 aria-label="Campaign slug"
                 className="form-control input-lg"
                 data-testid="campaign-editor-slug"
-                disabled={isDisabledByAdmin || slugLocked}
+                disabled={isReadOnly}
                 name="slug"
                 type="text"
                 value={values.slug}
                 onChange={(event) => onFieldChange('slug', event.target.value)}
               />
               <p className="organizer-field-hint">
-                Future public route:
+                Public route:
                 {' '}
-                <strong>/campaigns/{values.slug || 'your-slug'}</strong>
+                <strong>{buildCampaignPath(values.slug || 'your-slug')}</strong>
               </p>
             </EditorField>
           ) : null}
@@ -278,7 +283,7 @@ export function CampaignEditorForm({
           <EditorField error={fieldErrors.organizationName} label="Organization name (optional)">
             <input
               className="form-control input-lg"
-              disabled={isDisabledByAdmin}
+              disabled={isReadOnly}
               name="organizationName"
               type="text"
               value={values.organizationName}
@@ -289,7 +294,7 @@ export function CampaignEditorForm({
           <EditorField error={fieldErrors.organizationUrl} label="Organization URL (optional)">
             <input
               className="form-control input-lg"
-              disabled={isDisabledByAdmin}
+              disabled={isReadOnly}
               name="organizationUrl"
               placeholder="https://example.org"
               type="url"
@@ -305,7 +310,7 @@ export function CampaignEditorForm({
 
         <EditorField error={fieldErrors.descriptionMarkdown} label="Description markdown">
           <MarkdownEditor
-            disabled={isDisabledByAdmin}
+            disabled={isReadOnly}
             value={values.descriptionMarkdown}
             onChange={(nextValue) => onFieldChange('descriptionMarkdown', nextValue)}
           />
@@ -326,42 +331,44 @@ export function CampaignEditorForm({
         <EditorField error={fieldErrors.backgroundImageUrl} label="Background image URL">
           <input
             className="form-control input-lg"
-            disabled={isDisabledByAdmin || isUploading}
+            disabled={isReadOnly || isUploading}
             name="backgroundImageUrl"
             placeholder="https://images.example.org/banner.jpg"
             type="url"
             value={values.backgroundImageUrl}
             onChange={(event) => onFieldChange('backgroundImageUrl', event.target.value)}
           />
-          <div className="organizer-upload-row">
-            <label className="organizer-upload-label">
-              <span>{isUploading ? 'Uploading image...' : 'Upload image'}</span>
-              <input
-                disabled={isDisabledByAdmin || isUploading}
-                type="file"
-                accept="image/*"
-                onChange={(event) => {
-                  const [file] = Array.from(event.target.files || []);
+          {!isReadOnly ? (
+            <div className="organizer-upload-row">
+              <label className="organizer-upload-label">
+                <span>{isUploading ? 'Uploading image...' : 'Upload image'}</span>
+                <input
+                  disabled={isUploading}
+                  type="file"
+                  accept="image/*"
+                  onChange={(event) => {
+                    const [file] = Array.from(event.target.files || []);
 
-                  if (file) {
-                    onUpload(file);
-                  }
+                    if (file) {
+                      onUpload(file);
+                    }
 
-                  event.target.value = '';
-                }}
-              />
-            </label>
-            <p className="organizer-field-hint">
-              Uploads replace the URL with the public object path result.
-            </p>
-          </div>
+                    event.target.value = '';
+                  }}
+                />
+              </label>
+              <p className="organizer-field-hint">
+                Uploads replace the URL with the public object path result.
+              </p>
+            </div>
+          ) : null}
         </EditorField>
 
         <div className="organizer-editor-grid">
           <EditorField error={fieldErrors.suggestedSubject} label="Suggested subject">
             <input
               className="form-control input-lg"
-              disabled={isDisabledByAdmin}
+              disabled={isReadOnly}
               name="suggestedSubject"
               type="text"
               value={values.suggestedSubject}
@@ -372,7 +379,7 @@ export function CampaignEditorForm({
           <EditorField error={fieldErrors.suggestedMessage} label="Suggested message">
             <textarea
               className="form-control organizer-editor-textarea organizer-editor-textarea--message"
-              disabled={isDisabledByAdmin}
+              disabled={isReadOnly}
               name="suggestedMessage"
               value={values.suggestedMessage}
               onChange={(event) => onFieldChange('suggestedMessage', event.target.value)}
@@ -382,42 +389,42 @@ export function CampaignEditorForm({
       </div>
 
       <div className="organizer-editor-actions">
-        <button
-          type="button"
-          className="btn btn-lg btn-orange organizer-editor-button"
-          disabled={isDisabledByAdmin || pendingAction !== null}
-          onClick={onSave}
-        >
-          {pendingAction === 'save' ? 'Saving...' : saveLabel}
-        </button>
+        {!campaign ? (
+          <button
+            type="button"
+            className="btn btn-lg btn-orange organizer-editor-button"
+            disabled={pendingAction !== null || isUploading}
+            onClick={onSave}
+          >
+            {pendingAction === 'create' ? 'Creating...' : 'Create campaign'}
+          </button>
+        ) : null}
 
-        {canPublish ? (
+        {canEnable ? (
           <button
             type="button"
             className="site-nav__button organizer-editor-button organizer-editor-button--primary"
             disabled={pendingAction !== null}
             onClick={onPublish}
           >
-            {pendingAction === 'publish' ? 'Publishing...' : 'Publish'}
+            {pendingAction === 'publish' ? 'Enabling...' : 'Enable campaign'}
           </button>
         ) : null}
 
-        {canArchive && onArchive ? (
+        {canDisable && onArchive ? (
           <button
             type="button"
             className="site-nav__button organizer-editor-button"
             disabled={pendingAction !== null}
             onClick={onArchive}
           >
-            {pendingAction === 'archive' ? 'Archiving...' : 'Archive'}
+            {pendingAction === 'archive' ? 'Disabling...' : 'Disable campaign'}
           </button>
         ) : null}
 
-        {campaign ? (
-          <Link to="/organizer/campaigns" className="organizer-inline-link organizer-editor-link">
-            Back to campaigns
-          </Link>
-        ) : null}
+        <Link to="/organizer/campaigns" className="organizer-inline-link organizer-editor-link">
+          Back to campaigns
+        </Link>
 
         {campaign && onCopyPublicUrl ? (
           <button
@@ -428,6 +435,20 @@ export function CampaignEditorForm({
           >
             Copy public URL
           </button>
+        ) : null}
+
+        {campaign?.status === 'archived' ? (
+          <p className="organizer-editor-state-note">
+            Supporters who visit this campaign will see that it is disabled, and the contact form
+            will remain hidden until you enable it again.
+          </p>
+        ) : null}
+
+        {campaign?.status === 'published' ? (
+          <p className="organizer-editor-state-note">
+            Enabling a different campaign will automatically disable this one so only one of your
+            campaigns stays live at a time.
+          </p>
         ) : null}
       </div>
     </div>

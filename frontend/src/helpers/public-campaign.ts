@@ -1,4 +1,5 @@
 import { parseCampaignEditorValues } from './campaign-editor';
+import { buildCampaignPath } from './campaign-path';
 import type { PublicCampaign } from '../types';
 
 export interface PublicCampaignContent {
@@ -11,10 +12,6 @@ export interface PublicCampaignContent {
 export interface ComposeDraftFields {
   subject?: string;
   message?: string;
-}
-
-export function buildCampaignPath(slug: string) {
-  return `/campaigns/${slug}`;
 }
 
 export function getCampaignEntryPath(

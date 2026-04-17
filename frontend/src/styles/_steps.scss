@@ -105,7 +105,6 @@ div#whydio {
   gap: 18px;
   justify-content: space-between;
   margin: 0 auto 24px;
-  max-width: 900px;
   padding: 15px 20px;
 
   @media (max-width: $screen-xs-max) {
@@ -114,6 +113,13 @@ div#whydio {
     gap: 12px;
     padding: 14px 16px;
   }
+}
+
+.campaign-flow-banner-shell {
+  float: none;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .campaign-flow-banner__copy {
@@ -169,6 +175,14 @@ div#whydio {
 
   @media (max-width: $screen-xs-max) {
     padding: 10px 0 32px;
+  }
+
+  &.is-fallback {
+    background-image:
+      radial-gradient(circle at top, rgba(255, 255, 255, 0.09), transparent 52%),
+      linear-gradient(rgba(46, 20, 24, 0.44), rgba(46, 20, 24, 0.62)),
+      url('/img/bg-fade.jpg'),
+      linear-gradient(135deg, #711025 0%, #c12a43 48%, #f85628 100%);
   }
 
   &.has-image {
@@ -229,6 +243,34 @@ div#whydio {
   }
 }
 
+.campaign-public-page__progress {
+  margin: 22px auto 0;
+  max-width: 520px;
+
+  #progress-bar {
+    margin: 0 auto;
+    opacity: 1;
+  }
+
+  #pb-dot-1 {
+    fill: $pink;
+  }
+
+  #progress-bar .labels {
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: -4px;
+  }
+
+  #progress-bar .labels .first {
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin-top: 18px;
+  }
+}
+
 .campaign-public-page__meta {
   font-size: 14px;
   letter-spacing: 0.08em;
@@ -243,6 +285,66 @@ div#whydio {
 
 #address.campaign-address-card {
   margin-bottom: 0;
+}
+
+.campaign-public-page__disabled-card {
+  text-align: left;
+
+  h2 {
+    margin-top: 10px;
+    margin-bottom: 12px;
+    text-align: left;
+  }
+
+  p {
+    margin-bottom: 0;
+    color: #666;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+}
+
+.campaign-public-page__disabled-eyebrow {
+  color: $gray;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@media (min-width: $screen-sm-min) {
+  #address.campaign-address-card .whitebox-container > form > .clearfix {
+    position: relative;
+  }
+
+  #address.campaign-address-card #submitAddress {
+    box-sizing: border-box;
+    margin-top: 0;
+    max-height: none;
+    opacity: 0;
+    overflow: hidden;
+    padding-left: 18px;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 96px;
+    transition: max-width 0.5s ease, opacity 0.25s ease;
+  }
+
+  #address.campaign-address-card #submitAddress.addressValid {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #address.campaign-address-card #submitAddress .btn-lg.btn-orange {
+    margin-top: 25px;
+    padding-left: 24px;
+    padding-right: 24px;
+    text-align: center;
+    width: 100%;
+  }
 }
 
 .campaign-stats-card {
@@ -277,11 +379,11 @@ div#whydio {
 .campaign-stat {
   border-top: 1px solid #f1ece9;
   padding: 20px;
+}
 
-  &:first-of-type {
-    border-top: 0;
-    padding-top: 16px;
-  }
+.campaign-stats-card__header + .campaign-stat {
+  border-top: 0;
+  padding-top: 16px;
 }
 
 .campaign-stat__value {
@@ -316,7 +418,8 @@ div#whydio {
   display: flex;
   gap: 28px;
   margin: 0 auto;
-  max-width: 1180px;
+  max-width: 1040px;
+  width: 100%;
 
   @media (max-width: $screen-sm-max) {
     flex-direction: column;

@@ -7,6 +7,11 @@ import {
   defaultWizardState,
 } from '../src/context/WizardContext.tsx';
 import {
+  buildCampaignPath,
+  getCampaignSlugFromPath,
+  isCampaignPath,
+} from '../src/helpers/campaign-path.ts';
+import {
   getCampaignComposePrefill,
   getPublicCampaignContent,
 } from '../src/helpers/public-campaign.ts';
@@ -43,6 +48,18 @@ function createCampaign(overrides: Partial<PublicCampaign> = {}): PublicCampaign
 }
 
 describe('public campaign frontend helpers', () => {
+  it('builds root-level campaign paths and still recognizes legacy campaign URLs', () => {
+    expect(buildCampaignPath('protect-public-libraries')).toBe('/protect-public-libraries');
+    expect(getCampaignSlugFromPath('/protect-public-libraries')).toBe('protect-public-libraries');
+    expect(getCampaignSlugFromPath('/campaigns/protect-public-libraries')).toBe(
+      'protect-public-libraries'
+    );
+    expect(getCampaignSlugFromPath('/location')).toBeNull();
+    expect(isCampaignPath('/protect-public-libraries')).toBe(true);
+    expect(isCampaignPath('/campaigns/protect-public-libraries')).toBe(true);
+    expect(isCampaignPath('/privacy-policy')).toBe(false);
+  });
+
   it('renders the campaign page layout with the stats rail and safe markdown output', () => {
     const campaign = createCampaign();
     const campaignContent = getPublicCampaignContent(campaign);

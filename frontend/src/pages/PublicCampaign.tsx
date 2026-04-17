@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AddressCaptureCard } from '../components/AddressCaptureCard';
 import { CampaignMarkdownPreview } from '../components/CampaignMarkdownPreview';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+import { ProgressBar } from '../components/ProgressBar';
 import { useWizard } from '../context/WizardContext';
 import { getPublicCampaign, recordPublicCampaignEvent } from '../helpers/campaign-api';
 import {
@@ -10,6 +11,18 @@ import {
   type PublicCampaignContent,
 } from '../helpers/public-campaign';
 import type { CanonicalAddress, PublicCampaign } from '../types';
+
+function isCampaignEnabled(campaign: Pick<PublicCampaign, 'status'>) {
+  return campaign.status === 'published';
+}
+
+function getCampaignUnavailableMessage(status: PublicCampaign['status']) {
+  if (status === 'disabled') {
+    return 'This campaign has been disabled and is not accepting new messages right now.';
+  }
+
+  return 'This campaign is currently disabled, so the contact form is not available right now.';
+}
 
 function CampaignStat({
   label,
@@ -22,6 +35,20 @@ function CampaignStat({
     <div className="campaign-stat">
       <span className="campaign-stat__value">{value.toLocaleString()}</span>
       <span className="campaign-stat__label">{label}</span>
+    </div>
+  );
+}
+
+function CampaignUnavailableCard({ status }: { status: PublicCampaign['status'] }) {
+  return (
+    <div className="campaign-address-card whitebox">
+      <div className="whitebox-container">
+        <div className="campaign-public-page__disabled-card">
+          <span className="campaign-public-page__disabled-eyebrow">Campaign unavailable</span>
+          <h2>Contacting representatives is currently turned off.</h2>
+          <p>{getCampaignUnavailableMessage(status)}</p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -44,7 +71,7 @@ export function PublicCampaignLayout({
         style={
           heroImageReady && campaignContent.backgroundImageUrl
             ? {
-                backgroundImage: `linear-gradient(rgba(46, 20, 24, 0.42), rgba(46, 20, 24, 0.62)), url(${campaignContent.backgroundImageUrl})`,
+                backgroundImage: `linear-gradient(135deg, rgba(126, 18, 39, 0.78), rgba(201, 42, 67, 0.62)), url(${campaignContent.backgroundImageUrl})`,
               }
             : undefined
         }
@@ -57,10 +84,9 @@ export function PublicCampaignLayout({
                 {campaign.organizationName || 'Public campaign'}
               </p>
               <h1>{campaign.title}</h1>
-              <p className="campaign-public-page__lede">
-                Send a message to your members of Congress through Democracy.io. Start with your
-                address and continue with your own words.
-              </p>
+              <div className="campaign-public-page__progress">
+                <ProgressBar />
+              </div>
               {campaign.organizationUrl ? (
                 <p className="campaign-public-page__meta">
                   <a href={campaign.organizationUrl} target="_blank" rel="noreferrer noopener">
@@ -139,6 +165,7 @@ export function PublicCampaignPage() {
     }
 
     let cancelled = false;
+    pageViewLoggedRef.current = false;
     setLoading(true);
     setError(null);
 
@@ -150,6 +177,11 @@ export function PublicCampaignPage() {
 
         setCampaign(nextCampaign);
         setLoading(false);
+
+        if (!isCampaignEnabled(nextCampaign)) {
+          clearCampaignContext();
+          return;
+        }
 
         const nextSessionId = setActiveCampaign(nextCampaign);
 
@@ -217,7 +249,7 @@ export function PublicCampaignPage() {
   }, [campaignContent?.backgroundImageUrl]);
 
   async function handleVerifiedAddress(address: CanonicalAddress) {
-    if (!campaign) {
+    if (!campaign || !isCampaignEnabled(campaign)) {
       return;
     }
 
@@ -272,11 +304,14 @@ export function PublicCampaignPage() {
       campaignContent={campaignContent || getPublicCampaignContent(campaign)}
       heroImageReady={heroImageReady}
       addressCard={
-        <AddressCaptureCard
-          className="campaign-address-card"
-          submitLabel="Find my representatives"
-          onVerified={handleVerifiedAddress}
-        />
+        isCampaignEnabled(campaign) ? (
+          <AddressCaptureCard
+            className="campaign-address-card"
+            onVerified={handleVerifiedAddress}
+          />
+        ) : (
+          <CampaignUnavailableCard status={campaign.status} />
+        )
       }
     />
   );

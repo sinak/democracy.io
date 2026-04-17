@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CampaignStatusBadge } from '../../components/CampaignStatusBadge';
-import { HelperCard } from '../../components/HelperCard';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { OrganizerPageLayout } from '../../components/OrganizerPageLayout';
 import { useAuth } from '../../context/AuthContext';
+import { buildCampaignPath } from '../../helpers/campaign-path';
 import {
   getCampaignStatusLabel,
   summarizeCampaignRecord,
@@ -71,79 +71,32 @@ export function OrganizerCampaignList() {
     };
   }, [session?.access_token]);
 
-  const counts = useMemo(() => {
-    return campaigns.reduce(
-      (summary, campaign) => {
-        summary.total += 1;
-        summary[campaign.status] += 1;
-        return summary;
-      },
-      {
-        total: 0,
-        draft: 0,
-        published: 0,
-        archived: 0,
-        disabled: 0,
-      }
-    );
-  }, [campaigns]);
-
   return (
     <OrganizerPageLayout
       eyebrow="Organizer workspace"
-      title="Campaigns tied to your account"
-      intro={`Signed in as ${user?.email || 'an organizer'}. Create drafts, refine the campaign copy, publish when it is ready, and keep track of disabled or archived work without leaving the workspace.`}
-      actions={
-        <Link
-          to="/organizer/campaigns/new"
-          className="btn btn-lg btn-orange organizer-primary-action"
-        >
-          Create a campaign
-        </Link>
-      }
-      sidebarMode="stack"
-      sidebar={
-        <>
-          <HelperCard title="Your campaign states">
-            <dl className="organizer-meta-list organizer-meta-list--stacked">
-              <div>
-                <dt>Total</dt>
-                <dd>{counts.total}</dd>
-              </div>
-              <div>
-                <dt>Drafts</dt>
-                <dd>{counts.draft}</dd>
-              </div>
-              <div>
-                <dt>Published</dt>
-                <dd>{counts.published}</dd>
-              </div>
-              <div>
-                <dt>Archived</dt>
-                <dd>{counts.archived}</dd>
-              </div>
-              <div>
-                <dt>Disabled</dt>
-                <dd>{counts.disabled}</dd>
-              </div>
-            </dl>
-          </HelperCard>
-
-          <HelperCard title="Workflow notes">
-            <p>Drafts stay fully editable, including the slug.</p>
-            <p>
-              Once a campaign is published for the first time, the slug locks and the future public
-              path becomes stable.
-            </p>
-            <p>
-              Disabled campaigns stay visible here so you can review them, but only admins can
-              restore them.
-            </p>
-          </HelperCard>
-        </>
-      }
+      title="Campaigns"
+      intro=""
+      showHero={false}
     >
       {error ? <div className="alert alert-danger organizer-alert">{error}</div> : null}
+
+      <header className="organizer-campaign-list-header">
+        <div className="organizer-campaign-list-header__copy">
+          <div className="organizer-eyebrow organizer-eyebrow--left">Organizer workspace</div>
+          <h1 className="organizer-campaign-list-title">Campaigns</h1>
+          <p className="organizer-campaign-list-intro">
+            Signed in as {user?.email || 'an organizer'}. Create campaign content once, then come
+            back here to enable or disable it. Only one campaign can stay enabled at a time.
+          </p>
+
+          <Link
+            to="/organizer/campaigns/new"
+            className="site-nav__link organizer-campaign-list-action"
+          >
+            Create a new campaign
+          </Link>
+        </div>
+      </header>
 
       {isLoading ? (
         <LoadingSpinner
@@ -155,14 +108,17 @@ export function OrganizerCampaignList() {
         <div className="organizer-empty-state">
           <h2>No campaigns yet</h2>
           <p>
-            Start your first draft here. Any signed-in email can create campaigns, save draft copy,
-            and publish later.
+            Create your first campaign here. Once it exists, the content stays read-only and you
+            can only enable or disable it.
           </p>
         </div>
       ) : (
-        <div className="organizer-card-stack">
+        <div className="organizer-card-stack organizer-card-stack--campaign-list">
           {campaigns.map((campaign) => (
-            <article key={campaign.id} className="organizer-campaign-card">
+            <article
+              key={campaign.id}
+              className="organizer-campaign-card organizer-campaign-card--campaign-list"
+            >
               <div className="organizer-campaign-card__header">
                 <div>
                   <CampaignStatusBadge status={campaign.status} />
@@ -170,7 +126,7 @@ export function OrganizerCampaignList() {
                   <p className="organizer-card-kicker">
                     {getCampaignStatusLabel(campaign)}
                     {' '}
-                    · /campaigns/{campaign.slug}
+                    · {buildCampaignPath(campaign.slug)}
                   </p>
                 </div>
 
@@ -178,7 +134,7 @@ export function OrganizerCampaignList() {
                   to={`/organizer/campaigns/${campaign.id}/edit`}
                   className="organizer-inline-link"
                 >
-                  Open editor
+                  Manage campaign
                 </Link>
               </div>
 
@@ -186,7 +142,13 @@ export function OrganizerCampaignList() {
 
               {campaign.status === 'disabled' ? (
                 <p className="organizer-card-status-note">
-                  Disabled campaigns stay read-only here until an admin restores them.
+                  This campaign was disabled by an admin and will stay unavailable until it is
+                  restored.
+                </p>
+              ) : campaign.status === 'archived' ? (
+                <p className="organizer-card-status-note">
+                  This campaign is disabled. Visitors can still open the page, but the contact form
+                  stays hidden until you enable it again.
                 </p>
               ) : null}
 

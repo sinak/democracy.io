@@ -1,6 +1,7 @@
 import { useEffect, useEffectEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useWizard } from '../context/WizardContext';
+import { buildCampaignPath } from '../helpers/campaign-path';
 import { useApi } from '../hooks/useApi';
 import { buildCampaignPublicUrl } from '../helpers/campaign-editor';
 
@@ -256,7 +257,7 @@ export function Thanks() {
           </p>
           {activeCampaign ? (
             <p className="thanks-campaign-return">
-              <Link to={`/campaigns/${activeCampaign.slug}`}>Back to the campaign page</Link>
+              <Link to={buildCampaignPath(activeCampaign.slug)}>Back to the campaign page</Link>
             </p>
           ) : null}
         </div>

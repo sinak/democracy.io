@@ -157,6 +157,25 @@ body {
     }
   }
 }
+
+#wrapper[data-pagename="campaign"] {
+  .campaign-public-page__progress #progress-bar {
+    opacity: 0;
+    @extend .animated;
+    animation-name: fadeInUp;
+    animation-delay: 0.5s;
+  }
+
+  .campaign-public-page__progress #progress-bar-svg {
+    #pb-circle-1, #pb-circle-2, #pb-circle-3 {
+      stroke-linejoin: butt;
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      animation: draw 1.5s ease 0.8s 1 forwards;
+    }
+  }
+}
+
 #wrapper[data-pagename="location"] {
   div#progress-bar {
     opacity: 1;

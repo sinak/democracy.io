@@ -4,6 +4,7 @@ import type {
   UpdateCampaignRequest,
   CampaignStatus,
 } from '../types.ts';
+import { buildCampaignPath, isReservedCampaignSlug } from './campaign-path';
 
 export interface CampaignEditorValues {
   title: string;
@@ -235,6 +236,10 @@ export function validateCampaignEditor(
     fieldErrors.slug = 'Add a campaign slug.';
   }
 
+  if (normalizedValues.slug && isReservedCampaignSlug(normalizedValues.slug)) {
+    fieldErrors.slug = 'That public path is reserved. Choose a different slug.';
+  }
+
   if (
     normalizedValues.organizationUrl &&
     !isValidHttpUrl(normalizedValues.organizationUrl)
@@ -284,7 +289,7 @@ export function buildCampaignPublicUrl(
   slug: string,
   origin = window.location.origin
 ) {
-  return new URL(`/campaigns/${slug}`, origin).toString();
+  return new URL(buildCampaignPath(slug), origin).toString();
 }
 
 export function summarizeCampaignRecord(campaign: ParseableCampaignRecord) {
@@ -326,14 +331,14 @@ export function getCampaignStatusLabel(campaign: Pick<Campaign, 'status'>) {
   }
 
   if (campaign.status === 'archived') {
-    return 'Archived';
+    return 'Disabled';
   }
 
   if (campaign.status === 'published') {
-    return 'Published';
+    return 'Enabled';
   }
 
-  return 'Draft';
+  return 'Not enabled';
 }
 
 export function getCampaignModerationActionLabel(status: CampaignStatus) {

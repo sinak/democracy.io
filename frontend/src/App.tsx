@@ -5,6 +5,7 @@ import {
   Routes,
   useLocation,
   useNavigate,
+  useParams,
 } from 'react-router-dom';
 import { AppFooter } from './components/AppFooter';
 import { PlatformLayout } from './components/PlatformLayout';
@@ -16,6 +17,11 @@ import { TypewriterText } from './components/TypewriterText';
 import { WhyDio } from './components/WhyDio';
 import { useAuth } from './context/AuthContext';
 import { buildReturnToPath } from './helpers/auth-redirect';
+import {
+  buildCampaignPath,
+  isCampaignPath,
+  isReservedCampaignSlug,
+} from './helpers/campaign-path';
 import { AuthCallback } from './pages/AuthCallback';
 import { OrganizerSignIn } from './pages/OrganizerSignIn';
 import { CampaignModerationShell } from './pages/admin/CampaignModerationShell';
@@ -39,12 +45,43 @@ const PAGE_TITLES: Record<string, string> = {
 
 function getPageName(path: string) {
   if (path === '/') return 'home';
-  if (path.startsWith('/campaigns/')) return 'campaign';
   if (path === '/location') return 'location';
   if (path === '/compose') return 'compose';
   if (path === '/captcha') return 'captcha';
   if (path === '/thanks') return 'thanks';
+  if (isCampaignPath(path)) return 'campaign';
   return 'home';
+}
+
+function LegacyCampaignRedirect() {
+  const { slug = '' } = useParams();
+
+  return <Navigate to={buildCampaignPath(slug)} replace />;
+}
+
+function PublicCampaignRoute() {
+  const { slug = '' } = useParams();
+
+  if (!slug || isReservedCampaignSlug(slug)) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <PublicCampaignPage />;
+}
+
+function SupporterRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/:slug" element={<PublicCampaignRoute />} />
+      <Route path="/campaigns/:slug" element={<LegacyCampaignRedirect />} />
+      <Route path="/location" element={<LegislatorPicker />} />
+      <Route path="/compose" element={<MessageForm />} />
+      <Route path="/captcha" element={<Captcha />} />
+      <Route path="/thanks" element={<Thanks />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
 }
 
 function SupporterFlow() {
@@ -93,28 +130,12 @@ function SupporterFlow() {
 
         {pageName === 'campaign' ? (
           <div id="form-scope" className="ng-enter" key={location.pathname}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/campaigns/:slug" element={<PublicCampaignPage />} />
-              <Route path="/location" element={<LegislatorPicker />} />
-              <Route path="/compose" element={<MessageForm />} />
-              <Route path="/captcha" element={<Captcha />} />
-              <Route path="/thanks" element={<Thanks />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
+            <SupporterRoutes />
           </div>
         ) : (
           <div className="container">
             <div id="form-scope" className="ng-enter" key={location.pathname}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/campaigns/:slug" element={<PublicCampaignPage />} />
-                <Route path="/location" element={<LegislatorPicker />} />
-                <Route path="/compose" element={<MessageForm />} />
-                <Route path="/captcha" element={<Captcha />} />
-                <Route path="/thanks" element={<Thanks />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
-              </Routes>
+              <SupporterRoutes />
             </div>
           </div>
         )}

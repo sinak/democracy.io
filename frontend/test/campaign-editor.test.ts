@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { describe, expect, it } from '../vendor/vitest/index.js';
 import {
+  buildCampaignPublicUrl,
   createEmptyCampaignEditorValues,
   isCampaignSlugLocked,
   serializeCampaignEditorRequest,
@@ -55,6 +56,22 @@ describe('campaign editor helpers', () => {
       organizationName: null,
       organizationUrl: null,
     });
+  });
+
+  it('blocks reserved root-level slugs and builds root-level public URLs', () => {
+    const values = {
+      ...createEmptyCampaignEditorValues(),
+      title: 'Save public libraries',
+      slug: 'location',
+    };
+
+    const validation = validateCampaignEditor(values, 'draft');
+
+    expect(validation.isValid).toBe(false);
+    expect(validation.fieldErrors.slug).toBe('That public path is reserved. Choose a different slug.');
+    expect(buildCampaignPublicUrl('save-public-libraries')).toBe(
+      'http://localhost:3000/save-public-libraries'
+    );
   });
 
   it('renders markdown safely without parsing raw html', () => {

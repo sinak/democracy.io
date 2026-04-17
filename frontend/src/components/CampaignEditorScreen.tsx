@@ -5,7 +5,6 @@ import {
   createCampaign,
   getOrganizerCampaign,
   publishCampaign,
-  updateCampaign,
 } from '../helpers/campaign-api';
 import { uploadCampaignBackgroundImage } from '../helpers/campaign-assets';
 import {
@@ -16,7 +15,6 @@ import {
   normalizeCampaignEditorSlug,
   parseCampaignEditorValues,
   serializeCampaignEditorRequest,
-  toCampaignUpdateRequest,
   validateCampaignEditor,
   type CampaignEditorValues,
 } from '../helpers/campaign-editor';
@@ -46,7 +44,7 @@ export function CampaignEditorScreen({
   const [isLoading, setIsLoading] = useState(mode === 'edit');
   const [isUploading, setIsUploading] = useState(false);
   const [notice, setNotice] = useState<CampaignEditorNotice | null>(null);
-  const [pendingAction, setPendingAction] = useState<'save' | 'publish' | 'archive' | null>(null);
+  const [pendingAction, setPendingAction] = useState<'create' | 'publish' | 'archive' | null>(null);
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
 
   useEffect(() => {
@@ -134,7 +132,7 @@ export function CampaignEditorScreen({
         ...currentValues,
         title: value,
         slug:
-          mode !== 'create' && !campaign?.firstPublishedAt && !slugManuallyEdited
+          mode === 'create' && !slugManuallyEdited
             ? normalizeCampaignEditorSlug(value)
             : currentValues.slug,
       }));
@@ -156,64 +154,45 @@ export function CampaignEditorScreen({
     }));
   }
 
-  async function handleSave() {
+  async function handleCreate() {
     if (!session?.access_token) {
       return;
     }
 
-    const validation = validateCampaignEditor(values, 'draft', {
-      requireSlug: mode !== 'create',
+    const validation = validateCampaignEditor(values, 'publish', {
+      requireSlug: true,
     });
     setFieldErrors(validation.fieldErrors);
 
     if (!validation.isValid) {
       setNotice({
         tone: 'error',
-        message: 'Fix the highlighted fields before saving the draft.',
+        message: 'Finish the required fields before creating the campaign.',
       });
       return;
     }
 
-    setPendingAction('save');
+    setPendingAction('create');
     setNotice(null);
 
     try {
-      if (!campaign) {
-        const createdCampaign = await createCampaign(
-          session.access_token,
-          serializeCampaignEditorRequest(validation.normalizedValues)
-        );
-
-        navigate(`/organizer/campaigns/${createdCampaign.id}/edit`, {
-          replace: true,
-          state: { flashMessage: 'Draft saved.' },
-        });
-        return;
-      }
-
-      const nextCampaign = await updateCampaign(
+      const createdCampaign = await createCampaign(
         session.access_token,
-        campaign.id,
-        toCampaignUpdateRequest(validation.normalizedValues)
+        serializeCampaignEditorRequest(validation.normalizedValues)
       );
-      const nextValues = parseCampaignEditorValues(nextCampaign);
+      const publishedCampaign = await publishCampaign(
+        session.access_token,
+        createdCampaign.id
+      );
 
-      setCampaign(nextCampaign);
-      setValues(nextValues);
-      setSlugManuallyEdited(
-        nextCampaign.slug !== normalizeCampaignEditorSlug(nextCampaign.title)
-      );
-      setNotice({
-        tone: 'success',
-        message:
-          nextCampaign.status === 'draft'
-            ? 'Draft saved.'
-            : 'Campaign changes saved.',
+      navigate(`/organizer/campaigns/${publishedCampaign.id}/edit`, {
+        replace: true,
+        state: { flashMessage: 'Campaign created and enabled.' },
       });
     } catch (error) {
       setNotice({
         tone: 'error',
-        message: normalizeEditorError(error, 'Unable to save this campaign.'),
+        message: normalizeEditorError(error, 'Unable to create this campaign.'),
       });
     } finally {
       setPendingAction(null);
@@ -225,56 +204,25 @@ export function CampaignEditorScreen({
       return;
     }
 
-    const validation = validateCampaignEditor(values, 'publish', {
-      requireSlug: mode !== 'create',
-    });
-    setFieldErrors(validation.fieldErrors);
-
-    if (!validation.isValid) {
-      setNotice({
-        tone: 'error',
-        message: 'Finish the required fields before publishing.',
-      });
-      return;
-    }
-
     setPendingAction('publish');
     setNotice(null);
 
     try {
-      const upsertedCampaign = campaign
-        ? await updateCampaign(
-            session.access_token,
-            campaign.id,
-            toCampaignUpdateRequest(validation.normalizedValues)
-          )
-        : await createCampaign(
-            session.access_token,
-            serializeCampaignEditorRequest(validation.normalizedValues)
-          );
-      const publishedCampaign = await publishCampaign(
-        session.access_token,
-        upsertedCampaign.id
-      );
-
       if (!campaign) {
-        navigate(`/organizer/campaigns/${publishedCampaign.id}/edit`, {
-          replace: true,
-          state: { flashMessage: 'Campaign published.' },
-        });
         return;
       }
 
+      const publishedCampaign = await publishCampaign(session.access_token, campaign.id);
       setCampaign(publishedCampaign);
       setValues(parseCampaignEditorValues(publishedCampaign));
       setNotice({
         tone: 'success',
-        message: 'Campaign published.',
+        message: 'Campaign enabled.',
       });
     } catch (error) {
       setNotice({
         tone: 'error',
-        message: normalizeEditorError(error, 'Unable to publish this campaign.'),
+        message: normalizeEditorError(error, 'Unable to enable this campaign.'),
       });
     } finally {
       setPendingAction(null);
@@ -286,39 +234,22 @@ export function CampaignEditorScreen({
       return;
     }
 
-    const validation = validateCampaignEditor(values, 'draft');
-    setFieldErrors(validation.fieldErrors);
-
-    if (!validation.isValid) {
-      setNotice({
-        tone: 'error',
-        message: 'Fix the highlighted fields before archiving.',
-      });
-      return;
-    }
-
     setPendingAction('archive');
     setNotice(null);
 
     try {
-      await updateCampaign(
-        session.access_token,
-        campaign.id,
-        toCampaignUpdateRequest(validation.normalizedValues)
-      );
-
       const archivedCampaign = await archiveCampaign(session.access_token, campaign.id);
 
       setCampaign(archivedCampaign);
       setValues(parseCampaignEditorValues(archivedCampaign));
       setNotice({
         tone: 'success',
-        message: 'Campaign archived.',
+        message: 'Campaign disabled.',
       });
     } catch (error) {
       setNotice({
         tone: 'error',
-        message: normalizeEditorError(error, 'Unable to archive this campaign.'),
+        message: normalizeEditorError(error, 'Unable to disable this campaign.'),
       });
     } finally {
       setPendingAction(null);
@@ -398,15 +329,15 @@ export function CampaignEditorScreen({
   const title =
     mode === 'create'
       ? 'Create an organizer campaign'
-      : campaign?.title || 'Campaign editor';
+      : campaign?.title || 'Campaign manager';
   const intro =
     mode === 'create'
-      ? `Signed in as ${user?.email || 'an organizer'}. Draft here first, then publish when the copy and background image are ready.`
-      : 'Edit the campaign content, upload the background image, and manage publication without leaving the organizer workspace.';
+      ? `Signed in as ${user?.email || 'an organizer'}. Create the public campaign once here. After creation, the content locks and you can only enable or disable it.`
+      : 'Review the saved campaign details and control whether supporters can access it.';
 
   return (
     <OrganizerPageLayout
-      eyebrow={mode === 'create' ? 'Organizer workspace' : 'Campaign editor'}
+      eyebrow={mode === 'create' ? 'Organizer workspace' : 'Campaign manager'}
       showHero={mode !== 'create'}
       sidebarPlacement={mode === 'create' ? 'below' : 'side'}
       title={title}
@@ -441,10 +372,10 @@ export function CampaignEditorScreen({
           }
           onFieldChange={setFieldValue}
           onPublish={() => void handlePublish()}
-          onSave={() => void handleSave()}
+          onSave={() => void handleCreate()}
           onUpload={(file) => void handleUpload(file)}
           pendingAction={pendingAction}
-          showSlugField={mode !== 'create'}
+          showSlugField
           values={values}
         />
       )}

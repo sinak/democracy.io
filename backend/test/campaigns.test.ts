@@ -64,7 +64,7 @@ describe('campaign backend', () => {
     expect(adminResponse.body.data.campaigns).toEqual([]);
   });
 
-  it('generates random draft slugs on create, normalizes draft slug edits, and locks the slug after publish', async () => {
+  it('generates random draft slugs on create and refuses organizer edits after creation', async () => {
     const { app, auth } = await createTestContext();
     const token = await auth.createToken();
 
@@ -102,32 +102,27 @@ describe('campaign backend', () => {
       .set('Authorization', bearer(token))
       .send({ slug: 'Updated Draft Slug' });
 
-    expect(patchDraftResponse.status).toBe(200);
-    expect(patchDraftResponse.body.data.campaign.slug).toBe('updated-draft-slug');
-
-    const duplicateSlugResponse = await request(app)
-      .patch(`/api/1/campaigns/${secondCreateResponse.body.data.campaign.id as string}`)
-      .set('Authorization', bearer(token))
-      .send({ slug: 'updated draft slug' });
-
-    expect(duplicateSlugResponse.status).toBe(409);
-
-    const publishResponse = await request(app)
-      .post(`/api/1/campaigns/${campaignId}/publish`)
-      .set('Authorization', bearer(token));
-
-    expect(publishResponse.status).toBe(200);
-    expect(publishResponse.body.data.campaign.status).toBe('published');
-
-    const patchPublishedResponse = await request(app)
-      .patch(`/api/1/campaigns/${campaignId}`)
-      .set('Authorization', bearer(token))
-      .send({ slug: 'should-not-work' });
-
-    expect(patchPublishedResponse.status).toBe(409);
+    expect(patchDraftResponse.status).toBe(409);
+    expect(patchDraftResponse.body.message).toBe('Campaigns cannot be edited after creation.');
   });
 
-  it('applies publish, archive, disable, and restore transitions', async () => {
+  it('rejects reserved root-level slugs on create', async () => {
+    const { app, auth } = await createTestContext();
+    const token = await auth.createToken();
+
+    const response = await request(app)
+      .post('/api/1/campaigns')
+      .set('Authorization', bearer(token))
+      .send({
+        title: 'Reserved slug campaign',
+        slug: 'thanks',
+      });
+
+    expect(response.status).toBe(400);
+    expect(response.body.message).toBe('slug is reserved by a top-level route.');
+  });
+
+  it('applies enable, auto-disable, admin disable, and restore transitions', async () => {
     const { app, auth } = await createTestContext();
     const organizerToken = await auth.createToken({ email: 'organizer@example.com' });
     const adminToken = await auth.createToken({ email: 'admin@example.com' });
@@ -147,8 +142,38 @@ describe('campaign backend', () => {
     expect(publishResponse.body.data.campaign.status).toBe('published');
     expect(publishResponse.body.data.campaign.firstPublishedAt).toBeTruthy();
 
+    const createSecondResponse = await request(app)
+      .post('/api/1/campaigns')
+      .set('Authorization', bearer(organizerToken))
+      .send({ title: 'Second Campaign', slug: 'second-campaign' });
+
+    const secondCampaignId = createSecondResponse.body.data.campaign.id as string;
+
+    const secondPublishResponse = await request(app)
+      .post(`/api/1/campaigns/${secondCampaignId}/publish`)
+      .set('Authorization', bearer(organizerToken));
+
+    expect(secondPublishResponse.status).toBe(200);
+    expect(secondPublishResponse.body.data.campaign.status).toBe('published');
+
+    const organizerCampaignsResponse = await request(app)
+      .get('/api/1/campaigns')
+      .set('Authorization', bearer(organizerToken));
+
+    expect(organizerCampaignsResponse.status).toBe(200);
+    expect(
+      organizerCampaignsResponse.body.data.campaigns.filter(
+        (campaign: { status: string }) => campaign.status === 'published'
+      ).length
+    ).toBe(1);
+    expect(
+      organizerCampaignsResponse.body.data.campaigns.find(
+        (campaign: { id: string }) => campaign.id === campaignId
+      )?.status
+    ).toBe('archived');
+
     const archiveResponse = await request(app)
-      .post(`/api/1/campaigns/${campaignId}/archive`)
+      .post(`/api/1/campaigns/${secondCampaignId}/archive`)
       .set('Authorization', bearer(organizerToken));
 
     expect(archiveResponse.status).toBe(200);
@@ -172,7 +197,7 @@ describe('campaign backend', () => {
     expect(restoreResponse.body.data.campaign.disabledAt).toBeNull();
   });
 
-  it('only exposes published campaigns on the public routes', async () => {
+  it('shows unavailable archived and disabled campaigns on the public routes while keeping drafts hidden', async () => {
     const { app, repository } = await createTestContext();
 
     const publishedCampaign = repository.seedCampaign(
@@ -211,15 +236,18 @@ describe('campaign backend', () => {
     const publishedResponse = await request(app).get('/api/1/public/campaigns/published-campaign');
     expect(publishedResponse.status).toBe(200);
     expect(publishedResponse.body.data.campaign.slug).toBe(publishedCampaign.slug);
+    expect(publishedResponse.body.data.campaign.status).toBe('published');
 
     const draftResponse = await request(app).get('/api/1/public/campaigns/draft-campaign');
     expect(draftResponse.status).toBe(404);
 
     const archivedResponse = await request(app).get('/api/1/public/campaigns/archived-campaign');
-    expect(archivedResponse.status).toBe(404);
+    expect(archivedResponse.status).toBe(200);
+    expect(archivedResponse.body.data.campaign.status).toBe('archived');
 
     const disabledResponse = await request(app).get('/api/1/public/campaigns/disabled-campaign');
-    expect(disabledResponse.status).toBe(404);
+    expect(disabledResponse.status).toBe(200);
+    expect(disabledResponse.body.data.campaign.status).toBe('disabled');
 
     const eventResponse = await request(app)
       .post('/api/1/public/campaigns/published-campaign/events')
@@ -248,6 +276,12 @@ describe('campaign backend', () => {
       .send({ type: 'page_view' });
 
     expect(hiddenEventResponse.status).toBe(404);
+
+    const disabledEventResponse = await request(app)
+      .post('/api/1/public/campaigns/disabled-campaign/events')
+      .send({ type: 'page_view' });
+
+    expect(disabledEventResponse.status).toBe(404);
   });
 
   it('aggregates public stats from campaign events and successful message submissions', async () => {

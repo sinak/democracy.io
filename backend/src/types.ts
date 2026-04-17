@@ -195,7 +195,7 @@ export interface PublicCampaign {
   bodyMarkdown: string | null;
   organizationName: string | null;
   organizationUrl: string | null;
-  status: Extract<CampaignStatus, 'published'>;
+  status: CampaignStatus;
   publishedAt: string | null;
   firstPublishedAt: string | null;
   createdAt: string;

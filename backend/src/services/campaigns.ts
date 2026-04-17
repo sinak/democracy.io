@@ -11,6 +11,7 @@ import {
   type PublicCampaign,
   type UpdateCampaignRequest,
 } from '../types.js';
+import { isReservedCampaignSlug } from '../helpers/campaign-path.js';
 import { hashIpAddress } from '../helpers/ip-address.js';
 import { getPostgresPool } from './postgres.js';
 
@@ -260,6 +261,10 @@ function normalizeCreateCampaignInput(input: CreateCampaignRequest) {
     throw new CampaignValidationError('slug must contain letters or numbers.');
   }
 
+  if (slug && isReservedCampaignSlug(slug)) {
+    throw new CampaignValidationError('slug is reserved by a top-level route.');
+  }
+
   return {
     title,
     slug,
@@ -288,6 +293,10 @@ function normalizeUpdateCampaignInput(input: UpdateCampaignRequest) {
 
     if (!normalized.slug) {
       throw new CampaignValidationError('slug must contain letters or numbers.');
+    }
+
+    if (isReservedCampaignSlug(normalized.slug)) {
+      throw new CampaignValidationError('slug is reserved by a top-level route.');
     }
   }
 
@@ -324,7 +333,7 @@ function toPublicCampaign(campaign: Campaign): PublicCampaign {
     bodyMarkdown: campaign.bodyMarkdown,
     organizationName: campaign.organizationName,
     organizationUrl: campaign.organizationUrl,
-    status: 'published',
+    status: campaign.status,
     publishedAt: campaign.publishedAt,
     firstPublishedAt: campaign.firstPublishedAt,
     createdAt: campaign.createdAt,
@@ -390,6 +399,40 @@ export function createCampaignService(repository: CampaignRepository): CampaignS
     return campaign;
   }
 
+  async function requirePublicCampaignBySlug(slug: string) {
+    const normalizedSlug = normalizeCampaignSlug(slug);
+    const campaign = await repository.findBySlug(normalizedSlug);
+
+    if (!campaign || campaign.status === 'draft') {
+      throw new CampaignNotFoundError();
+    }
+
+    return campaign;
+  }
+
+  async function archiveOrganizerCampaign(campaign: CampaignRecord) {
+    if (campaign.status === 'archived') {
+      return campaign;
+    }
+
+    return repository.update({
+      ...campaign,
+      status: 'archived',
+      statusBeforeDisabled: 'archived',
+      archivedAt: new Date().toISOString(),
+    });
+  }
+
+  async function archiveOtherPublishedCampaigns(actor: CampaignActor, campaignId: string) {
+    const organizerCampaigns = await repository.listByOrganizer(actor.userId);
+
+    await Promise.all(
+      organizerCampaigns
+        .filter((campaign) => campaign.id !== campaignId && campaign.status === 'published')
+        .map((campaign) => archiveOrganizerCampaign(campaign))
+    );
+  }
+
   return {
     async listOrganizerCampaigns(actor) {
       const campaigns = await repository.listByOrganizer(actor.userId);
@@ -412,28 +455,9 @@ export function createCampaignService(repository: CampaignRepository): CampaignS
       return stripInternalCampaign(await requireOwnedCampaign(actor, campaignId));
     },
 
-    async updateCampaign(actor, campaignId, input) {
-      const campaign = await requireOwnedCampaign(actor, campaignId);
-
-      if (campaign.status === 'disabled') {
-        throw new CampaignStateError('Disabled campaigns cannot be edited.');
-      }
-
-      const normalizedUpdates = normalizeUpdateCampaignInput(input);
-
-      if (
-        normalizedUpdates.slug &&
-        (campaign.status !== 'draft' || campaign.firstPublishedAt !== null)
-      ) {
-        throw new CampaignStateError('Campaign slugs can only be edited while the campaign is still a draft.');
-      }
-
-      const updatedCampaign = await repository.update({
-        ...campaign,
-        ...normalizedUpdates,
-      });
-
-      return stripInternalCampaign(updatedCampaign);
+    async updateCampaign(actor, campaignId, _input) {
+      await requireOwnedCampaign(actor, campaignId);
+      throw new CampaignStateError('Campaigns cannot be edited after creation.');
     },
 
     async publishCampaign(actor, campaignId) {
@@ -443,12 +467,14 @@ export function createCampaignService(repository: CampaignRepository): CampaignS
         throw new CampaignStateError('Disabled campaigns cannot be published.');
       }
 
-      if (campaign.status === 'published') {
-        return stripInternalCampaign(campaign);
+      if (campaign.status !== 'draft' && campaign.status !== 'archived' && campaign.status !== 'published') {
+        throw new CampaignStateError('This campaign cannot be enabled right now.');
       }
 
-      if (campaign.status !== 'draft') {
-        throw new CampaignStateError('Only draft campaigns can be published.');
+      await archiveOtherPublishedCampaigns(actor, campaign.id);
+
+      if (campaign.status === 'published') {
+        return stripInternalCampaign(await requireOwnedCampaign(actor, campaignId));
       }
 
       const publishedAt = new Date().toISOString();
@@ -476,13 +502,11 @@ export function createCampaignService(repository: CampaignRepository): CampaignS
         return stripInternalCampaign(campaign);
       }
 
-      const archivedAt = new Date().toISOString();
-      const updatedCampaign = await repository.update({
-        ...campaign,
-        status: 'archived',
-        statusBeforeDisabled: 'archived',
-        archivedAt,
-      });
+      if (campaign.status !== 'published') {
+        throw new CampaignStateError('Only enabled campaigns can be disabled.');
+      }
+
+      const updatedCampaign = await archiveOrganizerCampaign(campaign);
 
       return stripInternalCampaign(updatedCampaign);
     },
@@ -526,7 +550,7 @@ export function createCampaignService(repository: CampaignRepository): CampaignS
     },
 
     async getPublicCampaignBySlug(slug) {
-      const campaign = stripInternalCampaign(await requirePublishedCampaignBySlug(slug));
+      const campaign = stripInternalCampaign(await requirePublicCampaignBySlug(slug));
       return toPublicCampaign(campaign);
     },
 

@@ -105,8 +105,9 @@ export function OrganizerCampaignList() {
           secondaryMessage="Fetching the live campaign list from the organizer API."
         />
       ) : campaigns.length === 0 ? (
-        <div className="organizer-empty-state">
-          <h2>No campaigns yet</h2>
+        <div className="organizer-placeholder-block">
+          <span className="organizer-eyebrow organizer-eyebrow--left">No campaigns yet</span>
+          <h2>Start your first campaign</h2>
           <p>
             Create your first campaign here. Once it exists, the content stays read-only and you
             can only enable or disable it.
@@ -121,13 +122,15 @@ export function OrganizerCampaignList() {
             >
               <div className="organizer-campaign-card__header">
                 <div>
-                  <CampaignStatusBadge status={campaign.status} />
+                  <div className="organizer-campaign-card__meta-row">
+                    <CampaignStatusBadge status={campaign.status} />
+                    <span className="organizer-card-kicker">
+                      {getCampaignStatusLabel(campaign)}
+                      {' '}
+                      · {buildCampaignPath(campaign.slug)}
+                    </span>
+                  </div>
                   <h2>{campaign.title}</h2>
-                  <p className="organizer-card-kicker">
-                    {getCampaignStatusLabel(campaign)}
-                    {' '}
-                    · {buildCampaignPath(campaign.slug)}
-                  </p>
                 </div>
 
                 <Link

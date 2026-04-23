@@ -41,7 +41,7 @@ function CampaignStat({
 
 function CampaignUnavailableCard({ status }: { status: PublicCampaign['status'] }) {
   return (
-    <div className="campaign-address-card whitebox">
+    <div className="campaign-address-card campaign-address-card--unavailable whitebox">
       <div className="whitebox-container">
         <div className="campaign-public-page__disabled-card">
           <span className="campaign-public-page__disabled-eyebrow">Campaign unavailable</span>
@@ -121,7 +121,12 @@ export function PublicCampaignLayout({
 
             <aside className="campaign-public-page__sidebar" data-testid="campaign-stats-rail">
               <div className="campaign-stats-card">
-                <div className="campaign-stats-card__header">Campaign activity</div>
+                <div className="campaign-stats-card__header">
+                  Campaign activity
+                  <span className="campaign-stats-card__subheader">
+                    Live counts for supporters joining in.
+                  </span>
+                </div>
                 <CampaignStat
                   label="People have taken action"
                   value={campaign.stats.peopleTakenAction}

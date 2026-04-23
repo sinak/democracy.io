@@ -26,6 +26,40 @@
   margin: 0 auto;
 }
 
+.supporter-entry-shell__campaign-cta {
+  margin-top: 12px;
+  margin-bottom: 34px;
+  text-align: center;
+}
+
+.supporter-entry-shell__campaign-link {
+  display: inline-block;
+  min-height: 42px;
+  padding: 11px 22px;
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+  background: linear-gradient(135deg, #f85628, $pink);
+  box-shadow: 0 10px 22px rgba(185, 58, 79, 0.2);
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 14px 24px rgba(185, 58, 79, 0.24);
+  }
+}
+
 div#whydio {
   background-color: #fff;
   border-top: 1px solid #CCCCCC;
@@ -80,6 +114,16 @@ div#whydio {
   }
 }
 @media (max-width: $screen-xs-max) {
+  .supporter-entry-shell__campaign-cta {
+    margin-top: 8px;
+    margin-bottom: 22px;
+  }
+
+  .supporter-entry-shell__campaign-link {
+    width: 100%;
+    max-width: 320px;
+  }
+
   #address {
     .btn-lg.btn-orange {
       left:0;
@@ -218,8 +262,15 @@ div#whydio {
 
   h1 {
     color: #fff;
-    margin: 0;
+    font-size: 46px;
+    line-height: 1.2;
+    margin: 0 auto;
+    max-width: 640px;
     text-shadow: 0 2px 18px rgba(0, 0, 0, 0.18);
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 36px;
+    }
   }
 }
 
@@ -291,7 +342,7 @@ div#whydio {
   text-align: left;
 
   h2 {
-    margin-top: 10px;
+    margin-top: 14px;
     margin-bottom: 12px;
     text-align: left;
   }
@@ -305,12 +356,30 @@ div#whydio {
 }
 
 .campaign-public-page__disabled-eyebrow {
+  border-bottom: 1px solid rgba(102, 95, 90, 0.12);
   color: $gray;
-  display: inline-block;
+  display: block;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.2em;
+  padding-bottom: 14px;
   text-transform: uppercase;
+}
+
+.campaign-address-card.campaign-address-card--unavailable {
+  overflow: hidden;
+  position: relative;
+}
+
+.campaign-address-card.campaign-address-card--unavailable::before {
+  background-image: linear-gradient(to right, #FF8900, $pink);
+  content: '';
+  display: block;
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 @media (min-width: $screen-sm-min) {
@@ -372,8 +441,20 @@ div#whydio {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.2em;
-  padding: 18px 20px 0;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid rgba(102, 95, 90, 0.12);
   text-transform: uppercase;
+}
+
+.campaign-stats-card__subheader {
+  display: block;
+  margin-top: 6px;
+  color: #6f6965;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-transform: none;
 }
 
 .campaign-stat {
@@ -431,14 +512,29 @@ div#whydio {
   margin-bottom: 0;
   min-width: 0;
   max-width: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.campaign-public-page__description-card::before {
+  background-image: linear-gradient(to right, #FF8900, $pink);
+  content: '';
+  display: block;
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .campaign-public-page__description-header {
+  border-bottom: 1px solid rgba(102, 95, 90, 0.12);
   color: $gray;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.2em;
   margin-bottom: 18px;
+  padding-bottom: 14px;
   text-transform: uppercase;
 }
 

@@ -45,7 +45,6 @@ export function CampaignEditorScreen({
   const [isUploading, setIsUploading] = useState(false);
   const [notice, setNotice] = useState<CampaignEditorNotice | null>(null);
   const [pendingAction, setPendingAction] = useState<'create' | 'publish' | 'archive' | null>(null);
-  const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
 
   useEffect(() => {
     const flashMessage =
@@ -90,9 +89,6 @@ export function CampaignEditorScreen({
         setCampaign(nextCampaign);
         setValues(nextValues);
         setFieldErrors({});
-        setSlugManuallyEdited(
-          nextCampaign.slug !== normalizeCampaignEditorSlug(nextCampaign.title)
-        );
       })
       .catch((error) => {
         if (!active) {
@@ -127,23 +123,18 @@ export function CampaignEditorScreen({
       return nextErrors;
     });
 
+    if (field === 'slug') {
+      return;
+    }
+
     if (field === 'title') {
       setValues((currentValues) => ({
         ...currentValues,
         title: value,
         slug:
-          mode === 'create' && !slugManuallyEdited
+          mode === 'create'
             ? normalizeCampaignEditorSlug(value)
             : currentValues.slug,
-      }));
-      return;
-    }
-
-    if (field === 'slug') {
-      setSlugManuallyEdited(true);
-      setValues((currentValues) => ({
-        ...currentValues,
-        slug: normalizeCampaignEditorSlug(value),
       }));
       return;
     }
@@ -160,7 +151,7 @@ export function CampaignEditorScreen({
     }
 
     const validation = validateCampaignEditor(values, 'publish', {
-      requireSlug: true,
+      requireSlug: false,
     });
     setFieldErrors(validation.fieldErrors);
 
@@ -375,7 +366,6 @@ export function CampaignEditorScreen({
           onSave={() => void handleCreate()}
           onUpload={(file) => void handleUpload(file)}
           pendingAction={pendingAction}
-          showSlugField
           values={values}
         />
       )}

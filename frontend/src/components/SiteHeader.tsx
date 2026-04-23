@@ -40,7 +40,7 @@ export function SiteHeader() {
         <div className="site-nav" aria-label="Primary">
           {!user && !isLoading ? (
             <NavLinkItem
-              label="Organizer sign in"
+              label="Login"
               to="/organizer/sign-in"
               isActive={location.pathname === '/organizer/sign-in'}
             />

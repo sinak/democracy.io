@@ -1,6 +1,5 @@
 import { useDeferredValue } from 'react';
 import { Link } from 'react-router-dom';
-import { buildCampaignPath } from '../helpers/campaign-path';
 import {
   buildCampaignPublicUrl,
   canCopyCampaignPublicUrl,
@@ -32,7 +31,6 @@ interface CampaignEditorFormProps {
   onPublish: () => void;
   onSave: () => void;
   onUpload: (file: File) => void;
-  showSlugField: boolean;
 }
 
 function formatDate(value: string | null) {
@@ -223,7 +221,6 @@ export function CampaignEditorForm({
   onSave,
   onUpload,
   pendingAction,
-  showSlugField,
   values,
 }: CampaignEditorFormProps) {
   const isDisabledByAdmin = campaign?.status === 'disabled';
@@ -247,7 +244,14 @@ export function CampaignEditorForm({
       {renderNotice(notice)}
 
       <div className="organizer-editor-section">
-        <h2>Campaign basics</h2>
+        <div className="organizer-editor-section__header">
+          <span className="organizer-eyebrow organizer-eyebrow--left">Section 01 · Details</span>
+          <h2>Campaign basics</h2>
+          <p className="organizer-editor-section__header-subtitle">
+            Identify the campaign publicly so supporters know who is behind it and where it lives.
+          </p>
+          <span className="organizer-editor-section__header-rule" aria-hidden="true" />
+        </div>
         <div className="organizer-editor-grid">
           <EditorField error={fieldErrors.title} label="Campaign title">
             <input
@@ -259,26 +263,6 @@ export function CampaignEditorForm({
               onChange={(event) => onFieldChange('title', event.target.value)}
             />
           </EditorField>
-
-          {showSlugField ? (
-            <EditorField error={fieldErrors.slug} label="Campaign slug">
-              <input
-                aria-label="Campaign slug"
-                className="form-control input-lg"
-                data-testid="campaign-editor-slug"
-                disabled={isReadOnly}
-                name="slug"
-                type="text"
-                value={values.slug}
-                onChange={(event) => onFieldChange('slug', event.target.value)}
-              />
-              <p className="organizer-field-hint">
-                Public route:
-                {' '}
-                <strong>{buildCampaignPath(values.slug || 'your-slug')}</strong>
-              </p>
-            </EditorField>
-          ) : null}
 
           <EditorField error={fieldErrors.organizationName} label="Organization name (optional)">
             <input
@@ -306,7 +290,14 @@ export function CampaignEditorForm({
       </div>
 
       <div className="organizer-editor-section">
-        <h2>Campaign content</h2>
+        <div className="organizer-editor-section__header">
+          <span className="organizer-eyebrow organizer-eyebrow--left">Section 02 · Content</span>
+          <h2>Campaign content</h2>
+          <p className="organizer-editor-section__header-subtitle">
+            The story, imagery, and pre-written message supporters can start from.
+          </p>
+          <span className="organizer-editor-section__header-rule" aria-hidden="true" />
+        </div>
 
         <EditorField error={fieldErrors.descriptionMarkdown} label="Description markdown">
           <MarkdownEditor

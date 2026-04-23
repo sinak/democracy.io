@@ -34,6 +34,7 @@ import { Thanks } from './pages/Thanks';
 import { CampaignCreateShell } from './pages/organizer/CampaignCreateShell';
 import { CampaignEditShell } from './pages/organizer/CampaignEditShell';
 import { OrganizerCampaignList } from './pages/organizer/CampaignList';
+import { CampaignShareShell } from './pages/organizer/CampaignShareShell';
 
 const PAGE_TITLES: Record<string, string> = {
   '/': '',
@@ -200,6 +201,7 @@ export default function App() {
             <Route index element={<Navigate to="campaigns" replace />} />
             <Route path="campaigns" element={<OrganizerCampaignList />} />
             <Route path="campaigns/new" element={<CampaignCreateShell />} />
+            <Route path="campaigns/:campaignId/share" element={<CampaignShareShell />} />
             <Route path="campaigns/:campaignId/edit" element={<CampaignEditShell />} />
           </Route>
 

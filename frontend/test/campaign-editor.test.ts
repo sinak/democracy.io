@@ -28,9 +28,22 @@ describe('campaign editor helpers', () => {
       slug: 'Add a campaign slug.',
       organizationUrl: 'Use a full http or https URL.',
       descriptionMarkdown: 'Markdown images must use full http or https URLs.',
-      suggestedSubject: 'Add a suggested subject line.',
-      suggestedMessage: 'Add a suggested message.',
     });
+  });
+
+  it('allows publishing campaigns without suggested copy', () => {
+    const result = validateCampaignEditor(
+      {
+        ...createEmptyCampaignEditorValues(),
+        title: 'Protect public libraries',
+        slug: 'protect-public-libraries',
+        descriptionMarkdown: 'Ask Congress to protect federal support for public libraries.',
+      },
+      'publish'
+    );
+
+    expect(result.isValid).toBe(true);
+    expect(result.fieldErrors).toEqual({});
   });
 
   it('locks the slug after first publish', () => {

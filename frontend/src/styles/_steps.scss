@@ -207,10 +207,10 @@ div#whydio {
 }
 
 .campaign-public-page__hero {
-  background-color: #7e1227;
+  background-color: #8f3f28;
   background-image:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.09), transparent 52%),
-    linear-gradient(135deg, #711025 0%, #c12a43 48%, #f85628 100%);
+    linear-gradient(135deg, #6f3627 0%, #b95f31 52%, #f08a3c 100%);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -224,9 +224,9 @@ div#whydio {
   &.is-fallback {
     background-image:
       radial-gradient(circle at top, rgba(255, 255, 255, 0.09), transparent 52%),
-      linear-gradient(rgba(46, 20, 24, 0.44), rgba(46, 20, 24, 0.62)),
+      linear-gradient(rgba(62, 49, 45, 0.42), rgba(83, 61, 54, 0.56)),
       url('/img/bg-fade.jpg'),
-      linear-gradient(135deg, #711025 0%, #c12a43 48%, #f85628 100%);
+      linear-gradient(135deg, #6f3627 0%, #b95f31 52%, #f08a3c 100%);
   }
 
   &.has-image {
@@ -740,9 +740,9 @@ label small {
 }
 
 /******
- Thanks
+ Share card
 ******/
-#thanks {
+.share-card {
   @extend .boxshadow;
   border-radius: 10px;
   background: #fff;
@@ -755,7 +755,7 @@ label small {
     margin: 0 auto;
   }
 
-  .thanks-body {
+  .share-card-body {
     padding: 30px 28px 22px;
     text-align: center;
 
@@ -764,7 +764,7 @@ label small {
     }
   }
 
-  .thanks-kicker {
+  .share-card-kicker {
     color: $gray;
     font-size: 12px;
     font-weight: 600;
@@ -773,7 +773,7 @@ label small {
     text-transform: uppercase;
   }
 
-  .thanks-headline {
+  .share-card-headline {
     color: #444;
     font-family: "DroidSerif", serif;
     font-size: 31px;
@@ -786,7 +786,7 @@ label small {
     }
   }
 
-  .thanks-subtitle {
+  .share-card-subtitle {
     color: #666;
     font-size: 17px;
     line-height: 1.55;
@@ -798,7 +798,42 @@ label small {
     }
   }
 
-  .thanks-campaign-return {
+  .share-card-url {
+    margin: 18px 0 0;
+    padding: 12px 14px;
+    border: 1px solid rgba(248, 86, 40, 0.16);
+    border-radius: 6px;
+    background: rgba(250, 247, 245, 0.82);
+    text-align: left;
+
+    span {
+      display: block;
+      color: $gray;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    a {
+      display: block;
+      margin-top: 5px;
+      color: #444;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        color: $brand-primary;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .share-card-context-link {
     margin: 16px 0 0;
 
     a {
@@ -810,7 +845,7 @@ label small {
     }
   }
 
-  .thanks-primary-actions {
+  .share-card-primary-actions {
     background-image: linear-gradient(to right, #FF9600, #FC4863);
     display: flex;
     gap: 14px;
@@ -821,7 +856,7 @@ label small {
     }
   }
 
-  .thanks-action-button {
+  .share-card-action-button {
     appearance: none;
     background: #fff;
     border: 0;
@@ -849,7 +884,7 @@ label small {
     }
   }
 
-  .thanks-copy-button {
+  .share-card-copy-button {
     color: $brand-primary;
 
     &:hover,
@@ -858,7 +893,7 @@ label small {
     }
   }
 
-  .thanks-feedback {
+  .share-card-feedback {
     color: #777;
     font-size: 13px;
     line-height: 1.5;
@@ -867,13 +902,13 @@ label small {
     text-align: center;
   }
 
-  .thanks-social {
+  .share-card-social {
     border-top: 1px solid #f1f1f1;
     padding: 18px 22px 24px;
     text-align: center;
   }
 
-  .thanks-social-title {
+  .share-card-social-title {
     color: $gray;
     font-size: 12px;
     font-weight: 600;
@@ -882,14 +917,14 @@ label small {
     text-transform: uppercase;
   }
 
-  .thanks-social-grid {
+  .share-card-social-grid {
     display: flex;
     justify-content: center;
     gap: 18px;
     flex-wrap: wrap;
   }
 
-  .thanks-social-button {
+  .share-card-social-button {
     background: transparent;
     border: 0;
     color: #666;
@@ -898,7 +933,7 @@ label small {
     text-align: center;
   }
 
-  .thanks-social-icon {
+  .share-card-social-icon {
     background-image: linear-gradient(to right, #FF9600, #FC4863);
     border-radius: 16px;
     color: #fff;
@@ -911,18 +946,31 @@ label small {
     width: 62px;
   }
 
-  .thanks-social-button:hover .thanks-social-icon,
-  .thanks-social-button:focus .thanks-social-icon {
+  .share-card-social-button:hover .share-card-social-icon,
+  .share-card-social-button:focus .share-card-social-icon {
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
     transform: translateY(-2px);
   }
 
-  .thanks-social-label {
+  .share-card-social-label {
     display: block;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+  }
+
+  .share-card-secondary-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px 18px;
+    padding: 0 22px 26px;
+
+    @media (max-width: $screen-xs-max) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }
 

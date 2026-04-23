@@ -6,70 +6,108 @@ import { OrganizerPageLayout } from '../../components/OrganizerPageLayout';
 import { useAuth } from '../../context/AuthContext';
 import { buildCampaignPath } from '../../helpers/campaign-path';
 import {
+  buildCampaignPublicUrl,
   getCampaignStatusLabel,
   summarizeCampaignRecord,
 } from '../../helpers/campaign-editor';
 import { listOrganizerCampaigns } from '../../helpers/campaign-api';
 import type { Campaign } from '../../types';
 
-function formatDate(value: string | null) {
-  if (!value) {
-    return 'Not yet';
+async function copyText(value: string) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(value);
+    return;
   }
 
-  return new Date(value).toLocaleDateString(undefined, {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  const textarea = document.createElement('textarea');
+  textarea.value = value;
+  textarea.setAttribute('readonly', 'true');
+  textarea.style.position = 'absolute';
+  textarea.style.left = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.select();
+  const copied = document.execCommand('copy');
+  document.body.removeChild(textarea);
+
+  if (!copied) {
+    throw new Error('Copy command failed.');
+  }
 }
 
 export function OrganizerCampaignList() {
   const { session, user } = useAuth();
+  const accessToken = session?.access_token || null;
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [copyStatus, setCopyStatus] = useState<{
+    campaignId: string;
+    status: 'copied' | 'error';
+  } | null>(null);
+  const [loadResult, setLoadResult] = useState<{
+    accessToken: string;
+    error: string | null;
+  } | null>(null);
+  const error =
+    loadResult?.accessToken === accessToken ? loadResult.error : null;
+  const isLoading = Boolean(accessToken && loadResult?.accessToken !== accessToken);
 
   useEffect(() => {
     let active = true;
 
-    if (!session?.access_token) {
-      setIsLoading(false);
+    if (!accessToken) {
       return;
     }
 
-    setIsLoading(true);
-
-    void listOrganizerCampaigns(session.access_token)
+    void listOrganizerCampaigns(accessToken)
       .then((nextCampaigns) => {
         if (!active) {
           return;
         }
 
         setCampaigns(nextCampaigns);
-        setError(null);
+        setLoadResult({ accessToken, error: null });
       })
       .catch((nextError) => {
         if (!active) {
           return;
         }
 
-        setError(
-          nextError instanceof Error
-            ? nextError.message
-            : 'Unable to load organizer campaigns.'
-        );
-      })
-      .finally(() => {
-        if (active) {
-          setIsLoading(false);
-        }
+        setLoadResult({
+          accessToken,
+          error:
+            nextError instanceof Error
+              ? nextError.message
+              : 'Unable to load organizer campaigns.',
+        });
       });
 
     return () => {
       active = false;
     };
-  }, [session?.access_token]);
+  }, [accessToken]);
+
+  useEffect(() => {
+    if (!copyStatus) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setCopyStatus(null);
+    }, 2400);
+
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, [copyStatus]);
+
+  const handleCopyCampaignUrl = async (campaign: Campaign) => {
+    try {
+      await copyText(buildCampaignPublicUrl(campaign.slug));
+      setCopyStatus({ campaignId: campaign.id, status: 'copied' });
+    } catch (copyError) {
+      console.warn('Copy campaign link failed.', copyError);
+      setCopyStatus({ campaignId: campaign.id, status: 'error' });
+    }
+  };
 
   return (
     <OrganizerPageLayout
@@ -115,66 +153,92 @@ export function OrganizerCampaignList() {
         </div>
       ) : (
         <div className="organizer-card-stack organizer-card-stack--campaign-list">
-          {campaigns.map((campaign) => (
-            <article
-              key={campaign.id}
-              className="organizer-campaign-card organizer-campaign-card--campaign-list"
-            >
-              <div className="organizer-campaign-card__header">
-                <div>
-                  <div className="organizer-campaign-card__meta-row">
-                    <CampaignStatusBadge status={campaign.status} />
-                    <span className="organizer-card-kicker">
-                      {getCampaignStatusLabel(campaign)}
-                      {' '}
-                      · {buildCampaignPath(campaign.slug)}
-                    </span>
+          {campaigns.map((campaign) => {
+            const publicUrl = buildCampaignPublicUrl(campaign.slug);
+            const activeCopyStatus =
+              copyStatus?.campaignId === campaign.id ? copyStatus.status : null;
+
+            return (
+              <article
+                key={campaign.id}
+                className="organizer-campaign-card organizer-campaign-card--campaign-list"
+              >
+                <div className="organizer-campaign-card__header">
+                  <div>
+                    <div className="organizer-campaign-card__meta-row">
+                      <CampaignStatusBadge status={campaign.status} />
+                      <span className="organizer-card-kicker">
+                        {getCampaignStatusLabel(campaign)}
+                        {' '}
+                        · {buildCampaignPath(campaign.slug)}
+                      </span>
+                    </div>
+                    <h2>{campaign.title}</h2>
                   </div>
-                  <h2>{campaign.title}</h2>
+
+                  <Link
+                    to={`/organizer/campaigns/${campaign.id}/edit`}
+                    className="organizer-inline-link"
+                  >
+                    Manage campaign
+                  </Link>
                 </div>
 
-                <Link
-                  to={`/organizer/campaigns/${campaign.id}/edit`}
-                  className="organizer-inline-link"
-                >
-                  Manage campaign
-                </Link>
-              </div>
+                <p>{summarizeCampaignRecord(campaign)}</p>
 
-              <p>{summarizeCampaignRecord(campaign)}</p>
+                {campaign.status === 'disabled' ? (
+                  <p className="organizer-card-status-note">
+                    This campaign was disabled by an admin and will stay unavailable until it is
+                    restored.
+                  </p>
+                ) : campaign.status === 'archived' ? (
+                  <p className="organizer-card-status-note">
+                    This campaign is disabled. Visitors can still open the page, but the contact form
+                    stays hidden until you enable it again.
+                  </p>
+                ) : null}
 
-              {campaign.status === 'disabled' ? (
-                <p className="organizer-card-status-note">
-                  This campaign was disabled by an admin and will stay unavailable until it is
-                  restored.
-                </p>
-              ) : campaign.status === 'archived' ? (
-                <p className="organizer-card-status-note">
-                  This campaign is disabled. Visitors can still open the page, but the contact form
-                  stays hidden until you enable it again.
-                </p>
-              ) : null}
+                <div className="organizer-campaign-card__share-row">
+                  <div className="organizer-campaign-card__public-link">
+                    <span>Public link</span>
+                    <a href={publicUrl} target="_blank" rel="noreferrer">
+                      {publicUrl}
+                    </a>
+                  </div>
 
-              <dl className="organizer-meta-list">
-                <div>
-                  <dt>Updated</dt>
-                  <dd>{formatDate(campaign.updatedAt)}</dd>
+                  <div className="organizer-campaign-card__share-actions">
+                    <button
+                      type="button"
+                      className="site-nav__button organizer-campaign-card__share-button"
+                      onClick={() => {
+                        void handleCopyCampaignUrl(campaign);
+                      }}
+                    >
+                      {activeCopyStatus === 'copied'
+                        ? 'Link copied'
+                        : activeCopyStatus === 'error'
+                          ? 'Copy failed'
+                          : 'Copy link'}
+                    </button>
+                    <Link
+                      to={`/organizer/campaigns/${campaign.id}/share`}
+                      state={{ campaign }}
+                      className="site-nav__link organizer-campaign-card__share-button"
+                    >
+                      Share link
+                    </Link>
+                  </div>
                 </div>
-                <div>
-                  <dt>First publish</dt>
-                  <dd>{formatDate(campaign.firstPublishedAt)}</dd>
-                </div>
-                <div>
-                  <dt>Messages sent</dt>
-                  <dd>{campaign.stats.totalMessagesSent}</dd>
-                </div>
-                <div>
-                  <dt>Flow starts</dt>
-                  <dd>{campaign.stats.flowStarts}</dd>
-                </div>
-              </dl>
-            </article>
-          ))}
+
+                <dl className="organizer-meta-list organizer-meta-list--single">
+                  <div>
+                    <dt>Flow starts</dt>
+                    <dd>{campaign.stats.flowStarts}</dd>
+                  </div>
+                </dl>
+              </article>
+            );
+          })}
         </div>
       )}
     </OrganizerPageLayout>

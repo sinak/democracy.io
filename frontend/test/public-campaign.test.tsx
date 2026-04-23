@@ -84,7 +84,7 @@ describe('public campaign frontend helpers', () => {
     expect(container.innerHTML.includes('&lt;script&gt;alert(1)&lt;/script&gt;')).toBe(true);
   });
 
-  it('keeps the red fallback hero treatment when no usable background image is active', () => {
+  it('keeps the fallback hero treatment when no usable background image is active', () => {
     const campaign = createCampaign({
       summary: JSON.stringify({
         schema: 'campaign-editor/v1',

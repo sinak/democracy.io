@@ -71,7 +71,7 @@ export function PublicCampaignLayout({
         style={
           heroImageReady && campaignContent.backgroundImageUrl
             ? {
-                backgroundImage: `linear-gradient(135deg, rgba(126, 18, 39, 0.78), rgba(201, 42, 67, 0.62)), url(${campaignContent.backgroundImageUrl})`,
+                backgroundImage: `linear-gradient(135deg, rgba(58, 45, 43, 0.7), rgba(201, 88, 52, 0.42)), url(${campaignContent.backgroundImageUrl})`,
               }
             : undefined
         }

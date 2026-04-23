@@ -176,9 +176,9 @@ export function CampaignEditorScreen({
         createdCampaign.id
       );
 
-      navigate(`/organizer/campaigns/${publishedCampaign.id}/edit`, {
+      navigate(`/organizer/campaigns/${publishedCampaign.id}/share`, {
         replace: true,
-        state: { flashMessage: 'Campaign created and enabled.' },
+        state: { campaign: publishedCampaign },
       });
     } catch (error) {
       setNotice({

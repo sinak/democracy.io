@@ -1,4 +1,4 @@
-import { useDeferredValue, useRef } from 'react';
+import { useDeferredValue, useRef, useState } from 'react';
 import { containsRawHtml } from '../helpers/campaign-editor';
 import { CampaignMarkdownPreview } from './CampaignMarkdownPreview';
 
@@ -19,6 +19,8 @@ interface MarkdownShortcut {
   title: string;
   apply: (value: string, selectionStart: number, selectionEnd: number) => EditorSelection;
 }
+
+type EditorPane = 'write' | 'preview';
 
 function countWords(value: string) {
   const trimmedValue = value.trim();
@@ -187,6 +189,7 @@ export function MarkdownEditor({
   value,
 }: MarkdownEditorProps) {
   const deferredValue = useDeferredValue(value);
+  const [activePane, setActivePane] = useState<EditorPane>('write');
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const wordCount = countWords(value);
   const lineCount = countLines(value);
@@ -220,18 +223,14 @@ export function MarkdownEditor({
   }
 
   return (
-    <div className="markdown-editor">
+    <div className={`markdown-editor markdown-editor--show-${activePane}`}>
       <div className="markdown-editor__toolbar">
-        <div className="markdown-editor__toolbar-copy">
-          <span>Draft faster</span>
-          <p>Select text, then use a shortcut to shape the copy.</p>
-        </div>
-
         <div
           aria-label="Markdown formatting shortcuts"
           className="markdown-editor__toolbar-actions"
           role="toolbar"
         >
+          <span className="markdown-editor__toolbar-label">Format</span>
           {MARKDOWN_SHORTCUTS.map((shortcut) => (
             <button
               key={shortcut.label}
@@ -246,10 +245,33 @@ export function MarkdownEditor({
             </button>
           ))}
         </div>
+
+        <div
+          aria-label="Description editor view"
+          className="markdown-editor__view-toggle"
+          role="group"
+        >
+          <button
+            aria-pressed={activePane === 'write'}
+            className={activePane === 'write' ? 'is-active' : ''}
+            type="button"
+            onClick={() => setActivePane('write')}
+          >
+            Write
+          </button>
+          <button
+            aria-pressed={activePane === 'preview'}
+            className={activePane === 'preview' ? 'is-active' : ''}
+            type="button"
+            onClick={() => setActivePane('preview')}
+          >
+            Preview
+          </button>
+        </div>
       </div>
 
       <div className="markdown-editor__body">
-        <section className="markdown-editor__pane">
+        <section className="markdown-editor__pane markdown-editor__pane--write">
           <div className="markdown-editor__pane-header">
             <div>
               <span>Write</span>
@@ -264,7 +286,7 @@ export function MarkdownEditor({
             disabled={disabled}
             name="descriptionMarkdown"
             placeholder={
-              '## Why this campaign matters\n\nExplain the stakes, what supporters should know, and what action you want them to take.\n\n- Point one\n- Point two\n\n[Learn more](https://example.org)'
+              '## Why this campaign matters\n\nExplain the stakes, what supporters should know, and what action you want them to take.'
             }
             ref={textareaRef}
             value={value}
@@ -272,23 +294,33 @@ export function MarkdownEditor({
           />
 
           <div className="markdown-editor__support">
-            <p className="organizer-field-hint markdown-editor__hint">
-              Use markdown for structure. Images must use external http or https URLs. Raw HTML
-              stays plain text.
-            </p>
-
-            <div className="markdown-editor__syntax-list">
-              <code>## Heading</code>
-              <code>- Bullet list</code>
-              <code>[Link](https://example.org)</code>
-              <code>![Alt text](https://image-url)</code>
-            </div>
-
             {hasRawHtml ? (
               <p className="markdown-editor__warning">
                 HTML tags were detected in this draft. They will not render on the public page.
               </p>
             ) : null}
+
+            <details className="markdown-editor__help">
+              <summary>Markdown help</summary>
+              <p>
+                Use Markdown for structure. See the
+                {' '}
+                <a
+                  href="https://www.markdownguide.org/basic-syntax/"
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  Markdown Guide basic syntax reference
+                </a>
+                . Images must use external http or https URLs. Raw HTML stays plain text.
+              </p>
+              <div className="markdown-editor__syntax-list">
+                <code>## Heading</code>
+                <code>- Bullet list</code>
+                <code>[Link](https://example.org)</code>
+                <code>![Alt text](https://image-url)</code>
+              </div>
+            </details>
           </div>
         </section>
 

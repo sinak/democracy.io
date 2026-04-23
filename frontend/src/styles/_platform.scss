@@ -65,6 +65,27 @@
   padding-bottom: 50px;
 }
 
+.organizer-campaign-share-shell {
+  padding-top: 18px;
+}
+
+.organizer-campaign-share-card {
+  margin-bottom: 28px;
+}
+
+.organizer-campaign-share-loading,
+.organizer-campaign-share-error {
+  margin-bottom: 32px;
+}
+
+.organizer-campaign-share-user {
+  margin: 0 0 34px;
+  color: #777;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .organizer-auth-shell {
   padding-top: 30px;
 }
@@ -396,6 +417,57 @@
   color: #6c4a3d;
 }
 
+.organizer-campaign-card__share-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px 22px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(102, 95, 90, 0.18);
+}
+
+.organizer-campaign-card__public-link {
+  min-width: 0;
+}
+
+.organizer-campaign-card__public-link span {
+  display: block;
+  margin-bottom: 7px;
+  color: $gray;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.organizer-campaign-card__public-link a {
+  color: #444;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.organizer-campaign-card__public-link a:hover,
+.organizer-campaign-card__public-link a:focus {
+  color: $pink;
+  text-decoration: underline;
+}
+
+.organizer-campaign-card__share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 9px;
+}
+
+.organizer-campaign-card__share-button {
+  min-height: 36px;
+  padding: 9px 12px;
+  white-space: nowrap;
+}
+
 .organizer-status-badge {
   display: inline-block;
   padding: 6px 10px 5px;
@@ -476,6 +548,13 @@
   padding-top: 16px;
 }
 
+.organizer-meta-list--single {
+  grid-template-columns: minmax(0, 180px);
+  margin-top: 18px;
+  padding-top: 0;
+  border-top: 0;
+}
+
 .organizer-meta-list--stacked {
   display: grid;
   grid-template-columns: 1fr;
@@ -553,8 +632,8 @@
 }
 
 .organizer-editor-section + .organizer-editor-section {
-  margin-top: 40px;
-  padding-top: 36px;
+  margin-top: 34px;
+  padding-top: 30px;
   border-top: 1px solid rgba(102, 95, 90, 0.14);
 }
 
@@ -564,11 +643,11 @@
 }
 
 .organizer-editor-section__header {
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .organizer-editor-section__header .organizer-eyebrow {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .organizer-editor-section__header h2 {
@@ -576,7 +655,7 @@
 }
 
 .organizer-editor-section__header-subtitle {
-  margin: 0 0 14px;
+  margin: 0 0 12px;
   max-width: 560px;
   color: #6f6965;
   font-size: 15px;
@@ -585,8 +664,8 @@
 
 .organizer-editor-section__header-rule {
   display: block;
-  width: 48px;
-  height: 3px;
+  width: 42px;
+  height: 2px;
   background-image: linear-gradient(to right, #ff8900, $pink);
   border-radius: 999px;
 }
@@ -640,12 +719,10 @@
 .markdown-editor {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(248, 86, 40, 0.16);
-  border-radius: 8px;
-  background:
-    linear-gradient(180deg, rgba(248, 86, 40, 0.07), rgba(249, 52, 105, 0.03) 16%, rgba(255, 255, 255, 0.98) 16%),
-    #fff;
-  box-shadow: 0 18px 32px rgba(96, 76, 65, 0.08);
+  border: 1px solid rgba(102, 95, 90, 0.14);
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 12px 24px rgba(96, 76, 65, 0.05);
 }
 
 .markdown-editor::before {
@@ -654,21 +731,22 @@
   top: 0;
   right: 0;
   left: 0;
-  height: 4px;
+  height: 3px;
   background-image: linear-gradient(to right, #ff8900, $pink);
 }
 
 .markdown-editor__toolbar {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  padding: 24px 24px 18px;
+  gap: 12px;
+  padding: 14px 16px 12px;
   border-bottom: 1px solid rgba(102, 95, 90, 0.12);
+  background: rgba(250, 247, 245, 0.62);
 }
 
-.markdown-editor__toolbar-copy span,
+.markdown-editor__toolbar-label,
 .markdown-editor__pane-header span {
   display: block;
   color: $gray;
@@ -678,7 +756,6 @@
   text-transform: uppercase;
 }
 
-.markdown-editor__toolbar-copy p,
 .markdown-editor__pane-header p {
   margin: 6px 0 0;
   color: #6f6965;
@@ -688,16 +765,22 @@
 
 .markdown-editor__toolbar-actions {
   display: flex;
+  flex: 1 1 auto;
   flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
+}
+
+.markdown-editor__toolbar-label {
+  margin-right: 2px;
 }
 
 .markdown-editor__toolbar-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 38px;
-  padding: 9px 14px;
+  min-height: 36px;
+  padding: 8px 11px;
   border: 1px solid rgba(248, 86, 40, 0.18);
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.94);
@@ -730,13 +813,42 @@
   transform: none;
 }
 
+.markdown-editor__view-toggle {
+  display: none;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid rgba(102, 95, 90, 0.12);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.markdown-editor__view-toggle button {
+  min-height: 34px;
+  padding: 6px 11px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: transparent;
+  color: #5a5552;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.markdown-editor__view-toggle button.is-active {
+  background-image: linear-gradient(to right, #ff8900, $pink);
+  color: #fff;
+}
+
 .markdown-editor__body {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.85fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
 }
 
 .markdown-editor__pane {
-  padding: 22px 24px 24px;
+  min-width: 0;
+  padding: 18px 20px 20px;
 }
 
 .markdown-editor__pane--preview {
@@ -749,7 +861,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .markdown-editor__pane-header strong {
@@ -763,8 +875,8 @@
 }
 
 .markdown-editor__textarea {
-  min-height: 320px;
-  padding: 16px 18px;
+  min-height: 300px;
+  padding: 15px 17px;
   border: 1px solid rgba(102, 95, 90, 0.16);
   border-radius: 6px;
   background:
@@ -773,9 +885,7 @@
   color: #4a4745;
   font-size: 15px;
   line-height: 1.8;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    0 10px 18px rgba(120, 92, 74, 0.04);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .markdown-editor__textarea:focus {
@@ -790,11 +900,55 @@
 }
 
 .markdown-editor__support {
-  margin-top: 14px;
+  margin-top: 12px;
 }
 
-.markdown-editor__hint {
-  margin-top: 0;
+.markdown-editor__help {
+  color: #6f6965;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.markdown-editor__help summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: $pink;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  list-style: none;
+  text-transform: uppercase;
+}
+
+.markdown-editor__help summary::-webkit-details-marker {
+  display: none;
+}
+
+.markdown-editor__help summary::after {
+  content: '+';
+  color: #8a817b;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.markdown-editor__help[open] summary::after {
+  content: '-';
+}
+
+.markdown-editor__help p {
+  margin: 10px 0 0;
+}
+
+.markdown-editor__help a {
+  color: $pink;
+  text-decoration: underline;
+}
+
+.markdown-editor__help a:hover,
+.markdown-editor__help a:focus {
+  color: darken($pink, 6%);
 }
 
 .markdown-editor__syntax-list {
@@ -805,31 +959,29 @@
 }
 
 .markdown-editor__syntax-list code {
-  padding: 6px 10px;
+  padding: 5px 9px;
   border: 1px solid rgba(248, 86, 40, 0.14);
-  border-radius: 999px;
+  border-radius: 4px;
   background: rgba(248, 86, 40, 0.05);
   color: #6c6662;
   font-size: 12px;
 }
 
 .markdown-editor__warning {
-  margin: 12px 0 0;
+  margin: 0 0 10px;
   color: #b32850;
   font-size: 13px;
   line-height: 1.6;
 }
 
 .markdown-editor__preview-frame {
-  min-height: 320px;
-  padding: 18px 20px;
+  min-height: 300px;
+  padding: 17px 19px;
   border: 1px solid rgba(102, 95, 90, 0.14);
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.95);
   overflow: auto;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.75),
-    0 10px 18px rgba(120, 92, 74, 0.04);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
 }
 
 .markdown-editor__preview-empty {
@@ -899,6 +1051,12 @@
 
 .organizer-editor-link {
   margin-left: auto;
+}
+
+.organizer-editor-link--standalone {
+  display: inline-block;
+  margin-top: 16px;
+  margin-left: 0;
 }
 
 .organizer-editor-state-note {
@@ -1057,8 +1215,15 @@
     position: static;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 18px;
-    padding-bottom: 8px;
+    margin-top: 12px;
+    padding-bottom: 6px;
+    gap: 8px;
+  }
+
+  .site-nav > .site-nav__link,
+  .site-nav > .site-nav__button {
+    min-height: 36px;
+    padding: 9px 12px;
   }
 
   .organizer-hero-card .whitebox-container,
@@ -1078,6 +1243,15 @@
 
   .organizer-campaign-card__header {
     flex-direction: column;
+  }
+
+  .organizer-campaign-card__share-row {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .organizer-campaign-card__share-actions {
+    justify-content: flex-start;
   }
 
   .organizer-campaign-list-header {
@@ -1116,6 +1290,19 @@
     grid-template-columns: 1fr;
   }
 
+  .markdown-editor__view-toggle {
+    display: flex;
+  }
+
+  .markdown-editor--show-write .markdown-editor__pane--preview,
+  .markdown-editor--show-preview .markdown-editor__pane--write {
+    display: none;
+  }
+
+  .markdown-editor--show-preview .markdown-editor__pane--preview {
+    display: block;
+  }
+
   .markdown-editor__pane--preview {
     border-top: 1px solid rgba(102, 95, 90, 0.12);
     border-left: 0;
@@ -1123,18 +1310,39 @@
 }
 
 @media (max-width: $screen-xs-max) {
-  .site-nav {
-    gap: 8px;
+  .site-navbar {
+    margin-bottom: 4px;
   }
 
-  .site-nav__link,
-  .site-nav__button {
-    width: 100%;
+  .site-navbar .navbar-brand {
+    height: auto;
+    padding-bottom: 6px;
+  }
+
+  .site-navbar .navbar-brand svg.logo {
+    max-width: 210px;
+  }
+
+  .site-nav {
+    gap: 8px;
+    margin-top: 8px;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .site-nav > .site-nav__link,
+  .site-nav > .site-nav__button {
+    flex: 1 1 112px;
+    width: auto;
+    max-width: 150px;
+    padding: 8px 10px;
+    font-size: 10px;
     text-align: center;
   }
 
   .organizer-shell {
-    padding-bottom: 28px;
+    padding-bottom: 18px;
+    overflow-x: hidden;
   }
 
   .organizer-auth-shell {
@@ -1143,6 +1351,10 @@
 
   .organizer-hero-card {
     margin-bottom: 18px;
+  }
+
+  .organizer-content-card .whitebox-container {
+    padding: 24px 18px 22px;
   }
 
   .organizer-page-intro {
@@ -1158,18 +1370,90 @@
     padding: 22px 20px;
   }
 
+  .organizer-campaign-card__share-actions {
+    flex-direction: column;
+  }
+
+  .organizer-campaign-card__share-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .organizer-meta-list--single {
+    grid-template-columns: 1fr;
+  }
+
+  .organizer-editor-section + .organizer-editor-section {
+    margin-top: 28px;
+    padding-top: 24px;
+  }
+
+  .organizer-editor-section__header {
+    margin-bottom: 18px;
+  }
+
+  .organizer-editor-section__header h2 {
+    margin-bottom: 8px;
+  }
+
+  .organizer-editor-section__header-subtitle {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .organizer-editor-section__header-rule {
+    width: 36px;
+  }
+
+  .organizer-editor-shell--create {
+    padding-bottom: 84px;
+  }
+
+  .organizer-editor-actions--create {
+    position: fixed;
+    right: 15px;
+    bottom: 0;
+    left: 15px;
+    z-index: 4;
+    margin: 0;
+    padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 -12px 22px rgba(80, 64, 54, 0.08);
+  }
+
   .markdown-editor__toolbar,
   .markdown-editor__pane {
     padding-right: 18px;
     padding-left: 18px;
   }
 
+  .markdown-editor__toolbar {
+    align-items: stretch;
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+
+  .markdown-editor__toolbar-actions,
+  .markdown-editor__view-toggle {
+    width: 100%;
+  }
+
+  .markdown-editor__view-toggle button {
+    flex: 1 1 0;
+  }
+
   .markdown-editor__pane-header {
     flex-direction: column;
+    gap: 8px;
   }
 
   .markdown-editor__pane-header strong {
     white-space: normal;
+  }
+
+  .markdown-editor__textarea,
+  .markdown-editor__preview-frame {
+    min-height: 280px;
   }
 
   .markdown-editor__toolbar-button {

@@ -135,14 +135,14 @@ export function CampaignEditorSidebar({
 
             <div className="organizer-preview-meta">
               <span>Suggested subject</span>
-              <p>{values.suggestedSubject || 'Add a short subject line supporters can start from.'}</p>
+              <p>{values.suggestedSubject || 'No suggested subject added.'}</p>
             </div>
 
             <div className="organizer-preview-meta">
               <span>Suggested message</span>
               <p>
                 {values.suggestedMessage ||
-                  'Supporters will see your suggested message here once you add it.'}
+                  'No suggested message added.'}
               </p>
             </div>
 
@@ -225,11 +225,20 @@ export function CampaignEditorForm({
 }: CampaignEditorFormProps) {
   const isDisabledByAdmin = campaign?.status === 'disabled';
   const isReadOnly = Boolean(campaign);
+  const isCreateMode = !campaign;
   const canEnable = Boolean(campaign && !isDisabledByAdmin && campaign.status !== 'published');
   const canDisable = Boolean(campaign && campaign.status === 'published');
+  const shellClassName = [
+    'organizer-editor-shell',
+    isCreateMode ? 'organizer-editor-shell--create' : null,
+  ].filter(Boolean).join(' ');
+  const actionClassName = [
+    'organizer-editor-actions',
+    isCreateMode ? 'organizer-editor-actions--create' : null,
+  ].filter(Boolean).join(' ');
 
   return (
-    <div className="organizer-editor-shell">
+    <div className={shellClassName}>
       {campaign?.status === 'disabled' ? (
         <div className="alert alert-danger organizer-inline-alert">
           This campaign is currently disabled by an admin. The public page stays unavailable until
@@ -245,10 +254,10 @@ export function CampaignEditorForm({
 
       <div className="organizer-editor-section">
         <div className="organizer-editor-section__header">
-          <span className="organizer-eyebrow organizer-eyebrow--left">Section 01 · Details</span>
+          <span className="organizer-eyebrow organizer-eyebrow--left">01 Details</span>
           <h2>Campaign basics</h2>
           <p className="organizer-editor-section__header-subtitle">
-            Identify the campaign publicly so supporters know who is behind it and where it lives.
+            Give supporters a clear name and organizer context.
           </p>
           <span className="organizer-editor-section__header-rule" aria-hidden="true" />
         </div>
@@ -291,32 +300,20 @@ export function CampaignEditorForm({
 
       <div className="organizer-editor-section">
         <div className="organizer-editor-section__header">
-          <span className="organizer-eyebrow organizer-eyebrow--left">Section 02 · Content</span>
+          <span className="organizer-eyebrow organizer-eyebrow--left">02 Content</span>
           <h2>Campaign content</h2>
           <p className="organizer-editor-section__header-subtitle">
-            The story, imagery, and pre-written message supporters can start from.
+            Write the public description, image, and optional suggested message.
           </p>
           <span className="organizer-editor-section__header-rule" aria-hidden="true" />
         </div>
 
-        <EditorField error={fieldErrors.descriptionMarkdown} label="Description markdown">
+        <EditorField error={fieldErrors.descriptionMarkdown} label="Campaign description">
           <MarkdownEditor
             disabled={isReadOnly}
             value={values.descriptionMarkdown}
             onChange={(nextValue) => onFieldChange('descriptionMarkdown', nextValue)}
           />
-          <p className="organizer-field-hint">
-            Use Markdown for structure. See the
-            {' '}
-            <a
-              href="https://www.markdownguide.org/basic-syntax/"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              Markdown Guide basic syntax reference
-            </a>
-            . Images must use external http or https URLs.
-          </p>
         </EditorField>
 
         <EditorField error={fieldErrors.backgroundImageUrl} label="Background image URL">
@@ -356,7 +353,7 @@ export function CampaignEditorForm({
         </EditorField>
 
         <div className="organizer-editor-grid">
-          <EditorField error={fieldErrors.suggestedSubject} label="Suggested subject">
+          <EditorField error={fieldErrors.suggestedSubject} label="Suggested subject (optional)">
             <input
               className="form-control input-lg"
               disabled={isReadOnly}
@@ -367,7 +364,7 @@ export function CampaignEditorForm({
             />
           </EditorField>
 
-          <EditorField error={fieldErrors.suggestedMessage} label="Suggested message">
+          <EditorField error={fieldErrors.suggestedMessage} label="Suggested message (optional)">
             <textarea
               className="form-control organizer-editor-textarea organizer-editor-textarea--message"
               disabled={isReadOnly}
@@ -379,7 +376,7 @@ export function CampaignEditorForm({
         </div>
       </div>
 
-      <div className="organizer-editor-actions">
+      <div className={actionClassName}>
         {!campaign ? (
           <button
             type="button"
@@ -413,9 +410,11 @@ export function CampaignEditorForm({
           </button>
         ) : null}
 
-        <Link to="/organizer/campaigns" className="organizer-inline-link organizer-editor-link">
-          Back to campaigns
-        </Link>
+        {campaign ? (
+          <Link to="/organizer/campaigns" className="organizer-inline-link organizer-editor-link">
+            Back to campaigns
+          </Link>
+        ) : null}
 
         {campaign && onCopyPublicUrl ? (
           <button
@@ -442,6 +441,15 @@ export function CampaignEditorForm({
           </p>
         ) : null}
       </div>
+
+      {!campaign ? (
+        <Link
+          to="/organizer/campaigns"
+          className="organizer-inline-link organizer-editor-link organizer-editor-link--standalone"
+        >
+          Back to campaigns
+        </Link>
+      ) : null}
     </div>
   );
 }

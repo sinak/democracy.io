@@ -267,14 +267,6 @@ export function validateCampaignEditor(
     if (!normalizedValues.descriptionMarkdown) {
       fieldErrors.descriptionMarkdown = 'Add a campaign description.';
     }
-
-    if (!normalizedValues.suggestedSubject) {
-      fieldErrors.suggestedSubject = 'Add a suggested subject line.';
-    }
-
-    if (!normalizedValues.suggestedMessage) {
-      fieldErrors.suggestedMessage = 'Add a suggested message.';
-    }
   }
 
   return {

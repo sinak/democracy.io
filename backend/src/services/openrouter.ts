@@ -25,6 +25,12 @@ export type OpenRouterResponseFormat =
 export interface OpenRouterChatCompletionRequest {
   messages: OpenRouterMessage[];
   response_format?: OpenRouterResponseFormat;
+  reasoning?: {
+    effort?: 'xhigh' | 'high' | 'medium' | 'low' | 'minimal' | 'none';
+    max_tokens?: number;
+    exclude?: boolean;
+    enabled?: boolean;
+  };
   max_tokens?: number;
   temperature?: number;
 }
@@ -59,6 +65,14 @@ const openRouterApi = axios.create({
   headers,
 });
 
+function getDefaultReasoning() {
+  if (/^google\/gemma-4-/i.test(config.openRouter.model)) {
+    return { effort: 'none' as const, exclude: true };
+  }
+
+  return undefined;
+}
+
 openRouterApi.interceptors.response.use(
   (res) => {
     const model = res.data?.model ? ` model=${res.data.model}` : '';
@@ -78,8 +92,10 @@ openRouterApi.interceptors.response.use(
 export async function createChatCompletion(
   request: OpenRouterChatCompletionRequest
 ): Promise<OpenRouterChatCompletionResponse> {
+  const defaultReasoning = getDefaultReasoning();
   const response = await openRouterApi.post('/chat/completions', {
     model: config.openRouter.model,
+    ...(defaultReasoning ? { reasoning: defaultReasoning } : {}),
     ...request,
   });
 

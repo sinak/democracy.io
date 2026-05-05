@@ -51,7 +51,7 @@ export const config = {
   openRouter: {
     baseUrl: process.env.OPENROUTER_BASE_URL || 'https://openrouter.ai/api/v1',
     apiKey: process.env.OPENROUTER_API_KEY || '',
-    model: process.env.OPENROUTER_MODEL || 'minimax/minimax-m2.5:free',
+    model: process.env.OPENROUTER_MODEL || 'google/gemma-4-31b-it',
     httpReferer: process.env.OPENROUTER_HTTP_REFERER || '',
     title: process.env.OPENROUTER_TITLE || '',
     maxCompletionTokens: parseInt(process.env.OPENROUTER_MAX_COMPLETION_TOKENS || '700', 10),

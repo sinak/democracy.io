@@ -3,10 +3,13 @@ import crypto from 'crypto';
 import { legislators } from '../dio/legislator-search.js';
 import * as potc from '../services/potc.js';
 import * as potcHelpers from '../helpers/potc.js';
-import { extractErrorMessage } from '../helpers/error-message.js';
 import { makeResponse, makeError } from '../helpers/response.js';
 import { config } from '../config.js';
-import { persistMessageSubmissions } from '../services/message-submissions.js';
+import {
+  makeMessageSubmissionErrorResult,
+  makeMessageSubmissionResult,
+  persistMessageSubmissions,
+} from '../services/message-submissions.js';
 import type { Message, MessageResponse } from '../types.js';
 import type { MessageSubmissionResult } from '../services/message-submissions.js';
 
@@ -71,17 +74,10 @@ router.post('/legislators/message', async (req, res) => {
       if (result.status === 'fulfilled') {
         const responseData = result.value.data as MessageResponse;
         modelData.push(responseData);
-        persistenceResults.push({
-          status: responseData.status || 'submitted',
-          url: responseData.url,
-          uid: responseData.uid,
-        });
+        persistenceResults.push(makeMessageSubmissionResult(responseData));
       } else {
         rejectedReason ??= result.reason;
-        persistenceResults.push({
-          status: 'error',
-          errorMessage: extractErrorMessage(result.reason),
-        });
+        persistenceResults.push(makeMessageSubmissionErrorResult(result.reason));
       }
     }
 

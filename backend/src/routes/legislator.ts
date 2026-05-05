@@ -3,10 +3,13 @@ import crypto from 'crypto';
 import { legislators } from '../dio/legislator-search.js';
 import * as potc from '../services/potc.js';
 import * as potcHelpers from '../helpers/potc.js';
-import { extractErrorMessage } from '../helpers/error-message.js';
 import { makeResponse, makeError } from '../helpers/response.js';
 import { config } from '../config.js';
-import { persistMessageSubmissions } from '../services/message-submissions.js';
+import {
+  makeMessageSubmissionErrorResult,
+  makeMessageSubmissionResult,
+  persistMessageSubmissions,
+} from '../services/message-submissions.js';
 import type { Message, MessageResponse } from '../types.js';
 
 const router = Router();
@@ -50,13 +53,7 @@ router.post('/legislator/:bioguideId/message', async (req, res) => {
       batchId,
       endpoint: req.originalUrl,
       messages: [message],
-      results: [
-        {
-          status: responseData.status || 'submitted',
-          url: responseData.url,
-          uid: responseData.uid,
-        },
-      ],
+      results: [makeMessageSubmissionResult(responseData)],
       requestIp: req.ip,
     });
 
@@ -66,12 +63,7 @@ router.post('/legislator/:bioguideId/message', async (req, res) => {
       batchId,
       endpoint: req.originalUrl,
       messages: [message],
-      results: [
-        {
-          status: 'error',
-          errorMessage: extractErrorMessage(err),
-        },
-      ],
+      results: [makeMessageSubmissionErrorResult(err)],
       requestIp: req.ip,
     });
 

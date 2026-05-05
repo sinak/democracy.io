@@ -75,6 +75,9 @@ export interface MessageResponse {
   status?: string;
   url?: string;
   uid?: string;
+  error?: unknown;
+  errors?: unknown;
+  message?: string;
 }
 
 export interface EmailCopyRequest {

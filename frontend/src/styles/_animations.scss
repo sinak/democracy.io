@@ -25,7 +25,7 @@ body {
 
 
 // Form element transitions 
-.repOption, .write-message .whitebox-container > div, .ng-enter #addressInputs > div {
+.repOption, .write-message .whitebox-container > div, .ng-enter #locationInputs > div {
   @extend .animated;
   animation-name: fadeUp30;
   @for $i from 1 through 10 {
@@ -42,34 +42,34 @@ body {
 }
 
 // Home-screen-specific animations
-#address {
-  #addressInputs {
+#location-entry {
+  #locationInputs {
     width: 100%;
     transition: width 0.5s ease;
   }
 
   @media (min-width: $screen-sm-min) {
-    #addressInputs.addressValid {
+    #locationInputs.locationValid {
       width: 75%;
     }
   }
   @media (min-width: $screen-sm-min) {
-    #submitAddress {
+    #submitLocation {
       max-width: 0;
       overflow: hidden;
       transition: max-width 0.5s ease;
     }
-    #submitAddress.addressValid {
+    #submitLocation.locationValid {
       max-width: 25%;
     }
   }
   @media (max-width: $screen-xs-max) {
-    #submitAddress {
+    #submitLocation {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.5s ease;
     }
-    #submitAddress.addressValid {
+    #submitLocation.locationValid {
       max-height: 100px;
     }
   }
@@ -134,7 +134,7 @@ body {
     animation-name: fadeInUp;
     animation-delay: 1.5s; // Reduces jittering
   }
-  #address.whitebox {
+  #location-entry.whitebox {
     @extend .animated;
     animation-name: fadeInUp;
     animation-delay: 1.5s; // Reduces jittering

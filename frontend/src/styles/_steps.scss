@@ -38,36 +38,36 @@ div#whydio {
     font-weight: 100;
   }
 }
-#address {
+#location-entry {
   margin-bottom: 30px;
 }
-#address .whitebox-container {
+#location-entry .whitebox-container {
   padding: 0;
 }
-#address .whitebox-container > form {
+#location-entry .whitebox-container > form {
   padding: 27px 30px 15px 30px;
   @extend .clearfix;
 }
-#address .btn-lg.btn-orange {
+#location-entry .btn-lg.btn-orange {
   margin-top: 25px;
   right: 2px;
 }
-#address .alert.alert-danger {
+#location-entry .alert.alert-danger {
   margin-bottom: 5px;
   margin-top:5px;
   background-color: #fff;
 }
-#address .whitebox-footer {
+#location-entry .whitebox-footer {
   a, a:visited, a:hover, a:active {
     color: inherit;
     text-decoration: underline;
   }
 }
 @media (min-width: $screen-sm-min) {
-  #address #addressInputs {
+  #location-entry #locationInputs {
     float:left;
   }
-  #address #submitAddress {
+  #location-entry #submitLocation {
     float:right;
     width: 25%;
     margin-top: 96px;
@@ -75,7 +75,7 @@ div#whydio {
   }
 }
 @media (max-width: $screen-xs-max) {
-  #address {
+  #location-entry {
     .btn-lg.btn-orange {
       left:0;
       margin-top:5px;

@@ -52,13 +52,13 @@ export function Home() {
   return (
     <>
       <div className="row">
-        <div id="address" className="whitebox col-sm-11 col-md-8 col-lg-7">
+        <div id="location-entry" className="whitebox col-sm-11 col-md-8 col-lg-7">
           <div className="whitebox-container clearfix">
             <form name="addressForm" onSubmit={handleSubmit}>
               <div className="clearfix">
                 <div
-                  id="addressInputs"
-                  className={`clearfix ${isValid ? 'addressValid' : ''}`}
+                  id="locationInputs"
+                  className={`clearfix ${isValid ? 'locationValid' : ''}`}
                 >
                   <div className="form-group">
                     <label htmlFor="streetAddress1">Street address</label>
@@ -112,8 +112,8 @@ export function Home() {
                 </div>
 
                 <div
-                  id="submitAddress"
-                  className={`clearfix ${isValid ? 'addressValid' : ''}`}
+                  id="submitLocation"
+                  className={`clearfix ${isValid ? 'locationValid' : ''}`}
                 >
                   <button
                     type="submit"

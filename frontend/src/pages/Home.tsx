@@ -23,6 +23,8 @@ const ADDRESS_FORM_ELEMENT_IDS = [
   'zip1',
   'submitLocation',
 ];
+const ADDRESS_FORM_INTERACTIVE_ELEMENT_IDS = ['street1', 'city1', 'zip1', 'submitLocation'];
+const TRANSPARENT_REASONS = new Set(['opacity-zero', 'hidden-ancestor-opacity-zero']);
 
 function getVisibilitySuccessSampleRate() {
   const parsed = Number(import.meta.env.VITE_ADDRESS_VISIBILITY_SUCCESS_SAMPLE_RATE);
@@ -208,11 +210,18 @@ function getAddressFormVisibilitySnapshot(phase: string) {
   if (
     hitTest?.topElement &&
     hitTest.topElement.id &&
-    ['street1', 'city1', 'zip1', 'submitLocation'].includes(hitTest.topElement.id)
+    ADDRESS_FORM_INTERACTIVE_ELEMENT_IDS.includes(hitTest.topElement.id)
   ) {
     const index = reasons.indexOf('not-hit-testable');
     if (index !== -1) reasons.splice(index, 1);
   }
+
+  const isTransparentAndInteractable =
+    reasons.length > 0 &&
+    reasons.every((reason) => TRANSPARENT_REASONS.has(reason)) &&
+    hitTest?.hitTestable === true &&
+    !!hitTest.topElement?.id &&
+    ADDRESS_FORM_INTERACTIVE_ELEMENT_IDS.includes(hitTest.topElement.id);
 
   let status = 'visible';
   if (!entry || !streetInput) {
@@ -221,6 +230,8 @@ function getAddressFormVisibilitySnapshot(phase: string) {
     status = 'offscreen';
   } else if (reasons.includes('not-hit-testable')) {
     status = 'obscured';
+  } else if (isTransparentAndInteractable) {
+    status = 'transparent-hit-testable';
   } else if (reasons.length > 0) {
     status = 'hidden';
   }
@@ -296,17 +307,26 @@ export function Home() {
       if (cancelled) return;
 
       const snapshot = getAddressFormVisibilitySnapshot(phase);
+      if (snapshot.visibilityState !== 'visible' && !forced) return;
+
       if (snapshot.reasons.length > 0) {
         if (getSessionFlag(VISIBILITY_HIDDEN_REPORTED_KEY) && !forced) return;
+
+        const isTransparentHitTestable = snapshot.status === 'transparent-hit-testable';
+        const diagnosticName = isTransparentHitTestable
+          ? 'address-form-transparent'
+          : 'address-form-invisible';
 
         setClarityTag('address_form_visibility', snapshot.reasons);
         setClarityTag('address_form_visibility_status', snapshot.status);
         setClarityTag('address_form_visibility_phase', phase);
-        trackClarityEvent('address-form-invisible');
-        upgradeClaritySession('address-form-invisible');
+        trackClarityEvent(diagnosticName);
+        if (!isTransparentHitTestable) {
+          upgradeClaritySession('address-form-invisible');
+        }
 
-        reportDiagnostic('address-form-invisible', {
-          level: 'warning',
+        reportDiagnostic(diagnosticName, {
+          level: isTransparentHitTestable ? 'info' : 'warning',
           tags: {
             flow: 'address',
             step: 'home',

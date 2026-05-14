@@ -43,7 +43,8 @@ export function Home() {
 
       sessionStorage.setItem(VISIBILITY_REPORTED_KEY, '1');
 
-      Sentry.captureMessage('address-form-invisible', {
+      try {
+        Sentry.captureMessage('address-form-invisible', {
         level: 'warning',
         extra: {
           reasons,
@@ -72,7 +73,11 @@ export function Home() {
           prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
           dataPagefrom: document.getElementById('wrapper')?.getAttribute('data-pagefrom'),
         },
-      });
+        });
+      } catch (err) {
+        // Telemetry must never break the page.
+        console.error('Sentry capture failed:', err);
+      }
 
       if (entry) {
         entry.style.opacity = '1';

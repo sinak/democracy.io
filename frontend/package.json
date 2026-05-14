@@ -13,8 +13,8 @@
     "@sentry/react": "^10.53.1",
     "bootstrap-sass": "^3.3.2",
     "hover.css": "^2.0.2",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
     "react-router-dom": "^7.13.1",
     "sass": "^1.97.3"
   },

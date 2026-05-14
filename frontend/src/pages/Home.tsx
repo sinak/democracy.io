@@ -1,13 +1,123 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as Sentry from '@sentry/react';
 import { useWizard } from '../context/WizardContext';
 import { useApi } from '../hooks/useApi';
 import { validateAddressResponse, getAddressData } from '../helpers/address';
+import { reportDiagnostic } from '../helpers/diagnostics';
 import type { CanonicalAddress } from '../types';
 
 const VISIBILITY_CHECK_DELAY_MS = 2500;
 const VISIBILITY_REPORTED_KEY = 'dio:location-entry-visibility-reported';
+const ADDRESS_FORM_ELEMENT_IDS = [
+  'form-scope',
+  'location-entry',
+  'locationInputs',
+  'street1',
+  'city1',
+  'zip1',
+  'submitLocation',
+];
+
+function getElementSnapshot(id: string) {
+  const element = document.getElementById(id);
+  if (!element) return { id, present: false };
+
+  const rect = element.getBoundingClientRect();
+  const style = window.getComputedStyle(element);
+
+  return {
+    id,
+    present: true,
+    tagName: element.tagName.toLowerCase(),
+    className: element.className,
+    display: style.display,
+    visibility: style.visibility,
+    opacity: style.opacity,
+    position: style.position,
+    width: style.width,
+    height: style.height,
+    animationName: style.animationName,
+    rect: {
+      x: rect.x,
+      y: rect.y,
+      width: rect.width,
+      height: rect.height,
+    },
+  };
+}
+
+function getHiddenAncestor(element: HTMLElement | null) {
+  let current: HTMLElement | null = element;
+
+  while (current) {
+    const style = window.getComputedStyle(current);
+    const rect = current.getBoundingClientRect();
+
+    if (style.display === 'none') {
+      return {
+        id: current.id || null,
+        tagName: current.tagName.toLowerCase(),
+        reason: 'display-none',
+      };
+    }
+    if (style.visibility === 'hidden') {
+      return {
+        id: current.id || null,
+        tagName: current.tagName.toLowerCase(),
+        reason: 'visibility-hidden',
+      };
+    }
+    if (style.opacity === '0') {
+      return {
+        id: current.id || null,
+        tagName: current.tagName.toLowerCase(),
+        reason: 'opacity-zero',
+      };
+    }
+    if (rect.width === 0 || rect.height === 0) {
+      return {
+        id: current.id || null,
+        tagName: current.tagName.toLowerCase(),
+        reason: 'zero-rect',
+      };
+    }
+
+    if (current.id === 'wrapper') break;
+    current = current.parentElement;
+  }
+
+  return null;
+}
+
+function isHitTestable(element: HTMLElement, rect: DOMRect) {
+  if (rect.width === 0 || rect.height === 0) return false;
+  if (
+    rect.bottom <= 0 ||
+    rect.right <= 0 ||
+    rect.top >= window.innerHeight ||
+    rect.left >= window.innerWidth
+  ) {
+    return true;
+  }
+
+  const x = Math.min(Math.max(rect.left + rect.width / 2, 0), window.innerWidth - 1);
+  const y = Math.min(Math.max(rect.top + rect.height / 2, 0), window.innerHeight - 1);
+  const topElement = document.elementFromPoint(x, y);
+
+  return !!topElement && (element === topElement || element.contains(topElement));
+}
+
+function forceAddressFormVisible() {
+  for (const id of ['form-scope', 'location-entry']) {
+    const element = document.getElementById(id);
+    if (!element) continue;
+
+    element.style.setProperty('display', 'block', 'important');
+    element.style.setProperty('opacity', '1', 'important');
+    element.style.setProperty('visibility', 'visible', 'important');
+    element.style.setProperty('animation', 'none', 'important');
+  }
+}
 
 export function Home() {
   const navigate = useNavigate();
@@ -30,6 +140,7 @@ export function Home() {
       const streetInput = document.getElementById('street1');
       const entryRect = entry?.getBoundingClientRect();
       const entryStyle = entry ? window.getComputedStyle(entry) : null;
+      const hiddenAncestor = getHiddenAncestor(entry);
 
       const reasons: string[] = [];
       if (!entry) reasons.push('element-missing');
@@ -37,35 +148,30 @@ export function Home() {
       if (entryStyle?.opacity === '0') reasons.push('opacity-zero');
       if (entryStyle?.visibility === 'hidden') reasons.push('visibility-hidden');
       if (entryStyle?.display === 'none') reasons.push('display-none');
+      if (entry && entryRect && !isHitTestable(entry, entryRect)) reasons.push('not-hit-testable');
+      if (hiddenAncestor) reasons.push(`hidden-ancestor-${hiddenAncestor.reason}`);
       if (!streetInput) reasons.push('street-input-missing');
 
       if (reasons.length === 0) return;
 
       sessionStorage.setItem(VISIBILITY_REPORTED_KEY, '1');
 
-      try {
-        Sentry.captureMessage('address-form-invisible', {
+      reportDiagnostic('address-form-invisible', {
         level: 'warning',
+        tags: {
+          flow: 'address',
+          step: 'home',
+          diagnostic: 'visibility',
+        },
         extra: {
           reasons,
-          elementPresent: !!entry,
-          streetInputPresent: !!streetInput,
-          cityInputPresent: !!document.getElementById('city1'),
-          zipInputPresent: !!document.getElementById('zip1'),
-          locationInputsPresent: !!document.getElementById('locationInputs'),
-          submitLocationPresent: !!document.getElementById('submitLocation'),
-          opacity: entryStyle?.opacity,
-          visibility: entryStyle?.visibility,
-          display: entryStyle?.display,
-          height: entryStyle?.height,
-          width: entryStyle?.width,
-          animationName: entryStyle?.animationName,
-          rect: entryRect && {
-            x: entryRect.x,
-            y: entryRect.y,
-            width: entryRect.width,
-            height: entryRect.height,
-          },
+          hiddenAncestor,
+          elements: ADDRESS_FORM_ELEMENT_IDS.map(getElementSnapshot),
+          path: window.location.pathname,
+          hash: window.location.hash,
+          userAgent: navigator.userAgent,
+          language: navigator.language,
+          cookieEnabled: navigator.cookieEnabled,
           windowWidth: window.innerWidth,
           windowHeight: window.innerHeight,
           devicePixelRatio: window.devicePixelRatio,
@@ -73,18 +179,9 @@ export function Home() {
           prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
           dataPagefrom: document.getElementById('wrapper')?.getAttribute('data-pagefrom'),
         },
-        });
-      } catch (err) {
-        // Telemetry must never break the page.
-        console.error('Sentry capture failed:', err);
-      }
+      });
 
-      if (entry) {
-        entry.style.opacity = '1';
-        entry.style.visibility = 'visible';
-        entry.style.display = '';
-        entry.style.animation = 'none';
-      }
+      forceAddressFormVisible();
     }, VISIBILITY_CHECK_DELAY_MS);
 
     return () => window.clearTimeout(timer);
@@ -115,6 +212,24 @@ export function Home() {
         navigate('/location');
       }
     } catch (err) {
+      reportDiagnostic('address-verification-failed', {
+        level: 'warning',
+        tags: {
+          flow: 'address',
+          step: 'verify-address',
+        },
+        extra: {
+          errorName: err instanceof Error ? err.name : null,
+          errorMessage: err instanceof Error ? err.message : String(err),
+          errorCode:
+            typeof err === 'object' && err && 'code' in err
+              ? String((err as { code?: unknown }).code)
+              : null,
+          path: window.location.pathname,
+          hash: window.location.hash,
+        },
+        exception: err,
+      });
       const validation = validateAddressResponse(err, null, postal.trim());
       setError(typeof validation === 'string' ? validation : 'An unexpected error occurred.');
       setVerifying(false);

@@ -6,10 +6,10 @@ const router = Router();
 
 const MAX_ENVELOPE_BYTES = 200 * 1024;
 
-const allowedDsn = process.env.SENTRY_ALLOWED_DSN || '';
+const allowedDsn = process.env.SENTRY_ALLOWED_DSN || process.env.VITE_SENTRY_DSN || '';
 const allowedDsnUrl = parseDsn(allowedDsn);
 if (allowedDsn && !allowedDsnUrl) {
-  logger.warn('[monitor] SENTRY_ALLOWED_DSN is set but invalid; tunnel will reject all events');
+  logger.warn('[monitor] Sentry DSN is set but invalid; tunnel will reject all events');
 }
 
 type ParsedDsn = {

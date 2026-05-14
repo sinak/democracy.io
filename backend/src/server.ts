@@ -19,6 +19,7 @@ import draftMessageRoutes from './routes/draft-message.js';
 import topicSuggestionRoutes from './routes/topic-suggestion.js';
 import shareTopicRoutes from './routes/share-topic.js';
 import messageCopyRoutes from './routes/message-copy.js';
+import monitorRoutes from './routes/monitor.js';
 import { checkPostgresConnection } from './services/postgres.js';
 
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
@@ -54,10 +55,18 @@ const draftLimiter = rateLimit({
   skip: skipLocalRateLimit,
 });
 
+const monitorLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 60,
+  message: { status: 'error', message: 'Too many requests', code: 429, data: null },
+  skip: skipLocalRateLimit,
+});
+
 app.use(/\/api.*\/message$/, messageLimiter);
 app.use('/api/1/draft-message', draftLimiter);
 app.use('/api/1/topic-suggestion', draftLimiter);
 app.use('/api/1/share-topic', draftLimiter);
+app.use('/api/1/monitor', monitorLimiter);
 
 // API routes (mounted at /api/1)
 app.use('/api/1', locationRoutes);
@@ -70,6 +79,7 @@ app.use('/api/1', draftMessageRoutes);
 app.use('/api/1', topicSuggestionRoutes);
 app.use('/api/1', shareTopicRoutes);
 app.use('/api/1', messageCopyRoutes);
+app.use('/api/1', monitorRoutes);
 
 // Exception logging endpoint
 app.post('/api/1/exception', (req, res) => {

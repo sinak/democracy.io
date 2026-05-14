@@ -1,9 +1,13 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as Sentry from '@sentry/react';
 import { useWizard } from '../context/WizardContext';
 import { useApi } from '../hooks/useApi';
 import { validateAddressResponse, getAddressData } from '../helpers/address';
 import type { CanonicalAddress } from '../types';
+
+const VISIBILITY_CHECK_DELAY_MS = 2500;
+const VISIBILITY_REPORTED_KEY = 'dio:location-entry-visibility-reported';
 
 export function Home() {
   const navigate = useNavigate();
@@ -17,6 +21,69 @@ export function Home() {
   const [error, setError] = useState<string | null>(null);
   const [verifying, setVerifying] = useState(false);
   const [touched, setTouched] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem(VISIBILITY_REPORTED_KEY) === '1') return;
+
+    const timer = window.setTimeout(() => {
+      const entry = document.getElementById('location-entry');
+      const streetInput = document.getElementById('street1');
+      const entryRect = entry?.getBoundingClientRect();
+      const entryStyle = entry ? window.getComputedStyle(entry) : null;
+
+      const reasons: string[] = [];
+      if (!entry) reasons.push('element-missing');
+      if (entryRect && (entryRect.width === 0 || entryRect.height === 0)) reasons.push('zero-rect');
+      if (entryStyle?.opacity === '0') reasons.push('opacity-zero');
+      if (entryStyle?.visibility === 'hidden') reasons.push('visibility-hidden');
+      if (entryStyle?.display === 'none') reasons.push('display-none');
+      if (!streetInput) reasons.push('street-input-missing');
+
+      if (reasons.length === 0) return;
+
+      sessionStorage.setItem(VISIBILITY_REPORTED_KEY, '1');
+
+      Sentry.captureMessage('address-form-invisible', {
+        level: 'warning',
+        extra: {
+          reasons,
+          elementPresent: !!entry,
+          streetInputPresent: !!streetInput,
+          cityInputPresent: !!document.getElementById('city1'),
+          zipInputPresent: !!document.getElementById('zip1'),
+          locationInputsPresent: !!document.getElementById('locationInputs'),
+          submitLocationPresent: !!document.getElementById('submitLocation'),
+          opacity: entryStyle?.opacity,
+          visibility: entryStyle?.visibility,
+          display: entryStyle?.display,
+          height: entryStyle?.height,
+          width: entryStyle?.width,
+          animationName: entryStyle?.animationName,
+          rect: entryRect && {
+            x: entryRect.x,
+            y: entryRect.y,
+            width: entryRect.width,
+            height: entryRect.height,
+          },
+          windowWidth: window.innerWidth,
+          windowHeight: window.innerHeight,
+          devicePixelRatio: window.devicePixelRatio,
+          documentReadyState: document.readyState,
+          prefersReducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+          dataPagefrom: document.getElementById('wrapper')?.getAttribute('data-pagefrom'),
+        },
+      });
+
+      if (entry) {
+        entry.style.opacity = '1';
+        entry.style.visibility = 'visible';
+        entry.style.display = '';
+        entry.style.animation = 'none';
+      }
+    }, VISIBILITY_CHECK_DELAY_MS);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const isValid = address.trim() !== '' && city.trim() !== '' && /^\d{5}$/.test(postal.trim());
 
@@ -54,18 +121,18 @@ export function Home() {
       <div className="row">
         <div id="location-entry" className="whitebox col-sm-11 col-md-8 col-lg-7">
           <div className="whitebox-container clearfix">
-            <form name="addressForm" onSubmit={handleSubmit}>
+            <form name="locationForm" onSubmit={handleSubmit}>
               <div className="clearfix">
                 <div
                   id="locationInputs"
                   className={`clearfix ${isValid ? 'locationValid' : ''}`}
                 >
                   <div className="form-group">
-                    <label htmlFor="streetAddress1">Street address</label>
+                    <label htmlFor="street1">Street address</label>
                     <input
                       type="text"
-                      id="streetAddress1"
-                      name="address"
+                      id="street1"
+                      name="street"
                       autoComplete="street-address"
                       required
                       value={address}
@@ -97,7 +164,7 @@ export function Home() {
                         <input
                           type="tel"
                           id="zip1"
-                          name="postal"
+                          name="zip"
                           autoComplete="postal-code"
                           required
                           pattern="\d{5}"

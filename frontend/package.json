@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@sentry/react": "^10.53.1",
     "bootstrap-sass": "^3.3.2",
     "hover.css": "^2.0.2",
     "react": "^19.2.0",

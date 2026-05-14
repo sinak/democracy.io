@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Router, raw } from 'express';
 import { logger } from '../logger.js';
 
@@ -74,18 +75,29 @@ router.post(
       return res.sendStatus(202);
     }
 
+    const upstreamUrl =
+      `https://${envelopeDsn.host}/api/${envelopeDsn.projectId}/envelope/` +
+      `?sentry_key=${encodeURIComponent(envelopeDsn.publicKey)}&sentry_version=7`;
+
     try {
-      const upstream = await fetch(
-        `https://${envelopeDsn.host}/api/${envelopeDsn.projectId}/envelope/`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-sentry-envelope' },
-          body: text,
-        }
-      );
+      const upstream = await axios.post(upstreamUrl, text, {
+        headers: { 'Content-Type': 'application/x-sentry-envelope' },
+        validateStatus: () => true,
+        timeout: 10_000,
+      });
+      if (upstream.status >= 400) {
+        logger.warn('[monitor] Sentry rejected envelope', {
+          status: upstream.status,
+          response:
+            typeof upstream.data === 'string'
+              ? upstream.data.slice(0, 500)
+              : JSON.stringify(upstream.data).slice(0, 500),
+        });
+      }
       return res.sendStatus(upstream.status);
     } catch (err) {
-      logger.error('[monitor] Failed to forward envelope to Sentry', err);
+      const message = err instanceof Error ? err.message : String(err);
+      logger.error('[monitor] Failed to forward envelope to Sentry', { message });
       return res.sendStatus(502);
     }
   }

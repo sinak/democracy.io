@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useWizard } from '../context/WizardContext';
 import { useApi } from '../hooks/useApi';
 import { validateAddressResponse, getAddressData } from '../helpers/address';
+import { setClarityTag, trackClarityEvent, upgradeClaritySession } from '../helpers/clarity';
 import { reportDiagnostic } from '../helpers/diagnostics';
 import type { CanonicalAddress } from '../types';
 
@@ -133,6 +134,9 @@ export function Home() {
   const [touched, setTouched] = useState(false);
 
   useEffect(() => {
+    setClarityTag('flow', 'address');
+    trackClarityEvent('address-form-mounted');
+
     if (sessionStorage.getItem(VISIBILITY_REPORTED_KEY) === '1') return;
 
     const timer = window.setTimeout(() => {
@@ -155,6 +159,10 @@ export function Home() {
       if (reasons.length === 0) return;
 
       sessionStorage.setItem(VISIBILITY_REPORTED_KEY, '1');
+
+      setClarityTag('address_form_visibility', reasons);
+      trackClarityEvent('address-form-invisible');
+      upgradeClaritySession('address-form-invisible');
 
       reportDiagnostic('address-form-invisible', {
         level: 'warning',
@@ -241,7 +249,7 @@ export function Home() {
       <div className="row">
         <div id="location-entry" className="whitebox col-sm-11 col-md-8 col-lg-7">
           <div className="whitebox-container clearfix">
-            <form name="locationForm" onSubmit={handleSubmit}>
+            <form name="locationForm" onSubmit={handleSubmit} data-clarity-mask="true">
               <div className="clearfix">
                 <div
                   id="locationInputs"

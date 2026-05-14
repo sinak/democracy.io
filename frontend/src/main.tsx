@@ -3,8 +3,11 @@ import { HashRouter } from 'react-router-dom';
 import * as Sentry from '@sentry/react';
 import { AppErrorBoundary } from './components/AppErrorBoundary';
 import { WizardProvider } from './context/WizardContext';
+import { initMicrosoftClarity } from './helpers/clarity';
 import App from './App';
 import './styles/app.scss';
+
+initMicrosoftClarity(import.meta.env.VITE_CLARITY_PROJECT_ID);
 
 const sentryDsn = import.meta.env.VITE_SENTRY_DSN;
 if (sentryDsn) {

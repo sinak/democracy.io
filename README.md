@@ -53,6 +53,10 @@ This builds:
 - `frontend/dist`
 - `backend/dist`
 
+## Frontend Telemetry
+
+Set `VITE_CLARITY_PROJECT_ID` at frontend build time to enable Microsoft Clarity session diagnostics in the Vite frontend. Leave it unset to disable Clarity.
+
 ## Production
 
 ```bash

@@ -1,33 +1,19 @@
-import axios from 'axios';
 import { Router, raw } from 'express';
 import { logger } from '../logger.js';
+import {
+  forwardSentryEnvelope,
+  getConfiguredSentryDsn,
+  parseDsn,
+} from '../services/sentry.js';
 
 const router = Router();
 
 const MAX_ENVELOPE_BYTES = 200 * 1024;
 
-const allowedDsn = process.env.SENTRY_ALLOWED_DSN || process.env.VITE_SENTRY_DSN || '';
+const allowedDsn = getConfiguredSentryDsn();
 const allowedDsnUrl = parseDsn(allowedDsn);
 if (allowedDsn && !allowedDsnUrl) {
   logger.warn('[monitor] Sentry DSN is set but invalid; tunnel will reject all events');
-}
-
-type ParsedDsn = {
-  host: string;
-  publicKey: string;
-  projectId: string;
-};
-
-function parseDsn(dsn: string): ParsedDsn | null {
-  if (!dsn) return null;
-  try {
-    const url = new URL(dsn);
-    const projectId = url.pathname.replace(/^\//, '').split('/')[0];
-    if (!url.username || !url.host || !projectId) return null;
-    return { host: url.host, publicKey: url.username, projectId };
-  } catch {
-    return null;
-  }
 }
 
 router.post(
@@ -75,16 +61,8 @@ router.post(
       return res.sendStatus(202);
     }
 
-    const upstreamUrl =
-      `https://${envelopeDsn.host}/api/${envelopeDsn.projectId}/envelope/` +
-      `?sentry_key=${encodeURIComponent(envelopeDsn.publicKey)}&sentry_version=7`;
-
     try {
-      const upstream = await axios.post(upstreamUrl, text, {
-        headers: { 'Content-Type': 'application/x-sentry-envelope' },
-        validateStatus: () => true,
-        timeout: 10_000,
-      });
+      const upstream = await forwardSentryEnvelope(envelopeDsn, text);
       if (upstream.status >= 400) {
         logger.warn('[monitor] Sentry rejected envelope', {
           status: upstream.status,

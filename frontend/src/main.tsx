@@ -3,6 +3,7 @@ import { HashRouter } from 'react-router-dom';
 import * as Sentry from '@sentry/react';
 import { AppErrorBoundary } from './components/AppErrorBoundary';
 import { WizardProvider } from './context/WizardContext';
+import { installGlobalDiagnostics } from './helpers/diagnostics';
 import App from './App';
 import './styles/app.scss';
 
@@ -24,6 +25,8 @@ if (sentryDsn) {
     console.error('Sentry init failed:', err);
   }
 }
+
+installGlobalDiagnostics();
 
 createRoot(document.getElementById('root')!).render(
   <AppErrorBoundary>

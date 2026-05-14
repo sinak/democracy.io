@@ -21,6 +21,7 @@ import shareTopicRoutes from './routes/share-topic.js';
 import messageCopyRoutes from './routes/message-copy.js';
 import monitorRoutes from './routes/monitor.js';
 import { checkPostgresConnection } from './services/postgres.js';
+import { captureClientDiagnostic } from './services/sentry.js';
 
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(currentDir, '../..');
@@ -83,7 +84,21 @@ app.use('/api/1', monitorRoutes);
 
 // Exception logging endpoint
 app.post('/api/1/exception', (req, res) => {
-  logger.warn('[Client Exception]', req.body);
+  const body: Record<string, unknown> =
+    typeof req.body === 'object' && req.body !== null ? req.body : {};
+  logger.warn('[Client Exception]', {
+    name: body.name,
+    level: body.level,
+    tags: body.tags,
+    url: body.url,
+    userAgent: body.userAgent,
+  });
+
+  void captureClientDiagnostic(body, req.get('user-agent')).catch((err) => {
+    const message = err instanceof Error ? err.message : String(err);
+    logger.warn('[Client Exception] Failed to forward diagnostic to Sentry', { message });
+  });
+
   res.sendStatus(200);
 });
 

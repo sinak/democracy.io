@@ -8,6 +8,17 @@ import { installGlobalDiagnostics } from './helpers/diagnostics';
 import App from './App';
 import './styles/app.scss';
 
+function normalizeLegacyHashbangUrl() {
+  const { hash, pathname, search } = window.location;
+  if (!hash.startsWith('#!')) return;
+
+  const hashPath = hash.slice(2);
+  const normalizedPath = hashPath.startsWith('/') ? hashPath : `/${hashPath}`;
+  window.history.replaceState(null, '', `${pathname}${search}#${normalizedPath}`);
+}
+
+normalizeLegacyHashbangUrl();
+
 initMicrosoftClarity(import.meta.env.VITE_CLARITY_PROJECT_ID);
 
 const sentryDsn = import.meta.env.VITE_SENTRY_DSN;

@@ -11,6 +11,10 @@ describe('getLegacyHashRedirectTarget', () => {
     expect(getLegacyHashRedirectTarget('/', '', '#/compose?draft=1')).toBe('/compose?draft=1');
   });
 
+  it('converts legacy hashbang routes into browser paths', () => {
+    expect(getLegacyHashRedirectTarget('/', '', '#!/location')).toBe('/location');
+  });
+
   it('ignores non-legacy hashes', () => {
     expect(getLegacyHashRedirectTarget('/organizer/sign-in', '', '#top')).toBeNull();
   });

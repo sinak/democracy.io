@@ -11,11 +11,12 @@
     "test": "node ./vendor/vitest/bin/vitest.mjs run"
   },
   "dependencies": {
+    "@sentry/react": "^10.53.1",
     "@supabase/supabase-js": "file:vendor/supabase-js",
     "bootstrap-sass": "^3.3.2",
     "hover.css": "^2.0.2",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
     "react-markdown": "file:vendor/react-markdown",
     "react-router-dom": "^7.13.1",
     "remark-gfm": "file:vendor/remark-gfm",

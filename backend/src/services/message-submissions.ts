@@ -1,8 +1,13 @@
 import crypto from 'node:crypto';
-import type { Message } from '../types.js';
+import type { Message, MessageResponse } from '../types.js';
 import { logger } from '../logger.js';
 import { getPostgresPool } from './postgres.js';
-import { extractErrorMessage } from '../helpers/error-message.js';
+import {
+  extractDeliveryErrorMessage,
+  extractErrorMessage,
+  formatDeliveryErrorForStorage,
+  formatDeliveryResponseErrorForStorage,
+} from '../helpers/error-message.js';
 import { hashIpAddress } from '../helpers/ip-address.js';
 
 export interface MessageSubmissionResult {
@@ -20,6 +25,36 @@ interface PersistMessageSubmissionsParams {
   batchId?: string;
 }
 
+const DELIVERY_ERROR_STATUSES = new Set(['error', 'failed', 'failure']);
+
+function isDeliveryErrorStatus(status: string) {
+  const normalizedStatus = status.toLowerCase();
+  return (
+    DELIVERY_ERROR_STATUSES.has(normalizedStatus) ||
+    normalizedStatus.includes('error') ||
+    normalizedStatus.includes('fail')
+  );
+}
+
+export function makeMessageSubmissionResult(responseData: MessageResponse): MessageSubmissionResult {
+  const status = responseData.status || 'submitted';
+  const shouldStoreError = isDeliveryErrorStatus(status) || Boolean(extractDeliveryErrorMessage(responseData));
+
+  return {
+    status,
+    url: responseData.url,
+    uid: responseData.uid,
+    errorMessage: shouldStoreError ? formatDeliveryResponseErrorForStorage(responseData) : undefined,
+  };
+}
+
+export function makeMessageSubmissionErrorResult(err: unknown): MessageSubmissionResult {
+  return {
+    status: 'error',
+    errorMessage: formatDeliveryErrorForStorage(err),
+  };
+}
+
 export async function persistMessageSubmissions({
   endpoint,
   messages,
@@ -33,6 +68,9 @@ export async function persistMessageSubmissions({
   }
 
   const requestIpHash = hashIpAddress(requestIp);
+  const deliveryErrors = results
+    .map((result, index) => ({ result, bioguideId: messages[index]?.bioguideId }))
+    .filter(({ result }) => isDeliveryErrorStatus(result.status) || result.errorMessage);
 
   try {
     await Promise.all(
@@ -99,6 +137,12 @@ export async function persistMessageSubmissions({
     );
 
     logger.debug(`[Message Submissions] Stored ${messages.length} message record(s) for batch ${batchId}`);
+    if (deliveryErrors.length > 0) {
+      const errorSummary = deliveryErrors
+        .map(({ result, bioguideId }) => `${bioguideId ?? 'unknown'}=${result.status}`)
+        .join(', ');
+      logger.warn(`[Message Submissions] Batch ${batchId} recorded delivery error(s): ${errorSummary}`);
+    }
   } catch (err) {
     logger.warn(
       `[Message Submissions] Failed to persist ${messages.length} message record(s): ${extractErrorMessage(err)}`

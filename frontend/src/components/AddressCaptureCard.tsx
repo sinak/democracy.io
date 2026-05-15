@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { validateAddressResponse, getAddressData } from '../helpers/address';
 import { useApi } from '../hooks/useApi';
 import { useWizard } from '../context/WizardContext';
+import { reportDiagnostic } from '../helpers/diagnostics';
 import type { CanonicalAddress } from '../types';
 
 interface AddressCaptureCardProps {
@@ -49,6 +50,24 @@ export function AddressCaptureCard({
 
       await onVerified(validation as CanonicalAddress);
     } catch (err) {
+      reportDiagnostic('address-verification-failed', {
+        level: 'warning',
+        tags: {
+          flow: 'address',
+          step: 'verify-address',
+        },
+        extra: {
+          errorName: err instanceof Error ? err.name : null,
+          errorMessage: err instanceof Error ? err.message : String(err),
+          errorCode:
+            typeof err === 'object' && err && 'code' in err
+              ? String((err as { code?: unknown }).code)
+              : null,
+          path: window.location.pathname,
+          hash: window.location.hash,
+        },
+        exception: err,
+      });
       const validation = validateAddressResponse(err, null, postal.trim());
       setError(typeof validation === 'string' ? validation : 'An unexpected error occurred.');
       setVerifying(false);
@@ -56,17 +75,17 @@ export function AddressCaptureCard({
   }
 
   return (
-    <div id="address" className={`whitebox ${className}`.trim()}>
+    <div id="location-entry" className={`whitebox ${className}`.trim()}>
       <div className="whitebox-container clearfix">
-        <form name="addressForm" onSubmit={handleSubmit}>
+        <form name="locationForm" onSubmit={handleSubmit} data-clarity-mask="true">
           <div className="clearfix">
-            <div id="addressInputs" className={`clearfix ${isValid ? 'addressValid' : ''}`}>
+            <div id="locationInputs" className={`clearfix ${isValid ? 'locationValid' : ''}`}>
               <div className="form-group">
-                <label htmlFor="streetAddress1">Street address</label>
+                <label htmlFor="street1">Street address</label>
                 <input
                   type="text"
-                  id="streetAddress1"
-                  name="address"
+                  id="street1"
+                  name="street"
                   autoComplete="street-address"
                   required
                   value={address}
@@ -98,7 +117,7 @@ export function AddressCaptureCard({
                     <input
                       type="tel"
                       id="zip1"
-                      name="postal"
+                      name="zip"
                       autoComplete="postal-code"
                       required
                       pattern="\d{5}"
@@ -112,7 +131,7 @@ export function AddressCaptureCard({
               </div>
             </div>
 
-            <div id="submitAddress" className={`clearfix ${isValid ? 'addressValid' : ''}`}>
+            <div id="submitLocation" className={`clearfix ${isValid ? 'locationValid' : ''}`}>
               <button type="submit" className="btn btn-lg btn-orange" disabled={verifying}>
                 {verifying ? 'Verifying...' : submitLabel}
               </button>

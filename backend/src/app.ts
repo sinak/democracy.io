@@ -20,9 +20,11 @@ import draftMessageRoutes from './routes/draft-message.js';
 import topicSuggestionRoutes from './routes/topic-suggestion.js';
 import shareTopicRoutes from './routes/share-topic.js';
 import messageCopyRoutes from './routes/message-copy.js';
+import monitorRoutes from './routes/monitor.js';
 import { createAdminCampaignRoutes } from './routes/admin-campaigns.js';
 import { createCampaignRoutes } from './routes/campaigns.js';
 import { createPublicCampaignRoutes } from './routes/public-campaigns.js';
+import { captureClientDiagnostic } from './services/sentry.js';
 
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(currentDir, '../..');
@@ -68,10 +70,18 @@ export function createApp(options: CreateAppOptions = {}) {
     skip: skipLocalRateLimit,
   });
 
+  const monitorLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000,
+    max: 60,
+    message: { status: 'error', message: 'Too many requests', code: 429, data: null },
+    skip: skipLocalRateLimit,
+  });
+
   app.use(/\/api.*\/message$/, messageLimiter);
   app.use('/api/1/draft-message', draftLimiter);
   app.use('/api/1/topic-suggestion', draftLimiter);
   app.use('/api/1/share-topic', draftLimiter);
+  app.use('/api/1/monitor', monitorLimiter);
 
   app.use('/api/1', locationRoutes);
   app.use('/api/1', legislatorsRoutes);
@@ -83,12 +93,27 @@ export function createApp(options: CreateAppOptions = {}) {
   app.use('/api/1', topicSuggestionRoutes);
   app.use('/api/1', shareTopicRoutes);
   app.use('/api/1', messageCopyRoutes);
+  app.use('/api/1', monitorRoutes);
   app.use('/api/1', createCampaignRoutes({ campaignService, requireAuthenticatedUser }));
   app.use('/api/1', createAdminCampaignRoutes({ campaignService, requireAuthenticatedUser, requireAdminUser }));
   app.use('/api/1', createPublicCampaignRoutes({ campaignService }));
 
   app.post('/api/1/exception', (req, res) => {
-    logger.warn('[Client Exception]', req.body);
+    const body: Record<string, unknown> =
+      typeof req.body === 'object' && req.body !== null ? req.body : {};
+    logger.warn('[Client Exception]', {
+      name: body.name,
+      level: body.level,
+      tags: body.tags,
+      url: body.url,
+      userAgent: body.userAgent,
+    });
+
+    void captureClientDiagnostic(body, req.get('user-agent')).catch((err) => {
+      const message = err instanceof Error ? err.message : String(err);
+      logger.warn('[Client Exception] Failed to forward diagnostic to Sentry', { message });
+    });
+
     res.sendStatus(200);
   });
 

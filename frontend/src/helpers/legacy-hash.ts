@@ -3,14 +3,24 @@ export function getLegacyHashRedirectTarget(
   search: string,
   hash: string
 ) {
-  if (pathname !== '/' || !hash.startsWith('#/')) {
+  if (pathname !== '/') {
     return null;
   }
 
-  const fragment = hash.slice(1);
+  const fragment = hash.startsWith('#!')
+    ? hash.slice(2)
+    : hash.startsWith('#/')
+      ? hash.slice(1)
+      : null;
+
+  if (fragment === null) {
+    return null;
+  }
+
+  const normalizedFragment = fragment.startsWith('/') ? fragment : `/${fragment}`;
 
   try {
-    const legacyUrl = new URL(fragment, 'http://localhost');
+    const legacyUrl = new URL(normalizedFragment, 'http://localhost');
     const nextPath = `${legacyUrl.pathname}${legacyUrl.search}${legacyUrl.hash}`;
     return nextPath === '/' && search ? `/${search}` : nextPath;
   } catch {

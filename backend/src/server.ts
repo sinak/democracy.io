@@ -5,14 +5,12 @@ import { legislators } from './dio/legislator-search.js';
 import { fetchLegislators } from './services/congress-legislators.js';
 import { checkPostgresConnection } from './services/postgres.js';
 
-// Health check
 const app = createApp();
 
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', legislatorsLoaded: legislators.loaded });
 });
 
-// Load legislator data, then start server
 async function start() {
   try {
     logger.info('Fetching legislator data...');
@@ -24,7 +22,6 @@ async function start() {
     logger.warn('Server starting without legislator data — will retry in 12 hours');
   }
 
-  // Schedule refresh every 12 hours
   setInterval(async () => {
     try {
       logger.info('[Congress Legislators] Automatic update');

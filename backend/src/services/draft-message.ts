@@ -10,10 +10,13 @@ const systemPrompt = [
   'You help users draft constituent emails to members of Congress.',
   'Return valid JSON only.',
   'The JSON object must have exactly two string fields: "subject" and "message".',
-  'Write a concise, polite, plain-text subject and message.',
+  'Write a clear, well-formatted, plain-text email body that communicates what the user wants.',
+  'State the main request early, explain the reason or stakes using only supplied details, and end with a respectful action request.',
+  'Use short paragraphs separated by blank lines when the length limit allows; avoid a single dense block of text.',
   'Do not include any greeting, salutation, or recipient name in the message.',
   'Do not include any closing signature, sender name, email, phone number, or address.',
   'Do not use markdown, bullets, or code formatting.',
+  'Preserve the user\'s substantive intent and tone instead of replacing it with generic policy language.',
   'Do not invent personal facts, legislative facts, or district facts that were not provided.',
   'The message field must contain only the body text that should appear after "Dear [Representative/Senator LastName],".',
 ].join(' ');
@@ -190,12 +193,15 @@ function buildUserPrompt(request: DraftMessageRequest): string {
     outputRequirements: {
       format: 'json_object',
       requiredKeys: ['subject', 'message'],
-      subject: 'A concise plain-text subject line.',
-      message: 'The body only, without a greeting, salutation, or signature.',
+      subject: 'A specific, concise plain-text subject line that reflects the user\'s request.',
+      message:
+        'A finished email body only, without a greeting, salutation, or signature. It should read naturally after "Dear [Representative/Senator LastName],".',
     },
     styleGuidance: [
-      'Be polite and concise.',
-      'Explain why the issue matters to the sender.',
+      'Keep the message polite, direct, and easy to scan.',
+      'Prefer two or three short paragraphs: the request, why it matters, and the action the user wants the legislator to take.',
+      'Use concrete details from the instruction, current draft, selected topics, recipients, and location only.',
+      'For rewrite mode, preserve the user\'s specific points while improving organization, clarity, and flow.',
       'Keep the content usable as a body-only message for multiple legislators.',
     ],
   };

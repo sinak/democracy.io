@@ -77,36 +77,36 @@ div#whydio {
     font-weight: 100;
   }
 }
-#address {
+#location-entry {
   margin-bottom: 30px;
 }
-#address .whitebox-container {
+#location-entry .whitebox-container {
   padding: 0;
 }
-#address .whitebox-container > form {
+#location-entry .whitebox-container > form {
   padding: 27px 30px 15px 30px;
   @extend .clearfix;
 }
-#address .btn-lg.btn-orange {
+#location-entry .btn-lg.btn-orange {
   margin-top: 25px;
   right: 2px;
 }
-#address .alert.alert-danger {
+#location-entry .alert.alert-danger {
   margin-bottom: 5px;
   margin-top:5px;
   background-color: #fff;
 }
-#address .whitebox-footer {
+#location-entry .whitebox-footer {
   a, a:visited, a:hover, a:active {
     color: inherit;
     text-decoration: underline;
   }
 }
 @media (min-width: $screen-sm-min) {
-  #address #addressInputs {
+  #location-entry #locationInputs {
     float:left;
   }
-  #address #submitAddress {
+  #location-entry #submitLocation {
     float:right;
     width: 25%;
     margin-top: 96px;
@@ -124,7 +124,7 @@ div#whydio {
     max-width: 320px;
   }
 
-  #address {
+  #location-entry {
     .btn-lg.btn-orange {
       left:0;
       margin-top:5px;
@@ -334,7 +334,7 @@ div#whydio {
   }
 }
 
-#address.campaign-address-card {
+#location-entry.campaign-address-card {
   margin-bottom: 0;
 }
 
@@ -383,11 +383,11 @@ div#whydio {
 }
 
 @media (min-width: $screen-sm-min) {
-  #address.campaign-address-card .whitebox-container > form > .clearfix {
+  #location-entry.campaign-address-card .whitebox-container > form > .clearfix {
     position: relative;
   }
 
-  #address.campaign-address-card #submitAddress {
+  #location-entry.campaign-address-card #submitLocation {
     box-sizing: border-box;
     margin-top: 0;
     max-height: none;
@@ -402,12 +402,12 @@ div#whydio {
     transition: max-width 0.5s ease, opacity 0.25s ease;
   }
 
-  #address.campaign-address-card #submitAddress.addressValid {
+  #location-entry.campaign-address-card #submitLocation.locationValid {
     opacity: 1;
     pointer-events: auto;
   }
 
-  #address.campaign-address-card #submitAddress .btn-lg.btn-orange {
+  #location-entry.campaign-address-card #submitLocation .btn-lg.btn-orange {
     margin-top: 25px;
     padding-left: 24px;
     padding-right: 24px;

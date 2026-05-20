@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CampaignStatusBadge } from '../../components/CampaignStatusBadge';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 import { OrganizerPageLayout } from '../../components/OrganizerPageLayout';
@@ -35,8 +35,15 @@ async function copyText(value: string) {
 }
 
 export function OrganizerCampaignList() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const { session, user } = useAuth();
   const accessToken = session?.access_token || null;
+  const [flashMessage] = useState(() =>
+    typeof (location.state as { flashMessage?: unknown } | null)?.flashMessage === 'string'
+      ? ((location.state as { flashMessage?: string }).flashMessage ?? null)
+      : null
+  );
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [copyStatus, setCopyStatus] = useState<{
     campaignId: string;
@@ -49,6 +56,14 @@ export function OrganizerCampaignList() {
   const error =
     loadResult?.accessToken === accessToken ? loadResult.error : null;
   const isLoading = Boolean(accessToken && loadResult?.accessToken !== accessToken);
+
+  useEffect(() => {
+    if (!flashMessage) {
+      return;
+    }
+
+    navigate(location.pathname, { replace: true, state: null });
+  }, [flashMessage, location.pathname, navigate]);
 
   useEffect(() => {
     let active = true;
@@ -116,6 +131,10 @@ export function OrganizerCampaignList() {
       intro=""
       showHero={false}
     >
+      {flashMessage ? (
+        <div className="alert alert-success organizer-alert">{flashMessage}</div>
+      ) : null}
+
       {error ? <div className="alert alert-danger organizer-alert">{error}</div> : null}
 
       <header className="organizer-campaign-list-header">

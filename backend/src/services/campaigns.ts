@@ -16,7 +16,8 @@ import { hashIpAddress } from '../helpers/ip-address.js';
 import { getPostgresPool } from './postgres.js';
 
 type NonDisabledCampaignStatus = Exclude<CampaignStatus, 'disabled'>;
-const RANDOM_CAMPAIGN_SLUG_BYTE_LENGTH = 6;
+const RANDOM_CAMPAIGN_SLUG_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+const RANDOM_CAMPAIGN_SLUG_LENGTH = 5;
 const RANDOM_CAMPAIGN_SLUG_MAX_ATTEMPTS = 5;
 
 export interface CampaignRecord extends Campaign {
@@ -69,6 +70,7 @@ export interface CampaignRepository {
   findBySlug(slug: string): Promise<CampaignRecord | null>;
   create(input: NewCampaignRecord): Promise<CampaignRecord>;
   update(campaign: CampaignRecord): Promise<CampaignRecord>;
+  delete(id: string): Promise<void>;
   createEvent(event: NewCampaignEventRecord): Promise<CampaignEvent>;
 }
 
@@ -79,6 +81,7 @@ export interface CampaignService {
   updateCampaign(actor: CampaignActor, campaignId: string, input: UpdateCampaignRequest): Promise<Campaign>;
   publishCampaign(actor: CampaignActor, campaignId: string): Promise<Campaign>;
   archiveCampaign(actor: CampaignActor, campaignId: string): Promise<Campaign>;
+  deleteCampaign(actor: CampaignActor, campaignId: string): Promise<void>;
   listAdminCampaigns(): Promise<Campaign[]>;
   disableCampaign(campaignId: string): Promise<Campaign>;
   restoreCampaign(campaignId: string): Promise<Campaign>;
@@ -252,22 +255,9 @@ function normalizeCreateCampaignInput(input: CreateCampaignRequest) {
   assertObjectPayload(input, 'Campaign request body must be an object.');
 
   const title = normalizeRequiredString(input.title, 'title');
-  const slug =
-    typeof input.slug === 'string' && input.slug.trim()
-      ? normalizeCampaignSlug(input.slug)
-      : null;
-
-  if (typeof input.slug === 'string' && input.slug.trim() && !slug) {
-    throw new CampaignValidationError('slug must contain letters or numbers.');
-  }
-
-  if (slug && isReservedCampaignSlug(slug)) {
-    throw new CampaignValidationError('slug is reserved by a top-level route.');
-  }
 
   return {
     title,
-    slug,
     summary: normalizeOptionalString(input.summary, 'summary'),
     bodyMarkdown: normalizeOptionalMarkdown(input.bodyMarkdown, 'bodyMarkdown'),
     organizationName: normalizeOptionalString(input.organizationName, 'organizationName'),
@@ -347,7 +337,13 @@ function isUniqueViolation(err: unknown) {
 }
 
 function generateRandomCampaignSlug() {
-  return crypto.randomBytes(RANDOM_CAMPAIGN_SLUG_BYTE_LENGTH).toString('hex');
+  let slug = '';
+
+  for (let index = 0; index < RANDOM_CAMPAIGN_SLUG_LENGTH; index += 1) {
+    slug += RANDOM_CAMPAIGN_SLUG_ALPHABET[crypto.randomInt(RANDOM_CAMPAIGN_SLUG_ALPHABET.length)];
+  }
+
+  return slug;
 }
 
 function isSuccessfulSubmission(submission: CampaignMessageSubmission) {
@@ -445,7 +441,7 @@ export function createCampaignService(repository: CampaignRepository): CampaignS
         organizerUserId: actor.userId,
         organizerEmail: actor.email,
         ...normalizedInput,
-        slug: normalizedInput.slug ?? (await createUniqueCampaignSlug()),
+        slug: await createUniqueCampaignSlug(),
       });
 
       return stripInternalCampaign(campaign);
@@ -509,6 +505,11 @@ export function createCampaignService(repository: CampaignRepository): CampaignS
       const updatedCampaign = await archiveOrganizerCampaign(campaign);
 
       return stripInternalCampaign(updatedCampaign);
+    },
+
+    async deleteCampaign(actor, campaignId) {
+      const campaign = await requireOwnedCampaign(actor, campaignId);
+      await repository.delete(campaign.id);
     },
 
     async listAdminCampaigns() {
@@ -662,7 +663,7 @@ export function createPostgresCampaignRepository(getPool: () => PgPool | null = 
     },
 
     async findBySlug(slug) {
-      const [campaign] = await selectCampaigns('where c.slug = $1 limit 1', [slug]);
+      const [campaign] = await selectCampaigns('where lower(c.slug) = lower($1) limit 1', [slug]);
       return campaign || null;
     },
 
@@ -758,6 +759,11 @@ export function createPostgresCampaignRepository(getPool: () => PgPool | null = 
 
         throw err;
       }
+    },
+
+    async delete(id) {
+      const pool = requirePool();
+      await pool.query('delete from public.campaigns where id = $1', [id]);
     },
 
     async createEvent(event) {

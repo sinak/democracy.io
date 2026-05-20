@@ -31,14 +31,33 @@ create table if not exists public.campaigns (
   disabled_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now(),
-  constraint campaigns_slug_kebab_case_check check (slug ~ '^[a-z0-9]+(?:-[a-z0-9]+)*$'),
-  constraint campaigns_slug_lowercase_check check (slug = lower(slug)),
+  constraint campaigns_slug_path_check check (slug ~ '^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$'),
   constraint campaigns_status_before_disabled_check check (status_before_disabled <> 'disabled'),
   constraint campaigns_first_publish_check check (
     published_at is null
     or first_published_at is not null
   )
 );
+
+alter table if exists public.campaigns
+  drop constraint if exists campaigns_slug_lowercase_check;
+
+alter table if exists public.campaigns
+  drop constraint if exists campaigns_slug_kebab_case_check;
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conname = 'campaigns_slug_path_check'
+      and conrelid = 'public.campaigns'::regclass
+  ) then
+    alter table public.campaigns
+      add constraint campaigns_slug_path_check check (slug ~ '^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$');
+  end if;
+end
+$$;
 
 create index if not exists campaigns_organizer_user_id_idx
   on public.campaigns (organizer_user_id, created_at desc);
@@ -48,3 +67,6 @@ create index if not exists campaigns_status_idx
 
 create index if not exists campaigns_slug_idx
   on public.campaigns (slug);
+
+create index if not exists campaigns_slug_lower_idx
+  on public.campaigns (lower(slug));

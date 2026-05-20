@@ -55,13 +55,16 @@ describe('campaign editor helpers', () => {
     const values = {
       ...createEmptyCampaignEditorValues(),
       title: '!!!',
+      slug: 'testingg',
     };
 
     const validation = validateCampaignEditor(values, 'draft', { requireSlug: false });
 
     expect(validation.isValid).toBe(true);
     expect(validation.fieldErrors).toEqual({});
-    expect(serializeCampaignEditorRequest(validation.normalizedValues)).toEqual({
+    expect(
+      serializeCampaignEditorRequest(validation.normalizedValues, { includeSlug: false })
+    ).toEqual({
       title: '!!!',
       summary:
         '{"schema":"campaign-editor/v1","suggestedSubject":"","suggestedMessage":"","backgroundImageUrl":""}',

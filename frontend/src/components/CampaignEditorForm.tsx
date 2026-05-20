@@ -1,20 +1,20 @@
-import { useDeferredValue } from 'react';
-import { Link } from 'react-router-dom';
+import { useDeferredValue } from "react";
+import { Link } from "react-router-dom";
 import {
   buildCampaignPublicUrl,
   canCopyCampaignPublicUrl,
   getCampaignStatusLabel,
   type CampaignEditorErrors,
   type CampaignEditorValues,
-} from '../helpers/campaign-editor';
-import type { Campaign } from '../types';
-import { CampaignMarkdownPreview } from './CampaignMarkdownPreview';
-import { CampaignStatusBadge } from './CampaignStatusBadge';
-import { HelperCard } from './HelperCard';
-import { MarkdownEditor } from './MarkdownEditor';
+} from "../helpers/campaign-editor";
+import type { Campaign } from "../types";
+import { CampaignMarkdownPreview } from "./CampaignMarkdownPreview";
+import { CampaignStatusBadge } from "./CampaignStatusBadge";
+import { HelperCard } from "./HelperCard";
+import { MarkdownEditor } from "./MarkdownEditor";
 
 export interface CampaignEditorNotice {
-  tone: 'success' | 'error' | 'info';
+  tone: "success" | "error" | "info";
   message: string;
 }
 
@@ -24,9 +24,10 @@ interface CampaignEditorFormProps {
   fieldErrors: CampaignEditorErrors;
   isUploading: boolean;
   notice: CampaignEditorNotice | null;
-  pendingAction: 'create' | 'publish' | 'archive' | null;
+  pendingAction: "create" | "publish" | "archive" | "delete" | null;
   onArchive: (() => void) | null;
   onCopyPublicUrl: (() => void) | null;
+  onDelete: (() => void) | null;
   onFieldChange: (field: keyof CampaignEditorValues, value: string) => void;
   onPublish: () => void;
   onSave: () => void;
@@ -35,13 +36,13 @@ interface CampaignEditorFormProps {
 
 function formatDate(value: string | null) {
   if (!value) {
-    return 'Not yet';
+    return "Not yet";
   }
 
   return new Date(value).toLocaleDateString(undefined, {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
+    month: "short",
+    day: "numeric",
+    year: "numeric",
   });
 }
 
@@ -51,11 +52,11 @@ function renderNotice(notice: CampaignEditorNotice | null) {
   }
 
   const alertClassName =
-    notice.tone === 'success'
-      ? 'alert alert-success organizer-alert organizer-inline-alert'
-      : notice.tone === 'error'
-        ? 'alert alert-danger organizer-alert organizer-inline-alert'
-        : 'alert alert-info organizer-alert organizer-inline-alert';
+    notice.tone === "success"
+      ? "alert alert-success organizer-alert organizer-inline-alert"
+      : notice.tone === "error"
+        ? "alert alert-danger organizer-alert organizer-inline-alert"
+        : "alert alert-info organizer-alert organizer-inline-alert";
 
   return <div className={alertClassName}>{notice.message}</div>;
 }
@@ -80,16 +81,16 @@ function EditorField({
 
 export function CampaignEditorSidebar({
   campaign,
-  hasRawHtml,
   showPublishingNotes = true,
   values,
 }: {
   campaign: Campaign | null;
-  hasRawHtml: boolean;
   showPublishingNotes?: boolean;
   values: CampaignEditorValues;
 }) {
-  const deferredDescriptionMarkdown = useDeferredValue(values.descriptionMarkdown);
+  const deferredDescriptionMarkdown = useDeferredValue(
+    values.descriptionMarkdown,
+  );
   const publicUrl =
     campaign && canCopyCampaignPublicUrl(campaign)
       ? buildCampaignPublicUrl(campaign.slug)
@@ -100,7 +101,7 @@ export function CampaignEditorSidebar({
       <HelperCard title="Campaign preview">
         <div className="organizer-preview-shell">
           <div
-            className={`organizer-preview-hero ${values.backgroundImageUrl ? 'has-image' : ''}`}
+            className={`organizer-preview-hero ${values.backgroundImageUrl ? "has-image" : ""}`}
             style={
               values.backgroundImageUrl
                 ? {
@@ -110,11 +111,11 @@ export function CampaignEditorSidebar({
             }
           >
             {campaign ? <CampaignStatusBadge status={campaign.status} /> : null}
-            <h2>{values.title || 'Untitled campaign'}</h2>
+            <h2>{values.title || "Untitled campaign"}</h2>
             <p>
               {campaign
                 ? getCampaignStatusLabel(campaign)
-                : 'Preview this campaign before you create it'}
+                : "Preview this campaign before you create it"}
             </p>
           </div>
 
@@ -135,21 +136,20 @@ export function CampaignEditorSidebar({
 
             <div className="organizer-preview-meta">
               <span>Suggested subject</span>
-              <p>{values.suggestedSubject || 'No suggested subject added.'}</p>
+              <p>{values.suggestedSubject || "No suggested subject added."}</p>
             </div>
 
             <div className="organizer-preview-meta">
               <span>Suggested message</span>
-              <p>
-                {values.suggestedMessage ||
-                  'No suggested message added.'}
-              </p>
+              <p>{values.suggestedMessage || "No suggested message added."}</p>
             </div>
 
             <div className="organizer-preview-copy">
               <span>Description preview</span>
               {deferredDescriptionMarkdown ? (
-                <CampaignMarkdownPreview markdown={deferredDescriptionMarkdown} />
+                <CampaignMarkdownPreview
+                  markdown={deferredDescriptionMarkdown}
+                />
               ) : (
                 <p className="organizer-preview-placeholder">
                   Add markdown to preview the campaign description.
@@ -163,33 +163,8 @@ export function CampaignEditorSidebar({
       {showPublishingNotes ? (
         <HelperCard title="Publishing notes">
           <p>
-            Organizers can only edit campaign content during creation. After that, the campaign is
-            read-only and can only be enabled or disabled.
-          </p>
-          <p>
-            Public campaign routes live at the root now, so reserved paths like
-            {' '}
-            <strong>/location</strong>
-            {' '}
-            and
-            {' '}
-            <strong>/organizer</strong>
-            {' '}
-            cannot be used as campaign slugs.
-          </p>
-          <p>
-            Markdown accepts regular formatting, links, and external image URLs. Raw HTML is shown
-            as plain text and never rendered.
-          </p>
-          {hasRawHtml ? (
-            <p className="organizer-helper-warning">
-              HTML tags were detected in the description. They will be ignored in preview and on
-              the public page.
-            </p>
-          ) : null}
-          <p>
-            Background images upload into the public <strong>campaign-assets</strong> bucket under
-            your user folder, then the resulting public URL is saved with the campaign.
+            Organizers can only edit campaign content during creation. After
+            that, the campaign is read-only and can only be enabled or disabled.
           </p>
           {campaign ? (
             <dl className="organizer-meta-list organizer-meta-list--compact">
@@ -216,6 +191,7 @@ export function CampaignEditorForm({
   notice,
   onArchive,
   onCopyPublicUrl,
+  onDelete,
   onFieldChange,
   onPublish,
   onSave,
@@ -223,30 +199,37 @@ export function CampaignEditorForm({
   pendingAction,
   values,
 }: CampaignEditorFormProps) {
-  const isDisabledByAdmin = campaign?.status === 'disabled';
+  const isDisabledByAdmin = campaign?.status === "disabled";
   const isReadOnly = Boolean(campaign);
   const isCreateMode = !campaign;
-  const canEnable = Boolean(campaign && !isDisabledByAdmin && campaign.status !== 'published');
-  const canDisable = Boolean(campaign && campaign.status === 'published');
+  const canEnable = Boolean(
+    campaign && !isDisabledByAdmin && campaign.status !== "published",
+  );
+  const canDisable = Boolean(campaign && campaign.status === "published");
   const shellClassName = [
-    'organizer-editor-shell',
-    isCreateMode ? 'organizer-editor-shell--create' : null,
-  ].filter(Boolean).join(' ');
+    "organizer-editor-shell",
+    isCreateMode ? "organizer-editor-shell--create" : null,
+  ]
+    .filter(Boolean)
+    .join(" ");
   const actionClassName = [
-    'organizer-editor-actions',
-    isCreateMode ? 'organizer-editor-actions--create' : null,
-  ].filter(Boolean).join(' ');
+    "organizer-editor-actions",
+    isCreateMode ? "organizer-editor-actions--create" : null,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div className={shellClassName}>
-      {campaign?.status === 'disabled' ? (
+      {campaign?.status === "disabled" ? (
         <div className="alert alert-danger organizer-inline-alert">
-          This campaign is currently disabled by an admin. The public page stays unavailable until
-          an admin restores it.
+          This campaign is currently disabled by an admin. The public page stays
+          unavailable until an admin restores it.
         </div>
       ) : campaign ? (
         <div className="alert alert-info organizer-inline-alert">
-          Campaign content is locked after creation. From here you can only enable or disable it.
+          Campaign content is locked after creation. From here you can only
+          enable or disable it.
         </div>
       ) : null}
 
@@ -254,12 +237,17 @@ export function CampaignEditorForm({
 
       <div className="organizer-editor-section">
         <div className="organizer-editor-section__header">
-          <span className="organizer-eyebrow organizer-eyebrow--left">01 Details</span>
+          <span className="organizer-eyebrow organizer-eyebrow--left">
+            01 Details
+          </span>
           <h2>Campaign basics</h2>
           <p className="organizer-editor-section__header-subtitle">
             Give supporters a clear name and organizer context.
           </p>
-          <span className="organizer-editor-section__header-rule" aria-hidden="true" />
+          <span
+            className="organizer-editor-section__header-rule"
+            aria-hidden="true"
+          />
         </div>
         <div className="organizer-editor-grid">
           <EditorField error={fieldErrors.title} label="Campaign title">
@@ -269,22 +257,30 @@ export function CampaignEditorForm({
               name="title"
               type="text"
               value={values.title}
-              onChange={(event) => onFieldChange('title', event.target.value)}
+              onChange={(event) => onFieldChange("title", event.target.value)}
             />
           </EditorField>
 
-          <EditorField error={fieldErrors.organizationName} label="Organization name (optional)">
+          <EditorField
+            error={fieldErrors.organizationName}
+            label="Organization name (optional)"
+          >
             <input
               className="form-control input-lg"
               disabled={isReadOnly}
               name="organizationName"
               type="text"
               value={values.organizationName}
-              onChange={(event) => onFieldChange('organizationName', event.target.value)}
+              onChange={(event) =>
+                onFieldChange("organizationName", event.target.value)
+              }
             />
           </EditorField>
 
-          <EditorField error={fieldErrors.organizationUrl} label="Organization URL (optional)">
+          <EditorField
+            error={fieldErrors.organizationUrl}
+            label="Organization URL (optional)"
+          >
             <input
               className="form-control input-lg"
               disabled={isReadOnly}
@@ -292,7 +288,9 @@ export function CampaignEditorForm({
               placeholder="https://example.org"
               type="url"
               value={values.organizationUrl}
-              onChange={(event) => onFieldChange('organizationUrl', event.target.value)}
+              onChange={(event) =>
+                onFieldChange("organizationUrl", event.target.value)
+              }
             />
           </EditorField>
         </div>
@@ -300,23 +298,36 @@ export function CampaignEditorForm({
 
       <div className="organizer-editor-section">
         <div className="organizer-editor-section__header">
-          <span className="organizer-eyebrow organizer-eyebrow--left">02 Content</span>
+          <span className="organizer-eyebrow organizer-eyebrow--left">
+            02 Content
+          </span>
           <h2>Campaign content</h2>
           <p className="organizer-editor-section__header-subtitle">
             Write the public description, image, and optional suggested message.
           </p>
-          <span className="organizer-editor-section__header-rule" aria-hidden="true" />
+          <span
+            className="organizer-editor-section__header-rule"
+            aria-hidden="true"
+          />
         </div>
 
-        <EditorField error={fieldErrors.descriptionMarkdown} label="Campaign description">
+        <EditorField
+          error={fieldErrors.descriptionMarkdown}
+          label="Campaign description"
+        >
           <MarkdownEditor
             disabled={isReadOnly}
             value={values.descriptionMarkdown}
-            onChange={(nextValue) => onFieldChange('descriptionMarkdown', nextValue)}
+            onChange={(nextValue) =>
+              onFieldChange("descriptionMarkdown", nextValue)
+            }
           />
         </EditorField>
 
-        <EditorField error={fieldErrors.backgroundImageUrl} label="Background image URL">
+        <EditorField
+          error={fieldErrors.backgroundImageUrl}
+          label="Background image URL"
+        >
           <input
             className="form-control input-lg"
             disabled={isReadOnly || isUploading}
@@ -324,12 +335,16 @@ export function CampaignEditorForm({
             placeholder="https://images.example.org/banner.jpg"
             type="url"
             value={values.backgroundImageUrl}
-            onChange={(event) => onFieldChange('backgroundImageUrl', event.target.value)}
+            onChange={(event) =>
+              onFieldChange("backgroundImageUrl", event.target.value)
+            }
           />
           {!isReadOnly ? (
             <div className="organizer-upload-row">
               <label className="organizer-upload-label">
-                <span>{isUploading ? 'Uploading image...' : 'Upload image'}</span>
+                <span>
+                  {isUploading ? "Uploading image..." : "Upload image"}
+                </span>
                 <input
                   disabled={isUploading}
                   type="file"
@@ -341,7 +356,7 @@ export function CampaignEditorForm({
                       onUpload(file);
                     }
 
-                    event.target.value = '';
+                    event.target.value = "";
                   }}
                 />
               </label>
@@ -353,24 +368,34 @@ export function CampaignEditorForm({
         </EditorField>
 
         <div className="organizer-editor-grid">
-          <EditorField error={fieldErrors.suggestedSubject} label="Suggested subject (optional)">
+          <EditorField
+            error={fieldErrors.suggestedSubject}
+            label="Suggested subject (optional)"
+          >
             <input
               className="form-control input-lg"
               disabled={isReadOnly}
               name="suggestedSubject"
               type="text"
               value={values.suggestedSubject}
-              onChange={(event) => onFieldChange('suggestedSubject', event.target.value)}
+              onChange={(event) =>
+                onFieldChange("suggestedSubject", event.target.value)
+              }
             />
           </EditorField>
 
-          <EditorField error={fieldErrors.suggestedMessage} label="Suggested message (optional)">
+          <EditorField
+            error={fieldErrors.suggestedMessage}
+            label="Suggested message (optional)"
+          >
             <textarea
               className="form-control organizer-editor-textarea organizer-editor-textarea--message"
               disabled={isReadOnly}
               name="suggestedMessage"
               value={values.suggestedMessage}
-              onChange={(event) => onFieldChange('suggestedMessage', event.target.value)}
+              onChange={(event) =>
+                onFieldChange("suggestedMessage", event.target.value)
+              }
             />
           </EditorField>
         </div>
@@ -384,7 +409,7 @@ export function CampaignEditorForm({
             disabled={pendingAction !== null || isUploading}
             onClick={onSave}
           >
-            {pendingAction === 'create' ? 'Creating...' : 'Create campaign'}
+            {pendingAction === "create" ? "Creating..." : "Create campaign"}
           </button>
         ) : null}
 
@@ -395,7 +420,7 @@ export function CampaignEditorForm({
             disabled={pendingAction !== null}
             onClick={onPublish}
           >
-            {pendingAction === 'publish' ? 'Enabling...' : 'Enable campaign'}
+            {pendingAction === "publish" ? "Enabling..." : "Enable campaign"}
           </button>
         ) : null}
 
@@ -406,12 +431,15 @@ export function CampaignEditorForm({
             disabled={pendingAction !== null}
             onClick={onArchive}
           >
-            {pendingAction === 'archive' ? 'Disabling...' : 'Disable campaign'}
+            {pendingAction === "archive" ? "Disabling..." : "Disable campaign"}
           </button>
         ) : null}
 
         {campaign ? (
-          <Link to="/organizer/campaigns" className="organizer-inline-link organizer-editor-link">
+          <Link
+            to="/organizer/campaigns"
+            className="organizer-inline-link organizer-editor-link"
+          >
             Back to campaigns
           </Link>
         ) : null}
@@ -427,17 +455,28 @@ export function CampaignEditorForm({
           </button>
         ) : null}
 
-        {campaign?.status === 'archived' ? (
+        {campaign && onDelete ? (
+          <button
+            type="button"
+            className="site-nav__button organizer-editor-button organizer-editor-button--danger"
+            disabled={pendingAction !== null}
+            onClick={onDelete}
+          >
+            {pendingAction === "delete" ? "Deleting..." : "Delete campaign"}
+          </button>
+        ) : null}
+
+        {campaign?.status === "archived" ? (
           <p className="organizer-editor-state-note">
-            Supporters who visit this campaign will see that it is disabled, and the contact form
-            will remain hidden until you enable it again.
+            Supporters who visit this campaign will see that it is disabled, and
+            the contact form will remain hidden until you enable it again.
           </p>
         ) : null}
 
-        {campaign?.status === 'published' ? (
+        {campaign?.status === "published" ? (
           <p className="organizer-editor-state-note">
-            Enabling a different campaign will automatically disable this one so only one of your
-            campaigns stays live at a time.
+            Enabling a different campaign will automatically disable this one so
+            only one of your campaigns stays live at a time.
           </p>
         ) : null}
       </div>

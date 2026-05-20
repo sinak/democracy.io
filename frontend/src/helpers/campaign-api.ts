@@ -59,6 +59,13 @@ export function archiveCampaign(accessToken: string, campaignId: string) {
   }).then((response) => response.campaign);
 }
 
+export function deleteCampaign(accessToken: string, campaignId: string) {
+  return apiFetch<void>(`/campaigns/${campaignId}`, {
+    method: 'DELETE',
+    accessToken,
+  });
+}
+
 export function listAdminCampaigns(accessToken: string) {
   return apiFetch<CampaignListResponse>('/admin/campaigns', { accessToken }).then(
     (response) => response.campaigns

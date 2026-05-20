@@ -13,5 +13,5 @@ const RESERVED_CAMPAIGN_SLUGS = new Set([
 ]);
 
 export function isReservedCampaignSlug(slug: string) {
-  return RESERVED_CAMPAIGN_SLUGS.has(slug);
+  return RESERVED_CAMPAIGN_SLUGS.has(slug.toLowerCase());
 }

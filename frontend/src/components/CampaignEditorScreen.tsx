@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import {
   archiveCampaign,
   createCampaign,
+  deleteCampaign,
   getOrganizerCampaign,
   publishCampaign,
 } from '../helpers/campaign-api';
@@ -10,9 +11,7 @@ import { uploadCampaignBackgroundImage } from '../helpers/campaign-assets';
 import {
   buildCampaignPublicUrl,
   canCopyCampaignPublicUrl,
-  containsRawHtml,
   createEmptyCampaignEditorValues,
-  normalizeCampaignEditorSlug,
   parseCampaignEditorValues,
   serializeCampaignEditorRequest,
   validateCampaignEditor,
@@ -44,7 +43,7 @@ export function CampaignEditorScreen({
   const [isLoading, setIsLoading] = useState(mode === 'edit');
   const [isUploading, setIsUploading] = useState(false);
   const [notice, setNotice] = useState<CampaignEditorNotice | null>(null);
-  const [pendingAction, setPendingAction] = useState<'create' | 'publish' | 'archive' | null>(null);
+  const [pendingAction, setPendingAction] = useState<'create' | 'publish' | 'archive' | 'delete' | null>(null);
 
   useEffect(() => {
     const flashMessage =
@@ -131,10 +130,6 @@ export function CampaignEditorScreen({
       setValues((currentValues) => ({
         ...currentValues,
         title: value,
-        slug:
-          mode === 'create'
-            ? normalizeCampaignEditorSlug(value)
-            : currentValues.slug,
       }));
       return;
     }
@@ -169,7 +164,7 @@ export function CampaignEditorScreen({
     try {
       const createdCampaign = await createCampaign(
         session.access_token,
-        serializeCampaignEditorRequest(validation.normalizedValues)
+        serializeCampaignEditorRequest(validation.normalizedValues, { includeSlug: false })
       );
       const publishedCampaign = await publishCampaign(
         session.access_token,
@@ -247,6 +242,39 @@ export function CampaignEditorScreen({
     }
   }
 
+  async function handleDelete() {
+    if (!session?.access_token || !campaign) {
+      return;
+    }
+
+    const shouldDelete = window.confirm(
+      'Delete this campaign? This permanently removes it from your organizer workspace and removes the public campaign page. This cannot be undone.'
+    );
+
+    if (!shouldDelete) {
+      return;
+    }
+
+    setPendingAction('delete');
+    setNotice(null);
+
+    try {
+      await deleteCampaign(session.access_token, campaign.id);
+
+      navigate('/organizer/campaigns', {
+        replace: true,
+        state: { flashMessage: 'Campaign deleted.' },
+      });
+    } catch (error) {
+      setNotice({
+        tone: 'error',
+        message: normalizeEditorError(error, 'Unable to delete this campaign.'),
+      });
+    } finally {
+      setPendingAction(null);
+    }
+  }
+
   async function handleUpload(file: File) {
     if (!session?.access_token || !user?.id) {
       return;
@@ -316,7 +344,6 @@ export function CampaignEditorScreen({
     }
   }
 
-  const hasRawHtml = containsRawHtml(values.descriptionMarkdown);
   const title =
     mode === 'create'
       ? 'Create an organizer campaign'
@@ -336,7 +363,6 @@ export function CampaignEditorScreen({
       sidebar={
         <CampaignEditorSidebar
           campaign={campaign}
-          hasRawHtml={hasRawHtml}
           showPublishingNotes={mode !== 'create'}
           values={values}
         />
@@ -361,6 +387,7 @@ export function CampaignEditorScreen({
               ? () => void handleCopyPublicUrl()
               : null
           }
+          onDelete={campaign ? () => void handleDelete() : null}
           onFieldChange={setFieldValue}
           onPublish={() => void handlePublish()}
           onSave={() => void handleCreate()}

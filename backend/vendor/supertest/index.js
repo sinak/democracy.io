@@ -172,6 +172,10 @@ class TestAgent {
   patch(urlPath) {
     return new TestRequest(this.app, 'PATCH', urlPath);
   }
+
+  delete(urlPath) {
+    return new TestRequest(this.app, 'DELETE', urlPath);
+  }
 }
 
 export default function request(app) {

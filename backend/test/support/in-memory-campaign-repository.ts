@@ -47,7 +47,7 @@ export interface InMemoryCampaignRepository extends CampaignRepository {
 
 export function createInMemoryCampaignRepository(): InMemoryCampaignRepository {
   const campaigns = new Map<string, CampaignRecord>();
-  const events: CampaignEvent[] = [];
+  let events: CampaignEvent[] = [];
   const submissions: CampaignMessageSubmission[] = [];
 
   function hydrateCampaign(campaign: CampaignRecord): CampaignRecord {
@@ -58,8 +58,10 @@ export function createInMemoryCampaignRepository(): InMemoryCampaignRepository {
   }
 
   function ensureUniqueSlug(slug: string, currentCampaignId?: string) {
+    const normalizedSlug = slug.toLowerCase();
+
     for (const campaign of campaigns.values()) {
-      if (campaign.slug === slug && campaign.id !== currentCampaignId) {
+      if (campaign.slug.toLowerCase() === normalizedSlug && campaign.id !== currentCampaignId) {
         throw new CampaignConflictError('Campaign slug is already in use.');
       }
     }
@@ -110,7 +112,11 @@ export function createInMemoryCampaignRepository(): InMemoryCampaignRepository {
     },
 
     async findBySlug(slug) {
-      const campaign = Array.from(campaigns.values()).find((entry) => entry.slug === slug) || null;
+      const normalizedSlug = slug.toLowerCase();
+      const campaign =
+        Array.from(campaigns.values()).find(
+          (entry) => entry.slug.toLowerCase() === normalizedSlug
+        ) || null;
       return campaign ? hydrateCampaign(campaign) : null;
     },
 
@@ -148,6 +154,11 @@ export function createInMemoryCampaignRepository(): InMemoryCampaignRepository {
 
       campaigns.set(updatedCampaign.id, updatedCampaign);
       return hydrateCampaign(updatedCampaign);
+    },
+
+    async delete(id) {
+      campaigns.delete(id);
+      events = events.filter((event) => event.campaignId !== id);
     },
 
     async createEvent(event) {

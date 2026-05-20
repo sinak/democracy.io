@@ -73,11 +73,12 @@ describe('campaign backend', () => {
       .set('Authorization', bearer(token))
       .send({
         title: 'My Great Campaign',
+        slug: 'my-great-campaign',
         summary: 'A test campaign',
       });
 
     expect(createResponse.status).toBe(201);
-    expect(/^[a-z0-9]{12}$/.test(createResponse.body.data.campaign.slug as string)).toBe(true);
+    expect(/^[A-Z0-9]{5}$/.test(createResponse.body.data.campaign.slug as string)).toBe(true);
     expect(createResponse.body.data.campaign.slug === 'my-great-campaign').toBe(false);
 
     const secondCreateResponse = await request(app)
@@ -88,7 +89,7 @@ describe('campaign backend', () => {
       });
 
     expect(secondCreateResponse.status).toBe(201);
-    expect(/^[a-z0-9]{12}$/.test(secondCreateResponse.body.data.campaign.slug as string)).toBe(
+    expect(/^[A-Z0-9]{5}$/.test(secondCreateResponse.body.data.campaign.slug as string)).toBe(
       true
     );
     expect(
@@ -106,7 +107,7 @@ describe('campaign backend', () => {
     expect(patchDraftResponse.body.message).toBe('Campaigns cannot be edited after creation.');
   });
 
-  it('rejects reserved root-level slugs on create', async () => {
+  it('ignores client-provided slugs on create', async () => {
     const { app, auth } = await createTestContext();
     const token = await auth.createToken();
 
@@ -118,8 +119,9 @@ describe('campaign backend', () => {
         slug: 'thanks',
       });
 
-    expect(response.status).toBe(400);
-    expect(response.body.message).toBe('slug is reserved by a top-level route.');
+    expect(response.status).toBe(201);
+    expect(/^[A-Z0-9]{5}$/.test(response.body.data.campaign.slug as string)).toBe(true);
+    expect(response.body.data.campaign.slug === 'thanks').toBe(false);
   });
 
   it('applies enable, auto-disable, admin disable, and restore transitions', async () => {
@@ -141,6 +143,14 @@ describe('campaign backend', () => {
     expect(publishResponse.status).toBe(200);
     expect(publishResponse.body.data.campaign.status).toBe('published');
     expect(publishResponse.body.data.campaign.firstPublishedAt).toBeTruthy();
+    expect(/^[A-Z0-9]{5}$/.test(publishResponse.body.data.campaign.slug as string)).toBe(true);
+
+    const publicResponse = await request(app).get(
+      `/api/1/public/campaigns/${publishResponse.body.data.campaign.slug}`
+    );
+
+    expect(publicResponse.status).toBe(200);
+    expect(publicResponse.body.data.campaign.slug).toBe(publishResponse.body.data.campaign.slug);
 
     const createSecondResponse = await request(app)
       .post('/api/1/campaigns')
@@ -195,6 +205,45 @@ describe('campaign backend', () => {
     expect(restoreResponse.status).toBe(200);
     expect(restoreResponse.body.data.campaign.status).toBe('archived');
     expect(restoreResponse.body.data.campaign.disabledAt).toBeNull();
+  });
+
+  it('lets organizers delete their own campaigns', async () => {
+    const { app, auth, repository } = await createTestContext();
+    const organizerToken = await auth.createToken({ email: 'organizer@example.com' });
+    const otherOrganizerToken = await auth.createToken({
+      email: 'other@example.com',
+      userId: 'other-user',
+    });
+
+    const campaign = repository.seedCampaign(
+      buildPublishedCampaignSeed({
+        organizerUserId: 'user-1',
+        organizerEmail: 'organizer@example.com',
+        title: 'Delete me',
+        slug: 'delete-me',
+      })
+    );
+    repository.seedEvent({ campaignId: campaign.id, type: 'flow_start' });
+
+    const forbiddenResponse = await request(app)
+      .delete(`/api/1/campaigns/${campaign.id}`)
+      .set('Authorization', bearer(otherOrganizerToken));
+
+    expect(forbiddenResponse.status).toBe(404);
+
+    const deleteResponse = await request(app)
+      .delete(`/api/1/campaigns/${campaign.id}`)
+      .set('Authorization', bearer(organizerToken));
+
+    expect(deleteResponse.status).toBe(204);
+
+    const getResponse = await request(app)
+      .get(`/api/1/campaigns/${campaign.id}`)
+      .set('Authorization', bearer(organizerToken));
+    expect(getResponse.status).toBe(404);
+
+    const publicResponse = await request(app).get('/api/1/public/campaigns/delete-me');
+    expect(publicResponse.status).toBe(404);
   });
 
   it('shows unavailable archived and disabled campaigns on the public routes while keeping drafts hidden', async () => {

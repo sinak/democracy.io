@@ -1049,6 +1049,18 @@
   background: rgba(250, 247, 245, 0.92);
 }
 
+.organizer-editor-button--danger {
+  border-color: rgba(177, 55, 39, 0.44);
+  background: rgba(255, 245, 242, 0.92);
+  color: #9c2f22;
+}
+
+.organizer-editor-button--danger:hover,
+.organizer-editor-button--danger:focus {
+  border-color: rgba(177, 55, 39, 0.64);
+  color: #7f241b;
+}
+
 .organizer-editor-link {
   margin-left: auto;
 }

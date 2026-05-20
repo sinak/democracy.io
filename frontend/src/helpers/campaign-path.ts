@@ -21,7 +21,7 @@ export function buildLegacyCampaignPath(slug: string) {
 }
 
 export function isReservedCampaignSlug(slug: string) {
-  return RESERVED_CAMPAIGN_SLUGS.has(slug);
+  return RESERVED_CAMPAIGN_SLUGS.has(slug.toLowerCase());
 }
 
 export function getCampaignSlugFromPath(path: string) {

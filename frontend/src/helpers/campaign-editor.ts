@@ -166,9 +166,11 @@ export function parseCampaignEditorValues(
 }
 
 export function serializeCampaignEditorRequest(
-  values: CampaignEditorValues
+  values: CampaignEditorValues,
+  options?: { includeSlug?: boolean }
 ): CreateCampaignRequest {
   const normalizedValues = normalizeCampaignEditorValues(values);
+  const includeSlug = options?.includeSlug ?? true;
 
   const summaryPayload = JSON.stringify({
     schema: CAMPAIGN_SUMMARY_SCHEMA,
@@ -185,7 +187,7 @@ export function serializeCampaignEditorRequest(
     organizationUrl: toOptionalValue(normalizedValues.organizationUrl),
   };
 
-  if (normalizedValues.slug) {
+  if (includeSlug && normalizedValues.slug) {
     request.slug = normalizedValues.slug;
   }
 

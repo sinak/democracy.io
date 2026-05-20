@@ -16,6 +16,7 @@ export interface TestAgent {
   get(path: string): TestRequest;
   post(path: string): TestRequest;
   patch(path: string): TestRequest;
+  delete(path: string): TestRequest;
 }
 
 export default function request(app: unknown): TestAgent;

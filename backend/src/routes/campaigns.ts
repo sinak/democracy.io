@@ -136,5 +136,22 @@ export function createCampaignRoutes({ campaignService, requireAuthenticatedUser
     }
   });
 
+  router.delete('/campaigns/:id', requireAuthenticatedUser, async (req, res) => {
+    try {
+      const campaignId = String(req.params.id);
+      await campaignService.deleteCampaign(
+        {
+          userId: req.auth!.userId,
+          email: req.auth!.email,
+        },
+        campaignId
+      );
+
+      res.status(204).send();
+    } catch (err) {
+      res.status(getCampaignErrorStatusCode(err)).json(makeError(err, getCampaignErrorStatusCode(err)));
+    }
+  });
+
   return router;
 }
